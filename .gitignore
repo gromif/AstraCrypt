@@ -1,0 +1,14 @@
+# Project exclude paths
+/.gradle/
+/build/
+/properties/.gradle/
+/.kotlin/
+
+/private_key.pepk
+/AS_keystore.jks
+/.idea/caches/deviceStreaming.xml
+/.idea/runConfigurations.xml
+/.idea/caches/
+/keystore.properties
+/app/src/main/cpp/.minified
+/app/src/main/cpp/.notMinified

@@ -1,0 +1,136 @@
+<resources>
+
+    <style name="AppTheme" parent="@style/Gen.Light.AppTheme" />
+
+    <style name="Gen.Light.AppTheme" parent="@style/Theme.Material3.DayNight.NoActionBar">
+        <item name="windowActionModeOverlay">true</item>
+        <item name="actionModeCloseDrawable">@drawable/ic_close</item>
+        <item name="materialCardViewStyle">@style/Base.MaterialCardView.Elevated</item>
+        <item name="materialCardViewFilledStyle">@style/Base.MaterialCardView.Filled</item>
+        <item name="toolbarStyle">@style/Base.Toolbar</item>
+        <item name="bottomSheetDialogTheme">@style/AppTheme.BottomSheetDialogTheme</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.App.LargeComponent</item>
+        <item name="floatingActionButtonLargePrimaryStyle">@style/Widget.App.FloatingActionButton.Primary</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+
+        <item name="colorPrimary">@color/md_theme_light_primary</item>
+        <item name="colorOnPrimary">@color/md_theme_light_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/md_theme_light_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/md_theme_light_onPrimaryContainer</item>
+        <item name="colorSecondary">@color/md_theme_light_secondary</item>
+        <item name="colorOnSecondary">@color/md_theme_light_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/md_theme_light_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/md_theme_light_onSecondaryContainer</item>
+        <item name="colorTertiary">@color/md_theme_light_tertiary</item>
+        <item name="colorOnTertiary">@color/md_theme_light_onTertiary</item>
+        <item name="colorTertiaryContainer">@color/md_theme_light_tertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/md_theme_light_onTertiaryContainer</item>
+        <item name="colorError">@color/md_theme_light_error</item>
+        <item name="colorErrorContainer">@color/md_theme_light_errorContainer</item>
+        <item name="colorOnError">@color/md_theme_light_onError</item>
+        <item name="colorOnErrorContainer">@color/md_theme_light_onErrorContainer</item>
+        <item name="android:colorBackground">@color/md_theme_light_background</item>
+        <item name="colorOnBackground">@color/md_theme_light_onBackground</item>
+        <item name="colorSurface">@color/md_theme_light_surface</item>
+        <item name="colorOnSurface">@color/md_theme_light_onSurface</item>
+        <item name="colorSurfaceVariant">@color/md_theme_light_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/md_theme_light_onSurfaceVariant</item>
+        <item name="colorOutline">@color/md_theme_light_outline</item>
+        <item name="colorOnSurfaceInverse">@color/md_theme_light_inverseOnSurface</item>
+        <item name="colorSurfaceInverse">@color/md_theme_light_inverseSurface</item>
+        <item name="colorPrimaryInverse">@color/md_theme_light_inversePrimary</item>
+    </style>
+
+    <style name="ShapeAppearance.App.LargeComponent" parent="ShapeAppearance.Material3.LargeComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">25dp</item>
+    </style>
+
+    <style name="SettingsTitle">
+        <item name="android:textAppearance">?textAppearanceListItem</item>
+        <item name="android:textColor">?colorOnSurface</item>
+    </style>
+
+    <style name="SettingsSummary">
+        <item name="android:textAppearance">?textAppearanceListItemSecondary</item>
+        <item name="android:textColor">?colorOnSurface</item>
+    </style>
+
+    <style name="Base.Toolbar" parent="Widget.Material3.Toolbar.Surface">
+        <item name="titleCentered">true</item>
+    </style>
+
+    <style name="AppTheme.BottomSheetDialogTheme" parent="ThemeOverlay.Material3.DayNight.BottomSheetDialog">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="Widget.App.FloatingActionButton.Primary" parent="Widget.Material3.FloatingActionButton.Large.Primary">
+        <item name="useCompatPadding">true</item>
+    </style>
+
+    <style name="Base.MaterialCardView.Elevated" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardCornerRadius">@dimen/cardRadius</item>
+    </style>
+
+    <style name="Base.MaterialCardView.Filled" parent="Widget.Material3.CardView.Filled">
+        <item name="cardCornerRadius">@dimen/cardRadius</item>
+    </style>
+
+    <style name="Base.Button.SubPanel" parent="Widget.Material3.Button.TextButton">
+        <item name="android:layout_margin">5dp</item>
+    </style>
+
+    <style name="Base.TextView.Options.Title" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textColor">?colorOnSurface</item>
+        <item name="android:textAppearance">?textAppearanceLabelLarge</item>
+        <item name="android:paddingStart">?listPreferredItemPaddingStart</item>
+        <item name="android:paddingEnd">?listPreferredItemPaddingEnd</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:minHeight">?listPreferredItemHeightSmall</item>
+        <item name="android:drawablePadding">?listPreferredItemPaddingStart</item>
+    </style>
+
+    <style name="Base.TextView.Options.Item" parent="@style/Base.TextView.Options.Title">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:foreground">?selectableItemBackground</item>
+        <item name="drawableTint">?colorOnSurfaceVariant</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.RoundIcon" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="Subscriptions.Starter" parent="">
+        <item name="planTextColor">@color/plan_starter_textColor</item>
+        <item name="planCrownColor">@color/plan_starter_textColor</item>
+        <item name="planBackgroundColor">@color/plan_starter_backgroundColor</item>
+        <item name="planLeftContainer">@color/plan_starter_leftContainerColor</item>
+        <item name="planRightContainer">@color/plan_starter_rightContainerColor</item>
+        <item name="planBottomContainer">@color/plan_starter_bottomContainerColor</item>
+    </style>
+
+    <style name="Subscriptions.Standard" parent="">
+        <item name="planTextColor">@color/plan_standard_textColor</item>
+        <item name="planCrownColor">@color/plan_standard_textColor</item>
+        <item name="planBackgroundColor">@color/plan_standard_backgroundColor</item>
+        <item name="planLeftContainer">@color/plan_standard_leftContainerColor</item>
+        <item name="planRightContainer">@color/plan_standard_rightContainerColor</item>
+        <item name="planBottomContainer">@color/plan_standard_bottomContainerColor</item>
+    </style>
+
+    <style name="Subscriptions.Extreme" parent="">
+        <item name="planTextColor">@color/plan_extreme_textColor</item>
+        <item name="planCrownColor">@color/plan_extreme_textColor</item>
+        <item name="planBackgroundColor">@color/plan_extreme_backgroundColor</item>
+        <item name="planLeftContainer">@color/plan_extreme_leftContainerColor</item>
+        <item name="planRightContainer">@color/plan_extreme_rightContainerColor</item>
+        <item name="planBottomContainer">@color/plan_extreme_bottomContainerColor</item>
+    </style>
+
+</resources>

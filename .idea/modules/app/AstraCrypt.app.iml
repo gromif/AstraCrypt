@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module version="4">
+  <component name="AdditionalModuleElements">
+    <content url="file://$MODULE_DIR$/../../../app" dumb="true">
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/Debug/323d1l5m/arm64-v8a/CMakeFiles/3.22.1-g37088a8/CompilerIdC/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/Debug/323d1l5m/arm64-v8a/CMakeFiles/3.22.1-g37088a8/CompilerIdCXX/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/Debug/323d1l5m/arm64-v8a/CMakeFiles/CMakeTmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/Debug/323d1l5m/armeabi-v7a/CMakeFiles/3.22.1-g37088a8/CompilerIdC/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/Debug/323d1l5m/armeabi-v7a/CMakeFiles/3.22.1-g37088a8/CompilerIdCXX/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/Debug/323d1l5m/armeabi-v7a/CMakeFiles/CMakeTmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/Debug/323d1l5m/x86/CMakeFiles/3.22.1-g37088a8/CompilerIdC/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/Debug/323d1l5m/x86/CMakeFiles/3.22.1-g37088a8/CompilerIdCXX/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/Debug/323d1l5m/x86/CMakeFiles/CMakeTmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/Debug/323d1l5m/x86_64/CMakeFiles/3.22.1-g37088a8/CompilerIdC/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/Debug/323d1l5m/x86_64/CMakeFiles/3.22.1-g37088a8/CompilerIdCXX/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/Debug/323d1l5m/x86_64/CMakeFiles/CMakeTmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/Debug/56e5d134/arm64-v8a/CMakeFiles/3.22.1-g37088a8/CompilerIdC/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/Debug/56e5d134/arm64-v8a/CMakeFiles/3.22.1-g37088a8/CompilerIdCXX/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/Debug/56e5d134/arm64-v8a/CMakeFiles/CMakeTmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/Debug/56e5d134/armeabi-v7a/CMakeFiles/3.22.1-g37088a8/CompilerIdC/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/Debug/56e5d134/armeabi-v7a/CMakeFiles/3.22.1-g37088a8/CompilerIdCXX/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/Debug/56e5d134/armeabi-v7a/CMakeFiles/CMakeTmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/Debug/56e5d134/x86/CMakeFiles/3.22.1-g37088a8/CompilerIdC/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/Debug/56e5d134/x86/CMakeFiles/3.22.1-g37088a8/CompilerIdCXX/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/Debug/56e5d134/x86/CMakeFiles/CMakeTmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/Debug/56e5d134/x86_64/CMakeFiles/3.22.1-g37088a8/CompilerIdC/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/Debug/56e5d134/x86_64/CMakeFiles/3.22.1-g37088a8/CompilerIdCXX/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/Debug/56e5d134/x86_64/CMakeFiles/CMakeTmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/Debug/6z8144r5/arm64-v8a/CMakeFiles/3.22.1-g37088a8/CompilerIdC/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/Debug/6z8144r5/arm64-v8a/CMakeFiles/3.22.1-g37088a8/CompilerIdCXX/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/Debug/6z8144r5/arm64-v8a/CMakeFiles/CMakeTmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/Debug/6z8144r5/armeabi-v7a/CMakeFiles/3.22.1-g37088a8/CompilerIdC/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/Debug/6z8144r5/armeabi-v7a/CMakeFiles/3.22.1-g37088a8/CompilerIdCXX/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/Debug/6z8144r5/armeabi-v7a/CMakeFiles/CMakeTmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/Debug/6z8144r5/x86/CMakeFiles/3.22.1-g37088a8/CompilerIdC/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/Debug/6z8144r5/x86/CMakeFiles/3.22.1-g37088a8/CompilerIdCXX/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/Debug/6z8144r5/x86/CMakeFiles/CMakeTmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/Debug/6z8144r5/x86_64/CMakeFiles/3.22.1-g37088a8/CompilerIdC/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/Debug/6z8144r5/x86_64/CMakeFiles/3.22.1-g37088a8/CompilerIdCXX/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/Debug/6z8144r5/x86_64/CMakeFiles/CMakeTmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/RelWithDebInfo/6b4y6137/arm64-v8a/CMakeFiles/3.22.1-g37088a8/CompilerIdC/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/RelWithDebInfo/6b4y6137/arm64-v8a/CMakeFiles/3.22.1-g37088a8/CompilerIdCXX/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/RelWithDebInfo/6b4y6137/arm64-v8a/CMakeFiles/CMakeTmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/RelWithDebInfo/6b4y6137/armeabi-v7a/CMakeFiles/3.22.1-g37088a8/CompilerIdC/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/RelWithDebInfo/6b4y6137/armeabi-v7a/CMakeFiles/3.22.1-g37088a8/CompilerIdCXX/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/RelWithDebInfo/6b4y6137/armeabi-v7a/CMakeFiles/CMakeTmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/RelWithDebInfo/6b4y6137/x86/CMakeFiles/3.22.1-g37088a8/CompilerIdC/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/RelWithDebInfo/6b4y6137/x86/CMakeFiles/3.22.1-g37088a8/CompilerIdCXX/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/RelWithDebInfo/6b4y6137/x86/CMakeFiles/CMakeTmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/RelWithDebInfo/6b4y6137/x86_64/CMakeFiles/3.22.1-g37088a8/CompilerIdC/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/RelWithDebInfo/6b4y6137/x86_64/CMakeFiles/3.22.1-g37088a8/CompilerIdCXX/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/RelWithDebInfo/6b4y6137/x86_64/CMakeFiles/CMakeTmp" />
+    </content>
+  </component>
+</module>

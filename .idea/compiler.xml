@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel target="17">
+      <module name="AstraCrypt.core.haptic" target="21" />
+      <module name="AstraCrypt.core.tiles-with-coroutines" target="21" />
+      <module name="AstraCrypt.ui.compose-calculator" target="21" />
+      <module name="AstraCrypt.ui.compose-color-schemes" target="21" />
+      <module name="AstraCrypt.ui.compose-core" target="21" />
+      <module name="AstraCrypt.ui.compose-details" target="21" />
+      <module name="AstraCrypt.ui.compose-help" target="21" />
+      <module name="AstraCrypt.ui.compose-notes" target="21" />
+      <module name="properties" target="21" />
+      <module name="properties.main" target="21" />
+      <module name="properties.test" target="21" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

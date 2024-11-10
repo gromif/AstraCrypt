@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/move"
+        android:icon="@drawable/ic_folder_move_outline"
+        android:title="@string/files_options_move"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/delete"
+        android:icon="@drawable/ic_delete_variant_outline"
+        android:title="@string/files_options_delete"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/addToStarred"
+        android:icon="@drawable/ic_menu_favourite"
+        android:title="@string/files_options_addToStarred"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/createDir"
+        android:icon="@drawable/ic_create_new_folder_outline"
+        android:title="@android:string/selectAll"
+        android:visible="false"
+        app:showAsAction="ifRoom" />
+</menu>

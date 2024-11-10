@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/removeFromStarred"
+        android:icon="@drawable/ic_menu_favourite_outline"
+        android:title="@string/files_options_removeFromStarred"
+        app:showAsAction="always" />
+</menu>

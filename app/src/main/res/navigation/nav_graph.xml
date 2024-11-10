@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tabs_graph"
+    app:startDestination="@id/homeFragment">
+    <action
+        android:id="@+id/action_global_detailsFragment"
+        app:destination="@id/detailsFragment"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim"
+        tools:layout="@layout/fragment_details" />
+    <action
+        android:id="@+id/action_global_subscriptionsGraph"
+        app:destination="@id/subscriptionsGraph"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim"
+        tools:layout="@layout/fragment_details" />
+    <navigation
+        android:id="@+id/subscriptionsGraph"
+        app:startDestination="@id/subscriptionsFragment">
+        <fragment
+            android:id="@+id/subscriptionsOverviewFragment"
+            android:name="com.nevidimka655.astracrypt.ui.purchases.PurchasesOverviewFragment"
+            android:label="{planName}">
+            <argument
+                android:name="planName"
+                app:argType="string" />
+            <argument
+                android:name="planCardId"
+                app:argType="integer" />
+        </fragment>
+        <fragment
+            android:id="@+id/subscriptionsFragment"
+            android:name="com.nevidimka655.astracrypt.ui.purchases.PurchasesFragment"
+            android:label="@string/purchases">
+            <action
+                android:id="@+id/action_subscriptionsFragment_to_subscriptionsOverviewFragment"
+                app:destination="@id/subscriptionsOverviewFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        </fragment>
+    </navigation>
+    <fragment
+        android:id="@+id/authFragment"
+        android:name="com.nevidimka655.astracrypt.features.auth.AuthFragment"
+        android:label="@string/signIn"
+        tools:layout="@layout/fragment_auth"/>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.nevidimka655.astracrypt.tabs.home.HomeFragment"
+        android:label="@string/home">
+        <action
+            android:id="@+id/action_homeFragment_to_labFragment"
+            app:destination="@id/labGraph"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_homeFragment_to_notesGraph"
+            app:destination="@id/notesGraph" />
+    </fragment>
+    <fragment
+        android:id="@+id/filesFragment"
+        android:name="com.nevidimka655.astracrypt.tabs.files.FilesFragment"
+        android:label="@string/files" >
+    </fragment>
+    <fragment
+        android:id="@+id/starredFragment"
+        android:name="com.nevidimka655.astracrypt.tabs.files.FilesFragment"
+        android:label="@string/starred" >
+    </fragment>
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.nevidimka655.astracrypt.features.details.DetailsFragment"
+        android:label="@string/files_options_details"
+        tools:layout="@layout/fragment_details" />
+    <navigation
+        android:id="@+id/settingsGraph"
+        app:startDestination="@id/settingsFragment">
+        <fragment
+            android:id="@+id/settingsFragment"
+            android:name="com.nevidimka655.astracrypt.tabs.settings.SettingsFragment"
+            android:label="@string/settings">
+            <action
+                android:id="@+id/action_settingsFragment_to_editProfileFragment"
+                app:destination="@id/editProfileFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            <action
+                android:id="@+id/action_settingsFragment_to_aboutFragment"
+                app:destination="@id/aboutFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            <action
+                android:id="@+id/action_settingsFragment_to_dataCollectionFragment"
+                app:destination="@id/dataCollectionFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            <action
+                android:id="@+id/action_settingsFragment_to_securityFragment"
+                app:destination="@id/securityFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            <action
+                android:id="@+id/action_settingsFragment_to_interfaceFragment"
+                app:destination="@id/interfaceFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        </fragment>
+        <fragment
+            android:id="@+id/editProfileFragment"
+            android:name="com.nevidimka655.astracrypt.tabs.settings.EditProfileFragment"
+            android:label="@string/settings_editProfile" />
+        <fragment
+            android:id="@+id/aboutFragment"
+            android:name="com.nevidimka655.astracrypt.tabs.settings.AboutFragment"
+            android:label="@string/settings_about"
+            tools:layout="@layout/fragment_privacy_policy">
+            <action
+                android:id="@+id/action_aboutFragment_to_privacyPolicyFragment"
+                app:destination="@id/privacyPolicyFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        </fragment>
+        <fragment
+            android:id="@+id/dataCollectionFragment"
+            android:name="com.nevidimka655.astracrypt.tabs.settings.DataCollectionFragment"
+            android:label="@string/settings_dataCollection" />
+        <fragment
+            android:id="@+id/securityFragment"
+            android:name="com.nevidimka655.astracrypt.tabs.settings.SecurityFragment"
+            android:label="@string/settings_security">
+            <action
+                android:id="@+id/action_securityFragment_to_encryptionFragment"
+                app:destination="@id/encryptionFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            <action
+                android:id="@+id/action_securityFragment_to_authenticationFragment"
+                app:destination="@id/authenticationFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            <action
+                android:id="@+id/action_securityFragment_to_deviceAdminRightsFragment"
+                app:destination="@id/deviceAdminRightsFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            <action
+                android:id="@+id/action_securityFragment_to_quickActionsFragment"
+                app:destination="@id/quickActionsFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/databaseColumnsFragment"
+            android:name="com.nevidimka655.astracrypt.tabs.settings.security.encryption.DatabaseColumnsFragment"
+            android:label="@string/settings_columns" />
+        <fragment
+            android:id="@+id/authenticationFragment"
+            android:name="com.nevidimka655.astracrypt.tabs.settings.security.authentication.AuthenticationFragment"
+            android:label="@string/settings_authentication" />
+        <fragment
+            android:id="@+id/encryptionFragment"
+            android:name="com.nevidimka655.astracrypt.tabs.settings.security.encryption.EncryptionFragment"
+            android:label="@string/settings_encryption">
+            <action
+                android:id="@+id/action_encryptionFragment_to_databaseColumnsFragment"
+                app:destination="@id/databaseColumnsFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        </fragment>
+        <fragment
+            android:id="@+id/privacyPolicyFragment"
+            android:name="com.nevidimka655.astracrypt.tabs.settings.PrivacyPolicyFragment"
+            android:label="@string/privacyPolicy" />
+        <fragment
+            android:id="@+id/deviceAdminRightsFragment"
+            android:name="com.nevidimka655.astracrypt.tabs.settings.security.DeviceAdminRightsFragment"
+            android:label="@string/settings_deviceAdminRights" />
+        <fragment
+            android:id="@+id/interfaceFragment"
+            android:name="com.nevidimka655.astracrypt.tabs.settings.InterfaceFragment"
+            android:label="@string/settings_interface" >
+            <action
+                android:id="@+id/action_interfaceFragment_to_filesFragmentAppearance"
+                app:destination="@id/filesFragmentAppearance" />
+        </fragment>
+        <fragment
+            android:id="@+id/filesFragmentAppearance"
+            android:name="com.nevidimka655.astracrypt.tabs.settings.appearance.FilesFragment"
+            android:label="@string/files" />
+        <fragment
+            android:id="@+id/quickActionsFragment"
+            android:name="com.nevidimka655.astracrypt.tabs.settings.security.quick_actions.QuickActionsFragment"
+            android:label="@string/settings_quickActions" />
+    </navigation>
+    <navigation
+        android:id="@+id/labGraph"
+        app:startDestination="@id/labFragment">
+        <fragment
+            android:id="@+id/aeadTextFragment"
+            android:name="com.nevidimka655.astracrypt.lab.aead.AeadTextFragment"
+            android:label="@string/text"
+            tools:layout="@layout/fragment_lab_text" />
+        <fragment
+            android:id="@+id/aeadFilesFragment"
+            android:name="com.nevidimka655.astracrypt.lab.aead.AeadFilesFragment"
+            android:label="@string/files"
+            tools:layout="@layout/fragment_lab_files" />
+        <fragment
+            android:id="@+id/aeadFragment"
+            android:name="com.nevidimka655.astracrypt.lab.aead.AeadFragment"
+            android:label="@string/lab_aeadEncryption"
+            tools:layout="@layout/fragment_lab">
+            <action
+                android:id="@+id/action_aeadFragment_to_aeadTextFragment"
+                app:destination="@id/aeadTextFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            <action
+                android:id="@+id/action_aeadFragment_to_aeadFilesFragment"
+                app:destination="@id/aeadFilesFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        </fragment>
+        <fragment
+            android:id="@+id/labFragment"
+            android:name="com.nevidimka655.astracrypt.lab.LabFragment"
+            android:label="@string/lab">
+            <action
+                android:id="@+id/action_labFragment_to_aeadFragment"
+                app:destination="@id/aeadFragment" />
+            <action
+                android:id="@+id/action_labFragment_to_archiveFragment"
+                app:destination="@id/archiveFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/archiveFragment"
+            android:name="com.nevidimka655.astracrypt.lab.ArchiveFragment"
+            android:label="@string/lab_combinedZip" />
+    </navigation>
+    <navigation
+        android:id="@+id/notesGraph"
+        app:startDestination="@id/notesFragment">
+        <fragment
+            android:id="@+id/notesFragment"
+            android:name="com.nevidimka655.astracrypt.features.notes.NotesFragment"
+            android:label="@string/notes">
+            <action
+                android:id="@+id/action_notesFragment_to_notesViewFragment"
+                app:destination="@id/notesViewFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/notesViewFragment"
+            android:name="com.nevidimka655.astracrypt.features.notes.NotesViewFragment"
+            android:label="{noteName}">
+            <argument
+                android:name="noteName"
+                app:argType="string" />
+        </fragment>
+    </navigation>
+    <fragment
+        android:id="@+id/calculatorFragment"
+        android:name="com.nevidimka655.astracrypt.features.calculator.CalculatorFragment"
+        android:label="CalculatorFragment" /><action android:id="@+id/action_global_calculatorFragment" app:destination="@id/calculatorFragment"/>
+    <action
+        android:id="@+id/action_global_homeFragment"
+        app:destination="@id/homeFragment"
+        app:popUpTo="@id/tabs_graph"
+        app:popUpToInclusive="true" />
+    <action
+        android:id="@+id/action_global_authFragment"
+        app:destination="@id/authFragment"
+        app:popUpTo="@id/tabs_graph"
+        app:popUpToInclusive="true" />
+    <fragment
+        android:id="@+id/helpFragment"
+        android:name="com.nevidimka655.astracrypt.help.HelpFragment"
+        android:label="@string/help">
+        <argument
+            android:name="help_index"
+            app:argType="integer" />
+    </fragment>
+    <action android:id="@+id/action_global_helpFragment" app:destination="@id/helpFragment" />
+</navigation>
