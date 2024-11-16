@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
     alias(libs.plugins.kotlin.navigation.safeargs)
     alias(libs.plugins.compose.compiler)
 }
@@ -137,6 +138,10 @@ dependencies {
     implementation(libs.google.android.material)
     implementation(libs.google.android.billing.ktx)
     implementation(libs.google.crypto.tink)
+
+    // DI - Hilt
+    ksp(libs.hilt.android.compiler)
+    implementation(libs.hilt.android)
 
     // Kotlin
     implementation(libs.kotlin.coroutines)
