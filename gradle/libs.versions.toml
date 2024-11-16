@@ -24,7 +24,6 @@ serialization = "1.7.3"
 
 # GOOGLE VERSIONS --------------------------------------------------------------------------------------------------------------------------------
 google-tink = "1.15.0"
-google-billing = "7.1.1"
 google-material = "1.12.0"
 hilt = "2.52"
 
@@ -70,7 +69,6 @@ lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-ru
 
 # GOOGLE LIBRARIES --------------------------------------------------------------------------------------------------------------------------------
 google-crypto-tink = { group = "com.google.crypto.tink", name = "tink-android", version.ref = "google-tink" }
-google-android-billing-ktx = { group = "com.android.billingclient", name = "billing-ktx", version.ref = "google-billing" }
 google-android-material = { group = "com.google.android.material", name = "material", version.ref = "google-material" }
 
 # BACKGROUND LIBRARIES --------------------------------------------------------------------------------------------------------------------------------

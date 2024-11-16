@@ -136,7 +136,6 @@ dependencies {
 
     // Google
     implementation(libs.google.android.material)
-    implementation(libs.google.android.billing.ktx)
     implementation(libs.google.crypto.tink)
 
     // DI - Hilt

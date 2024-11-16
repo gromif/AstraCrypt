@@ -103,7 +103,6 @@ class MainActivity : AppCompatActivity() {
             cancel.setOnClickListener { vm.selectorManager.closeActionMode() }
         }
         vm.uiStateFlow.withLifecycle(lifecycleScope, lifecycle) { parseUiState(it) }
-        registerBuyCallback()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             val isPermissionsGranted = ContextCompat.checkSelfPermission(
                 this,
@@ -160,14 +159,6 @@ class MainActivity : AppCompatActivity() {
             when (abs(verticalOffset)) {
                 0 -> setBottomBarState(true)
                 totalScrollRange -> setBottomBarState(false)
-            }
-        }
-    }
-
-    private fun registerBuyCallback() = lifecycleScope.launch {
-        vm.billingManager.buyRequestParams.consumeEach {
-            if (it != null) {
-                vm.billingManager.launchBillingFlow(this@MainActivity, billingParams = it)
             }
         }
     }
