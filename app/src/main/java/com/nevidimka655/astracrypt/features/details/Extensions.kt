@@ -2,12 +2,12 @@ package com.nevidimka655.astracrypt.features.details
 
 import android.text.format.DateFormat
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.InsertDriveFile
 import androidx.compose.material.icons.outlined.AccessTime
 import androidx.compose.material.icons.outlined.ChangeCircle
 import androidx.compose.material.icons.outlined.Folder
 import androidx.compose.material.icons.outlined.FolderOpen
 import androidx.compose.material.icons.outlined.Headphones
-import androidx.compose.material.icons.outlined.InsertDriveFile
 import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material.icons.outlined.PhotoSizeSelectLarge
 import androidx.compose.material.icons.outlined.SdCard
@@ -46,7 +46,7 @@ suspend fun DetailsManager.submitDetailsQuery(
 
     addGroup(name = TextWrap(id = R.string.files_options_details)) {
         addItem(
-            icon = IconWrap(imageVector = Icons.Outlined.InsertDriveFile),
+            icon = IconWrap(imageVector = Icons.AutoMirrored.Outlined.InsertDriveFile),
             title = TextWrap(id = R.string.itemType),
             summary = TextWrap(id = item.itemType.title)
         )
