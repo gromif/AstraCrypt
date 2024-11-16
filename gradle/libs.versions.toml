@@ -1,8 +1,7 @@
-[versions] # ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+[versions]
 kotlin = "2.0.21"
 gradle = "8.7.2"
 gradle-ksp = "2.0.21-1.0.27"
-plugin-kotlin-navigation-safeargs = "2.8.4"
 
 room = "2.6.1"
 lifecycle = "2.8.7"
@@ -28,7 +27,6 @@ google-tink = "1.15.0"
 google-billing = "7.1.1"
 google-material = "1.12.0"
 hilt = "2.52"
-hilt-android-compiler = "2.52"
 
 [libraries] # ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -93,7 +91,7 @@ android-application = { id = "com.android.application", version.ref = "gradle" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "gradle-ksp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-kotlin-navigation-safeargs = { id = "androidx.navigation.safeargs", version.ref = "plugin-kotlin-navigation-safeargs" }
+kotlin-navigation-safeargs = { id = "androidx.navigation.safeargs", version.ref = "navigation" }
 
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 
