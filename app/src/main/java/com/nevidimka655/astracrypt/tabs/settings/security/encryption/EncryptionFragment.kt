@@ -50,7 +50,6 @@ import kotlinx.coroutines.withContext
 
 class EncryptionFragment : Fragment() {
     private val vm by activityViewModels<MainVM>()
-    private val planManager get() = vm.purchaseManager
     private val masterSettings get() = PrefsManager.clear
     private val settings get() = PrefsManager.settings
     private val encryptionManager get() = vm.encryptionManager

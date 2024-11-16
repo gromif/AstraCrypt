@@ -10,7 +10,6 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.ComposeView
@@ -18,9 +17,7 @@ import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.platform.rememberNestedScrollInteropConnection
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.nevidimka655.astracrypt.MainVM
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.ui.theme.AstraCryptTheme
 import com.nevidimka655.astracrypt.utils.billing.PurchaseManager
@@ -29,7 +26,6 @@ import com.nevidimka655.ui.compose_core.ext.cellsCount
 import com.nevidimka655.ui.compose_core.theme.spaces
 
 class PurchasesFragment : Fragment() {
-    private val vm by activityViewModels<MainVM>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,7 +42,6 @@ class PurchasesFragment : Fragment() {
 
     @Composable
     fun SubscriptionsScreen() {
-        val isPremiumPurchased = remember { vm.purchaseManager.isPremium }
         val cellsCount = LocalWindowWidth.current.cellsCount()
         LazyVerticalGrid(
             modifier = Modifier
@@ -63,7 +58,7 @@ class PurchasesFragment : Fragment() {
                 }
             }
             item {
-                PurchasePremiumCard(isPurchased = isPremiumPurchased) { planNameRes ->
+                PurchasePremiumCard(isPurchased = true) { planNameRes ->
                     openPlan(planNameRes, PurchaseManager.Purchase.Premium)
                 }
             }

@@ -9,8 +9,6 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.res.stringResource
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import com.nevidimka655.astracrypt.MainVM
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.ui.theme.AstraCryptTheme
 import com.nevidimka655.ui.compose_core.PreferencesGroup
@@ -18,8 +16,6 @@ import com.nevidimka655.ui.compose_core.PreferencesScreen
 import com.nevidimka655.ui.compose_core.PreferencesSwitch
 
 class QuickActionsFragment : Fragment() {
-    private val vm by activityViewModels<MainVM>()
-    private val planManager get() = vm.purchaseManager
 
     override fun onCreateView(
         inflater: LayoutInflater,

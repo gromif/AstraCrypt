@@ -45,7 +45,6 @@ import com.nevidimka655.astracrypt.utils.IO
 import com.nevidimka655.astracrypt.utils.OpenManager
 import com.nevidimka655.astracrypt.utils.SelectorManager
 import com.nevidimka655.astracrypt.utils.ToolsManager
-import com.nevidimka655.astracrypt.utils.billing.PurchaseManager
 import com.nevidimka655.astracrypt.utils.extensions.lazyFast
 import com.nevidimka655.astracrypt.utils.extensions.recreate
 import com.nevidimka655.astracrypt.utils.extensions.removeLines
@@ -86,7 +85,6 @@ class MainVM @Inject constructor(
     val assetsManager: AssetsManager
 ) : ViewModel() {
     private val worker get() = Engine.workManager
-    val purchaseManager = PurchaseManager()
     val selectorManager by lazyFast { SelectorManager() }
     val authManager = AuthManager()
     val openManager by lazy { OpenManager() }

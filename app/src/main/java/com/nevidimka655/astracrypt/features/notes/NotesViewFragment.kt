@@ -28,7 +28,6 @@ import kotlinx.coroutines.launch
 class NotesViewFragment : Fragment() {
     private val vm by activityViewModels<MainVM>()
     private val notesManager get() = vm.toolsManager.notesManager
-    private val planManager get() = vm.purchaseManager
 
     override fun onCreateView(
         inflater: LayoutInflater,

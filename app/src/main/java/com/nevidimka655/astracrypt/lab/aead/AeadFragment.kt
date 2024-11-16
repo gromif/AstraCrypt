@@ -29,7 +29,6 @@ import kotlin.random.Random
 class AeadFragment : Fragment(R.layout.fragment_lab) {
     private val vm by activityViewModels<MainVM>()
     private val labManager get() = vm.toolsManager.labManager
-    private val planComplianceManager get() = vm.purchaseManager
     private var binding: FragmentLabBinding? = null
 
     private val dataTypeItems by lazyFast {
