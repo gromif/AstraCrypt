@@ -60,6 +60,7 @@ import com.nevidimka655.crypto.tink.KeysetTemplates
 import com.nevidimka655.crypto.tink.extensions.streamingAeadPrimitive
 import com.nevidimka655.crypto.tink.extensions.toBase64
 import com.nevidimka655.notes.Notes
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.Job
@@ -80,6 +81,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import java.io.ByteArrayOutputStream
 
+@HiltViewModel
 class MainVM : ViewModel() {
     private val worker get() = Engine.workManager
 
