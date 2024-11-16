@@ -80,12 +80,13 @@ import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import java.io.ByteArrayOutputStream
+import javax.inject.Inject
 
 @HiltViewModel
-class MainVM : ViewModel() {
+class MainVM @Inject constructor(
+    val assetsManager: AssetsManager
+) : ViewModel() {
     private val worker get() = Engine.workManager
-
-    val assetsManager = AssetsManager()
     val billingManager = PlayBillingManager(viewModelScope)
     val purchaseManager = PurchaseManager()
     val selectorManager by lazyFast { SelectorManager() }

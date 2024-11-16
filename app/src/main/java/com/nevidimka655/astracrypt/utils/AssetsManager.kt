@@ -3,8 +3,9 @@ package com.nevidimka655.astracrypt.utils
 import android.app.Activity
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import javax.inject.Inject
 
-class AssetsManager {
+class AssetsManager @Inject constructor() {
 
     private var _privacyPolicyMutableStateFlow: MutableStateFlow<String?>? = null
     val privacyPolicyStateFlow get() = run {

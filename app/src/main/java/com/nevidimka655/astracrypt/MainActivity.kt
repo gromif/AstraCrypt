@@ -56,8 +56,8 @@ class MainActivity : AppCompatActivity() {
     val fab get() = binding.fab
     val fabLarge get() = binding.fabLarge
 
-    @SuppressLint("MissingSuperCall")
     override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         Engine.init(applicationContext)
         setupDynamicColors()
         TinkConfig.init()
@@ -67,7 +67,6 @@ class MainActivity : AppCompatActivity() {
         }
         ColorManager.initialize(this)
         enableEdgeToEdge()
-        super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setupToolbar()
         setupSnackbarsFlow()
