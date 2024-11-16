@@ -11,7 +11,7 @@ import com.nevidimka655.astracrypt.utils.extensions.withViewLifecycle
 
 class PrivacyPolicyFragment : Fragment(R.layout.fragment_privacy_policy) {
     private val vm by activityViewModels<MainVM>()
-    private val assetsManager get() = vm.assetsManager
+    private val assetsManager get() = vm.privacyPolicyManager
     private var binding: FragmentPrivacyPolicyBinding? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -38,11 +38,11 @@ import com.nevidimka655.astracrypt.tabs.settings.security.authentication.Camoufl
 import com.nevidimka655.astracrypt.ui.UiState
 import com.nevidimka655.astracrypt.utils.AppConfig
 import com.nevidimka655.astracrypt.utils.ApplicationComponentManager
-import com.nevidimka655.astracrypt.utils.AssetsManager
 import com.nevidimka655.astracrypt.utils.EncryptionManager
 import com.nevidimka655.astracrypt.utils.Engine
 import com.nevidimka655.astracrypt.utils.IO
 import com.nevidimka655.astracrypt.utils.OpenManager
+import com.nevidimka655.astracrypt.utils.PrivacyPolicyManager
 import com.nevidimka655.astracrypt.utils.SelectorManager
 import com.nevidimka655.astracrypt.utils.ToolsManager
 import com.nevidimka655.astracrypt.utils.extensions.lazyFast
@@ -82,7 +82,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainVM @Inject constructor(
-    val assetsManager: AssetsManager
+    val privacyPolicyManager: PrivacyPolicyManager
 ) : ViewModel() {
     private val worker get() = Engine.workManager
     val selectorManager by lazyFast { SelectorManager() }
@@ -494,8 +494,8 @@ class MainVM @Inject constructor(
     }
 
     fun loadPrivacyPolicy(activity: Activity) {
-        if (assetsManager.privacyPolicyStateFlow.value == null) {
-            viewModelScope.launch(Dispatchers.IO) { assetsManager.loadPrivacyPolicy(activity) }
+        if (privacyPolicyManager.privacyPolicyStateFlow.value == null) {
+            viewModelScope.launch(Dispatchers.IO) { privacyPolicyManager.loadPrivacyPolicy(activity) }
         }
     }
 

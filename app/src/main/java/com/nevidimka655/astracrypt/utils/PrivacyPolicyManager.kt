@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
-class AssetsManager @Inject constructor() {
+class PrivacyPolicyManager @Inject constructor() {
 
     private var _privacyPolicyMutableStateFlow: MutableStateFlow<String?>? = null
     val privacyPolicyStateFlow get() = run {
