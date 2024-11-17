@@ -26,6 +26,8 @@ serialization = "1.7.3"
 google-tink = "1.15.0"
 google-material = "1.12.0"
 hilt = "2.52"
+hilt-work = "1.2.0"
+hilt-compiler = "1.2.0"
 
 [libraries] # ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -45,6 +47,8 @@ compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 compose-material3-icons-core = { group = "androidx.compose.material", name = "material-icons-core" }
 compose-material3-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended" }
 compose-material3-windowSizeClass = { group = "androidx.compose.material3", name = "material3-window-size-class" }
+
+compose-navigation = { group = "androidx.navigation", name = "navigation-compose" }
 
 # MEDIA LIBRARIES --------------------------------------------------------------------------------------------------------------------------------
 media-coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
@@ -83,6 +87,8 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
+hilt-compiler = { group = "androidx.hilt", name = "hilt-compiler", version.ref = "hilt-compiler" }
+hilt-work = { group = "androidx.hilt", name = "hilt-work", version.ref = "hilt-work" }
 
 [plugins] # ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 android-application = { id = "com.android.application", version.ref = "gradle" }

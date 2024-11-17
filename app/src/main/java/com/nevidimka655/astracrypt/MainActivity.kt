@@ -37,8 +37,6 @@ import com.nevidimka655.astracrypt.utils.extensions.withLifecycle
 import com.nevidimka655.crypto.tink.TinkConfig
 import com.nevidimka655.haptic.hapticClick
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.channels.consumeEach
-import kotlinx.coroutines.launch
 import kotlin.math.abs
 
 @AndroidEntryPoint

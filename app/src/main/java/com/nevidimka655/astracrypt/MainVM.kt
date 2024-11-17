@@ -23,6 +23,8 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.Operation
 import androidx.work.OutOfQuotaPolicy
 import androidx.work.WorkInfo
+import androidx.work.WorkManager
+import coil.ImageLoader
 import coil.request.ImageRequest
 import com.nevidimka655.astracrypt.entities.CoilTinkModel
 import com.nevidimka655.astracrypt.entities.NavigatorDirectory
@@ -82,9 +84,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainVM @Inject constructor(
+    val workManager: WorkManager,
     val privacyPolicyManager: PrivacyPolicyManager
 ) : ViewModel() {
-    private val worker get() = Engine.workManager
+    @Inject lateinit var imageLoader: ImageLoader
     val selectorManager by lazyFast { SelectorManager() }
     val authManager = AuthManager()
     val openManager by lazy { OpenManager() }
@@ -208,9 +211,9 @@ class MainVM @Inject constructor(
             .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
             .setInputData(data)
             .build()
-        worker.enqueue(workerRequest)
+        workManager.enqueue(workerRequest)
         launch {
-            worker.getWorkInfoByIdLiveData(workerRequest.id).asFlow().collectLatest {
+            workManager.getWorkInfoByIdLiveData(workerRequest.id).asFlow().collectLatest {
                 when (it?.state) {
                     WorkInfo.State.SUCCEEDED -> {
                         showSnackbar(R.string.snack_imported)
@@ -416,7 +419,7 @@ class MainVM @Inject constructor(
             .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
             .setInputData(data)
             .build()
-        lastExportOperation = worker.enqueue(workerRequest)
+        lastExportOperation = workManager.enqueue(workerRequest)
     }
 
     fun searchQuerySubmit(query: String) {
@@ -433,7 +436,7 @@ class MainVM @Inject constructor(
             if (profileInfoJson != null) {
                 profileInfo = Json.decodeFromString(profileInfoJson)
                 if (loadIconFile && profileInfo.defaultAvatar == null) {
-                    profileInfo.iconFile = Engine.imageLoader.execute(
+                    profileInfo.iconFile = imageLoader.execute(
                         ImageRequest.Builder(Engine.appContext)
                             .data(
                                 CoilTinkModel(

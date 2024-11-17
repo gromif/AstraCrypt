@@ -103,6 +103,7 @@ dependencies {
     // Compose
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.activity)
+    implementation(libs.compose.navigation)
     implementation(libs.compose.material3.icons.core)
     implementation(libs.compose.material3.icons.extended)
     implementation(libs.compose.material3)
@@ -140,7 +141,9 @@ dependencies {
 
     // DI - Hilt
     ksp(libs.hilt.android.compiler)
+    ksp(libs.hilt.compiler)
     implementation(libs.hilt.android)
+    implementation(libs.hilt.work)
 
     // Kotlin
     implementation(libs.kotlin.coroutines)

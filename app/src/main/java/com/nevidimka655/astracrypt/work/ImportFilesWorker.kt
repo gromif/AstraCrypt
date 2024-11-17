@@ -19,13 +19,13 @@ import androidx.core.app.NotificationCompat
 import androidx.core.provider.DocumentsContractCompat
 import androidx.documentfile.provider.DocumentFile
 import androidx.exifinterface.media.ExifInterface
+import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.ForegroundInfo
 import androidx.work.WorkManager
 import androidx.work.WorkerParameters
-import coil.request.CachePolicy
+import coil.ImageLoader
 import coil.request.ImageRequest
-import coil.size.Scale
 import com.google.crypto.tink.StreamingAead
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.entities.EncryptionInfo
@@ -40,6 +40,8 @@ import com.nevidimka655.crypto.tink.TinkConfig
 import com.nevidimka655.crypto.tink.extensions.fromBase64
 import com.nevidimka655.crypto.tink.extensions.secureRandom
 import com.nevidimka655.crypto.tink.extensions.streamingAeadPrimitive
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedInject
 import kotlinx.coroutines.*
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -48,25 +50,15 @@ import java.io.File
 import java.io.InputStream
 import java.io.OutputStream
 
-@Suppress("DEPRECATION")
-class ImportFilesWorker(
-    appContext: Context,
-    params: WorkerParameters
-) : CoroutineWorker(appContext, params) {
+@HiltWorker
+class ImportFilesWorker @AssistedInject constructor(
+    @Assisted context: Context,
+    @Assisted params: WorkerParameters,
+    private val imageLoader: ImageLoader,
+    private val defaultCoilRequestBuilder: ImageRequest.Builder
+) : CoroutineWorker(context, params) {
     private val defaultDispatcher = Dispatchers.IO
-    private val imageLoader get() = Engine.imageLoader
     private val contentResolver get() = applicationContext.contentResolver
-    private val defaultCoilRequestBuilder = ImageRequest.Builder(applicationContext)
-        .diskCachePolicy(CachePolicy.DISABLED)
-        .memoryCachePolicy(CachePolicy.DISABLED)
-        .size(AppConfig.DB_THUMB_SIZE)
-        .scale(Scale.FILL)
-        .transformations(CenterCropTransformation())
-
-    @SuppressLint("NewApi")
-    private val bitmapCompressFormat = if (Api.atLeastAndroid11()) {
-        Bitmap.CompressFormat.WEBP_LOSSY
-    } else Bitmap.CompressFormat.WEBP
 
     object Args {
         const val fileWithUris = "Be_My_Eyes"
@@ -90,7 +82,6 @@ class ImportFilesWorker(
     private var notificationId = 0
 
     override suspend fun doWork(): Result {
-        Engine.init(applicationContext)
         parentDirectoryId = inputData.getLong(Args.dirId, 0)
         saveOriginalFiles = inputData.getBoolean(Args.saveOriginalFiles, false)
         setForeground(getForegroundInfo())
@@ -293,6 +284,9 @@ class ImportFilesWorker(
         val thumbnailFileName = Randomizer.getUrlSafeString(
             secureRandom(secureSeed.toByteArray()), AppConfig.DB_THUMB_FILE_NAME_COUNT
         )
+        val bitmapCompressFormat = if (Api.atLeastAndroid11()) {
+            Bitmap.CompressFormat.WEBP_LOSSY
+        } else Bitmap.CompressFormat.WEBP
         val compressedByteStream = ByteArrayOutputStream().also {
             bitmap.compress(
                 bitmapCompressFormat,

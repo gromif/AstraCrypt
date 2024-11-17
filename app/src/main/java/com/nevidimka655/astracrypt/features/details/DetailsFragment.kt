@@ -17,16 +17,20 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import coil.ImageLoader
 import coil.compose.AsyncImage
 import com.nevidimka655.astracrypt.MainVM
 import com.nevidimka655.astracrypt.entities.CoilTinkModel
 import com.nevidimka655.astracrypt.ui.theme.AstraCryptTheme
-import com.nevidimka655.astracrypt.utils.Engine
 import com.nevidimka655.compose_details.Details
 import com.nevidimka655.compose_details.Screen
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-class DetailsFragment : Fragment() {
+@AndroidEntryPoint
+class DetailsFragment: Fragment() {
     private val vm by activityViewModels<MainVM>()
+    @Inject lateinit var imageLoader: ImageLoader
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -63,7 +67,7 @@ class DetailsFragment : Fragment() {
                                         encryptionType = encryption
                                     ),
                                     contentDescription = null,
-                                    imageLoader = Engine.imageLoader,
+                                    imageLoader = imageLoader,
                                     contentScale = ContentScale.Crop)
                             }
                         }
