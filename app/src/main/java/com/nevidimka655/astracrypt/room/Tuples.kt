@@ -6,17 +6,22 @@ import com.nevidimka655.astracrypt.utils.enums.StorageItemState
 import com.nevidimka655.astracrypt.utils.enums.StorageItemType
 
 data class StorageItemListTuple(
-    @PrimaryKey val id: Long,
+    @PrimaryKey val id: Long = -1,
+
     @ColumnInfo(name = "name")
-    val name: String,
+    val name: String = "",
+
     @ColumnInfo(name = "item_type", typeAffinity = ColumnInfo.INTEGER)
-    val itemType: StorageItemType,
+    val itemType: StorageItemType = StorageItemType.Folder,
+
     @ColumnInfo(name = "thumb")
-    val thumbnail: String,
+    val thumbnail: String = "",
+
     @ColumnInfo(name = "state")
-    val state: StorageItemState,
+    val state: StorageItemState = StorageItemState.Default,
+
     @ColumnInfo(name = "enc_thumb_type")
-    val thumbnailEncryptionType: Int
+    val thumbnailEncryptionType: Int = -1
 ) {
     val isFile get() = itemType.isFile
     val isDirectory get() = !isFile
