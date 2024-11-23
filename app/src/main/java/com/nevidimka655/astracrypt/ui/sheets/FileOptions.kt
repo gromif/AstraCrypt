@@ -1,5 +1,6 @@
 package com.nevidimka655.astracrypt.ui.sheets
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -27,6 +28,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
@@ -45,14 +47,22 @@ import com.nevidimka655.ui.compose_core.theme.spaces
 @Composable
 fun Sheets.filesOptions(
     state: MutableState<Boolean> = mutableStateOf(false),
+    name: String = "Test",
+    itemIcon: ImageVector = Icons.Default.Folder,
+    isFolder: Boolean = true,
     sheetState: SheetState = SheetDefaults.state(),
+    onRename: () -> Unit = {}
 ) = SheetDefaults.default(
-    state = state,
-    sheetState = sheetState
+    state = state, sheetState = sheetState
 ) {
     val context = LocalContext.current
     Column {
-        SheetFilesOptionsHeader()
+        SheetFilesOptionsHeader(
+            text = name,
+            itemIcon = itemIcon,
+            isFolder = isFolder,
+            onRename = onRename
+        )
         HorizontalDivider()
         SheetFilesOptionsItem(
             text = context.getString(R.string.open),
@@ -91,7 +101,10 @@ fun Sheets.filesOptions(
 @Composable
 fun SheetFilesOptionsHeader(
     modifier: Modifier = Modifier,
-    text: String = "Test"
+    text: String = "Test",
+    itemIcon: ImageVector = Icons.Default.Folder,
+    isFolder: Boolean = true,
+    onRename: () -> Unit = {}
 ) = Column(
     modifier = Modifier.padding(
         bottom = MaterialTheme.spaces.spaceMedium,
@@ -114,13 +127,14 @@ fun SheetFilesOptionsHeader(
             icon = Icons.Outlined.DeleteForever,
             contentDescription = context.getString(R.string.files_options_delete)
         )
-        Icon(
-            imageVector = Icons.Default.Folder,
+        Image(
+            imageVector = itemIcon,
             contentDescription = null,
-            modifier = Modifier.size(48.dp)
+            modifier = Modifier.size(48.dp),
+            colorFilter = if (isFolder) ColorFilter.tint(color = MaterialTheme.colorScheme.onSurfaceVariant) else null
         )
         FilledTonalIconButton(
-            onClick = {},
+            onClick = onRename,
             icon = Icons.Outlined.Edit,
             contentDescription = context.getString(R.string.files_options_rename)
         )
