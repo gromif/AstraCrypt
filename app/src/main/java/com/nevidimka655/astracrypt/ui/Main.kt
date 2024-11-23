@@ -96,7 +96,7 @@ fun Main(
                     enter = fadeIn() + scaleIn(),
                     exit = fadeOut() + scaleOut()
                 ) {
-                    LargeFloatingActionButton (
+                    LargeFloatingActionButton(
                         onClick = {
                             coroutineScope.launch { onFabClick.send(0) }
                         },
@@ -152,7 +152,9 @@ fun Main(
                 }
                 composable<Route.Tabs.Files> {
                     val files: Route.Tabs.Files = it.toRoute()
-                    toolbarTitle = context.getString(files.titleId)
+                    toolbarTitle = if (!files.isStarred) {
+                        context.getString(files.titleId)
+                    } else context.getString(files.titleIdAlt)
                     currentTab =
                         if (!files.isStarred) BottomBarItems.Files else BottomBarItems.Starred
                     fabState = if (!files.isStarred) FabState(

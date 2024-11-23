@@ -16,6 +16,7 @@ object Route {
         @Serializable
         data class Files(
             @StringRes val titleId: Int = R.string.files,
+            @StringRes val titleIdAlt: Int = R.string.starred,
             val isStarred: Boolean = false
         )
 
