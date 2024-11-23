@@ -1,33 +1,26 @@
 package com.nevidimka655.astracrypt
 
-import android.Manifest
 import android.annotation.SuppressLint
-import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
+import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
-import androidx.core.view.updatePadding
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.behavior.HideBottomViewOnScrollBehavior
 import com.google.android.material.color.DynamicColors
 import com.google.android.material.snackbar.Snackbar
 import com.nevidimka655.astracrypt.databinding.MainBinding
 import com.nevidimka655.astracrypt.features.auth.AuthType
 import com.nevidimka655.astracrypt.tabs.settings.security.authentication.Camouflage
+import com.nevidimka655.astracrypt.ui.Main
 import com.nevidimka655.astracrypt.ui.UiState
 import com.nevidimka655.astracrypt.utils.ColorManager
 import com.nevidimka655.astracrypt.utils.Engine
@@ -55,6 +48,7 @@ class MainActivity : AppCompatActivity() {
     val fabLarge get() = binding.fabLarge
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         Engine.init(applicationContext)
         setupDynamicColors()
@@ -64,8 +58,8 @@ class MainActivity : AppCompatActivity() {
             encryptionManager.loadEncryptionInfo()
         }
         ColorManager.initialize(this)
-        enableEdgeToEdge()
-        setContentView(binding.root)
+        setContent { Main() }
+        /*setContentView(binding.root)
         setupToolbar()
         setupSnackbarsFlow()
         savedInstanceState ?: shouldShowAuthScreen(navController)
@@ -112,7 +106,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 gt.launch(Manifest.permission.POST_NOTIFICATIONS)
             }
-        }
+        }*/
     }
 
     private fun shouldShowAuthScreen(navController: NavController) {

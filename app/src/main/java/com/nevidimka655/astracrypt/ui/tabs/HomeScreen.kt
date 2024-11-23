@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.tabs.home
+package com.nevidimka655.astracrypt.ui.tabs
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -25,6 +25,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -52,8 +53,9 @@ import com.nevidimka655.ui.compose_core.theme.spaces
 @Composable
 inline fun HomeScreen(
     vm: MainVM,
-    crossinline onClick: (item: StorageItemListTuple) -> Unit
+    crossinline openFolder: () -> Unit
 ) {
+    SideEffect { vm.loadProfileInfo() }
     val profileInfoState = vm.profileInfoFlow.collectAsStateWithLifecycle()
     val recentItemsState = vm.recentFilesStateFlow.collectAsStateWithLifecycle()
     Column(
@@ -69,7 +71,22 @@ inline fun HomeScreen(
             modifier = Modifier.height(350.dp),
             titleText = stringResource(id = R.string.recentlyAdded)
         ) {
-            RecentList(itemsState = recentItemsState) { onClick(it) }
+            RecentList(itemsState = recentItemsState) {
+                if (it.isFile) {
+                    vm.openManager.reset()
+                    //ExportDialog().show(childFragmentManager, null) // TODO
+                    vm.openWithDialog(itemId = it.id)
+                } else {
+                    vm.openDirectory(
+                        id = it.id,
+                        dirName = it.name,
+                        popBackStack = true
+                    )
+                    vm.triggerFilesListUpdate()
+                    openFolder()
+                }
+
+            }
         }
     }
 }
@@ -122,11 +139,18 @@ inline fun RecentListItem(
                 .height(200.dp),
             contentAlignment = Alignment.Center
         ) {
-            if (thumb.isEmpty()) Image(
-                modifier = Modifier.size(72.dp),
-                imageVector = itemType.iconAlt,
-                contentDescription = null
-            ) else AsyncImage(
+            if (thumb.isEmpty()) {
+                if (itemType == StorageItemType.Folder) Icon(
+                    modifier = Modifier.size(72.dp),
+                    imageVector = itemType.iconAlt,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                ) else Image(
+                    modifier = Modifier.size(72.dp),
+                    imageVector = itemType.iconAlt,
+                    contentDescription = null
+                )
+            } else AsyncImage(
                 modifier = Modifier.fillMaxSize(),
                 model = CoilTinkModel(path = thumb, encryptionType = thumbEncryption),
                 contentDescription = null,

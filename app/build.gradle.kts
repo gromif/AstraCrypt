@@ -108,7 +108,8 @@ dependencies {
     implementation(libs.compose.material3.icons.extended)
     implementation(libs.compose.material3)
     implementation(libs.compose.material3.windowSizeClass)
-    implementation(libs.compose.ui.tooling)
+    debugImplementation(libs.compose.ui.tooling)
+    debugImplementation(libs.compose.ui.tooling.preview)
     debugImplementation(libs.compose.ui.test.manifest)
 
     // Paging

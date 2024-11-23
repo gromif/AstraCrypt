@@ -16,7 +16,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.SearchView
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
-import androidx.core.content.FileProvider
 import androidx.core.view.MenuProvider
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
@@ -24,8 +23,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.NavigationUI
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -35,8 +32,6 @@ import com.nevidimka655.astracrypt.databinding.OptionsFilesBinding
 import com.nevidimka655.astracrypt.databinding.TextInputLayoutBinding
 import com.nevidimka655.astracrypt.room.StorageItemListTuple
 import com.nevidimka655.astracrypt.ui.UiState
-import com.nevidimka655.astracrypt.ui.dialogs.DeleteOriginalFilesDialog
-import com.nevidimka655.astracrypt.ui.dialogs.ExportDialog
 import com.nevidimka655.astracrypt.ui.theme.AstraCryptTheme
 import com.nevidimka655.astracrypt.utils.AppConfig
 import com.nevidimka655.astracrypt.utils.CustomLayoutParams
@@ -48,11 +43,6 @@ import com.nevidimka655.astracrypt.utils.extensions.requireToolbar
 import com.nevidimka655.astracrypt.utils.extensions.ui.requireMainActivity
 import com.nevidimka655.astracrypt.utils.extensions.ui.setDrawableTop
 import com.nevidimka655.astracrypt.utils.extensions.ui.setTooltip
-import com.nevidimka655.astracrypt.utils.extensions.ui.viewLifecycleScope
-import com.nevidimka655.haptic.Haptic
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class FilesFragment : Fragment() {
     private val vm by activityViewModels<MainVM>()
@@ -66,21 +56,7 @@ class FilesFragment : Fragment() {
     private var searchView: SearchView? = null
 
     private var addStorageItemBottomSheetDialog: BottomSheetDialog? = null
-    private val pickFileContract = registerForActivityResult(
-        ActivityResultContracts.OpenMultipleDocuments()
-    ) {
-        if (it.isNotEmpty()) viewLifecycleScope.launch {
-            withContext(Dispatchers.Main) {
-                vm.lastUriListToImport = it
-                DeleteOriginalFilesDialog().show(childFragmentManager, null)
-            }
-        }
-    }
-    private val scanContract = registerForActivityResult(ActivityResultContracts.TakePicture()) {
-        if (it) vm.import(vm.lastUriToScan!!).invokeOnCompletion {
-            vm.lastUriToScan = null
-        }
-    }
+
     private val exportDirContract =
         registerForActivityResult(ActivityResultContracts.OpenDocumentTree()) {
             if (it != null) vm.export(
@@ -94,26 +70,11 @@ class FilesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ) = ComposeView(requireContext()).apply {
-        vm.isStarredFragment = isStarredFragment
         setupFloatingButton(fab)
         setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
         setContent {
             AstraCryptTheme {
-                FilesScreen(
-                    vm = vm,
-                    onAdd = { callFileContract() },
-                    onScan = {
-                        scanContract.launch(
-                            FileProvider.getUriForFile(
-                                requireContext(),
-                                "com.nevidimka655.astracrypt",
-                                IO.getExportedCacheCameraFile()
-                            ).also { vm.lastUriToScan = it }
-                        )
-                    },
-                    onAddPhoto = { callFileContract("image") },
-                    onAddVideo = { callFileContract("video") },
-                    onAddMusic = { callFileContract("audio") },
+                /*FilesScreen(
                     onOptions = { onOptions(item = it) },
                     onNavigatorClick = { vm.openDirectoryFromSelector(it) },
                     onClick = {
@@ -127,7 +88,7 @@ class FilesFragment : Fragment() {
                             else -> initSelecting(it)
                         }
                     }
-                ) { if (!selectorManager.blockItems) initSelecting(it) }
+                ) { if (!selectorManager.blockItems) initSelecting(it) }*/
             }
         }
     }
@@ -151,36 +112,7 @@ class FilesFragment : Fragment() {
         setupBackCallback()
     }
 
-    private fun openItem(item: StorageItemListTuple) {
-        if (item.itemType.isFile) {
-            vm.openManager.reset()
-            ExportDialog().show(childFragmentManager, null)
-            vm.openWithDialog(itemId = item.id)
-        } else {
-            closeSearchView()
-            if (isStarredFragment) {
-                vm.openDirectory(
-                    id = item.id,
-                    dirName = item.name,
-                    popBackStack = true
-                )
-                vm.triggerFilesListUpdate()
-                val bottomNavItem = requireActivity().findViewById<BottomNavigationView>(
-                    R.id.bottomNavigationView
-                ).menu.findItem(R.id.filesFragment)
-                NavigationUI.onNavDestinationSelected(bottomNavItem, findNavController())
-            } else {
-                if (vm.getUiState().fabState) fab.show()
-                vm.openDirectory(
-                    id = item.id,
-                    dirName = item.name
-                )
-            }
-        }
-    }
 
-    private fun callFileContract(mimeSubType: String = "*") =
-        pickFileContract.launch(arrayOf("$mimeSubType/*"))
 
     private fun onOptions(item: StorageItemListTuple) {
         if (selectorManager.isInitialized) return
@@ -196,7 +128,7 @@ class FilesFragment : Fragment() {
         }
         optionsBinding.open.setOnClickListener {
             optionsBottomSheetDialog.cancel()
-            openItem(item)
+            //openItem(item)
         }
         optionsBinding.export.setOnClickListener {
             optionsBottomSheetDialog.cancel()
@@ -295,10 +227,7 @@ class FilesFragment : Fragment() {
 
     private fun setupFloatingButton(fab: FloatingActionButton) = with(fab) {
         setOnClickListener {
-            Haptic.rise()
-            viewLifecycleScope.launch {
-                vm.createNewSheetState.value = true
-            }
+
         }
         setTooltip(R.string.createNew)
     }
@@ -389,22 +318,7 @@ class FilesFragment : Fragment() {
     private fun setupBackCallback() {
         val backCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                if (vm.isSearchActive()) closeSearchView()
-                else {
-                    if (vm.filesNavigatorList.isNotEmpty()) vm.closeDirectory()
-                    else {
-                        if (selectorManager.isInitialized) {
-                            selectorManager.run {
-                                closeActionMode()
-                                clear()
-                                clearViews()
-                            }
-                        } else {
-                            isEnabled = false
-                            requireActivity().onBackPressedDispatcher.onBackPressed()
-                        }
-                    }
-                }
+
             }
         }
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, backCallback)

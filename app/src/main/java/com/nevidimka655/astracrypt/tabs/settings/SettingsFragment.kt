@@ -39,46 +39,7 @@ class SettingsFragment : Fragment() {
         setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
         setContent {
             AstraCryptTheme {
-                val cellsCount = when(LocalWindowWidth.current) {
-                    WindowWidthSizeClass.Compact -> 2
-                    WindowWidthSizeClass.Medium -> 3
-                    WindowWidthSizeClass.Expanded -> 5
-                    else -> 5
-                }
-                val list = remember {
-                    listOf(
-                        Pair(Icons.Outlined.Person, R.string.settings_editProfile),
-                        Pair(Icons.Outlined.Security, R.string.settings_security),
-                        Pair(Icons.Outlined.Palette, R.string.settings_interface),
-                        Pair(Icons.Outlined.Storefront, R.string.purchases),
-                        Pair(Icons.Outlined.Analytics, R.string.settings_dataCollection),
-                        Pair(Icons.Outlined.Info, R.string.settings_about)
-                    )
-                }
-                LazyVerticalGrid(
-                    modifier = Modifier.nestedScroll(rememberNestedScrollInteropConnection()),
-                    columns = GridCells.Fixed(cellsCount),
-                    verticalArrangement = Arrangement.spacedBy(MaterialTheme.spaces.spaceMedium),
-                    horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spaces.spaceMedium),
-                    contentPadding = PaddingValues(MaterialTheme.spaces.spaceMedium)
-                ) {
-                    items(list.size) { key ->
-                        val item = list[key]
-                        SettingsGroupItem(
-                            title = stringResource(id = item.second),
-                            imageVector = item.first
-                        ) {
-                            when (key) {
-                                0 -> navigate(R.id.action_settingsFragment_to_editProfileFragment)
-                                1 -> navigate(R.id.action_settingsFragment_to_securityFragment)
-                                2 -> navigate(R.id.action_settingsFragment_to_interfaceFragment)
-                                3 -> navigate(R.id.action_global_subscriptionsGraph)
-                                4 -> navigate(R.id.action_settingsFragment_to_dataCollectionFragment)
-                                5 -> navigate(R.id.action_settingsFragment_to_aboutFragment)
-                            }
-                        }
-                    }
-                }
+
             }
         }
     }

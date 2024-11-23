@@ -1,5 +1,8 @@
-package com.nevidimka655.astracrypt.tabs.files
+package com.nevidimka655.astracrypt.ui.tabs
 
+import androidx.activity.compose.BackHandler
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.animateColorAsState
@@ -51,6 +54,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.runtime.snapshots.SnapshotStateMap
@@ -61,6 +65,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.platform.rememberNestedScrollInteropConnection
 import androidx.compose.ui.res.dimensionResource
@@ -69,6 +74,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.content.FileProvider
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
@@ -80,8 +86,15 @@ import com.nevidimka655.astracrypt.entities.CoilTinkModel
 import com.nevidimka655.astracrypt.entities.NavigatorDirectory
 import com.nevidimka655.astracrypt.room.StorageItemListTuple
 import com.nevidimka655.astracrypt.tabs.Tabs
+import com.nevidimka655.astracrypt.tabs.files.createNewSheet
+import com.nevidimka655.astracrypt.tabs.files.newFolder
+import com.nevidimka655.astracrypt.ui.dialogs.DeleteOriginalFiles
+import com.nevidimka655.astracrypt.ui.dialogs.Dialogs
 import com.nevidimka655.astracrypt.ui.shared.NoItemsPage
+import com.nevidimka655.astracrypt.ui.sheets.Sheets
+import com.nevidimka655.astracrypt.ui.sheets.filesOptions
 import com.nevidimka655.astracrypt.utils.Engine
+import com.nevidimka655.astracrypt.utils.IO
 import com.nevidimka655.astracrypt.utils.appearance.AppearanceManager
 import com.nevidimka655.astracrypt.utils.appearance.ViewMode
 import com.nevidimka655.astracrypt.utils.enums.StorageItemState
@@ -92,6 +105,12 @@ import com.nevidimka655.haptic.hapticLongClick
 import com.nevidimka655.ui.compose_core.ext.LocalWindowWidth
 import com.nevidimka655.ui.compose_core.ext.cellsCount
 import com.nevidimka655.ui.compose_core.theme.spaces
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -128,11 +147,18 @@ fun FilesGridItem(
                 .aspectRatio(1.5f),
             contentAlignment = Alignment.Center
         ) {
-            if (thumb.isEmpty()) Image(
-                modifier = Modifier.size(72.dp),
-                imageVector = itemType.iconAlt,
-                contentDescription = null
-            ) else AsyncImage(modifier = Modifier.fillMaxSize(),
+            if (thumb.isEmpty()) {
+                if (itemType == StorageItemType.Folder) Icon(
+                    modifier = Modifier.size(72.dp),
+                    imageVector = itemType.iconAlt,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                ) else Image(
+                    modifier = Modifier.size(72.dp),
+                    imageVector = itemType.iconAlt,
+                    contentDescription = null
+                )
+            } else AsyncImage(modifier = Modifier.fillMaxSize(),
                 model = CoilTinkModel(
                     absolutePath = null,
                     path = thumb,
@@ -246,11 +272,18 @@ fun FilesListItemMedium(
             modifier = Modifier.size(dimensionResource(id = R.dimen.filesListItemMediumHeight)),
             contentAlignment = Alignment.Center
         ) {
-            if (thumb.isEmpty()) Image(
-                modifier = Modifier.size(60.dp),
-                imageVector = itemType.iconAlt,
-                contentDescription = null
-            ) else AsyncImage(
+            if (thumb.isEmpty()) {
+                if (itemType == StorageItemType.Folder) Icon(
+                    modifier = Modifier.size(60.dp),
+                    imageVector = itemType.iconAlt,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                ) else Image(
+                    modifier = Modifier.size(60.dp),
+                    imageVector = itemType.iconAlt,
+                    contentDescription = null
+                )
+            } else AsyncImage(
                 model = CoilTinkModel(
                     absolutePath = null,
                     path = thumb,
@@ -415,7 +448,9 @@ fun FilesNavigatorItem(
     isFirstItem: Boolean = false, title: String = "", onClick: () -> Unit = {}
 ) {
     if (!isFirstItem) VerticalDivider(
-        modifier = Modifier.width(2.dp).height(20.dp)
+        modifier = Modifier
+            .width(2.dp)
+            .height(20.dp)
     )
     Text(
         modifier = Modifier
@@ -429,53 +464,185 @@ fun FilesNavigatorItem(
     )
 }
 
+private fun openItem(
+    vm: MainVM,
+    isStarred: Boolean,
+    onOpenStarredDir: () -> Unit,
+    item: StorageItemListTuple
+) {
+    if (item.itemType.isFile) {
+        vm.openManager.reset()
+        //ExportDialog().show(childFragmentManager, null)
+        vm.openWithDialog(itemId = item.id)
+    } else {
+        //closeSearchView()
+        if (isStarred) {
+            vm.openDirectory(
+                id = item.id,
+                dirName = item.name,
+                popBackStack = true
+            )
+            vm.triggerFilesListUpdate()
+            onOpenStarredDir()
+        } else {
+            //if (vm.getUiState().fabState) fab.show()
+            vm.openDirectory(
+                id = item.id,
+                dirName = item.name
+            )
+        }
+    }
+}
+
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FilesScreen(
     vm: MainVM,
-    onAdd: () -> Unit,
-    onScan: () -> Unit,
-    onAddPhoto: () -> Unit,
-    onAddVideo: () -> Unit,
-    onAddMusic: () -> Unit,
+    isStarred: Boolean,
+    onFabClick: Channel<Any>,
+    onNavigateUp: () -> Unit,
+    onOpenStarredDir: () -> Unit,
     onOptions: (item: StorageItemListTuple) -> Unit,
     onNavigatorClick: (index: Int?) -> Unit,
-    onClick: (item: StorageItemListTuple) -> Unit,
     onLongPress: (item: StorageItemListTuple) -> Unit
 ) {
+    val context = LocalContext.current
     val scope = rememberCoroutineScope()
-    val items = (if (vm.isStarredFragment) vm.starredPagingFlow else vm.pagingFlow)
-        .collectAsLazyPagingItems()
+    val items = (if (isStarred) vm.starredPagingFlow else vm.pagingFlow).collectAsLazyPagingItems()
     val isEmptyPageVisible = remember {
-        derivedStateOf {
-            items.itemCount == 0 && items.loadState.refresh is LoadState.NotLoading
-        }
+        derivedStateOf { items.itemCount == 0 && items.loadState.refresh is LoadState.NotLoading }
     }
     var dialogNewFolder by Tabs.Files.Dialogs.newFolder(state = vm.dialogNewFolderState) {
         vm.newDirectory(it.removeLines().trim())
     }
-    Tabs.Files.createNewSheet(
-        state = vm.createNewSheetState,
+    var isCreateSheetVisible = remember { mutableStateOf(false) }
+    var isOptionsSheetVisible = remember { mutableStateOf(false) }
+    LaunchedEffect(Unit) {
+        onFabClick.receiveAsFlow().collectLatest {
+            Haptic.rise()
+            isCreateSheetVisible.value = true
+        }
+    }
+    var backOverrideState by remember { mutableStateOf(true) }
+    BackHandler(enabled = backOverrideState) {
+        if (vm.isSearchActive()) {
+            //closeSearchView() //TODO
+        } else {
+            if (vm.filesNavigatorList.isNotEmpty()) vm.closeDirectory()
+            else {
+                if (vm.selectorManager.isInitialized) {
+                    vm.selectorManager.run {
+                        closeActionMode()
+                        clear()
+                        clearViews()
+                    }
+                } else onNavigateUp()
+            }
+        }
+    }
+
+    var deleteOri by rememberSaveable { mutableStateOf(false) }
+    if (deleteOri) Dialogs.DeleteOriginalFiles(
+        onImportStartDelete = {
+            deleteOri = false
+            vm.lastUriListToImport?.let {
+                vm.import(
+                    uriList = it.toTypedArray(),
+                    saveOriginalFiles = false
+                )
+            }
+        },
+        onImportStartSave = {
+            deleteOri = false
+            vm.lastUriListToImport?.let {
+                vm.import(
+                    uriList = it.toTypedArray(),
+                    saveOriginalFiles = true
+                )
+            }
+        }
+    )
+
+    val pickFileContract = rememberLauncherForActivityResult(
+        ActivityResultContracts.OpenMultipleDocuments()
+    ) {
+        if (it.isNotEmpty()) scope.launch {
+            withContext(Dispatchers.Main) {
+                vm.lastUriListToImport = it
+                deleteOri = true
+            }
+        }
+    }
+
+    fun callFileContract(mimeSubType: String = "*") =
+        pickFileContract.launch(arrayOf("$mimeSubType/*"))
+
+    val scanContract = rememberLauncherForActivityResult(
+        ActivityResultContracts.TakePicture()
+    ) {
+        if (it) vm.import(vm.lastUriToScan!!).invokeOnCompletion {
+            vm.lastUriToScan = null
+        }
+    }
+    Sheets.createNewSheet(
+        state = isCreateSheetVisible,
         scope = scope,
         onCreateFolder = { dialogNewFolder = true },
-        onAdd = onAdd,
-        onScan = onScan,
-        onAddPhoto = onAddPhoto,
-        onAddVideo = onAddVideo,
-        onAddMusic = onAddMusic
+        onAdd = { callFileContract() },
+        onScan = {
+            scanContract.launch(
+                FileProvider.getUriForFile(
+                    context,
+                    "com.nevidimka655.astracrypt",
+                    IO.getExportedCacheCameraFile()
+                ).also { vm.lastUriToScan = it }
+            )
+        },
+        onAddPhoto = { callFileContract("image") },
+        onAddVideo = { callFileContract("video") },
+        onAddMusic = { callFileContract("audio") }
+    )
+    Sheets.filesOptions(
+        state = isOptionsSheetVisible
     )
     Column {
-        if (!vm.isStarredFragment && !vm.isSearchExpandedState) FilesNavigator(
-            filesNavigatorList = vm.filesNavigatorList, onClick = onNavigatorClick
-        )
+        if (!isStarred && !vm.isSearchExpandedState) {
+            AnimatedVisibility(visible = vm.filesNavigatorList.isNotEmpty()) {
+                FilesNavigator(
+                    filesNavigatorList = vm.filesNavigatorList, onClick = onNavigatorClick
+                )
+            }
+        }
         AnimatedVisibility(
             visible = !isEmptyPageVisible.value, enter = fadeIn(), exit = ExitTransition.None
         ) {
             FilesList(
                 pagingItems = items,
                 listCheckedState = vm.selectorManager.itemsMapState,
-                onOptions = onOptions,
-                onClick = onClick,
+                onOptions = { isOptionsSheetVisible.value = true },
+                onClick = {
+                    when {
+                        vm.selectorManager.itemsMapState.isEmpty() -> openItem(
+                            vm,
+                            isStarred,
+                            onOpenStarredDir,
+                            it
+                        )
+
+                        vm.selectorManager.blockItems -> {
+                            val isNotSelected = !vm.selectorManager.getItemState(it.id)
+                            if (isNotSelected && it.isDirectory) openItem(
+                                vm,
+                                isStarred,
+                                onOpenStarredDir,
+                                it
+                            )
+                        }
+
+                        //else -> initSelecting(it)
+                    }
+                },
                 onLongPress = onLongPress
             )
         }
@@ -483,7 +650,7 @@ fun FilesScreen(
             visible = isEmptyPageVisible.value, enter = fadeIn(), exit = ExitTransition.None
         ) {
             when {
-                vm.isStarredFragment -> NoItemsPage(
+                isStarred -> NoItemsPage(
                     mainIcon = Icons.Outlined.StarOutline, actionIcon = Icons.Outlined.StarOutline
                 )
 

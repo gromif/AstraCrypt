@@ -28,9 +28,9 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.tabs.Tabs
+import com.nevidimka655.astracrypt.ui.sheets.Sheets
 import com.nevidimka655.ui.compose_core.IconWithBorder
-import com.nevidimka655.ui.compose_core.sheets.Sheets
+import com.nevidimka655.ui.compose_core.sheets.SheetDefaults
 import com.nevidimka655.ui.compose_core.sheets.default
 import com.nevidimka655.ui.compose_core.theme.spaces
 import kotlinx.coroutines.CoroutineScope
@@ -38,9 +38,9 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Tabs.Files.createNewSheet(
+fun Sheets.createNewSheet(
     state: MutableState<Boolean>,
-    sheetState: SheetState = Sheets.state(),
+    sheetState: SheetState = SheetDefaults.state(),
     scope: CoroutineScope,
     onCreateFolder: () -> Unit,
     onAdd: () -> Unit,
@@ -48,7 +48,7 @@ fun Tabs.Files.createNewSheet(
     onAddPhoto: () -> Unit,
     onAddVideo: () -> Unit,
     onAddMusic: () -> Unit,
-) = Sheets.default(
+) = SheetDefaults.default(
     state = state,
     sheetState = sheetState,
     title = stringResource(id = R.string.createNew)

@@ -53,7 +53,7 @@ import com.nevidimka655.astracrypt.MainVM
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.help.HelpFragment
 import com.nevidimka655.astracrypt.help.HelpIndex
-import com.nevidimka655.astracrypt.tabs.files.FilesListItemMedium
+import com.nevidimka655.astracrypt.ui.tabs.FilesListItemMedium
 import com.nevidimka655.astracrypt.ui.shared.BaseNoItemsPage
 import com.nevidimka655.astracrypt.ui.shared.NoItemsPageSize
 import com.nevidimka655.astracrypt.ui.theme.AstraCryptTheme

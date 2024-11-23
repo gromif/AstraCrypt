@@ -3,6 +3,7 @@
 package com.nevidimka655.astracrypt.ui.theme.icons
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Folder
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.nevidimka655.astracrypt.R
@@ -13,8 +14,7 @@ object _FileType
 
 val _FileType.Folder
     @Composable get() = _folder
-        ?: vectorResource(id = R.drawable.ic_menu_files).also { _folder = it }
-private var _folder: ImageVector? = null
+private var _folder: ImageVector = Icons.Default.Folder
 
 val _FileType.Audio
     @Composable get() = _audio
@@ -37,7 +37,6 @@ val _FileType.File
 private var _file: ImageVector? = null
 
 fun _FileType.reset() {
-    _folder = null
     _file = null
     _audio = null
     _photo = null

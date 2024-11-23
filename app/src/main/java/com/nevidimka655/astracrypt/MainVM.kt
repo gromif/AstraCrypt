@@ -94,7 +94,6 @@ class MainVM @Inject constructor(
     val encryptionManager = EncryptionManager()
     val encryptionInfo get() = encryptionManager.encryptionInfo
 
-    val createNewSheetState = mutableStateOf(false)
     val dialogNewFolderState = mutableStateOf(false)
     var isSearchExpandedState by mutableStateOf(false)
     private var searchSetupJob: Job? = null
@@ -132,7 +131,7 @@ class MainVM @Inject constructor(
 
     val toolsManager = ToolsManager(_snackbarChannel)
 
-    var isStarredFragment = false
+    var isStarredScreen = false
     var pagingSource: PagingSource<Int, StorageItemListTuple>? = null
     var pagingStarredSource: PagingSource<Int, StorageItemListTuple>? = null
 
@@ -266,7 +265,7 @@ class MainVM @Inject constructor(
     }
 
     private fun triggerListUpdate() {
-        if (isStarredFragment) triggerStarredListUpdate() else triggerFilesListUpdate()
+        if (isStarredScreen) triggerStarredListUpdate() else triggerFilesListUpdate()
     }
 
     private fun triggerStarredListUpdate() {
