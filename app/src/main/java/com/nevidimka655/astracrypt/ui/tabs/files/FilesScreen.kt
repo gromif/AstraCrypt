@@ -535,7 +535,7 @@ fun FilesScreen(
             isCreateSheetVisible.value = true
         }
     }
-    var backOverrideState by remember { mutableStateOf(true) }
+    var backOverrideState by remember { mutableStateOf(!isStarred) }
     BackHandler(enabled = backOverrideState) {
         if (vm.isSearchActive()) {
             //closeSearchView() //TODO
