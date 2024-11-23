@@ -51,7 +51,8 @@ fun Sheets.filesOptions(
     itemIcon: ImageVector = Icons.Default.Folder,
     isFolder: Boolean = true,
     sheetState: SheetState = SheetDefaults.state(),
-    onRename: () -> Unit = {}
+    onRename: () -> Unit = {},
+    onDelete: () -> Unit = {}
 ) = SheetDefaults.default(
     state = state, sheetState = sheetState
 ) {
@@ -61,7 +62,8 @@ fun Sheets.filesOptions(
             text = name,
             itemIcon = itemIcon,
             isFolder = isFolder,
-            onRename = onRename
+            onRename = onRename,
+            onDelete = onDelete
         )
         HorizontalDivider()
         SheetFilesOptionsItem(
@@ -104,7 +106,8 @@ fun SheetFilesOptionsHeader(
     text: String = "Test",
     itemIcon: ImageVector = Icons.Default.Folder,
     isFolder: Boolean = true,
-    onRename: () -> Unit = {}
+    onRename: () -> Unit = {},
+    onDelete: () -> Unit = {}
 ) = Column(
     modifier = Modifier.padding(
         bottom = MaterialTheme.spaces.spaceMedium,
@@ -123,7 +126,7 @@ fun SheetFilesOptionsHeader(
     ) {
         val context = LocalContext.current
         FilledTonalIconButton(
-            onClick = {},
+            onClick = onDelete,
             icon = Icons.Outlined.DeleteForever,
             contentDescription = context.getString(R.string.files_options_delete)
         )

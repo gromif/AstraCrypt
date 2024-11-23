@@ -88,6 +88,7 @@ import com.nevidimka655.astracrypt.room.StorageItemListTuple
 import com.nevidimka655.astracrypt.tabs.Tabs
 import com.nevidimka655.astracrypt.tabs.files.createNewSheet
 import com.nevidimka655.astracrypt.tabs.files.newFolder
+import com.nevidimka655.astracrypt.ui.dialogs.DeleteFile
 import com.nevidimka655.astracrypt.ui.dialogs.DeleteOriginalFiles
 import com.nevidimka655.astracrypt.ui.dialogs.Dialogs
 import com.nevidimka655.astracrypt.ui.dialogs.rename
@@ -523,6 +524,10 @@ fun FilesScreen(
     ) {
         vm.rename(filesVM.optionsItem.id, it.removeLines().trim())
     }
+    if (filesVM.dialogDeleteState.value) Tabs.Files.Dialogs.DeleteFile(
+        state = filesVM.dialogDeleteState,
+        name = filesVM.optionsItem.name
+    ) { vm.delete(filesVM.optionsItem.id) }
     var isCreateSheetVisible = remember { mutableStateOf(false) }
     LaunchedEffect(Unit) {
         onFabClick.receiveAsFlow().collectLatest {
@@ -617,6 +622,10 @@ fun FilesScreen(
         onRename = {
             filesVM.sheetOptionsState.value = false
             dialogRename = true
+        },
+        onDelete = {
+            filesVM.sheetOptionsState.value = false
+            filesVM.dialogDeleteState.value = true
         }
     )
     Column {

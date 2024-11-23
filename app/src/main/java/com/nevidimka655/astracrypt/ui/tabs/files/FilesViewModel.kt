@@ -11,5 +11,6 @@ class FilesViewModel: ViewModel() {
 
     val sheetOptionsState = mutableStateOf(false)
     val dialogRenameState = mutableStateOf(false)
+    val dialogDeleteState = mutableStateOf(false)
 
 }
