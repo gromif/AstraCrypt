@@ -50,9 +50,11 @@ fun Sheets.filesOptions(
     name: String = "Test",
     itemIcon: ImageVector = Icons.Default.Folder,
     isFolder: Boolean = true,
+    isStarred: Boolean = false,
     sheetState: SheetState = SheetDefaults.state(),
     onRename: () -> Unit = {},
-    onDelete: () -> Unit = {}
+    onDelete: () -> Unit = {},
+    onStarStateChange: (Boolean) -> Unit = {}
 ) = SheetDefaults.default(
     state = state, sheetState = sheetState
 ) {
@@ -79,11 +81,12 @@ fun Sheets.filesOptions(
 
         }
         SheetFilesOptionsItem(
-            text = context.getString(R.string.files_options_addToStarred),
-            imageVector = Icons.Outlined.StarOutline
-        ) {
-
-        }
+            text = if (isStarred) {
+                context.getString(R.string.files_options_removeFromStarred)
+            } else context.getString(R.string.files_options_addToStarred),
+            imageVector = Icons.Outlined.StarOutline,
+            onClick = { onStarStateChange(!isStarred) }
+        )
         SheetFilesOptionsItem(
             text = context.getString(R.string.files_options_select),
             imageVector = Icons.Outlined.SelectAll

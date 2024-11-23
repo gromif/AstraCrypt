@@ -619,6 +619,7 @@ fun FilesScreen(
         name = filesVM.optionsItem.name,
         itemIcon = filesVM.optionsItem.itemType.icon,
         isFolder = filesVM.optionsItem.isDirectory,
+        isStarred = filesVM.optionsItem.state.isStarred,
         onRename = {
             filesVM.sheetOptionsState.value = false
             dialogRename = true
@@ -626,6 +627,10 @@ fun FilesScreen(
         onDelete = {
             filesVM.sheetOptionsState.value = false
             filesVM.dialogDeleteState.value = true
+        },
+        onStarStateChange = {
+            filesVM.sheetOptionsState.value = false
+            vm.setStarredFlag(it, filesVM.optionsItem.id)
         }
     )
     Column {
