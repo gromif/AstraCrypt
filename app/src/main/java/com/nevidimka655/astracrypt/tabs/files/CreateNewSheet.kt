@@ -18,12 +18,12 @@ import androidx.compose.material.icons.outlined.Videocam
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SheetState
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -59,24 +59,23 @@ fun Sheets.createNewSheet(
         text: String,
         onClick: () -> Unit
     ) = Box(contentAlignment = Alignment.Center) {
-        Surface(shape = CircleShape) {
-            Column(
-                modifier = Modifier
-                    .size(96.dp)
-                    .clickable {
-                        scope.launch { sheetState.hide() }.invokeOnCompletion {
-                            state.value = false
-                            onClick()
-                        }
-                    },
-                verticalArrangement = Arrangement.spacedBy(
-                    MaterialTheme.spaces.spaceMedium, Alignment.CenterVertically
-                ),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                IconWithBorder(imageVector = imageVector)
-                Text(text = text, style = MaterialTheme.typography.bodySmall)
-            }
+        Column(
+            modifier = Modifier
+                .size(96.dp)
+                .clip(CircleShape)
+                .clickable {
+                    scope.launch { sheetState.hide() }.invokeOnCompletion {
+                        state.value = false
+                        onClick()
+                    }
+                },
+            verticalArrangement = Arrangement.spacedBy(
+                MaterialTheme.spaces.spaceMedium, Alignment.CenterVertically
+            ),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            IconWithBorder(imageVector = imageVector)
+            Text(text = text, style = MaterialTheme.typography.bodySmall)
         }
     }
     LazyVerticalGrid(
