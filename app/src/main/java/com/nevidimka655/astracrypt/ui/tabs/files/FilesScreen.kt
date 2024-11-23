@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.ui.tabs
+package com.nevidimka655.astracrypt.ui.tabs.files
 
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -90,6 +90,7 @@ import com.nevidimka655.astracrypt.tabs.files.createNewSheet
 import com.nevidimka655.astracrypt.tabs.files.newFolder
 import com.nevidimka655.astracrypt.ui.dialogs.DeleteOriginalFiles
 import com.nevidimka655.astracrypt.ui.dialogs.Dialogs
+import com.nevidimka655.astracrypt.ui.dialogs.rename
 import com.nevidimka655.astracrypt.ui.shared.NoItemsPage
 import com.nevidimka655.astracrypt.ui.sheets.Sheets
 import com.nevidimka655.astracrypt.ui.sheets.filesOptions
@@ -499,11 +500,11 @@ private fun openItem(
 @Composable
 fun FilesScreen(
     vm: MainVM,
+    filesVM: FilesViewModel,
     isStarred: Boolean,
     onFabClick: Channel<Any>,
     onNavigateUp: () -> Unit,
     onOpenStarredDir: () -> Unit,
-    onOptions: (item: StorageItemListTuple) -> Unit,
     onNavigatorClick: (index: Int?) -> Unit,
     onLongPress: (item: StorageItemListTuple) -> Unit
 ) {
@@ -516,8 +517,13 @@ fun FilesScreen(
     var dialogNewFolder by Tabs.Files.Dialogs.newFolder(state = vm.dialogNewFolderState) {
         vm.newDirectory(it.removeLines().trim())
     }
+    var dialogRename by Tabs.Files.Dialogs.rename(
+        state = filesVM.dialogRenameState,
+        name = filesVM.optionsItem.name
+    ) {
+        vm.rename(filesVM.optionsItem.id, it.removeLines().trim())
+    }
     var isCreateSheetVisible = remember { mutableStateOf(false) }
-    var isOptionsSheetVisible = remember { mutableStateOf(false) }
     LaunchedEffect(Unit) {
         onFabClick.receiveAsFlow().collectLatest {
             Haptic.rise()
@@ -604,7 +610,14 @@ fun FilesScreen(
         onAddMusic = { callFileContract("audio") }
     )
     Sheets.filesOptions(
-        state = isOptionsSheetVisible
+        state = filesVM.sheetOptionsState,
+        name = filesVM.optionsItem.name,
+        itemIcon = filesVM.optionsItem.itemType.icon,
+        isFolder = filesVM.optionsItem.isDirectory,
+        onRename = {
+            filesVM.sheetOptionsState.value = false
+            dialogRename = true
+        }
     )
     Column {
         if (!isStarred && !vm.isSearchExpandedState) {
@@ -620,7 +633,12 @@ fun FilesScreen(
             FilesList(
                 pagingItems = items,
                 listCheckedState = vm.selectorManager.itemsMapState,
-                onOptions = { isOptionsSheetVisible.value = true },
+                onOptions = {
+                    with(filesVM) {
+                        optionsItem = it
+                        sheetOptionsState.value = true
+                    }
+                },
                 onClick = {
                     when {
                         vm.selectorManager.itemsMapState.isEmpty() -> openItem(
