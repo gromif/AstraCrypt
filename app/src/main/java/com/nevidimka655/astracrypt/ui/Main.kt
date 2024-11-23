@@ -46,8 +46,8 @@ import com.nevidimka655.astracrypt.entities.FabState
 import com.nevidimka655.astracrypt.tabs.settings.SettingsScreen
 import com.nevidimka655.astracrypt.ui.navigation.BottomBarItems
 import com.nevidimka655.astracrypt.ui.navigation.Route
-import com.nevidimka655.astracrypt.ui.tabs.FilesScreen
 import com.nevidimka655.astracrypt.ui.tabs.HomeScreen
+import com.nevidimka655.astracrypt.ui.tabs.files.FilesScreen
 import com.nevidimka655.astracrypt.ui.theme.AstraCryptTheme
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
@@ -163,11 +163,11 @@ fun Main(
 
                     FilesScreen(
                         vm = vm,
+                        filesVM = viewModel(),
                         isStarred = files.isStarred,
                         onFabClick = onFabClick,
                         onNavigateUp = { navController.navigateUp() },
                         onOpenStarredDir = { navController.navigate(BottomBarItems.Files.route) },
-                        onOptions = { },
                         onNavigatorClick = { vm.openDirectoryFromSelector(it) }
                     ) { }
                 }
