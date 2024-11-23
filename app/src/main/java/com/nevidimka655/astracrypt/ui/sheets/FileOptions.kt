@@ -11,6 +11,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.OpenInNew
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Folder
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.outlined.DeleteForever
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.outlined.Info
@@ -84,7 +85,7 @@ fun Sheets.filesOptions(
             text = if (isStarred) {
                 context.getString(R.string.files_options_removeFromStarred)
             } else context.getString(R.string.files_options_addToStarred),
-            imageVector = Icons.Outlined.StarOutline,
+            imageVector = if (isStarred) Icons.Default.Star else Icons.Outlined.StarOutline,
             onClick = { onStarStateChange(!isStarred) }
         )
         SheetFilesOptionsItem(
