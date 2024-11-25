@@ -505,6 +505,7 @@ fun FilesScreen(
     isStarred: Boolean,
     onFabClick: Channel<Any>,
     onNavigateUp: () -> Unit,
+    onNavigateToDetails: (Long) -> Unit,
     onOpenStarredDir: () -> Unit,
     onNavigatorClick: (index: Int?) -> Unit,
     onLongPress: (item: StorageItemListTuple) -> Unit
@@ -627,6 +628,11 @@ fun FilesScreen(
         onDelete = {
             filesVM.sheetOptionsState.value = false
             filesVM.dialogDeleteState.value = true
+        },
+        onDetails = {
+            filesVM.sheetOptionsState.value = false
+            //closeSearchView() //TODO: Search
+            onNavigateToDetails(filesVM.optionsItem.id)
         },
         onStarStateChange = {
             filesVM.sheetOptionsState.value = false

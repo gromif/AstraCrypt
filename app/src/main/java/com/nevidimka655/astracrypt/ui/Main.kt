@@ -43,6 +43,7 @@ import androidx.navigation.toRoute
 import com.nevidimka655.astracrypt.MainVM
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.entities.FabState
+import com.nevidimka655.astracrypt.features.details.DetailsScreen
 import com.nevidimka655.astracrypt.tabs.settings.SettingsScreen
 import com.nevidimka655.astracrypt.ui.navigation.BottomBarItems
 import com.nevidimka655.astracrypt.ui.navigation.Route
@@ -144,6 +145,7 @@ fun Main(
                 composable<Route.Tabs.Home> {
                     val home: Route.Tabs.Home = it.toRoute()
                     toolbarTitle = context.getString(home.titleId)
+                    isInnerScreen = false
                     currentTab = BottomBarItems.Home
                     fabState = FabState.NO
                     HomeScreen(vm) {
@@ -155,6 +157,7 @@ fun Main(
                     toolbarTitle = if (!files.isStarred) {
                         context.getString(files.titleId)
                     } else context.getString(files.titleIdAlt)
+                    isInnerScreen = false
                     currentTab =
                         if (!files.isStarred) BottomBarItems.Files else BottomBarItems.Starred
                     fabState = if (!files.isStarred) FabState(
@@ -169,13 +172,27 @@ fun Main(
                         isStarred = files.isStarred,
                         onFabClick = onFabClick,
                         onNavigateUp = { navController.navigateUp() },
+                        onNavigateToDetails = { navController.navigate(Route.Tabs.Details(itemId = it)) },
                         onOpenStarredDir = { navController.navigate(BottomBarItems.Files.route) },
                         onNavigatorClick = { vm.openDirectoryFromSelector(it) }
                     ) { }
                 }
+                composable<Route.Tabs.Details> {
+                    val details: Route.Tabs.Details = it.toRoute()
+                    toolbarTitle = context.getString(details.titleId)
+                    isInnerScreen = true
+                    fabState = FabState.NO
+                    DetailsScreen(
+                        detailsManager = vm.toolsManager.detailsManager,
+                        imageLoader = vm.imageLoader,
+                        encryptionInfo = vm.encryptionInfo,
+                        itemId = details.itemId
+                    )
+                }
                 composable<Route.Tabs.Settings> {
                     val settings: Route.Tabs.Settings = it.toRoute()
                     toolbarTitle = context.getString(settings.titleId)
+                    isInnerScreen = false
                     currentTab = BottomBarItems.Settings
                     fabState = FabState.NO
                     SettingsScreen()

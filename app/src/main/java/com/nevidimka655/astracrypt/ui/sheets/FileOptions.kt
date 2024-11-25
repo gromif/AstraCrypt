@@ -55,6 +55,7 @@ fun Sheets.filesOptions(
     sheetState: SheetState = SheetDefaults.state(),
     onRename: () -> Unit = {},
     onDelete: () -> Unit = {},
+    onDetails: () -> Unit = {},
     onStarStateChange: (Boolean) -> Unit = {}
 ) = SheetDefaults.default(
     state = state, sheetState = sheetState
@@ -96,10 +97,9 @@ fun Sheets.filesOptions(
         }
         SheetFilesOptionsItem(
             text = context.getString(R.string.files_options_details),
-            imageVector = Icons.Outlined.Info
-        ) {
-
-        }
+            imageVector = Icons.Outlined.Info,
+            onClick = onDetails
+        )
     }
 }
 

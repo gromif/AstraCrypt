@@ -25,6 +25,12 @@ object Route {
             @StringRes val titleId: Int = R.string.settings
         )
 
+        @Serializable
+        data class Details(
+            @StringRes val titleId: Int = R.string.files_options_details,
+            val itemId: Long
+        )
+
     }
 
 }
