@@ -155,12 +155,6 @@ class FilesFragment : Fragment() {
             optionsBottomSheetDialog.cancel()
             showRenameDialog(context, layoutInflater, item)
         }
-        optionsBinding.details.setOnClickListener {
-            optionsBottomSheetDialog.cancel()
-            closeSearchView()
-            vm.submitDetailsQuery(item.id)
-            findNavController().navigate(R.id.action_global_detailsFragment)
-        }
         optionsBinding.select.setOnClickListener {
             optionsBottomSheetDialog.cancel()
             initSelecting(item)

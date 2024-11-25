@@ -5,13 +5,6 @@
     android:id="@+id/tabs_graph"
     app:startDestination="@id/homeFragment">
     <action
-        android:id="@+id/action_global_detailsFragment"
-        app:destination="@id/detailsFragment"
-        app:enterAnim="@anim/nav_default_enter_anim"
-        app:exitAnim="@anim/nav_default_exit_anim"
-        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-        app:popExitAnim="@anim/nav_default_pop_exit_anim" />
-    <action
         android:id="@+id/action_global_subscriptionsGraph"
         app:destination="@id/subscriptionsGraph"
         app:enterAnim="@anim/nav_default_enter_anim"
@@ -74,10 +67,6 @@
         android:name="com.nevidimka655.astracrypt.tabs.files.FilesFragment"
         android:label="@string/starred" >
     </fragment>
-    <fragment
-        android:id="@+id/detailsFragment"
-        android:name="com.nevidimka655.astracrypt.features.details.DetailsFragment"
-        android:label="@string/files_options_details" />
     <navigation
         android:id="@+id/settingsGraph"
         app:startDestination="@id/settingsFragment">

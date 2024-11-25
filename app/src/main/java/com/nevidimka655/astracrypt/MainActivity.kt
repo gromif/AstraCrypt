@@ -172,13 +172,6 @@ class MainActivity : AppCompatActivity() {
         )
         if (isDestinationMain) vm.toolsManager.releaseMemory()
         uiState = when (fragmentDest) {
-            R.id.detailsFragment, R.id.subscriptionsFragment -> with(vm) {
-                cacheUiState()
-                uiState.copy(
-                    navBarColorTinted = false,
-                    fabState = false
-                )
-            }
 
             R.id.filesFragment, R.id.starredFragment -> with(vm) {
                 if (isUiStateCached()) restoreCachedUiState()

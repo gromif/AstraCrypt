@@ -29,7 +29,6 @@ import coil.request.ImageRequest
 import com.nevidimka655.astracrypt.entities.CoilTinkModel
 import com.nevidimka655.astracrypt.entities.NavigatorDirectory
 import com.nevidimka655.astracrypt.features.auth.AuthManager
-import com.nevidimka655.astracrypt.features.details.submitDetailsQuery
 import com.nevidimka655.astracrypt.features.profile.AvatarIds
 import com.nevidimka655.astracrypt.features.profile.ProfileInfo
 import com.nevidimka655.astracrypt.room.Repository
@@ -340,11 +339,6 @@ class MainVM @Inject constructor(
             newDirId = movingDirId ?: 0
         )
         showSnackbar(R.string.snack_itemsMoved)
-    }
-
-    fun submitDetailsQuery(itemId: Long) = viewModelScope.launch(Dispatchers.IO) {
-        toolsManager.detailsManager.clear()
-        toolsManager.detailsManager.submitDetailsQuery(encryptionInfo, itemId)
     }
 
     @OptIn(FlowPreview::class)
