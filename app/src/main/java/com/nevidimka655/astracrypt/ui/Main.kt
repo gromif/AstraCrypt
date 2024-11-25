@@ -6,6 +6,8 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -50,6 +52,7 @@ import com.nevidimka655.astracrypt.ui.navigation.Route
 import com.nevidimka655.astracrypt.ui.tabs.HomeScreen
 import com.nevidimka655.astracrypt.ui.tabs.files.FilesScreen
 import com.nevidimka655.astracrypt.ui.theme.AstraCryptTheme
+import com.nevidimka655.haptic.Haptic
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
 
@@ -80,7 +83,10 @@ fun Main(
                 CenterAlignedTopAppBar(
                     title = { Text(text = toolbarTitle) },
                     navigationIcon = {
-                        if (isInnerScreen) IconButton(onClick = { navController.navigateUp() }) {
+                        if (isInnerScreen) IconButton(onClick = {
+                            Haptic.click()
+                            navController.navigateUp()
+                        }) {
                             Icon(
                                 imageVector = Icons.AutoMirrored.Default.ArrowBack,
                                 contentDescription = context.getString(R.string.back)
@@ -105,32 +111,38 @@ fun Main(
                 }
             },
             bottomBar = {
-                if (!isInnerScreen) BottomAppBar {
-                    BottomBarItems.entries.forEach {
-                        NavigationBarItem(
-                            selected = currentTab == it,
-                            onClick = {
-                                if (currentTab != it) navController.navigate(
-                                    route = it.route,
-                                    navOptions = NavOptions.Builder()
-                                        .setLaunchSingleTop(true)
-                                        .setPopUpTo<Route.Tabs.Home>(false)
-                                        .build()
-                                )
-                            },
-                            icon = {
-                                Icon(
-                                    if (currentTab == it) it.icon else it.iconOutline,
-                                    context.getString(it.titleId)
-                                )
-                            },
-                            label = {
-                                Text(
-                                    text = context.getString(it.titleId),
-                                    fontWeight = if (currentTab == it) FontWeight.Bold else FontWeight.Normal
-                                )
-                            }
-                        )
+                AnimatedVisibility(
+                    visible = !isInnerScreen,
+                    enter = slideInVertically(initialOffsetY = { it / 2 }) + fadeIn(),
+                    exit = slideOutVertically(targetOffsetY = { it / 2 }) + fadeOut()
+                ) {
+                    BottomAppBar {
+                        BottomBarItems.entries.forEach {
+                            NavigationBarItem(
+                                selected = currentTab == it,
+                                onClick = {
+                                    if (currentTab != it) navController.navigate(
+                                        route = it.route,
+                                        navOptions = NavOptions.Builder()
+                                            .setLaunchSingleTop(true)
+                                            .setPopUpTo<Route.Tabs.Home>(false)
+                                            .build()
+                                    )
+                                },
+                                icon = {
+                                    Icon(
+                                        if (currentTab == it) it.icon else it.iconOutline,
+                                        context.getString(it.titleId)
+                                    )
+                                },
+                                label = {
+                                    Text(
+                                        text = context.getString(it.titleId),
+                                        fontWeight = if (currentTab == it) FontWeight.Bold else FontWeight.Normal
+                                    )
+                                }
+                            )
+                        }
                     }
                 }
             }
