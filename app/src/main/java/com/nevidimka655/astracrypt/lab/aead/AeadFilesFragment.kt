@@ -12,7 +12,6 @@ import androidx.work.WorkInfo
 import com.nevidimka655.astracrypt.MainVM
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.databinding.FragmentLabFilesBinding
-import com.nevidimka655.astracrypt.utils.extensions.ui.requireMainActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -111,7 +110,7 @@ class AeadFilesFragment : Fragment(R.layout.fragment_lab_files) {
                 labManager.filesWorkerInfoLiveData = null
             }
             WorkInfo.State.FAILED -> {
-                requireMainActivity().showSnackbarIfPossible(R.string.error)
+                //requireMainActivity().showSnackbarIfPossible(R.string.error)
                 labManager.filesWorkerInfoLiveData = null
             }
             else -> {}

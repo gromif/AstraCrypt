@@ -2,21 +2,16 @@ package com.nevidimka655.astracrypt
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.isVisible
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import com.google.android.material.behavior.HideBottomViewOnScrollBehavior
 import com.google.android.material.color.DynamicColors
-import com.google.android.material.snackbar.Snackbar
 import com.nevidimka655.astracrypt.databinding.MainBinding
 import com.nevidimka655.astracrypt.features.auth.AuthType
 import com.nevidimka655.astracrypt.tabs.settings.security.authentication.Camouflage
@@ -26,20 +21,15 @@ import com.nevidimka655.astracrypt.utils.ColorManager
 import com.nevidimka655.astracrypt.utils.Engine
 import com.nevidimka655.astracrypt.utils.appearance.AppearanceManager
 import com.nevidimka655.astracrypt.utils.extensions.lazyFast
-import com.nevidimka655.astracrypt.utils.extensions.withLifecycle
 import com.nevidimka655.crypto.tink.TinkConfig
-import com.nevidimka655.haptic.hapticClick
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.abs
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : ComponentActivity() {
     private val vm by viewModels<MainVM>()
     private val binding by lazyFast { MainBinding.inflate(layoutInflater) }
     private val toolbar get() = binding.toolbar
-    private val navController by lazyFast {
-        (supportFragmentManager.findFragmentById(R.id.my_nav_host_fragment) as NavHostFragment).navController
-    }
     private val appBarConfigurationMainIds = setOf(
         R.id.homeFragment, R.id.filesFragment, R.id.starredFragment, R.id.settingsFragment,
         R.id.authFragment
@@ -205,36 +195,6 @@ class MainActivity : AppCompatActivity() {
             else -> uiState
         }
         vm.setUiState(uiState)
-    }
-
-    private fun setupSnackbarsFlow() = vm.snackbarChannel.withLifecycle(lifecycleScope, lifecycle) {
-        showSnackbarIfPossible(it)
-    }
-
-    fun showSnackbarIfPossible(resId: Int) {
-        val isFabShouldBeAnchored = when (navController.currentDestination!!.id) {
-            R.id.filesFragment -> true
-            else -> false
-        }
-        Snackbar
-            .make(this, binding.root, getString(resId), 700)
-            .setAnchorView(if (isFabShouldBeAnchored) fab else null)
-            .show()
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        toolbar.hapticClick()
-        return navController.navigateUp() || super.onSupportNavigateUp()
-    }
-
-    private fun setupToolbar() = with(toolbar) {
-        setSupportActionBar(this)
-        setupActionBarWithNavController(
-            navController,
-            AppBarConfiguration.Builder(
-                appBarConfigurationMainIds
-            ).build()
-        )
     }
 
 }
