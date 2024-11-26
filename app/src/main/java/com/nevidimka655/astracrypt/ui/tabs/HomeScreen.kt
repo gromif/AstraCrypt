@@ -51,9 +51,10 @@ import com.nevidimka655.ui.compose_core.CardWithTitle
 import com.nevidimka655.ui.compose_core.theme.spaces
 
 @Composable
-inline fun HomeScreen(
+fun HomeScreen(
     vm: MainVM,
-    crossinline openFolder: () -> Unit
+    onOpenFile: (Long) -> Unit,
+    openFolder: () -> Unit
 ) {
     SideEffect { vm.loadProfileInfo() }
     val profileInfoState = vm.profileInfoFlow.collectAsStateWithLifecycle()
@@ -72,11 +73,7 @@ inline fun HomeScreen(
             titleText = stringResource(id = R.string.recentlyAdded)
         ) {
             RecentList(itemsState = recentItemsState) {
-                if (it.isFile) {
-                    vm.openManager.reset()
-                    //ExportDialog().show(childFragmentManager, null) // TODO
-                    vm.openWithDialog(itemId = it.id)
-                } else {
+                if (it.isFile) onOpenFile(it.id) else {
                     vm.openDirectory(
                         id = it.id,
                         dirName = it.name,
@@ -85,7 +82,6 @@ inline fun HomeScreen(
                     vm.triggerFilesListUpdate()
                     openFolder()
                 }
-
             }
         }
     }

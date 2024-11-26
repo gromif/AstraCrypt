@@ -29,6 +29,7 @@ import coil.request.ImageRequest
 import com.nevidimka655.astracrypt.entities.CoilTinkModel
 import com.nevidimka655.astracrypt.entities.NavigatorDirectory
 import com.nevidimka655.astracrypt.features.auth.AuthManager
+import com.nevidimka655.astracrypt.features.export.ExportManager
 import com.nevidimka655.astracrypt.features.profile.AvatarIds
 import com.nevidimka655.astracrypt.features.profile.ProfileInfo
 import com.nevidimka655.astracrypt.room.Repository
@@ -42,7 +43,6 @@ import com.nevidimka655.astracrypt.utils.ApplicationComponentManager
 import com.nevidimka655.astracrypt.utils.EncryptionManager
 import com.nevidimka655.astracrypt.utils.Engine
 import com.nevidimka655.astracrypt.utils.IO
-import com.nevidimka655.astracrypt.utils.OpenManager
 import com.nevidimka655.astracrypt.utils.PrivacyPolicyManager
 import com.nevidimka655.astracrypt.utils.SelectorManager
 import com.nevidimka655.astracrypt.utils.ToolsManager
@@ -89,7 +89,7 @@ class MainVM @Inject constructor(
     @Inject lateinit var imageLoader: ImageLoader
     val selectorManager by lazyFast { SelectorManager() }
     val authManager = AuthManager()
-    val openManager by lazy { OpenManager() }
+    val openManager by lazy { ExportManager() }
     val encryptionManager = EncryptionManager()
     val encryptionInfo get() = encryptionManager.encryptionInfo
 

@@ -31,6 +31,12 @@ object Route {
             val itemId: Long
         )
 
+        @Serializable
+        data class Export(
+            @StringRes val titleId: Int = R.string.files,
+            val itemId: Long
+        )
+
     }
 
 }

@@ -1,9 +1,11 @@
-package com.nevidimka655.astracrypt.utils
+package com.nevidimka655.astracrypt.features.export
 
 import androidx.core.content.FileProvider
-import com.nevidimka655.astracrypt.entities.OpenUiState
+import com.nevidimka655.astracrypt.entities.ExportUiState
 import com.nevidimka655.astracrypt.room.OpenTuple
 import com.nevidimka655.astracrypt.room.StorageItemListTuple
+import com.nevidimka655.astracrypt.utils.Engine
+import com.nevidimka655.astracrypt.utils.IO
 import com.nevidimka655.crypto.tink.KeysetFactory
 import com.nevidimka655.crypto.tink.KeysetTemplates
 import com.nevidimka655.crypto.tink.extensions.streamingAeadPrimitive
@@ -13,8 +15,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
-class OpenManager {
-    private val _uiState = MutableStateFlow(OpenUiState())
+class ExportManager {
+    private val _uiState = MutableStateFlow(ExportUiState())
     val uiState = _uiState.asStateFlow()
     private var dialogProgress = 0
     var selectedExportItem: StorageItemListTuple? = null
@@ -71,7 +73,7 @@ class OpenManager {
     fun reset() {
         selectedExportItem = null
         dialogProgress = 0
-        _uiState.update { OpenUiState() }
+        _uiState.update { ExportUiState() }
     }
 
 }

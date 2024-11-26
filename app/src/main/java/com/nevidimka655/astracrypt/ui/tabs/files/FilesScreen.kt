@@ -470,13 +470,10 @@ private fun openItem(
     vm: MainVM,
     isStarred: Boolean,
     onOpenStarredDir: () -> Unit,
+    onOpenFile: (Long) -> Unit,
     item: StorageItemListTuple
 ) {
-    if (item.itemType.isFile) {
-        vm.openManager.reset()
-        //ExportDialog().show(childFragmentManager, null)
-        vm.openWithDialog(itemId = item.id)
-    } else {
+    if (item.itemType.isFile) onOpenFile(item.id) else {
         //closeSearchView()
         if (isStarred) {
             vm.openDirectory(
@@ -507,6 +504,7 @@ fun FilesScreen(
     onNavigateUp: () -> Unit,
     onNavigateToDetails: (Long) -> Unit,
     onOpenStarredDir: () -> Unit,
+    onOpenFile: (Long) -> Unit,
     onNavigatorClick: (index: Int?) -> Unit,
     onLongPress: (item: StorageItemListTuple) -> Unit
 ) {
@@ -662,19 +660,21 @@ fun FilesScreen(
                 onClick = {
                     when {
                         vm.selectorManager.itemsMapState.isEmpty() -> openItem(
-                            vm,
-                            isStarred,
-                            onOpenStarredDir,
-                            it
+                            vm = vm,
+                            isStarred = isStarred,
+                            onOpenStarredDir = onOpenStarredDir,
+                            onOpenFile = onOpenFile,
+                            item = it
                         )
 
                         vm.selectorManager.blockItems -> {
                             val isNotSelected = !vm.selectorManager.getItemState(it.id)
                             if (isNotSelected && it.isDirectory) openItem(
-                                vm,
-                                isStarred,
-                                onOpenStarredDir,
-                                it
+                                vm = vm,
+                                isStarred = isStarred,
+                                onOpenStarredDir = onOpenStarredDir,
+                                onOpenFile = onOpenFile,
+                                item = it
                             )
                         }
 

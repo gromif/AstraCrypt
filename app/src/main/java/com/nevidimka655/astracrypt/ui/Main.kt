@@ -36,6 +36,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.NavHost
@@ -46,6 +47,7 @@ import com.nevidimka655.astracrypt.MainVM
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.entities.FabState
 import com.nevidimka655.astracrypt.features.details.DetailsScreen
+import com.nevidimka655.astracrypt.features.export.ExportScreen
 import com.nevidimka655.astracrypt.tabs.settings.SettingsScreen
 import com.nevidimka655.astracrypt.ui.navigation.BottomBarItems
 import com.nevidimka655.astracrypt.ui.navigation.Route
@@ -160,7 +162,7 @@ fun Main(
                     isInnerScreen = false
                     currentTab = BottomBarItems.Home
                     fabState = FabState.NO
-                    HomeScreen(vm) {
+                    HomeScreen(vm = vm, onOpenFile = { openFile(navController, it) }) {
                         navController.navigate(BottomBarItems.Files.route)
                     }
                 }
@@ -186,6 +188,7 @@ fun Main(
                         onNavigateUp = { navController.navigateUp() },
                         onNavigateToDetails = { navController.navigate(Route.Tabs.Details(itemId = it)) },
                         onOpenStarredDir = { navController.navigate(BottomBarItems.Files.route) },
+                        onOpenFile = { openFile(navController, it) },
                         onNavigatorClick = { vm.openDirectoryFromSelector(it) }
                     ) { }
                 }
@@ -201,6 +204,13 @@ fun Main(
                         itemId = details.itemId
                     )
                 }
+                composable<Route.Tabs.Export> {
+                    val export: Route.Tabs.Export = it.toRoute()
+                    toolbarTitle = context.getString(export.titleId)
+                    isInnerScreen = true
+                    fabState = FabState.NO
+                    ExportScreen(encryptionInfo = vm.encryptionInfo, itemId = export.itemId)
+                }
                 composable<Route.Tabs.Settings> {
                     val settings: Route.Tabs.Settings = it.toRoute()
                     toolbarTitle = context.getString(settings.titleId)
@@ -213,3 +223,6 @@ fun Main(
         }
     }
 }
+
+private fun openFile(navController: NavController, itemId: Long) =
+    navController.navigate(Route.Tabs.Export(itemId = itemId))
