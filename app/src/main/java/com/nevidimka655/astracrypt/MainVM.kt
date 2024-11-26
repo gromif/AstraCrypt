@@ -83,11 +83,11 @@ import javax.inject.Inject
 @HiltViewModel
 class MainVM @Inject constructor(
     val workManager: WorkManager,
-    val privacyPolicyManager: PrivacyPolicyManager
+    val authManager: AuthManager,
+    val privacyPolicyManager: PrivacyPolicyManager,
+    val imageLoader: ImageLoader
 ) : ViewModel() {
-    @Inject lateinit var imageLoader: ImageLoader
     val selectorManager by lazyFast { SelectorManager() }
-    val authManager = AuthManager()
     val encryptionManager = EncryptionManager()
     val encryptionInfo get() = encryptionManager.encryptionInfo
 
