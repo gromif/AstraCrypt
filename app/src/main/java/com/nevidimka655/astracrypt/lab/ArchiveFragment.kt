@@ -53,7 +53,6 @@ import com.nevidimka655.astracrypt.MainVM
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.help.HelpFragment
 import com.nevidimka655.astracrypt.help.HelpIndex
-import com.nevidimka655.astracrypt.ui.tabs.files.FilesListItemMedium
 import com.nevidimka655.astracrypt.ui.shared.BaseNoItemsPage
 import com.nevidimka655.astracrypt.ui.shared.NoItemsPageSize
 import com.nevidimka655.astracrypt.ui.theme.AstraCryptTheme
@@ -186,13 +185,13 @@ class ArchiveFragment : Fragment() {
             }
             if (stateList.isNotEmpty()) LazyColumn {
                 itemsIndexed(stateList) { index, it ->
-                    FilesListItemMedium(
+                    /*FilesListItemMedium(
                         name = it.name,
                         isBackgroundTransparent = true,
                         onLongClick = {
                             stateList.removeAt(index)
                         }
-                    )
+                    )*/
                 }
             } else BaseNoItemsPage(
                 modifier = Modifier.fillMaxSize(),
