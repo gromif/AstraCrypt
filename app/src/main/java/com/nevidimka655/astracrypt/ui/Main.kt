@@ -38,6 +38,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
@@ -189,7 +190,7 @@ fun Main(
 
                     FilesScreen(
                         vm = vm,
-                        filesVM = viewModel(),
+                        filesVM = hiltViewModel(),
                         isStarred = files.isStarred,
                         onFabClick = onFabClick,
                         onNavigateUp = { navController.navigateUp() },
