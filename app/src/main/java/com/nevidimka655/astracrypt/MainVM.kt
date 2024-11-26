@@ -29,7 +29,6 @@ import coil.request.ImageRequest
 import com.nevidimka655.astracrypt.entities.CoilTinkModel
 import com.nevidimka655.astracrypt.entities.NavigatorDirectory
 import com.nevidimka655.astracrypt.features.auth.AuthManager
-import com.nevidimka655.astracrypt.features.export.ExportManager
 import com.nevidimka655.astracrypt.features.profile.AvatarIds
 import com.nevidimka655.astracrypt.features.profile.ProfileInfo
 import com.nevidimka655.astracrypt.room.Repository
@@ -89,7 +88,6 @@ class MainVM @Inject constructor(
     @Inject lateinit var imageLoader: ImageLoader
     val selectorManager by lazyFast { SelectorManager() }
     val authManager = AuthManager()
-    val openManager by lazy { ExportManager() }
     val encryptionManager = EncryptionManager()
     val encryptionInfo get() = encryptionManager.encryptionInfo
 
@@ -377,12 +375,6 @@ class MainVM @Inject constructor(
             triggerListUpdate()
         }
     }
-
-    fun openWithDialog(itemId: Long) = viewModelScope.launch(Dispatchers.IO) {
-        openManager.openWithDialog(
-            Repository.getDataForOpening(encryptionInfo = encryptionInfo, id = itemId)
-        )
-    }.also { openManager.job = it }
 
     fun export(itemToExport: StorageItemListTuple, outputUri: Uri) {
         val data = Data.Builder().apply {

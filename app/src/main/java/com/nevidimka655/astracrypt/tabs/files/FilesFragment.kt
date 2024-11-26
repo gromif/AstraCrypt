@@ -12,7 +12,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.activity.OnBackPressedCallback
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.SearchView
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
@@ -57,13 +56,13 @@ class FilesFragment : Fragment() {
 
     private var addStorageItemBottomSheetDialog: BottomSheetDialog? = null
 
-    private val exportDirContract =
+    /*private val exportDirContract =
         registerForActivityResult(ActivityResultContracts.OpenDocumentTree()) {
             if (it != null) vm.export(
                 itemToExport = vm.openManager.selectedExportItem!!,
                 outputUri = it
             )
-        }
+        }*/
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -126,16 +125,12 @@ class FilesFragment : Fragment() {
             title.setDrawableTop(item.itemType.iconView)
             title.text = item.name
         }
-        optionsBinding.open.setOnClickListener {
-            optionsBottomSheetDialog.cancel()
-            //openItem(item)
-        }
         optionsBinding.export.setOnClickListener {
-            optionsBottomSheetDialog.cancel()
+            /*optionsBottomSheetDialog.cancel()
             if (vm.lastExportOperation?.result?.isDone != false) {
                 vm.openManager.selectedExportItem = item
                 exportDirContract.launch(null)
-            }
+            }*/
         }
         if (item.state.isDefault) with(optionsBinding.addToStarred) {
             isVisible = true

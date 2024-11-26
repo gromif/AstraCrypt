@@ -1,22 +1,8 @@
 package com.nevidimka655.astracrypt.ui.dialogs
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.activityViewModels
-import com.nevidimka655.astracrypt.MainVM
-import com.nevidimka655.astracrypt.databinding.DialogExtractingBinding
 
 class ExportDialog : DialogFragment() {
-
-    private val vm by activityViewModels<MainVM>()
-    private val openManager get() = vm.openManager
-
-    private var binding: DialogExtractingBinding? = null
-
-    private var buttonOpen: Button? = null
 
     /*override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         isCancelable = false
@@ -62,19 +48,5 @@ class ExportDialog : DialogFragment() {
             }
         }
     }*/
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ) = binding?.root ?: DialogExtractingBinding.inflate(inflater, container, false).also {
-        binding = it
-    }.root
-
-    override fun onDestroyView() {
-        buttonOpen = null
-        binding = null
-        super.onDestroyView()
-    }
 
 }
