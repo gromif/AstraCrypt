@@ -144,6 +144,7 @@ dependencies {
     // DI - Hilt
     ksp(libs.hilt.android.compiler)
     ksp(libs.hilt.compiler)
+    implementation(libs.hilt.compose.navigation)
     implementation(libs.hilt.android)
     implementation(libs.hilt.work)
 

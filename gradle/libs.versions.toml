@@ -28,6 +28,7 @@ google-material = "1.12.0"
 hilt = "2.52"
 hilt-work = "1.2.0"
 hilt-compiler = "1.2.0"
+hilt-compose-navigation = "1.2.0"
 
 [libraries] # ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -91,6 +92,7 @@ hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref
 hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
 hilt-compiler = { group = "androidx.hilt", name = "hilt-compiler", version.ref = "hilt-compiler" }
 hilt-work = { group = "androidx.hilt", name = "hilt-work", version.ref = "hilt-work" }
+hilt-compose-navigation = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hilt-compose-navigation" }
 
 [plugins] # ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 android-application = { id = "com.android.application", version.ref = "gradle" }
