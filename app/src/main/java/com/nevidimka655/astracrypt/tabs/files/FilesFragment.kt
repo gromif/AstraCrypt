@@ -1,7 +1,6 @@
 package com.nevidimka655.astracrypt.tabs.files
 
 import android.content.Context
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.ActionMode
 import android.view.LayoutInflater
@@ -16,8 +15,6 @@ import androidx.appcompat.widget.SearchView
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.core.view.MenuProvider
-import androidx.core.view.isVisible
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -28,15 +25,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.nevidimka655.astracrypt.MainVM
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.databinding.OptionsFilesBinding
-import com.nevidimka655.astracrypt.databinding.TextInputLayoutBinding
 import com.nevidimka655.astracrypt.room.StorageItemListTuple
 import com.nevidimka655.astracrypt.ui.UiState
 import com.nevidimka655.astracrypt.ui.theme.AstraCryptTheme
-import com.nevidimka655.astracrypt.utils.AppConfig
 import com.nevidimka655.astracrypt.utils.CustomLayoutParams
-import com.nevidimka655.astracrypt.utils.IO
 import com.nevidimka655.astracrypt.utils.extensions.lazyFast
-import com.nevidimka655.astracrypt.utils.extensions.openKeyboard
 import com.nevidimka655.astracrypt.utils.extensions.requireMenuHost
 import com.nevidimka655.astracrypt.utils.extensions.requireToolbar
 import com.nevidimka655.astracrypt.utils.extensions.ui.requireMainActivity
@@ -132,20 +125,6 @@ class FilesFragment : Fragment() {
                 exportDirContract.launch(null)
             }*/
         }
-        if (item.state.isDefault) with(optionsBinding.addToStarred) {
-            isVisible = true
-            setOnClickListener {
-                optionsBottomSheetDialog.cancel()
-                vm.setStarredFlag(true, item.id)
-            }
-        }
-        else with(optionsBinding.removeFromStarred) {
-            isVisible = true
-            setOnClickListener {
-                optionsBottomSheetDialog.cancel()
-                vm.setStarredFlag(false, item.id)
-            }
-        }
         optionsBinding.select.setOnClickListener {
             optionsBottomSheetDialog.cancel()
             initSelecting(item)
@@ -233,13 +212,6 @@ class FilesFragment : Fragment() {
                     }
 
                     R.id.createDir -> vm.dialogNewFolderState.value = true
-                    R.id.addToStarred, R.id.removeFromStarred -> {
-                        vm.setStarredFlag(
-                            state = item.itemId == R.id.addToStarred,
-                            itemsArr = selectorManager.getSelectedItemsList()
-                        )
-                        if (searchView?.isIconified != false) selectorManager.closeActionMode()
-                    }
 
                     R.id.delete -> {
                         vm.deleteSelected(selectorManager.getSelectedItemsList())
