@@ -2,7 +2,6 @@ package com.nevidimka655.astracrypt.tabs.settings
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Size
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
@@ -27,22 +26,14 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.core.graphics.drawable.toDrawable
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import coil.request.CachePolicy
-import coil.request.ImageRequest
-import coil.size.Scale
 import com.nevidimka655.astracrypt.MainVM
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.features.profile.AvatarIds
-import com.nevidimka655.astracrypt.features.profile.ui.ProfileIcon
 import com.nevidimka655.astracrypt.ui.theme.AstraCryptTheme
-import com.nevidimka655.astracrypt.utils.Api
 import com.nevidimka655.astracrypt.utils.AppConfig
-import com.nevidimka655.astracrypt.utils.CenterCropTransformation
-import com.nevidimka655.astracrypt.utils.Engine
 import com.nevidimka655.astracrypt.utils.extensions.ui.viewLifecycleScope
 import com.nevidimka655.ui.compose_core.Compose
 import com.nevidimka655.ui.compose_core.Preference
@@ -59,12 +50,11 @@ import kotlinx.coroutines.launch
 
 class EditProfileFragment : Fragment() {
     private val vm by activityViewModels<MainVM>()
-    private val imageLoader get() = Engine.imageLoader
 
     @SuppressLint("NewApi")
     val photoContract = registerForActivityResult(ActivityResultContracts.GetContent()) {
         if (it != null) viewLifecycleScope.launch(Dispatchers.IO) {
-            val drawable =
+            /*val drawable =
                 if (Api.atLeastAndroid10()) requireContext().contentResolver.loadThumbnail(
                     it, Size(AppConfig.DB_THUMB_SIZE, AppConfig.DB_THUMB_SIZE), null
                 ).toDrawable(resources) else {
@@ -83,7 +73,7 @@ class EditProfileFragment : Fragment() {
                     defaultAvatar = null,
                     iconFile = drawable
                 )
-            )
+            )*/
         }
     }
 
@@ -119,7 +109,7 @@ class EditProfileFragment : Fragment() {
                 Preference(
                     titleText = getString(R.string.settings_changeAvatar),
                     trailingContent = {
-                        ProfileIcon(profileInfo = profileInfo, iconSize = 56.dp, showBorder = false)
+                        //ProfileIcon(profileInfo = profileInfo, iconSize = 56.dp, showBorder = false)
                     }
                 ) { dialogChangeAvatarState.value = true }
             }

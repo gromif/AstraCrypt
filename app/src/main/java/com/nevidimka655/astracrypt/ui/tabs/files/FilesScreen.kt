@@ -78,6 +78,7 @@ import androidx.core.content.FileProvider
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
+import coil.ImageLoader
 import coil.compose.AsyncImage
 import coil.compose.AsyncImagePainter
 import com.nevidimka655.astracrypt.MainVM
@@ -95,7 +96,6 @@ import com.nevidimka655.astracrypt.ui.dialogs.rename
 import com.nevidimka655.astracrypt.ui.shared.NoItemsPage
 import com.nevidimka655.astracrypt.ui.sheets.Sheets
 import com.nevidimka655.astracrypt.ui.sheets.filesOptions
-import com.nevidimka655.astracrypt.utils.Engine
 import com.nevidimka655.astracrypt.utils.IO
 import com.nevidimka655.astracrypt.utils.appearance.AppearanceManager
 import com.nevidimka655.astracrypt.utils.appearance.ViewMode
@@ -118,6 +118,7 @@ import kotlinx.coroutines.withContext
 @Composable
 fun FilesGridItem(
     modifier: Modifier = Modifier,
+    imageLoader: ImageLoader,
     name: String,
     thumb: String,
     thumbEncryptionType: Int,
@@ -167,7 +168,7 @@ fun FilesGridItem(
                     encryptionType = thumbEncryptionType
                 ),
                 contentDescription = null,
-                imageLoader = Engine.imageLoader,
+                imageLoader = imageLoader,
                 contentScale = ContentScale.Crop,
                 onState = {
                     loadOtherIcons = it is AsyncImagePainter.State.Success
@@ -244,6 +245,7 @@ fun FilesGridItem(
 @Composable
 fun FilesListItemMedium(
     modifier: Modifier = Modifier,
+    imageLoader: ImageLoader,
     name: String = "TEST_NAME",
     thumb: String = "",
     thumbEncryptionType: Int = -1,
@@ -292,7 +294,7 @@ fun FilesListItemMedium(
                     encryptionType = thumbEncryptionType
                 ),
                 contentDescription = null,
-                imageLoader = Engine.imageLoader,
+                imageLoader = imageLoader,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .size(85.dp)
@@ -347,6 +349,7 @@ fun FilesListItemMedium(
 fun FilesList(
     pagingItems: LazyPagingItems<StorageItemListTuple>,
     listCheckedState: SnapshotStateMap<Long, Boolean>,
+    imageLoader: ImageLoader,
     onOptions: (item: StorageItemListTuple) -> Unit,
     onClick: (item: StorageItemListTuple) -> Unit,
     onLongPress: (item: StorageItemListTuple) -> Unit
@@ -382,6 +385,7 @@ fun FilesList(
             key = { pagingItems[it]?.id ?: it }) { index ->
             pagingItems[index]?.let {
                 FilesGridItem(modifier = Modifier.animateItemPlacement(),
+                    imageLoader = imageLoader,
                     name = it.name,
                     thumb = it.thumbnail,
                     thumbEncryptionType = it.thumbnailEncryptionType,
@@ -402,6 +406,7 @@ fun FilesList(
             key = { pagingItems[it]?.id ?: it }) { index ->
             pagingItems[index]?.let {
                 FilesListItemMedium(modifier = Modifier.animateItemPlacement(),
+                    imageLoader = imageLoader,
                     name = it.name,
                     thumb = it.thumbnail,
                     thumbEncryptionType = it.thumbnailEncryptionType,
@@ -651,6 +656,7 @@ fun FilesScreen(
             FilesList(
                 pagingItems = items,
                 listCheckedState = vm.selectorManager.itemsMapState,
+                imageLoader = filesVM.imageLoader,
                 onOptions = {
                     with(filesVM) {
                         optionsItem = it

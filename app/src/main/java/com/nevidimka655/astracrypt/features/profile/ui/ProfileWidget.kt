@@ -15,17 +15,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import coil.ImageLoader
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.features.profile.ProfileInfo
 import com.nevidimka655.ui.compose_core.theme.spaces
 
 @Composable
-fun ProfileWidget(profileInfoState: State<ProfileInfo>) = Row(
+fun ProfileWidget(profileInfoState: State<ProfileInfo>, imageLoader: ImageLoader) = Row(
     modifier = Modifier
         .fillMaxWidth()
         .height(80.dp)
 ) {
-    ProfileIcon(profileInfo = profileInfoState.value)
+    ProfileIcon(profileInfo = profileInfoState.value, imageLoader = imageLoader)
     Column(
         modifier = Modifier
             .fillMaxSize()

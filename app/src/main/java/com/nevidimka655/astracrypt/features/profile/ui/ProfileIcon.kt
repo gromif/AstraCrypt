@@ -16,15 +16,16 @@ import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import coil.ImageLoader
 import coil.compose.AsyncImage
 import com.nevidimka655.astracrypt.features.profile.AvatarIds
 import com.nevidimka655.astracrypt.features.profile.AvatarIds.Companion.vector
 import com.nevidimka655.astracrypt.features.profile.ProfileInfo
-import com.nevidimka655.astracrypt.utils.Engine
 
 @Composable
 fun ProfileIcon(
     profileInfo: ProfileInfo,
+    imageLoader: ImageLoader,
     showBorder: Boolean = true,
     iconSize: Dp = 80.dp
 ) {
@@ -53,7 +54,7 @@ fun ProfileIcon(
             modifier = Modifier.fillMaxSize(),
             model = icon,
             contentDescription = null,
-            imageLoader = Engine.imageLoader,
+            imageLoader = imageLoader,
             contentScale = ContentScale.Crop
         )
     }

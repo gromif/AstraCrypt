@@ -2,10 +2,6 @@ package com.nevidimka655.astracrypt.utils
 
 import android.content.Context
 import androidx.work.WorkManager
-import coil.ImageLoader
-import coil.decode.VideoFrameDecoder
-import coil.request.CachePolicy
-import coil.transition.CrossfadeTransition
 import com.nevidimka655.astracrypt.utils.shared_prefs.PrefsKeys
 import com.nevidimka655.astracrypt.utils.shared_prefs.PrefsManager
 import com.nevidimka655.crypto.tink.KeysetFactory
@@ -19,7 +15,6 @@ object Engine {
     lateinit var appContext: Context
 
     val workManager get() = WorkManager.getInstance(appContext)
-    lateinit var imageLoader: ImageLoader
 
     /**
      * Call this method in all application components that may be created at app startup/restoring
@@ -30,14 +25,6 @@ object Engine {
         if (!::appContext.isInitialized) {
             appContext = context
         }
-        if (!::imageLoader.isInitialized) imageLoader = ImageLoader.Builder(appContext)
-            .components {
-                add(TinkCoilFetcherFactory())
-                add(VideoFrameDecoder.Factory())
-            }
-            .transitionFactory(CrossfadeTransition.Factory())
-            .diskCachePolicy(CachePolicy.DISABLED)
-            .build()
         KeysetFactory.Config.run {
             if (dataFileName.isEmpty()) {
                 dataFileName = "grapefruit.ss0"

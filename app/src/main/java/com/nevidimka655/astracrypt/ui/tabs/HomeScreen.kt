@@ -38,13 +38,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import coil.ImageLoader
 import coil.compose.AsyncImage
 import com.nevidimka655.astracrypt.MainVM
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.entities.CoilTinkModel
 import com.nevidimka655.astracrypt.features.profile.ui.ProfileWidget
 import com.nevidimka655.astracrypt.room.StorageItemListTuple
-import com.nevidimka655.astracrypt.utils.Engine
 import com.nevidimka655.astracrypt.utils.enums.StorageItemState
 import com.nevidimka655.astracrypt.utils.enums.StorageItemType
 import com.nevidimka655.ui.compose_core.CardWithTitle
@@ -67,12 +67,12 @@ fun HomeScreen(
             .padding(MaterialTheme.spaces.spaceMedium),
         verticalArrangement = Arrangement.spacedBy(MaterialTheme.spaces.spaceMedium)
     ) {
-        ProfileWidget(profileInfoState = profileInfoState)
+        ProfileWidget(profileInfoState = profileInfoState, imageLoader = vm.imageLoader)
         CardWithTitle(
             modifier = Modifier.height(350.dp),
             titleText = stringResource(id = R.string.recentlyAdded)
         ) {
-            RecentList(itemsState = recentItemsState) {
+            RecentList(itemsState = recentItemsState, imageLoader = vm.imageLoader) {
                 if (it.isFile) onOpenFile(it.id) else {
                     vm.openDirectory(
                         id = it.id,
@@ -90,6 +90,7 @@ fun HomeScreen(
 @Composable
 inline fun RecentList(
     itemsState: State<List<StorageItemListTuple>>,
+    imageLoader: ImageLoader,
     crossinline onClick: (item: StorageItemListTuple) -> Unit
 ) = LazyRow(
     modifier = Modifier.fillMaxSize(),
@@ -102,6 +103,7 @@ inline fun RecentList(
         val item = itemsState.value[it]
         RecentListItem(
             name = item.name,
+            imageLoader = imageLoader,
             thumb = item.thumbnail,
             thumbEncryption = item.thumbnailEncryptionType,
             itemType = item.itemType,
@@ -113,6 +115,7 @@ inline fun RecentList(
 @Composable
 inline fun RecentListItem(
     modifier: Modifier = Modifier,
+    imageLoader: ImageLoader,
     name: String,
     thumb: String,
     thumbEncryption: Int,
@@ -150,7 +153,7 @@ inline fun RecentListItem(
                 modifier = Modifier.fillMaxSize(),
                 model = CoilTinkModel(path = thumb, encryptionType = thumbEncryption),
                 contentDescription = null,
-                imageLoader = Engine.imageLoader,
+                imageLoader = imageLoader,
                 contentScale = ContentScale.Crop
             )
             if (state.isStarred) Icon(
