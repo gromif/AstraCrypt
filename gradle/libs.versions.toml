@@ -40,6 +40,7 @@ compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = 
 
 compose-activity = { group = "androidx.activity", name = "activity-compose", version.ref = "compose-activity" }
 
+compose-ui = { group = "androidx.compose.ui", name = "ui" }
 compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
