@@ -9,7 +9,6 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.SearchView
 import androidx.compose.ui.platform.ComposeView
@@ -24,15 +23,11 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.nevidimka655.astracrypt.MainVM
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.databinding.OptionsFilesBinding
 import com.nevidimka655.astracrypt.room.StorageItemListTuple
 import com.nevidimka655.astracrypt.ui.UiState
 import com.nevidimka655.astracrypt.ui.theme.AstraCryptTheme
-import com.nevidimka655.astracrypt.utils.CustomLayoutParams
 import com.nevidimka655.astracrypt.utils.extensions.lazyFast
 import com.nevidimka655.astracrypt.utils.extensions.requireMenuHost
-import com.nevidimka655.astracrypt.utils.extensions.requireToolbar
-import com.nevidimka655.astracrypt.utils.extensions.ui.setDrawableTop
 import com.nevidimka655.astracrypt.utils.extensions.ui.setTooltip
 
 class FilesFragment : Fragment() {
@@ -103,7 +98,7 @@ class FilesFragment : Fragment() {
 
 
 
-    private fun onOptions(item: StorageItemListTuple) {
+    /*private fun onOptions(item: StorageItemListTuple) {
         if (selectorManager.isInitialized) return
         val context = requireContext()
         val optionsBottomSheetDialog = BottomSheetDialog(context)
@@ -111,16 +106,12 @@ class FilesFragment : Fragment() {
             orientation = LinearLayout.VERTICAL
             layoutParams = CustomLayoutParams.LINEAR_MATCH_WRAP
         }
-        val optionsBinding = OptionsFilesBinding.inflate(layoutInflater).apply {
-            title.setDrawableTop(item.itemType.iconView)
-            title.text = item.name
-        }
         optionsBinding.export.setOnClickListener {
-            /*optionsBottomSheetDialog.cancel()
+            optionsBottomSheetDialog.cancel()
             if (vm.lastExportOperation?.result?.isDone != false) {
                 vm.openManager.selectedExportItem = item
                 exportDirContract.launch(null)
-            }*/
+            }
         }
         optionsBinding.select.setOnClickListener {
             optionsBottomSheetDialog.cancel()
@@ -131,9 +122,7 @@ class FilesFragment : Fragment() {
             showDeleteDialog(context, item)
         }
         viewContainer.addView(optionsBinding.root)
-        optionsBottomSheetDialog.setContentView(viewContainer, CustomLayoutParams.LINEAR_MATCH_WRAP)
-        optionsBottomSheetDialog.show()
-    }
+    }*/
 
     private fun showDeleteDialog(
         context: Context,
@@ -195,7 +184,7 @@ class FilesFragment : Fragment() {
                     R.id.move -> {
                         if (vm.isSearchActive()) {
                             vm.invalidateCachedUiState()
-                            closeSearchView()
+//                            closeSearchView()
                         }
                         vm.cacheUiState()
                         selectorManager.blockItems = true
@@ -226,10 +215,10 @@ class FilesFragment : Fragment() {
                 }
             }
         }
-        selectorManager.setView(
+        /*selectorManager.setView(
             viewInstance = requireToolbar(R.id.toolbar),
             actionModeInstance = actionModeCallback
-        )
+        )*/
     }
 
     private fun setupBackCallback() {
@@ -241,7 +230,7 @@ class FilesFragment : Fragment() {
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, backCallback)
     }
 
-    private fun closeSearchView() = requireToolbar(R.id.toolbar).collapseActionView()
+//    private fun closeSearchView() = requireToolbar(R.id.toolbar).collapseActionView()
 
     private fun setupMenu() = requireMenuHost().addMenuProvider(object : MenuProvider {
         override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
