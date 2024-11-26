@@ -26,11 +26,4 @@ class ToolsManager(
     private var _calculatorManager: CalculatorManagerWrap? = null
     val calculatorManager get() = _calculatorManager ?: CalculatorManagerWrap().also { _calculatorManager = it }
 
-    fun releaseMemory() {
-        _calculatorManager = null
-        _labManager = null
-        _labCombineZipManager = null
-        _detailsManager = null
-        _notesManager = null
-    }
 }

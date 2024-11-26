@@ -15,8 +15,6 @@ import com.nevidimka655.astracrypt.MainVM
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.databinding.FragmentLabBinding
 import com.nevidimka655.astracrypt.utils.billing.AlgorithmPaywallListFactory
-import com.nevidimka655.astracrypt.utils.extensions.lazyFast
-import com.nevidimka655.astracrypt.utils.extensions.ui.requireMainActivity
 import com.nevidimka655.astracrypt.utils.extensions.ui.setTooltip
 import com.nevidimka655.astracrypt.utils.extensions.ui.viewLifecycleScope
 import com.nevidimka655.astracrypt.utils.extensions.withViewLifecycle
@@ -31,7 +29,7 @@ class AeadFragment : Fragment(R.layout.fragment_lab) {
     private val labManager get() = vm.toolsManager.labManager
     private var binding: FragmentLabBinding? = null
 
-    private val dataTypeItems by lazyFast {
+    private val dataTypeItems by lazy {
         resources.getStringArray(R.array.lab_data_types)
     }
     private lateinit var itemsMajor: Array<String>

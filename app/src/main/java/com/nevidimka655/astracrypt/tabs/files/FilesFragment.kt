@@ -26,7 +26,6 @@ import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.room.StorageItemListTuple
 import com.nevidimka655.astracrypt.ui.UiState
 import com.nevidimka655.astracrypt.ui.theme.AstraCryptTheme
-import com.nevidimka655.astracrypt.utils.extensions.lazyFast
 import com.nevidimka655.astracrypt.utils.extensions.requireMenuHost
 import com.nevidimka655.astracrypt.utils.extensions.ui.setTooltip
 
@@ -34,7 +33,7 @@ class FilesFragment : Fragment() {
     private val vm by activityViewModels<MainVM>()
 
     private val selectorManager get() = vm.selectorManager
-    private val isStarredFragment by lazyFast {
+    private val isStarredFragment by lazy {
         findNavController().currentDestination!!.id == R.id.starredFragment
     }
 

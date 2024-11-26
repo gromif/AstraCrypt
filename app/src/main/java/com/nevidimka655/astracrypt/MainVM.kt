@@ -45,7 +45,6 @@ import com.nevidimka655.astracrypt.utils.IO
 import com.nevidimka655.astracrypt.utils.PrivacyPolicyManager
 import com.nevidimka655.astracrypt.utils.SelectorManager
 import com.nevidimka655.astracrypt.utils.ToolsManager
-import com.nevidimka655.astracrypt.utils.extensions.lazyFast
 import com.nevidimka655.astracrypt.utils.extensions.recreate
 import com.nevidimka655.astracrypt.utils.extensions.removeLines
 import com.nevidimka655.astracrypt.utils.shared_prefs.PrefsKeys
@@ -87,7 +86,7 @@ class MainVM @Inject constructor(
     val privacyPolicyManager: PrivacyPolicyManager,
     val imageLoader: ImageLoader
 ) : ViewModel() {
-    val selectorManager by lazyFast { SelectorManager() }
+    val selectorManager by lazy { SelectorManager() }
     val encryptionManager = EncryptionManager()
     val encryptionInfo get() = encryptionManager.encryptionInfo
 
