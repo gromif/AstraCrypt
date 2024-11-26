@@ -20,7 +20,6 @@ import com.nevidimka655.astracrypt.MainVM
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.ui.theme.AstraCryptTheme
 import com.nevidimka655.astracrypt.utils.extensions.requireMenuHost
-import com.nevidimka655.astracrypt.utils.extensions.ui.requireMainActivity
 import com.nevidimka655.notes.Notes
 import com.nevidimka655.notes.ui.OverviewScreen
 import kotlinx.coroutines.launch
