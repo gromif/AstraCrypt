@@ -320,17 +320,6 @@ class MainVM @Inject constructor(
         showSnackbar(R.string.snack_itemsDeleted)
     }
 
-    fun setStarredFlag(
-        state: Boolean,
-        id: Long? = null,
-        itemsArr: List<Long>? = null
-    ) = viewModelScope.launch(Dispatchers.IO) {
-        Repository.setStarred(id, itemsArr, state)
-        showSnackbar(
-            if (state) R.string.snack_starred else R.string.snack_unstarred
-        )
-    }
-
     fun move(itemsArr: List<Long>, movingDirId: Long?) = viewModelScope.launch(Dispatchers.IO) {
         Repository.moveItems(
             idsArray = itemsArr,

@@ -639,7 +639,7 @@ fun FilesScreen(
         },
         onStarStateChange = {
             filesVM.sheetOptionsState.value = false
-            vm.setStarredFlag(it, filesVM.optionsItem.id)
+            filesVM.setStarredFlag(it, filesVM.optionsItem.id)
         }
     )
     Column {
