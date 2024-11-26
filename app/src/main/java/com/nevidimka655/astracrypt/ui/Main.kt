@@ -83,6 +83,12 @@ fun Main(
             val toolbarIsCollapsing = topBarScroll.state.collapsedFraction > 0f
             fabState = fabState.copy(isVisible = !toolbarIsCollapsing)
         }
+        LaunchedEffect(Unit) {
+            with(vm) {
+                if (!isDatabaseCreated()) setupForFirstUse()
+                encryptionManager.loadEncryptionInfo()
+            }
+        }
         Scaffold(
             modifier = modifier.nestedScroll(topBarScroll.nestedScrollConnection),
             topBar = {

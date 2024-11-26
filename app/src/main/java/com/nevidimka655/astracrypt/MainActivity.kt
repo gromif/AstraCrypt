@@ -1,19 +1,12 @@
 package com.nevidimka655.astracrypt
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.viewModels
-import androidx.navigation.NavController
-import androidx.navigation.NavOptions
 import com.google.android.material.color.DynamicColors
 import com.nevidimka655.astracrypt.databinding.MainBinding
-import com.nevidimka655.astracrypt.features.auth.AuthType
-import com.nevidimka655.astracrypt.tabs.settings.security.authentication.Camouflage
 import com.nevidimka655.astracrypt.ui.Main
-import com.nevidimka655.astracrypt.ui.UiState
 import com.nevidimka655.astracrypt.utils.Engine
 import com.nevidimka655.astracrypt.utils.appearance.AppearanceManager
 import com.nevidimka655.astracrypt.utils.extensions.lazyFast
@@ -22,9 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    private val vm by viewModels<MainVM>()
     private val binding by lazyFast { MainBinding.inflate(layoutInflater) }
-    private val toolbar get() = binding.toolbar
     private val appBarConfigurationMainIds = setOf(
         R.id.homeFragment, R.id.filesFragment, R.id.starredFragment, R.id.settingsFragment,
         R.id.authFragment
@@ -38,10 +29,6 @@ class MainActivity : ComponentActivity() {
         Engine.init(applicationContext)
         setupDynamicColors()
         TinkConfig.init()
-        with(vm) {
-            if (!isDatabaseCreated()) setupForFirstUse()
-            encryptionManager.loadEncryptionInfo()
-        }
         setContent { Main() }
         /*setContentView(binding.root)
         setupToolbar()
@@ -93,7 +80,7 @@ class MainActivity : ComponentActivity() {
         }*/
     }
 
-    private fun shouldShowAuthScreen(navController: NavController) {
+    /*private fun shouldShowAuthScreen(navController: NavController) {
         var startDestination = when (vm.authManager.info.authType) {
             AuthType.NO_AUTH -> R.id.homeFragment
             AuthType.PASSWORD -> R.id.authFragment
@@ -111,7 +98,7 @@ class MainActivity : ComponentActivity() {
                 .build()
             navController.navigate(startDestination, null, options)
         }
-    }
+    }*/
 
     private fun setupDynamicColors() {
         if (DynamicColors.isDynamicColorAvailable() && AppearanceManager.useDynamicColors) {
@@ -119,7 +106,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    @SuppressLint("PrivateResource")
+    /*@SuppressLint("PrivateResource")
     private fun setUiStateOnFragment(fragmentDest: Int) {
         val isDestinationMain = appBarConfigurationMainIds.contains(fragmentDest)
         var uiState = UiState(
@@ -129,15 +116,7 @@ class MainActivity : ComponentActivity() {
         if (isDestinationMain) vm.toolsManager.releaseMemory()
         uiState = when (fragmentDest) {
 
-            R.id.filesFragment, R.id.starredFragment -> with(vm) {
-                if (isUiStateCached()) restoreCachedUiState()
-                else vm.getUiState().copy(
-                    fabState = fragmentDest == R.id.filesFragment
-                )
-            }
-
             R.id.homeFragment, R.id.settingsFragment -> {
-                vm.invalidateCachedUiState() // subsF uistate invalidating(filesF & settingsF)
                 uiState
             }
 
@@ -160,7 +139,6 @@ class MainActivity : ComponentActivity() {
 
             else -> uiState
         }
-        vm.setUiState(uiState)
-    }
+    }*/
 
 }
