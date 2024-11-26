@@ -146,10 +146,6 @@ class FilesFragment : Fragment() {
                 vm.setStarredFlag(false, item.id)
             }
         }
-        optionsBinding.rename.setOnClickListener {
-            optionsBottomSheetDialog.cancel()
-            showRenameDialog(context, layoutInflater, item)
-        }
         optionsBinding.select.setOnClickListener {
             optionsBottomSheetDialog.cancel()
             initSelecting(item)
@@ -161,43 +157,6 @@ class FilesFragment : Fragment() {
         viewContainer.addView(optionsBinding.root)
         optionsBottomSheetDialog.setContentView(viewContainer, CustomLayoutParams.LINEAR_MATCH_WRAP)
         optionsBottomSheetDialog.show()
-    }
-
-    private fun showRenameDialog(
-        context: Context,
-        layoutInflater: LayoutInflater,
-        item: StorageItemListTuple
-    ) {
-        val textInputLayout = TextInputLayoutBinding.inflate(
-            layoutInflater, null, false
-        )
-        with(textInputLayout.inputLayout) {
-            counterMaxLength = AppConfig.ITEM_NAME_MAX_SIZE
-            isCounterEnabled = true
-        }
-        val dialog = MaterialAlertDialogBuilder(context)
-            .setPositiveButton(android.R.string.ok) { _, _ ->
-                vm.rename(item.id, textInputLayout.editText.text.toString())
-            }
-            .setNegativeButton(android.R.string.cancel, null)
-            .setTitle(R.string.files_options_rename)
-            .setView(textInputLayout.root)
-            .create()
-            .openKeyboard()
-        dialog.show()
-        val okButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE)
-        textInputLayout.editText.apply {
-            setHint(R.string.name)
-            addTextChangedListener {
-                okButton.isEnabled = it != null
-                        && it.toString().count() <= AppConfig.ITEM_NAME_MAX_SIZE
-                        && it.toString().trim().isNotEmpty()
-            }
-        }
-        with(textInputLayout.editText) {
-            setText(item.name)
-            setSelection(0, IO.removeExtension(item.name).length)
-        }
     }
 
     private fun showDeleteDialog(
