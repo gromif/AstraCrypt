@@ -32,14 +32,12 @@ import com.nevidimka655.astracrypt.utils.CustomLayoutParams
 import com.nevidimka655.astracrypt.utils.extensions.lazyFast
 import com.nevidimka655.astracrypt.utils.extensions.requireMenuHost
 import com.nevidimka655.astracrypt.utils.extensions.requireToolbar
-import com.nevidimka655.astracrypt.utils.extensions.ui.requireMainActivity
 import com.nevidimka655.astracrypt.utils.extensions.ui.setDrawableTop
 import com.nevidimka655.astracrypt.utils.extensions.ui.setTooltip
 
 class FilesFragment : Fragment() {
     private val vm by activityViewModels<MainVM>()
 
-    private val fab by lazyFast { requireMainActivity().fab }
     private val selectorManager get() = vm.selectorManager
     private val isStarredFragment by lazyFast {
         findNavController().currentDestination!!.id == R.id.starredFragment
@@ -62,7 +60,6 @@ class FilesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ) = ComposeView(requireContext()).apply {
-        setupFloatingButton(fab)
         setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
         setContent {
             AstraCryptTheme {
@@ -95,7 +92,7 @@ class FilesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupMenu()
         if (selectorManager.isInitialized) {
-            fab.hide()
+//            fab.hide()
             with(selectorManager) {
                 setupContextualActionMode()
                 init()

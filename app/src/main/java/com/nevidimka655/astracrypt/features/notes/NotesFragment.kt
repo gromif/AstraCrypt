@@ -90,10 +90,10 @@ class NotesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        requireMainActivity().fabLarge.setOnClickListener {
+        /*requireMainActivity().fabLarge.setOnClickListener {
             notesManager.reset()
             showNote()
-        }
+        }*/
     }
 
 }

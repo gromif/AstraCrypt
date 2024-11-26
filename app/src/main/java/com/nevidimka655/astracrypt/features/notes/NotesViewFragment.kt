@@ -72,12 +72,12 @@ class NotesViewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupMenu()
-        requireMainActivity().fabLarge.setOnClickListener {
+        /*requireMainActivity().fabLarge.setOnClickListener {
             lifecycleScope.launch {
                 notesManager.save(vm.encryptionInfo)
                 findNavController().popBackStack()
             }
-        }
+        }*/
     }
 
 }

@@ -57,7 +57,6 @@ import com.nevidimka655.astracrypt.ui.shared.BaseNoItemsPage
 import com.nevidimka655.astracrypt.ui.shared.NoItemsPageSize
 import com.nevidimka655.astracrypt.ui.theme.AstraCryptTheme
 import com.nevidimka655.astracrypt.utils.extensions.requireMenuHost
-import com.nevidimka655.astracrypt.utils.extensions.ui.requireMainActivity
 import com.nevidimka655.ui.compose_core.CardWithTitle
 import com.nevidimka655.ui.compose_core.ext.LocalWindowWidth
 import com.nevidimka655.ui.compose_core.ext.isCompact
@@ -222,11 +221,11 @@ class ArchiveFragment : Fragment() {
                 return true
             }
         }, viewLifecycleOwner, Lifecycle.State.STARTED)
-        requireMainActivity().fabLarge.setOnClickListener {
+        /*requireMainActivity().fabLarge.setOnClickListener {
             if (labCombineZipManager.mutableListOfSources.isNotEmpty()) {
                 createDocument.launch(labCombineZipManager.mutableListOfSources[0].name)
             }
-        }
+        }*/
     }
 
 }

@@ -82,7 +82,7 @@ class AeadFragment : Fragment(R.layout.fragment_lab) {
                     setupEncryptionTypes(binding?.encryptionType)
                 }
             }
-            requireMainActivity().fabLarge.setOnClickListener { done() }
+            /*requireMainActivity().fabLarge.setOnClickListener { done() }*/
             shuffle.setOnClickListener {
                 shuffleKey()
             }
