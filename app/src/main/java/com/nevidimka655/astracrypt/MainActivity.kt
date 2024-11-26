@@ -6,24 +6,19 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
-import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
-import com.google.android.material.behavior.HideBottomViewOnScrollBehavior
 import com.google.android.material.color.DynamicColors
 import com.nevidimka655.astracrypt.databinding.MainBinding
 import com.nevidimka655.astracrypt.features.auth.AuthType
 import com.nevidimka655.astracrypt.tabs.settings.security.authentication.Camouflage
 import com.nevidimka655.astracrypt.ui.Main
 import com.nevidimka655.astracrypt.ui.UiState
-import com.nevidimka655.astracrypt.utils.ColorManager
 import com.nevidimka655.astracrypt.utils.Engine
 import com.nevidimka655.astracrypt.utils.appearance.AppearanceManager
 import com.nevidimka655.astracrypt.utils.extensions.lazyFast
 import com.nevidimka655.crypto.tink.TinkConfig
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.math.abs
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -47,7 +42,6 @@ class MainActivity : ComponentActivity() {
             if (!isDatabaseCreated()) setupForFirstUse()
             encryptionManager.loadEncryptionInfo()
         }
-        ColorManager.initialize(this)
         setContent { Main() }
         /*setContentView(binding.root)
         setupToolbar()
@@ -123,34 +117,6 @@ class MainActivity : ComponentActivity() {
         if (DynamicColors.isDynamicColorAvailable() && AppearanceManager.useDynamicColors) {
             DynamicColors.applyToActivityIfAvailable(this)
         }
-    }
-
-    private fun setBottomBarState(slideUp: Boolean = true) {
-        val bottomBar = binding.bottomBar
-        val params = (bottomBar.layoutParams as CoordinatorLayout.LayoutParams)
-        val behavior = params.behavior as HideBottomViewOnScrollBehavior
-        with(behavior) {
-            if (slideUp && isScrolledDown) slideUp(bottomBar, true)
-            else if (!slideUp && isScrolledUp) slideDown(bottomBar, true)
-        }
-    }
-
-    private fun registerAppBarOffsetListener() {
-        binding.appBarLayout.addOnOffsetChangedListener { appBarLayout, verticalOffset ->
-            val totalScrollRange = appBarLayout.totalScrollRange
-            when (abs(verticalOffset)) {
-                0 -> setBottomBarState(true)
-                totalScrollRange -> setBottomBarState(false)
-            }
-        }
-    }
-
-    private fun parseUiState(state: UiState) = binding.run {
-        bottomNavigationView.isVisible = state.navBarEnabled
-        movePanel.isVisible = state.movePanelButtonState
-        if (state.fabLargeState) fabLarge.show() else fabLarge.hide()
-        if (state.fabState) fab.show() else fab.hide()
-        binding.appBarLayout.setExpanded(state.toolbarState, state.toolbarStateAnimated)
     }
 
     @SuppressLint("PrivateResource")
