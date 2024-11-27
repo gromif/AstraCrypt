@@ -36,12 +36,6 @@ object IO {
 
     fun getProfileIconFile() = File("$filesDir/icon")
 
-    fun removeExtension(name: String): String {
-        val lastPointIndex = name.lastIndexOf('.')
-        return if (lastPointIndex != -1) name.substring(0, lastPointIndex)
-        else name
-    }
-
     fun bytesToHumanReadable(bytesSize: Long): String {
         val kilobytes = bytesSize / 1024.0
         val megabytes = kilobytes / 1024.0
