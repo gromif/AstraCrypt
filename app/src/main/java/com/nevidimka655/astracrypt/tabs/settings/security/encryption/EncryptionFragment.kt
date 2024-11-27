@@ -28,8 +28,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.nevidimka655.astracrypt.MainVM
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.help.HelpFragment
-import com.nevidimka655.astracrypt.help.HelpIndex
+import com.nevidimka655.astracrypt.features.help.HelpFragment
+import com.nevidimka655.astracrypt.features.help.HelpIndex
 import com.nevidimka655.astracrypt.ui.dialogs.DatabaseTransformDialog
 import com.nevidimka655.astracrypt.ui.theme.AstraCryptTheme
 import com.nevidimka655.astracrypt.utils.billing.AlgorithmPaywallListFactory

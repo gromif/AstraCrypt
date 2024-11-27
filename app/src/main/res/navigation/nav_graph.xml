@@ -290,7 +290,7 @@
         app:popUpToInclusive="true" />
     <fragment
         android:id="@+id/helpFragment"
-        android:name="com.nevidimka655.astracrypt.help.HelpFragment"
+        android:name="com.nevidimka655.astracrypt.features.help.HelpFragment"
         android:label="@string/help">
         <argument
             android:name="help_index"

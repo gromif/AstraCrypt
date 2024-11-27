@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.help
+package com.nevidimka655.astracrypt.features.help
 
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.compose_help.Help

@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.help
+package com.nevidimka655.astracrypt.features.help
 
 enum class HelpIndex {
 
