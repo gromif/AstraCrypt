@@ -384,7 +384,7 @@ fun FilesList(
         if (viewMode == ViewMode.Grid) items(count = pagingItems.itemSnapshotList.size,
             key = { pagingItems[it]?.id ?: it }) { index ->
             pagingItems[index]?.let {
-                FilesGridItem(modifier = Modifier.animateItemPlacement(),
+                FilesGridItem(modifier = Modifier.animateItem(),
                     imageLoader = imageLoader,
                     name = it.name,
                     thumb = it.thumbnail,
@@ -405,7 +405,7 @@ fun FilesList(
         } else items(count = pagingItems.itemSnapshotList.size,
             key = { pagingItems[it]?.id ?: it }) { index ->
             pagingItems[index]?.let {
-                FilesListItemMedium(modifier = Modifier.animateItemPlacement(),
+                FilesListItemMedium(modifier = Modifier.animateItem(),
                     imageLoader = imageLoader,
                     name = it.name,
                     thumb = it.thumbnail,
