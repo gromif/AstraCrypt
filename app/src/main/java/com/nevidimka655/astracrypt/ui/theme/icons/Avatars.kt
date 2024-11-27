@@ -1,5 +1,3 @@
-@file:Suppress("ObjectPropertyName")
-
 package com.nevidimka655.astracrypt.ui.theme.icons
 
 import androidx.compose.material.icons.Icons
