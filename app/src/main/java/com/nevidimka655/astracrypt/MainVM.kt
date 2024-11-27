@@ -117,13 +117,11 @@ class MainVM @Inject constructor(
 
     private var cachedUiState: UiState? = null
     private val _uiStateFlow = MutableStateFlow(UiState())
-    val uiStateFlow = _uiStateFlow.asStateFlow()
 
     private val _profileInfoFlow = MutableStateFlow(ProfileInfo())
     val profileInfoFlow = _profileInfoFlow.asStateFlow()
 
     private val _snackbarChannel = Channel<Int>(0)
-    val snackbarChannel = _snackbarChannel.receiveAsFlow()
 
     val toolsManager = ToolsManager(_snackbarChannel)
 

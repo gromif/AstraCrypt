@@ -72,7 +72,7 @@
         app:startDestination="@id/settingsFragment">
         <fragment
             android:id="@+id/settingsFragment"
-            android:name="com.nevidimka655.astracrypt.tabs.settings.SettingsFragment"
+            android:name="com.nevidimka655.astracrypt.tabs.settings.AboutFragment"
             android:label="@string/settings">
             <action
                 android:id="@+id/action_settingsFragment_to_editProfileFragment"
@@ -133,7 +133,7 @@
             android:label="@string/settings_dataCollection" />
         <fragment
             android:id="@+id/securityFragment"
-            android:name="com.nevidimka655.astracrypt.tabs.settings.SecurityFragment"
+            android:name="com.nevidimka655.astracrypt.tabs.settings.AboutFragment"
             android:label="@string/settings_security">
             <action
                 android:id="@+id/action_securityFragment_to_encryptionFragment"

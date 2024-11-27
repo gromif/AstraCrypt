@@ -34,7 +34,5 @@ sealed class StorageItemFlags {
 
     @Serializable
     @SerialName("app")
-    class App: StorageItemFlags() {
-
-    }
+    class App: StorageItemFlags()
 }
