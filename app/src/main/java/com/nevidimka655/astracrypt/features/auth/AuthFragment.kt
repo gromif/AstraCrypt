@@ -16,8 +16,8 @@ import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.databinding.FragmentAuthBinding
 import com.nevidimka655.astracrypt.features.profile.AvatarIds
 import com.nevidimka655.astracrypt.utils.AppConfig
-import com.nevidimka655.crypto.tink.KeysetFactory
 import com.nevidimka655.astracrypt.utils.extensions.withViewLifecycle
+import com.nevidimka655.crypto.tink.KeysetFactory
 
 class AuthFragment : Fragment(R.layout.fragment_auth) {
 
