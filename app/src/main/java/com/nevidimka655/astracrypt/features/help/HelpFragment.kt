@@ -8,7 +8,6 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
-import com.nevidimka655.astracrypt.help.HelpFragmentArgs
 import com.nevidimka655.astracrypt.ui.theme.AstraCryptTheme
 import com.nevidimka655.compose_help.Help
 import com.nevidimka655.compose_help.HelpScreen
