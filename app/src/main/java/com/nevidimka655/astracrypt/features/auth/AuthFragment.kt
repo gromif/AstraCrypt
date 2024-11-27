@@ -1,7 +1,6 @@
 package com.nevidimka655.astracrypt.features.auth
 
 import android.content.Context
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
@@ -32,7 +31,6 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
         super.onViewCreated(view, savedInstanceState)
         with(requireActivity().window) {
             addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-            navigationBarColor = Color.TRANSPARENT
             setBackgroundDrawableResource(R.drawable.setup_bg)
         }
         binding = FragmentAuthBinding.bind(view)
