@@ -7,7 +7,7 @@ import coil.fetch.FetchResult
 import coil.fetch.Fetcher
 import coil.fetch.SourceResult
 import coil.request.Options
-import com.nevidimka655.astracrypt.entities.CoilTinkModel
+import com.nevidimka655.astracrypt.model.CoilTinkModel
 import com.nevidimka655.crypto.tink.KeysetFactory
 import com.nevidimka655.crypto.tink.KeysetTemplates
 import com.nevidimka655.crypto.tink.extensions.streamingAeadPrimitive

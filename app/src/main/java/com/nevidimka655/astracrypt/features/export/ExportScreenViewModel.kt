@@ -6,8 +6,8 @@ import androidx.compose.runtime.setValue
 import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nevidimka655.astracrypt.entities.EncryptionInfo
-import com.nevidimka655.astracrypt.entities.ExportUiState
+import com.nevidimka655.astracrypt.model.EncryptionInfo
+import com.nevidimka655.astracrypt.model.ExportUiState
 import com.nevidimka655.astracrypt.room.OpenTuple
 import com.nevidimka655.astracrypt.room.Repository
 import com.nevidimka655.astracrypt.room.StorageItemListTuple

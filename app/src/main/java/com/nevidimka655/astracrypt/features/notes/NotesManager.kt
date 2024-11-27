@@ -4,7 +4,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.text.input.TextFieldValue
-import com.nevidimka655.astracrypt.entities.EncryptionInfo
+import com.nevidimka655.astracrypt.model.EncryptionInfo
 import com.nevidimka655.astracrypt.room.Repository
 import com.nevidimka655.astracrypt.room.entities.NoteItemEntity
 import kotlinx.coroutines.Dispatchers

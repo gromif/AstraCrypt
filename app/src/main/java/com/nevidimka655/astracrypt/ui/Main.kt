@@ -49,7 +49,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.nevidimka655.astracrypt.MainVM
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.entities.FabState
+import com.nevidimka655.astracrypt.model.FabState
 import com.nevidimka655.astracrypt.features.details.DetailsScreen
 import com.nevidimka655.astracrypt.features.export.ExportScreen
 import com.nevidimka655.astracrypt.tabs.settings.SettingsScreen

@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.entities
+package com.nevidimka655.astracrypt.model
 
 import androidx.annotation.StringRes
 import androidx.compose.ui.graphics.vector.ImageVector

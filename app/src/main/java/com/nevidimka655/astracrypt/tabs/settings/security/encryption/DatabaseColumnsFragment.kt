@@ -21,7 +21,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import com.nevidimka655.astracrypt.MainVM
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.entities.EncryptionInfo
+import com.nevidimka655.astracrypt.model.EncryptionInfo
 import com.nevidimka655.astracrypt.ui.dialogs.DatabaseTransformDialog
 import com.nevidimka655.astracrypt.ui.theme.AstraCryptTheme
 import com.nevidimka655.astracrypt.utils.enums.DatabaseColumns

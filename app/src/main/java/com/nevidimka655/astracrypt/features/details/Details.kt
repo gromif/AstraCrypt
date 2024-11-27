@@ -14,8 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import coil.ImageLoader
 import coil.compose.AsyncImage
-import com.nevidimka655.astracrypt.entities.CoilTinkModel
-import com.nevidimka655.astracrypt.entities.EncryptionInfo
+import com.nevidimka655.astracrypt.model.CoilTinkModel
+import com.nevidimka655.astracrypt.model.EncryptionInfo
 import com.nevidimka655.compose_details.Details
 import com.nevidimka655.compose_details.DetailsManager
 import com.nevidimka655.compose_details.Screen

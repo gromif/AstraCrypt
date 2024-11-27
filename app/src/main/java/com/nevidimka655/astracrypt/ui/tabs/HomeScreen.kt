@@ -42,7 +42,7 @@ import coil.ImageLoader
 import coil.compose.AsyncImage
 import com.nevidimka655.astracrypt.MainVM
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.entities.CoilTinkModel
+import com.nevidimka655.astracrypt.model.CoilTinkModel
 import com.nevidimka655.astracrypt.features.profile.ui.ProfileWidget
 import com.nevidimka655.astracrypt.room.StorageItemListTuple
 import com.nevidimka655.astracrypt.utils.enums.StorageItemState

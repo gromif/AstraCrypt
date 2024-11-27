@@ -3,7 +3,7 @@ package com.nevidimka655.astracrypt.utils
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import com.nevidimka655.astracrypt.entities.EncryptionInfo
+import com.nevidimka655.astracrypt.model.EncryptionInfo
 import com.nevidimka655.crypto.tink.KeysetFactory
 import com.nevidimka655.crypto.tink.KeysetTemplates
 import com.nevidimka655.astracrypt.utils.shared_prefs.PrefsKeys

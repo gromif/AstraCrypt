@@ -83,8 +83,8 @@ import coil.compose.AsyncImage
 import coil.compose.AsyncImagePainter
 import com.nevidimka655.astracrypt.MainVM
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.entities.CoilTinkModel
-import com.nevidimka655.astracrypt.entities.NavigatorDirectory
+import com.nevidimka655.astracrypt.model.CoilTinkModel
+import com.nevidimka655.astracrypt.model.NavigatorDirectory
 import com.nevidimka655.astracrypt.room.StorageItemListTuple
 import com.nevidimka655.astracrypt.tabs.Tabs
 import com.nevidimka655.astracrypt.tabs.files.createNewSheet

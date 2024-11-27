@@ -13,8 +13,8 @@ import androidx.compose.material.icons.outlined.PhotoSizeSelectLarge
 import androidx.compose.material.icons.outlined.SdCard
 import androidx.core.os.bundleOf
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.entities.EncryptionInfo
-import com.nevidimka655.astracrypt.entities.StorageItemFlags
+import com.nevidimka655.astracrypt.model.EncryptionInfo
+import com.nevidimka655.astracrypt.model.StorageItemFlags
 import com.nevidimka655.astracrypt.room.Repository
 import com.nevidimka655.astracrypt.utils.Engine
 import com.nevidimka655.astracrypt.utils.IO

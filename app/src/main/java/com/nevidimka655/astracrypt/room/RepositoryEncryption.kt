@@ -3,7 +3,7 @@ package com.nevidimka655.astracrypt.room
 import androidx.paging.PagingData
 import androidx.paging.map
 import com.google.crypto.tink.Aead
-import com.nevidimka655.astracrypt.entities.EncryptionInfo
+import com.nevidimka655.astracrypt.model.EncryptionInfo
 import com.nevidimka655.astracrypt.room.entities.NoteItemEntity
 import com.nevidimka655.astracrypt.room.entities.StorageItemEntity
 import com.nevidimka655.astracrypt.utils.enums.DatabaseColumns

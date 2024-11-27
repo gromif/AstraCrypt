@@ -16,7 +16,7 @@ import androidx.work.CoroutineWorker
 import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.entities.EncryptionInfo
+import com.nevidimka655.astracrypt.model.EncryptionInfo
 import com.nevidimka655.astracrypt.room.ExportTuple
 import com.nevidimka655.astracrypt.room.Repository
 import com.nevidimka655.astracrypt.utils.Api

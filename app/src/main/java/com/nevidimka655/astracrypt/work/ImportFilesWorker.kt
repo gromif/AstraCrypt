@@ -28,8 +28,8 @@ import coil.ImageLoader
 import coil.request.ImageRequest
 import com.google.crypto.tink.StreamingAead
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.entities.EncryptionInfo
-import com.nevidimka655.astracrypt.entities.StorageItemFlags
+import com.nevidimka655.astracrypt.model.EncryptionInfo
+import com.nevidimka655.astracrypt.model.StorageItemFlags
 import com.nevidimka655.astracrypt.room.Repository
 import com.nevidimka655.astracrypt.room.entities.StorageItemEntity
 import com.nevidimka655.astracrypt.utils.*

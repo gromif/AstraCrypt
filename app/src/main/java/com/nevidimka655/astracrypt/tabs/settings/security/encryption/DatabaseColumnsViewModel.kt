@@ -1,7 +1,7 @@
 package com.nevidimka655.astracrypt.tabs.settings.security.encryption
 
 import androidx.lifecycle.ViewModel
-import com.nevidimka655.astracrypt.entities.EncryptionInfo
+import com.nevidimka655.astracrypt.model.EncryptionInfo
 
 class DatabaseColumnsViewModel: ViewModel() {
 

@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.entities
+package com.nevidimka655.astracrypt.model
 
 import com.nevidimka655.astracrypt.utils.Engine
 import com.nevidimka655.crypto.tink.KeysetFactory

@@ -31,8 +31,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.entities.EncryptionInfo
-import com.nevidimka655.astracrypt.entities.ExportUiState
+import com.nevidimka655.astracrypt.model.EncryptionInfo
+import com.nevidimka655.astracrypt.model.ExportUiState
 import com.nevidimka655.astracrypt.utils.IO
 import com.nevidimka655.ui.compose_core.theme.spaces
 

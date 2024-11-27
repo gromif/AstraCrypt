@@ -24,7 +24,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.nevidimka655.astracrypt.MainVM
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.entities.EncryptionInfo
+import com.nevidimka655.astracrypt.model.EncryptionInfo
 import com.nevidimka655.astracrypt.features.auth.AuthType
 import com.nevidimka655.compose_calculator.CalculatorManager
 import com.nevidimka655.astracrypt.ui.theme.AstraCryptTheme

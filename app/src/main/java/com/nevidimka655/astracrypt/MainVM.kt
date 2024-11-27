@@ -26,8 +26,8 @@ import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import coil.ImageLoader
 import coil.request.ImageRequest
-import com.nevidimka655.astracrypt.entities.CoilTinkModel
-import com.nevidimka655.astracrypt.entities.NavigatorDirectory
+import com.nevidimka655.astracrypt.model.CoilTinkModel
+import com.nevidimka655.astracrypt.model.NavigatorDirectory
 import com.nevidimka655.astracrypt.features.auth.AuthManager
 import com.nevidimka655.astracrypt.features.profile.AvatarIds
 import com.nevidimka655.astracrypt.features.profile.ProfileInfo

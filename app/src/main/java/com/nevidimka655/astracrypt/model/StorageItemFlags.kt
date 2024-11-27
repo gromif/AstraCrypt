@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.entities
+package com.nevidimka655.astracrypt.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

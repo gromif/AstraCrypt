@@ -3,7 +3,7 @@ package com.nevidimka655.astracrypt.ui
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.entities.ActionItem
+import com.nevidimka655.astracrypt.model.ActionItem
 
 object Actions {
 

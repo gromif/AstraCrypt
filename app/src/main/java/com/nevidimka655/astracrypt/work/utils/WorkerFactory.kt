@@ -6,7 +6,7 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.OutOfQuotaPolicy
 import androidx.work.WorkInfo
 import androidx.work.workDataOf
-import com.nevidimka655.astracrypt.entities.EncryptionInfo
+import com.nevidimka655.astracrypt.model.EncryptionInfo
 import com.nevidimka655.astracrypt.utils.Engine
 import com.nevidimka655.crypto.tink.KeysetFactory
 import com.nevidimka655.astracrypt.work.LabCombinedZipWorker

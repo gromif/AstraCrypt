@@ -3,8 +3,8 @@ package com.nevidimka655.astracrypt.room
 import android.content.Context
 import androidx.room.Room
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.entities.DetailsFolderContent
-import com.nevidimka655.astracrypt.entities.EncryptionInfo
+import com.nevidimka655.astracrypt.model.DetailsFolderContent
+import com.nevidimka655.astracrypt.model.EncryptionInfo
 import com.nevidimka655.astracrypt.room.entities.NoteItemEntity
 import com.nevidimka655.astracrypt.room.entities.StorageItemEntity
 import com.nevidimka655.astracrypt.utils.AppConfig
