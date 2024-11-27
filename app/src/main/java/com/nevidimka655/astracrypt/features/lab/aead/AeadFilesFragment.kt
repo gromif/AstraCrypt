@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.lab.aead
+package com.nevidimka655.astracrypt.features.lab.aead
 
 import android.os.Bundle
 import android.view.View
@@ -83,7 +83,8 @@ class AeadFilesFragment : Fragment(R.layout.fragment_lab_files) {
     private fun updateDetailsCard(workInfo: WorkInfo? = null) {
         binding?.run {
             detailsCard.isVisible = labManager.filesSourceName != null
-            detailsFile.text = labManager.filesSourceName
+            detailsFile.text =
+                labManager.filesSourceName
             detailsProgress.isVisible = workInfo?.state == WorkInfo.State.RUNNING
         }
     }
@@ -97,7 +98,7 @@ class AeadFilesFragment : Fragment(R.layout.fragment_lab_files) {
     }
 
     private fun registerWorkerInfoLiveData() {
-        labManager.filesWorkerInfoLiveData?.observe(viewLifecycleOwner) {
+        labManager.filesWorkerInfoLiveData!!.observe(viewLifecycleOwner) {
             if (it != null) {
                 parseWorkInfo(it)
             }

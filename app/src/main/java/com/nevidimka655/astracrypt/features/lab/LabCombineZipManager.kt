@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.lab
+package com.nevidimka655.astracrypt.features.lab
 
 import android.net.Uri
 import androidx.compose.runtime.mutableStateListOf

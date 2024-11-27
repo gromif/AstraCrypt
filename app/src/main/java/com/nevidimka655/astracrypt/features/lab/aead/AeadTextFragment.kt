@@ -1,10 +1,9 @@
-package com.nevidimka655.astracrypt.lab.aead
+package com.nevidimka655.astracrypt.features.lab.aead
 
 import android.content.ClipData
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.nevidimka655.astracrypt.MainVM
@@ -16,7 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class AeadTextFragment : Fragment(R.layout.fragment_lab_text) {
+class AeadTextFragment : androidx.fragment.app.Fragment(R.layout.fragment_lab_text) {
     private val vm by activityViewModels<MainVM>()
     private val labManager get() = vm.toolsManager.labManager
     private var binding: FragmentLabTextBinding? = null

@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.lab.aead
+package com.nevidimka655.astracrypt.features.lab.aead
 
 import android.content.ContentResolver
 import android.net.Uri

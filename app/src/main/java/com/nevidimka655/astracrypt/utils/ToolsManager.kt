@@ -1,9 +1,9 @@
 package com.nevidimka655.astracrypt.utils
 
 import com.nevidimka655.astracrypt.features.calculator.CalculatorManagerWrap
+import com.nevidimka655.astracrypt.features.lab.LabCombineZipManager
+import com.nevidimka655.astracrypt.features.lab.aead.LabAeadManager
 import com.nevidimka655.astracrypt.features.notes.NotesManager
-import com.nevidimka655.astracrypt.lab.LabCombineZipManager
-import com.nevidimka655.astracrypt.lab.aead.LabAeadManager
 import com.nevidimka655.compose_details.DetailsManager
 import kotlinx.coroutines.channels.Channel
 

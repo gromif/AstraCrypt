@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.lab.aead
+package com.nevidimka655.astracrypt.features.lab.aead
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -6,7 +6,6 @@ import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
@@ -24,7 +23,7 @@ import kotlinx.coroutines.withContext
 import kotlin.math.abs
 import kotlin.random.Random
 
-class AeadFragment : Fragment(R.layout.fragment_lab) {
+class AeadFragment : androidx.fragment.app.Fragment(R.layout.fragment_lab) {
     private val vm by activityViewModels<MainVM>()
     private val labManager get() = vm.toolsManager.labManager
     private var binding: FragmentLabBinding? = null
@@ -59,7 +58,7 @@ class AeadFragment : Fragment(R.layout.fragment_lab) {
                     if (text != null) {
                         val newPassword = text.toString()
                         val isPasswordAccepted = labManager.newKeysetPassword(newPassword)
-                        if (isPasswordAccepted && labManager.keysetUri == null) shuffleKey()
+                        if (isPasswordAccepted && labManager.keysetUri != null) shuffleKey()
                     }
                 }
             }
