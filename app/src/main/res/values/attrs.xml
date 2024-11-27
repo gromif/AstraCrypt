@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <attr name="buttonCompoundTint" format="color" />
-    <declare-styleable name="roundProgress">
-        <attr name="roundProgressTrackColor" format="color" />
-    </declare-styleable>
     <declare-styleable name="subscriptionCardDesign">
         <attr name="planTextColor" format="color" />
         <attr name="planTimeColor" format="color" />

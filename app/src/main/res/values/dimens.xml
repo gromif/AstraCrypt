@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="cardRadius">14dp</dimen>
-    <dimen name="item_image_stroke_width">1dp</dimen>
-    <dimen name="cardMessageSubItemPadding">3dp</dimen>
-    <dimen name="coloredCardCompatPadding">10dp</dimen>
-    <dimen name="adapterAvatarsSpacing">10dp</dimen>
-    <dimen name="home_options_cardHeightDefault">100dp</dimen>
-    <dimen name="home_padding">20dp</dimen>
-    <dimen name="home_padding_alt">15dp</dimen>
     <dimen name="padding_default">16dp</dimen>
     <dimen name="padding_double">32dp</dimen>
     <dimen name="padding_half">8dp</dimen>
@@ -17,18 +10,9 @@
     <dimen name="setup_cardTopMargin">40dp</dimen>
     <dimen name="setup_cardWidth">350dp</dimen>
     <dimen name="setup_plan_cardStrokeWidth">2dp</dimen>
-    <dimen name="recycler_margin">4dp</dimen>
     <dimen name="subs_item_height">200dp</dimen>
     <dimen name="subs_item_margin">18dp</dimen>
     <dimen name="settingsGroupItemHeight">180dp</dimen>
     <dimen name="filesListItemMediumHeight">100dp</dimen>
-    <dimen name="files_item_height">190dp</dimen>
-    <dimen name="files_item_icon_height">120dp</dimen>
-    <dimen name="files_item_icon_mini_size">42dp</dimen>
-    <dimen name="files_item_icon_state_size">23dp</dimen>
-    <dimen name="files_chips_height">0dp</dimen>
-    <dimen name="files_chips_margin">3dp</dimen>
     <dimen name="dialog_view_padding">10dp</dimen>
-    <dimen name="prefs_margin">8dp</dimen>
-    <dimen name="prefs_content_padding">16dp</dimen>
 </resources>
