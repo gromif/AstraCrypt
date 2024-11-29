@@ -53,10 +53,4 @@
       <excludeFolder url="file://$MODULE_DIR$/../../../app/.cxx/RelWithDebInfo/6b4y6137/x86_64/CMakeFiles/CMakeTmp" />
     </content>
   </component>
-  <component name="ModuleClassLoaderOverlays">
-    <paths>
-      <option value="/tmp/overlay5387118380841202959" />
-      <option value="/tmp/overlay15349275519502765432" />
-    </paths>
-  </component>
 </module>
