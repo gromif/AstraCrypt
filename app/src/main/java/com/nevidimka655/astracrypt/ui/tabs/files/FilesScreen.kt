@@ -624,6 +624,16 @@ fun FilesScreen(
         itemIcon = filesVM.optionsItem.itemType.icon,
         isFolder = filesVM.optionsItem.isDirectory,
         isStarred = filesVM.optionsItem.state.isStarred,
+        onOpen = {
+            filesVM.sheetOptionsState.value = false
+            openItem(
+                vm = vm,
+                isStarred = isStarred,
+                onOpenStarredDir = onOpenStarredDir,
+                onOpenFile = onOpenFile,
+                item = filesVM.optionsItem
+            )
+        },
         onRename = {
             filesVM.sheetOptionsState.value = false
             dialogRename = true

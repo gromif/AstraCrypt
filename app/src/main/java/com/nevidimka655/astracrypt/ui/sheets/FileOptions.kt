@@ -53,6 +53,7 @@ fun Sheets.filesOptions(
     isFolder: Boolean = true,
     isStarred: Boolean = false,
     sheetState: SheetState = SheetDefaults.state(),
+    onOpen: () -> Unit = {},
     onRename: () -> Unit = {},
     onDelete: () -> Unit = {},
     onDetails: () -> Unit = {},
@@ -72,10 +73,9 @@ fun Sheets.filesOptions(
         HorizontalDivider()
         SheetFilesOptionsItem(
             text = context.getString(R.string.open),
-            imageVector = Icons.AutoMirrored.Default.OpenInNew
-        ) {
-
-        }
+            imageVector = Icons.AutoMirrored.Default.OpenInNew,
+            onClick = onOpen
+        )
         SheetFilesOptionsItem(
             text = context.getString(R.string.files_options_export),
             imageVector = Icons.Outlined.SaveAlt
