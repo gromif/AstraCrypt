@@ -87,7 +87,6 @@ import com.nevidimka655.astracrypt.model.CoilTinkModel
 import com.nevidimka655.astracrypt.model.NavigatorDirectory
 import com.nevidimka655.astracrypt.room.StorageItemListTuple
 import com.nevidimka655.astracrypt.tabs.Tabs
-import com.nevidimka655.astracrypt.tabs.files.createNewSheet
 import com.nevidimka655.astracrypt.tabs.files.newFolder
 import com.nevidimka655.astracrypt.ui.dialogs.DeleteFile
 import com.nevidimka655.astracrypt.ui.dialogs.DeleteOriginalFiles
@@ -96,6 +95,7 @@ import com.nevidimka655.astracrypt.ui.dialogs.rename
 import com.nevidimka655.astracrypt.ui.shared.NoItemsPage
 import com.nevidimka655.astracrypt.ui.sheets.Sheets
 import com.nevidimka655.astracrypt.ui.sheets.filesOptions
+import com.nevidimka655.astracrypt.ui.tabs.files.sheets.createNewSheet
 import com.nevidimka655.astracrypt.utils.IO
 import com.nevidimka655.astracrypt.utils.appearance.AppearanceManager
 import com.nevidimka655.astracrypt.utils.appearance.ViewMode

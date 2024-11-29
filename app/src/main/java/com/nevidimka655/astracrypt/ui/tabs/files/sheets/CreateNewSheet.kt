@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.tabs.files
+package com.nevidimka655.astracrypt.ui.tabs.files.sheets
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
