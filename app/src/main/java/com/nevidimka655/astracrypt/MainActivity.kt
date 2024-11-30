@@ -4,10 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.google.android.material.color.DynamicColors
 import com.nevidimka655.astracrypt.ui.Main
 import com.nevidimka655.astracrypt.utils.Engine
-import com.nevidimka655.astracrypt.utils.appearance.AppearanceManager
 import com.nevidimka655.crypto.tink.TinkConfig
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -18,7 +16,6 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         Engine.init(applicationContext)
-        setupDynamicColors()
         TinkConfig.init()
         setContent { Main() }
         /*savedInstanceState ?: shouldShowAuthScreen(navController)
@@ -69,12 +66,6 @@ class MainActivity : ComponentActivity() {
             navController.navigate(startDestination, null, options)
         }
     }*/
-
-    private fun setupDynamicColors() {
-        if (DynamicColors.isDynamicColorAvailable() && AppearanceManager.useDynamicColors) {
-            DynamicColors.applyToActivityIfAvailable(this)
-        }
-    }
 
     /*@SuppressLint("PrivateResource")
     private fun setUiStateOnFragment(fragmentDest: Int) {
