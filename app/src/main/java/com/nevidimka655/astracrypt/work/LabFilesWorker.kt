@@ -32,20 +32,22 @@ import com.nevidimka655.crypto.tink.extensions.streamingAeadPrimitive
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class LabFilesWorker(appContext: Context, params: WorkerParameters) :
-    CoroutineWorker(appContext, params) {
+class LabFilesWorker(
+    appContext: Context,
+    params: WorkerParameters
+) : CoroutineWorker(appContext, params) {
 
     object Args {
-        const val sourceUriArray = "The Rescuer"
-        const val destinationUri = "Pyramids"
-        const val encryptedAssociatedData = "The Cracked Wall"
-        const val encryptedKeyset = "Return of the Medjay"
-        const val mode = "Legions of Blood"
+        const val SOURCE_URI_ARRAY = "a1"
+        const val TARGET_URI = "a2"
+        const val ENCRYPTED_AD = "a3"
+        const val ENCRYPTED_KEYSET = "a4"
+        const val MODE = "a5"
     }
 
     companion object {
-        const val keysetTransportAssociatedData = "Siege of Alexandria"
-        const val associatedDataTransportAssociatedData = "Trials of the Gods"
+        const val keysetTransportAssociatedData = "b1"
+        const val associatedDataTransportAssociatedData = "b2"
 
         fun aeadForKeyset() = KeysetFactory.aead(
             Engine.appContext, KeysetTemplates.AEAD.AES256_GCM).aeadPrimitive()
@@ -59,22 +61,22 @@ class LabFilesWorker(appContext: Context, params: WorkerParameters) :
         setForeground(getForegroundInfo())
         TinkConfig.initStream()
         val aeadForKeyset = aeadForKeyset()
-        val keysetHandle = inputData.getString(Args.encryptedKeyset)!!.run {
+        val keysetHandle = inputData.getString(Args.ENCRYPTED_KEYSET)!!.run {
             KeysetHandle.readWithAssociatedData(
                 JsonKeysetReader.withBytes(fromBase64()),
                 aeadForKeyset,
                 keysetTransportAssociatedData.toByteArray()
             )
         }
-        val associatedData = inputData.getString(Args.encryptedAssociatedData)!!.run {
+        val associatedData = inputData.getString(Args.ENCRYPTED_AD)!!.run {
             aeadForKeyset.decrypt(
                 fromBase64(),
                 associatedDataTransportAssociatedData.toByteArray()
             )
         }
-        val mode = inputData.getBoolean(Args.mode, false)
-        val destinationUri = inputData.getString(Args.destinationUri)!!.toUri()
-        val sourceUriArray = inputData.getStringArray(Args.sourceUriArray)!!.map { it.toUri() }
+        val mode = inputData.getBoolean(Args.MODE, false)
+        val destinationUri = inputData.getString(Args.TARGET_URI)!!.toUri()
+        val sourceUriArray = inputData.getStringArray(Args.SOURCE_URI_ARRAY)!!.map { it.toUri() }
         val destinationRoot = DocumentFile.fromTreeUri(applicationContext, destinationUri)!!
         val datePattern = "dd_mm_yyyy_hh:mm:ss"
         val date = DateFormat.format(datePattern, System.currentTimeMillis()).toString()
