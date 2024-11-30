@@ -145,7 +145,7 @@ class FilesFragment : Fragment() {
                         )
                     }
 
-                    R.id.createDir -> vm.dialogNewFolderState.value = true
+                    R.id.createDir -> {/*vm.dialogNewFolderState.value = true*/}
 
                     R.id.delete -> {
                         vm.deleteSelected(selectorManager.getSelectedItemsList())
