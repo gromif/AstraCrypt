@@ -6,7 +6,6 @@ import android.net.Uri
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.work.OneTimeWorkRequestBuilder
@@ -18,7 +17,7 @@ import com.nevidimka655.astracrypt.model.ExportUiState
 import com.nevidimka655.astracrypt.room.OpenTuple
 import com.nevidimka655.astracrypt.room.Repository
 import com.nevidimka655.astracrypt.utils.Engine
-import com.nevidimka655.astracrypt.utils.IO
+import com.nevidimka655.astracrypt.utils.Io
 import com.nevidimka655.astracrypt.work.ExportFilesWorker
 import com.nevidimka655.crypto.tink.KeysetFactory
 import com.nevidimka655.crypto.tink.KeysetTemplates
@@ -42,6 +41,7 @@ private typealias Args = ExportFilesWorker.Args
 
 @HiltViewModel
 class ExportScreenViewModel @Inject constructor(
+    val io: Io,
     val workManager: WorkManager
 ) : ViewModel() {
     private val workUUID = UUID.randomUUID()
@@ -86,16 +86,12 @@ class ExportScreenViewModel @Inject constructor(
     }
 
     suspend fun export(exportTuple: OpenTuple) = withContext(Dispatchers.IO) {
-        val exportFile = IO.getExportedCacheFile(exportTuple.name)
-        val outputUri = FileProvider.getUriForFile(
-            Engine.appContext,
-            "com.nevidimka655.astracrypt",
-            exportFile
-        )
+        val exportFile = io.getExportedCacheFile(exportTuple.name)
+        val outputUri = io.getExportedCacheFileUri(file = exportFile)
         internalExportUri = outputUri.toString()
         uiState = uiState.copy(name = exportTuple.name)
         val outStream = Engine.appContext.contentResolver.openOutputStream(outputUri)
-        val inStream = IO.getLocalFile(exportTuple.path).run {
+        val inStream = io.getLocalFile(exportTuple.path).run {
             if (exportTuple.encryptionType == -1) inputStream()
             else {
                 val aeadTemplate = KeysetTemplates.Stream.entries[exportTuple.encryptionType]
@@ -149,6 +145,6 @@ class ExportScreenViewModel @Inject constructor(
 
     fun cancelExport() = workManager.cancelWorkById(id = workUUID)
 
-    fun onDispose() = IO.clearExportedCache()
+    fun onDispose() = io.clearExportedCache()
 
 }

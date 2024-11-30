@@ -4,17 +4,22 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import com.nevidimka655.astracrypt.room.Repository
 import com.nevidimka655.astracrypt.utils.Engine
-import com.nevidimka655.astracrypt.utils.IO
+import com.nevidimka655.astracrypt.utils.Io
+import com.nevidimka655.astracrypt.utils.shared_prefs.PrefsManager
 import com.nevidimka655.crypto.tink.KeysetFactory
 import com.nevidimka655.crypto.tink.extensions.secureRandom
-import com.nevidimka655.astracrypt.utils.shared_prefs.PrefsManager
 import com.nevidimka655.tiles_with_coroutines.TileServiceCoroutine
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 import java.io.RandomAccessFile
 import java.security.KeyStore
+import javax.inject.Inject
 
 @RequiresApi(Build.VERSION_CODES.N)
-class QuickDataDeletion: TileServiceCoroutine() {
+@AndroidEntryPoint
+class QuickDataDeletion @Inject constructor(): TileServiceCoroutine() {
+    @Inject lateinit var io: Io
+
     override fun onClick() {
         super.onClick()
         Engine.init(applicationContext)
@@ -27,7 +32,7 @@ class QuickDataDeletion: TileServiceCoroutine() {
                 keyStore.deleteEntry(alias)
             }
 
-            with(IO) {
+            with(io) {
                 dataDir.deleteRecursively()
                 cacheDir.deleteRecursively()
             }

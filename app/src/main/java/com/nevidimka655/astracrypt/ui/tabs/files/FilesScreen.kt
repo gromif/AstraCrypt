@@ -66,7 +66,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.platform.rememberNestedScrollInteropConnection
 import androidx.compose.ui.res.dimensionResource
@@ -513,7 +512,6 @@ fun FilesScreen(
     onNavigatorClick: (index: Int?) -> Unit,
     onLongPress: (item: StorageItemListTuple) -> Unit
 ) {
-    val context = LocalContext.current
     val scope = rememberCoroutineScope()
     val items = (if (isStarred) vm.starredPagingFlow else vm.pagingFlow).collectAsLazyPagingItems()
     val isEmptyPageVisible = remember {
@@ -610,9 +608,7 @@ fun FilesScreen(
         scope = scope,
         onCreateFolder = { dialogNewFolder = true },
         onAdd = { callFileContract() },
-        onScan = {
-            scanContract.launch(filesVM.getCameraScanOutputUri(context))
-        },
+        onScan = { scanContract.launch(filesVM.getCameraScanOutputUri()) },
         onAddPhoto = { callFileContract("image") },
         onAddVideo = { callFileContract("video") },
         onAddMusic = { callFileContract("audio") }

@@ -35,7 +35,7 @@ import com.nevidimka655.astracrypt.utils.AppConfig
 import com.nevidimka655.astracrypt.utils.ApplicationComponentManager
 import com.nevidimka655.astracrypt.utils.EncryptionManager
 import com.nevidimka655.astracrypt.utils.Engine
-import com.nevidimka655.astracrypt.utils.IO
+import com.nevidimka655.astracrypt.utils.Io
 import com.nevidimka655.astracrypt.utils.PrivacyPolicyManager
 import com.nevidimka655.astracrypt.utils.SelectorManager
 import com.nevidimka655.astracrypt.utils.ToolsManager
@@ -70,6 +70,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainVM @Inject constructor(
+    val io: Io,
     val workManager: WorkManager,
     val authManager: AuthManager,
     val privacyPolicyManager: PrivacyPolicyManager,
@@ -235,9 +236,9 @@ class MainVM @Inject constructor(
         suspend fun deleteIterator(itemToDelete: StorageItemMinimalTuple) {
             idsList.add(itemToDelete.id)
             if (itemToDelete.path.isNotEmpty()) {
-                val localFile = IO.getLocalFile(itemToDelete.path)
+                val localFile = io.getLocalFile(itemToDelete.path)
                 if (localFile.exists()) {
-                    val thumbLocalFile = IO.getLocalFile(itemToDelete.thumb)
+                    val thumbLocalFile = io.getLocalFile(itemToDelete.thumb)
                     thumbLocalFile.delete()
                     localFile.delete()
                 }
@@ -321,7 +322,7 @@ class MainVM @Inject constructor(
                         ImageRequest.Builder(Engine.appContext)
                             .data(
                                 CoilTinkModel(
-                                    absolutePath = IO.getProfileIconFile().toString(),
+                                    absolutePath = io.getProfileIconFile().toString(),
                                     encryptionType = encryptionInfo.thumbEncryptionOrdinal
                                 )
                             )
@@ -341,7 +342,7 @@ class MainVM @Inject constructor(
     fun saveProfileInfo(
         profileInfo: ProfileInfo, force: Boolean = false
     ) = viewModelScope.launch(Dispatchers.IO) {
-        val iconFile = IO.getProfileIconFile()
+        val iconFile = io.getProfileIconFile()
         if (profileInfo.defaultAvatar == null) {
             if (_profileInfoFlow.value.iconFile != profileInfo.iconFile || force) {
                 iconFile.recreate()
@@ -370,7 +371,7 @@ class MainVM @Inject constructor(
     }
 
     fun setupForFirstUse() {
-        IO.dataDir.mkdir()
+        io.dataDir.mkdir()
         KeysetFactory.associatedData
         viewModelScope.launch(Dispatchers.IO) {
             Repository.createBasicFolders(Engine.appContext, encryptionInfo)
@@ -383,7 +384,7 @@ class MainVM @Inject constructor(
         }
     }
 
-    fun isDatabaseCreated() = IO.dataDir.exists()
+    fun isDatabaseCreated() = io.dataDir.exists()
 
     private suspend fun showSnackbar(@StringRes stringId: Int) = _snackbarChannel.send(stringId)
 

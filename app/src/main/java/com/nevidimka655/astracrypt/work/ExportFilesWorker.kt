@@ -12,6 +12,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.net.toUri
 import androidx.documentfile.provider.DocumentFile
+import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
@@ -21,20 +22,24 @@ import com.nevidimka655.astracrypt.room.ExportTuple
 import com.nevidimka655.astracrypt.room.Repository
 import com.nevidimka655.astracrypt.utils.Api
 import com.nevidimka655.astracrypt.utils.Engine
-import com.nevidimka655.astracrypt.utils.IO
+import com.nevidimka655.astracrypt.utils.Io
 import com.nevidimka655.astracrypt.utils.extensions.contentResolver
 import com.nevidimka655.crypto.tink.KeysetFactory
 import com.nevidimka655.crypto.tink.KeysetTemplates
 import com.nevidimka655.crypto.tink.TinkConfig
 import com.nevidimka655.crypto.tink.extensions.fromBase64
 import com.nevidimka655.crypto.tink.extensions.streamingAeadPrimitive
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedInject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
 
-class ExportFilesWorker(
-    context: Context,
-    params: WorkerParameters
+@HiltWorker
+class ExportFilesWorker @AssistedInject constructor(
+    @Assisted context: Context,
+    @Assisted params: WorkerParameters,
+    private val io: Io,
 ) : CoroutineWorker(context, params) {
 
     object Args {
@@ -94,7 +99,7 @@ class ExportFilesWorker(
         val (_, name, encryptionType, path) = exportTuple
         val file = parentDir.createFile("text/binary", name)
         if (file != null) {
-            val fileEncodedInputStream = IO.getLocalFile(path).inputStream()
+            val fileEncodedInputStream = io.getLocalFile(path).inputStream()
             val fileInputStream = if (encryptionType != -1) {
                 KeysetFactory.stream(
                     applicationContext,

@@ -1,11 +1,9 @@
 package com.nevidimka655.astracrypt.ui.tabs.files
 
-import android.content.Context
 import android.net.Uri
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.work.OneTimeWorkRequestBuilder
@@ -18,7 +16,7 @@ import com.nevidimka655.astracrypt.model.EncryptionInfo
 import com.nevidimka655.astracrypt.room.Repository
 import com.nevidimka655.astracrypt.room.StorageItemListTuple
 import com.nevidimka655.astracrypt.utils.Engine
-import com.nevidimka655.astracrypt.utils.IO
+import com.nevidimka655.astracrypt.utils.Io
 import com.nevidimka655.astracrypt.work.ImportFilesWorker
 import com.nevidimka655.astracrypt.work.utils.WorkerSerializer
 import com.nevidimka655.crypto.tink.KeysetFactory
@@ -36,7 +34,9 @@ private typealias Args = ImportFilesWorker.Args
 
 @HiltViewModel
 class FilesViewModel @Inject constructor(
+    val io: Io,
     val workManager: WorkManager,
+    val workerSerializer: WorkerSerializer,
     val imageLoader: ImageLoader
 ) : ViewModel() {
     private var cameraScanOutputUri: Uri? = null
@@ -47,10 +47,8 @@ class FilesViewModel @Inject constructor(
     val dialogRenameState = mutableStateOf(false)
     val dialogDeleteState = mutableStateOf(false)
 
-    fun getCameraScanOutputUri(context: Context) = FileProvider.getUriForFile(
-        context,
-        "com.nevidimka655.astracrypt",
-        IO.getExportedCacheCameraFile()
+    fun getCameraScanOutputUri() = io.getExportedCacheFileUri(
+        file = io.getExportedCacheCameraFile()
     ).also { cameraScanOutputUri = it }
 
     fun setStarredFlag(
@@ -71,7 +69,7 @@ class FilesViewModel @Inject constructor(
         encryptionInfo: EncryptionInfo
     ) = viewModelScope.launch {
         val listToSave = uriList.map { it.toString() }.toTypedArray()
-        val fileWithUris = WorkerSerializer.saveStringArrayToFile(listToSave)
+        val fileWithUris = workerSerializer.saveStringArrayToFile(listToSave)
         val encryptionInfoJson = Json.encodeToString(encryptionInfo)
         val associatedData = if (encryptionInfo.isAssociatedDataEncrypted)
             KeysetFactory.transformAssociatedDataToWorkInstance(

@@ -8,10 +8,11 @@ import androidx.work.WorkInfo
 import androidx.work.workDataOf
 import com.nevidimka655.astracrypt.model.EncryptionInfo
 import com.nevidimka655.astracrypt.utils.Engine
-import com.nevidimka655.crypto.tink.KeysetFactory
+import com.nevidimka655.astracrypt.utils.IO
 import com.nevidimka655.astracrypt.work.LabCombinedZipWorker
 import com.nevidimka655.astracrypt.work.TransformDatabaseWorker
 import com.nevidimka655.astracrypt.work.TransformNotesWorker
+import com.nevidimka655.crypto.tink.KeysetFactory
 import com.nevidimka655.crypto.tink.extensions.toBase64
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -70,7 +71,7 @@ object WorkerFactory {
         zipFilesContentStringArray: Array<String>
     ) {
         val fileWithZipContentPath =
-            WorkerSerializer.saveStringArrayToFile(zipFilesContentStringArray)
+            WorkerSerializer(IO).saveStringArrayToFile(zipFilesContentStringArray)
         val data = workDataOf(
             Pair(LabCombinedZipWorker.Args.fileWithZipContentUris, fileWithZipContentPath),
             Pair(LabCombinedZipWorker.Args.sourceUri, sourceUri.toString()),

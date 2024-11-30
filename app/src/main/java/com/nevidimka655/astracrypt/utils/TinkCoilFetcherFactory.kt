@@ -14,15 +14,18 @@ import com.nevidimka655.crypto.tink.extensions.streamingAeadPrimitive
 import okio.buffer
 import okio.source
 import java.io.File
+import javax.inject.Inject
 
-class TinkCoilFetcherFactory : Fetcher.Factory<CoilTinkModel> {
+class TinkCoilFetcherFactory @Inject constructor(
+    private val io: Io
+) : Fetcher.Factory<CoilTinkModel> {
     override fun create(data: CoilTinkModel, options: Options, imageLoader: ImageLoader) =
         TinkCoilFetcher(data)
 
     inner class TinkCoilFetcher(private val data: CoilTinkModel) : Fetcher {
         override suspend fun fetch(): FetchResult {
             val streamOrdinal = data.encryptionType
-            val path = data.absolutePath ?: "${IO.dataDir}/${data.path}"
+            val path = data.absolutePath ?: "${io.dataDir}/${data.path}"
             val file = File(path)
             val sourceInputChannel = if (streamOrdinal == -1) file.inputStream()
             else {
@@ -32,7 +35,7 @@ class TinkCoilFetcherFactory : Fetcher.Factory<CoilTinkModel> {
             }
             return SourceResult(
                 source = ImageSource(
-                    source = sourceInputChannel.source().buffer(), IO.cacheDir
+                    source = sourceInputChannel.source().buffer(), io.cacheDir
                 ),
                 mimeType = null,
                 dataSource = DataSource.DISK

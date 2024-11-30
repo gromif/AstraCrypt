@@ -54,6 +54,7 @@ import java.io.OutputStream
 class ImportFilesWorker @AssistedInject constructor(
     @Assisted context: Context,
     @Assisted params: WorkerParameters,
+    private val io: Io,
     private val imageLoader: ImageLoader,
     private val defaultCoilRequestBuilder: ImageRequest.Builder
 ) : CoroutineWorker(context, params) {
@@ -155,7 +156,7 @@ class ImportFilesWorker @AssistedInject constructor(
             secureRandom(fileUri.toString().toByteArray()), AppConfig.DB_FILE_NAME_COUNT
         )
         val outRelativePath = "$randomNum/$randomFileName"
-        val outFile = File("${IO.dataDir}/$outRelativePath")
+        val outFile = File("${io.dataDir}/$outRelativePath")
         contentResolver.openInputStream(fileUri)!!.use { inStream ->
             filePrimitive?.newEncryptingStream(
                 outFile.outputStream(), KeysetFactory.associatedData
@@ -196,7 +197,7 @@ class ImportFilesWorker @AssistedInject constructor(
             } catch (e: Exception) {}
         } else {
             outFile.delete()
-            File("${IO.dataDir}/$thumbnailPath").delete()
+            File("${io.dataDir}/$thumbnailPath").delete()
         }
     }
 
@@ -295,7 +296,7 @@ class ImportFilesWorker @AssistedInject constructor(
             )
         }
         val relativePath = "$randomDir/$thumbnailFileName"
-        val fileOut = File("${IO.dataDir}/$relativePath")
+        val fileOut = File("${io.dataDir}/$relativePath")
         primitive?.newEncryptingStream(
             fileOut.outputStream(),
             KeysetFactory.associatedData
@@ -380,7 +381,7 @@ class ImportFilesWorker @AssistedInject constructor(
     private fun getRandomDirectory(seed: String): String {
         val randomNum =
             secureRandom(seed.toByteArray()).nextInt(1, AppConfig.DB_DIRS_COUNT + 1)
-        val randomDirFile = File("${IO.dataDir}/$randomNum")
+        val randomDirFile = File("${io.dataDir}/$randomNum")
         if (!randomDirFile.exists()) randomDirFile.mkdir()
         return randomNum.toString()
     }

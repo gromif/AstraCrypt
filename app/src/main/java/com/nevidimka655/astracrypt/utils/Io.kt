@@ -1,18 +1,24 @@
 package com.nevidimka655.astracrypt.utils
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.text.format.DateFormat
+import androidx.core.content.FileProvider
 import com.nevidimka655.astracrypt.utils.extensions.recreate
 import java.io.File
 import java.text.DecimalFormat
 
-object IO {
+@SuppressLint("StaticFieldLeak")
+val IO = Io(context = Engine.appContext) // TODO: Remove top-level declaration
 
-    private val filesDir get() = Engine.appContext.filesDir
-    val cacheDir: File get() = Engine.appContext.cacheDir
+class Io (
+    private val context: Context
+) {
+    private val filesDir get() = context.filesDir
+    private val exportedCacheDir = File(cacheDir, "exp").also { it.mkdir() }
+    val cacheDir: File get() = context.cacheDir
 
-    private val exportedCacheDir by lazy { File(cacheDir, "exp").also { it.mkdir() } }
-
-    val dataDir by lazy { File("$filesDir/data") }
+    val dataDir = File("$filesDir/data")
 
     fun createTempFileInCache(): File =
         File.createTempFile(Randomizer.getUrlSafeString(5), null, cacheDir)
@@ -27,6 +33,12 @@ object IO {
     fun getExportedCacheFile(name: String) = File(exportedCacheDir, name).also {
         it.recreate()
     }
+
+    fun getExportedCacheFileUri(file: File) = FileProvider.getUriForFile(
+        context,
+        context.applicationInfo.packageName,
+        file
+    )
 
     fun clearExportedCache() = exportedCacheDir.listFiles()?.forEach {
         it.deleteRecursively()
