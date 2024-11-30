@@ -98,7 +98,7 @@ class MainVM @Inject constructor(
             list.map {
                 RepositoryEncryption.decryptStorageItemListTuple(encryptionInfo, it)
             }
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             list
         } else list
     }.stateIn(viewModelScope, SharingStarted.Lazily, listOf())
