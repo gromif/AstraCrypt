@@ -1,6 +1,5 @@
 package com.nevidimka655.astracrypt.tabs.files
 
-import android.content.Context
 import android.os.Bundle
 import android.view.ActionMode
 import android.view.LayoutInflater
@@ -19,15 +18,12 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.nevidimka655.astracrypt.MainVM
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.room.StorageItemListTuple
 import com.nevidimka655.astracrypt.ui.UiState
 import com.nevidimka655.astracrypt.ui.theme.AstraCryptTheme
 import com.nevidimka655.astracrypt.utils.extensions.requireMenuHost
-import com.nevidimka655.astracrypt.utils.extensions.ui.setTooltip
 
 class FilesFragment : Fragment() {
     private val vm by activityViewModels<MainVM>()
@@ -40,14 +36,6 @@ class FilesFragment : Fragment() {
     private var searchView: SearchView? = null
 
     private var addStorageItemBottomSheetDialog: BottomSheetDialog? = null
-
-    /*private val exportDirContract =
-        registerForActivityResult(ActivityResultContracts.OpenDocumentTree()) {
-            if (it != null) vm.export(
-                itemToExport = vm.openManager.selectedExportItem!!,
-                outputUri = it
-            )
-        }*/
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -99,50 +87,11 @@ class FilesFragment : Fragment() {
 
     /*private fun onOptions(item: StorageItemListTuple) {
         if (selectorManager.isInitialized) return
-        val context = requireContext()
-        val optionsBottomSheetDialog = BottomSheetDialog(context)
-        val viewContainer = LinearLayout(context).apply {
-            orientation = LinearLayout.VERTICAL
-            layoutParams = CustomLayoutParams.LINEAR_MATCH_WRAP
-        }
-        optionsBinding.export.setOnClickListener {
-            optionsBottomSheetDialog.cancel()
-            if (vm.lastExportOperation?.result?.isDone != false) {
-                vm.openManager.selectedExportItem = item
-                exportDirContract.launch(null)
-            }
-        }
         optionsBinding.select.setOnClickListener {
             optionsBottomSheetDialog.cancel()
             initSelecting(item)
         }
-        optionsBinding.delete.setOnClickListener {
-            optionsBottomSheetDialog.cancel()
-            showDeleteDialog(context, item)
-        }
-        viewContainer.addView(optionsBinding.root)
     }*/
-
-    private fun showDeleteDialog(
-        context: Context,
-        item: StorageItemListTuple,
-    ) {
-        MaterialAlertDialogBuilder(context)
-            .setTitle("${context.getString(R.string.files_options_delete)}?")
-            .setMessage("${context.getString(R.string.files_options_delete)} \"${item.name}\"?")
-            .setPositiveButton(R.string.files_options_delete) { _, _ ->
-                vm.delete(item.id)
-            }
-            .setNegativeButton(android.R.string.cancel, null)
-            .show()
-    }
-
-    private fun setupFloatingButton(fab: FloatingActionButton) = with(fab) {
-        setOnClickListener {
-
-        }
-        setTooltip(R.string.createNew)
-    }
 
     private fun setupContextualActionMode() {
         val actionModeCallback = object : ActionMode.Callback {
