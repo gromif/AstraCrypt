@@ -1,15 +1,11 @@
 package com.nevidimka655.astracrypt.utils
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.text.format.DateFormat
 import androidx.core.content.FileProvider
 import com.nevidimka655.astracrypt.utils.extensions.recreate
 import java.io.File
 import java.text.DecimalFormat
-
-@SuppressLint("StaticFieldLeak")
-val IO = Io(context = Engine.appContext) // TODO: Remove top-level declaration
 
 class Io (
     private val context: Context
