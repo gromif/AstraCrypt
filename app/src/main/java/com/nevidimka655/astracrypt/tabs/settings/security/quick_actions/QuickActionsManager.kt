@@ -24,7 +24,7 @@ object QuickActionsManager {
 
     fun setStateToAllComponents(state: Boolean) {
         listOf(
-            Components.COMPONENT_QUICK_DATA_DELETION
+            Components.QUICK_DATA_DELETION
         ).forEach {
             setComponentState(
                 componentName = it,
@@ -35,11 +35,10 @@ object QuickActionsManager {
 
     fun isSupported() = Api.atLeastAndroid7()
 
+    @SuppressLint("NewApi")
     object Components {
 
-        @SuppressLint("NewApi")
-        val COMPONENT_QUICK_DATA_DELETION =
-            ComponentName(context, QuickDataDeletion::class.java)
+        val QUICK_DATA_DELETION get() = ComponentName(context, QuickDataDeletion::class.java)
 
     }
 

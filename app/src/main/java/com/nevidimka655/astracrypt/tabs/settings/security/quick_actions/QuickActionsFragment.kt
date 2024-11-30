@@ -35,7 +35,7 @@ class QuickActionsFragment : Fragment() {
                             isAutoSwitchState = false
                         ) {
                             QuickActionsManager.setComponentState(
-                                componentName = QuickActionsManager.Components.COMPONENT_QUICK_DATA_DELETION,
+                                componentName = QuickActionsManager.Components.QUICK_DATA_DELETION,
                                 state = it
                             )
                             quickDataDeletionState.value = isQuickDataDeletionEnabled()
@@ -47,6 +47,6 @@ class QuickActionsFragment : Fragment() {
     }
 
     private fun isQuickDataDeletionEnabled() =
-        QuickActionsManager.isComponentEnabled(QuickActionsManager.Components.COMPONENT_QUICK_DATA_DELETION)
+        QuickActionsManager.isComponentEnabled(QuickActionsManager.Components.QUICK_DATA_DELETION)
 
 }
