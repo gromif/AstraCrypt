@@ -98,7 +98,6 @@ class MainVM @Inject constructor(
     val currentNavigatorDirectoryId get() = filesNavigatorList.lastOrNull()?.id ?: 0
 
     var lastUriListToImport: List<Uri>? = null
-    var lastUriToScan: Uri? = null
 
     private var _searchChannel: Channel<String>? = null
     var lastSearchQuery: String? = null
