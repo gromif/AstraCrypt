@@ -238,12 +238,12 @@ class AuthenticationFragment : Fragment() {
     ): MutableState<Boolean> {
         val context = LocalContext.current
         val state = dialogPassword {
-            if (authManager.checkPassword(it)) onMatch(it)
+            /*if (authManager.checkPassword(it)) onMatch(it)
             else {
                 Toast.makeText(
                     context, context.getString(R.string.t_invalidPass), Toast.LENGTH_SHORT
                 ).show()
-            }
+            }*/
         }
         return state
     }

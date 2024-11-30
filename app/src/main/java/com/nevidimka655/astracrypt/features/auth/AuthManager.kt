@@ -3,23 +3,24 @@ package com.nevidimka655.astracrypt.features.auth
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.core.content.edit
 import com.google.crypto.tink.subtle.AesGcmJce
 import com.nevidimka655.astracrypt.utils.AppConfig
+import com.nevidimka655.astracrypt.utils.datastore.DefaultDataStoreManager
+import com.nevidimka655.astracrypt.utils.shared_prefs.PrefsKeys
+import com.nevidimka655.astracrypt.utils.shared_prefs.PrefsManager
 import com.nevidimka655.crypto.tink.HashStringGenerator
 import com.nevidimka655.crypto.tink.extensions.fromBase64
 import com.nevidimka655.crypto.tink.extensions.sha384
 import com.nevidimka655.crypto.tink.extensions.toBase64
-import com.nevidimka655.astracrypt.utils.shared_prefs.PrefsKeys
-import com.nevidimka655.astracrypt.utils.shared_prefs.PrefsManager
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import java.security.GeneralSecurityException
 import kotlin.random.Random
 
-class AuthManager {
+class AuthManager(
+    private val defaultDataStoreManager: DefaultDataStoreManager
+) {
     private val cryptoPrefs get() = PrefsManager.settings
-    private val masterPrefs get() = PrefsManager.clear
 
     var info by mutableStateOf(loadInfo())
         private set
@@ -38,24 +39,21 @@ class AuthManager {
         ).commit()
     }
 
-    fun changePassword(password: String) {
+    suspend fun changePassword(password: String) {
         val key = extendStringPassword(password)
         val associatedData = password.sha384()
         val randomBytesToEncrypt = Random.nextBytes(Random.nextInt(20, 51))
         val primitive = AesGcmJce(key)
         val encryptedData = primitive.encrypt(randomBytesToEncrypt, associatedData).toBase64()
-        masterPrefs.edit {
-            putString(PrefsKeys.Auth.TEST_DATA, encryptedData)
-        }
+        defaultDataStoreManager.setPasswordCheckTestDataFlow(value = encryptedData)
     }
 
-    fun checkPassword(password: String): Boolean {
+    suspend fun checkPassword(password: String): Boolean {
         val key = extendStringPassword(password)
         val associatedData = password.sha384()
         val primitive = AesGcmJce(key)
         return try {
-            val testData = masterPrefs.getString(PrefsKeys.Auth.TEST_DATA, null)!!
-                .fromBase64()
+            val testData = defaultDataStoreManager.getPasswordCheckTestData().fromBase64()
             primitive.decrypt(testData, associatedData)
             true
         } catch (e: GeneralSecurityException) {

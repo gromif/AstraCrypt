@@ -1,10 +1,8 @@
 package com.nevidimka655.astracrypt.features.auth
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
-import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -16,7 +14,6 @@ import com.nevidimka655.astracrypt.databinding.FragmentAuthBinding
 import com.nevidimka655.astracrypt.features.profile.AvatarIds
 import com.nevidimka655.astracrypt.utils.AppConfig
 import com.nevidimka655.astracrypt.utils.extensions.withViewLifecycle
-import com.nevidimka655.crypto.tink.KeysetFactory
 
 class AuthFragment : Fragment(R.layout.fragment_auth) {
 
@@ -62,7 +59,7 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
             counterMaxLength = AppConfig.AUTH_PASSWORD_MAX_LENGTH
         }
         fab.setOnClickListener {
-            val password = passwordEditText.text.toString().trim()
+            /*val password = passwordEditText.text.toString().trim()
             val isPasswordCorrect = password.isNotEmpty()
                     && password.length <= AppConfig.AUTH_PASSWORD_MAX_LENGTH
                     && authManager.checkPassword(password)
@@ -77,7 +74,7 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
             }
             else Toast.makeText(
                 requireContext(), getString(R.string.t_invalidPass), Toast.LENGTH_SHORT
-            ).show()
+            ).show()*/
         }
     }
 
