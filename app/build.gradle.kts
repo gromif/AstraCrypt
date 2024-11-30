@@ -153,6 +153,7 @@ dependencies {
     // Other
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.datastore.preferences)
 }
 
 fun getVersionCode() = project.property("versionMajor").toString().toInt() * 10000 +
