@@ -8,11 +8,11 @@ import androidx.compose.runtime.setValue
 import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.work.Data
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.OutOfQuotaPolicy
 import androidx.work.WorkInfo
 import androidx.work.WorkManager
+import androidx.work.workDataOf
 import coil.ImageLoader
 import com.nevidimka655.astracrypt.model.EncryptionInfo
 import com.nevidimka655.astracrypt.room.Repository
@@ -31,6 +31,8 @@ import kotlinx.coroutines.launch
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import javax.inject.Inject
+
+private typealias Args = ImportFilesWorker.Args
 
 @HiltViewModel
 class FilesViewModel @Inject constructor(
@@ -70,27 +72,26 @@ class FilesViewModel @Inject constructor(
     ) = viewModelScope.launch {
         val listToSave = uriList.map { it.toString() }.toTypedArray()
         val fileWithUris = WorkerSerializer.saveStringArrayToFile(listToSave)
-        val data = Data.Builder().apply {
-            putString(ImportFilesWorker.Args.fileWithUris, fileWithUris)
-            putLong(ImportFilesWorker.Args.dirId, dirId)
-            putBoolean(ImportFilesWorker.Args.saveOriginalFiles, saveOriginalFiles)
-            putString(ImportFilesWorker.Args.encryptionInfo, Json.encodeToString(encryptionInfo))
-            putString(
-                ImportFilesWorker.Args.associatedData,
-                if (encryptionInfo.isAssociatedDataEncrypted)
-                    KeysetFactory.transformAssociatedDataToWorkInstance(
-                        context = Engine.appContext,
-                        bytesIn = KeysetFactory.associatedData,
-                        encryptionMode = true,
-                        authenticationTag = ImportFilesWorker.Args.TAG_ASSOCIATED_DATA_TRANSPORT
-                    ).toBase64()
-                else null
-            )
+        val encryptionInfoJson = Json.encodeToString(encryptionInfo)
+        val associatedData = if (encryptionInfo.isAssociatedDataEncrypted)
+            KeysetFactory.transformAssociatedDataToWorkInstance(
+                context = Engine.appContext,
+                bytesIn = KeysetFactory.associatedData,
+                encryptionMode = true,
+                authenticationTag = Args.TAG_ASSOCIATED_DATA_TRANSPORT
+            ).toBase64()
+        else null
+        val data = workDataOf(
+            Args.fileWithUris to fileWithUris,
+            Args.dirId to dirId,
+            Args.saveOriginalFiles to saveOriginalFiles,
+            Args.encryptionInfo to encryptionInfoJson,
+            Args.associatedData to associatedData
+        )
+        val workerRequest = OneTimeWorkRequestBuilder<ImportFilesWorker>().apply {
+            setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
+            setInputData(data)
         }.build()
-        val workerRequest = OneTimeWorkRequestBuilder<ImportFilesWorker>()
-            .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
-            .setInputData(data)
-            .build()
         workManager.enqueue(workerRequest)
         workManager.getWorkInfoByIdFlow(workerRequest.id).collectLatest {
             when (it?.state) {
