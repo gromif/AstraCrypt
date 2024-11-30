@@ -22,17 +22,6 @@ object QuickActionsManager {
             PackageManager.DONT_KILL_APP
         )
 
-    fun setStateToAllComponents(state: Boolean) {
-        listOf(
-            Components.QUICK_DATA_DELETION
-        ).forEach {
-            setComponentState(
-                componentName = it,
-                state = state
-            )
-        }
-    }
-
     fun isSupported() = Api.atLeastAndroid7()
 
     @SuppressLint("NewApi")
