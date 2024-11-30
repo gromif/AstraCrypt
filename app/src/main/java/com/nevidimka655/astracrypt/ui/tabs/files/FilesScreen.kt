@@ -75,7 +75,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.core.content.FileProvider
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
@@ -97,7 +96,6 @@ import com.nevidimka655.astracrypt.ui.shared.NoItemsPage
 import com.nevidimka655.astracrypt.ui.sheets.Sheets
 import com.nevidimka655.astracrypt.ui.sheets.filesOptions
 import com.nevidimka655.astracrypt.ui.tabs.files.sheets.createNewSheet
-import com.nevidimka655.astracrypt.utils.IO
 import com.nevidimka655.astracrypt.utils.appearance.AppearanceManager
 import com.nevidimka655.astracrypt.utils.appearance.ViewMode
 import com.nevidimka655.astracrypt.utils.enums.StorageItemState
@@ -564,18 +562,22 @@ fun FilesScreen(
         onImportStartDelete = {
             deleteOri = false
             vm.lastUriListToImport?.let {
-                vm.import(
+                filesVM.import(
                     uriList = it.toTypedArray(),
-                    saveOriginalFiles = false
+                    saveOriginalFiles = false,
+                    dirId = vm.currentNavigatorDirectoryId,
+                    encryptionInfo = vm.encryptionInfo
                 )
             }
         },
         onImportStartSave = {
             deleteOri = false
             vm.lastUriListToImport?.let {
-                vm.import(
+                filesVM.import(
                     uriList = it.toTypedArray(),
-                    saveOriginalFiles = true
+                    saveOriginalFiles = true,
+                    dirId = vm.currentNavigatorDirectoryId,
+                    encryptionInfo = vm.encryptionInfo
                 )
             }
         }
@@ -583,23 +585,21 @@ fun FilesScreen(
 
     val pickFileContract =
         rememberLauncherForActivityResult(ActivityResultContracts.OpenMultipleDocuments()) {
-        if (it.isNotEmpty()) scope.launch {
-            withContext(Dispatchers.Main) {
-                vm.lastUriListToImport = it
-                deleteOri = true
+            if (it.isNotEmpty()) scope.launch {
+                withContext(Dispatchers.Main) {
+                    vm.lastUriListToImport = it
+                    deleteOri = true
+                }
             }
         }
-    }
 
     fun callFileContract(mimeSubType: String = "*") =
         pickFileContract.launch(arrayOf("$mimeSubType/*"))
 
     val scanContract =
         rememberLauncherForActivityResult(ActivityResultContracts.TakePicture()) {
-        if (it) vm.import(vm.lastUriToScan!!).invokeOnCompletion {
-            vm.lastUriToScan = null
+            if (it) filesVM.importCameraScan(vm.currentNavigatorDirectoryId, vm.encryptionInfo)
         }
-    }
     val exportContract =
         rememberLauncherForActivityResult(ActivityResultContracts.OpenDocumentTree()) {
             it?.let { onExport(filesVM.optionsItem.id, it) }
@@ -611,13 +611,7 @@ fun FilesScreen(
         onCreateFolder = { dialogNewFolder = true },
         onAdd = { callFileContract() },
         onScan = {
-            scanContract.launch(
-                FileProvider.getUriForFile(
-                    context,
-                    "com.nevidimka655.astracrypt",
-                    IO.getExportedCacheCameraFile()
-                ).also { vm.lastUriToScan = it }
-            )
+            scanContract.launch(filesVM.getCameraScanOutputUri(context))
         },
         onAddPhoto = { callFileContract("image") },
         onAddVideo = { callFileContract("video") },

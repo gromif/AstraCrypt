@@ -11,17 +11,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.core.graphics.drawable.toBitmap
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asFlow
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingSource
 import androidx.paging.cachedIn
 import androidx.paging.map
-import androidx.work.Data
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.OutOfQuotaPolicy
-import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import coil.ImageLoader
 import coil.request.ImageRequest
@@ -48,18 +43,14 @@ import com.nevidimka655.astracrypt.utils.extensions.recreate
 import com.nevidimka655.astracrypt.utils.extensions.removeLines
 import com.nevidimka655.astracrypt.utils.shared_prefs.PrefsKeys
 import com.nevidimka655.astracrypt.utils.shared_prefs.PrefsManager
-import com.nevidimka655.astracrypt.work.ImportFilesWorker
-import com.nevidimka655.astracrypt.work.utils.WorkerSerializer
 import com.nevidimka655.crypto.tink.KeysetFactory
 import com.nevidimka655.crypto.tink.KeysetTemplates
 import com.nevidimka655.crypto.tink.extensions.streamingAeadPrimitive
-import com.nevidimka655.crypto.tink.extensions.toBase64
 import com.nevidimka655.notes.Notes
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -173,52 +164,6 @@ class MainVM @Inject constructor(
             )
         }
     }.cachedIn(viewModelScope)
-
-    fun import(
-        vararg uriList: Uri,
-        saveOriginalFiles: Boolean = false
-    ) = viewModelScope.launch {
-        val listToSave = uriList.map { it.toString() }.toTypedArray()
-        val fileWithUris = WorkerSerializer.saveStringArrayToFile(listToSave)
-        val data = Data.Builder().apply {
-            putString(ImportFilesWorker.Args.fileWithUris, fileWithUris)
-            putLong(ImportFilesWorker.Args.dirId, currentNavigatorDirectoryId)
-            putBoolean(ImportFilesWorker.Args.saveOriginalFiles, saveOriginalFiles)
-            putString(ImportFilesWorker.Args.encryptionInfo, Json.encodeToString(encryptionInfo))
-            putString(
-                ImportFilesWorker.Args.associatedData,
-                if (encryptionInfo.isAssociatedDataEncrypted)
-                    KeysetFactory.transformAssociatedDataToWorkInstance(
-                        context = Engine.appContext,
-                        bytesIn = KeysetFactory.associatedData,
-                        encryptionMode = true,
-                        authenticationTag = ImportFilesWorker.Args.TAG_ASSOCIATED_DATA_TRANSPORT
-                    ).toBase64()
-                else null
-            )
-        }.build()
-        val workerRequest = OneTimeWorkRequestBuilder<ImportFilesWorker>()
-            .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
-            .setInputData(data)
-            .build()
-        workManager.enqueue(workerRequest)
-        launch {
-            workManager.getWorkInfoByIdLiveData(workerRequest.id).asFlow().collectLatest {
-                when (it?.state) {
-                    WorkInfo.State.SUCCEEDED -> {
-                        showSnackbar(R.string.snack_imported)
-                        cancel()
-                    }
-
-                    WorkInfo.State.FAILED -> {
-                        cancel()
-                    }
-
-                    else -> {}
-                }
-            }
-        }
-    }
 
     fun openDirectory(
         id: Long,
