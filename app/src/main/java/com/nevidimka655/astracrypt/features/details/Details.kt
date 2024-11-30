@@ -7,34 +7,24 @@ import androidx.compose.material.icons.filled.Folder
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import coil.ImageLoader
 import coil.compose.AsyncImage
 import com.nevidimka655.astracrypt.model.CoilTinkModel
-import com.nevidimka655.astracrypt.model.EncryptionInfo
 import com.nevidimka655.compose_details.Details
 import com.nevidimka655.compose_details.DetailsManager
 import com.nevidimka655.compose_details.Screen
-import kotlinx.coroutines.launch
 
 @Composable
 fun DetailsScreen(
     detailsManager: DetailsManager,
     imageLoader: ImageLoader,
-    encryptionInfo: EncryptionInfo,
-    itemId: Long
+    onStart: suspend () -> Unit
 ) {
-    val scope = rememberCoroutineScope()
-    DisposableEffect(Unit) {
-        scope.launch {
-            detailsManager.submitDetailsQuery(encryptionInfo, itemId)
-        }
-        onDispose { detailsManager.clear() }
-    }
+    LaunchedEffect(Unit) { onStart() }
     Details.Screen(
         detailsManager = detailsManager,
         headerImage = {

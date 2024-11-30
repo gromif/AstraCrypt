@@ -50,6 +50,7 @@ import androidx.navigation.toRoute
 import com.nevidimka655.astracrypt.MainVM
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.features.details.DetailsScreen
+import com.nevidimka655.astracrypt.features.details.DetailsScreenViewModel
 import com.nevidimka655.astracrypt.features.export.ExportScreen
 import com.nevidimka655.astracrypt.features.export.ExportScreenViewModel
 import com.nevidimka655.astracrypt.model.FabState
@@ -215,11 +216,13 @@ fun Main(
                     toolbarTitle = context.getString(details.titleId)
                     isInnerScreen = true
                     fabState = FabState.NO
+                    val vm1: DetailsScreenViewModel = hiltViewModel()
                     DetailsScreen(
-                        detailsManager = vm.toolsManager.detailsManager,
-                        imageLoader = vm.imageLoader,
-                        encryptionInfo = vm.encryptionInfo,
-                        itemId = details.itemId
+                        detailsManager = vm1.detailsManager,
+                        imageLoader = vm1.imageLoader,
+                        onStart = {
+                            vm1.submitDetailsQuery(vm.encryptionInfo, details.itemId)
+                        }
                     )
                 }
                 composable<Route.Tabs.Export> {
