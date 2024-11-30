@@ -17,6 +17,7 @@ import com.nevidimka655.astracrypt.room.Repository
 import com.nevidimka655.astracrypt.room.StorageItemListTuple
 import com.nevidimka655.astracrypt.utils.Engine
 import com.nevidimka655.astracrypt.utils.Io
+import com.nevidimka655.astracrypt.utils.datastore.AppearanceManager
 import com.nevidimka655.astracrypt.utils.extensions.removeLines
 import com.nevidimka655.astracrypt.work.ImportFilesWorker
 import com.nevidimka655.astracrypt.work.utils.WorkerSerializer
@@ -35,6 +36,7 @@ private typealias Args = ImportFilesWorker.Args
 
 @HiltViewModel
 class FilesViewModel @Inject constructor(
+    val appearanceManager: AppearanceManager,
     val io: Io,
     val workManager: WorkManager,
     val workerSerializer: WorkerSerializer,

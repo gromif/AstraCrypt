@@ -39,6 +39,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
@@ -61,6 +62,7 @@ import com.nevidimka655.astracrypt.ui.tabs.HomeScreen
 import com.nevidimka655.astracrypt.ui.tabs.files.FilesScreen
 import com.nevidimka655.astracrypt.ui.tabs.files.FilesViewModel
 import com.nevidimka655.astracrypt.ui.theme.AstraCryptTheme
+import com.nevidimka655.astracrypt.utils.enums.ViewMode
 import com.nevidimka655.haptic.Haptic
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
@@ -71,7 +73,9 @@ fun Main(
     modifier: Modifier = Modifier,
     vm: MainVM = viewModel<MainVM>(),
     navController: NavHostController = rememberNavController()
-) = AstraCryptTheme {
+) = AstraCryptTheme(
+    dynamicThemeFlow = vm.appearanceManager.dynamicThemeFlow
+) {
     Surface {
         val context = LocalContext.current
         var toolbarTitle by remember { mutableStateOf("") }
@@ -198,9 +202,13 @@ fun Main(
                     vm.isStarredScreen = files.isStarred
 
                     val filesVm: FilesViewModel = hiltViewModel()
+                    val viewMode by filesVm.appearanceManager.filesViewModeFlow.collectAsStateWithLifecycle(
+                        initialValue = ViewMode.Grid
+                    )
                     FilesScreen(
                         vm = vm,
                         filesVM = filesVm,
+                        viewMode = viewMode,
                         isStarred = files.isStarred,
                         onFabClick = onFabClick,
                         onNavigateUp = { navController.navigateUp() },

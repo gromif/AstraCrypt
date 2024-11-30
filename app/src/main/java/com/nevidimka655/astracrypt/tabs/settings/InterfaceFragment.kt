@@ -15,7 +15,6 @@ import com.google.android.material.color.DynamicColors
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.ui.theme.AstraCryptTheme
 import com.nevidimka655.astracrypt.ui.theme.reset
-import com.nevidimka655.astracrypt.utils.appearance.AppearanceManager
 import com.nevidimka655.ui.compose_core.Preference
 import com.nevidimka655.ui.compose_core.PreferencesGroup
 import com.nevidimka655.ui.compose_core.PreferencesScreen
@@ -30,7 +29,7 @@ class InterfaceFragment : Fragment() {
     ) = ComposeView(requireContext()).apply {
         setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
         setContent {
-            AstraCryptTheme {
+            /*AstraCryptTheme {
                 val isDynamicColorsAvailable = remember { DynamicColors.isDynamicColorAvailable() }
                 PreferencesScreen {
                     PreferencesGroup {
@@ -51,7 +50,7 @@ class InterfaceFragment : Fragment() {
                         }
                     }
                 }
-            }
+            }*/
         }
     }
 }

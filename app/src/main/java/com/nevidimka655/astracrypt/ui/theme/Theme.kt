@@ -12,17 +12,20 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.nevidimka655.astracrypt.ui.theme.icons.Avatars
 import com.nevidimka655.astracrypt.ui.theme.icons.FileType
 import com.nevidimka655.astracrypt.ui.theme.icons.Purchases
 import com.nevidimka655.astracrypt.ui.theme.icons.reset
 import com.nevidimka655.astracrypt.ui.theme.icons.resetAlt
-import com.nevidimka655.astracrypt.utils.appearance.AppearanceManager
 import com.nevidimka655.compose_color_schemes._ColorSchemes
 import com.nevidimka655.ui.compose_core.ext.windowSizeClassLocalProviders
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emptyFlow
 
 private val LightColors = lightColorScheme(
     primary = md_theme_light_primary,
@@ -88,17 +91,18 @@ private val DarkColors = darkColorScheme(
     scrim = md_theme_dark_scrim
 )
 
-var isDarkModeEnabled = false
+private var isDarkModeEnabled = false
 
 @Composable
 fun AstraCryptTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = AppearanceManager.useDynamicColors,
+    dynamicThemeFlow: Flow<Boolean> = emptyFlow<Boolean>(),
     content: @Composable () -> Unit
 ) {
     _ColorSchemes.isDarkTheme = darkTheme
+    val dynamicThemeState by dynamicThemeFlow.collectAsStateWithLifecycle(initialValue = true)
     val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
+        dynamicThemeState && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
             val context = LocalContext.current
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }

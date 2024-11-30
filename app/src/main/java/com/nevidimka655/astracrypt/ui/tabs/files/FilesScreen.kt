@@ -95,10 +95,9 @@ import com.nevidimka655.astracrypt.ui.shared.NoItemsPage
 import com.nevidimka655.astracrypt.ui.sheets.Sheets
 import com.nevidimka655.astracrypt.ui.sheets.filesOptions
 import com.nevidimka655.astracrypt.ui.tabs.files.sheets.createNewSheet
-import com.nevidimka655.astracrypt.utils.appearance.AppearanceManager
-import com.nevidimka655.astracrypt.utils.appearance.ViewMode
 import com.nevidimka655.astracrypt.utils.enums.StorageItemState
 import com.nevidimka655.astracrypt.utils.enums.StorageItemType
+import com.nevidimka655.astracrypt.utils.enums.ViewMode
 import com.nevidimka655.astracrypt.utils.extensions.removeLines
 import com.nevidimka655.haptic.Haptic
 import com.nevidimka655.haptic.hapticLongClick
@@ -345,6 +344,7 @@ fun FilesListItemMedium(
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun FilesList(
+    viewMode: ViewMode = ViewMode.Grid,
     pagingItems: LazyPagingItems<StorageItemListTuple>,
     listCheckedState: SnapshotStateMap<Long, Boolean>,
     imageLoader: ImageLoader,
@@ -353,7 +353,6 @@ fun FilesList(
     onLongPress: (item: StorageItemListTuple) -> Unit
 ) {
     val view = LocalView.current
-    val viewMode = remember { AppearanceManager.viewMode }
     val cells = when (viewMode) {
         ViewMode.Grid -> LocalWindowWidth.current.cellsCount(2, 3, 5)
         ViewMode.ListDefault -> LocalWindowWidth.current.cellsCount()
@@ -502,6 +501,7 @@ private fun openItem(
 fun FilesScreen(
     vm: MainVM,
     filesVM: FilesViewModel,
+    viewMode: ViewMode,
     isStarred: Boolean,
     onFabClick: Channel<Any>,
     onNavigateUp: () -> Unit,
@@ -662,6 +662,7 @@ fun FilesScreen(
             visible = !isEmptyPageVisible.value, enter = fadeIn(), exit = ExitTransition.None
         ) {
             FilesList(
+                viewMode = viewMode,
                 pagingItems = items,
                 listCheckedState = vm.selectorManager.itemsMapState,
                 imageLoader = filesVM.imageLoader,

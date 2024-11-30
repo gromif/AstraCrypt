@@ -39,6 +39,7 @@ import com.nevidimka655.astracrypt.utils.Io
 import com.nevidimka655.astracrypt.utils.PrivacyPolicyManager
 import com.nevidimka655.astracrypt.utils.SelectorManager
 import com.nevidimka655.astracrypt.utils.ToolsManager
+import com.nevidimka655.astracrypt.utils.datastore.AppearanceManager
 import com.nevidimka655.astracrypt.utils.extensions.recreate
 import com.nevidimka655.astracrypt.utils.shared_prefs.PrefsKeys
 import com.nevidimka655.astracrypt.utils.shared_prefs.PrefsManager
@@ -72,6 +73,7 @@ class MainVM @Inject constructor(
     val io: Io,
     val workManager: WorkManager,
     val authManager: AuthManager,
+    val appearanceManager: AppearanceManager,
     val privacyPolicyManager: PrivacyPolicyManager,
     val imageLoader: ImageLoader
 ) : ViewModel() {
