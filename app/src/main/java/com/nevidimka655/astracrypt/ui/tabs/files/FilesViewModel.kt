@@ -17,6 +17,7 @@ import com.nevidimka655.astracrypt.room.Repository
 import com.nevidimka655.astracrypt.room.StorageItemListTuple
 import com.nevidimka655.astracrypt.utils.Engine
 import com.nevidimka655.astracrypt.utils.Io
+import com.nevidimka655.astracrypt.utils.extensions.removeLines
 import com.nevidimka655.astracrypt.work.ImportFilesWorker
 import com.nevidimka655.astracrypt.work.utils.WorkerSerializer
 import com.nevidimka655.crypto.tink.KeysetFactory
@@ -104,6 +105,19 @@ class FilesViewModel @Inject constructor(
 
                 else -> {}
             }
+        }
+    }
+
+    fun rename(
+        encryptionInfo: EncryptionInfo,
+        id: Long,
+        name: String
+    ) = viewModelScope.launch(Dispatchers.IO) {
+        val oldName = Repository.getName(encryptionInfo, id)
+        val newName = name.removeLines().trim()
+        if (newName != oldName) {
+            Repository.updateName(id, encryptionInfo, newName)
+            //showSnackbar(R.string.snack_itemRenamed) TODO: Snackbar
         }
     }
 

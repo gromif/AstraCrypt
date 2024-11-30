@@ -59,6 +59,7 @@ import com.nevidimka655.astracrypt.ui.navigation.BottomBarItems
 import com.nevidimka655.astracrypt.ui.navigation.Route
 import com.nevidimka655.astracrypt.ui.tabs.HomeScreen
 import com.nevidimka655.astracrypt.ui.tabs.files.FilesScreen
+import com.nevidimka655.astracrypt.ui.tabs.files.FilesViewModel
 import com.nevidimka655.astracrypt.ui.theme.AstraCryptTheme
 import com.nevidimka655.haptic.Haptic
 import kotlinx.coroutines.channels.Channel
@@ -196,9 +197,10 @@ fun Main(
                     ) else FabState.NO
                     vm.isStarredScreen = files.isStarred
 
+                    val filesVm: FilesViewModel = hiltViewModel()
                     FilesScreen(
                         vm = vm,
-                        filesVM = hiltViewModel(),
+                        filesVM = filesVm,
                         isStarred = files.isStarred,
                         onFabClick = onFabClick,
                         onNavigateUp = { navController.navigateUp() },
@@ -207,6 +209,9 @@ fun Main(
                         onOpenFile = { export(navController, it) },
                         onExport = { itemId, outUri ->
                             export(navController, itemId, outUri.toString())
+                        },
+                        onRename = { itemId, newName ->
+                            filesVm.rename(vm.encryptionInfo, itemId, newName)
                         },
                         onNavigatorClick = { vm.openDirectoryFromSelector(it) }
                     ) { }

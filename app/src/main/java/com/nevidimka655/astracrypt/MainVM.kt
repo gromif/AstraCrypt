@@ -40,7 +40,6 @@ import com.nevidimka655.astracrypt.utils.PrivacyPolicyManager
 import com.nevidimka655.astracrypt.utils.SelectorManager
 import com.nevidimka655.astracrypt.utils.ToolsManager
 import com.nevidimka655.astracrypt.utils.extensions.recreate
-import com.nevidimka655.astracrypt.utils.extensions.removeLines
 import com.nevidimka655.astracrypt.utils.shared_prefs.PrefsKeys
 import com.nevidimka655.astracrypt.utils.shared_prefs.PrefsManager
 import com.nevidimka655.crypto.tink.KeysetFactory
@@ -219,15 +218,6 @@ class MainVM @Inject constructor(
             parentDirectoryId = filesNavigatorList.lastOrNull()?.id
         )
         showSnackbar(R.string.snack_folderCreated)
-    }
-
-    fun rename(id: Long, name: String) = viewModelScope.launch(Dispatchers.IO) {
-        val oldName = Repository.getName(encryptionInfo, id)
-        val newName = name.removeLines().trim()
-        if (newName != oldName) {
-            Repository.updateName(id, encryptionInfo, newName)
-            showSnackbar(R.string.snack_itemRenamed)
-        }
     }
 
     fun delete(storageItemId: Long) = viewModelScope.launch(Dispatchers.IO) {

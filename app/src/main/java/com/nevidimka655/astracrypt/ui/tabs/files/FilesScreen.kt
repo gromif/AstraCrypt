@@ -509,6 +509,7 @@ fun FilesScreen(
     onOpenStarredDir: () -> Unit,
     onOpenFile: (Long) -> Unit,
     onExport: (itemId: Long, outUri: Uri) -> Unit,
+    onRename: (itemId: Long, newName: String) -> Unit,
     onNavigatorClick: (index: Int?) -> Unit,
     onLongPress: (item: StorageItemListTuple) -> Unit
 ) {
@@ -523,9 +524,7 @@ fun FilesScreen(
     var dialogRename by Tabs.Files.Dialogs.rename(
         state = filesVM.dialogRenameState,
         name = filesVM.optionsItem.name
-    ) {
-        vm.rename(filesVM.optionsItem.id, it.removeLines().trim())
-    }
+    ) { onRename(filesVM.optionsItem.id, it.removeLines().trim()) }
     if (filesVM.dialogDeleteState.value) Tabs.Files.Dialogs.DeleteFile(
         state = filesVM.dialogDeleteState,
         name = filesVM.optionsItem.name
