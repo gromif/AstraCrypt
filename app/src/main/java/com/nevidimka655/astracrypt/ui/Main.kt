@@ -49,9 +49,10 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.nevidimka655.astracrypt.MainVM
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.model.FabState
 import com.nevidimka655.astracrypt.features.details.DetailsScreen
 import com.nevidimka655.astracrypt.features.export.ExportScreen
+import com.nevidimka655.astracrypt.features.export.ExportScreenViewModel
+import com.nevidimka655.astracrypt.model.FabState
 import com.nevidimka655.astracrypt.tabs.settings.SettingsScreen
 import com.nevidimka655.astracrypt.ui.navigation.BottomBarItems
 import com.nevidimka655.astracrypt.ui.navigation.Route
@@ -176,7 +177,7 @@ fun Main(
                     isInnerScreen = false
                     currentTab = BottomBarItems.Home
                     fabState = FabState.NO
-                    HomeScreen(vm = vm, onOpenFile = { openFile(navController, it) }) {
+                    HomeScreen(vm = vm, onOpenFile = { export(navController, it) }) {
                         navController.navigate(BottomBarItems.Files.route)
                     }
                 }
@@ -202,7 +203,10 @@ fun Main(
                         onNavigateUp = { navController.navigateUp() },
                         onNavigateToDetails = { navController.navigate(Route.Tabs.Details(itemId = it)) },
                         onOpenStarredDir = { navController.navigate(BottomBarItems.Files.route) },
-                        onOpenFile = { openFile(navController, it) },
+                        onOpenFile = { export(navController, it) },
+                        onExport = { itemId, outUri ->
+                            export(navController, itemId, outUri.toString())
+                        },
                         onNavigatorClick = { vm.openDirectoryFromSelector(it) }
                     ) { }
                 }
@@ -223,7 +227,24 @@ fun Main(
                     toolbarTitle = context.getString(export.titleId)
                     isInnerScreen = true
                     fabState = FabState.NO
-                    ExportScreen(encryptionInfo = vm.encryptionInfo, itemId = export.itemId)
+                    val vm1: ExportScreenViewModel = hiltViewModel()
+                    ExportScreen(
+                        state = vm1.uiState,
+                        isExternalExport = export.outUri != null,
+                        onStart = {
+                            if (export.outUri != null) vm1.export(
+                                encryptionInfo = vm.encryptionInfo,
+                                itemId = export.itemId,
+                                output = export.outUri
+                            ).invokeOnCompletion { vm1.observeWorkInfoState() } else vm1.export(
+                                encryptionInfo = vm.encryptionInfo,
+                                itemId = export.itemId
+                            )
+                        },
+                        onOpenExportedFile = { vm1.openExportedFile(context = context) },
+                        onCancelExport = { vm1.cancelExport() },
+                        onDispose = { vm1.onDispose() }
+                    )
                 }
                 composable<Route.Tabs.Settings> {
                     val settings: Route.Tabs.Settings = it.toRoute()
@@ -238,5 +259,5 @@ fun Main(
     }
 }
 
-private fun openFile(navController: NavController, itemId: Long) =
-    navController.navigate(Route.Tabs.Export(itemId = itemId))
+private fun export(navController: NavController, itemId: Long, outUri: String? = null) =
+    navController.navigate(Route.Tabs.Export(itemId = itemId, outUri = outUri))

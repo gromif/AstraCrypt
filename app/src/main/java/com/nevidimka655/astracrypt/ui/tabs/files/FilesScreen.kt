@@ -1,5 +1,6 @@
 package com.nevidimka655.astracrypt.ui.tabs.files
 
+import android.net.Uri
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -510,6 +511,7 @@ fun FilesScreen(
     onNavigateToDetails: (Long) -> Unit,
     onOpenStarredDir: () -> Unit,
     onOpenFile: (Long) -> Unit,
+    onExport: (itemId: Long, outUri: Uri) -> Unit,
     onNavigatorClick: (index: Int?) -> Unit,
     onLongPress: (item: StorageItemListTuple) -> Unit
 ) {
@@ -579,9 +581,8 @@ fun FilesScreen(
         }
     )
 
-    val pickFileContract = rememberLauncherForActivityResult(
-        ActivityResultContracts.OpenMultipleDocuments()
-    ) {
+    val pickFileContract =
+        rememberLauncherForActivityResult(ActivityResultContracts.OpenMultipleDocuments()) {
         if (it.isNotEmpty()) scope.launch {
             withContext(Dispatchers.Main) {
                 vm.lastUriListToImport = it
@@ -593,13 +594,17 @@ fun FilesScreen(
     fun callFileContract(mimeSubType: String = "*") =
         pickFileContract.launch(arrayOf("$mimeSubType/*"))
 
-    val scanContract = rememberLauncherForActivityResult(
-        ActivityResultContracts.TakePicture()
-    ) {
+    val scanContract =
+        rememberLauncherForActivityResult(ActivityResultContracts.TakePicture()) {
         if (it) vm.import(vm.lastUriToScan!!).invokeOnCompletion {
             vm.lastUriToScan = null
         }
     }
+    val exportContract =
+        rememberLauncherForActivityResult(ActivityResultContracts.OpenDocumentTree()) {
+            it?.let { onExport(filesVM.optionsItem.id, it) }
+        }
+
     Sheets.createNewSheet(
         state = isCreateSheetVisible,
         scope = scope,
@@ -633,6 +638,10 @@ fun FilesScreen(
                 onOpenFile = onOpenFile,
                 item = filesVM.optionsItem
             )
+        },
+        onExport = {
+            filesVM.sheetOptionsState.value = false
+            exportContract.launch(null)
         },
         onRename = {
             filesVM.sheetOptionsState.value = false

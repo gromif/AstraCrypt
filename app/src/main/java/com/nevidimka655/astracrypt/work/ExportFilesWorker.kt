@@ -33,14 +33,13 @@ import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
 
 class ExportFilesWorker(
-    appContext: Context,
+    context: Context,
     params: WorkerParameters
-) : CoroutineWorker(appContext, params) {
+) : CoroutineWorker(context, params) {
 
     object Args {
         const val uriDirOutput = "yellow"
         const val itemId = "green"
-        const val isItemFile = "black"
         const val encryptionInfo = "blue"
         const val associatedData = "red"
         const val TAG_ASSOCIATED_DATA_TRANSPORT = "orange"
@@ -48,8 +47,8 @@ class ExportFilesWorker(
 
     private val notificationId = 201
 
-    private val encryptionInfo by lazy {
-        Json.decodeFromString<EncryptionInfo>(
+    private val encryptionInfo: EncryptionInfo by lazy {
+        Json.decodeFromString(
             inputData.getString(Args.encryptionInfo)!!
         )
     }
@@ -61,8 +60,8 @@ class ExportFilesWorker(
         shouldDecodeAssociatedData()
         val outputDirUri = inputData.getString(Args.uriDirOutput)!!
         val itemId = inputData.getLong(Args.itemId, 0)
-        val itemIsFile = inputData.getBoolean(Args.isItemFile, false)
         val startDir = createStartDocumentFile(outputDirUri.toUri())
+        val itemIsFile = Repository.getTypeById(id = itemId).isFile
         if (startDir != null) {
             if (itemIsFile) fileIterator(
                 exportTuple = Repository.getDataToExport(encryptionInfo, itemId),

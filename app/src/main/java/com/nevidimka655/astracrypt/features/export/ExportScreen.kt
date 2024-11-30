@@ -1,11 +1,11 @@
 package com.nevidimka655.astracrypt.features.export
 
-import android.content.Intent
 import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -22,44 +22,42 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.model.EncryptionInfo
 import com.nevidimka655.astracrypt.model.ExportUiState
-import com.nevidimka655.astracrypt.utils.IO
 import com.nevidimka655.ui.compose_core.theme.spaces
 
 @Preview(showBackground = true)
 @Composable
 fun ExportScreen(
-    vm: ExportScreenViewModel = viewModel(),
-    state: ExportUiState = vm.uiState,
-    encryptionInfo: EncryptionInfo = EncryptionInfo(),
-    itemId: Long = 0
+    isExternalExport: Boolean = false,
+    state: ExportUiState = ExportUiState(),
+    onStart: () -> Unit = {},
+    onOpenExportedFile: () -> Unit = {},
+    onCancelExport: () -> Unit = {},
+    onDispose: () -> Unit = {}
 ) = Column(
     modifier = Modifier
         .fillMaxSize()
         .verticalScroll(rememberScrollState()),
     verticalArrangement = Arrangement.spacedBy(
-        MaterialTheme.spaces.spaceMedium,
-        Alignment.CenterVertically
+        space = MaterialTheme.spaces.spaceMedium,
+        alignment = Alignment.CenterVertically
     ),
     horizontalAlignment = Alignment.CenterHorizontally
 ) {
-    val context = LocalContext.current
     val onBackPressedDispatcher = LocalOnBackPressedDispatcherOwner.current
+    fun back() = onBackPressedDispatcher?.onBackPressedDispatcher?.onBackPressed()
+
     DisposableEffect(Unit) {
-        vm.openWithDialog(encryptionInfo = encryptionInfo, itemId = itemId)
-        onDispose { IO.clearExportedCache() }
+        onStart()
+        onDispose { onDispose() }
     }
-    val isDecrypted = remember(state) { state.progress == state.itemsCount }
+
     ElevatedCard {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -70,7 +68,7 @@ fun ExportScreen(
                 contentDescription = null,
                 modifier = Modifier.size(128.dp)
             )
-            AnimatedVisibility(visible = !isDecrypted) {
+            AnimatedVisibility(visible = !state.isDone) {
                 LinearProgressIndicator(modifier = Modifier.width(96.dp))
             }
         }
@@ -80,19 +78,30 @@ fun ExportScreen(
         text = state.name,
         style = MaterialTheme.typography.titleMedium
     )
-    Button(enabled = isDecrypted, onClick = {
-        val intentView = Intent(Intent.ACTION_VIEW).apply {
-            data = state.lastOutputFile
-            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+    Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+        Button(
+            enabled = state.isDone,
+            onClick = {
+                if (isExternalExport) back()
+                else onOpenExportedFile()
+            }
+        ) {
+            Text(
+                text = stringResource(
+                    id = if (isExternalExport) android.R.string.ok else R.string.open
+                )
+            )
         }
-        try {
-            context.startActivity(intentView)
-        } catch (_: Exception) {
+        AnimatedVisibility(visible = !state.isDone) {
+            OutlinedButton(
+                onClick = {
+                    if (isExternalExport) onCancelExport()
+                    back()
+                },
+                modifier = Modifier.padding(top = MaterialTheme.spaces.spaceMedium)
+            ) {
+                Text(text = stringResource(id = android.R.string.cancel))
+            }
         }
-    }) {
-        Text(text = stringResource(id = R.string.open))
-    }
-    OutlinedButton(onClick = { onBackPressedDispatcher?.onBackPressedDispatcher?.onBackPressed() }) {
-        Text(text = stringResource(id = android.R.string.cancel))
     }
 }

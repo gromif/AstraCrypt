@@ -1,10 +1,8 @@
 package com.nevidimka655.astracrypt.model
 
-import android.net.Uri
-
 data class ExportUiState(
+    val isDone: Boolean = false,
     val itemsCount: Int = 1,
     val progress: Int = 0,
-    val name: String = "",
-    val lastOutputFile: Uri? = null
+    val name: String = ""
 )

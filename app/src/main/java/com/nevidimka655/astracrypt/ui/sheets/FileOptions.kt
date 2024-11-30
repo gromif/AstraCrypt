@@ -54,6 +54,7 @@ fun Sheets.filesOptions(
     isStarred: Boolean = false,
     sheetState: SheetState = SheetDefaults.state(),
     onOpen: () -> Unit = {},
+    onExport: () -> Unit = {},
     onRename: () -> Unit = {},
     onDelete: () -> Unit = {},
     onDetails: () -> Unit = {},
@@ -78,10 +79,9 @@ fun Sheets.filesOptions(
         )
         SheetFilesOptionsItem(
             text = context.getString(R.string.files_options_export),
-            imageVector = Icons.Outlined.SaveAlt
-        ) {
-
-        }
+            imageVector = Icons.Outlined.SaveAlt,
+            onClick = onExport
+        )
         SheetFilesOptionsItem(
             text = if (isStarred) {
                 context.getString(R.string.files_options_removeFromStarred)

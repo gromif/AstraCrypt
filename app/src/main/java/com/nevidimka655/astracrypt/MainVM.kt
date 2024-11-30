@@ -20,17 +20,16 @@ import androidx.paging.cachedIn
 import androidx.paging.map
 import androidx.work.Data
 import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.Operation
 import androidx.work.OutOfQuotaPolicy
 import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import coil.ImageLoader
 import coil.request.ImageRequest
-import com.nevidimka655.astracrypt.model.CoilTinkModel
-import com.nevidimka655.astracrypt.model.NavigatorDirectory
 import com.nevidimka655.astracrypt.features.auth.AuthManager
 import com.nevidimka655.astracrypt.features.profile.AvatarIds
 import com.nevidimka655.astracrypt.features.profile.ProfileInfo
+import com.nevidimka655.astracrypt.model.CoilTinkModel
+import com.nevidimka655.astracrypt.model.NavigatorDirectory
 import com.nevidimka655.astracrypt.room.Repository
 import com.nevidimka655.astracrypt.room.RepositoryEncryption
 import com.nevidimka655.astracrypt.room.StorageItemListTuple
@@ -49,7 +48,6 @@ import com.nevidimka655.astracrypt.utils.extensions.recreate
 import com.nevidimka655.astracrypt.utils.extensions.removeLines
 import com.nevidimka655.astracrypt.utils.shared_prefs.PrefsKeys
 import com.nevidimka655.astracrypt.utils.shared_prefs.PrefsManager
-import com.nevidimka655.astracrypt.work.ExportFilesWorker
 import com.nevidimka655.astracrypt.work.ImportFilesWorker
 import com.nevidimka655.astracrypt.work.utils.WorkerSerializer
 import com.nevidimka655.crypto.tink.KeysetFactory
@@ -110,7 +108,6 @@ class MainVM @Inject constructor(
 
     var lastUriListToImport: List<Uri>? = null
     var lastUriToScan: Uri? = null
-    var lastExportOperation: Operation? = null
 
     private var _searchChannel: Channel<String>? = null
     var lastSearchQuery: String? = null
@@ -360,37 +357,6 @@ class MainVM @Inject constructor(
             _searchChannel = null
             triggerListUpdate()
         }
-    }
-
-    fun export(itemToExport: StorageItemListTuple, outputUri: Uri) {
-        val data = Data.Builder().apply {
-            putLong(ExportFilesWorker.Args.itemId, itemToExport.id)
-            putString(
-                ExportFilesWorker.Args.encryptionInfo,
-                Json.encodeToString(encryptionInfo)
-            )
-            putBoolean(ExportFilesWorker.Args.isItemFile, itemToExport.itemType.isFile)
-            putString(
-                ExportFilesWorker.Args.uriDirOutput,
-                outputUri.toString()
-            )
-            putString(
-                ExportFilesWorker.Args.associatedData,
-                if (encryptionInfo.isAssociatedDataEncrypted)
-                    KeysetFactory.transformAssociatedDataToWorkInstance(
-                        context = Engine.appContext,
-                        bytesIn = KeysetFactory.associatedData,
-                        encryptionMode = true,
-                        authenticationTag = ExportFilesWorker.Args.TAG_ASSOCIATED_DATA_TRANSPORT
-                    ).toBase64()
-                else null
-            )
-        }.build()
-        val workerRequest = OneTimeWorkRequestBuilder<ExportFilesWorker>()
-            .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
-            .setInputData(data)
-            .build()
-        lastExportOperation = workManager.enqueue(workerRequest)
     }
 
     fun searchQuerySubmit(query: String) {
