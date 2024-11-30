@@ -15,6 +15,7 @@ import androidx.core.net.toUri
 import androidx.documentfile.provider.DocumentFile
 import androidx.work.CoroutineWorker
 import androidx.work.ForegroundInfo
+import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import com.google.crypto.tink.JsonKeysetReader
 import com.google.crypto.tink.KeysetHandle
@@ -29,12 +30,15 @@ import com.nevidimka655.crypto.tink.TinkConfig
 import com.nevidimka655.crypto.tink.extensions.aeadPrimitive
 import com.nevidimka655.crypto.tink.extensions.fromBase64
 import com.nevidimka655.crypto.tink.extensions.streamingAeadPrimitive
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedInject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class LabFilesWorker(
-    appContext: Context,
-    params: WorkerParameters
+class LabFilesWorker @AssistedInject constructor(
+    @Assisted appContext: Context,
+    @Assisted params: WorkerParameters,
+    private val workManager: WorkManager
 ) : CoroutineWorker(appContext, params) {
 
     object Args {
@@ -125,7 +129,7 @@ class LabFilesWorker(
         val title = applicationContext.getString(R.string.dialog_exporting)
         val cancelText = applicationContext.getString(android.R.string.cancel)
         // This PendingIntent can be used to cancel the worker
-        val workerStopPendingIntent = Engine.workManager.createCancelPendingIntent(id)
+        val workerStopPendingIntent = workManager.createCancelPendingIntent(id)
         // Create a Notification channel if necessary
         if (Api.atLeastAndroid8()) createChannel()
         val notification = NotificationCompat.Builder(applicationContext, channelId).apply {
