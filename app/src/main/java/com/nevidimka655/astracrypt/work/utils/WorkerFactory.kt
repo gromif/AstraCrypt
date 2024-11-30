@@ -76,9 +76,9 @@ object WorkerFactory {
         val fileWithZipContentPath =
             WorkerSerializer(io).saveStringArrayToFile(zipFilesContentStringArray)
         val data = workDataOf(
-            Pair(LabCombinedZipWorker.Args.fileWithZipContentUris, fileWithZipContentPath),
-            Pair(LabCombinedZipWorker.Args.sourceUri, sourceUri.toString()),
-            Pair(LabCombinedZipWorker.Args.destinationStringUri, destinationUri.toString())
+            Pair(LabCombinedZipWorker.Args.ZIP_FILE_URI, fileWithZipContentPath),
+            Pair(LabCombinedZipWorker.Args.SOURCE_URI, sourceUri.toString()),
+            Pair(LabCombinedZipWorker.Args.TARGET_URI, destinationUri.toString())
         )
         val workerRequest = OneTimeWorkRequestBuilder<LabCombinedZipWorker>()
             .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)

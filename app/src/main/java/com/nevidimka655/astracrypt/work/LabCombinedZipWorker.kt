@@ -26,13 +26,15 @@ import java.io.File
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
 
-class LabCombinedZipWorker(appContext: Context, params: WorkerParameters) :
-    CoroutineWorker(appContext, params) {
+class LabCombinedZipWorker(
+    appContext: Context,
+    params: WorkerParameters
+) : CoroutineWorker(appContext, params) {
 
     object Args {
-        const val sourceUri = "Market Chase"
-        const val destinationStringUri = "dControl"
-        const val fileWithZipContentUris = "FRPComposite"
+        const val SOURCE_URI = "a1"
+        const val TARGET_URI = "a2"
+        const val ZIP_FILE_URI = "a3"
     }
 
     private val notificationId = 203
@@ -41,10 +43,10 @@ class LabCombinedZipWorker(appContext: Context, params: WorkerParameters) :
         var workerResult = Result.success()
         Engine.init(applicationContext)
         setForeground(getForegroundInfo())
-        val destinationUri = inputData.getString(Args.destinationStringUri)!!.toUri()
-        val sourceUri = inputData.getString(Args.sourceUri)!!.toUri()
+        val destinationUri = inputData.getString(Args.TARGET_URI)!!.toUri()
+        val sourceUri = inputData.getString(Args.SOURCE_URI)!!.toUri()
         val destinationDocument = DocumentFile.fromSingleUri(applicationContext, destinationUri)!!
-        val zipFileContentUrisFile = File(inputData.getString(Args.fileWithZipContentUris)!!)
+        val zipFileContentUrisFile = File(inputData.getString(Args.ZIP_FILE_URI)!!)
         try {
             contentResolver.openOutputStream(destinationUri)?.use { out ->
                 contentResolver.openInputStream(sourceUri)?.use { it.copyTo(out) }
