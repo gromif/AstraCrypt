@@ -15,6 +15,7 @@ import androidx.documentfile.provider.DocumentFile
 import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.ForegroundInfo
+import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.model.EncryptionInfo
@@ -40,6 +41,7 @@ class ExportFilesWorker @AssistedInject constructor(
     @Assisted context: Context,
     @Assisted params: WorkerParameters,
     private val io: Io,
+    private val workManager: WorkManager,
 ) : CoroutineWorker(context, params) {
 
     object Args {
@@ -144,7 +146,7 @@ class ExportFilesWorker @AssistedInject constructor(
         val title = applicationContext.getString(R.string.dialog_exporting)
         val cancelText = applicationContext.getString(android.R.string.cancel)
         // This PendingIntent can be used to cancel the worker
-        val workerStopPendingIntent = Engine.workManager.createCancelPendingIntent(id)
+        val workerStopPendingIntent = workManager.createCancelPendingIntent(id)
         // Create a Notification channel if necessary
         if (Api.atLeastAndroid8()) createChannel()
         val notification = NotificationCompat.Builder(applicationContext, channelId).apply {
