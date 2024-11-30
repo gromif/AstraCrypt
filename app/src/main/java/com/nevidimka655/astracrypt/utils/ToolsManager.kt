@@ -4,7 +4,6 @@ import com.nevidimka655.astracrypt.features.calculator.CalculatorManagerWrap
 import com.nevidimka655.astracrypt.features.lab.LabCombineZipManager
 import com.nevidimka655.astracrypt.features.lab.aead.LabAeadManager
 import com.nevidimka655.astracrypt.features.notes.NotesManager
-import com.nevidimka655.compose_details.DetailsManager
 import kotlinx.coroutines.channels.Channel
 
 class ToolsManager(
@@ -16,9 +15,6 @@ class ToolsManager(
     private var _labCombineZipManager: LabCombineZipManager? = null
     val labCombineZipManager get() = _labCombineZipManager
         ?: LabCombineZipManager().also { _labCombineZipManager = it }
-
-    private var _detailsManager: DetailsManager? = null
-    val detailsManager get() = _detailsManager ?: DetailsManager().also { _detailsManager = it }
 
     private var _notesManager: NotesManager? = null
     val notesManager get() = _notesManager ?: NotesManager().also { _notesManager = it }
