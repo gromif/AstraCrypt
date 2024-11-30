@@ -147,6 +147,7 @@ object Repository {
     }
 
     suspend fun getMaxId() = storage.getMaxId()
+    suspend fun getTypeById(id: Long) = storage.getTypeById(id)
     suspend fun getDirIdsList(dirId: Long) = storage.getDirIdsList(dirId)
     suspend fun getFilesCountFlow(dirId: Long) = storage.getFilesCountFlow(dirId)
     suspend fun getListDataToExportFromDir(encryptionInfo: EncryptionInfo, dirId: Long) = run {

@@ -5,6 +5,7 @@ import androidx.room.*
 import com.nevidimka655.astracrypt.room.*
 import com.nevidimka655.astracrypt.room.entities.StorageItemEntity
 import com.nevidimka655.astracrypt.utils.enums.StorageItemState
+import com.nevidimka655.astracrypt.utils.enums.StorageItemType
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -12,6 +13,9 @@ interface StorageItemDao {
 
     @Query("select max(id) from store_items")
     suspend fun getMaxId(): Long
+
+    @Query("select item_type from store_items where id = :id")
+    suspend fun getTypeById(id: Long): StorageItemType
 
     @Query("select * from store_items WHERE id = :id")
     suspend fun getById(id: Long): StorageItemEntity
