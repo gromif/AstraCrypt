@@ -50,6 +50,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -503,6 +504,7 @@ fun FilesScreen(
     filesVM: FilesViewModel,
     viewMode: ViewMode,
     isStarred: Boolean,
+    dialogNewFolderState: MutableState<Boolean>,
     onFabClick: Channel<Any>,
     onNavigateUp: () -> Unit,
     onNavigateToDetails: (Long) -> Unit,
@@ -518,7 +520,7 @@ fun FilesScreen(
     val isEmptyPageVisible = remember {
         derivedStateOf { items.itemCount == 0 && items.loadState.refresh is LoadState.NotLoading }
     }
-    var dialogNewFolder by Tabs.Files.Dialogs.newFolder(state = vm.dialogNewFolderState) {
+    var dialogNewFolder by Tabs.Files.Dialogs.newFolder(state = dialogNewFolderState) {
         vm.newDirectory(it.removeLines().trim())
     }
     var dialogRename by Tabs.Files.Dialogs.rename(

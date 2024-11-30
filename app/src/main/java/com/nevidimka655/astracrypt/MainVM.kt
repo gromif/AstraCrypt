@@ -81,7 +81,6 @@ class MainVM @Inject constructor(
     val encryptionManager = EncryptionManager()
     val encryptionInfo get() = encryptionManager.encryptionInfo
 
-    val dialogNewFolderState = mutableStateOf(false)
     var isSearchExpandedState by mutableStateOf(false)
     private var searchSetupJob: Job? = null
     private var searchDirsIndexesList: ArrayList<Long>? = null

@@ -205,11 +205,13 @@ fun Main(
                     val viewMode by filesVm.appearanceManager.filesViewModeFlow.collectAsStateWithLifecycle(
                         initialValue = ViewMode.Grid
                     )
+                    val dialogNewFolderState = rememberSaveable { mutableStateOf(false) }
                     FilesScreen(
                         vm = vm,
                         filesVM = filesVm,
                         viewMode = viewMode,
                         isStarred = files.isStarred,
+                        dialogNewFolderState = dialogNewFolderState,
                         onFabClick = onFabClick,
                         onNavigateUp = { navController.navigateUp() },
                         onNavigateToDetails = { navController.navigate(Route.Tabs.Details(itemId = it)) },
