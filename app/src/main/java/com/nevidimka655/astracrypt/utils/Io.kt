@@ -8,7 +8,8 @@ import java.io.File
 import java.text.DecimalFormat
 
 class Io (
-    private val context: Context
+    private val context: Context,
+    private val randomizer: Randomizer
 ) {
     private val filesDir get() = context.filesDir
     private val exportedCacheDir = File(cacheDir, "exp").also { it.mkdir() }
@@ -17,7 +18,7 @@ class Io (
     val dataDir = File("$filesDir/data")
 
     fun createTempFileInCache(): File =
-        File.createTempFile(Randomizer.getUrlSafeString(5), null, cacheDir)
+        File.createTempFile(randomizer.generateUrlSafeString(5), null, cacheDir)
 
     fun getExportedCacheCameraFile(): File {
         val pattern = "dd-MM-yyyy_HH:mm:ss"

@@ -10,6 +10,7 @@ import androidx.work.workDataOf
 import com.nevidimka655.astracrypt.model.EncryptionInfo
 import com.nevidimka655.astracrypt.utils.Engine
 import com.nevidimka655.astracrypt.utils.Io
+import com.nevidimka655.astracrypt.utils.Randomizer
 import com.nevidimka655.astracrypt.work.LabCombinedZipWorker
 import com.nevidimka655.astracrypt.work.TransformDatabaseWorker
 import com.nevidimka655.astracrypt.work.TransformNotesWorker
@@ -21,7 +22,7 @@ import kotlinx.serialization.json.Json
 object WorkerFactory {
     private val worker get() = Engine.workManager
     @SuppressLint("StaticFieldLeak")
-    private val io = Io(Engine.appContext) // TODO: Replace with DI
+    private val io = Io(Engine.appContext, Randomizer()) // TODO: Replace with DI
     var transformWorkLiveData: LiveData<WorkInfo?>? = null
 
     fun startTransformDatabase(oldInfo: EncryptionInfo, newInfo: EncryptionInfo) {

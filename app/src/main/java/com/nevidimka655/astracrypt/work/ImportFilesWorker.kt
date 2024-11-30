@@ -55,6 +55,7 @@ class ImportFilesWorker @AssistedInject constructor(
     @Assisted context: Context,
     @Assisted params: WorkerParameters,
     private val io: Io,
+    private val randomizer: Randomizer,
     private val imageLoader: ImageLoader,
     private val defaultCoilRequestBuilder: ImageRequest.Builder
 ) : CoroutineWorker(context, params) {
@@ -92,7 +93,10 @@ class ImportFilesWorker @AssistedInject constructor(
             KeysetFactory.stream(applicationContext, KeysetTemplates.Stream.entries[fileEncryption])
         } else null
         val keysetHandleForThumbEncryption = if (thumbEncryption > -1) {
-            KeysetFactory.stream(applicationContext, KeysetTemplates.Stream.entries[thumbEncryption])
+            KeysetFactory.stream(
+                applicationContext,
+                KeysetTemplates.Stream.entries[thumbEncryption]
+            )
         } else null
         val fileEncryptionPrimitive = keysetHandleForFileEncryption?.streamingAeadPrimitive()
         val thumbEncryptionPrimitive = keysetHandleForThumbEncryption?.streamingAeadPrimitive()
@@ -113,7 +117,8 @@ class ImportFilesWorker @AssistedInject constructor(
                 )
                 nextId++
             }
-        } catch (ignored: Exception) {}
+        } catch (ignored: Exception) {
+        }
         return Result.success()
     }
 
@@ -152,8 +157,9 @@ class ImportFilesWorker @AssistedInject constructor(
             )
         }
         val randomNum = getRandomDirectory(fileUri.toString())
-        val randomFileName = Randomizer.getUrlSafeString(
-            secureRandom(fileUri.toString().toByteArray()), AppConfig.DB_FILE_NAME_COUNT
+        val randomFileName = randomizer.generateUrlSafeString(
+            size = AppConfig.DB_FILE_NAME_COUNT,
+            random = secureRandom(fileUri.toString().toByteArray()),
         )
         val outRelativePath = "$randomNum/$randomFileName"
         val outFile = File("${io.dataDir}/$outRelativePath")
@@ -194,7 +200,8 @@ class ImportFilesWorker @AssistedInject constructor(
                 } else docFile.parentFile?.let { parent ->
                     DocumentsContractCompat.removeDocument(contentResolver, fileUri, parent.uri)
                 }
-            } catch (e: Exception) {}
+            } catch (e: Exception) {
+            }
         } else {
             outFile.delete()
             File("${io.dataDir}/$thumbnailPath").delete()
@@ -222,7 +229,11 @@ class ImportFilesWorker @AssistedInject constructor(
             setSilent(true)
             addAction(R.drawable.ic_close, cancelText, workerStopPendingIntent)
         }.build()
-        return ForegroundInfo(notificationId, notification, ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC)
+        return ForegroundInfo(
+            notificationId,
+            notification,
+            ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC
+        )
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -270,6 +281,7 @@ class ImportFilesWorker @AssistedInject constructor(
                         bitmapDrawable?.bitmap
                     }
                 }
+
                 else -> {
                     val request = defaultCoilRequestBuilder.data(uri).build()
                     val bitmapDrawable = imageLoader.execute(request).drawable as BitmapDrawable?
@@ -282,8 +294,9 @@ class ImportFilesWorker @AssistedInject constructor(
         } ?: return ""
         val secureSeed = uri.toString()
         val randomDir = getRandomDirectory(secureSeed)
-        val thumbnailFileName = Randomizer.getUrlSafeString(
-            secureRandom(secureSeed.toByteArray()), AppConfig.DB_THUMB_FILE_NAME_COUNT
+        val thumbnailFileName = randomizer.generateUrlSafeString(
+            size = AppConfig.DB_THUMB_FILE_NAME_COUNT,
+            random = secureRandom(secureSeed.toByteArray())
         )
         val bitmapCompressFormat = if (Api.atLeastAndroid11()) {
             Bitmap.CompressFormat.WEBP_LOSSY

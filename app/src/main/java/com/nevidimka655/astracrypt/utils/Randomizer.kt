@@ -1,31 +1,34 @@
 package com.nevidimka655.astracrypt.utils
 
+import javax.inject.Inject
+import javax.inject.Singleton
 import kotlin.random.Random
 
-object Randomizer {
+@Singleton
+class Randomizer @Inject constructor() {
+    companion object {
+        private const val ENG_LOWERCASE = "abcdefghijklmnopqrstuvwxyz"
+        private const val ENG_UPPERCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        private const val NUMBERS = "0123456789"
+        private const val URL_SAFE_SYMBOLS = "-_.~()@,;"
 
-    private const val englishLiterals = "abcdefghijklmnopqrstuvwxyz"
-    private const val englishLiteralsUpper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    private const val numbers = "1234567890"
-    private const val symbolsUrlSafe = "-_.~()@,;"
-
-    private const val urlSafeDictionary = "$englishLiterals$englishLiteralsUpper" +
-            "$numbers$symbolsUrlSafe"
-
-    fun genStr(customDict: String, size: Int): String {
-        val str = StringBuilder()
-        repeat(size) {
-            str.append(customDict.random())
-        }
-        return str.toString()
+        private const val URL_SAFE_DICT = ENG_LOWERCASE + ENG_UPPERCASE + NUMBERS + URL_SAFE_SYMBOLS
     }
 
-    fun getUrlSafeString(size: Int) = StringBuilder().apply {
-        repeat(size) { append(urlSafeDictionary.random()) }
-    }.toString()
+    /**
+     * Generates a random string from a custom dictionary.
+     *
+     * @param dict The characters to use for generation.
+     * @param size The length of the generated string.
+     */
+    fun generateString(dict: String, size: Int, random: Random = Random.Default): String =
+        (1..size).map { dict.random(random) }.joinToString("")
 
-    fun getUrlSafeString(random: Random, size: Int) = StringBuilder().apply {
-        repeat(size) { append(urlSafeDictionary.random(random)) }
-    }.toString()
-
+    /**
+     * Generates a URL-safe random string.
+     *
+     * @param size The length of the generated string.
+     */
+    fun generateUrlSafeString(size: Int, random: Random = Random.Default): String =
+        generateString(URL_SAFE_DICT, size, random)
 }
