@@ -1,5 +1,6 @@
 package com.nevidimka655.astracrypt.work.utils
 
+import android.annotation.SuppressLint
 import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.work.OneTimeWorkRequestBuilder
@@ -8,7 +9,7 @@ import androidx.work.WorkInfo
 import androidx.work.workDataOf
 import com.nevidimka655.astracrypt.model.EncryptionInfo
 import com.nevidimka655.astracrypt.utils.Engine
-import com.nevidimka655.astracrypt.utils.IO
+import com.nevidimka655.astracrypt.utils.Io
 import com.nevidimka655.astracrypt.work.LabCombinedZipWorker
 import com.nevidimka655.astracrypt.work.TransformDatabaseWorker
 import com.nevidimka655.astracrypt.work.TransformNotesWorker
@@ -19,6 +20,8 @@ import kotlinx.serialization.json.Json
 
 object WorkerFactory {
     private val worker get() = Engine.workManager
+    @SuppressLint("StaticFieldLeak")
+    private val io = Io(Engine.appContext) // TODO: Replace with DI
     var transformWorkLiveData: LiveData<WorkInfo?>? = null
 
     fun startTransformDatabase(oldInfo: EncryptionInfo, newInfo: EncryptionInfo) {
@@ -71,7 +74,7 @@ object WorkerFactory {
         zipFilesContentStringArray: Array<String>
     ) {
         val fileWithZipContentPath =
-            WorkerSerializer(IO).saveStringArrayToFile(zipFilesContentStringArray)
+            WorkerSerializer(io).saveStringArrayToFile(zipFilesContentStringArray)
         val data = workDataOf(
             Pair(LabCombinedZipWorker.Args.fileWithZipContentUris, fileWithZipContentPath),
             Pair(LabCombinedZipWorker.Args.sourceUri, sourceUri.toString()),
