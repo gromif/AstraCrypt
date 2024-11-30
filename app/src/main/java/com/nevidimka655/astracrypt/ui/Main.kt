@@ -216,12 +216,13 @@ fun Main(
                     toolbarTitle = context.getString(details.titleId)
                     isInnerScreen = true
                     fabState = FabState.NO
+                    val context = LocalContext.current
                     val vm1: DetailsScreenViewModel = hiltViewModel()
                     DetailsScreen(
                         detailsManager = vm1.detailsManager,
                         imageLoader = vm1.imageLoader,
                         onStart = {
-                            vm1.submitDetailsQuery(vm.encryptionInfo, details.itemId)
+                            vm1.submitDetailsQuery(context, vm.encryptionInfo, details.itemId)
                         }
                     )
                 }

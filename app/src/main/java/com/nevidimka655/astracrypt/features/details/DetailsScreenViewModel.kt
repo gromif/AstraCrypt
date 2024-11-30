@@ -1,5 +1,6 @@
 package com.nevidimka655.astracrypt.features.details
 
+import android.content.Context
 import android.text.format.DateFormat
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.InsertDriveFile
@@ -18,7 +19,6 @@ import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.model.EncryptionInfo
 import com.nevidimka655.astracrypt.model.StorageItemFlags
 import com.nevidimka655.astracrypt.room.Repository
-import com.nevidimka655.astracrypt.utils.Engine
 import com.nevidimka655.astracrypt.utils.Io
 import com.nevidimka655.compose_details.DetailsManager
 import com.nevidimka655.compose_details.addItem
@@ -38,6 +38,7 @@ class DetailsScreenViewModel @Inject constructor(
 ): ViewModel() {
 
     suspend fun submitDetailsQuery(
+        context: Context,
         encryptionInfo: EncryptionInfo,
         itemId: Long
     ) = detailsManager.run {
@@ -55,16 +56,16 @@ class DetailsScreenViewModel @Inject constructor(
             "thumb" to item.thumb
         )
 
-        addGroup(name = TextWrap(id = R.string.files_options_details)) {
+        addGroup(name = TextWrap.Resource(id = R.string.files_options_details)) {
             addItem(
                 icon = IconWrap(imageVector = Icons.AutoMirrored.Outlined.InsertDriveFile),
-                title = TextWrap(id = R.string.itemType),
-                summary = TextWrap(id = item.itemType.title)
+                title = TextWrap.Resource(id = R.string.itemType),
+                summary = TextWrap.Resource(id = item.itemType.title)
             )
             addItem(
                 icon = IconWrap(imageVector = Icons.Outlined.FolderOpen),
-                title = TextWrap(id = R.string.path),
-                summary = TextWrap(text = absolutePath)
+                title = TextWrap.Resource(id = R.string.path),
+                summary = TextWrap.Text(text = absolutePath)
             )
             // SIZE
             if (isFile) {
@@ -73,8 +74,8 @@ class DetailsScreenViewModel @Inject constructor(
                 val currentSize = io.bytesToHumanReadable(currentSizeBytes)
                 addItem(
                     icon = IconWrap(imageVector = Icons.Outlined.SdCard),
-                    title = TextWrap(id = R.string.currentSize),
-                    summary = TextWrap(text = "$currentSize ($currentSizeBytes B)")
+                    title = TextWrap.Resource(id = R.string.currentSize),
+                    summary = TextWrap.Text(text = "$currentSize ($currentSizeBytes B)")
                 )
             }
             // TIME
@@ -82,21 +83,21 @@ class DetailsScreenViewModel @Inject constructor(
             val creationTime = DateFormat.format(pattern, item.creationTime).toString()
             addItem(
                 icon = IconWrap(imageVector = Icons.Outlined.AccessTime),
-                title = TextWrap(id = R.string.creationTime),
-                summary = TextWrap(text = creationTime)
+                title = TextWrap.Resource(id = R.string.creationTime),
+                summary = TextWrap.Text(text = creationTime)
             )
             if (item.modificationTime.toInt() != 0) {
                 val modificationTime = DateFormat.format(pattern, item.modificationTime).toString()
                 addItem(
                     icon = IconWrap(imageVector = Icons.Outlined.ChangeCircle),
-                    title = TextWrap(id = R.string.modificationTime),
-                    summary = TextWrap(text = modificationTime)
+                    title = TextWrap.Resource(id = R.string.modificationTime),
+                    summary = TextWrap.Text(text = modificationTime)
                 )
             }
         }
         if (isFile) {
             if (item.flags.isNotEmpty()) {
-                addGroup(name = TextWrap(id = item.itemType.title)) {
+                addGroup(name = TextWrap.Resource(id = item.itemType.title)) {
                     when (val flags = Json.decodeFromString<StorageItemFlags>(item.flags)) {
                         is StorageItemFlags.App -> flags.toString()
                         is StorageItemFlags.Image -> addImageFlags(flags)
@@ -105,47 +106,47 @@ class DetailsScreenViewModel @Inject constructor(
                     }
                 }
             }
-            addGroup(name = TextWrap(id = R.string.settings_encryption)) {
+            addGroup(name = TextWrap.Resource(id = R.string.settings_encryption)) {
                 addItem(
                     icon = IconWrap(imageVector = Icons.Outlined.Lock),
-                    title = TextWrap(id = R.string.encryption_type),
+                    title = TextWrap.Resource(id = R.string.encryption_type),
                     summary = if (item.encryptionType == -1) {
-                        TextWrap(id = R.string.withoutEncryption)
-                    } else TextWrap(text = KeysetTemplates.Stream.entries[item.encryptionType].name)
+                        TextWrap.Resource(id = R.string.withoutEncryption)
+                    } else TextWrap.Text(text = KeysetTemplates.Stream.entries[item.encryptionType].name)
                 )
                 addItem(
                     icon = IconWrap(imageVector = Icons.Outlined.Lock),
-                    title = TextWrap(id = R.string.thumb_encryption_type),
+                    title = TextWrap.Resource(id = R.string.thumb_encryption_type),
                     summary = if (item.thumbnailEncryptionType == -1) {
-                        TextWrap(id = R.string.withoutEncryption)
-                    } else TextWrap(text = KeysetTemplates.Stream.entries[item.thumbnailEncryptionType].name)
+                        TextWrap.Resource(id = R.string.withoutEncryption)
+                    } else TextWrap.Text(text = KeysetTemplates.Stream.entries[item.thumbnailEncryptionType].name)
                 )
             }
         } else {
             val content = Repository.getFolderContent(item.id)
-            addGroup(name = TextWrap(id = R.string.folder)) {
-                val files = Engine.appContext.getString(R.string.files)
-                val folders = Engine.appContext.getString(R.string.folders)
+            addGroup(name = TextWrap.Resource(id = R.string.folder)) {
+                val files = context.getString(R.string.files)
+                val folders = context.getString(R.string.folders)
                 val summaryText = "$files - ${content.filesCount}, $folders - ${content.foldersCount}"
                 addItem(
                     icon = IconWrap(imageVector = Icons.Outlined.Folder),
-                    title = TextWrap(id = R.string.folderContents),
-                    summary = TextWrap(text = summaryText)
+                    title = TextWrap.Resource(id = R.string.folderContents),
+                    summary = TextWrap.Text(text = summaryText)
                 )
             }
         }
-        if (isFile) addGroup(name = TextWrap(id = R.string.settings_security)) {
+        if (isFile) addGroup(name = TextWrap.Resource(id = R.string.settings_security)) {
             addItem(
                 icon = IconWrap(imageVector = Icons.Outlined.FolderOpen),
-                title = TextWrap(id = R.string.path),
-                summary = TextWrap(text = item.path)
+                title = TextWrap.Resource(id = R.string.path),
+                summary = TextWrap.Text(text = item.path)
             )
             val originalSizeBytes = item.originalSizeInBytes
             val originalSize = io.bytesToHumanReadable(originalSizeBytes)
             addItem(
                 icon = IconWrap(imageVector = Icons.Outlined.SdCard),
-                title = TextWrap(id = R.string.originalSize),
-                summary = TextWrap(text = "$originalSize ($originalSizeBytes B)")
+                title = TextWrap.Resource(id = R.string.originalSize),
+                summary = TextWrap.Text(text = "$originalSize ($originalSizeBytes B)")
             )
             if (item.thumb.isNotEmpty()) {
                 val thumbnailFile = io.getLocalFile(item.thumb)
@@ -153,13 +154,13 @@ class DetailsScreenViewModel @Inject constructor(
                 val thumbnailSize = io.bytesToHumanReadable(thumbnailSizeBytes)
                 addItem(
                     icon = IconWrap(imageVector = Icons.Outlined.FolderOpen),
-                    title = TextWrap(id = R.string.thumbnailPath),
-                    summary = TextWrap(text = item.thumb)
+                    title = TextWrap.Resource(id = R.string.thumbnailPath),
+                    summary = TextWrap.Text(text = item.thumb)
                 )
                 addItem(
                     icon = IconWrap(imageVector = Icons.Outlined.SdCard),
-                    title = TextWrap(id = R.string.thumbnailSize),
-                    summary = TextWrap(text = "$thumbnailSize ($thumbnailSizeBytes B)")
+                    title = TextWrap.Resource(id = R.string.thumbnailSize),
+                    summary = TextWrap.Text(text = "$thumbnailSize ($thumbnailSizeBytes B)")
                 )
             }
         }
@@ -168,24 +169,24 @@ class DetailsScreenViewModel @Inject constructor(
     private fun MutableList<DetailsItem>.addImageFlags(flags: StorageItemFlags.Image) {
         addItem(
             icon = IconWrap(imageVector = Icons.Outlined.PhotoSizeSelectLarge),
-            title = TextWrap(id = R.string.imageResolution),
-            summary = TextWrap(text = flags.resolution)
+            title = TextWrap.Resource(id = R.string.imageResolution),
+            summary = TextWrap.Text(text = flags.resolution)
         )
     }
 
     private fun MutableList<DetailsItem>.addMusicFlags(flags: StorageItemFlags.Music) {
         addItem(
             icon = IconWrap(imageVector = Icons.Outlined.Headphones),
-            title = TextWrap(id = R.string.sample_rate),
-            summary = TextWrap(text = "${flags.sampleRate}kHz")
+            title = TextWrap.Resource(id = R.string.sample_rate),
+            summary = TextWrap.Text(text = "${flags.sampleRate}kHz")
         )
     }
 
     private fun MutableList<DetailsItem>.addVideoFlags(flags: StorageItemFlags.Video) {
         addItem(
             icon = IconWrap(imageVector = Icons.Outlined.PhotoSizeSelectLarge),
-            title = TextWrap(id = R.string.videoResolution),
-            summary = TextWrap(text = flags.resolution)
+            title = TextWrap.Resource(id = R.string.videoResolution),
+            summary = TextWrap.Text(text = flags.resolution)
         )
     }
 
