@@ -12,8 +12,8 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val settingsDataStoreManager: SettingsDataStoreManager,
-    private val io: Io,
-    private val encryptionManager: EncryptionManager,
+    io: Io,
+    encryptionManager: EncryptionManager,
     val imageLoader: ImageLoader
 ): ViewModel() {
 
