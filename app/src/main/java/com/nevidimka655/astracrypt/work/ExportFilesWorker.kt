@@ -40,6 +40,7 @@ import kotlinx.serialization.json.Json
 class ExportFilesWorker @AssistedInject constructor(
     @Assisted context: Context,
     @Assisted params: WorkerParameters,
+    private val repository: Repository,
     private val keysetFactory: KeysetFactory,
     private val io: Io,
     private val workManager: WorkManager,
@@ -69,10 +70,10 @@ class ExportFilesWorker @AssistedInject constructor(
         val outputDirUri = inputData.getString(Args.uriDirOutput)!!
         val itemId = inputData.getLong(Args.itemId, 0)
         val startDir = createStartDocumentFile(outputDirUri.toUri())
-        val itemIsFile = Repository.getTypeById(id = itemId).isFile
+        val itemIsFile = repository.getTypeById(id = itemId).isFile
         if (startDir != null) {
             if (itemIsFile) fileIterator(
-                exportTuple = Repository.getDataToExport(encryptionInfo, itemId),
+                exportTuple = repository.getDataToExport(encryptionInfo, itemId),
                 parentDir = startDir
             ) else directoryIterator(
                 dirId = itemId,
@@ -86,10 +87,10 @@ class ExportFilesWorker @AssistedInject constructor(
         DocumentFile.fromTreeUri(applicationContext, startUri)
 
     private suspend fun directoryIterator(dirId: Long, parentDir: DocumentFile?) {
-        val dirName = Repository.getDataToExport(encryptionInfo, dirId).name
+        val dirName = repository.getDataToExport(encryptionInfo, dirId).name
         val newDirectory = parentDir?.createDirectory(dirName)
         if (newDirectory != null) {
-            Repository.getListDataToExportFromDir(encryptionInfo, dirId).forEach {
+            repository.getListDataToExportFromDir(encryptionInfo, dirId).forEach {
                 if (!isStopped) {
                     if (it.path.isNotEmpty()) fileIterator(it, newDirectory)
                     else directoryIterator(it.id, newDirectory)
