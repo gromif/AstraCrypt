@@ -1,6 +1,5 @@
 package com.nevidimka655.astracrypt.work.utils
 
-import android.annotation.SuppressLint
 import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.work.OneTimeWorkRequestBuilder
@@ -10,7 +9,6 @@ import androidx.work.workDataOf
 import com.nevidimka655.astracrypt.model.EncryptionInfo
 import com.nevidimka655.astracrypt.utils.Engine
 import com.nevidimka655.astracrypt.utils.Io
-import com.nevidimka655.astracrypt.utils.Randomizer
 import com.nevidimka655.astracrypt.work.LabCombinedZipWorker
 import com.nevidimka655.astracrypt.work.TransformDatabaseWorker
 import com.nevidimka655.astracrypt.work.TransformNotesWorker
@@ -19,17 +17,17 @@ import com.nevidimka655.crypto.tink.extensions.toBase64
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
-object WorkerFactory {
+class WorkerFactory(
+    private val keysetFactory: KeysetFactory,
+    private val io: Io
+) {
     private val worker get() = Engine.workManager
-    @SuppressLint("StaticFieldLeak")
-    private val io = Io(Engine.appContext, Randomizer()) // TODO: Replace with DI
     var transformWorkLiveData: LiveData<WorkInfo?>? = null
 
     fun startTransformDatabase(oldInfo: EncryptionInfo, newInfo: EncryptionInfo) {
         val associatedData = if (newInfo.isAssociatedDataEncrypted)
-            KeysetFactory.transformAssociatedDataToWorkInstance(
-                context = Engine.appContext,
-                bytesIn = KeysetFactory.associatedData,
+            keysetFactory.transformAssociatedDataToWorkInstance(
+                bytesIn = keysetFactory.associatedData,
                 encryptionMode = true,
                 authenticationTag = TransformDatabaseWorker.Args.TAG_ASSOCIATED_DATA_TRANSPORT
             ).toBase64()
@@ -49,9 +47,8 @@ object WorkerFactory {
 
     fun startTransformNotes(oldInfo: EncryptionInfo, newInfo: EncryptionInfo) {
         val associatedData = if (newInfo.isAssociatedDataEncrypted)
-            KeysetFactory.transformAssociatedDataToWorkInstance(
-                context = Engine.appContext,
-                bytesIn = KeysetFactory.associatedData,
+            keysetFactory.transformAssociatedDataToWorkInstance(
+                bytesIn = keysetFactory.associatedData,
                 encryptionMode = true,
                 authenticationTag = TransformNotesWorker.Args.TAG_ASSOCIATED_DATA_TRANSPORT
             ).toBase64()
