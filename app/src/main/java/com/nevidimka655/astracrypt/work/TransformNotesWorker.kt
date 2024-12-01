@@ -37,6 +37,7 @@ import kotlinx.serialization.json.Json
 class TransformNotesWorker @AssistedInject constructor(
     @Assisted appContext: Context,
     @Assisted params: WorkerParameters,
+    private val repository: Repository,
     private val keysetFactory: KeysetFactory,
 ) : CoroutineWorker(appContext, params) {
 
@@ -68,7 +69,7 @@ class TransformNotesWorker @AssistedInject constructor(
         shouldDecodeAssociatedData()
         var pageIndex = 0
         val pageSize = 20
-        var itemsList = Repository.getTransformNotesItems(pageSize, pageIndex)
+        var itemsList = repository.getTransformNotesItems(pageSize, pageIndex)
         while (itemsList.isNotEmpty()) {
             val encrypt = toPrimitive != null
             val isEncrypted = fromPrimitive != null
@@ -76,12 +77,12 @@ class TransformNotesWorker @AssistedInject constructor(
                 val name = doString(encrypt, isEncrypted, it.name)
                 val text = doString(encrypt, isEncrypted, it.text)
                 val textPreview = doString(encrypt, isEncrypted, it.textPreview)
-                Repository.updateTransformNotes(
+                repository.updateTransformNotes(
                     id = it.id, name = name, text = text, textPreview = textPreview
                 )
             }
             pageIndex++
-            itemsList = Repository.getTransformNotesItems(pageSize, pageIndex)
+            itemsList = repository.getTransformNotesItems(pageSize, pageIndex)
         }
         delay(500)
         Result.success()
