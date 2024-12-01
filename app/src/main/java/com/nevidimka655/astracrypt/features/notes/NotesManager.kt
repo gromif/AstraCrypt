@@ -10,7 +10,9 @@ import com.nevidimka655.astracrypt.room.entities.NoteItemEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class NotesManager {
+class NotesManager(
+    private val repository: Repository
+) {
     var titleState by mutableStateOf(TextFieldValue(""))
     var textState by mutableStateOf(TextFieldValue(""))
 
@@ -22,7 +24,7 @@ class NotesManager {
         title: String?
     ) = withContext(Dispatchers.IO) {
         this@NotesManager.noteId = noteId
-        val text = Repository.getNoteTextById(encryptionInfo, noteId)
+        val text = repository.getNoteTextById(encryptionInfo, noteId)
         titleState = TextFieldValue(title ?: "")
         textState = TextFieldValue(text ?: "")
     }
@@ -39,14 +41,14 @@ class NotesManager {
             textPreview = textPreview,
             creationTime = System.currentTimeMillis()
         )
-        Repository.run {
+        repository.run {
             if (noteId == 0L) insertNote(encryptionInfo, noteItemEntity)
             else updateNote(encryptionInfo, noteItemEntity)
         }
         reset()
     }
 
-    suspend fun delete(id: Long) = withContext(Dispatchers.IO) { Repository.deleteNoteById(id) }
+    suspend fun delete(id: Long) = withContext(Dispatchers.IO) { repository.deleteNoteById(id) }
 
     fun reset() {
         noteId = 0L
