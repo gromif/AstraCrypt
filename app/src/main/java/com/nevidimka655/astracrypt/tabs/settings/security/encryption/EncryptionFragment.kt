@@ -36,8 +36,6 @@ import com.nevidimka655.astracrypt.utils.billing.AlgorithmPaywallListFactory
 import com.nevidimka655.astracrypt.utils.extensions.requireMenuHost
 import com.nevidimka655.astracrypt.utils.shared_prefs.PrefsKeys
 import com.nevidimka655.astracrypt.utils.shared_prefs.PrefsManager
-import com.nevidimka655.astracrypt.work.utils.WorkerFactory
-import com.nevidimka655.crypto.tink.KeysetFactory
 import com.nevidimka655.crypto.tink.KeysetTemplates
 import com.nevidimka655.ui.compose_core.Preference
 import com.nevidimka655.ui.compose_core.PreferencesGroup
@@ -277,10 +275,10 @@ class EncryptionFragment : Fragment() {
             with(vm.encryptionManager) {
                 val fileEncryptionOrdinal = if (which > 0) {
                     val streamingType = KeysetTemplates.Stream.entries[which - 1]
-                    with(KeysetFactory) {
+                    /*with(KeysetFactory) {
                         stream(requireContext(), streamingType)
                         saveKeystoreFile()
-                    }
+                    }*/
                     streamingType.ordinal
                 } else -1
                 encryptionInfo =
