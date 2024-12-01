@@ -38,6 +38,7 @@ class TransformNotesWorker @AssistedInject constructor(
     @Assisted appContext: Context,
     @Assisted params: WorkerParameters,
     private val repository: Repository,
+    private val repositoryEncryption: RepositoryEncryption,
     private val keysetFactory: KeysetFactory,
 ) : CoroutineWorker(appContext, params) {
 
@@ -126,11 +127,11 @@ class TransformNotesWorker @AssistedInject constructor(
     } ?: value
 
     private fun encrypt(str: String) = if (str.isNotEmpty())
-        toPrimitive?.run { RepositoryEncryption.encryptStringField(this, str) }
+        toPrimitive?.run { repositoryEncryption.encryptStringField(this, str) }
             ?: str else str
 
     private fun decrypt(str: String) = if (str.isNotEmpty())
-        fromPrimitive?.run { RepositoryEncryption.decryptStringField(this, str) }
+        fromPrimitive?.run { repositoryEncryption.decryptStringField(this, str) }
             ?: str else str
 
     @SuppressLint("NewApi")
