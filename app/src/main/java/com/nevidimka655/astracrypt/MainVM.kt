@@ -38,12 +38,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -65,16 +63,6 @@ class MainVM @Inject constructor(
     var isSearchExpandedState by mutableStateOf(false)
     private var searchSetupJob: Job? = null
     private var searchDirsIndexesList: ArrayList<Long>? = null
-
-    val recentFilesStateFlow = repository.getRecentFilesFlow().map { list ->
-        if (encryptionInfo.isDatabaseEncrypted) try {
-            list.map {
-                repositoryEncryption.decryptStorageItemListTuple(encryptionInfo, it)
-            }
-        } catch (_: Exception) {
-            list
-        } else list
-    }.stateIn(viewModelScope, SharingStarted.Lazily, listOf())
 
     val filesNavigatorList = mutableStateListOf<NavigatorDirectory>()
     val currentNavigatorDirectoryId get() = filesNavigatorList.lastOrNull()?.id ?: 0

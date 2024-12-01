@@ -189,7 +189,7 @@ fun Main(
                         initialValue = ProfileInfo()
                     )
                     HomeScreen(
-                        recentItemsState = vm.recentFilesStateFlow.collectAsStateWithLifecycle(),
+                        recentItemsState = homeVm.recentFilesStateFlow.collectAsStateWithLifecycle(),
                         imageLoader = homeVm.imageLoader,
                         coilAvatarModel = homeVm.coilAvatarModel,
                         defaultAvatar = profileInfo.defaultAvatar,
