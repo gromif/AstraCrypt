@@ -17,7 +17,6 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingSource
 import androidx.paging.cachedIn
 import androidx.paging.map
-import androidx.work.WorkManager
 import coil.ImageLoader
 import coil.request.ImageRequest
 import com.nevidimka655.astracrypt.features.auth.AuthManager
@@ -74,7 +73,6 @@ class MainVM @Inject constructor(
     private val repositoryEncryption: RepositoryEncryption,
     private val keysetFactory: KeysetFactory,
     val io: Io,
-    val workManager: WorkManager,
     val authManager: AuthManager,
     val appearanceManager: AppearanceManager,
     val privacyPolicyManager: PrivacyPolicyManager,
