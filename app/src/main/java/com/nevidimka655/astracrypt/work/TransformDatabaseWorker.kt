@@ -39,7 +39,9 @@ import kotlin.random.Random
 class TransformDatabaseWorker @AssistedInject constructor(
     @Assisted appContext: Context,
     @Assisted params: WorkerParameters,
-    private val keysetFactory: KeysetFactory,
+    private val repository: Repository,
+    private val repositoryEncryption: RepositoryEncryption,
+    private val keysetFactory: KeysetFactory
 ) : CoroutineWorker(appContext, params) {
 
     object Args {
@@ -88,11 +90,11 @@ class TransformDatabaseWorker @AssistedInject constructor(
             shouldDecodeAssociatedData()
             var pageIndex = 0
             val pageSize = 20
-            var itemsList = Repository.getDatabaseTransformItems(pageSize, pageIndex)
+            var itemsList = repository.getDatabaseTransformItems(pageSize, pageIndex)
             while (itemsList.isNotEmpty()) {
                 iterateDatabaseItems(itemsList)
                 pageIndex++
-                itemsList = Repository.getDatabaseTransformItems(pageSize, pageIndex)
+                itemsList = repository.getDatabaseTransformItems(pageSize, pageIndex)
             }
         }
         delay(500)
@@ -143,7 +145,7 @@ class TransformDatabaseWorker @AssistedInject constructor(
             value = it.thumbnailEncryptionType
         )
         val details = operateStringField(encryptDetails, isFlagsEncrypted, it.flags)
-        Repository.updateDbEntry(
+        repository.updateDbEntry(
             id = it.id,
             name = name,
             thumb = thumbnail,
@@ -175,11 +177,11 @@ class TransformDatabaseWorker @AssistedInject constructor(
     ) = if (encrypt && toEncryption != -1) {
         if (!encrypted || isEncryptionDifferent) {
             val valueToEncrypt = if (fromEncryption == -1 || !encrypted) value
-            else RepositoryEncryption.decryptIntField(fromKeysetHandleKeyId, associatedInt, value)
-            RepositoryEncryption.encryptIntField(toKeysetHandleKeyId, associatedInt, valueToEncrypt)
+            else repositoryEncryption.decryptIntField(fromKeysetHandleKeyId, associatedInt, value)
+            repositoryEncryption.encryptIntField(toKeysetHandleKeyId, associatedInt, valueToEncrypt)
         } else value
     } else {
-        if (encrypted) RepositoryEncryption.decryptIntField(
+        if (encrypted) repositoryEncryption.decryptIntField(
             fromKeysetHandleKeyId,
             associatedInt,
             value
@@ -188,11 +190,11 @@ class TransformDatabaseWorker @AssistedInject constructor(
     }
 
     private fun encrypt(str: String) = if (str.isNotEmpty())
-        toPrimitive?.run { RepositoryEncryption.encryptStringField(this, str) }
+        toPrimitive?.run { repositoryEncryption.encryptStringField(this, str) }
             ?: str else str
 
     private fun decrypt(str: String) = if (str.isNotEmpty())
-        fromPrimitive?.run { RepositoryEncryption.decryptStringField(this, str) }
+        fromPrimitive?.run { repositoryEncryption.decryptStringField(this, str) }
             ?: str else str
 
     @SuppressLint("NewApi")
