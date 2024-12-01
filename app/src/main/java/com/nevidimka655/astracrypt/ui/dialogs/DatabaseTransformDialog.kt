@@ -40,7 +40,7 @@ class DatabaseTransformDialog : DialogFragment(R.layout.dialog_transform_db) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        WorkerFactory.transformWorkLiveData?.observe(viewLifecycleOwner) {
+        /*WorkerFactory.transformWorkLiveData?.observe(viewLifecycleOwner) {
             if (it != null) {
                 if (it.state.isFinished) with(vm) {
                     WorkerFactory.transformWorkLiveData = null
@@ -49,7 +49,7 @@ class DatabaseTransformDialog : DialogFragment(R.layout.dialog_transform_db) {
                     dismiss()
                 }
             }
-        }
+        }*/
     }
 
     override fun onDestroyView() {

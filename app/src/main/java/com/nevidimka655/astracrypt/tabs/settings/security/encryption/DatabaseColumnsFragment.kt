@@ -26,7 +26,6 @@ import com.nevidimka655.astracrypt.ui.dialogs.DatabaseTransformDialog
 import com.nevidimka655.astracrypt.ui.theme.AstraCryptTheme
 import com.nevidimka655.astracrypt.utils.enums.DatabaseColumns
 import com.nevidimka655.astracrypt.utils.extensions.requireMenuHost
-import com.nevidimka655.astracrypt.work.utils.WorkerFactory
 import com.nevidimka655.ui.compose_core.CheckBoxOneLineListItem
 import com.nevidimka655.ui.compose_core.PreferencesGroup
 import com.nevidimka655.ui.compose_core.PreferencesScreen
@@ -190,10 +189,10 @@ class DatabaseColumnsFragment : Fragment() {
     }
 
     private fun startDbTransformProcess() {
-        WorkerFactory.startTransformDatabase(
+        /*WorkerFactory.startTransformDatabase(
             oldInfo = encryptionInfo,
             newInfo = encryptionInfoNew
-        )
+        )*/
         DatabaseTransformDialog().show(childFragmentManager, null)
         saveEncryptionInfo()
     }

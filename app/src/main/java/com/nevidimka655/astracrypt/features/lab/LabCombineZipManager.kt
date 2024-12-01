@@ -30,12 +30,12 @@ class LabCombineZipManager {
     }
 
     suspend fun start(destinationUri: Uri) {
-        WorkerFactory.startCombinedZipWorker(
-            sourceUri = mutableListOfSources[0].uri,
-            destinationUri = destinationUri,
-            zipFilesContentStringArray = mutableListOfFiles.map { it.uri.toString() }
-                .toTypedArray()
-        )
+//        WorkerFactory.startCombinedZipWorker(
+//            sourceUri = mutableListOfSources[0].uri,
+//            destinationUri = destinationUri,
+//            zipFilesContentStringArray = mutableListOfFiles.map { it.uri.toString() }
+//                .toTypedArray()
+//        )
         clearFiles()
         clearSources()
     }

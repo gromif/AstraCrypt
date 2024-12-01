@@ -297,10 +297,10 @@ class EncryptionFragment : Fragment() {
             val newEncryptionInfo = oldEncryptionInfo
                 .copy(notesEncryptionOrdinal = notesEncryptionOrdinal)
             encryptionManager.encryptionInfo = newEncryptionInfo
-            WorkerFactory.startTransformNotes(
+            /*WorkerFactory.startTransformNotes(
                 oldInfo = oldEncryptionInfo,
                 newInfo = newEncryptionInfo
-            )
+            )*/
             DatabaseTransformDialog().show(childFragmentManager, null)
             withContext(Dispatchers.IO) { encryptionManager.save() }
         }
@@ -311,10 +311,10 @@ class EncryptionFragment : Fragment() {
             with(encryptionManager) {
                 val thumbEncryptionOrdinal = if (which > 0) {
                     val streamingType = KeysetTemplates.Stream.entries[which + 3]
-                    with(KeysetFactory) {
-                        stream(requireContext(), streamingType)
-                        saveKeystoreFile()
-                    }
+//                    with(KeysetFactory) {
+//                        stream(requireContext(), streamingType)
+//                        saveKeystoreFile()
+//                    }
                     streamingType.ordinal
                 } else -1
                 encryptionInfo = encryptionInfoNew
@@ -354,10 +354,10 @@ class EncryptionFragment : Fragment() {
                 isFlagsEncrypted || isPathEncrypted ||
                 isThumbEncryptionTypeEncrypted || isThumbnailEncrypted
             ) {
-                WorkerFactory.startTransformDatabase(
+                /*WorkerFactory.startTransformDatabase(
                     oldInfo = oldEncryptionInfo,
                     newInfo = newEncryptionInfo
-                )
+                )*/
                 DatabaseTransformDialog().show(childFragmentManager, null)
             }
         }
