@@ -12,7 +12,9 @@ import com.nevidimka655.crypto.tink.KeysetFactory
 import com.nevidimka655.crypto.tink.extensions.fromBase64
 import com.nevidimka655.crypto.tink.extensions.toBase64
 
-object RepositoryEncryption {
+class RepositoryEncryption(
+    private val keysetFactory: KeysetFactory
+) {
 
     fun decryptNotesPager(
         encryptionInfo: EncryptionInfo,
@@ -104,7 +106,7 @@ object RepositoryEncryption {
 
     fun decryptStringField(dbPrimitive: Aead, value: String) = dbPrimitive.run {
         val base64Decrypted = value.fromBase64()
-        decrypt(base64Decrypted, KeysetFactory.associatedData).decodeToString()
+        decrypt(base64Decrypted, keysetFactory.associatedData).decodeToString()
     }
 
     fun decryptIntField(
@@ -198,7 +200,7 @@ object RepositoryEncryption {
         ) else value
 
     fun encryptStringField(dbPrimitive: Aead, value: String) = dbPrimitive.run {
-        encrypt(value.toByteArray(), KeysetFactory.associatedData).toBase64()
+        encrypt(value.toByteArray(), keysetFactory.associatedData).toBase64()
     }
 
     fun encryptIntField(

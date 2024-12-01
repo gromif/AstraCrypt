@@ -1,35 +1,25 @@
 package com.nevidimka655.astracrypt.room
 
 import android.content.Context
-import androidx.room.Room
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.model.DetailsFolderContent
 import com.nevidimka655.astracrypt.model.EncryptionInfo
+import com.nevidimka655.astracrypt.room.daos.NotesDao
+import com.nevidimka655.astracrypt.room.daos.StorageItemDao
 import com.nevidimka655.astracrypt.room.entities.NoteItemEntity
 import com.nevidimka655.astracrypt.room.entities.StorageItemEntity
-import com.nevidimka655.astracrypt.utils.AppConfig
-import com.nevidimka655.astracrypt.utils.Engine
 import com.nevidimka655.astracrypt.utils.enums.DatabaseColumns
 import com.nevidimka655.astracrypt.utils.enums.StorageItemState
 import com.nevidimka655.astracrypt.utils.enums.StorageItemType
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.debounce
 
-object Repository {
-    private val database = Room.databaseBuilder(
-        Engine.appContext,
-        AppDatabase::class.java,
-        AppConfig.DB_NAME
-    ).build()
-    private var databaseExternal: AppDatabase? = null
-    private var storage = database.getStorageItemDao()
-    private var notes = database.getNotesDao()
-
-    fun switchDatabase(db: AppDatabase?) {
-        databaseExternal = db
-        storage = db?.getStorageItemDao() ?: database.getStorageItemDao()
-        notes = db?.getNotesDao() ?: database.getNotesDao()
-    }
+class Repository(
+    private val repositoryEncryption: RepositoryEncryption,
+    private val database: AppDatabase,
+    private val storage: StorageItemDao,
+    private val notes: NotesDao
+) {
 
     suspend fun createBasicFolders(context: Context, encryptionInfo: EncryptionInfo) = arrayOf(
         R.string.music, R.string.document, R.string.video, R.string.photo
@@ -42,15 +32,15 @@ object Repository {
     }
 
     suspend fun insert(encryptionInfo: EncryptionInfo, item: StorageItemEntity) = storage.insert(
-        RepositoryEncryption.encryptStorageItemEntity(encryptionInfo, item)
+        repositoryEncryption.encryptStorageItemEntity(encryptionInfo, item)
     )
 
     suspend fun insertNote(encryptionInfo: EncryptionInfo, noteItem: NoteItemEntity) = notes.insert(
-        RepositoryEncryption.encryptNoteItemEntity(encryptionInfo, noteItem)
+        repositoryEncryption.encryptNoteItemEntity(encryptionInfo, noteItem)
     )
 
     suspend fun updateNote(encryptionInfo: EncryptionInfo, noteItem: NoteItemEntity) = notes.update(
-        RepositoryEncryption.encryptNoteItemEntity(encryptionInfo, noteItem)
+        repositoryEncryption.encryptNoteItemEntity(encryptionInfo, noteItem)
     )
 
     suspend fun updateDbEntry(
@@ -114,14 +104,14 @@ object Repository {
         name: String
     ) {
         val newName = if (encryptionInfo.isDatabaseEncrypted) {
-            RepositoryEncryption.encryptName(encryptionInfo, name)
+            repositoryEncryption.encryptName(encryptionInfo, name)
         } else name
         storage.updateName(id, newName)
     }
 
     suspend fun getNoteTextById(encryptionInfo: EncryptionInfo, itemId: Long) = run {
         val text = notes.getTextId(itemId = itemId)
-        if (encryptionInfo.isNotesEncrypted) RepositoryEncryption.decryptNoteText(
+        if (encryptionInfo.isNotesEncrypted) repositoryEncryption.decryptNoteText(
             encryptionInfo, text
         ) else text
     }
@@ -129,16 +119,16 @@ object Repository {
     suspend fun getById(encryptionInfo: EncryptionInfo, itemId: Long) = run {
         val item = storage.getById(itemId)
         if (encryptionInfo.isDatabaseEncrypted) item.copy(
-            name = RepositoryEncryption.decryptName(encryptionInfo, item.name),
-            thumb = RepositoryEncryption.decryptThumb(encryptionInfo, item.thumb),
-            path = RepositoryEncryption.decryptPath(encryptionInfo, item.path),
-            flags = RepositoryEncryption.decryptFlags(encryptionInfo, item.flags),
-            encryptionType = RepositoryEncryption.decryptEncryptionType(
+            name = repositoryEncryption.decryptName(encryptionInfo, item.name),
+            thumb = repositoryEncryption.decryptThumb(encryptionInfo, item.thumb),
+            path = repositoryEncryption.decryptPath(encryptionInfo, item.path),
+            flags = repositoryEncryption.decryptFlags(encryptionInfo, item.flags),
+            encryptionType = repositoryEncryption.decryptEncryptionType(
                 encryptionInfo = encryptionInfo,
                 itemId = item.id,
                 value = item.encryptionType
             ),
-            thumbnailEncryptionType = RepositoryEncryption.decryptThumbEncryptionType(
+            thumbnailEncryptionType = repositoryEncryption.decryptThumbEncryptionType(
                 encryptionInfo = encryptionInfo,
                 itemId = item.id,
                 value = item.thumbnailEncryptionType
@@ -154,9 +144,9 @@ object Repository {
         val list = storage.getListDataToExport(dirId)
         if (encryptionInfo.isDatabaseEncrypted) list.map {
             it.copy(
-                name = RepositoryEncryption.decryptName(encryptionInfo, it.name),
-                path = RepositoryEncryption.decryptPath(encryptionInfo, it.path),
-                encryptionType = RepositoryEncryption.decryptEncryptionType(
+                name = repositoryEncryption.decryptName(encryptionInfo, it.name),
+                path = repositoryEncryption.decryptPath(encryptionInfo, it.path),
+                encryptionType = repositoryEncryption.decryptEncryptionType(
                     encryptionInfo, it.id, it.encryptionType
                 )
             )
@@ -166,9 +156,9 @@ object Repository {
     suspend fun getDataToExport(encryptionInfo: EncryptionInfo, itemId: Long) = run {
         val item = storage.getDataToExport(itemId)
         if (encryptionInfo.isDatabaseEncrypted) item.copy(
-            name = RepositoryEncryption.decryptName(encryptionInfo, item.name),
-            path = RepositoryEncryption.decryptPath(encryptionInfo, item.path),
-            encryptionType = RepositoryEncryption.decryptEncryptionType(
+            name = repositoryEncryption.decryptName(encryptionInfo, item.name),
+            path = repositoryEncryption.decryptPath(encryptionInfo, item.path),
+            encryptionType = repositoryEncryption.decryptEncryptionType(
                 encryptionInfo, item.id, item.encryptionType
             )
         ) else item
@@ -177,7 +167,7 @@ object Repository {
     suspend fun getName(encryptionInfo: EncryptionInfo, id: Long) = run {
         val name = storage.getName(id)
         if (encryptionInfo.isDatabaseEncrypted) {
-            RepositoryEncryption.decryptName(encryptionInfo, name)
+            repositoryEncryption.decryptName(encryptionInfo, name)
         } else name
     }
 
@@ -185,9 +175,9 @@ object Repository {
         val item = storage.getMinimalItemsDataInDir(dirId)
         if (encryptionInfo.isDatabaseEncrypted) item.map {
             it.copy(
-                name = RepositoryEncryption.decryptName(encryptionInfo, it.name),
-                thumb = RepositoryEncryption.decryptThumb(encryptionInfo, it.thumb),
-                path = RepositoryEncryption.decryptPath(encryptionInfo, it.path)
+                name = repositoryEncryption.decryptName(encryptionInfo, it.name),
+                thumb = repositoryEncryption.decryptThumb(encryptionInfo, it.thumb),
+                path = repositoryEncryption.decryptPath(encryptionInfo, it.path)
             )
         } else item
     }
@@ -195,29 +185,29 @@ object Repository {
     suspend fun getMinimalItemData(encryptionInfo: EncryptionInfo, id: Long) = run {
         val item = storage.getMinimalItemData(id)
         if (encryptionInfo.isDatabaseEncrypted) item.copy(
-            name = RepositoryEncryption.decryptName(encryptionInfo, item.name),
-            thumb = RepositoryEncryption.decryptThumb(encryptionInfo, item.thumb),
-            path = RepositoryEncryption.decryptPath(encryptionInfo, item.path)
+            name = repositoryEncryption.decryptName(encryptionInfo, item.name),
+            thumb = repositoryEncryption.decryptThumb(encryptionInfo, item.thumb),
+            path = repositoryEncryption.decryptPath(encryptionInfo, item.path)
         ) else item
     }
 
     suspend fun getDataForOpening(encryptionInfo: EncryptionInfo, id: Long) = run {
         val item = storage.getDataToOpen(id)
         if (encryptionInfo.isDatabaseEncrypted) item.copy(
-            name = RepositoryEncryption.decryptName(encryptionInfo, item.name),
-            encryptionType = RepositoryEncryption.decryptEncryptionType(
+            name = repositoryEncryption.decryptName(encryptionInfo, item.name),
+            encryptionType = repositoryEncryption.decryptEncryptionType(
                 encryptionInfo = encryptionInfo,
                 itemId = id,
                 value = item.encryptionType
             ),
-            path = RepositoryEncryption.decryptPath(encryptionInfo, item.path)
+            path = repositoryEncryption.decryptPath(encryptionInfo, item.path)
         ) else item
     }
 
     suspend fun getParentDirInfo(encryptionInfo: EncryptionInfo, dirId: Long) =
         storage.getParentDirInfo(dirId)?.run {
             if (encryptionInfo.isDatabaseEncrypted) copy(
-                name = RepositoryEncryption.decryptName(
+                name = repositoryEncryption.decryptName(
                     encryptionInfo = encryptionInfo,
                     value = this.name
                 )
