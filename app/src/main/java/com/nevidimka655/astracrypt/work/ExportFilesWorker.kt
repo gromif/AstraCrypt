@@ -40,6 +40,7 @@ import kotlinx.serialization.json.Json
 class ExportFilesWorker @AssistedInject constructor(
     @Assisted context: Context,
     @Assisted params: WorkerParameters,
+    private val keysetFactory: KeysetFactory,
     private val io: Io,
     private val workManager: WorkManager,
 ) : CoroutineWorker(context, params) {
@@ -103,12 +104,9 @@ class ExportFilesWorker @AssistedInject constructor(
         if (file != null) {
             val fileEncodedInputStream = io.getLocalFile(path).inputStream()
             val fileInputStream = if (encryptionType != -1) {
-                KeysetFactory.stream(
-                    applicationContext,
-                    KeysetTemplates.Stream.entries[encryptionType]
-                ).streamingAeadPrimitive().newDecryptingStream(
-                    fileEncodedInputStream, KeysetFactory.associatedData
-                )
+                keysetFactory.stream(KeysetTemplates.Stream.entries[encryptionType])
+                    .streamingAeadPrimitive()
+                    .newDecryptingStream(fileEncodedInputStream, keysetFactory.associatedData)
             } else fileEncodedInputStream
             contentResolver.openOutputStream(file.uri)?.use { output ->
                 fileInputStream.use { input ->
@@ -128,13 +126,12 @@ class ExportFilesWorker @AssistedInject constructor(
         if (encryptionInfo.isAssociatedDataEncrypted) {
             val bytes = inputData.getString(Args.associatedData)!!.fromBase64()
             TinkConfig.initAead()
-            val decodedData = KeysetFactory.transformAssociatedDataToWorkInstance(
-                context = applicationContext,
+            val decodedData = keysetFactory.transformAssociatedDataToWorkInstance(
                 bytesIn = bytes,
                 encryptionMode = false,
                 authenticationTag = Args.TAG_ASSOCIATED_DATA_TRANSPORT
             )
-            KeysetFactory.setAssociatedDataExplicitly(decodedData)
+            keysetFactory.setAssociatedDataExplicitly(decodedData)
         }
     }
 
