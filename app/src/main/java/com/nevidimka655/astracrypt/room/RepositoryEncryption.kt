@@ -9,12 +9,32 @@ import com.nevidimka655.astracrypt.room.entities.StorageItemEntity
 import com.nevidimka655.astracrypt.utils.enums.DatabaseColumns
 import com.nevidimka655.crypto.tink.IntEncode
 import com.nevidimka655.crypto.tink.KeysetFactory
+import com.nevidimka655.crypto.tink.KeysetGroupId
+import com.nevidimka655.crypto.tink.KeysetTemplates
+import com.nevidimka655.crypto.tink.extensions.aeadPrimitive
 import com.nevidimka655.crypto.tink.extensions.fromBase64
 import com.nevidimka655.crypto.tink.extensions.toBase64
 
 class RepositoryEncryption(
     private val keysetFactory: KeysetFactory
 ) {
+    private fun getDatabaseKeysetHandle(encryptionInfo: EncryptionInfo) = keysetFactory.aead(
+        KeysetTemplates.AEAD.entries[encryptionInfo.databaseEncryptionOrdinal]
+    )
+
+    private fun getDatabasePrimitive(encryptionInfo: EncryptionInfo) =
+        getDatabaseKeysetHandle(encryptionInfo).aeadPrimitive()
+
+    private fun dbKeyId(encryptionInfo: EncryptionInfo) =
+        getDatabaseKeysetHandle(encryptionInfo).primary.id
+
+    private fun getNotesKeysetHandle(encryptionInfo: EncryptionInfo) = keysetFactory.aead(
+        KeysetTemplates.AEAD.entries[encryptionInfo.notesEncryptionOrdinal],
+        keysetGroupId = KeysetGroupId.AEAD_NOTES
+    )
+
+    private fun getNotesPrimitive(encryptionInfo: EncryptionInfo) =
+        getNotesKeysetHandle(encryptionInfo).aeadPrimitive()
 
     fun decryptNotesPager(
         encryptionInfo: EncryptionInfo,
@@ -54,7 +74,7 @@ class RepositoryEncryption(
     ) = if (value.isNotEmpty()
         && encryptionInfo.isDatabaseEncrypted
         && encryptionInfo.isNameEncrypted
-    ) decryptStringField(encryptionInfo.dbPrimitive, value) else value
+    ) decryptStringField(getDatabasePrimitive(encryptionInfo), value) else value
 
     fun decryptThumb(
         encryptionInfo: EncryptionInfo,
@@ -62,7 +82,7 @@ class RepositoryEncryption(
     ) = if (value.isNotEmpty()
         && encryptionInfo.isDatabaseEncrypted
         && encryptionInfo.isThumbnailEncrypted
-    ) decryptStringField(encryptionInfo.dbPrimitive, value) else value
+    ) decryptStringField(getDatabasePrimitive(encryptionInfo), value) else value
 
     fun decryptPath(
         encryptionInfo: EncryptionInfo,
@@ -70,7 +90,7 @@ class RepositoryEncryption(
     ) = if (value.isNotEmpty()
         && encryptionInfo.isDatabaseEncrypted
         && encryptionInfo.isPathEncrypted
-    ) decryptStringField(encryptionInfo.dbPrimitive, value) else value
+    ) decryptStringField(getDatabasePrimitive(encryptionInfo), value) else value
 
     fun decryptFlags(
         encryptionInfo: EncryptionInfo,
@@ -78,7 +98,7 @@ class RepositoryEncryption(
     ) = if (value.isNotEmpty()
         && encryptionInfo.isDatabaseEncrypted
         && encryptionInfo.isFlagsEncrypted
-    ) decryptStringField(encryptionInfo.dbPrimitive, value) else value
+    ) decryptStringField(getDatabasePrimitive(encryptionInfo), value) else value
 
     fun decryptThumbEncryptionType(
         encryptionInfo: EncryptionInfo,
@@ -87,7 +107,7 @@ class RepositoryEncryption(
     ) = if (encryptionInfo.isDatabaseEncrypted
         && encryptionInfo.isThumbEncryptionTypeEncrypted
     ) decryptIntField(
-        encryptionInfo.dbKeyId,
+        dbKeyId(encryptionInfo),
         itemId.toInt() * DatabaseColumns.ThumbEncryptionType.ordinal,
         value
     ) else value
@@ -99,14 +119,14 @@ class RepositoryEncryption(
     ) = if (encryptionInfo.isDatabaseEncrypted
         && encryptionInfo.isEncryptionTypeEncrypted
     ) decryptIntField(
-        encryptionInfo.dbKeyId,
+        dbKeyId(encryptionInfo),
         itemId.toInt() * DatabaseColumns.EncryptionType.ordinal,
         value
     ) else value
 
-    fun decryptStringField(dbPrimitive: Aead, value: String) = dbPrimitive.run {
+    fun decryptStringField(aead: Aead, value: String): String {
         val base64Decrypted = value.fromBase64()
-        decrypt(base64Decrypted, keysetFactory.associatedData).decodeToString()
+        return aead.decrypt(base64Decrypted, keysetFactory.associatedData).decodeToString()
     }
 
     fun decryptIntField(
@@ -120,45 +140,45 @@ class RepositoryEncryption(
         value: String
     ) = if (encryptionInfo.isDatabaseEncrypted
         && encryptionInfo.isNameEncrypted
-    ) encryptStringField(encryptionInfo.dbPrimitive, value)
+    ) encryptStringField(getDatabasePrimitive(encryptionInfo), value)
     else value
 
     private fun encryptNoteName(
         encryptionInfo: EncryptionInfo,
         value: String?
-    ) = value?.run { encryptStringField(encryptionInfo.notesPrimitive, this) }
+    ) = value?.run { encryptStringField(getNotesPrimitive(encryptionInfo), this) }
 
     private fun encryptNoteTextPreview(
         encryptionInfo: EncryptionInfo,
         value: String?
-    ) = value?.run { encryptStringField(encryptionInfo.notesPrimitive, this) }
+    ) = value?.run { encryptStringField(getNotesPrimitive(encryptionInfo), this) }
 
     private fun encryptNoteText(
         encryptionInfo: EncryptionInfo,
         value: String?
-    ) = value?.run { encryptStringField(encryptionInfo.notesPrimitive, this) }
+    ) = value?.run { encryptStringField(getNotesPrimitive(encryptionInfo), this) }
 
     private fun decryptNoteName(
         encryptionInfo: EncryptionInfo,
         value: String?
-    ) = value?.run { decryptStringField(encryptionInfo.notesPrimitive, this) }
+    ) = value?.run { decryptStringField(getNotesPrimitive(encryptionInfo), this) }
 
     private fun decryptNoteTextPreview(
         encryptionInfo: EncryptionInfo,
         value: String?
-    ) = value?.run { decryptStringField(encryptionInfo.notesPrimitive, this) }
+    ) = value?.run { decryptStringField(getNotesPrimitive(encryptionInfo), this) }
 
     fun decryptNoteText(
         encryptionInfo: EncryptionInfo,
         value: String?
-    ) = value?.run { decryptStringField(encryptionInfo.notesPrimitive, this) }
+    ) = value?.run { decryptStringField(getNotesPrimitive(encryptionInfo), this) }
 
     fun encryptThumb(
         encryptionInfo: EncryptionInfo,
         value: String
     ) = if (encryptionInfo.isDatabaseEncrypted
         && encryptionInfo.isThumbnailEncrypted
-    ) encryptStringField(encryptionInfo.dbPrimitive, value)
+    ) encryptStringField(getDatabasePrimitive(encryptionInfo), value)
     else value
 
     fun encryptPath(
@@ -166,7 +186,7 @@ class RepositoryEncryption(
         value: String
     ) = if (encryptionInfo.isDatabaseEncrypted
         && encryptionInfo.isPathEncrypted
-    ) encryptStringField(encryptionInfo.dbPrimitive, value)
+    ) encryptStringField(getDatabasePrimitive(encryptionInfo), value)
     else value
 
     fun encryptFlags(
@@ -174,7 +194,7 @@ class RepositoryEncryption(
         value: String
     ) = if (encryptionInfo.isDatabaseEncrypted
         && encryptionInfo.isFlagsEncrypted
-    ) encryptStringField(encryptionInfo.dbPrimitive, value)
+    ) encryptStringField(getDatabasePrimitive(encryptionInfo), value)
     else value
 
     fun encryptThumbEncryptionType(
@@ -183,7 +203,7 @@ class RepositoryEncryption(
         value: Int
     ) =
         if (encryptionInfo.isDatabaseEncrypted && encryptionInfo.isThumbEncryptionTypeEncrypted) encryptIntField(
-            encryptionInfo.dbKeyId,
+            dbKeyId(encryptionInfo),
             itemId.toInt() * DatabaseColumns.ThumbEncryptionType.ordinal,
             value
         ) else value
@@ -194,7 +214,7 @@ class RepositoryEncryption(
         value: Int
     ) =
         if (encryptionInfo.isDatabaseEncrypted && encryptionInfo.isEncryptionTypeEncrypted) encryptIntField(
-            encryptionInfo.dbKeyId,
+            dbKeyId(encryptionInfo),
             itemId.toInt() * DatabaseColumns.EncryptionType.ordinal,
             value
         ) else value

@@ -1,10 +1,5 @@
 package com.nevidimka655.astracrypt.model
 
-import com.nevidimka655.astracrypt.utils.Engine
-import com.nevidimka655.crypto.tink.KeysetFactory
-import com.nevidimka655.crypto.tink.KeysetGroupId
-import com.nevidimka655.crypto.tink.KeysetTemplates
-import com.nevidimka655.crypto.tink.extensions.aeadPrimitive
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -24,22 +19,6 @@ data class EncryptionInfo(
 
     @SerialName("k") val isAssociatedDataEncrypted: Boolean = false
 ) {
-    private val dbKeysetHandle by lazy {
-        KeysetFactory.aead(
-            Engine.appContext,
-            KeysetTemplates.AEAD.entries[databaseEncryptionOrdinal]
-        )
-    }
-    val dbPrimitive by lazy { dbKeysetHandle.aeadPrimitive() }
-    private val notesKeysetHandle by lazy {
-        KeysetFactory.aead(
-            Engine.appContext,
-            KeysetTemplates.AEAD.entries[notesEncryptionOrdinal],
-            keysetGroupId = KeysetGroupId.AEAD_NOTES
-        )
-    }
-    val notesPrimitive by lazy { notesKeysetHandle.aeadPrimitive() }
-    val dbKeyId by lazy { dbKeysetHandle.primary.id }
     val isDatabaseEncrypted by lazy { databaseEncryptionOrdinal != -1 }
     val isNotesEncrypted by lazy { notesEncryptionOrdinal != -1 }
 }
