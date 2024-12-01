@@ -294,8 +294,8 @@ class AuthenticationFragment : Fragment() {
         newState: Boolean,
         passPhrase: String
     ) {
-        if (newState) KeysetFactory.encryptAssociatedData(passPhrase)
-        else KeysetFactory.decryptAssociatedData()
+        /*if (newState) KeysetFactory.encryptAssociatedData(passPhrase)
+        else KeysetFactory.decryptAssociatedData()*/
         encryptionManager.encryptionInfo = currentEncryptionInfo.copy(
             isAssociatedDataEncrypted = newState
         )
