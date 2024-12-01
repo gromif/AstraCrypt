@@ -23,8 +23,17 @@ object RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideRepository(database: AppDatabase, storage: StorageItemDao, notes: NotesDao) =
-        Repository(database = database, storage = storage, notes = notes)
+    fun provideRepository(
+        repositoryEncryption: RepositoryEncryption,
+        database: AppDatabase,
+        storage: StorageItemDao,
+        notes: NotesDao
+    ) = Repository(
+        repositoryEncryption = repositoryEncryption,
+        database = database,
+        storage = storage,
+        notes = notes
+    )
 
     @Singleton
     @Provides
