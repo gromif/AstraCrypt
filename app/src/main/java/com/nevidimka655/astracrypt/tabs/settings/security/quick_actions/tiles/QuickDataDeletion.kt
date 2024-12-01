@@ -19,6 +19,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class QuickDataDeletion @Inject constructor(): TileServiceCoroutine() {
     @Inject lateinit var io: Io
+    @Inject lateinit var keysetFactory: KeysetFactory
 
     override fun onClick() {
         super.onClick()
@@ -40,7 +41,7 @@ class QuickDataDeletion @Inject constructor(): TileServiceCoroutine() {
             Repository.clearAllTables()
             PrefsManager.clearAllPrefs()
 
-            RandomAccessFile(KeysetFactory.dataFile, "rws").use {
+            RandomAccessFile(keysetFactory.dataFile, "rws").use {
                 val byteArray = ByteArray(96)
                 val secureSeed = "${System.currentTimeMillis()}AC_$classLoader".toByteArray()
                 secureRandom(secureSeed).nextBytes(byteArray)
