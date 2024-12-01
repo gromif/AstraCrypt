@@ -70,6 +70,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainVM @Inject constructor(
+    private val repository: Repository,
+    private val repositoryEncryption: RepositoryEncryption,
     private val keysetFactory: KeysetFactory,
     val io: Io,
     val workManager: WorkManager,
@@ -86,10 +88,10 @@ class MainVM @Inject constructor(
     private var searchSetupJob: Job? = null
     private var searchDirsIndexesList: ArrayList<Long>? = null
 
-    val recentFilesStateFlow = Repository.getRecentFilesFlow().map { list ->
+    val recentFilesStateFlow = repository.getRecentFilesFlow().map { list ->
         if (encryptionInfo.isDatabaseEncrypted) try {
             list.map {
-                RepositoryEncryption.decryptStorageItemListTuple(encryptionInfo, it)
+                repositoryEncryption.decryptStorageItemListTuple(encryptionInfo, it)
             }
         } catch (_: Exception) {
             list
@@ -125,14 +127,14 @@ class MainVM @Inject constructor(
             initialLoadSize = AppConfig.PAGING_INITIAL_LOAD
         ),
         pagingSourceFactory = {
-            Repository.getList(
+            repository.getList(
                 parentDirectoryId = currentNavigatorDirectoryId,
                 searchQuery = lastSearchQuery,
                 dirIdsForSearch = searchDirsIndexesList,
                 isNameEncrypted = encryptionInfo.isDatabaseEncrypted && encryptionInfo.isNameEncrypted
             ).also { pagingSource = it }
         }
-    ).flow.map { RepositoryEncryption.decryptPager(encryptionInfo, it) }.cachedIn(viewModelScope)
+    ).flow.map { repositoryEncryption.decryptPager(encryptionInfo, it) }.cachedIn(viewModelScope)
 
     val starredPagingFlow = Pager(
         PagingConfig(
@@ -141,11 +143,11 @@ class MainVM @Inject constructor(
             initialLoadSize = AppConfig.PAGING_INITIAL_LOAD
         ),
         pagingSourceFactory = {
-            Repository.getStarredList(
+            repository.getStarredList(
                 lastSearchQuery
             ).also { pagingStarredSource = it }
         }
-    ).flow.map { RepositoryEncryption.decryptPager(encryptionInfo, it) }.cachedIn(viewModelScope)
+    ).flow.map { repositoryEncryption.decryptPager(encryptionInfo, it) }.cachedIn(viewModelScope)
 
     val notesPagingFlow = Pager(
         PagingConfig(
@@ -153,10 +155,10 @@ class MainVM @Inject constructor(
             enablePlaceholders = false,
             initialLoadSize = 10
         ),
-        pagingSourceFactory = { Repository.getNotesList() }
+        pagingSourceFactory = { repository.getNotesList() }
     ).flow.map { pagingData ->
         val timePattern = "d MMMM yyyy"
-        RepositoryEncryption.decryptNotesPager(encryptionInfo, pagingData).map {
+        repositoryEncryption.decryptNotesPager(encryptionInfo, pagingData).map {
             Notes.Item(
                 id = it.id,
                 title = it.name,
@@ -214,7 +216,7 @@ class MainVM @Inject constructor(
     }
 
     fun newDirectory(directoryName: String) = viewModelScope.launch(Dispatchers.IO) {
-        Repository.newDirectory(
+        repository.newDirectory(
             encryptionInfo = encryptionInfo,
             directoryName = directoryName,
             parentDirectoryId = filesNavigatorList.lastOrNull()?.id
@@ -224,7 +226,7 @@ class MainVM @Inject constructor(
 
     fun delete(storageItemId: Long) = viewModelScope.launch(Dispatchers.IO) {
         val idsList = arrayListOf<Long>()
-        val itemToDelete = Repository.getMinimalItemData(encryptionInfo, storageItemId)
+        val itemToDelete = repository.getMinimalItemData(encryptionInfo, storageItemId)
         suspend fun deleteIterator(itemToDelete: StorageItemMinimalTuple) {
             idsList.add(itemToDelete.id)
             if (itemToDelete.path.isNotEmpty()) {
@@ -234,12 +236,12 @@ class MainVM @Inject constructor(
                     thumbLocalFile.delete()
                     localFile.delete()
                 }
-            } else Repository.getMinimalItemsDataInDir(encryptionInfo, itemToDelete.id).forEach {
+            } else repository.getMinimalItemsDataInDir(encryptionInfo, itemToDelete.id).forEach {
                 deleteIterator(it)
             }
         }
         deleteIterator(itemToDelete)
-        Repository.deleteByIds(idsList)
+        repository.deleteByIds(idsList)
         showSnackbar(
             if (itemToDelete.path.isEmpty()) R.string.snack_folderDeleted
             else R.string.snack_itemsDeleted
@@ -252,7 +254,7 @@ class MainVM @Inject constructor(
     }
 
     fun move(itemsArr: List<Long>, movingDirId: Long?) = viewModelScope.launch(Dispatchers.IO) {
-        Repository.moveItems(
+        repository.moveItems(
             idsArray = itemsArr,
             newDirId = movingDirId ?: 0
         )
@@ -270,7 +272,7 @@ class MainVM @Inject constructor(
                     val array = searchDirsIndexesList!!
                     suspend fun iterate(id: Long) {
                         array.add(id)
-                        Repository.getDirIdsList(id).forEach {
+                        repository.getDirIdsList(id).forEach {
                             iterate(it)
                         }
                     }
@@ -363,7 +365,7 @@ class MainVM @Inject constructor(
         io.dataDir.mkdir()
         keysetFactory.associatedData
         viewModelScope.launch(Dispatchers.IO) {
-            Repository.createBasicFolders(Engine.appContext, encryptionInfo)
+            repository.createBasicFolders(Engine.appContext, encryptionInfo)
         }
     }
 
