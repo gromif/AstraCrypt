@@ -54,6 +54,7 @@ import java.io.OutputStream
 class ImportFilesWorker @AssistedInject constructor(
     @Assisted context: Context,
     @Assisted params: WorkerParameters,
+    private val keysetFactory: KeysetFactory,
     private val io: Io,
     private val randomizer: Randomizer,
     private val imageLoader: ImageLoader,
@@ -90,13 +91,10 @@ class ImportFilesWorker @AssistedInject constructor(
         TinkConfig.initStream()
         shouldDecodeAssociatedData()
         val keysetHandleForFileEncryption = if (fileEncryption > -1) {
-            KeysetFactory.stream(applicationContext, KeysetTemplates.Stream.entries[fileEncryption])
+            keysetFactory.stream(KeysetTemplates.Stream.entries[fileEncryption])
         } else null
         val keysetHandleForThumbEncryption = if (thumbEncryption > -1) {
-            KeysetFactory.stream(
-                applicationContext,
-                KeysetTemplates.Stream.entries[thumbEncryption]
-            )
+            keysetFactory.stream(KeysetTemplates.Stream.entries[thumbEncryption])
         } else null
         val fileEncryptionPrimitive = keysetHandleForFileEncryption?.streamingAeadPrimitive()
         val thumbEncryptionPrimitive = keysetHandleForThumbEncryption?.streamingAeadPrimitive()
@@ -126,13 +124,12 @@ class ImportFilesWorker @AssistedInject constructor(
         if (encryptionInfo.isAssociatedDataEncrypted) {
             TinkConfig.initAead()
             val bytes = inputData.getString(Args.associatedData)!!.fromBase64()
-            val decodedData = KeysetFactory.transformAssociatedDataToWorkInstance(
-                context = applicationContext,
+            val decodedData = keysetFactory.transformAssociatedDataToWorkInstance(
                 bytesIn = bytes,
                 encryptionMode = false,
                 authenticationTag = Args.TAG_ASSOCIATED_DATA_TRANSPORT
             )
-            KeysetFactory.setAssociatedDataExplicitly(decodedData)
+            keysetFactory.setAssociatedDataExplicitly(decodedData)
         }
     }
 
@@ -165,7 +162,7 @@ class ImportFilesWorker @AssistedInject constructor(
         val outFile = File("${io.dataDir}/$outRelativePath")
         contentResolver.openInputStream(fileUri)!!.use { inStream ->
             filePrimitive?.newEncryptingStream(
-                outFile.outputStream(), KeysetFactory.associatedData
+                outFile.outputStream(), keysetFactory.associatedData
             )?.use { writeData(inStream, it) } ?: outFile.outputStream().use {
                 writeData(inStream, it)
             }
@@ -312,7 +309,7 @@ class ImportFilesWorker @AssistedInject constructor(
         val fileOut = File("${io.dataDir}/$relativePath")
         primitive?.newEncryptingStream(
             fileOut.outputStream(),
-            KeysetFactory.associatedData
+            keysetFactory.associatedData
         )?.use {
             it.write(compressedByteStream.toByteArray())
         } ?: fileOut.outputStream().use { it.write(compressedByteStream.toByteArray()) }
