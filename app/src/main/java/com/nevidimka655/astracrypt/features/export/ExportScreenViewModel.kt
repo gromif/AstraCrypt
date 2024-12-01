@@ -41,6 +41,7 @@ private typealias Args = ExportFilesWorker.Args
 
 @HiltViewModel
 class ExportScreenViewModel @Inject constructor(
+    private val keysetFactory: KeysetFactory,
     val io: Io,
     val workManager: WorkManager
 ) : ViewModel() {
@@ -63,9 +64,8 @@ class ExportScreenViewModel @Inject constructor(
         output: String
     ) = viewModelScope.launch {
         val associatedData = if (encryptionInfo.isAssociatedDataEncrypted)
-            KeysetFactory.transformAssociatedDataToWorkInstance(
-                context = Engine.appContext,
-                bytesIn = KeysetFactory.associatedData,
+            keysetFactory.transformAssociatedDataToWorkInstance(
+                bytesIn = keysetFactory.associatedData,
                 encryptionMode = true,
                 authenticationTag = Args.TAG_ASSOCIATED_DATA_TRANSPORT
             ).toBase64()
@@ -95,11 +95,8 @@ class ExportScreenViewModel @Inject constructor(
             if (exportTuple.encryptionType == -1) inputStream()
             else {
                 val aeadTemplate = KeysetTemplates.Stream.entries[exportTuple.encryptionType]
-                KeysetFactory.stream(Engine.appContext, aeadTemplate).streamingAeadPrimitive()
-                    .newDecryptingStream(
-                        inputStream(),
-                        KeysetFactory.associatedData
-                    )
+                keysetFactory.stream(aeadTemplate).streamingAeadPrimitive()
+                    .newDecryptingStream(inputStream(), keysetFactory.associatedData)
             }
         }
         inStream.use { ins ->
