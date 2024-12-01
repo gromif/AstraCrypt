@@ -16,7 +16,6 @@ import kotlinx.coroutines.flow.debounce
 
 class Repository(
     private val repositoryEncryption: RepositoryEncryption,
-    private val database: AppDatabase,
     private val storage: StorageItemDao,
     private val notes: NotesDao
 ) {
@@ -285,9 +284,5 @@ class Repository(
     fun getFilesCountFlow() = storage.getFilesCountFlow().debounce(200)
 
     suspend fun getFilesCount() = storage.getFilesCount()
-
-    fun clearAllTables() {
-        database.clearAllTables()
-    }
 
 }

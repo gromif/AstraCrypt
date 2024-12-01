@@ -25,12 +25,10 @@ object RepositoryModule {
     @Provides
     fun provideRepository(
         repositoryEncryption: RepositoryEncryption,
-        database: AppDatabase,
         storage: StorageItemDao,
         notes: NotesDao
     ) = Repository(
         repositoryEncryption = repositoryEncryption,
-        database = database,
         storage = storage,
         notes = notes
     )
