@@ -17,7 +17,7 @@ class ToolsManager(
         ?: LabCombineZipManager().also { _labCombineZipManager = it }
 
     private var _notesManager: NotesManager? = null
-    val notesManager get() = _notesManager ?: NotesManager().also { _notesManager = it }
+    val notesManager get() = _notesManager!!
 
     private var _calculatorManager: CalculatorManagerWrap? = null
     val calculatorManager get() = _calculatorManager ?: CalculatorManagerWrap().also { _calculatorManager = it }

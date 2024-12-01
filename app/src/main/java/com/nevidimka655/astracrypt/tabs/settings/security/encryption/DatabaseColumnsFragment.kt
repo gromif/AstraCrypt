@@ -1,38 +1,9 @@
 package com.nevidimka655.astracrypt.tabs.settings.security.encryption
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.platform.ComposeView
-import androidx.compose.ui.platform.ViewCompositionStrategy
-import androidx.compose.ui.res.stringResource
-import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import com.nevidimka655.astracrypt.MainVM
-import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.model.EncryptionInfo
-import com.nevidimka655.astracrypt.ui.dialogs.DatabaseTransformDialog
-import com.nevidimka655.astracrypt.ui.theme.AstraCryptTheme
-import com.nevidimka655.astracrypt.utils.enums.DatabaseColumns
-import com.nevidimka655.astracrypt.utils.extensions.requireMenuHost
-import com.nevidimka655.ui.compose_core.CheckBoxOneLineListItem
-import com.nevidimka655.ui.compose_core.PreferencesGroup
-import com.nevidimka655.ui.compose_core.PreferencesScreen
-import com.nevidimka655.ui.compose_core.dialogs.Dialogs
 
 class DatabaseColumnsFragment : Fragment() {
-    private val vm by activityViewModels<MainVM>()
+    /*private val vm by activityViewModels<MainVM>()
     private val vmState by viewModels<DatabaseColumnsViewModel>()
     private val encryptionManager get() = vm.encryptionManager
     private val encryptionInfo get() = encryptionManager.encryptionInfo
@@ -189,17 +160,17 @@ class DatabaseColumnsFragment : Fragment() {
     }
 
     private fun startDbTransformProcess() {
-        /*WorkerFactory.startTransformDatabase(
+        *//*WorkerFactory.startTransformDatabase(
             oldInfo = encryptionInfo,
             newInfo = encryptionInfoNew
-        )*/
+        )*//*
         DatabaseTransformDialog().show(childFragmentManager, null)
         saveEncryptionInfo()
     }
 
     private fun saveEncryptionInfo() = with(encryptionManager) {
-        encryptionInfo = encryptionInfoNew
-        save()
-    }
+        *//*encryptionInfo = encryptionInfoNew
+        save()*//*
+    }*/
 
 }

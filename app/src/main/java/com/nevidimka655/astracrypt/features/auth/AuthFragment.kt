@@ -1,23 +1,11 @@
 package com.nevidimka655.astracrypt.features.auth
 
-import android.os.Bundle
-import android.view.View
-import android.view.WindowManager
-import android.widget.Toast
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
-import com.nevidimka655.astracrypt.MainVM
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.databinding.FragmentAuthBinding
-import com.nevidimka655.astracrypt.features.profile.AvatarIds
-import com.nevidimka655.astracrypt.utils.AppConfig
-import com.nevidimka655.astracrypt.utils.extensions.withViewLifecycle
 
 class AuthFragment : Fragment(R.layout.fragment_auth) {
 
-    private val vm by activityViewModels<MainVM>()
+    /*private val vm by activityViewModels<MainVM>()
     private val encryptionInfo get() = vm.encryptionManager.encryptionInfo
     private val authManager get() = vm.authManager
     private val info get() = authManager.info
@@ -59,7 +47,7 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
             counterMaxLength = AppConfig.AUTH_PASSWORD_MAX_LENGTH
         }
         fab.setOnClickListener {
-            /*val password = passwordEditText.text.toString().trim()
+            val password = passwordEditText.text.toString().trim()
             val isPasswordCorrect = password.isNotEmpty()
                     && password.length <= AppConfig.AUTH_PASSWORD_MAX_LENGTH
                     && authManager.checkPassword(password)
@@ -74,7 +62,7 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
             }
             else Toast.makeText(
                 requireContext(), getString(R.string.t_invalidPass), Toast.LENGTH_SHORT
-            ).show()*/
+            ).show()
         }
     }
 
@@ -86,6 +74,6 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
-    }
+    }*/
 
 }

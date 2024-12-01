@@ -7,6 +7,7 @@ import coil.request.CachePolicy
 import coil.transition.CrossfadeTransition
 import com.nevidimka655.astracrypt.utils.Io
 import com.nevidimka655.astracrypt.utils.TinkCoilFetcherFactory
+import com.nevidimka655.crypto.tink.KeysetFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -38,8 +39,9 @@ class CoilModule {
     @Singleton
     @Provides
     fun provideTinkCoilFetcherFactory(
-        io: Io
-    ): TinkCoilFetcherFactory = TinkCoilFetcherFactory(io = io)
+        io: Io,
+        keysetFactory: KeysetFactory
+    ): TinkCoilFetcherFactory = TinkCoilFetcherFactory(io = io, keysetFactory = keysetFactory)
 
     @Singleton
     @Provides

@@ -5,7 +5,6 @@ import androidx.annotation.RequiresApi
 import com.nevidimka655.astracrypt.room.AppDatabase
 import com.nevidimka655.astracrypt.utils.Engine
 import com.nevidimka655.astracrypt.utils.Io
-import com.nevidimka655.astracrypt.utils.shared_prefs.PrefsManager
 import com.nevidimka655.crypto.tink.KeysetFactory
 import com.nevidimka655.crypto.tink.extensions.secureRandom
 import com.nevidimka655.tiles_with_coroutines.TileServiceCoroutine
@@ -40,7 +39,6 @@ class QuickDataDeletion @Inject constructor(): TileServiceCoroutine() {
             }
 
             database.clearAllTables()
-            PrefsManager.clearAllPrefs()
 
             RandomAccessFile(keysetFactory.dataFile, "rws").use {
                 val byteArray = ByteArray(96)

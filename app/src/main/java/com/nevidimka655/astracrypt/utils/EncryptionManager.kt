@@ -4,23 +4,19 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import com.nevidimka655.astracrypt.model.EncryptionInfo
+import com.nevidimka655.astracrypt.utils.datastore.SettingsDataStoreManager
 import com.nevidimka655.crypto.tink.KeysetFactory
 import com.nevidimka655.crypto.tink.KeysetTemplates
-import com.nevidimka655.astracrypt.utils.shared_prefs.PrefsKeys
-import com.nevidimka655.astracrypt.utils.shared_prefs.PrefsManager
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
+import kotlinx.coroutines.flow.first
 
-class EncryptionManager {
+class EncryptionManager(
+    private val settingsDataStoreManager: SettingsDataStoreManager,
+    private val keysetFactory: KeysetFactory
+) {
     var encryptionInfo by mutableStateOf(EncryptionInfo())
 
-    fun loadEncryptionInfo() {
-        val serializedInfo = PrefsManager.settings.getString(
-            key = PrefsKeys.ENCRYPTION,
-            defaultValue = ""
-        )
-        encryptionInfo = if (!serializedInfo.isNullOrEmpty()) {
-            val info = Json.decodeFromString<EncryptionInfo>(serializedInfo)
+    suspend fun loadEncryptionInfo() {
+        encryptionInfo = settingsDataStoreManager.encryptionInfoFlow.first().let { info ->
             if (info.fileEncryptionOrdinal > 15 || info.fileEncryptionOrdinal < -1) info.copy(
                 fileEncryptionOrdinal = decodeIntField(
                     field = info.fileEncryptionOrdinal,
@@ -35,17 +31,14 @@ class EncryptionManager {
                     mod = 62
                 )
             ) else info
-        } else EncryptionInfo()
+        }
     }
 
-    fun save() {
-        PrefsManager.settings.putString(
-            key = PrefsKeys.ENCRYPTION,
-            value = Json.encodeToString(encryptionInfo)
-        ).commit()
+    suspend fun save() {
+        settingsDataStoreManager.setEncryptionInfo(encryptionInfo)
     }
 
-    fun decodeIntField(field: Int, mod: Int) = ((KeysetFactory.uniqueSalt + field) / mod) - 12
+    fun decodeIntField(field: Int, mod: Int) = ((keysetFactory.uniqueSalt + field) / mod) - 12
 
     fun getFileEncryptionName() = if (encryptionInfo.fileEncryptionOrdinal > -1) {
         KeysetTemplates.Stream.entries[encryptionInfo.fileEncryptionOrdinal].name

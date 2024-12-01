@@ -162,7 +162,7 @@ class LabAeadManager(
         encryptionMode: Boolean,
         associatedData: String
     ) = withContext(Dispatchers.Default) {
-        if (filesWorkerInfoLiveData != null) return@withContext
+        /*if (filesWorkerInfoLiveData != null) return@withContext
         val aeadForKeyset = LabFilesWorker.aeadForKeyset()
         val keysetByteEncryptedOutput = ByteArrayOutputStream()
         currentLabKey!!.keysetHandle!!.writeWithAssociatedData(
@@ -187,7 +187,7 @@ class LabAeadManager(
             .setInputData(data)
             .build()
         worker.enqueue(workerRequest)
-        filesWorkerInfoLiveData = worker.getWorkInfoByIdLiveData(workerRequest.id)
+        filesWorkerInfoLiveData = worker.getWorkInfoByIdLiveData(workerRequest.id)*/
     }
 
     fun newKeysetPassword(pass: String): Boolean {

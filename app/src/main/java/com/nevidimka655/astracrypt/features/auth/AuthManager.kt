@@ -1,43 +1,23 @@
 package com.nevidimka655.astracrypt.features.auth
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import com.google.crypto.tink.subtle.AesGcmJce
 import com.nevidimka655.astracrypt.utils.AppConfig
 import com.nevidimka655.astracrypt.utils.datastore.DefaultDataStoreManager
-import com.nevidimka655.astracrypt.utils.shared_prefs.PrefsKeys
-import com.nevidimka655.astracrypt.utils.shared_prefs.PrefsManager
+import com.nevidimka655.astracrypt.utils.datastore.SettingsDataStoreManager
 import com.nevidimka655.crypto.tink.HashStringGenerator
 import com.nevidimka655.crypto.tink.extensions.fromBase64
 import com.nevidimka655.crypto.tink.extensions.sha384
 import com.nevidimka655.crypto.tink.extensions.toBase64
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 import java.security.GeneralSecurityException
 import kotlin.random.Random
 
 class AuthManager(
-    private val defaultDataStoreManager: DefaultDataStoreManager
+    private val defaultDataStoreManager: DefaultDataStoreManager,
+    private val settingsDataStoreManager: SettingsDataStoreManager
 ) {
-    private val cryptoPrefs get() = PrefsManager.settings
+    val info get() = settingsDataStoreManager.authInfoFlow
 
-    var info by mutableStateOf(loadInfo())
-        private set
-
-    private fun loadInfo() = run {
-        val info = cryptoPrefs.getString(PrefsKeys.Auth.INFO, "")!!
-        val infoObj = if (info.isEmpty()) AuthInfo() else Json.decodeFromString(info)
-        infoObj
-    }
-
-    fun saveInfo(authInfo: AuthInfo) {
-        info = authInfo
-        cryptoPrefs.putString(
-            key = PrefsKeys.Auth.INFO,
-            value = Json.encodeToString(authInfo)
-        ).commit()
-    }
+    suspend fun saveInfo(authInfo: AuthInfo) = settingsDataStoreManager.setAuthInfo(authInfo)
 
     suspend fun changePassword(password: String) {
         val key = extendStringPassword(password)

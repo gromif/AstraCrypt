@@ -44,7 +44,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class AuthenticationFragment : Fragment() {
-    private val vm by activityViewModels<MainVM>()
+    /*private val vm by activityViewModels<MainVM>()
     private val authManager get() = vm.authManager
     private val encryptionManager get() = vm.encryptionManager
 
@@ -238,12 +238,12 @@ class AuthenticationFragment : Fragment() {
     ): MutableState<Boolean> {
         val context = LocalContext.current
         val state = dialogPassword {
-            /*if (authManager.checkPassword(it)) onMatch(it)
+            *//*if (authManager.checkPassword(it)) onMatch(it)
             else {
                 Toast.makeText(
                     context, context.getString(R.string.t_invalidPass), Toast.LENGTH_SHORT
                 ).show()
-            }*/
+            }*//*
         }
         return state
     }
@@ -294,8 +294,8 @@ class AuthenticationFragment : Fragment() {
         newState: Boolean,
         passPhrase: String
     ) {
-        /*if (newState) KeysetFactory.encryptAssociatedData(passPhrase)
-        else KeysetFactory.decryptAssociatedData()*/
+        *//*if (newState) KeysetFactory.encryptAssociatedData(passPhrase)
+        else KeysetFactory.decryptAssociatedData()*//*
         encryptionManager.encryptionInfo = currentEncryptionInfo.copy(
             isAssociatedDataEncrypted = newState
         )
@@ -304,6 +304,6 @@ class AuthenticationFragment : Fragment() {
 
     private fun disableAuthentication() {
         authManager.saveInfo(authInfo = authManager.info.copy(authType = AuthType.NO_AUTH))
-    }
+    }*/
 
 }

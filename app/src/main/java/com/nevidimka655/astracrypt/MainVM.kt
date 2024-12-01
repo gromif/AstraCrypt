@@ -20,7 +20,6 @@ import androidx.paging.map
 import coil.ImageLoader
 import coil.request.ImageRequest
 import com.nevidimka655.astracrypt.features.auth.AuthManager
-import com.nevidimka655.astracrypt.features.profile.AvatarIds
 import com.nevidimka655.astracrypt.features.profile.ProfileInfo
 import com.nevidimka655.astracrypt.model.CoilTinkModel
 import com.nevidimka655.astracrypt.model.NavigatorDirectory
@@ -28,10 +27,8 @@ import com.nevidimka655.astracrypt.room.Repository
 import com.nevidimka655.astracrypt.room.RepositoryEncryption
 import com.nevidimka655.astracrypt.room.StorageItemListTuple
 import com.nevidimka655.astracrypt.room.StorageItemMinimalTuple
-import com.nevidimka655.astracrypt.tabs.settings.security.authentication.Camouflage
 import com.nevidimka655.astracrypt.ui.UiState
 import com.nevidimka655.astracrypt.utils.AppConfig
-import com.nevidimka655.astracrypt.utils.ApplicationComponentManager
 import com.nevidimka655.astracrypt.utils.EncryptionManager
 import com.nevidimka655.astracrypt.utils.Engine
 import com.nevidimka655.astracrypt.utils.Io
@@ -39,9 +36,8 @@ import com.nevidimka655.astracrypt.utils.PrivacyPolicyManager
 import com.nevidimka655.astracrypt.utils.SelectorManager
 import com.nevidimka655.astracrypt.utils.ToolsManager
 import com.nevidimka655.astracrypt.utils.datastore.AppearanceManager
+import com.nevidimka655.astracrypt.utils.datastore.SettingsDataStoreManager
 import com.nevidimka655.astracrypt.utils.extensions.recreate
-import com.nevidimka655.astracrypt.utils.shared_prefs.PrefsKeys
-import com.nevidimka655.astracrypt.utils.shared_prefs.PrefsManager
 import com.nevidimka655.crypto.tink.KeysetFactory
 import com.nevidimka655.crypto.tink.KeysetTemplates
 import com.nevidimka655.crypto.tink.extensions.streamingAeadPrimitive
@@ -56,14 +52,13 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 import java.io.ByteArrayOutputStream
 import javax.inject.Inject
 
@@ -73,13 +68,14 @@ class MainVM @Inject constructor(
     private val repositoryEncryption: RepositoryEncryption,
     private val keysetFactory: KeysetFactory,
     private val io: Io,
+    private val settingsDataStoreManager: SettingsDataStoreManager,
+    private val encryptionManager: EncryptionManager,
     val authManager: AuthManager,
     val appearanceManager: AppearanceManager,
     val privacyPolicyManager: PrivacyPolicyManager,
     val imageLoader: ImageLoader
 ) : ViewModel() {
     val selectorManager by lazy { SelectorManager() }
-    val encryptionManager = EncryptionManager()
     val encryptionInfo get() = encryptionManager.encryptionInfo
 
     var isSearchExpandedState by mutableStateOf(false)
@@ -103,9 +99,6 @@ class MainVM @Inject constructor(
 
     private var _searchChannel: Channel<String>? = null
     var lastSearchQuery: String? = null
-
-    private var cachedUiState: UiState? = null
-    private val _uiStateFlow = MutableStateFlow(UiState())
 
     private val _profileInfoFlow = MutableStateFlow(ProfileInfo())
     val profileInfoFlow = _profileInfoFlow.asStateFlow()
@@ -305,27 +298,18 @@ class MainVM @Inject constructor(
     fun loadProfileInfo(loadIconFile: Boolean = true) {
         if (_profileInfoFlow.value.iconFile != null) return
         viewModelScope.launch(Dispatchers.IO) {
-            val profileInfoJson = PrefsManager.settings.getString(PrefsKeys.PROFILE_INFO, null)
-            val profileInfo: ProfileInfo
-            if (profileInfoJson != null) {
-                profileInfo = Json.decodeFromString(profileInfoJson)
-                if (loadIconFile && profileInfo.defaultAvatar == null) {
-                    profileInfo.iconFile = imageLoader.execute(
-                        ImageRequest.Builder(Engine.appContext)
-                            .data(
-                                CoilTinkModel(
-                                    absolutePath = io.getProfileIconFile().toString(),
-                                    encryptionType = encryptionInfo.thumbEncryptionOrdinal
-                                )
+            val profileInfo = settingsDataStoreManager.profileInfoFlow.first()
+            if (loadIconFile && profileInfo.defaultAvatar == null) {
+                profileInfo.iconFile = imageLoader.execute(
+                    ImageRequest.Builder(Engine.appContext)
+                        .data(
+                            CoilTinkModel(
+                                absolutePath = io.getProfileIconFile().toString(),
+                                encryptionType = encryptionInfo.thumbEncryptionOrdinal
                             )
-                            .build()
-                    ).drawable!!
-                }
-            } else {
-                profileInfo = ProfileInfo(
-                    defaultAvatar = AvatarIds.entries.random().ordinal
-                )
-                saveProfileInfo(profileInfo)
+                        )
+                        .build()
+                ).drawable!!
             }
             _profileInfoFlow.update { profileInfo }
         }
@@ -352,10 +336,7 @@ class MainVM @Inject constructor(
                 outStream.use { it.write(compressedByteStream.toByteArray()) }
             }
         } else iconFile.delete()
-        PrefsManager.settings.putString(
-            key = PrefsKeys.PROFILE_INFO,
-            value = Json.encodeToString(profileInfo)
-        ).apply()
+        settingsDataStoreManager.setProfileInfo(profileInfo)
         _profileInfoFlow.update { profileInfo }
     }
 
@@ -377,26 +358,17 @@ class MainVM @Inject constructor(
 
     private suspend fun showSnackbar(@StringRes stringId: Int) = _snackbarChannel.send(stringId)
 
-    fun setUiState(uiState: UiState) = _uiStateFlow.update { uiState }
+    fun setUiState(uiState: UiState) {}
 
-    fun getUiState() = _uiStateFlow.value
-    fun cacheUiState() {
-        if (!isUiStateCached()) cachedUiState = getUiState()
-    }
+    fun getUiState() = UiState()
+    fun cacheUiState() {}
 
-    fun restoreCachedUiState() = cachedUiState?.let {
-        invalidateCachedUiState()
-        it
-    } ?: UiState()
+    fun restoreCachedUiState() = UiState()
 
-    fun invalidateCachedUiState() {
-        cachedUiState = null
-    }
-
-    fun isUiStateCached() = cachedUiState != null
+    fun invalidateCachedUiState() {}
 
     fun updateCamouflageFeatureAccess(): Boolean {
-        viewModelScope.launch(Dispatchers.IO) {
+        /*viewModelScope.launch(Dispatchers.IO) {
             if (authManager.info.camouflage !is Camouflage.None) {
                 authManager.saveInfo(authManager.info.copy(camouflage = Camouflage.None))
                 with(ApplicationComponentManager) {
@@ -404,7 +376,7 @@ class MainVM @Inject constructor(
                     setCalculatorActivityState(false)
                 }
             }
-        }
+        }*/
         return true
     }
 

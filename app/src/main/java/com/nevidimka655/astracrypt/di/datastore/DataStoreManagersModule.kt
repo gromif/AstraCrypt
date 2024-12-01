@@ -4,6 +4,8 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import com.nevidimka655.astracrypt.utils.datastore.AppearanceManager
 import com.nevidimka655.astracrypt.utils.datastore.DefaultDataStoreManager
+import com.nevidimka655.astracrypt.utils.datastore.SettingsDataStoreManager
+import com.nevidimka655.crypto.tink.KeysetFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,5 +27,12 @@ object DataStoreManagersModule {
     fun provideAppearanceManager(
         @DefaultDataStore dataStore: DataStore<Preferences>
     ) = AppearanceManager(dataStore = dataStore)
+
+    @Singleton
+    @Provides
+    fun provideSettingsDataStoreManager(
+        @SettingsDataStore dataStore: DataStore<Preferences>,
+        keysetFactory: KeysetFactory
+    ) = SettingsDataStoreManager(dataStore = dataStore, keysetFactory = keysetFactory)
 
 }

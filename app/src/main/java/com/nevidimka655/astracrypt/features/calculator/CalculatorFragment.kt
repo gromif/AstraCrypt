@@ -28,7 +28,7 @@ class CalculatorFragment : Fragment() {
         setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
         setContent {
             AstraCryptTheme {
-                LaunchedEffect(Unit) {
+                /*LaunchedEffect(Unit) {
                     vm.toolsManager.calculatorManager.onCamouflagesClose.consumeEach {
                         if (it && !vm.updateCamouflageFeatureAccess()) findNavController().navigate(
                             when (vm.authManager.info.authType) {
@@ -38,7 +38,7 @@ class CalculatorFragment : Fragment() {
                         )
                     }
                 }
-                Calculator.Screen.Auto(calculatorManager = vm.toolsManager.calculatorManager)
+                Calculator.Screen.Auto(calculatorManager = vm.toolsManager.calculatorManager)*/
             }
         }
     }

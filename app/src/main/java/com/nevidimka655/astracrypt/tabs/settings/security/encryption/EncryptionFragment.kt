@@ -1,55 +1,9 @@
 package com.nevidimka655.astracrypt.tabs.settings.security.encryption
 
-import android.annotation.SuppressLint
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.platform.ComposeView
-import androidx.compose.ui.platform.ViewCompositionStrategy
-import androidx.compose.ui.res.stringResource
-import androidx.core.content.edit
-import androidx.core.os.bundleOf
-import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
-import com.nevidimka655.astracrypt.MainVM
-import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.features.help.HelpFragment
-import com.nevidimka655.astracrypt.features.help.HelpIndex
-import com.nevidimka655.astracrypt.ui.dialogs.DatabaseTransformDialog
-import com.nevidimka655.astracrypt.ui.theme.AstraCryptTheme
-import com.nevidimka655.astracrypt.utils.billing.AlgorithmPaywallListFactory
-import com.nevidimka655.astracrypt.utils.extensions.requireMenuHost
-import com.nevidimka655.astracrypt.utils.shared_prefs.PrefsKeys
-import com.nevidimka655.astracrypt.utils.shared_prefs.PrefsManager
-import com.nevidimka655.crypto.tink.KeysetTemplates
-import com.nevidimka655.ui.compose_core.Preference
-import com.nevidimka655.ui.compose_core.PreferencesGroup
-import com.nevidimka655.ui.compose_core.PreferencesScreen
-import com.nevidimka655.ui.compose_core.dialogs.Dialogs
-import com.nevidimka655.ui.compose_core.dialogs.radio
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class EncryptionFragment : Fragment() {
-    private val vm by activityViewModels<MainVM>()
-    private val masterSettings get() = PrefsManager.clear
-    private val settings get() = PrefsManager.settings
+   /* private val vm by activityViewModels<MainVM>()
     private val encryptionManager get() = vm.encryptionManager
     private val encryptionInfoNew get() = encryptionManager.encryptionInfo
 
@@ -243,7 +197,8 @@ class EncryptionFragment : Fragment() {
             }
             PreferencesGroup(text = stringResource(id = R.string.settings)) {
                 var settingsEncryption by remember(encryptionInfo) {
-                    mutableIntStateOf(masterSettings.getInt(PrefsKeys.ENCRYPTION_SETTINGS, -1))
+                    //mutableIntStateOf(masterSettings.getInt(PrefsKeys.ENCRYPTION_SETTINGS, -1))
+                    mutableIntStateOf(-1)
                 }
                 val settingsEncryptionName = remember(settingsEncryption) {
                     if (settingsEncryption == -1) getString(R.string.withoutEncryption)
@@ -275,10 +230,10 @@ class EncryptionFragment : Fragment() {
             with(vm.encryptionManager) {
                 val fileEncryptionOrdinal = if (which > 0) {
                     val streamingType = KeysetTemplates.Stream.entries[which - 1]
-                    /*with(KeysetFactory) {
+                    *//*with(KeysetFactory) {
                         stream(requireContext(), streamingType)
                         saveKeystoreFile()
-                    }*/
+                    }*//*
                     streamingType.ordinal
                 } else -1
                 encryptionInfo =
@@ -295,10 +250,10 @@ class EncryptionFragment : Fragment() {
             val newEncryptionInfo = oldEncryptionInfo
                 .copy(notesEncryptionOrdinal = notesEncryptionOrdinal)
             encryptionManager.encryptionInfo = newEncryptionInfo
-            /*WorkerFactory.startTransformNotes(
+            *//*WorkerFactory.startTransformNotes(
                 oldInfo = oldEncryptionInfo,
                 newInfo = newEncryptionInfo
-            )*/
+            )*//*
             DatabaseTransformDialog().show(childFragmentManager, null)
             withContext(Dispatchers.IO) { encryptionManager.save() }
         }
@@ -327,7 +282,7 @@ class EncryptionFragment : Fragment() {
     }
 
     private suspend fun onSettingsEncryptionSelected(which: Int) {
-        withContext(Dispatchers.IO) {
+        *//*withContext(Dispatchers.IO) {
             masterSettings.edit(true) {
                 putInt(PrefsKeys.ENCRYPTION_SETTINGS, if (which == 0) -1 else which - 1)
             }
@@ -336,7 +291,7 @@ class EncryptionFragment : Fragment() {
                 aead = KeysetTemplates.AEAD.entries[if (which == 0) 0 else which - 1],
                 isEncryptionEnabledNewState = which > 0
             )
-        }
+        }*//*
     }
 
     private suspend fun onDatabaseEncryptionSelected(which: Int) {
@@ -352,14 +307,14 @@ class EncryptionFragment : Fragment() {
                 isFlagsEncrypted || isPathEncrypted ||
                 isThumbEncryptionTypeEncrypted || isThumbnailEncrypted
             ) {
-                /*WorkerFactory.startTransformDatabase(
+                *//*WorkerFactory.startTransformDatabase(
                     oldInfo = oldEncryptionInfo,
                     newInfo = newEncryptionInfo
-                )*/
+                )*//*
                 DatabaseTransformDialog().show(childFragmentManager, null)
             }
         }
         withContext(Dispatchers.IO) { encryptionManager.save() }
-    }
+    }*/
 
 }

@@ -93,7 +93,6 @@ fun Main(
         LaunchedEffect(Unit) {
             with(vm) {
                 if (!isDatabaseCreated()) setupForFirstUse()
-                encryptionManager.loadEncryptionInfo()
             }
         }
         Scaffold(
