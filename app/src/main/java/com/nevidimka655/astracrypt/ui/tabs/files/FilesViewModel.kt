@@ -35,6 +35,7 @@ private typealias Args = ImportFilesWorker.Args
 
 @HiltViewModel
 class FilesViewModel @Inject constructor(
+    private val repository: Repository,
     private val keysetFactory: KeysetFactory,
     val appearanceManager: AppearanceManager,
     val io: Io,
@@ -59,7 +60,7 @@ class FilesViewModel @Inject constructor(
         id: Long? = null,
         itemsArr: List<Long>? = null
     ) = viewModelScope.launch(Dispatchers.IO) {
-        Repository.setStarred(id, itemsArr, state)
+        repository.setStarred(id, itemsArr, state)
         /*showSnackbar(
             if (state) R.string.snack_starred else R.string.snack_unstarred
         )*/ // TODO: Snackbar
@@ -114,10 +115,10 @@ class FilesViewModel @Inject constructor(
         id: Long,
         name: String
     ) = viewModelScope.launch(Dispatchers.IO) {
-        val oldName = Repository.getName(encryptionInfo, id)
+        val oldName = repository.getName(encryptionInfo, id)
         val newName = name.removeLines().trim()
         if (newName != oldName) {
-            Repository.updateName(id, encryptionInfo, newName)
+            repository.updateName(id, encryptionInfo, newName)
             //showSnackbar(R.string.snack_itemRenamed) TODO: Snackbar
         }
     }
