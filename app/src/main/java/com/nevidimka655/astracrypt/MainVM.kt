@@ -70,6 +70,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainVM @Inject constructor(
+    private val keysetFactory: KeysetFactory,
     val io: Io,
     val workManager: WorkManager,
     val authManager: AuthManager,
@@ -342,14 +343,11 @@ class MainVM @Inject constructor(
                 }
                 val thumbEncryption = encryptionInfo.thumbEncryptionOrdinal
                 val keysetHandle = if (thumbEncryption != -1) {
-                    KeysetFactory.stream(
-                        Engine.appContext,
-                        KeysetTemplates.Stream.entries[thumbEncryption]
-                    )
+                    keysetFactory.stream(KeysetTemplates.Stream.entries[thumbEncryption])
                 } else null
                 val outStream = keysetHandle?.streamingAeadPrimitive()?.newEncryptingStream(
                     iconFile.outputStream(),
-                    KeysetFactory.associatedData
+                    keysetFactory.associatedData
                 ) ?: iconFile.outputStream()
                 outStream.use { it.write(compressedByteStream.toByteArray()) }
             }
@@ -363,7 +361,7 @@ class MainVM @Inject constructor(
 
     fun setupForFirstUse() {
         io.dataDir.mkdir()
-        KeysetFactory.associatedData
+        keysetFactory.associatedData
         viewModelScope.launch(Dispatchers.IO) {
             Repository.createBasicFolders(Engine.appContext, encryptionInfo)
         }
