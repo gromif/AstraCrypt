@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.ui.tabs
+package com.nevidimka655.astracrypt.ui.tabs.home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -42,8 +42,8 @@ import coil.ImageLoader
 import coil.compose.AsyncImage
 import com.nevidimka655.astracrypt.MainVM
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.model.CoilTinkModel
 import com.nevidimka655.astracrypt.features.profile.ui.ProfileWidget
+import com.nevidimka655.astracrypt.model.CoilTinkModel
 import com.nevidimka655.astracrypt.room.StorageItemListTuple
 import com.nevidimka655.astracrypt.utils.enums.StorageItemState
 import com.nevidimka655.astracrypt.utils.enums.StorageItemType

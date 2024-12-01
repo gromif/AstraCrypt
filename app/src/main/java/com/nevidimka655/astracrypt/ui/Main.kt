@@ -58,7 +58,7 @@ import com.nevidimka655.astracrypt.model.FabState
 import com.nevidimka655.astracrypt.tabs.settings.SettingsScreen
 import com.nevidimka655.astracrypt.ui.navigation.BottomBarItems
 import com.nevidimka655.astracrypt.ui.navigation.Route
-import com.nevidimka655.astracrypt.ui.tabs.HomeScreen
+import com.nevidimka655.astracrypt.ui.tabs.home.HomeScreen
 import com.nevidimka655.astracrypt.ui.tabs.files.FilesScreen
 import com.nevidimka655.astracrypt.ui.tabs.files.FilesViewModel
 import com.nevidimka655.astracrypt.ui.theme.AstraCryptTheme
