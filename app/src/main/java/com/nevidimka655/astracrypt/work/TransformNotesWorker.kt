@@ -9,6 +9,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
@@ -25,14 +26,18 @@ import com.nevidimka655.crypto.tink.KeysetTemplates
 import com.nevidimka655.crypto.tink.TinkConfig
 import com.nevidimka655.crypto.tink.extensions.aeadPrimitive
 import com.nevidimka655.crypto.tink.extensions.fromBase64
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedInject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
 
-class TransformNotesWorker(
-    appContext: Context,
-    params: WorkerParameters,
+@HiltWorker
+class TransformNotesWorker @AssistedInject constructor(
+    @Assisted appContext: Context,
+    @Assisted params: WorkerParameters,
+    private val keysetFactory: KeysetFactory,
 ) : CoroutineWorker(appContext, params) {
 
     object Args {
@@ -85,25 +90,22 @@ class TransformNotesWorker(
     private fun shouldDecodeAssociatedData() {
         if (newEncryptionInfo.isAssociatedDataEncrypted) {
             val bytes = inputData.getString(Args.associatedData)!!.fromBase64()
-            val decodedData = KeysetFactory.transformAssociatedDataToWorkInstance(
-                context = applicationContext,
+            val decodedData = keysetFactory.transformAssociatedDataToWorkInstance(
                 bytesIn = bytes,
                 encryptionMode = false,
                 authenticationTag = Args.TAG_ASSOCIATED_DATA_TRANSPORT
             )
-            KeysetFactory.setAssociatedDataExplicitly(decodedData)
+            keysetFactory.setAssociatedDataExplicitly(decodedData)
         }
     }
 
     private fun initEncryption() {
         TinkConfig.initAead()
-        val keysetHandleFrom = if (fromEncryption > -1) KeysetFactory.aead(
-            context = applicationContext,
+        val keysetHandleFrom = if (fromEncryption > -1) keysetFactory.aead(
             aead = KeysetTemplates.AEAD.entries[fromEncryption],
             keysetGroupId = KeysetGroupId.AEAD_NOTES
         ) else null
-        val keysetHandleTo = if (toEncryption > -1) KeysetFactory.aead(
-            context = applicationContext,
+        val keysetHandleTo = if (toEncryption > -1) keysetFactory.aead(
             aead = KeysetTemplates.AEAD.entries[toEncryption],
             keysetGroupId = KeysetGroupId.AEAD_NOTES
         ) else null
