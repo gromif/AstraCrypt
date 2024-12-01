@@ -1,7 +1,6 @@
 package com.nevidimka655.astracrypt.utils
 
 object AppConfig {
-    const val DB_NAME = "storage"
     const val DB_DIRS_COUNT = 25
     const val DB_FILE_NAME_COUNT = 13
     const val DB_THUMB_FILE_NAME_COUNT = DB_FILE_NAME_COUNT
