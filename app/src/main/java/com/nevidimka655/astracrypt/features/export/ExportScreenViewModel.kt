@@ -41,6 +41,7 @@ private typealias Args = ExportFilesWorker.Args
 
 @HiltViewModel
 class ExportScreenViewModel @Inject constructor(
+    private val repository: Repository,
     private val keysetFactory: KeysetFactory,
     val io: Io,
     val workManager: WorkManager
@@ -54,7 +55,7 @@ class ExportScreenViewModel @Inject constructor(
         itemId: Long
     ) = viewModelScope.launch(Dispatchers.IO) {
         export(
-            Repository.getDataForOpening(encryptionInfo = encryptionInfo, id = itemId)
+            repository.getDataForOpening(encryptionInfo = encryptionInfo, id = itemId)
         )
     }
 
