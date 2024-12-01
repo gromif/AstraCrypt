@@ -32,6 +32,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailsScreenViewModel @Inject constructor(
+    private val repository: Repository,
     private val io: Io,
     val detailsManager: DetailsManager,
     val imageLoader: ImageLoader
@@ -42,8 +43,8 @@ class DetailsScreenViewModel @Inject constructor(
         encryptionInfo: EncryptionInfo,
         itemId: Long
     ) = detailsManager.run {
-        val item = Repository.getById(encryptionInfo, itemId)
-        val absolutePath = Repository.getAbsolutePath(
+        val item = repository.getById(encryptionInfo, itemId)
+        val absolutePath = repository.getAbsolutePath(
             encryptionInfo = encryptionInfo,
             childName = item.name,
             parentDirId = item.parentDirectoryId
@@ -123,7 +124,7 @@ class DetailsScreenViewModel @Inject constructor(
                 )
             }
         } else {
-            val content = Repository.getFolderContent(item.id)
+            val content = repository.getFolderContent(item.id)
             addGroup(name = TextWrap.Resource(id = R.string.folder)) {
                 val files = context.getString(R.string.files)
                 val folders = context.getString(R.string.folders)
