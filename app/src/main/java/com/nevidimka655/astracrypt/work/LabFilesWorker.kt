@@ -38,6 +38,7 @@ import kotlinx.coroutines.withContext
 class LabFilesWorker @AssistedInject constructor(
     @Assisted appContext: Context,
     @Assisted params: WorkerParameters,
+    private val keysetFactory: KeysetFactory,
     private val workManager: WorkManager
 ) : CoroutineWorker(appContext, params) {
 
@@ -52,9 +53,6 @@ class LabFilesWorker @AssistedInject constructor(
     companion object {
         const val keysetTransportAssociatedData = "b1"
         const val associatedDataTransportAssociatedData = "b2"
-
-        fun aeadForKeyset() = KeysetFactory.aead(
-            Engine.appContext, KeysetTemplates.AEAD.AES256_GCM).aeadPrimitive()
     }
 
     private val notificationId = 202
@@ -64,7 +62,7 @@ class LabFilesWorker @AssistedInject constructor(
         Engine.init(applicationContext)
         setForeground(getForegroundInfo())
         TinkConfig.initStream()
-        val aeadForKeyset = aeadForKeyset()
+        val aeadForKeyset = keysetFactory.aead(KeysetTemplates.AEAD.AES256_GCM).aeadPrimitive()
         val keysetHandle = inputData.getString(Args.ENCRYPTED_KEYSET)!!.run {
             KeysetHandle.readWithAssociatedData(
                 JsonKeysetReader.withBytes(fromBase64()),
