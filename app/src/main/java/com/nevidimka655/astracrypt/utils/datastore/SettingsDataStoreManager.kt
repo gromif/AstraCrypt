@@ -40,7 +40,7 @@ class SettingsDataStoreManager(
         prefs[key]?.let {
             val profileInfoJson = decryptValue(key = key.name, value = it)
             Json.decodeFromString<ProfileInfo>(profileInfoJson)
-        } ?: ProfileInfo(defaultAvatar = AvatarIds.entries.random().ordinal)
+        } ?: ProfileInfo(defaultAvatar = AvatarIds.AVATAR_5.ordinal)
     }
     suspend fun setProfileInfo(profileInfo: ProfileInfo) = dataStore.edit {
         val key = profileInfoKey()

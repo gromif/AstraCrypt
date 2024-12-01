@@ -25,7 +25,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -37,10 +36,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.ImageLoader
 import coil.compose.AsyncImage
-import com.nevidimka655.astracrypt.MainVM
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.features.profile.ui.ProfileWidget
 import com.nevidimka655.astracrypt.model.CoilTinkModel
@@ -52,37 +49,32 @@ import com.nevidimka655.ui.compose_core.theme.spaces
 
 @Composable
 fun HomeScreen(
-    vm: MainVM,
-    onOpenFile: (Long) -> Unit,
-    openFolder: () -> Unit
+    recentItemsState: State<List<StorageItemListTuple>>,
+    imageLoader: ImageLoader,
+    coilAvatarModel: CoilTinkModel?,
+    defaultAvatar: Int? = null,
+    name: String?,
+    onOpenRecent: (StorageItemListTuple) -> Unit
+) = Column(
+    modifier = Modifier
+        .fillMaxSize()
+        .nestedScroll(rememberNestedScrollInteropConnection())
+        .verticalScroll(rememberScrollState())
+        .padding(MaterialTheme.spaces.spaceMedium),
+    verticalArrangement = Arrangement.spacedBy(MaterialTheme.spaces.spaceMedium)
 ) {
-    SideEffect { vm.loadProfileInfo() }
-    val profileInfoState = vm.profileInfoFlow.collectAsStateWithLifecycle()
-    val recentItemsState = vm.recentFilesStateFlow.collectAsStateWithLifecycle()
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .nestedScroll(rememberNestedScrollInteropConnection())
-            .verticalScroll(rememberScrollState())
-            .padding(MaterialTheme.spaces.spaceMedium),
-        verticalArrangement = Arrangement.spacedBy(MaterialTheme.spaces.spaceMedium)
+    ProfileWidget(
+        imageLoader = imageLoader,
+        name = name,
+        coilAvatarModel = coilAvatarModel,
+        defaultAvatar = defaultAvatar
+    )
+    CardWithTitle(
+        modifier = Modifier.height(350.dp),
+        titleText = stringResource(id = R.string.recentlyAdded)
     ) {
-        ProfileWidget(profileInfoState = profileInfoState, imageLoader = vm.imageLoader)
-        CardWithTitle(
-            modifier = Modifier.height(350.dp),
-            titleText = stringResource(id = R.string.recentlyAdded)
-        ) {
-            RecentList(itemsState = recentItemsState, imageLoader = vm.imageLoader) {
-                if (it.isFile) onOpenFile(it.id) else {
-                    vm.openDirectory(
-                        id = it.id,
-                        dirName = it.name,
-                        popBackStack = true
-                    )
-                    vm.triggerFilesListUpdate()
-                    openFolder()
-                }
-            }
+        RecentList(itemsState = recentItemsState, imageLoader = imageLoader) {
+            onOpenRecent(it)
         }
     }
 }

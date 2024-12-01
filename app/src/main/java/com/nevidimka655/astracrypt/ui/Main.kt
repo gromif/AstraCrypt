@@ -54,13 +54,15 @@ import com.nevidimka655.astracrypt.features.details.DetailsScreen
 import com.nevidimka655.astracrypt.features.details.DetailsScreenViewModel
 import com.nevidimka655.astracrypt.features.export.ExportScreen
 import com.nevidimka655.astracrypt.features.export.ExportScreenViewModel
+import com.nevidimka655.astracrypt.features.profile.ProfileInfo
 import com.nevidimka655.astracrypt.model.FabState
 import com.nevidimka655.astracrypt.tabs.settings.SettingsScreen
 import com.nevidimka655.astracrypt.ui.navigation.BottomBarItems
 import com.nevidimka655.astracrypt.ui.navigation.Route
-import com.nevidimka655.astracrypt.ui.tabs.home.HomeScreen
 import com.nevidimka655.astracrypt.ui.tabs.files.FilesScreen
 import com.nevidimka655.astracrypt.ui.tabs.files.FilesViewModel
+import com.nevidimka655.astracrypt.ui.tabs.home.HomeScreen
+import com.nevidimka655.astracrypt.ui.tabs.home.HomeViewModel
 import com.nevidimka655.astracrypt.ui.theme.AstraCryptTheme
 import com.nevidimka655.astracrypt.utils.enums.ViewMode
 import com.nevidimka655.haptic.Haptic
@@ -182,9 +184,28 @@ fun Main(
                     isInnerScreen = false
                     currentTab = BottomBarItems.Home
                     fabState = FabState.NO
-                    HomeScreen(vm = vm, onOpenFile = { export(navController, it) }) {
-                        navController.navigate(BottomBarItems.Files.route)
-                    }
+                    val homeVm: HomeViewModel = hiltViewModel()
+                    val profileInfo by homeVm.profileInfoFlow.collectAsStateWithLifecycle(
+                        initialValue = ProfileInfo()
+                    )
+                    HomeScreen(
+                        recentItemsState = vm.recentFilesStateFlow.collectAsStateWithLifecycle(),
+                        imageLoader = homeVm.imageLoader,
+                        coilAvatarModel = homeVm.coilAvatarModel,
+                        defaultAvatar = profileInfo.defaultAvatar,
+                        name = profileInfo.name,
+                        onOpenRecent = {
+                            if (it.isFile) export(navController, it.id) else {
+                                vm.openDirectory(
+                                    id = it.id,
+                                    dirName = it.name,
+                                    popBackStack = true
+                                )
+                                vm.triggerFilesListUpdate()
+                                navController.navigate(BottomBarItems.Files.route)
+                            }
+                        }
+                    )
                 }
                 composable<Route.Tabs.Files> {
                     val files: Route.Tabs.Files = it.toRoute()

@@ -10,23 +10,31 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.ImageLoader
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.features.profile.ProfileInfo
+import com.nevidimka655.astracrypt.model.CoilTinkModel
 import com.nevidimka655.ui.compose_core.theme.spaces
 
 @Composable
-fun ProfileWidget(profileInfoState: State<ProfileInfo>, imageLoader: ImageLoader) = Row(
+fun ProfileWidget(
+    imageLoader: ImageLoader,
+    name: String? = null,
+    coilAvatarModel: CoilTinkModel?,
+    defaultAvatar: Int? = null
+) = Row(
     modifier = Modifier
         .fillMaxWidth()
         .height(80.dp)
 ) {
-    ProfileIcon(profileInfo = profileInfoState.value, imageLoader = imageLoader)
+    ProfileIcon(
+        imageLoader = imageLoader,
+        coilAvatarModel = coilAvatarModel,
+        defaultAvatar = defaultAvatar
+    )
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -35,7 +43,7 @@ fun ProfileWidget(profileInfoState: State<ProfileInfo>, imageLoader: ImageLoader
     ) {
         Text(
             text = stringResource(
-                id = R.string.hello, profileInfoState.value.name ?: stringResource(R.string.user)
+                id = R.string.hello, name ?: stringResource(R.string.user)
             ),
             style = MaterialTheme.typography.titleLarge,
             fontWeight = FontWeight.Bold,

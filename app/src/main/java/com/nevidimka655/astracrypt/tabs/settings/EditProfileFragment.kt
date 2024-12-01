@@ -95,39 +95,39 @@ class EditProfileFragment : Fragment() {
     @Composable
     fun EditProfileScreen() {
         PreferencesScreen {
-            val profileInfo by vm.profileInfoFlow.collectAsStateWithLifecycle()
-            val name = remember(profileInfo) { profileInfo.name ?: getString(R.string.user) }
-            val dialogChangeNameState = dialogChangeName(currentName = name) {
-                vm.saveProfileInfo(profileInfo.copy(name = it.trim()))
-            }
-            val dialogChangeAvatarState = Compose.state()
-            PreferencesGroup {
-                Preference(
-                    titleText = getString(R.string.settings_changeName),
-                    summaryText = name
-                ) { dialogChangeNameState.value = true }
-                Preference(
-                    titleText = getString(R.string.settings_changeAvatar),
-                    trailingContent = {
-                        //ProfileIcon(profileInfo = profileInfo, iconSize = 56.dp, showBorder = false)
-                    }
-                ) { dialogChangeAvatarState.value = true }
-            }
-            DialogChangeAvatar(
-                state = dialogChangeAvatarState,
-                galleryCallback = {
-                    photoContract.launch("image/*")
-                },
-                onDefaultAvatarClick = {
-                    vm.saveProfileInfo(
-                        profileInfo = profileInfo.copy(
-                            defaultAvatar = it.ordinal,
-                            iconFile = null
-                        ),
-                        force = true
-                    )
-                }
-            )
+//            val profileInfo by vm.profileInfoFlow.collectAsStateWithLifecycle()
+//            val name = remember(profileInfo) { profileInfo.name ?: getString(R.string.user) }
+//            val dialogChangeNameState = dialogChangeName(currentName = name) {
+//                vm.saveProfileInfo(profileInfo.copy(name = it.trim()))
+//            }
+//            val dialogChangeAvatarState = Compose.state()
+//            PreferencesGroup {
+//                Preference(
+//                    titleText = getString(R.string.settings_changeName),
+//                    summaryText = name
+//                ) { dialogChangeNameState.value = true }
+//                Preference(
+//                    titleText = getString(R.string.settings_changeAvatar),
+//                    trailingContent = {
+//                        //ProfileIcon(profileInfo = profileInfo, iconSize = 56.dp, showBorder = false)
+//                    }
+//                ) { dialogChangeAvatarState.value = true }
+//            }
+//            DialogChangeAvatar(
+//                state = dialogChangeAvatarState,
+//                galleryCallback = {
+//                    photoContract.launch("image/*")
+//                },
+//                onDefaultAvatarClick = {
+//                    vm.saveProfileInfo(
+//                        profileInfo = profileInfo.copy(
+//                            defaultAvatar = it.ordinal,
+//                            iconFile = null
+//                        ),
+//                        force = true
+//                    )
+//                }
+//            )
         }
     }
 

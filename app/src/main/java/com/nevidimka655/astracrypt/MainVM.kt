@@ -1,7 +1,6 @@
 package com.nevidimka655.astracrypt
 
 import android.app.Activity
-import android.graphics.Bitmap
 import android.net.Uri
 import android.text.format.DateFormat
 import androidx.annotation.StringRes
@@ -9,7 +8,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.core.graphics.drawable.toBitmap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
@@ -18,10 +16,7 @@ import androidx.paging.PagingSource
 import androidx.paging.cachedIn
 import androidx.paging.map
 import coil.ImageLoader
-import coil.request.ImageRequest
-import com.nevidimka655.astracrypt.features.auth.AuthManager
 import com.nevidimka655.astracrypt.features.profile.ProfileInfo
-import com.nevidimka655.astracrypt.model.CoilTinkModel
 import com.nevidimka655.astracrypt.model.NavigatorDirectory
 import com.nevidimka655.astracrypt.room.Repository
 import com.nevidimka655.astracrypt.room.RepositoryEncryption
@@ -36,30 +31,21 @@ import com.nevidimka655.astracrypt.utils.PrivacyPolicyManager
 import com.nevidimka655.astracrypt.utils.SelectorManager
 import com.nevidimka655.astracrypt.utils.ToolsManager
 import com.nevidimka655.astracrypt.utils.datastore.AppearanceManager
-import com.nevidimka655.astracrypt.utils.datastore.SettingsDataStoreManager
-import com.nevidimka655.astracrypt.utils.extensions.recreate
 import com.nevidimka655.crypto.tink.KeysetFactory
-import com.nevidimka655.crypto.tink.KeysetTemplates
-import com.nevidimka655.crypto.tink.extensions.streamingAeadPrimitive
 import com.nevidimka655.notes.Notes
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.debounce
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.io.ByteArrayOutputStream
 import javax.inject.Inject
 
 @HiltViewModel
@@ -68,9 +54,7 @@ class MainVM @Inject constructor(
     private val repositoryEncryption: RepositoryEncryption,
     private val keysetFactory: KeysetFactory,
     private val io: Io,
-    private val settingsDataStoreManager: SettingsDataStoreManager,
     private val encryptionManager: EncryptionManager,
-    val authManager: AuthManager,
     val appearanceManager: AppearanceManager,
     val privacyPolicyManager: PrivacyPolicyManager,
     val imageLoader: ImageLoader
@@ -99,9 +83,6 @@ class MainVM @Inject constructor(
 
     private var _searchChannel: Channel<String>? = null
     var lastSearchQuery: String? = null
-
-    private val _profileInfoFlow = MutableStateFlow(ProfileInfo())
-    val profileInfoFlow = _profileInfoFlow.asStateFlow()
 
     private val _snackbarChannel = Channel<Int>(0)
 
@@ -295,30 +276,10 @@ class MainVM @Inject constructor(
 
     fun isSearchActive() = searchSetupJob != null
 
-    fun loadProfileInfo(loadIconFile: Boolean = true) {
-        if (_profileInfoFlow.value.iconFile != null) return
-        viewModelScope.launch(Dispatchers.IO) {
-            val profileInfo = settingsDataStoreManager.profileInfoFlow.first()
-            if (loadIconFile && profileInfo.defaultAvatar == null) {
-                profileInfo.iconFile = imageLoader.execute(
-                    ImageRequest.Builder(Engine.appContext)
-                        .data(
-                            CoilTinkModel(
-                                absolutePath = io.getProfileIconFile().toString(),
-                                encryptionType = encryptionInfo.thumbEncryptionOrdinal
-                            )
-                        )
-                        .build()
-                ).drawable!!
-            }
-            _profileInfoFlow.update { profileInfo }
-        }
-    }
-
     fun saveProfileInfo(
         profileInfo: ProfileInfo, force: Boolean = false
     ) = viewModelScope.launch(Dispatchers.IO) {
-        val iconFile = io.getProfileIconFile()
+        /*val iconFile = io.getProfileIconFile()
         if (profileInfo.defaultAvatar == null) {
             if (_profileInfoFlow.value.iconFile != profileInfo.iconFile || force) {
                 iconFile.recreate()
@@ -337,7 +298,7 @@ class MainVM @Inject constructor(
             }
         } else iconFile.delete()
         settingsDataStoreManager.setProfileInfo(profileInfo)
-        _profileInfoFlow.update { profileInfo }
+        _profileInfoFlow.update { profileInfo }*/
     }
 
     fun setupForFirstUse() {
