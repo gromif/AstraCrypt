@@ -12,9 +12,9 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val settingsDataStoreManager: SettingsDataStoreManager,
+    val imageLoader: ImageLoader,
     io: Io,
     encryptionManager: EncryptionManager,
-    val imageLoader: ImageLoader
 ): ViewModel() {
 
     val coilAvatarModel = CoilTinkModel(
