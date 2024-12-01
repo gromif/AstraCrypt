@@ -72,7 +72,7 @@ class MainVM @Inject constructor(
     private val repository: Repository,
     private val repositoryEncryption: RepositoryEncryption,
     private val keysetFactory: KeysetFactory,
-    val io: Io,
+    private val io: Io,
     val authManager: AuthManager,
     val appearanceManager: AppearanceManager,
     val privacyPolicyManager: PrivacyPolicyManager,
