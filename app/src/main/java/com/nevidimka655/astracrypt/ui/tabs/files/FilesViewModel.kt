@@ -15,7 +15,6 @@ import coil.ImageLoader
 import com.nevidimka655.astracrypt.model.EncryptionInfo
 import com.nevidimka655.astracrypt.room.Repository
 import com.nevidimka655.astracrypt.room.StorageItemListTuple
-import com.nevidimka655.astracrypt.utils.Engine
 import com.nevidimka655.astracrypt.utils.Io
 import com.nevidimka655.astracrypt.utils.datastore.AppearanceManager
 import com.nevidimka655.astracrypt.utils.extensions.removeLines
@@ -36,6 +35,7 @@ private typealias Args = ImportFilesWorker.Args
 
 @HiltViewModel
 class FilesViewModel @Inject constructor(
+    private val keysetFactory: KeysetFactory,
     val appearanceManager: AppearanceManager,
     val io: Io,
     val workManager: WorkManager,
@@ -75,9 +75,8 @@ class FilesViewModel @Inject constructor(
         val fileWithUris = workerSerializer.saveStringArrayToFile(listToSave)
         val encryptionInfoJson = Json.encodeToString(encryptionInfo)
         val associatedData = if (encryptionInfo.isAssociatedDataEncrypted)
-            KeysetFactory.transformAssociatedDataToWorkInstance(
-                context = Engine.appContext,
-                bytesIn = KeysetFactory.associatedData,
+            keysetFactory.transformAssociatedDataToWorkInstance(
+                bytesIn = keysetFactory.associatedData,
                 encryptionMode = true,
                 authenticationTag = Args.TAG_ASSOCIATED_DATA_TRANSPORT
             ).toBase64()
