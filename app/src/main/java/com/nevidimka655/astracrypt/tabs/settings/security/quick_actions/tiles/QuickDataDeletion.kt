@@ -2,7 +2,7 @@ package com.nevidimka655.astracrypt.tabs.settings.security.quick_actions.tiles
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import com.nevidimka655.astracrypt.room.Repository
+import com.nevidimka655.astracrypt.room.AppDatabase
 import com.nevidimka655.astracrypt.utils.Engine
 import com.nevidimka655.astracrypt.utils.Io
 import com.nevidimka655.astracrypt.utils.shared_prefs.PrefsManager
@@ -18,6 +18,7 @@ import javax.inject.Inject
 @RequiresApi(Build.VERSION_CODES.N)
 @AndroidEntryPoint
 class QuickDataDeletion @Inject constructor(): TileServiceCoroutine() {
+    @Inject lateinit var database: AppDatabase
     @Inject lateinit var io: Io
     @Inject lateinit var keysetFactory: KeysetFactory
 
@@ -38,7 +39,7 @@ class QuickDataDeletion @Inject constructor(): TileServiceCoroutine() {
                 cacheDir.deleteRecursively()
             }
 
-            Repository.clearAllTables()
+            database.clearAllTables()
             PrefsManager.clearAllPrefs()
 
             RandomAccessFile(keysetFactory.dataFile, "rws").use {
