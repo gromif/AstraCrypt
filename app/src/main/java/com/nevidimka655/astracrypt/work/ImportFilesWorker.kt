@@ -54,6 +54,7 @@ import java.io.OutputStream
 class ImportFilesWorker @AssistedInject constructor(
     @Assisted context: Context,
     @Assisted params: WorkerParameters,
+    private val repository: Repository,
     private val keysetFactory: KeysetFactory,
     private val io: Io,
     private val randomizer: Randomizer,
@@ -101,7 +102,7 @@ class ImportFilesWorker @AssistedInject constructor(
         val file = File(inputData.getString(Args.fileWithUris)!!)
         val urisList = withContext(defaultDispatcher) { file.readLines() }
         file.delete()
-        var nextId = withContext(defaultDispatcher) { Repository.getMaxId() }
+        var nextId = withContext(defaultDispatcher) { repository.getMaxId() }
         try {
             urisList.forEach {
                 yield()
@@ -183,7 +184,7 @@ class ImportFilesWorker @AssistedInject constructor(
                 creationTime = creationDate,
                 thumbnailEncryptionType = thumbEncryption
             )
-            Repository.insert(encryptionInfo, item)
+            repository.insert(encryptionInfo, item)
             if (!saveOriginalFiles) try {
                 val isFileDeleted = docFile.delete()
                 if (isFileDeleted) return@coroutineScope
