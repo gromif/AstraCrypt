@@ -12,9 +12,9 @@ import com.nevidimka655.astracrypt.ui.navigation.Route
 
 inline fun NavGraphBuilder.details(
     crossinline onUiStateChange: (UiState) -> Unit
-) = composable<Route.Tabs.Details> {
-    val details: Route.Tabs.Details = it.toRoute()
-    onUiStateChange(Route.Tabs.Details.Ui.state)
+) = composable<Route.Details> {
+    val details: Route.Details = it.toRoute()
+    onUiStateChange(Route.Details.Ui.state)
     val context = LocalContext.current
     val vm: DetailsScreenViewModel = hiltViewModel()
     DetailsScreen(

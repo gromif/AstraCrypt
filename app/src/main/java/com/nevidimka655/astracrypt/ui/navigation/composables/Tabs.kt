@@ -73,7 +73,7 @@ inline fun NavGraphBuilder.tabs(
             dialogNewFolderState = dialogNewFolderState,
             onFabClick = onFabClick,
             onNavigateUp = { navController.navigateUp() },
-            onNavigateToDetails = { navController.navigate(Route.Tabs.Details(itemId = it)) },
+            onNavigateToDetails = { navController.navigate(Route.Details(itemId = it)) },
             onOpenStarredDir = { navController.navigate(BottomBarItems.Files.route) },
             onOpenFile = { navController.navigate(Route.Tabs.Export(itemId = it)) },
             onExport = { itemId, outUri ->
