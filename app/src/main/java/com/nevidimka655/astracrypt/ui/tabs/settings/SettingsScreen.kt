@@ -33,7 +33,9 @@ import com.nevidimka655.ui.compose_core.ext.LocalWindowWidth
 import com.nevidimka655.ui.compose_core.theme.spaces
 
 @Composable
-fun SettingsScreen() {
+fun SettingsScreen(
+    onAbout: () -> Unit = {}
+) {
     val cellsCount = when(LocalWindowWidth.current) {
         WindowWidthSizeClass.Compact -> 2
         WindowWidthSizeClass.Medium -> 3
@@ -63,14 +65,14 @@ fun SettingsScreen() {
                 title = stringResource(id = item.second),
                 imageVector = item.first
             ) {
-                /*when (key) {
-                    0 -> navigate(R.id.action_settingsFragment_to_editProfileFragment)
+                when (key) {
+                    /*0 -> navigate(R.id.action_settingsFragment_to_editProfileFragment)
                     1 -> navigate(R.id.action_settingsFragment_to_securityFragment)
                     2 -> navigate(R.id.action_settingsFragment_to_interfaceFragment)
                     3 -> navigate(R.id.action_global_subscriptionsGraph)
-                    4 -> navigate(R.id.action_settingsFragment_to_dataCollectionFragment)
-                    5 -> navigate(R.id.action_settingsFragment_to_aboutFragment)
-                }*/
+                    4 -> navigate(R.id.action_settingsFragment_to_dataCollectionFragment)*/
+                    5 -> onAbout()
+                }
             }
         }
     }

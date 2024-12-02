@@ -4,6 +4,8 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import com.nevidimka655.astracrypt.MainVM
 import com.nevidimka655.astracrypt.ui.UiState
+import com.nevidimka655.astracrypt.ui.navigation.composables.about.aboutGraph
+import com.nevidimka655.astracrypt.ui.navigation.composables.details
 import com.nevidimka655.astracrypt.ui.navigation.composables.export
 import com.nevidimka655.astracrypt.ui.navigation.composables.tabs
 import kotlinx.coroutines.channels.Channel
@@ -20,5 +22,7 @@ inline fun root(
         navController = navController,
         onFabClick = onFabClick
     )
+    details(onUiStateChange = onUiStateChange)
     export(onUiStateChange = onUiStateChange)
+    aboutGraph(onUiStateChange = onUiStateChange, navController = navController)
 }
