@@ -1,6 +1,6 @@
 [versions]
 kotlin = "2.0.21"
-gradle = "8.7.2"
+gradle = "8.7.3"
 gradle-ksp = "2.0.21-1.0.28"
 
 room = "2.6.1"
