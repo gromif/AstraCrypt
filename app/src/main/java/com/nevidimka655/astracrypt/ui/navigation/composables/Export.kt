@@ -12,9 +12,9 @@ import com.nevidimka655.astracrypt.ui.navigation.Route
 
 inline fun NavGraphBuilder.export(
     crossinline onUiStateChange: (UiState) -> Unit
-) = composable<Route.Tabs.Export> {
-    val export: Route.Tabs.Export = it.toRoute()
-    onUiStateChange(Route.Tabs.Export.Ui.state)
+) = composable<Route.Export> {
+    val export: Route.Export = it.toRoute()
+    onUiStateChange(Route.Export.Ui.state)
     val vm: ExportScreenViewModel = hiltViewModel()
     val context = LocalContext.current
     ExportScreen(

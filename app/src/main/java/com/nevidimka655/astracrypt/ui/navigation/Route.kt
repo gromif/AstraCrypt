@@ -51,20 +51,6 @@ object Route {
             }
         }
 
-        @Serializable
-        data class Export(
-            val itemId: Long,
-            val outUri: String? = null
-        ) {
-            object Ui {
-                val state = UiState(
-                    toolbar = UiState.Toolbar(
-                        title = TextWrap.Resource(id = R.string.files_options_export)
-                    )
-                )
-            }
-        }
-
     }
 
     @Serializable
@@ -76,6 +62,20 @@ object Route {
             val state = UiState(
                 toolbar = UiState.Toolbar(
                     title = TextWrap.Resource(id = R.string.files_options_details)
+                )
+            )
+        }
+    }
+
+    @Serializable
+    data class Export(
+        val itemId: Long,
+        val outUri: String? = null
+    ) {
+        object Ui {
+            val state = UiState(
+                toolbar = UiState.Toolbar(
+                    title = TextWrap.Resource(id = R.string.files_options_export)
                 )
             )
         }

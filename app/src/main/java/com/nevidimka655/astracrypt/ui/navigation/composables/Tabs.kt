@@ -41,7 +41,7 @@ inline fun NavGraphBuilder.tabs(
             defaultAvatar = profileInfo.defaultAvatar,
             name = profileInfo.name,
             onOpenRecent = {
-                if (it.isFile) navController.navigate(Route.Tabs.Export(itemId = it.id)) else {
+                if (it.isFile) navController.navigate(Route.Export(itemId = it.id)) else {
                     vm.openDirectory(
                         id = it.id,
                         dirName = it.name,
@@ -75,10 +75,10 @@ inline fun NavGraphBuilder.tabs(
             onNavigateUp = { navController.navigateUp() },
             onNavigateToDetails = { navController.navigate(Route.Details(itemId = it)) },
             onOpenStarredDir = { navController.navigate(BottomBarItems.Files.route) },
-            onOpenFile = { navController.navigate(Route.Tabs.Export(itemId = it)) },
+            onOpenFile = { navController.navigate(Route.Export(itemId = it)) },
             onExport = { itemId, outUri ->
                 navController.navigate(
-                    Route.Tabs.Export(itemId = itemId, outUri = outUri.toString())
+                    Route.Export(itemId = itemId, outUri = outUri.toString())
                 )
             },
             onRename = { itemId, newName ->
