@@ -13,10 +13,14 @@ class EncryptionManager(
     private val settingsDataStoreManager: SettingsDataStoreManager,
     private val keysetFactory: KeysetFactory
 ) {
-    var encryptionInfo by mutableStateOf(EncryptionInfo())
+    private var info: EncryptionInfo? = null
+    var encryptionInfoState by mutableStateOf(EncryptionInfo())
+
+    suspend fun getInfo() = info ?: settingsDataStoreManager.encryptionInfoFlow.first()
+        .also { info = it }
 
     suspend fun loadEncryptionInfo() {
-        encryptionInfo = settingsDataStoreManager.encryptionInfoFlow.first().let { info ->
+        encryptionInfoState = settingsDataStoreManager.encryptionInfoFlow.first().let { info ->
             if (info.fileEncryptionOrdinal > 15 || info.fileEncryptionOrdinal < -1) info.copy(
                 fileEncryptionOrdinal = decodeIntField(
                     field = info.fileEncryptionOrdinal,
@@ -35,25 +39,25 @@ class EncryptionManager(
     }
 
     suspend fun save() {
-        settingsDataStoreManager.setEncryptionInfo(encryptionInfo)
+        settingsDataStoreManager.setEncryptionInfo(encryptionInfoState)
     }
 
     fun decodeIntField(field: Int, mod: Int) = ((keysetFactory.uniqueSalt + field) / mod) - 12
 
-    fun getFileEncryptionName() = if (encryptionInfo.fileEncryptionOrdinal > -1) {
-        KeysetTemplates.Stream.entries[encryptionInfo.fileEncryptionOrdinal].name
+    fun getFileEncryptionName() = if (encryptionInfoState.fileEncryptionOrdinal > -1) {
+        KeysetTemplates.Stream.entries[encryptionInfoState.fileEncryptionOrdinal].name
     } else null
 
-    fun getThumbEncryptionName() = if (encryptionInfo.thumbEncryptionOrdinal > -1) {
-        KeysetTemplates.Stream.entries[encryptionInfo.thumbEncryptionOrdinal].name
+    fun getThumbEncryptionName() = if (encryptionInfoState.thumbEncryptionOrdinal > -1) {
+        KeysetTemplates.Stream.entries[encryptionInfoState.thumbEncryptionOrdinal].name
     } else null
 
-    fun getDbEncryptionName() = if (encryptionInfo.databaseEncryptionOrdinal > -1) {
-        KeysetTemplates.AEAD.entries[encryptionInfo.databaseEncryptionOrdinal].name
+    fun getDbEncryptionName() = if (encryptionInfoState.databaseEncryptionOrdinal > -1) {
+        KeysetTemplates.AEAD.entries[encryptionInfoState.databaseEncryptionOrdinal].name
     } else null
 
-    fun getNotesEncryptionName() = if (encryptionInfo.notesEncryptionOrdinal > -1) {
-        KeysetTemplates.AEAD.entries[encryptionInfo.notesEncryptionOrdinal].name
+    fun getNotesEncryptionName() = if (encryptionInfoState.notesEncryptionOrdinal > -1) {
+        KeysetTemplates.AEAD.entries[encryptionInfoState.notesEncryptionOrdinal].name
     } else null
 
 }
