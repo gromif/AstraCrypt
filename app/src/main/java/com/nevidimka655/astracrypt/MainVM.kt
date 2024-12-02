@@ -22,7 +22,7 @@ import com.nevidimka655.astracrypt.room.Repository
 import com.nevidimka655.astracrypt.room.RepositoryEncryption
 import com.nevidimka655.astracrypt.room.StorageItemListTuple
 import com.nevidimka655.astracrypt.room.StorageItemMinimalTuple
-import com.nevidimka655.astracrypt.ui.UiState
+import com.nevidimka655.astracrypt.ui.UiStateOld
 import com.nevidimka655.astracrypt.utils.AppConfig
 import com.nevidimka655.astracrypt.utils.EncryptionManager
 import com.nevidimka655.astracrypt.utils.Engine
@@ -307,12 +307,12 @@ class MainVM @Inject constructor(
 
     private suspend fun showSnackbar(@StringRes stringId: Int) = _snackbarChannel.send(stringId)
 
-    fun setUiState(uiState: UiState) {}
+    fun setUiState(uiStateOld: UiStateOld) {}
 
-    fun getUiState() = UiState()
+    fun getUiState() = UiStateOld()
     fun cacheUiState() {}
 
-    fun restoreCachedUiState() = UiState()
+    fun restoreCachedUiState() = UiStateOld()
 
     fun invalidateCachedUiState() {}
 

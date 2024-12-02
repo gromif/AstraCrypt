@@ -1,5 +1,6 @@
 package com.nevidimka655.astracrypt.ui
 
+import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandVertically
@@ -13,7 +14,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -55,7 +55,6 @@ import com.nevidimka655.astracrypt.features.details.DetailsScreenViewModel
 import com.nevidimka655.astracrypt.features.export.ExportScreen
 import com.nevidimka655.astracrypt.features.export.ExportScreenViewModel
 import com.nevidimka655.astracrypt.features.profile.ProfileInfo
-import com.nevidimka655.astracrypt.model.FabState
 import com.nevidimka655.astracrypt.tabs.settings.SettingsScreen
 import com.nevidimka655.astracrypt.ui.navigation.BottomBarItems
 import com.nevidimka655.astracrypt.ui.navigation.Route
@@ -80,17 +79,16 @@ fun Main(
 ) {
     Surface {
         val context = LocalContext.current
-        var toolbarTitle by remember { mutableStateOf("") }
-        var currentTab by remember { mutableStateOf<Any>(BottomBarItems.Home) }
-        var isInnerScreen by rememberSaveable { mutableStateOf(false) }
-        var fabState by remember { mutableStateOf<FabState>(FabState.NO) }
+        var uiState by remember { mutableStateOf(UiState()) }
+        val (toolbar, fab, bottomBarTab) = uiState
         val onFabClick = remember { Channel<Any>(0) }
 
         val coroutineScope = rememberCoroutineScope()
         val topBarScroll = TopAppBarDefaults.enterAlwaysScrollBehavior()
-        if (fabState != FabState.NO) LaunchedEffect(topBarScroll.state.collapsedFraction) {
+        var fabAnimatedVisibilityState by rememberSaveable(fab) { mutableStateOf(fab.visible) }
+        if (fab.visible) LaunchedEffect(topBarScroll.state.collapsedFraction) {
             val toolbarIsCollapsing = topBarScroll.state.collapsedFraction > 0f
-            fabState = fabState.copy(isVisible = !toolbarIsCollapsing)
+            fabAnimatedVisibilityState = !toolbarIsCollapsing
         }
         LaunchedEffect(Unit) {
             with(vm) {
@@ -101,9 +99,12 @@ fun Main(
             modifier = modifier.nestedScroll(topBarScroll.nestedScrollConnection),
             topBar = {
                 CenterAlignedTopAppBar(
-                    title = { Text(text = toolbarTitle) },
+                    title = {
+                        Text(text = toolbar.title.resolve(context))
+                    },
                     navigationIcon = {
-                        if (isInnerScreen) IconButton(onClick = {
+                        if (bottomBarTab == null) IconButton(onClick = {
+                            Toast.makeText(context, "${bottomBarTab}", Toast.LENGTH_SHORT).show()
                             Haptic.click()
                             navController.navigateUp()
                         }) {
@@ -119,7 +120,7 @@ fun Main(
             },
             floatingActionButton = {
                 AnimatedVisibility(
-                    visible = fabState.isVisible,
+                    visible = fabAnimatedVisibilityState,
                     enter = fadeIn() + scaleIn(),
                     exit = fadeOut() + scaleOut()
                 ) {
@@ -127,14 +128,14 @@ fun Main(
                         onClick = {
                             coroutineScope.launch { onFabClick.send(0) }
                         },
-                    ) { Icon(fabState.imageVector, fabState.contentDescription) }
+                    ) { Icon(fab.icon.imageVector, fab.contentDescription.resolve(context)) }
                 }
             },
             bottomBar = {
                 val localDensity = LocalDensity.current
                 val windowInsets = WindowInsets.systemBars
                 AnimatedVisibility(
-                    visible = !isInnerScreen,
+                    visible = bottomBarTab != null,
                     enter = expandVertically() + fadeIn(),
                     exit = shrinkVertically(targetHeight = {
                         windowInsets.getBottom(localDensity)
@@ -143,9 +144,9 @@ fun Main(
                     BottomAppBar {
                         BottomBarItems.entries.forEach {
                             NavigationBarItem(
-                                selected = currentTab == it,
+                                selected = bottomBarTab == it,
                                 onClick = {
-                                    if (currentTab != it) navController.navigate(
+                                    if (bottomBarTab != it) navController.navigate(
                                         route = it.route,
                                         navOptions = NavOptions.Builder()
                                             .setLaunchSingleTop(true)
@@ -155,14 +156,14 @@ fun Main(
                                 },
                                 icon = {
                                     Icon(
-                                        if (currentTab == it) it.icon else it.iconOutline,
+                                        if (bottomBarTab == it) it.icon else it.iconOutline,
                                         context.getString(it.titleId)
                                     )
                                 },
                                 label = {
                                     Text(
                                         text = context.getString(it.titleId),
-                                        fontWeight = if (currentTab == it) FontWeight.Bold else FontWeight.Normal
+                                        fontWeight = if (bottomBarTab == it) FontWeight.Bold else FontWeight.Normal
                                     )
                                 }
                             )
@@ -179,11 +180,7 @@ fun Main(
                 modifier = Modifier.padding(padding)
             ) {
                 composable<Route.Tabs.Home> {
-                    val home: Route.Tabs.Home = it.toRoute()
-                    toolbarTitle = context.getString(home.titleId)
-                    isInnerScreen = false
-                    currentTab = BottomBarItems.Home
-                    fabState = FabState.NO
+                    uiState = Route.Tabs.Home.Ui.state
                     val homeVm: HomeViewModel = hiltViewModel()
                     val profileInfo by homeVm.profileInfoFlow.collectAsStateWithLifecycle(
                         initialValue = ProfileInfo()
@@ -209,16 +206,8 @@ fun Main(
                 }
                 composable<Route.Tabs.Files> {
                     val files: Route.Tabs.Files = it.toRoute()
-                    toolbarTitle = if (!files.isStarred) {
-                        context.getString(files.titleId)
-                    } else context.getString(files.titleIdAlt)
-                    isInnerScreen = false
-                    currentTab =
-                        if (!files.isStarred) BottomBarItems.Files else BottomBarItems.Starred
-                    fabState = if (!files.isStarred) FabState(
-                        imageVector = Icons.Default.Add,
-                        contentDescription = context.getString(R.string.add)
-                    ) else FabState.NO
+                    uiState =
+                        if (files.isStarred) Route.Tabs.Files.Ui.starred else Route.Tabs.Files.Ui.files
                     vm.isStarredScreen = files.isStarred
 
                     val filesVm: FilesViewModel = hiltViewModel()
@@ -248,9 +237,7 @@ fun Main(
                 }
                 composable<Route.Tabs.Details> {
                     val details: Route.Tabs.Details = it.toRoute()
-                    toolbarTitle = context.getString(details.titleId)
-                    isInnerScreen = true
-                    fabState = FabState.NO
+                    uiState = Route.Tabs.Details.Ui.state
                     val context = LocalContext.current
                     val vm1: DetailsScreenViewModel = hiltViewModel()
                     DetailsScreen(
@@ -263,9 +250,6 @@ fun Main(
                 }
                 composable<Route.Tabs.Export> {
                     val export: Route.Tabs.Export = it.toRoute()
-                    toolbarTitle = context.getString(export.titleId)
-                    isInnerScreen = true
-                    fabState = FabState.NO
                     val vm1: ExportScreenViewModel = hiltViewModel()
                     ExportScreen(
                         state = vm1.uiState,
@@ -286,11 +270,7 @@ fun Main(
                     )
                 }
                 composable<Route.Tabs.Settings> {
-                    val settings: Route.Tabs.Settings = it.toRoute()
-                    toolbarTitle = context.getString(settings.titleId)
-                    isInnerScreen = false
-                    currentTab = BottomBarItems.Settings
-                    fabState = FabState.NO
+                    uiState = Route.Tabs.Settings.Ui.state
                     SettingsScreen()
                 }
             }

@@ -21,7 +21,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nevidimka655.astracrypt.MainVM
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.room.StorageItemListTuple
-import com.nevidimka655.astracrypt.ui.UiState
+import com.nevidimka655.astracrypt.ui.UiStateOld
 import com.nevidimka655.astracrypt.ui.theme.AstraCryptTheme
 import com.nevidimka655.astracrypt.utils.extensions.requireMenuHost
 
@@ -102,7 +102,7 @@ class FilesFragment : Fragment() {
                 )
                 vm.cacheUiState()
                 vm.setUiState(
-                    UiState(
+                    UiStateOld(
                         navBarEnabled = false,
                         movePanelButtonState = selectorManager.blockItems,
                         fabState = false
@@ -138,7 +138,7 @@ class FilesFragment : Fragment() {
                         selectorManager.blockItems = true
                         mode?.invalidate()
                         vm.setUiState(
-                            UiState(
+                            UiStateOld(
                                 navBarEnabled = false,
                                 movePanelButtonState = true
                             )

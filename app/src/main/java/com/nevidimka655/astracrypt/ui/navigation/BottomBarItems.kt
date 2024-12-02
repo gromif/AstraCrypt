@@ -23,7 +23,7 @@ enum class BottomBarItems(
         titleId = R.string.home,
         icon = Icons.Default.Home,
         iconOutline = Icons.Outlined.Home,
-        route = Route.Tabs.Home()
+        route = Route.Tabs.Home
     ),
     Files(
         titleId = R.string.files,
@@ -41,7 +41,7 @@ enum class BottomBarItems(
         titleId = R.string.settings,
         icon = Icons.Default.Settings,
         iconOutline = Icons.Outlined.Settings,
-        route = Route.Tabs.Settings()
+        route = Route.Tabs.Settings
     )
 
 }
