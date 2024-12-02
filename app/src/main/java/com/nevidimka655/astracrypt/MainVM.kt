@@ -25,13 +25,12 @@ import com.nevidimka655.astracrypt.room.StorageItemMinimalTuple
 import com.nevidimka655.astracrypt.ui.UiStateOld
 import com.nevidimka655.astracrypt.utils.AppConfig
 import com.nevidimka655.astracrypt.utils.EncryptionManager
-import com.nevidimka655.astracrypt.utils.Engine
 import com.nevidimka655.astracrypt.utils.Io
 import com.nevidimka655.astracrypt.utils.PrivacyPolicyManager
 import com.nevidimka655.astracrypt.utils.SelectorManager
+import com.nevidimka655.astracrypt.utils.SetupManager
 import com.nevidimka655.astracrypt.utils.ToolsManager
 import com.nevidimka655.astracrypt.utils.datastore.AppearanceManager
-import com.nevidimka655.crypto.tink.KeysetFactory
 import com.nevidimka655.notes.Notes
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -50,7 +49,7 @@ import javax.inject.Inject
 class MainVM @Inject constructor(
     private val repository: Repository,
     private val repositoryEncryption: RepositoryEncryption,
-    private val keysetFactory: KeysetFactory,
+    private val setupManager: SetupManager,
     private val io: Io,
     private val encryptionManager: EncryptionManager,
     val appearanceManager: AppearanceManager,
@@ -289,21 +288,11 @@ class MainVM @Inject constructor(
         _profileInfoFlow.update { profileInfo }*/
     }
 
-    fun setupForFirstUse() {
-        io.dataDir.mkdir()
-        keysetFactory.associatedData
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.createBasicFolders(Engine.appContext, encryptionInfo)
-        }
-    }
-
     fun loadPrivacyPolicy(activity: Activity) {
         if (privacyPolicyManager.privacyPolicyStateFlow.value == null) {
             viewModelScope.launch(Dispatchers.IO) { privacyPolicyManager.loadPrivacyPolicy(activity) }
         }
     }
-
-    fun isDatabaseCreated() = io.dataDir.exists()
 
     private suspend fun showSnackbar(@StringRes stringId: Int) = _snackbarChannel.send(stringId)
 
@@ -327,6 +316,10 @@ class MainVM @Inject constructor(
             }
         }*/
         return true
+    }
+
+    init {
+        if (!setupManager.isDatabaseCreated()) viewModelScope.launch { setupManager.setup() }
     }
 
 }

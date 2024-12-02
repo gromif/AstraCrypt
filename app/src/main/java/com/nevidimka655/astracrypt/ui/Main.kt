@@ -72,9 +72,6 @@ fun Main(
             val toolbarIsCollapsing = topBarScroll.state.collapsedFraction > 0f
             fabAnimatedVisibilityState = !toolbarIsCollapsing
         }
-        LaunchedEffect(Unit) {
-            if (!vm.isDatabaseCreated()) vm.setupForFirstUse()
-        }
         Scaffold(
             modifier = modifier.nestedScroll(topBarScroll.nestedScrollConnection),
             topBar = {

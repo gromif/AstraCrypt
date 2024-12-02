@@ -1,7 +1,5 @@
 package com.nevidimka655.astracrypt.room
 
-import android.content.Context
-import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.model.DetailsFolderContent
 import com.nevidimka655.astracrypt.model.EncryptionInfo
 import com.nevidimka655.astracrypt.room.daos.NotesDao
@@ -19,16 +17,6 @@ class Repository(
     private val storage: StorageItemDao,
     private val notes: NotesDao
 ) {
-
-    suspend fun createBasicFolders(context: Context, encryptionInfo: EncryptionInfo) = arrayOf(
-        R.string.music, R.string.document, R.string.video, R.string.photo
-    ).forEach {
-        newDirectory(
-            encryptionInfo = encryptionInfo,
-            directoryName = context.getString(it),
-            parentDirectoryId = 0
-        )
-    }
 
     suspend fun insert(encryptionInfo: EncryptionInfo, item: StorageItemEntity) = storage.insert(
         repositoryEncryption.encryptStorageItemEntity(encryptionInfo, item)
