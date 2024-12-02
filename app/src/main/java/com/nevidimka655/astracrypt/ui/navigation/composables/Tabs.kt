@@ -69,6 +69,7 @@ inline fun NavGraphBuilder.tabs(
             vm = vm,
             filesVM = filesVm,
             viewMode = viewMode,
+            itemsFlow = if (files.isStarred) vm.starredPagingFlow else vm.pagingFlow,
             isStarred = files.isStarred,
             dialogNewFolderState = dialogNewFolderState,
             onFabClick = onFabClick,

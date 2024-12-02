@@ -76,6 +76,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
+import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import coil.ImageLoader
@@ -107,6 +108,7 @@ import com.nevidimka655.ui.compose_core.ext.cellsCount
 import com.nevidimka655.ui.compose_core.theme.spaces
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
@@ -503,6 +505,7 @@ fun FilesScreen(
     vm: MainVM,
     filesVM: FilesViewModel,
     viewMode: ViewMode,
+    itemsFlow: Flow<PagingData<StorageItemListTuple>>,
     isStarred: Boolean,
     dialogNewFolderState: MutableState<Boolean>,
     onFabClick: Channel<Any>,
@@ -517,7 +520,7 @@ fun FilesScreen(
     onLongPress: (item: StorageItemListTuple) -> Unit
 ) {
     val scope = rememberCoroutineScope()
-    val items = (if (isStarred) vm.starredPagingFlow else vm.pagingFlow).collectAsLazyPagingItems()
+    val items = itemsFlow.collectAsLazyPagingItems()
     val isEmptyPageVisible = remember {
         derivedStateOf { items.itemCount == 0 && items.loadState.refresh is LoadState.NotLoading }
     }
