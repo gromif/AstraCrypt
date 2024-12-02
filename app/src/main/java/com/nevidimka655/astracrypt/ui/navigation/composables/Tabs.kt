@@ -3,7 +3,6 @@ package com.nevidimka655.astracrypt.ui.navigation.composables
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
@@ -11,8 +10,6 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import com.nevidimka655.astracrypt.MainVM
-import com.nevidimka655.astracrypt.features.details.DetailsScreen
-import com.nevidimka655.astracrypt.features.details.DetailsScreenViewModel
 import com.nevidimka655.astracrypt.features.profile.ProfileInfo
 import com.nevidimka655.astracrypt.ui.UiState
 import com.nevidimka655.astracrypt.ui.navigation.BottomBarItems
@@ -93,18 +90,5 @@ inline fun NavGraphBuilder.tabs(
     composable<Route.Tabs.Settings> {
         onUiStateChange(Route.Tabs.Settings.Ui.state)
         SettingsScreen()
-    }
-    composable<Route.Tabs.Details> {
-        val details: Route.Tabs.Details = it.toRoute()
-        onUiStateChange(Route.Tabs.Details.Ui.state)
-        val context = LocalContext.current
-        val vm1: DetailsScreenViewModel = hiltViewModel()
-        DetailsScreen(
-            detailsManager = vm1.detailsManager,
-            imageLoader = vm1.imageLoader,
-            onStart = {
-                vm1.submitDetailsQuery(context = context, itemId = details.itemId)
-            }
-        )
     }
 }
