@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.tabs.settings
+package com.nevidimka655.astracrypt.ui.tabs.settings
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

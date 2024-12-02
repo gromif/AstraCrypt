@@ -58,7 +58,7 @@ class MainVM @Inject constructor(
     val imageLoader: ImageLoader
 ) : ViewModel() {
     val selectorManager by lazy { SelectorManager() }
-    val encryptionInfo get() = encryptionManager.encryptionInfo
+    val encryptionInfo get() = encryptionManager.encryptionInfoState
 
     var isSearchExpandedState by mutableStateOf(false)
     private var searchSetupJob: Job? = null

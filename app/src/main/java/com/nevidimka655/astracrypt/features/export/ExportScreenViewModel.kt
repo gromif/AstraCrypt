@@ -12,10 +12,10 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.OutOfQuotaPolicy
 import androidx.work.WorkManager
 import androidx.work.workDataOf
-import com.nevidimka655.astracrypt.model.EncryptionInfo
 import com.nevidimka655.astracrypt.model.ExportUiState
 import com.nevidimka655.astracrypt.room.OpenTuple
 import com.nevidimka655.astracrypt.room.Repository
+import com.nevidimka655.astracrypt.utils.EncryptionManager
 import com.nevidimka655.astracrypt.utils.Engine
 import com.nevidimka655.astracrypt.utils.Io
 import com.nevidimka655.astracrypt.work.ExportFilesWorker
@@ -41,6 +41,7 @@ private typealias Args = ExportFilesWorker.Args
 
 @HiltViewModel
 class ExportScreenViewModel @Inject constructor(
+    private val encryptionManager: EncryptionManager,
     private val repository: Repository,
     private val keysetFactory: KeysetFactory,
     val io: Io,
@@ -50,20 +51,17 @@ class ExportScreenViewModel @Inject constructor(
     private var internalExportUri = ""
     var uiState by mutableStateOf(ExportUiState())
 
-    fun export(
-        encryptionInfo: EncryptionInfo,
-        itemId: Long
-    ) = viewModelScope.launch(Dispatchers.IO) {
+    fun export(itemId: Long) = viewModelScope.launch(Dispatchers.IO) {
         export(
-            repository.getDataForOpening(encryptionInfo = encryptionInfo, id = itemId)
+            repository.getDataForOpening(encryptionInfo = encryptionManager.getInfo(), id = itemId)
         )
     }
 
     fun export(
-        encryptionInfo: EncryptionInfo,
         itemId: Long,
         output: String
     ) = viewModelScope.launch {
+        val encryptionInfo = encryptionManager.getInfo()
         val associatedData = if (encryptionInfo.isAssociatedDataEncrypted)
             keysetFactory.transformAssociatedDataToWorkInstance(
                 bytesIn = keysetFactory.associatedData,
