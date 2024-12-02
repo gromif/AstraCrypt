@@ -76,6 +76,7 @@ inline fun NavGraphBuilder.tabs(
             onNavigateToDetails = { navController.navigate(Route.Details(itemId = it)) },
             onOpenStarredDir = { navController.navigate(BottomBarItems.Files.route) },
             onOpenFile = { navController.navigate(Route.Export(itemId = it)) },
+            onNewFolder = { vm.newDirectory(it) },
             onExport = { itemId, outUri ->
                 navController.navigate(
                     Route.Export(itemId = itemId, outUri = outUri.toString())

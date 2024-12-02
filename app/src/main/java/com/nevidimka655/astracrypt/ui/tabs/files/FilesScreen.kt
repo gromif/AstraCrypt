@@ -510,6 +510,7 @@ fun FilesScreen(
     onNavigateToDetails: (Long) -> Unit,
     onOpenStarredDir: () -> Unit,
     onOpenFile: (Long) -> Unit,
+    onNewFolder: (String) -> Unit,
     onExport: (itemId: Long, outUri: Uri) -> Unit,
     onRename: (itemId: Long, newName: String) -> Unit,
     onNavigatorClick: (index: Int?) -> Unit,
@@ -521,7 +522,7 @@ fun FilesScreen(
         derivedStateOf { items.itemCount == 0 && items.loadState.refresh is LoadState.NotLoading }
     }
     var dialogNewFolder by Tabs.Files.Dialogs.newFolder(state = dialogNewFolderState) {
-        vm.newDirectory(it.removeLines().trim())
+        onNewFolder(it.removeLines().trim())
     }
     var dialogRename by Tabs.Files.Dialogs.rename(
         state = filesVM.dialogRenameState,
