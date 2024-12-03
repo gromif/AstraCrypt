@@ -1,6 +1,5 @@
 package com.nevidimka655.astracrypt
 
-import android.app.Activity
 import android.net.Uri
 import android.text.format.DateFormat
 import androidx.annotation.StringRes
@@ -25,7 +24,6 @@ import com.nevidimka655.astracrypt.room.StorageItemMinimalTuple
 import com.nevidimka655.astracrypt.ui.UiStateOld
 import com.nevidimka655.astracrypt.utils.AppConfig
 import com.nevidimka655.astracrypt.utils.Io
-import com.nevidimka655.astracrypt.utils.PrivacyPolicyManager
 import com.nevidimka655.astracrypt.utils.SelectorManager
 import com.nevidimka655.astracrypt.utils.SetupManager
 import com.nevidimka655.astracrypt.utils.ToolsManager
@@ -51,7 +49,6 @@ class MainVM @Inject constructor(
     private val setupManager: SetupManager,
     private val io: Io,
     val appearanceManager: AppearanceManager,
-    val privacyPolicyManager: PrivacyPolicyManager,
     val imageLoader: ImageLoader
 ) : ViewModel() {
     val selectorManager by lazy { SelectorManager() }
@@ -279,12 +276,6 @@ class MainVM @Inject constructor(
         } else iconFile.delete()
         settingsDataStoreManager.setProfileInfo(profileInfo)
         _profileInfoFlow.update { profileInfo }*/
-    }
-
-    fun loadPrivacyPolicy(activity: Activity) {
-        if (privacyPolicyManager.privacyPolicyStateFlow.value == null) {
-            viewModelScope.launch(Dispatchers.IO) { privacyPolicyManager.loadPrivacyPolicy(activity) }
-        }
     }
 
     private suspend fun showSnackbar(@StringRes stringId: Int) = _snackbarChannel.send(stringId)
