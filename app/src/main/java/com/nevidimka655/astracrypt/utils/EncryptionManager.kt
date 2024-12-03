@@ -1,8 +1,5 @@
 package com.nevidimka655.astracrypt.utils
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import com.nevidimka655.astracrypt.model.EncryptionInfo
 import com.nevidimka655.astracrypt.utils.datastore.SettingsDataStoreManager
 import com.nevidimka655.crypto.tink.KeysetFactory
@@ -14,52 +11,26 @@ class EncryptionManager(
     private val keysetFactory: KeysetFactory
 ) {
     private var info: EncryptionInfo? = null
-    var encryptionInfoState by mutableStateOf(EncryptionInfo())
 
     suspend fun getInfo() = info ?: settingsDataStoreManager.encryptionInfoFlow.first()
         .also { info = it }
 
     fun getCachedInfo() = info
 
-    suspend fun loadEncryptionInfo() {
-        encryptionInfoState = settingsDataStoreManager.encryptionInfoFlow.first().let { info ->
-            if (info.fileEncryptionOrdinal > 15 || info.fileEncryptionOrdinal < -1) info.copy(
-                fileEncryptionOrdinal = decodeIntField(
-                    field = info.fileEncryptionOrdinal,
-                    mod = 38
-                ),
-                thumbEncryptionOrdinal = decodeIntField(
-                    field = info.thumbEncryptionOrdinal,
-                    mod = 84
-                ),
-                databaseEncryptionOrdinal = decodeIntField(
-                    field = info.databaseEncryptionOrdinal,
-                    mod = 62
-                )
-            ) else info
-        }
-    }
-
     suspend fun save() {
-        settingsDataStoreManager.setEncryptionInfo(encryptionInfoState)
+        settingsDataStoreManager.setEncryptionInfo(getInfo())
     }
 
-    fun decodeIntField(field: Int, mod: Int) = ((keysetFactory.uniqueSalt + field) / mod) - 12
+    suspend fun getFileEncryptionName() = KeysetTemplates.Stream.entries
+        .getOrNull(getInfo().fileEncryptionOrdinal)?.name
 
-    fun getFileEncryptionName() = if (encryptionInfoState.fileEncryptionOrdinal > -1) {
-        KeysetTemplates.Stream.entries[encryptionInfoState.fileEncryptionOrdinal].name
-    } else null
+    suspend fun getThumbEncryptionName() = KeysetTemplates.Stream.entries
+        .getOrNull(getInfo().thumbEncryptionOrdinal)?.name
 
-    fun getThumbEncryptionName() = if (encryptionInfoState.thumbEncryptionOrdinal > -1) {
-        KeysetTemplates.Stream.entries[encryptionInfoState.thumbEncryptionOrdinal].name
-    } else null
+    suspend fun getDbEncryptionName() = KeysetTemplates.AEAD.entries
+        .getOrNull(getInfo().databaseEncryptionOrdinal)?.name
 
-    fun getDbEncryptionName() = if (encryptionInfoState.databaseEncryptionOrdinal > -1) {
-        KeysetTemplates.AEAD.entries[encryptionInfoState.databaseEncryptionOrdinal].name
-    } else null
-
-    fun getNotesEncryptionName() = if (encryptionInfoState.notesEncryptionOrdinal > -1) {
-        KeysetTemplates.AEAD.entries[encryptionInfoState.notesEncryptionOrdinal].name
-    } else null
+    suspend fun getNotesEncryptionName() = KeysetTemplates.AEAD.entries
+        .getOrNull(getInfo().notesEncryptionOrdinal)?.name
 
 }
