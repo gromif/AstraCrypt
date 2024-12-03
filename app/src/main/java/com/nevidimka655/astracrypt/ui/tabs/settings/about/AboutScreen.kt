@@ -35,12 +35,14 @@ import com.nevidimka655.ui.compose_core.ext.vectorResource
 import com.nevidimka655.ui.compose_core.theme.spaces
 
 @Composable
-fun AboutScreen() {
+fun AboutScreen(
+    navigateToPrivacyPolicy: () -> Unit
+) {
     val context = LocalContext.current
     PreferencesScreen {
         AboutTitleCard()
         CommonOptions(context) {
-            //findNavController().navigate(R.id.action_aboutFragment_to_privacyPolicyFragment)
+            navigateToPrivacyPolicy()
         }
         PreferencesGroup(text = stringResource(id = R.string.support)) {
             CommunicationOptions(context)
@@ -50,7 +52,7 @@ fun AboutScreen() {
 
 @Composable
 private fun CommonOptions(
-    context: Context, privacyPolicyOnClick: () -> Unit
+    context: Context, onNavigateToPrivacyPolicy: () -> Unit
 ) = Card(modifier = Modifier.fillMaxWidth()) {
     TwoLineListItem(
         titleText = stringResource(id = R.string.about_moreApps),
@@ -72,7 +74,7 @@ private fun CommonOptions(
     )
     OneLineListItem(
         titleText = stringResource(id = R.string.privacyPolicy),
-        onClick = privacyPolicyOnClick
+        onClick = onNavigateToPrivacyPolicy
     )
 }
 

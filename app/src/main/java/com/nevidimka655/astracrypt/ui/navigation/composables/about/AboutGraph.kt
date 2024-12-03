@@ -10,5 +10,10 @@ inline fun NavGraphBuilder.aboutGraph(
     crossinline onUiStateChange: (UiState) -> Unit,
     navController: NavController
 ) = navigation<Route.AboutGraph>(startDestination = Route.AboutGraph.About) {
-    about(onUiStateChange = onUiStateChange)
+    about(
+        onUiStateChange = onUiStateChange,
+        navigateToPrivacyPolicy = {
+            navController.navigate(Route.AboutGraph.PrivacyPolicy)
+        })
+    privacyPolicy(onUiStateChange = onUiStateChange)
 }
