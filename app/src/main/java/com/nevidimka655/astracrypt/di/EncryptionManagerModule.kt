@@ -19,8 +19,7 @@ object EncryptionManagerModule {
         settingsDataStoreManager: SettingsDataStoreManager,
         keysetFactory: KeysetFactory
     ) = EncryptionManager(
-        settingsDataStoreManager = settingsDataStoreManager,
-        keysetFactory = keysetFactory
+        settingsDataStoreManager = settingsDataStoreManager
     )
 
 }

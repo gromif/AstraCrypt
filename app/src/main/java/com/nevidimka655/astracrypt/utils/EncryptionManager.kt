@@ -2,13 +2,11 @@ package com.nevidimka655.astracrypt.utils
 
 import com.nevidimka655.astracrypt.model.EncryptionInfo
 import com.nevidimka655.astracrypt.utils.datastore.SettingsDataStoreManager
-import com.nevidimka655.crypto.tink.KeysetFactory
 import com.nevidimka655.crypto.tink.KeysetTemplates
 import kotlinx.coroutines.flow.first
 
 class EncryptionManager(
-    private val settingsDataStoreManager: SettingsDataStoreManager,
-    private val keysetFactory: KeysetFactory
+    private val settingsDataStoreManager: SettingsDataStoreManager
 ) {
     private var info: EncryptionInfo? = null
 
