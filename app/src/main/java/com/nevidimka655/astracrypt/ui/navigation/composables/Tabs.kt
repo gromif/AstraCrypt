@@ -92,7 +92,8 @@ inline fun NavGraphBuilder.tabs(
     composable<Route.Tabs.Settings> {
         onUiStateChange(Route.Tabs.Settings.Ui.state)
         SettingsScreen(
-            onAbout = { navController.navigate(Route.AboutGraph) }
+            navigateToEditProfile = { navController.navigate(Route.EditProfile) },
+            navigateToAbout = { navController.navigate(Route.AboutGraph) }
         )
     }
 }

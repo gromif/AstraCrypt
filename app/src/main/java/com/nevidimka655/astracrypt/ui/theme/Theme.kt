@@ -131,7 +131,7 @@ fun AstraCryptTheme(
 }
 
 fun Icons.reset() = with(this) {
-    Avatars.reset()
+    this.Avatars.reset()
     Purchases.reset()
     FileType.reset()
     FileType.resetAlt()

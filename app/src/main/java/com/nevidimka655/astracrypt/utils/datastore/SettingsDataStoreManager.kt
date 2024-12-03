@@ -6,7 +6,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.nevidimka655.astracrypt.features.auth.AuthInfo
-import com.nevidimka655.astracrypt.features.profile.AvatarIds
+import com.nevidimka655.astracrypt.features.profile.Avatars
 import com.nevidimka655.astracrypt.features.profile.ProfileInfo
 import com.nevidimka655.astracrypt.model.EncryptionInfo
 import com.nevidimka655.crypto.tink.KeysetFactory
@@ -40,7 +40,7 @@ class SettingsDataStoreManager(
         prefs[key]?.let {
             val profileInfoJson = decryptValue(key = key.name, value = it)
             Json.decodeFromString<ProfileInfo>(profileInfoJson)
-        } ?: ProfileInfo(defaultAvatar = AvatarIds.AVATAR_5.ordinal)
+        } ?: ProfileInfo(defaultAvatar = Avatars.AVATAR_5)
     }
     suspend fun setProfileInfo(profileInfo: ProfileInfo) = dataStore.edit {
         val key = profileInfoKey()

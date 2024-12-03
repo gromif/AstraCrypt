@@ -82,6 +82,17 @@ object Route {
     }
 
     @Serializable
+    object EditProfile {
+        object Ui {
+            val state = UiState(
+                toolbar = UiState.Toolbar(
+                    title = TextWrap.Resource(id = R.string.settings_editProfile)
+                )
+            )
+        }
+    }
+
+    @Serializable
     object AboutGraph {
 
         @Serializable

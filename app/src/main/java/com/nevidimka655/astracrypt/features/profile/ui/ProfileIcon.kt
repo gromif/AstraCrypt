@@ -20,15 +20,15 @@ import androidx.compose.ui.unit.dp
 import coil.ImageLoader
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.nevidimka655.astracrypt.features.profile.AvatarIds
-import com.nevidimka655.astracrypt.features.profile.AvatarIds.Companion.vector
+import com.nevidimka655.astracrypt.features.profile.Avatars
+import com.nevidimka655.astracrypt.features.profile.Avatars.Companion.vector
 import com.nevidimka655.astracrypt.model.CoilTinkModel
 
 @Composable
 fun ProfileIcon(
     imageLoader: ImageLoader,
     coilAvatarModel: CoilTinkModel?,
-    defaultAvatar: Int? = null,
+    defaultAvatar: Avatars? = null,
     showBorder: Boolean = true,
     iconSize: Dp = 80.dp
 ) = Box(
@@ -47,7 +47,7 @@ fun ProfileIcon(
     if (defaultAvatar != null) Image(
         modifier = Modifier.fillMaxSize(),
         painter = rememberVectorPainter(
-            image = AvatarIds.entries[defaultAvatar].vector()
+            image = defaultAvatar.vector()
         ),
         contentDescription = null
     ) else if (coilAvatarModel != null) AsyncImage(

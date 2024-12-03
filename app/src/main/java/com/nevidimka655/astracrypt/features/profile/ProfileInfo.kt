@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 data class ProfileInfo(
 
     @SerialName("a")
-    var defaultAvatar: Int? = null,
+    var defaultAvatar: Avatars? = null,
 
     @SerialName("b")
     var name: String? = null

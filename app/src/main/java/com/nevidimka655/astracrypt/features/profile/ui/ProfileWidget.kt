@@ -16,6 +16,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.ImageLoader
 import com.nevidimka655.astracrypt.R
+import com.nevidimka655.astracrypt.features.profile.Avatars
 import com.nevidimka655.astracrypt.model.CoilTinkModel
 import com.nevidimka655.ui.compose_core.theme.spaces
 
@@ -24,7 +25,7 @@ fun ProfileWidget(
     imageLoader: ImageLoader,
     name: String? = null,
     coilAvatarModel: CoilTinkModel?,
-    defaultAvatar: Int? = null
+    defaultAvatar: Avatars? = null
 ) = Row(
     modifier = Modifier
         .fillMaxWidth()

@@ -37,6 +37,7 @@ import androidx.compose.ui.unit.dp
 import coil.ImageLoader
 import coil.compose.AsyncImage
 import com.nevidimka655.astracrypt.R
+import com.nevidimka655.astracrypt.features.profile.Avatars
 import com.nevidimka655.astracrypt.features.profile.ui.ProfileWidget
 import com.nevidimka655.astracrypt.model.CoilTinkModel
 import com.nevidimka655.astracrypt.room.StorageItemListTuple
@@ -50,7 +51,7 @@ fun HomeScreen(
     recentItemsState: State<List<StorageItemListTuple>>,
     imageLoader: ImageLoader,
     coilAvatarModel: CoilTinkModel?,
-    defaultAvatar: Int? = null,
+    defaultAvatar: Avatars? = null,
     name: String?,
     onOpenRecent: (StorageItemListTuple) -> Unit
 ) = Column(

@@ -15,7 +15,6 @@ import androidx.paging.PagingSource
 import androidx.paging.cachedIn
 import androidx.paging.map
 import coil.ImageLoader
-import com.nevidimka655.astracrypt.features.profile.ProfileInfo
 import com.nevidimka655.astracrypt.model.NavigatorDirectory
 import com.nevidimka655.astracrypt.room.Repository
 import com.nevidimka655.astracrypt.room.RepositoryEncryption
@@ -252,31 +251,6 @@ class MainVM @Inject constructor(
     }
 
     fun isSearchActive() = searchSetupJob != null
-
-    fun saveProfileInfo(
-        profileInfo: ProfileInfo, force: Boolean = false
-    ) = viewModelScope.launch(Dispatchers.IO) {
-        /*val iconFile = io.getProfileIconFile()
-        if (profileInfo.defaultAvatar == null) {
-            if (_profileInfoFlow.value.iconFile != profileInfo.iconFile || force) {
-                iconFile.recreate()
-                val compressedByteStream = ByteArrayOutputStream().also {
-                    profileInfo.iconFile!!.toBitmap().compress(Bitmap.CompressFormat.PNG, 98, it)
-                }
-                val thumbEncryption = encryptionInfo.thumbEncryptionOrdinal
-                val keysetHandle = if (thumbEncryption != -1) {
-                    keysetFactory.stream(KeysetTemplates.Stream.entries[thumbEncryption])
-                } else null
-                val outStream = keysetHandle?.streamingAeadPrimitive()?.newEncryptingStream(
-                    iconFile.outputStream(),
-                    keysetFactory.associatedData
-                ) ?: iconFile.outputStream()
-                outStream.use { it.write(compressedByteStream.toByteArray()) }
-            }
-        } else iconFile.delete()
-        settingsDataStoreManager.setProfileInfo(profileInfo)
-        _profileInfoFlow.update { profileInfo }*/
-    }
 
     private suspend fun showSnackbar(@StringRes stringId: Int) = _snackbarChannel.send(stringId)
 
