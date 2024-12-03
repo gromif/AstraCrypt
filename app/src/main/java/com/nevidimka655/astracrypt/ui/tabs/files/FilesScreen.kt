@@ -65,10 +65,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalView
-import androidx.compose.ui.platform.rememberNestedScrollInteropConnection
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -370,9 +368,7 @@ fun FilesList(
         }
     )
     LazyVerticalGrid(
-        modifier = Modifier
-            .fillMaxSize()
-            .nestedScroll(rememberNestedScrollInteropConnection()),
+        modifier = Modifier.fillMaxSize(),
         columns = GridCells.Fixed(cells),
         contentPadding = contentPadding,
         verticalArrangement = arrangement,

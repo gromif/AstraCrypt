@@ -27,10 +27,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
-import androidx.compose.ui.platform.rememberNestedScrollInteropConnection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -59,9 +57,7 @@ class LabFragment : Fragment() {
     @Composable
     private fun LabScreen() {
         LazyVerticalGrid(
-            modifier = Modifier
-                .fillMaxSize()
-                .nestedScroll(rememberNestedScrollInteropConnection()),
+            modifier = Modifier.fillMaxSize(),
             columns = GridCells.Adaptive(250.dp),
             contentPadding = PaddingValues(MaterialTheme.spaces.spaceMedium),
             verticalArrangement = Arrangement.spacedBy(MaterialTheme.spaces.spaceMedium),

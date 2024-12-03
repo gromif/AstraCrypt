@@ -11,10 +11,8 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
-import androidx.compose.ui.platform.rememberNestedScrollInteropConnection
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -44,9 +42,7 @@ class PurchasesFragment : Fragment() {
     fun SubscriptionsScreen() {
         val cellsCount = LocalWindowWidth.current.cellsCount()
         LazyVerticalGrid(
-            modifier = Modifier
-                .fillMaxSize()
-                .nestedScroll(rememberNestedScrollInteropConnection()),
+            modifier = Modifier.fillMaxSize(),
             columns = GridCells.Fixed(cellsCount),
             verticalArrangement = Arrangement.spacedBy(MaterialTheme.spaces.spaceMedium),
             horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spaces.spaceMedium),

@@ -23,10 +23,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
-import androidx.compose.ui.platform.rememberNestedScrollInteropConnection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -78,9 +76,7 @@ class PurchasesOverviewFragment : Fragment() {
         }
         val columnsCount = remember { widthSizeClass.cellsCount() }
         LazyVerticalGrid(
-            modifier = Modifier
-                .fillMaxSize()
-                .nestedScroll(rememberNestedScrollInteropConnection()),
+            modifier = Modifier.fillMaxSize(),
             columns = GridCells.Fixed(columnsCount),
             verticalArrangement = Arrangement.spacedBy(MaterialTheme.spaces.spaceMedium),
             horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spaces.spaceMedium),
