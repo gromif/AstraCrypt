@@ -184,7 +184,7 @@ class ImportFilesWorker @AssistedInject constructor(
                 creationTime = creationDate,
                 thumbnailEncryptionType = thumbEncryption
             )
-            repository.insert(encryptionInfo, item)
+            repository.insert(item)
             if (!saveOriginalFiles) try {
                 val isFileDeleted = docFile.delete()
                 if (isFileDeleted) return@coroutineScope

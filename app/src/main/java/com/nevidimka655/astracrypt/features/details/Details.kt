@@ -39,20 +39,14 @@ fun DetailsScreen(
                 imageVector = if (isFile) Icons.AutoMirrored.Outlined.InsertDriveFile else Icons.Filled.Folder,
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.onSurfaceVariant
-            ) else {
-                val encryption = remember {
-                    detailsManager.extras?.getInt("encryption") ?: -1
-                }
-                AsyncImage(modifier = Modifier.fillMaxSize(),
-                    model = CoilTinkModel(
-                        absolutePath = null,
-                        path = thumb,
-                        encryptionType = encryption
-                    ),
-                    contentDescription = null,
-                    imageLoader = imageLoader,
-                    contentScale = ContentScale.Crop)
-            }
+            ) else AsyncImage(modifier = Modifier.fillMaxSize(),
+                model = CoilTinkModel(
+                    absolutePath = null,
+                    path = thumb
+                ),
+                contentDescription = null,
+                imageLoader = imageLoader,
+                contentScale = ContentScale.Crop)
         }
     )
 }

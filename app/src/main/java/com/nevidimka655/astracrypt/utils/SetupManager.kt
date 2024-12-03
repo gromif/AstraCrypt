@@ -14,7 +14,6 @@ class SetupManager @Inject constructor(
     private val context: Context,
     private val keysetFactory: KeysetFactory,
     private val repository: Repository,
-    private val encryptionManager: EncryptionManager,
     private val io: Io
 ) {
 
@@ -25,7 +24,6 @@ class SetupManager @Inject constructor(
         keysetFactory.associatedData
         arrayOf(R.string.music, R.string.document, R.string.video, R.string.photo).forEach {
             repository.newDirectory(
-                encryptionInfo = encryptionManager.getInfo(),
                 directoryName = context.getString(it),
                 parentDirectoryId = 0
             )

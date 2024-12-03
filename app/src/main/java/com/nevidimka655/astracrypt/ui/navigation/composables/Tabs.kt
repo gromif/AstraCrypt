@@ -84,7 +84,7 @@ inline fun NavGraphBuilder.tabs(
                 )
             },
             onRename = { itemId, newName ->
-                filesVm.rename(vm.encryptionInfo, itemId, newName)
+                filesVm.rename(itemId, newName)
             },
             onNavigatorClick = { vm.openDirectoryFromSelector(it) }
         ) { }

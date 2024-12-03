@@ -18,6 +18,7 @@ import javax.inject.Inject
 
 class TinkCoilFetcherFactory @Inject constructor(
     private val keysetFactory: KeysetFactory,
+    private val encryptionManager: EncryptionManager,
     private val io: Io
 ) : Fetcher.Factory<CoilTinkModel> {
     override fun create(data: CoilTinkModel, options: Options, imageLoader: ImageLoader) =
@@ -25,12 +26,13 @@ class TinkCoilFetcherFactory @Inject constructor(
 
     inner class TinkCoilFetcher(private val data: CoilTinkModel) : Fetcher {
         override suspend fun fetch(): FetchResult {
-            val streamOrdinal = data.encryptionType
+            val encryptionInfo = encryptionManager.getInfo()
+            val streamOrdinal = encryptionInfo.thumbEncryptionOrdinal
             val path = data.absolutePath ?: "${io.dataDir}/${data.path}"
             val file = File(path)
             val sourceInputChannel = if (streamOrdinal == -1) file.inputStream() else {
-                val keysetHandle =
-                    keysetFactory.stream(KeysetTemplates.Stream.entries[streamOrdinal])
+                val keysetHandle = keysetFactory
+                    .stream(KeysetTemplates.Stream.entries[streamOrdinal])
                 keysetHandle.streamingAeadPrimitive()
                     .newDecryptingStream(file.inputStream(), keysetFactory.associatedData)
             }

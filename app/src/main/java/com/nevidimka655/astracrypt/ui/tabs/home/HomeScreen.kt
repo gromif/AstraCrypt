@@ -94,7 +94,6 @@ inline fun RecentList(
             name = item.name,
             imageLoader = imageLoader,
             thumb = item.thumbnail,
-            thumbEncryption = item.thumbnailEncryptionType,
             itemType = item.itemType,
             state = item.state
         ) { onClick(item) }
@@ -107,7 +106,6 @@ inline fun RecentListItem(
     imageLoader: ImageLoader,
     name: String,
     thumb: String,
-    thumbEncryption: Int,
     itemType: StorageItemType,
     state: StorageItemState,
     crossinline onClick: () -> Unit
@@ -140,7 +138,7 @@ inline fun RecentListItem(
                 )
             } else AsyncImage(
                 modifier = Modifier.fillMaxSize(),
-                model = CoilTinkModel(path = thumb, encryptionType = thumbEncryption),
+                model = CoilTinkModel(path = thumb),
                 contentDescription = null,
                 imageLoader = imageLoader,
                 contentScale = ContentScale.Crop

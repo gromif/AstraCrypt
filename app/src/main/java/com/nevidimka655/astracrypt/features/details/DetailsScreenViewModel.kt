@@ -18,7 +18,6 @@ import coil.ImageLoader
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.model.StorageItemFlags
 import com.nevidimka655.astracrypt.room.Repository
-import com.nevidimka655.astracrypt.utils.EncryptionManager
 import com.nevidimka655.astracrypt.utils.Io
 import com.nevidimka655.compose_details.DetailsManager
 import com.nevidimka655.compose_details.addItem
@@ -33,24 +32,20 @@ import javax.inject.Inject
 @HiltViewModel
 class DetailsScreenViewModel @Inject constructor(
     private val repository: Repository,
-    private val encryptionManager: EncryptionManager,
     private val io: Io,
     val detailsManager: DetailsManager,
     val imageLoader: ImageLoader
 ): ViewModel() {
 
     suspend fun submitDetailsQuery(context: Context, itemId: Long) = detailsManager.run {
-        val encryptionInfo = encryptionManager.getInfo()
-        val item = repository.getById(encryptionInfo, itemId)
+        val item = repository.getById(itemId)
         val absolutePath = repository.getAbsolutePath(
-            encryptionInfo = encryptionInfo,
             childName = item.name,
             parentDirId = item.parentDirectoryId
         )
         val isFile = item.itemType.isFile
         title = item.name
         extras = bundleOf(
-            "encryption" to item.thumbnailEncryptionType,
             "isFile" to isFile,
             "thumb" to item.thumb
         )

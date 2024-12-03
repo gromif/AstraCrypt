@@ -25,20 +25,14 @@ class HomeViewModel @Inject constructor(
     encryptionManager: EncryptionManager,
 ) : ViewModel() {
 
-    val coilAvatarModel = CoilTinkModel(
-        absolutePath = io.getProfileIconFile().toString(),
-        encryptionType = encryptionManager.encryptionInfoState.thumbEncryptionOrdinal
-    )
+    val coilAvatarModel = CoilTinkModel(absolutePath = io.getProfileIconFile().toString())
 
     val profileInfoFlow get() = settingsDataStoreManager.profileInfoFlow
 
     val recentFilesStateFlow = repository.getRecentFilesFlow().map { list ->
-        if (encryptionManager.encryptionInfoState.isDatabaseEncrypted) try {
+        if (encryptionManager.getInfo().isDatabaseEncrypted) try {
             list.map {
-                repositoryEncryption.decryptStorageItemListTuple(
-                    encryptionManager.encryptionInfoState,
-                    it
-                )
+                repositoryEncryption.decryptStorageItemListTuple(it)
             }
         } catch (_: Exception) {
             list

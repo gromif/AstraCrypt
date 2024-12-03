@@ -69,7 +69,6 @@ class NotesFragment : Fragment() {
                 ) {
                     lifecycleScope.launch {
                         notesManager.preloadText(
-                            encryptionInfo = vm.encryptionInfo,
                             noteId = it.id,
                             title = it.title
                         )

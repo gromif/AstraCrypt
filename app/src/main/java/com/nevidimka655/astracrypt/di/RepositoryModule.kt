@@ -7,6 +7,7 @@ import com.nevidimka655.astracrypt.room.Repository
 import com.nevidimka655.astracrypt.room.RepositoryEncryption
 import com.nevidimka655.astracrypt.room.daos.NotesDao
 import com.nevidimka655.astracrypt.room.daos.StorageItemDao
+import com.nevidimka655.astracrypt.utils.EncryptionManager
 import com.nevidimka655.crypto.tink.KeysetFactory
 import dagger.Module
 import dagger.Provides
@@ -25,18 +26,21 @@ object RepositoryModule {
     @Provides
     fun provideRepository(
         repositoryEncryption: RepositoryEncryption,
+        encryptionManager: EncryptionManager,
         storage: StorageItemDao,
         notes: NotesDao
     ) = Repository(
         repositoryEncryption = repositoryEncryption,
+        encryptionManager = encryptionManager,
         storage = storage,
         notes = notes
     )
 
     @Singleton
     @Provides
-    fun provideRepositoryEncryption(keysetFactory: KeysetFactory) =
-        RepositoryEncryption(keysetFactory = keysetFactory)
+    fun provideRepositoryEncryption(
+        keysetFactory: KeysetFactory, encryptionManager: EncryptionManager
+    ) = RepositoryEncryption(keysetFactory = keysetFactory, encryptionManager = encryptionManager)
 
     @Singleton
     @Provides

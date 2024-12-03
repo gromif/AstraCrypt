@@ -12,9 +12,9 @@ import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import androidx.work.workDataOf
 import coil.ImageLoader
-import com.nevidimka655.astracrypt.model.EncryptionInfo
 import com.nevidimka655.astracrypt.room.Repository
 import com.nevidimka655.astracrypt.room.StorageItemListTuple
+import com.nevidimka655.astracrypt.utils.EncryptionManager
 import com.nevidimka655.astracrypt.utils.Io
 import com.nevidimka655.astracrypt.utils.datastore.AppearanceManager
 import com.nevidimka655.astracrypt.utils.extensions.removeLines
@@ -37,6 +37,7 @@ private typealias Args = ImportFilesWorker.Args
 class FilesViewModel @Inject constructor(
     private val repository: Repository,
     private val keysetFactory: KeysetFactory,
+    private val encryptionManager: EncryptionManager,
     val appearanceManager: AppearanceManager,
     val io: Io,
     val workManager: WorkManager,
@@ -69,9 +70,9 @@ class FilesViewModel @Inject constructor(
     fun import(
         vararg uriList: Uri,
         saveOriginalFiles: Boolean = false,
-        dirId: Long,
-        encryptionInfo: EncryptionInfo
+        dirId: Long
     ) = viewModelScope.launch {
+        val encryptionInfo = encryptionManager.getInfo()
         val listToSave = uriList.map { it.toString() }.toTypedArray()
         val fileWithUris = workerSerializer.saveStringArrayToFile(listToSave)
         val encryptionInfoJson = Json.encodeToString(encryptionInfo)
@@ -110,23 +111,18 @@ class FilesViewModel @Inject constructor(
         }
     }
 
-    fun rename(
-        encryptionInfo: EncryptionInfo,
-        id: Long,
-        name: String
-    ) = viewModelScope.launch(Dispatchers.IO) {
-        val oldName = repository.getName(encryptionInfo, id)
+    fun rename(id: Long, name: String) = viewModelScope.launch(Dispatchers.IO) {
+        val oldName = repository.getName(id)
         val newName = name.removeLines().trim()
         if (newName != oldName) {
-            repository.updateName(id, encryptionInfo, newName)
+            repository.updateName(id, newName)
             //showSnackbar(R.string.snack_itemRenamed) TODO: Snackbar
         }
     }
 
-    fun importCameraScan(dirId: Long, encryptionInfo: EncryptionInfo) = import(
+    fun importCameraScan(dirId: Long) = import(
         cameraScanOutputUri!!,
-        dirId = dirId,
-        encryptionInfo = encryptionInfo
+        dirId = dirId
     )
 
 }

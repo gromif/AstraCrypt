@@ -5,6 +5,7 @@ import coil.ImageLoader
 import coil.decode.VideoFrameDecoder
 import coil.request.CachePolicy
 import coil.transition.CrossfadeTransition
+import com.nevidimka655.astracrypt.utils.EncryptionManager
 import com.nevidimka655.astracrypt.utils.Io
 import com.nevidimka655.astracrypt.utils.TinkCoilFetcherFactory
 import com.nevidimka655.crypto.tink.KeysetFactory
@@ -40,8 +41,13 @@ class CoilModule {
     @Provides
     fun provideTinkCoilFetcherFactory(
         io: Io,
-        keysetFactory: KeysetFactory
-    ): TinkCoilFetcherFactory = TinkCoilFetcherFactory(io = io, keysetFactory = keysetFactory)
+        keysetFactory: KeysetFactory,
+        encryptionManager: EncryptionManager
+    ): TinkCoilFetcherFactory = TinkCoilFetcherFactory(
+        io = io,
+        encryptionManager = encryptionManager,
+        keysetFactory = keysetFactory
+    )
 
     @Singleton
     @Provides

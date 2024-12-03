@@ -73,7 +73,7 @@ class ExportFilesWorker @AssistedInject constructor(
         val itemIsFile = repository.getTypeById(id = itemId).isFile
         if (startDir != null) {
             if (itemIsFile) fileIterator(
-                exportTuple = repository.getDataToExport(encryptionInfo, itemId),
+                exportTuple = repository.getDataToExport(itemId),
                 parentDir = startDir
             ) else directoryIterator(
                 dirId = itemId,
@@ -87,10 +87,10 @@ class ExportFilesWorker @AssistedInject constructor(
         DocumentFile.fromTreeUri(applicationContext, startUri)
 
     private suspend fun directoryIterator(dirId: Long, parentDir: DocumentFile?) {
-        val dirName = repository.getDataToExport(encryptionInfo, dirId).name
+        val dirName = repository.getDataToExport(dirId).name
         val newDirectory = parentDir?.createDirectory(dirName)
         if (newDirectory != null) {
-            repository.getListDataToExportFromDir(encryptionInfo, dirId).forEach {
+            repository.getListDataToExportFromDir(dirId).forEach {
                 if (!isStopped) {
                     if (it.path.isNotEmpty()) fileIterator(it, newDirectory)
                     else directoryIterator(it.id, newDirectory)

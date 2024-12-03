@@ -19,6 +19,8 @@ class EncryptionManager(
     suspend fun getInfo() = info ?: settingsDataStoreManager.encryptionInfoFlow.first()
         .also { info = it }
 
+    fun getCachedInfo() = info
+
     suspend fun loadEncryptionInfo() {
         encryptionInfoState = settingsDataStoreManager.encryptionInfoFlow.first().let { info ->
             if (info.fileEncryptionOrdinal > 15 || info.fileEncryptionOrdinal < -1) info.copy(

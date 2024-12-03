@@ -24,7 +24,6 @@ import com.nevidimka655.astracrypt.room.StorageItemListTuple
 import com.nevidimka655.astracrypt.room.StorageItemMinimalTuple
 import com.nevidimka655.astracrypt.ui.UiStateOld
 import com.nevidimka655.astracrypt.utils.AppConfig
-import com.nevidimka655.astracrypt.utils.EncryptionManager
 import com.nevidimka655.astracrypt.utils.Io
 import com.nevidimka655.astracrypt.utils.PrivacyPolicyManager
 import com.nevidimka655.astracrypt.utils.SelectorManager
@@ -51,13 +50,11 @@ class MainVM @Inject constructor(
     private val repositoryEncryption: RepositoryEncryption,
     private val setupManager: SetupManager,
     private val io: Io,
-    private val encryptionManager: EncryptionManager,
     val appearanceManager: AppearanceManager,
     val privacyPolicyManager: PrivacyPolicyManager,
     val imageLoader: ImageLoader
 ) : ViewModel() {
     val selectorManager by lazy { SelectorManager() }
-    val encryptionInfo get() = encryptionManager.encryptionInfoState
 
     var isSearchExpandedState by mutableStateOf(false)
     private var searchSetupJob: Job? = null
@@ -89,11 +86,10 @@ class MainVM @Inject constructor(
             repository.getList(
                 parentDirectoryId = currentNavigatorDirectoryId,
                 searchQuery = lastSearchQuery,
-                dirIdsForSearch = searchDirsIndexesList,
-                isNameEncrypted = encryptionInfo.isDatabaseEncrypted && encryptionInfo.isNameEncrypted
+                dirIdsForSearch = searchDirsIndexesList
             ).also { pagingSource = it }
         }
-    ).flow.map { repositoryEncryption.decryptPager(encryptionInfo, it) }.cachedIn(viewModelScope)
+    ).flow.map { repositoryEncryption.decryptPager(it) }.cachedIn(viewModelScope)
 
     val starredPagingFlow = Pager(
         PagingConfig(
@@ -102,11 +98,9 @@ class MainVM @Inject constructor(
             initialLoadSize = AppConfig.PAGING_INITIAL_LOAD
         ),
         pagingSourceFactory = {
-            repository.getStarredList(
-                lastSearchQuery
-            ).also { pagingStarredSource = it }
+            repository.getStarredList(lastSearchQuery).also { pagingStarredSource = it }
         }
-    ).flow.map { repositoryEncryption.decryptPager(encryptionInfo, it) }.cachedIn(viewModelScope)
+    ).flow.map { repositoryEncryption.decryptPager(it) }.cachedIn(viewModelScope)
 
     val notesPagingFlow = Pager(
         PagingConfig(
@@ -117,7 +111,7 @@ class MainVM @Inject constructor(
         pagingSourceFactory = { repository.getNotesList() }
     ).flow.map { pagingData ->
         val timePattern = "d MMMM yyyy"
-        repositoryEncryption.decryptNotesPager(encryptionInfo, pagingData).map {
+        repositoryEncryption.decryptNotesPager(pagingData).map {
             Notes.Item(
                 id = it.id,
                 title = it.name,
@@ -176,7 +170,6 @@ class MainVM @Inject constructor(
 
     fun newDirectory(directoryName: String) = viewModelScope.launch(Dispatchers.IO) {
         repository.newDirectory(
-            encryptionInfo = encryptionInfo,
             directoryName = directoryName,
             parentDirectoryId = filesNavigatorList.lastOrNull()?.id
         )
@@ -185,7 +178,7 @@ class MainVM @Inject constructor(
 
     fun delete(storageItemId: Long) = viewModelScope.launch(Dispatchers.IO) {
         val idsList = arrayListOf<Long>()
-        val itemToDelete = repository.getMinimalItemData(encryptionInfo, storageItemId)
+        val itemToDelete = repository.getMinimalItemData(storageItemId)
         suspend fun deleteIterator(itemToDelete: StorageItemMinimalTuple) {
             idsList.add(itemToDelete.id)
             if (itemToDelete.path.isNotEmpty()) {
@@ -195,7 +188,7 @@ class MainVM @Inject constructor(
                     thumbLocalFile.delete()
                     localFile.delete()
                 }
-            } else repository.getMinimalItemsDataInDir(encryptionInfo, itemToDelete.id).forEach {
+            } else repository.getMinimalItemsDataInDir(itemToDelete.id).forEach {
                 deleteIterator(it)
             }
         }

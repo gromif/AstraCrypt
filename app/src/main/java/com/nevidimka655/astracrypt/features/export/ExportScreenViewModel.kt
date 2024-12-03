@@ -53,14 +53,11 @@ class ExportScreenViewModel @Inject constructor(
 
     fun export(itemId: Long) = viewModelScope.launch(Dispatchers.IO) {
         export(
-            repository.getDataForOpening(encryptionInfo = encryptionManager.getInfo(), id = itemId)
+            repository.getDataForOpening(id = itemId)
         )
     }
 
-    fun export(
-        itemId: Long,
-        output: String
-    ) = viewModelScope.launch {
+    fun export(itemId: Long, output: String) = viewModelScope.launch {
         val encryptionInfo = encryptionManager.getInfo()
         val associatedData = if (encryptionInfo.isAssociatedDataEncrypted)
             keysetFactory.transformAssociatedDataToWorkInstance(

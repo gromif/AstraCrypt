@@ -164,8 +164,7 @@ fun FilesGridItem(
             } else AsyncImage(modifier = Modifier.fillMaxSize(),
                 model = CoilTinkModel(
                     absolutePath = null,
-                    path = thumb,
-                    encryptionType = thumbEncryptionType
+                    path = thumb
                 ),
                 contentDescription = null,
                 imageLoader = imageLoader,
@@ -290,8 +289,7 @@ fun FilesListItemMedium(
             } else AsyncImage(
                 model = CoilTinkModel(
                     absolutePath = null,
-                    path = thumb,
-                    encryptionType = thumbEncryptionType
+                    path = thumb
                 ),
                 contentDescription = null,
                 imageLoader = imageLoader,
@@ -568,8 +566,7 @@ fun FilesScreen(
                 filesVM.import(
                     uriList = it.toTypedArray(),
                     saveOriginalFiles = false,
-                    dirId = vm.currentNavigatorDirectoryId,
-                    encryptionInfo = vm.encryptionInfo
+                    dirId = vm.currentNavigatorDirectoryId
                 )
             }
         },
@@ -579,8 +576,7 @@ fun FilesScreen(
                 filesVM.import(
                     uriList = it.toTypedArray(),
                     saveOriginalFiles = true,
-                    dirId = vm.currentNavigatorDirectoryId,
-                    encryptionInfo = vm.encryptionInfo
+                    dirId = vm.currentNavigatorDirectoryId
                 )
             }
         }
@@ -601,7 +597,7 @@ fun FilesScreen(
 
     val scanContract =
         rememberLauncherForActivityResult(ActivityResultContracts.TakePicture()) {
-            if (it) filesVM.importCameraScan(vm.currentNavigatorDirectoryId, vm.encryptionInfo)
+            if (it) filesVM.importCameraScan(vm.currentNavigatorDirectoryId)
         }
     val exportContract =
         rememberLauncherForActivityResult(ActivityResultContracts.OpenDocumentTree()) {
