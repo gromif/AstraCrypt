@@ -24,8 +24,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
-import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.platform.rememberNestedScrollInteropConnection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.nevidimka655.astracrypt.R
@@ -53,7 +51,7 @@ fun SettingsScreen(
         )
     }
     LazyVerticalGrid(
-        modifier = Modifier.nestedScroll(rememberNestedScrollInteropConnection()),
+        modifier = Modifier.fillMaxSize(),
         columns = GridCells.Fixed(cellsCount),
         verticalArrangement = Arrangement.spacedBy(MaterialTheme.spaces.spaceMedium),
         horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spaces.spaceMedium),
