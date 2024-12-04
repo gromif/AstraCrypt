@@ -1,29 +1,29 @@
 package com.nevidimka655.astracrypt.utils
 
 import android.content.ComponentName
+import android.content.Context
 import android.content.pm.PackageManager
 import com.nevidimka655.astracrypt.MainActivity
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 
-object ApplicationComponentManager {
+class ApplicationComponentManager @Inject constructor(
+    @ApplicationContext context: Context
+) {
+    private val packageManager = context.packageManager
+    private val main = ComponentName(context, MainActivity::class.java)
+    private val calculator = ComponentName(context, "${context.packageName}.MainActivityCalculator")
 
-    fun setMainActivityState(state: Boolean) {
-        val context = Engine.appContext
-        context.packageManager.setComponentEnabledSetting(
-            ComponentName(context, MainActivity::class.java),
-            if (state) PackageManager.COMPONENT_ENABLED_STATE_ENABLED
-            else PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-            PackageManager.DONT_KILL_APP
-        )
-    }
+    private fun getComponentState(state: Boolean) = if (state) {
+        PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+    } else PackageManager.COMPONENT_ENABLED_STATE_DISABLED
 
-    fun setCalculatorActivityState(state: Boolean) {
-        val context = Engine.appContext
-        context.packageManager.setComponentEnabledSetting(
-            ComponentName(context, "${context.packageName}.MainActivityCalculator"),
-            if (state) PackageManager.COMPONENT_ENABLED_STATE_ENABLED
-            else PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-            PackageManager.DONT_KILL_APP
-        )
-    }
+    fun setMainActivityState(state: Boolean) = packageManager.setComponentEnabledSetting(
+        main, getComponentState(state = state), PackageManager.DONT_KILL_APP
+    )
+
+    fun setCalculatorActivityState(state: Boolean) = packageManager.setComponentEnabledSetting(
+        calculator, getComponentState(state = state), PackageManager.DONT_KILL_APP
+    )
 
 }
