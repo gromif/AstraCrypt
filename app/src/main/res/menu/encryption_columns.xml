@@ -5,6 +5,5 @@
         android:id="@+id/sync_db"
         android:icon="@drawable/ic_db_sync"
         android:title="@string/dialog_dbUpdate"
-        app:showAsAction="ifRoom"
-        app:iconTint="?colorOnSurfaceVariant" />
+        app:showAsAction="ifRoom" />
 </menu>

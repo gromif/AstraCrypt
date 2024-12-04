@@ -5,14 +5,12 @@
         android:id="@+id/lab"
         android:icon="@drawable/ic_lab_outline"
         android:title="@string/lab"
-        app:showAsAction="always"
-        app:iconTint="?colorOnSurfaceVariant" />
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/notes"
         android:icon="@drawable/ic_notes_outline"
         android:title="@string/notes"
-        app:showAsAction="ifRoom"
-        app:iconTint="?colorOnSurfaceVariant" />
+        app:showAsAction="ifRoom" />
 
 </menu>

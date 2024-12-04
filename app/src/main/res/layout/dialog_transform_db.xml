@@ -15,7 +15,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
-        android:text="@string/drinkWhileApplyingSettings"
-        android:textColor="?colorOnSecondaryContainer" />
+        android:text="@string/drinkWhileApplyingSettings" />
 
 </LinearLayout>

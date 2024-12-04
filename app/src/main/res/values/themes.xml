@@ -1,0 +1,10 @@
+<resources>
+
+    <style name="Theme.AstraCrypt" parent="android:Theme.Material.NoActionBar" />
+
+    <style name="ShapeAppearanceOverlay.RoundIcon" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+</resources>

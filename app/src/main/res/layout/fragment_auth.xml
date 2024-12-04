@@ -27,8 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/padding_default"
             android:layout_marginBottom="@dimen/padding_double"
-            android:gravity="center"
-            android:textAppearance="?textAppearanceTitleLarge" />
+            android:gravity="center" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/passwordBox"
@@ -47,7 +46,6 @@
 
         <Button
             android:id="@+id/hint"
-            style="@style/Widget.Material3.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/hint" />
@@ -56,7 +54,6 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
-        style="?floatingActionButtonLargeSurfaceStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"

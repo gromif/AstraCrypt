@@ -5,6 +5,5 @@
         android:id="@+id/help"
         android:icon="@drawable/ic_help_outline"
         android:title="@string/help"
-        app:iconTint="?colorOnSurfaceVariant"
         app:showAsAction="ifRoom" />
 </menu>
