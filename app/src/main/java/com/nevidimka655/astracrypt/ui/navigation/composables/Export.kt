@@ -25,7 +25,8 @@ inline fun NavGraphBuilder.export(
                 itemId = export.itemId,
                 output = export.outUri
             ).invokeOnCompletion { vm.observeWorkInfoState() } else vm.export(
-                itemId = export.itemId
+                itemId = export.itemId,
+                contentResolver = context.contentResolver
             )
         },
         onOpenExportedFile = { vm.openExportedFile(context = context) },

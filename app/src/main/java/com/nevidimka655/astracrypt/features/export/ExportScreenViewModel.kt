@@ -1,5 +1,6 @@
 package com.nevidimka655.astracrypt.features.export
 
+import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -16,7 +17,6 @@ import com.nevidimka655.astracrypt.model.ExportUiState
 import com.nevidimka655.astracrypt.room.OpenTuple
 import com.nevidimka655.astracrypt.room.Repository
 import com.nevidimka655.astracrypt.utils.EncryptionManager
-import com.nevidimka655.astracrypt.utils.Engine
 import com.nevidimka655.astracrypt.utils.Io
 import com.nevidimka655.astracrypt.work.ExportFilesWorker
 import com.nevidimka655.crypto.tink.KeysetFactory
@@ -51,9 +51,12 @@ class ExportScreenViewModel @Inject constructor(
     private var internalExportUri = ""
     var uiState by mutableStateOf(ExportUiState())
 
-    fun export(itemId: Long) = viewModelScope.launch(Dispatchers.IO) {
+    fun export(
+        itemId: Long, contentResolver: ContentResolver
+    ) = viewModelScope.launch(Dispatchers.IO) {
         export(
-            repository.getDataForOpening(id = itemId)
+            exportTuple = repository.getDataForOpening(id = itemId),
+            contentResolver = contentResolver
         )
     }
 
@@ -81,12 +84,14 @@ class ExportScreenViewModel @Inject constructor(
         workManager.enqueue(workerRequest)
     }
 
-    suspend fun export(exportTuple: OpenTuple) = withContext(Dispatchers.IO) {
+    suspend fun export(
+        exportTuple: OpenTuple, contentResolver: ContentResolver
+    ) = withContext(Dispatchers.IO) {
         val exportFile = io.getExportedCacheFile(exportTuple.name)
         val outputUri = io.getExportedCacheFileUri(file = exportFile)
         internalExportUri = outputUri.toString()
         uiState = uiState.copy(name = exportTuple.name)
-        val outStream = Engine.appContext.contentResolver.openOutputStream(outputUri)
+        val outStream = contentResolver.openOutputStream(outputUri)
         val inStream = io.getLocalFile(exportTuple.path).run {
             if (exportTuple.encryptionType == -1) inputStream()
             else {
