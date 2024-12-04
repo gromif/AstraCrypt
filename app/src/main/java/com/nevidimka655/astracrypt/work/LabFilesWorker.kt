@@ -1,6 +1,5 @@
 package com.nevidimka655.astracrypt.work
 
-import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
@@ -119,7 +118,6 @@ class LabFilesWorker @AssistedInject constructor(
         }
     }
 
-    @SuppressLint("NewApi")
     override suspend fun getForegroundInfo(): ForegroundInfo {
         val channelId = applicationContext.getString(
             R.string.notification_channel_fileOperations_id
@@ -129,7 +127,7 @@ class LabFilesWorker @AssistedInject constructor(
         // This PendingIntent can be used to cancel the worker
         val workerStopPendingIntent = workManager.createCancelPendingIntent(id)
         // Create a Notification channel if necessary
-        if (Api.atLeastAndroid8()) createChannel()
+        if (Api.atLeast8()) createChannel()
         val notification = NotificationCompat.Builder(applicationContext, channelId).apply {
             setContentTitle(title)
             foregroundServiceBehavior = NotificationCompat.FOREGROUND_SERVICE_DEFAULT

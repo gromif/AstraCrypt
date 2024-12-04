@@ -22,7 +22,7 @@ object QuickActionsManager {
             PackageManager.DONT_KILL_APP
         )
 
-    fun isSupported() = Api.atLeastAndroid7()
+    fun isSupported() = Api.atLeast7()
 
     @SuppressLint("NewApi")
     object Components {

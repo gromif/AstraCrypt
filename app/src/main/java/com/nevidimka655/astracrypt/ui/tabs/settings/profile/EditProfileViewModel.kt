@@ -3,7 +3,6 @@ package com.nevidimka655.astracrypt.ui.tabs.settings.profile
 import android.content.Context
 import android.graphics.Bitmap
 import android.net.Uri
-import android.os.Build
 import android.util.Size
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -18,6 +17,7 @@ import coil.size.Scale
 import com.nevidimka655.astracrypt.features.profile.Avatars
 import com.nevidimka655.astracrypt.features.profile.ProfileInfo
 import com.nevidimka655.astracrypt.model.CoilTinkModel
+import com.nevidimka655.astracrypt.utils.Api
 import com.nevidimka655.astracrypt.utils.AppConfig
 import com.nevidimka655.astracrypt.utils.CenterCropTransformation
 import com.nevidimka655.astracrypt.utils.EncryptionManager
@@ -65,7 +65,7 @@ class EditProfileViewModel @Inject constructor(
 
     fun setGalleryAvatar(context: Context, uri: Uri) = viewModelScope.launch(Dispatchers.IO) {
         isImageProcessing = true
-        val bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        val bitmap = if (Api.atLeast10()) {
             context.contentResolver.loadThumbnail(
                 uri, Size(AppConfig.DB_THUMB_SIZE, AppConfig.DB_THUMB_SIZE), null
             )

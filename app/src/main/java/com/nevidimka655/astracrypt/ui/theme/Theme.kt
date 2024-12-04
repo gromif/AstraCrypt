@@ -1,7 +1,6 @@
 package com.nevidimka655.astracrypt.ui.theme
 
 import android.app.Activity
-import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material3.MaterialTheme
@@ -20,6 +19,7 @@ import com.nevidimka655.astracrypt.ui.theme.icons.FileType
 import com.nevidimka655.astracrypt.ui.theme.icons.Purchases
 import com.nevidimka655.astracrypt.ui.theme.icons.reset
 import com.nevidimka655.astracrypt.ui.theme.icons.resetAlt
+import com.nevidimka655.astracrypt.utils.Api
 import com.nevidimka655.compose_color_schemes._ColorSchemes
 import com.nevidimka655.ui.compose_core.ext.windowSizeClassLocalProviders
 import kotlinx.coroutines.flow.Flow
@@ -36,7 +36,7 @@ fun AstraCryptTheme(
     _ColorSchemes.isDarkTheme = darkTheme
     val dynamicThemeState by dynamicThemeFlow.collectAsStateWithLifecycle(initialValue = true)
     val colorScheme = when {
-        dynamicThemeState && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
+        dynamicThemeState && Api.atLeast12() -> {
             val context = LocalContext.current
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }

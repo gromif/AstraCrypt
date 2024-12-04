@@ -1,6 +1,5 @@
 package com.nevidimka655.astracrypt.work
 
-import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
@@ -134,14 +133,13 @@ class TransformNotesWorker @AssistedInject constructor(
         fromPrimitive?.run { repositoryEncryption.decryptStringField(this, str) }
             ?: str else str
 
-    @SuppressLint("NewApi")
     override suspend fun getForegroundInfo(): ForegroundInfo {
         val channelId = applicationContext.getString(
             R.string.notification_channel_fileOperations_id
         )
         val title = applicationContext.getString(R.string.notification_dbTransform_title)
         // Create a Notification channel if necessary
-        if (Api.atLeastAndroid8()) {
+        if (Api.atLeast8()) {
             createChannel()
         }
         val notification = NotificationCompat.Builder(applicationContext, channelId)

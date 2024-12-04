@@ -206,7 +206,6 @@ class ImportFilesWorker @AssistedInject constructor(
         }
     }
 
-    @SuppressLint("NewApi")
     override suspend fun getForegroundInfo(): ForegroundInfo {
         val channelId = applicationContext.getString(
             R.string.notification_channel_fileOperations_id
@@ -217,7 +216,7 @@ class ImportFilesWorker @AssistedInject constructor(
         val workerStopPendingIntent =
             WorkManager.getInstance(applicationContext).createCancelPendingIntent(id)
         // Create a Notification channel if necessary
-        if (Api.atLeastAndroid8()) createChannel()
+        if (Api.atLeast8()) createChannel()
         val notification = NotificationCompat.Builder(applicationContext, channelId).apply {
             setContentTitle(title)
             setTicker(title)
@@ -296,7 +295,7 @@ class ImportFilesWorker @AssistedInject constructor(
             size = AppConfig.DB_THUMB_FILE_NAME_COUNT,
             random = secureRandom(secureSeed.toByteArray())
         )
-        val bitmapCompressFormat = if (Api.atLeastAndroid11()) {
+        val bitmapCompressFormat = if (Api.atLeast11()) {
             Bitmap.CompressFormat.WEBP_LOSSY
         } else Bitmap.CompressFormat.WEBP
         val compressedByteStream = ByteArrayOutputStream().also {
