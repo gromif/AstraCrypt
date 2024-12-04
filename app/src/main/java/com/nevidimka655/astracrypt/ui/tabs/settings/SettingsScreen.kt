@@ -25,6 +25,7 @@ import com.nevidimka655.ui.compose_core.theme.spaces
 @Composable
 fun SettingsScreen(
     navigateToEditProfile: () -> Unit = {},
+    navigateToUi: () -> Unit = {},
     navigateToAbout: () -> Unit = {}
 ) {
     val cellsCount = when(LocalWindowWidth.current) {
@@ -48,7 +49,7 @@ fun SettingsScreen(
                 when (key) {
                     SettingsMainItems.EditProfile -> navigateToEditProfile()
                     SettingsMainItems.Security -> TODO()
-                    SettingsMainItems.Interface -> TODO()
+                    SettingsMainItems.Interface -> navigateToUi()
                     SettingsMainItems.Purchases -> TODO()
                     SettingsMainItems.About -> navigateToAbout()
                 }

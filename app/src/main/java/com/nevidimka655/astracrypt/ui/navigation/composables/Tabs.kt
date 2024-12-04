@@ -93,6 +93,7 @@ inline fun NavGraphBuilder.tabs(
         onUiStateChange(Route.Tabs.Settings.Ui.state)
         SettingsScreen(
             navigateToEditProfile = { navController.navigate(Route.EditProfile) },
+            navigateToUi = { navController.navigate(Route.SettingsUi) },
             navigateToAbout = { navController.navigate(Route.AboutGraph) }
         )
     }
