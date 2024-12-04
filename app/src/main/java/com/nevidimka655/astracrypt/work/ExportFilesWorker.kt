@@ -21,7 +21,6 @@ import com.nevidimka655.astracrypt.model.EncryptionInfo
 import com.nevidimka655.astracrypt.room.ExportTuple
 import com.nevidimka655.astracrypt.room.Repository
 import com.nevidimka655.astracrypt.utils.Api
-import com.nevidimka655.astracrypt.utils.Engine
 import com.nevidimka655.astracrypt.utils.Io
 import com.nevidimka655.astracrypt.utils.extensions.contentResolver
 import com.nevidimka655.crypto.tink.KeysetFactory
@@ -62,7 +61,6 @@ class ExportFilesWorker @AssistedInject constructor(
     }
 
     override suspend fun doWork() = withContext(Dispatchers.IO) {
-        Engine.init(applicationContext)
         setForeground(getForegroundInfo())
         TinkConfig.initStream()
         shouldDecodeAssociatedData()

@@ -18,7 +18,6 @@ import com.nevidimka655.astracrypt.model.EncryptionInfo
 import com.nevidimka655.astracrypt.room.Repository
 import com.nevidimka655.astracrypt.room.RepositoryEncryption
 import com.nevidimka655.astracrypt.utils.Api
-import com.nevidimka655.astracrypt.utils.Engine
 import com.nevidimka655.crypto.tink.KeysetFactory
 import com.nevidimka655.crypto.tink.KeysetGroupId
 import com.nevidimka655.crypto.tink.KeysetTemplates
@@ -63,7 +62,6 @@ class TransformNotesWorker @AssistedInject constructor(
     private var notificationId = 3
 
     override suspend fun doWork() = withContext(Dispatchers.IO) {
-        Engine.init(applicationContext)
         setForeground(getForegroundInfo())
         initEncryption()
         shouldDecodeAssociatedData()

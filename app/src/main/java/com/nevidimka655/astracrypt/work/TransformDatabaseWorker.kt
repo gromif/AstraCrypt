@@ -19,7 +19,6 @@ import com.nevidimka655.astracrypt.room.DatabaseTransformTuple
 import com.nevidimka655.astracrypt.room.Repository
 import com.nevidimka655.astracrypt.room.RepositoryEncryption
 import com.nevidimka655.astracrypt.utils.Api
-import com.nevidimka655.astracrypt.utils.Engine
 import com.nevidimka655.astracrypt.utils.enums.DatabaseColumns
 import com.nevidimka655.crypto.tink.KeysetFactory
 import com.nevidimka655.crypto.tink.KeysetTemplates
@@ -81,7 +80,6 @@ class TransformDatabaseWorker @AssistedInject constructor(
     private var notificationId = 0
 
     override suspend fun doWork(): Result {
-        Engine.init(applicationContext)
         notificationId = Random.nextInt(0, 101)
         setForeground(getForegroundInfo())
         withContext(Dispatchers.IO) {

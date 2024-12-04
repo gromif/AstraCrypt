@@ -18,7 +18,6 @@ import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.utils.Api
-import com.nevidimka655.astracrypt.utils.Engine
 import com.nevidimka655.astracrypt.utils.extensions.contentResolver
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
@@ -46,7 +45,6 @@ class LabCombinedZipWorker @AssistedInject constructor(
 
     override suspend fun doWork() = withContext(Dispatchers.IO) {
         var workerResult = Result.success()
-        Engine.init(applicationContext)
         setForeground(getForegroundInfo())
         val destinationUri = inputData.getString(Args.TARGET_URI)!!.toUri()
         val sourceUri = inputData.getString(Args.SOURCE_URI)!!.toUri()

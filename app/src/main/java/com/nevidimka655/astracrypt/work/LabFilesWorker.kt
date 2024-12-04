@@ -21,7 +21,6 @@ import com.google.crypto.tink.KeysetHandle
 import com.google.crypto.tink.StreamingAead
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.utils.Api
-import com.nevidimka655.astracrypt.utils.Engine
 import com.nevidimka655.astracrypt.utils.extensions.contentResolver
 import com.nevidimka655.crypto.tink.KeysetFactory
 import com.nevidimka655.crypto.tink.KeysetTemplates
@@ -58,7 +57,6 @@ class LabFilesWorker @AssistedInject constructor(
 
     override suspend fun doWork() = withContext(Dispatchers.IO) {
         var workerResult = Result.success()
-        Engine.init(applicationContext)
         setForeground(getForegroundInfo())
         TinkConfig.initStream()
         val aeadForKeyset = keysetFactory.aead(KeysetTemplates.AEAD.AES256_GCM).aeadPrimitive()

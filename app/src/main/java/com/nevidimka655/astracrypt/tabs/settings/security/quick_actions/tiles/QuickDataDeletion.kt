@@ -3,7 +3,6 @@ package com.nevidimka655.astracrypt.tabs.settings.security.quick_actions.tiles
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.nevidimka655.astracrypt.room.AppDatabase
-import com.nevidimka655.astracrypt.utils.Engine
 import com.nevidimka655.astracrypt.utils.Io
 import com.nevidimka655.crypto.tink.KeysetFactory
 import com.nevidimka655.crypto.tink.extensions.secureRandom
@@ -23,7 +22,6 @@ class QuickDataDeletion @Inject constructor(): TileServiceCoroutine() {
 
     override fun onClick() {
         super.onClick()
-        Engine.init(applicationContext)
         launch(Dispatchers.IO) {
             val keyStore = KeyStore.getInstance("AndroidKeyStore")
             keyStore.load(null)
