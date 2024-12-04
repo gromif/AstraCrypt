@@ -1,47 +1,6 @@
 package com.nevidimka655.astracrypt.tabs.settings.security.authentication
 
-import android.annotation.SuppressLint
-import android.content.Context
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.ViewGroup
-import android.widget.Toast
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.platform.ComposeView
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.ViewCompositionStrategy
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
-import com.nevidimka655.astracrypt.MainVM
-import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.model.EncryptionInfo
-import com.nevidimka655.astracrypt.features.auth.AuthType
-import com.nevidimka655.compose_calculator.CalculatorManager
-import com.nevidimka655.astracrypt.ui.theme.AstraCryptTheme
-import com.nevidimka655.astracrypt.utils.AppConfig
-import com.nevidimka655.astracrypt.utils.ApplicationComponentManager
-import com.nevidimka655.crypto.tink.KeysetFactory
-import com.nevidimka655.ui.compose_core.Preference
-import com.nevidimka655.ui.compose_core.PreferencesGroup
-import com.nevidimka655.ui.compose_core.PreferencesGroupAnimated
-import com.nevidimka655.ui.compose_core.PreferencesScreen
-import com.nevidimka655.ui.compose_core.PreferencesSwitch
-import com.nevidimka655.ui.compose_core.dialogs.Dialogs
-import com.nevidimka655.ui.compose_core.dialogs.default
-import com.nevidimka655.ui.compose_core.dialogs.radio
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class AuthenticationFragment : Fragment() {
     /*private val vm by activityViewModels<MainVM>()

@@ -10,8 +10,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.tabs.settings.security.quick_actions.QuickActionsManager
 import com.nevidimka655.astracrypt.ui.theme.AstraCryptTheme
+import com.nevidimka655.astracrypt.utils.AppComponentManager
 import com.nevidimka655.ui.compose_core.Preference
 import com.nevidimka655.ui.compose_core.PreferencesGroup
 import com.nevidimka655.ui.compose_core.PreferencesScreen
@@ -26,7 +26,7 @@ class SecurityFragment : Fragment() {
         setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
         setContent {
             AstraCryptTheme {
-                val isQuickActionsSupported = remember { QuickActionsManager.isSupported() }
+                val isQuickActionsSupported = remember { AppComponentManager.isActionsSupported }
                 PreferencesScreen {
                     PreferencesGroup {
                         Preference(titleText = stringResource(id = R.string.settings_encryption)) {
