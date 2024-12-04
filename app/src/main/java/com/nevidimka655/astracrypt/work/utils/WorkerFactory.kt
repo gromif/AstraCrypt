@@ -5,9 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.OutOfQuotaPolicy
 import androidx.work.WorkInfo
+import androidx.work.WorkManager
 import androidx.work.workDataOf
 import com.nevidimka655.astracrypt.model.EncryptionInfo
-import com.nevidimka655.astracrypt.utils.Engine
 import com.nevidimka655.astracrypt.utils.Io
 import com.nevidimka655.astracrypt.work.LabCombinedZipWorker
 import com.nevidimka655.astracrypt.work.TransformDatabaseWorker
@@ -18,10 +18,10 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 class WorkerFactory(
+    private val workManager: WorkManager,
     private val keysetFactory: KeysetFactory,
     private val io: Io
 ) {
-    private val worker get() = Engine.workManager
     var transformWorkLiveData: LiveData<WorkInfo?>? = null
 
     fun startTransformDatabase(oldInfo: EncryptionInfo, newInfo: EncryptionInfo) {
@@ -41,8 +41,8 @@ class WorkerFactory(
             .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
             .setInputData(data)
             .build()
-        worker.enqueue(workerRequest)
-        transformWorkLiveData = worker.getWorkInfoByIdLiveData(workerRequest.id)
+        workManager.enqueue(workerRequest)
+        transformWorkLiveData = workManager.getWorkInfoByIdLiveData(workerRequest.id)
     }
 
     fun startTransformNotes(oldInfo: EncryptionInfo, newInfo: EncryptionInfo) {
@@ -62,8 +62,8 @@ class WorkerFactory(
             .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
             .setInputData(data)
             .build()
-        worker.enqueue(workerRequest)
-        transformWorkLiveData = worker.getWorkInfoByIdLiveData(workerRequest.id)
+        workManager.enqueue(workerRequest)
+        transformWorkLiveData = workManager.getWorkInfoByIdLiveData(workerRequest.id)
     }
 
     suspend fun startCombinedZipWorker(
@@ -82,7 +82,7 @@ class WorkerFactory(
             .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
             .setInputData(data)
             .build()
-        worker.enqueue(workerRequest)
+        workManager.enqueue(workerRequest)
     }
 
 }

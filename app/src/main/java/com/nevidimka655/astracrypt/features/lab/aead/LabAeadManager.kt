@@ -3,9 +3,6 @@ package com.nevidimka655.astracrypt.features.lab.aead
 import android.content.ContentResolver
 import android.net.Uri
 import androidx.lifecycle.LiveData
-import androidx.work.Data
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.OutOfQuotaPolicy
 import androidx.work.WorkInfo
 import com.google.crypto.tink.JsonKeysetReader
 import com.google.crypto.tink.JsonKeysetWriter
@@ -14,8 +11,6 @@ import com.google.crypto.tink.KeysetHandle
 import com.google.crypto.tink.subtle.AesEaxJce
 import com.google.crypto.tink.subtle.AesGcmJce
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.utils.Engine
-import com.nevidimka655.astracrypt.work.LabFilesWorker
 import com.nevidimka655.crypto.tink.Hex2
 import com.nevidimka655.crypto.tink.KeysetTemplates
 import com.nevidimka655.crypto.tink.extensions.aeadPrimitive
@@ -36,7 +31,6 @@ import java.io.ByteArrayOutputStream
 class LabAeadManager(
     private val snackbarChannelMutable: Channel<Int>
 ) {
-    private val worker get() = Engine.workManager
     private var keysetPassword = ""
     private var keysetPasswordSha384 = byteArrayOf()
     private var keysetAltPasswordSha384 = byteArrayOf()

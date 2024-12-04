@@ -10,8 +10,6 @@ import com.nevidimka655.haptic.Haptic
 object Engine {
     lateinit var appContext: Context
 
-    val workManager get() = WorkManager.getInstance(appContext)
-
     /**
      * Call this method in all application components that may be created at app startup/restoring
      * (e.g. in onCreate of activities and services)
