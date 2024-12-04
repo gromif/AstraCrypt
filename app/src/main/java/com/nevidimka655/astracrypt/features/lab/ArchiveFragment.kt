@@ -70,12 +70,12 @@ class ArchiveFragment : Fragment() {
     private val addFilesContract = registerForActivityResult(
         ActivityResultContracts.OpenMultipleDocuments()
     ) {
-        lifecycleScope.launch { labCombineZipManager.addFiles(it) }
+        //lifecycleScope.launch { labCombineZipManager.addFiles(it) }
     }
     private val addSourceFileContract = registerForActivityResult(
         ActivityResultContracts.OpenDocument()
     ) {
-        if (it != null) lifecycleScope.launch { labCombineZipManager.setSourceFile(it) }
+        //if (it != null) lifecycleScope.launch { labCombineZipManager.setSourceFile(it) }
     }
     private val createDocument = registerForActivityResult(
         ActivityResultContracts.CreateDocument("image/*")
