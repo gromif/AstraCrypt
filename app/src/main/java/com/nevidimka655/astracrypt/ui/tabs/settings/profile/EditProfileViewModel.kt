@@ -40,12 +40,12 @@ class EditProfileViewModel @Inject constructor(
     private val keysetFactory: KeysetFactory,
     private val settingsDataStoreManager: SettingsDataStoreManager,
     private val encryptionManager: EncryptionManager,
-    private val io: Io,
     val imageLoader: ImageLoader,
+    io: Io
 ): ViewModel() {
     private val iconFile = io.getProfileIconFile()
     val profileInfoFlow get() = settingsDataStoreManager.profileInfoFlow
-    val coilAvatarModel = CoilTinkModel(absolutePath = io.getProfileIconFile().toString())
+    val coilAvatarModel = CoilTinkModel(absolutePath = iconFile.toString())
     var isImageProcessing by mutableStateOf(false)
 
     private suspend fun updateProfile(
