@@ -1,7 +1,6 @@
 package com.nevidimka655.astracrypt.utils
 
 import android.content.Context
-import com.nevidimka655.haptic.Haptic
 
 /**
  * Contains singleton dependencies.
@@ -14,7 +13,6 @@ object Engine {
      * (e.g. in onCreate of activities and services)
      */
     fun init(context: Context) {
-        Haptic.init(context = context)
         if (!::appContext.isInitialized) {
             appContext = context
         }

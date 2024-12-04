@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import com.nevidimka655.astracrypt.ui.Main
 import com.nevidimka655.astracrypt.utils.Engine
 import com.nevidimka655.crypto.tink.TinkConfig
+import com.nevidimka655.haptic.Haptic
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -15,6 +16,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
+        Haptic.init(context = applicationContext)
         Engine.init(applicationContext)
         TinkConfig.init()
         setContent { Main() }
