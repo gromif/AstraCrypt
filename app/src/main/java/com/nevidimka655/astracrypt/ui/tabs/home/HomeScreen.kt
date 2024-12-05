@@ -1,6 +1,5 @@
 package com.nevidimka655.astracrypt.ui.tabs.home
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -126,18 +125,12 @@ inline fun RecentListItem(
                 .height(200.dp),
             contentAlignment = Alignment.Center
         ) {
-            if (thumb.isEmpty()) {
-                if (itemType == StorageItemType.Folder) Icon(
-                    modifier = Modifier.size(72.dp),
-                    imageVector = itemType.iconAlt,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onSurfaceVariant
-                ) else Image(
-                    modifier = Modifier.size(72.dp),
-                    imageVector = itemType.iconAlt,
-                    contentDescription = null
-                )
-            } else AsyncImage(
+            if (thumb.isEmpty()) Icon(
+                modifier = Modifier.size(72.dp),
+                painter = itemType.iconAlt,
+                contentDescription = null,
+                tint = itemType.iconTint
+            ) else AsyncImage(
                 modifier = Modifier.fillMaxSize(),
                 model = CoilTinkModel(path = thumb),
                 contentDescription = null,

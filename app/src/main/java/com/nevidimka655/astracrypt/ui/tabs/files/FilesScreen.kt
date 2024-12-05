@@ -10,7 +10,6 @@ import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -119,7 +118,6 @@ fun FilesGridItem(
     imageLoader: ImageLoader,
     name: String,
     thumb: String,
-    thumbEncryptionType: Int,
     itemType: StorageItemType,
     state: StorageItemState,
     isChecked: Boolean,
@@ -148,18 +146,12 @@ fun FilesGridItem(
                 .aspectRatio(1.5f),
             contentAlignment = Alignment.Center
         ) {
-            if (thumb.isEmpty()) {
-                if (itemType == StorageItemType.Folder) Icon(
-                    modifier = Modifier.size(72.dp),
-                    imageVector = itemType.iconAlt,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onSurfaceVariant
-                ) else Image(
-                    modifier = Modifier.size(72.dp),
-                    imageVector = itemType.iconAlt,
-                    contentDescription = null
-                )
-            } else AsyncImage(modifier = Modifier.fillMaxSize(),
+            if (thumb.isEmpty()) Icon(
+                modifier = Modifier.size(72.dp),
+                painter = itemType.iconAlt,
+                contentDescription = null,
+                tint = itemType.iconTint
+            ) else AsyncImage(modifier = Modifier.fillMaxSize(),
                 model = CoilTinkModel(
                     absolutePath = null,
                     path = thumb
@@ -199,10 +191,11 @@ fun FilesGridItem(
                 modifier = Modifier.size(48.dp),
                 contentAlignment = Alignment.Center
             ) {
-                if (itemType.isFile) Image(
+                if (itemType.isFile) Icon(
                     modifier = Modifier.size(24.dp),
-                    imageVector = itemType.icon,
-                    contentDescription = null
+                    painter = itemType.icon,
+                    contentDescription = null,
+                    tint = itemType.iconTint
                 )
             }
             Text(
@@ -272,18 +265,12 @@ fun FilesListItemMedium(
             modifier = Modifier.size(dimensionResource(id = R.dimen.filesListItemMediumHeight)),
             contentAlignment = Alignment.Center
         ) {
-            if (thumb.isEmpty()) {
-                if (itemType == StorageItemType.Folder) Icon(
-                    modifier = Modifier.size(60.dp),
-                    imageVector = itemType.iconAlt,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onSurfaceVariant
-                ) else Image(
-                    modifier = Modifier.size(60.dp),
-                    imageVector = itemType.iconAlt,
-                    contentDescription = null
-                )
-            } else AsyncImage(
+            if (thumb.isEmpty()) Icon(
+                modifier = Modifier.size(60.dp),
+                painter = itemType.iconAlt,
+                contentDescription = null,
+                tint = itemType.iconTint
+            ) else AsyncImage(
                 model = CoilTinkModel(
                     absolutePath = null,
                     path = thumb
@@ -381,7 +368,6 @@ fun FilesList(
                     imageLoader = imageLoader,
                     name = it.name,
                     thumb = it.thumbnail,
-                    thumbEncryptionType = it.thumbnailEncryptionType,
                     itemType = it.itemType,
                     state = it.state,
                     isChecked = listCheckedState.getOrElse(it.id) { false },

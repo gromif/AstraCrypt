@@ -1,6 +1,5 @@
 package com.nevidimka655.astracrypt.ui.sheets
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,7 +9,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.OpenInNew
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Folder
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.outlined.DeleteForever
 import androidx.compose.material.icons.outlined.Edit
@@ -29,14 +27,17 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.vector.VectorPainter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.nevidimka655.astracrypt.R
+import com.nevidimka655.astracrypt.ui.theme.icons.file_type.FileType
+import com.nevidimka655.astracrypt.ui.theme.icons.file_type.photo.Photo
 import com.nevidimka655.ui.compose_core.FilledTonalIconButton
 import com.nevidimka655.ui.compose_core.OneLineListItem
 import com.nevidimka655.ui.compose_core.sheets.SheetDefaults
@@ -49,7 +50,7 @@ import com.nevidimka655.ui.compose_core.theme.spaces
 fun Sheets.filesOptions(
     state: MutableState<Boolean> = mutableStateOf(false),
     name: String = "Test",
-    itemIcon: ImageVector = Icons.Default.Folder,
+    itemIcon: VectorPainter = Icons.FileType.Photo,
     isFolder: Boolean = true,
     isStarred: Boolean = false,
     sheetState: SheetState = SheetDefaults.state(),
@@ -108,7 +109,7 @@ fun Sheets.filesOptions(
 fun SheetFilesOptionsHeader(
     modifier: Modifier = Modifier,
     text: String = "Test",
-    itemIcon: ImageVector = Icons.Default.Folder,
+    itemIcon: VectorPainter = Icons.FileType.Photo,
     isFolder: Boolean = true,
     onRename: () -> Unit = {},
     onDelete: () -> Unit = {}
@@ -134,11 +135,11 @@ fun SheetFilesOptionsHeader(
             icon = Icons.Outlined.DeleteForever,
             contentDescription = context.getString(R.string.files_options_delete)
         )
-        Image(
-            imageVector = itemIcon,
+        Icon(
+            painter = itemIcon,
             contentDescription = null,
             modifier = Modifier.size(48.dp),
-            colorFilter = if (isFolder) ColorFilter.tint(color = MaterialTheme.colorScheme.onSurfaceVariant) else null
+            tint = if (isFolder) MaterialTheme.colorScheme.onSurfaceVariant else Color.Unspecified
         )
         FilledTonalIconButton(
             onClick = onRename,

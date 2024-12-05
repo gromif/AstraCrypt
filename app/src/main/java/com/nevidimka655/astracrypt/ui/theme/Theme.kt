@@ -15,10 +15,11 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.nevidimka655.astracrypt.ui.theme.icons.Avatars
-import com.nevidimka655.astracrypt.ui.theme.icons.FileType
 import com.nevidimka655.astracrypt.ui.theme.icons.Purchases
+import com.nevidimka655.astracrypt.ui.theme.icons.file_type.FileType
+import com.nevidimka655.astracrypt.ui.theme.icons.file_type.reset
+import com.nevidimka655.astracrypt.ui.theme.icons.file_type.resetAlt
 import com.nevidimka655.astracrypt.ui.theme.icons.reset
-import com.nevidimka655.astracrypt.ui.theme.icons.resetAlt
 import com.nevidimka655.astracrypt.utils.Api
 import com.nevidimka655.compose_color_schemes._ColorSchemes
 import com.nevidimka655.ui.compose_core.ext.windowSizeClassLocalProviders
@@ -65,7 +66,7 @@ fun AstraCryptTheme(
 }
 
 fun Icons.reset() = with(this) {
-    this.Avatars.reset()
+    Avatars.reset()
     Purchases.reset()
     FileType.reset()
     FileType.resetAlt()
