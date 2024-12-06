@@ -85,7 +85,7 @@ class Repository(
     )
 
     suspend fun updateName(id: Long, name: String) {
-        val newName = if (info().isDatabaseEncrypted) {
+        val newName = if (info().db) {
             repositoryEncryption.encryptName(name)
         } else name
         storage.updateName(id, newName)
@@ -93,12 +93,12 @@ class Repository(
 
     suspend fun getNoteTextById(itemId: Long) = run {
         val text = notes.getTextId(itemId = itemId)
-        if (info().isNotesEncrypted) repositoryEncryption.decryptNoteText(text) else text
+        if (info().notes) repositoryEncryption.decryptNoteText(text) else text
     }
 
     suspend fun getById(itemId: Long) = run {
         val item = storage.getById(itemId)
-        if (info().isDatabaseEncrypted) item.copy(
+        if (info().db) item.copy(
             name = repositoryEncryption.decryptName(item.name),
             thumb = repositoryEncryption.decryptThumb(item.thumb),
             path = repositoryEncryption.decryptPath(item.path),
@@ -120,7 +120,7 @@ class Repository(
     suspend fun getFilesCountFlow(dirId: Long) = storage.getFilesCountFlow(dirId)
     suspend fun getListDataToExportFromDir(dirId: Long) = run {
         val list = storage.getListDataToExport(dirId)
-        if (info().isDatabaseEncrypted) list.map {
+        if (info().db) list.map {
             it.copy(
                 name = repositoryEncryption.decryptName(it.name),
                 path = repositoryEncryption.decryptPath(it.path),
@@ -133,7 +133,7 @@ class Repository(
 
     suspend fun getDataToExport(itemId: Long) = run {
         val item = storage.getDataToExport(itemId)
-        if (info().isDatabaseEncrypted) item.copy(
+        if (info().db) item.copy(
             name = repositoryEncryption.decryptName(item.name),
             path = repositoryEncryption.decryptPath(item.path),
             encryptionType = repositoryEncryption.decryptEncryptionType(
@@ -144,14 +144,14 @@ class Repository(
 
     suspend fun getName(id: Long) = run {
         val name = storage.getName(id)
-        if (info().isDatabaseEncrypted) {
+        if (info().db) {
             repositoryEncryption.decryptName(name)
         } else name
     }
 
     suspend fun getMinimalItemsDataInDir(dirId: Long) = run {
         val item = storage.getMinimalItemsDataInDir(dirId)
-        if (info().isDatabaseEncrypted) item.map {
+        if (info().db) item.map {
             it.copy(
                 name = repositoryEncryption.decryptName(it.name),
                 thumb = repositoryEncryption.decryptThumb(it.thumb),
@@ -162,7 +162,7 @@ class Repository(
 
     suspend fun getMinimalItemData(id: Long) = run {
         val item = storage.getMinimalItemData(id)
-        if (info().isDatabaseEncrypted) item.copy(
+        if (info().db) item.copy(
             name = repositoryEncryption.decryptName(item.name),
             thumb = repositoryEncryption.decryptThumb(item.thumb),
             path = repositoryEncryption.decryptPath(item.path)
@@ -171,7 +171,7 @@ class Repository(
 
     suspend fun getDataForOpening(id: Long) = run {
         val item = storage.getDataToOpen(id)
-        if (info().isDatabaseEncrypted) item.copy(
+        if (info().db) item.copy(
             name = repositoryEncryption.decryptName(item.name),
             encryptionType = repositoryEncryption.decryptEncryptionType(
                 itemId = id,
@@ -183,7 +183,7 @@ class Repository(
 
     suspend fun getParentDirInfo(dirId: Long) =
         storage.getParentDirInfo(dirId)?.run {
-            if (info().isDatabaseEncrypted) copy(
+            if (info().db) copy(
                 name = repositoryEncryption.decryptName(value = this.name)
             ) else this
         }
@@ -230,7 +230,7 @@ class Repository(
         dirIdsForSearch: ArrayList<Long>? = null
     ): PagingSource<Int, StorageItemListTuple> {
         val info = encryptionManager.getCachedInfo()
-        val isNameEncrypted = info?.run { isDatabaseEncrypted && isNameEncrypted } == true
+        val isNameEncrypted = info?.run { db && name } == true
         return storage.listOrderDescAsc(
             parentDirId = if (dirIdsForSearch == null) parentDirectoryId else -1,
             query = searchQuery,

@@ -38,7 +38,7 @@ class RepositoryEncryption(
 
     fun decryptNotesPager(pagingData: PagingData<NoteItemListTuple>) = pagingData.map {
         val encryptionInfo = info()
-        if (encryptionInfo.isNotesEncrypted) {
+        if (encryptionInfo.notes) {
             it.copy(
                 name = decryptNoteName(it.name),
                 textPreview = decryptNoteTextPreview(it.textPreview)
@@ -48,13 +48,13 @@ class RepositoryEncryption(
 
     suspend fun decryptPager(
         pagingData: PagingData<StorageItemListTuple>
-    ) = if (info().isDatabaseEncrypted) pagingData.map {
+    ) = if (info().db) pagingData.map {
         decryptStorageItemListTuple(it)
     } else pagingData
 
     suspend fun decryptStorageItemListTuple(tuple: StorageItemListTuple): StorageItemListTuple {
         val encryptionInfo = info()
-        return if (encryptionInfo.isDatabaseEncrypted) tuple.copy(
+        return if (encryptionInfo.db) tuple.copy(
             name = decryptName(tuple.name),
             thumbnail = decryptThumb(tuple.thumbnail),
             thumbnailEncryptionType = decryptThumbEncryptionType(
@@ -67,39 +67,39 @@ class RepositoryEncryption(
     suspend fun decryptName(value: String): String {
         val encryptionInfo = info()
         return if (value.isNotEmpty()
-            && encryptionInfo.isDatabaseEncrypted
-            && encryptionInfo.isNameEncrypted
+            && encryptionInfo.db
+            && encryptionInfo.name
         ) decryptStringField(getDatabasePrimitive(), value) else value
     }
 
     suspend fun decryptThumb(value: String): String {
         val encryptionInfo = info()
         return if (value.isNotEmpty()
-            && encryptionInfo.isDatabaseEncrypted
-            && encryptionInfo.isThumbnailEncrypted
+            && encryptionInfo.db
+            && encryptionInfo.thumb
         ) decryptStringField(getDatabasePrimitive(), value) else value
     }
 
     suspend fun decryptPath(value: String): String {
         val encryptionInfo = info()
         return if (value.isNotEmpty()
-            && encryptionInfo.isDatabaseEncrypted
-            && encryptionInfo.isPathEncrypted
+            && encryptionInfo.db
+            && encryptionInfo.path
         ) decryptStringField(getDatabasePrimitive(), value) else value
     }
 
     suspend fun decryptFlags(value: String): String {
         val encryptionInfo = info()
         return if (value.isNotEmpty()
-            && encryptionInfo.isDatabaseEncrypted
-            && encryptionInfo.isFlagsEncrypted
+            && encryptionInfo.db
+            && encryptionInfo.flags
         ) decryptStringField(getDatabasePrimitive(), value) else value
     }
 
     suspend fun decryptThumbEncryptionType(itemId: Long, value: Int): Int {
         val encryptionInfo = info()
-        return if (encryptionInfo.isDatabaseEncrypted
-            && encryptionInfo.isThumbEncryptionTypeEncrypted
+        return if (encryptionInfo.db
+            && encryptionInfo.thumbEncryptionType
         ) decryptIntField(
             dbKeyId(),
             itemId.toInt() * DatabaseColumns.ThumbEncryptionType.ordinal,
@@ -109,7 +109,7 @@ class RepositoryEncryption(
 
     suspend fun decryptEncryptionType(itemId: Long, value: Int): Int {
         val info = this@RepositoryEncryption.info()
-        return if (info.isDatabaseEncrypted && info.isEncryptionTypeEncrypted) decryptIntField(
+        return if (info.db && info.encryptionType) decryptIntField(
             dbKeyId(),
             itemId.toInt() * DatabaseColumns.EncryptionType.ordinal,
             value
@@ -130,8 +130,8 @@ class RepositoryEncryption(
 
     suspend fun encryptName(value: String): String {
         val encryptionInfo = info()
-        return if (encryptionInfo.isDatabaseEncrypted
-            && encryptionInfo.isNameEncrypted
+        return if (encryptionInfo.db
+            && encryptionInfo.name
         ) encryptStringField(getDatabasePrimitive(), value)
         else value
     }
@@ -156,24 +156,24 @@ class RepositoryEncryption(
 
     suspend fun encryptThumb(value: String): String {
         val encryptionInfo = info()
-        return if (encryptionInfo.isDatabaseEncrypted
-            && encryptionInfo.isThumbnailEncrypted
+        return if (encryptionInfo.db
+            && encryptionInfo.thumb
         ) encryptStringField(getDatabasePrimitive(), value)
         else value
     }
 
     suspend fun encryptPath(value: String): String {
         val encryptionInfo = info()
-        return if (encryptionInfo.isDatabaseEncrypted
-            && encryptionInfo.isPathEncrypted
+        return if (encryptionInfo.db
+            && encryptionInfo.path
         ) encryptStringField(getDatabasePrimitive(), value)
         else value
     }
 
     suspend fun encryptFlags(value: String): String {
         val encryptionInfo = info()
-        return if (encryptionInfo.isDatabaseEncrypted
-            && encryptionInfo.isFlagsEncrypted
+        return if (encryptionInfo.db
+            && encryptionInfo.flags
         ) encryptStringField(getDatabasePrimitive(), value)
         else value
     }
@@ -182,7 +182,7 @@ class RepositoryEncryption(
         itemId: Long, value: Int
     ): Int {
         val info = info()
-        return if (info.isDatabaseEncrypted && info.isThumbEncryptionTypeEncrypted) encryptIntField(
+        return if (info.db && info.thumbEncryptionType) encryptIntField(
             dbKeyId(),
             itemId.toInt() * DatabaseColumns.ThumbEncryptionType.ordinal,
             value
@@ -193,7 +193,7 @@ class RepositoryEncryption(
         itemId: Long, value: Int
     ): Int {
         val info = info()
-        return if (info.isDatabaseEncrypted && info.isEncryptionTypeEncrypted) encryptIntField(
+        return if (info.db && info.encryptionType) encryptIntField(
             dbKeyId(),
             itemId.toInt() * DatabaseColumns.EncryptionType.ordinal,
             value
@@ -209,7 +209,7 @@ class RepositoryEncryption(
 
     suspend fun encryptStorageItemEntity(
         storageItem: StorageItemEntity
-    ) = if (info().isDatabaseEncrypted) storageItem.copy(
+    ) = if (info().db) storageItem.copy(
         name = encryptName(storageItem.name),
         thumb = encryptThumb(storageItem.thumb),
         path = encryptPath(storageItem.path),
@@ -224,7 +224,7 @@ class RepositoryEncryption(
 
     suspend fun encryptNoteItemEntity(
         noteItemEntity: NoteItemEntity
-    ) = if (info().isNotesEncrypted) noteItemEntity.copy(
+    ) = if (info().notes) noteItemEntity.copy(
         name = encryptNoteName(noteItemEntity.name),
         textPreview = encryptNoteTextPreview(noteItemEntity.textPreview),
         text = encryptNoteText(noteItemEntity.text)

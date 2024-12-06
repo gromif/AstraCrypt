@@ -30,7 +30,7 @@ class HomeViewModel @Inject constructor(
     val profileInfoFlow get() = settingsDataStoreManager.profileInfoFlow
 
     val recentFilesStateFlow = repository.getRecentFilesFlow().map { list ->
-        if (encryptionManager.getInfo().isDatabaseEncrypted) try {
+        if (encryptionManager.getInfo().db) try {
             list.map {
                 repositoryEncryption.decryptStorageItemListTuple(it)
             }

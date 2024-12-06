@@ -63,19 +63,19 @@ class TransformDatabaseWorker @AssistedInject constructor(
     }
     private val fromEncryption get() = oldEncryptionInfo.databaseEncryptionOrdinal
     private val toEncryption get() = newEncryptionInfo.databaseEncryptionOrdinal
-    private val isNameEncrypted get() = oldEncryptionInfo.isNameEncrypted
-    private val isThumbEncrypted get() = oldEncryptionInfo.isThumbnailEncrypted
-    private val isPathEncrypted get() = oldEncryptionInfo.isPathEncrypted
-    private val isFlagsEncrypted get() = oldEncryptionInfo.isFlagsEncrypted
-    private val isEncryptionTypeEncrypted get() = oldEncryptionInfo.isEncryptionTypeEncrypted
-    private val isThumbEncryptionTypeEncrypted get() = oldEncryptionInfo.isThumbEncryptionTypeEncrypted
+    private val isNameEncrypted get() = oldEncryptionInfo.name
+    private val isThumbEncrypted get() = oldEncryptionInfo.thumb
+    private val isPathEncrypted get() = oldEncryptionInfo.path
+    private val isFlagsEncrypted get() = oldEncryptionInfo.flags
+    private val isEncryptionTypeEncrypted get() = oldEncryptionInfo.encryptionType
+    private val isThumbEncryptionTypeEncrypted get() = oldEncryptionInfo.thumbEncryptionType
 
-    private val encryptName get() = newEncryptionInfo.isNameEncrypted
-    private val encryptThumb get() = newEncryptionInfo.isThumbnailEncrypted
-    private val encryptPath get() = newEncryptionInfo.isPathEncrypted
-    private val encryptDetails get() = newEncryptionInfo.isFlagsEncrypted
-    private val encryptEncryptionType get() = newEncryptionInfo.isEncryptionTypeEncrypted
-    private val encryptThumbEncryptionType get() = newEncryptionInfo.isThumbEncryptionTypeEncrypted
+    private val encryptName get() = newEncryptionInfo.name
+    private val encryptThumb get() = newEncryptionInfo.thumb
+    private val encryptPath get() = newEncryptionInfo.path
+    private val encryptDetails get() = newEncryptionInfo.flags
+    private val encryptEncryptionType get() = newEncryptionInfo.encryptionType
+    private val encryptThumbEncryptionType get() = newEncryptionInfo.thumbEncryptionType
 
     private var notificationId = 0
 
