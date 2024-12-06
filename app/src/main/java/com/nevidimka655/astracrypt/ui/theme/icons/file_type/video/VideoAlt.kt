@@ -8,20 +8,21 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.VectorPainter
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.tooling.preview.Preview
-import com.nevidimka655.astracrypt.ui.theme.ColorSchemes
+import com.nevidimka655.astracrypt.ui.theme.darkScheme
 import com.nevidimka655.astracrypt.ui.theme.icons.file_type._FileType
+import com.nevidimka655.astracrypt.ui.theme.lightScheme
 
 val _FileType.VideoAlt @Composable get() = icon()
 
 @Preview
 @Composable
-private fun Preview() = MaterialTheme(colorScheme = ColorSchemes.LightColors) {
+private fun Preview() = MaterialTheme(colorScheme = lightScheme) {
     Surface { Icon(painter = icon(), contentDescription = null, tint = Color.Unspecified) }
 }
 
 @Preview
 @Composable
-private fun PreviewDark() = MaterialTheme(colorScheme = ColorSchemes.DarkColors) {
+private fun PreviewDark() = MaterialTheme(colorScheme = darkScheme) {
     Surface { Icon(painter = icon(), contentDescription = null, tint = Color.Unspecified) }
 }
 
