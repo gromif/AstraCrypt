@@ -18,7 +18,6 @@
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/createDir"
-        android:icon="@drawable/ic_create_new_folder_outline"
         android:title="@android:string/selectAll"
         android:visible="false"
         app:showAsAction="ifRoom" />

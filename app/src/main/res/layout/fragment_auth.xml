@@ -58,7 +58,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:contentDescription="@string/signIn"
-        app:srcCompat="@drawable/ic_action_forward"
         app:useCompatPadding="true" />
 
 </FrameLayout>

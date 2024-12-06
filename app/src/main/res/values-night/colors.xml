@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="fileTypeImageDefault">#88b5f9</color>
-    <color name="fileTypeImageRed">#E87175</color>
-
     <color name="plan_starter_textColor">#c6e7ff</color>
     <color name="plan_starter_crownColor">#e7deff</color>
     <color name="plan_starter_backgroundColor">#001e2d</color>
