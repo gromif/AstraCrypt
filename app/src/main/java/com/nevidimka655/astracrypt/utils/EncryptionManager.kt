@@ -15,20 +15,16 @@ class EncryptionManager(
 
     fun getCachedInfo() = info
 
-    suspend fun save() {
-        settingsDataStoreManager.setEncryptionInfo(this@EncryptionManager.db())
-    }
-
     suspend fun getFileEncryptionName() = KeysetTemplates.Stream.entries
-        .getOrNull(this@EncryptionManager.db().fileEncryptionOrdinal)?.name
+        .getOrNull(getInfo().fileEncryptionOrdinal)?.name
 
     suspend fun getThumbEncryptionName() = KeysetTemplates.Stream.entries
-        .getOrNull(this@EncryptionManager.db().thumbEncryptionOrdinal)?.name
+        .getOrNull(getInfo().thumbEncryptionOrdinal)?.name
 
     suspend fun getDbEncryptionName() = KeysetTemplates.AEAD.entries
-        .getOrNull(this@EncryptionManager.db().databaseEncryptionOrdinal)?.name
+        .getOrNull(getInfo().databaseEncryptionOrdinal)?.name
 
     suspend fun getNotesEncryptionName() = KeysetTemplates.AEAD.entries
-        .getOrNull(this@EncryptionManager.db().notesEncryptionOrdinal)?.name
+        .getOrNull(getInfo().notesEncryptionOrdinal)?.name
 
 }
