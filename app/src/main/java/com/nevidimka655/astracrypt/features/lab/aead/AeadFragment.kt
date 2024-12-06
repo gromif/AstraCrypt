@@ -63,7 +63,7 @@ class AeadFragment : androidx.fragment.app.Fragment(R.layout.fragment_lab) {
                 }
             }
             (dataType.editText as MaterialAutoCompleteTextView).run {
-                setSimpleItems(dataTypeItems)
+                /*setSimpleItems(dataTypeItems)*/
                 val pos = labManager.dataType.ordinal
                 setText(dataTypeItems[pos], false)
                 setOnItemClickListener { _, _, position, _ ->
@@ -115,7 +115,7 @@ class AeadFragment : androidx.fragment.app.Fragment(R.layout.fragment_lab) {
         (encryptionType.editText as MaterialAutoCompleteTextView).run {
             val dataType = labManager.dataType
             val items = if (dataType == LabAeadManager.DataType.Text) itemsAead else itemsMajor
-            setSimpleItems(items)
+            /*setSimpleItems(items)*/
             val pos = labManager.encryptionType
             setText(items[pos], false)
             setOnItemClickListener { _, _, position, _ ->
