@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import coil.ImageLoader
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.features.profile.Avatars
+import com.nevidimka655.astracrypt.features.profile.Avatars.Companion.painter
 import com.nevidimka655.astracrypt.features.profile.ui.ProfileIcon
 import com.nevidimka655.astracrypt.model.CoilTinkModel
 import com.nevidimka655.astracrypt.utils.AppConfig
@@ -31,7 +32,6 @@ import com.nevidimka655.ui.compose_core.dialogs.Dialog
 import com.nevidimka655.ui.compose_core.dialogs.DialogDefaults
 import com.nevidimka655.ui.compose_core.dialogs.Dialogs
 import com.nevidimka655.ui.compose_core.dialogs.default
-import com.nevidimka655.ui.compose_core.ext.vectorResource
 import com.nevidimka655.ui.compose_core.theme.spaces
 
 @Composable
@@ -119,7 +119,7 @@ private fun DialogChangeAvatar(
                                     state.value = false
                                     onDefaultAvatarClick(it)
                                 },
-                            imageVector = vectorResource(id = it.resId),
+                            painter = it.painter(),
                             contentDescription = null
                         )
                     }

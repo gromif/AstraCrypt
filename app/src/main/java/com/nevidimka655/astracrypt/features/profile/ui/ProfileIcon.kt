@@ -12,7 +12,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.Dp
@@ -21,7 +20,7 @@ import coil.ImageLoader
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.nevidimka655.astracrypt.features.profile.Avatars
-import com.nevidimka655.astracrypt.features.profile.Avatars.Companion.vector
+import com.nevidimka655.astracrypt.features.profile.Avatars.Companion.painter
 import com.nevidimka655.astracrypt.model.CoilTinkModel
 
 @Composable
@@ -46,9 +45,7 @@ fun ProfileIcon(
     val context = LocalContext.current
     if (defaultAvatar != null) Image(
         modifier = Modifier.fillMaxSize(),
-        painter = rememberVectorPainter(
-            image = defaultAvatar.vector()
-        ),
+        painter = defaultAvatar.painter(),
         contentDescription = null
     ) else if (coilAvatarModel != null) AsyncImage(
         modifier = Modifier.fillMaxSize(),
