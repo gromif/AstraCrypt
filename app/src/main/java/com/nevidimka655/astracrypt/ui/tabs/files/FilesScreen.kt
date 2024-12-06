@@ -192,7 +192,7 @@ fun FilesGridItem(
                 contentAlignment = Alignment.Center
             ) {
                 if (itemType.isFile) Icon(
-                    modifier = Modifier.size(24.dp),
+                    modifier = Modifier.size(28.dp),
                     painter = itemType.icon,
                     contentDescription = null,
                     tint = itemType.iconTint
