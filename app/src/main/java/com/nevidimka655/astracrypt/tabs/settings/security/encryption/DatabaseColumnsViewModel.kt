@@ -1,10 +1,10 @@
 package com.nevidimka655.astracrypt.tabs.settings.security.encryption
 
 import androidx.lifecycle.ViewModel
-import com.nevidimka655.astracrypt.model.EncryptionInfo
+import com.nevidimka655.astracrypt.model.AeadInfo
 
 class DatabaseColumnsViewModel: ViewModel() {
 
-    var encryptionInfoNew: EncryptionInfo? = null
+    var aeadInfoNew: AeadInfo? = null
 
 }

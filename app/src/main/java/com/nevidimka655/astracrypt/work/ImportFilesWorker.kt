@@ -28,14 +28,13 @@ import coil.ImageLoader
 import coil.request.ImageRequest
 import com.google.crypto.tink.StreamingAead
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.model.EncryptionInfo
+import com.nevidimka655.astracrypt.model.AeadInfo
 import com.nevidimka655.astracrypt.model.StorageItemFlags
 import com.nevidimka655.astracrypt.room.Repository
 import com.nevidimka655.astracrypt.room.entities.StorageItemEntity
 import com.nevidimka655.astracrypt.utils.*
 import com.nevidimka655.astracrypt.utils.enums.StorageItemType
 import com.nevidimka655.crypto.tink.KeysetFactory
-import com.nevidimka655.crypto.tink.KeysetTemplates
 import com.nevidimka655.crypto.tink.TinkConfig
 import com.nevidimka655.crypto.tink.extensions.fromBase64
 import com.nevidimka655.crypto.tink.extensions.secureRandom
@@ -68,16 +67,14 @@ class ImportFilesWorker @AssistedInject constructor(
         const val fileWithUris = "Be_My_Eyes"
         const val dirId = "01"
         const val saveOriginalFiles = "sad"
-        const val encryptionInfo = "material"
+        const val aeadInfo = "material"
         const val associatedData = "keyset"
         const val TAG_ASSOCIATED_DATA_TRANSPORT = "keyset2"
     }
 
-    private val encryptionInfo: EncryptionInfo by lazy {
-        Json.decodeFromString(inputData.getString(Args.encryptionInfo)!!)
+    private val aeadInfo: AeadInfo by lazy {
+        Json.decodeFromString(inputData.getString(Args.aeadInfo)!!)
     }
-    private val fileEncryption get() = encryptionInfo.fileEncryptionOrdinal
-    private val thumbEncryption get() = encryptionInfo.thumbEncryptionOrdinal
     private val bitmapOptions = BitmapFactory.Options().apply { inJustDecodeBounds = true }
 
     private var saveOriginalFiles = false
@@ -91,14 +88,9 @@ class ImportFilesWorker @AssistedInject constructor(
         setForeground(getForegroundInfo())
         TinkConfig.initStream()
         shouldDecodeAssociatedData()
-        val keysetHandleForFileEncryption = if (fileEncryption > -1) {
-            keysetFactory.stream(KeysetTemplates.Stream.entries[fileEncryption])
-        } else null
-        val keysetHandleForThumbEncryption = if (thumbEncryption > -1) {
-            keysetFactory.stream(KeysetTemplates.Stream.entries[thumbEncryption])
-        } else null
-        val fileEncryptionPrimitive = keysetHandleForFileEncryption?.streamingAeadPrimitive()
-        val thumbEncryptionPrimitive = keysetHandleForThumbEncryption?.streamingAeadPrimitive()
+        val fileAead = aeadInfo.file?.let { keysetFactory.stream(it) }?.streamingAeadPrimitive()
+        val thumbAead =
+            aeadInfo.preview?.let { keysetFactory.stream(it) }?.streamingAeadPrimitive()
         val file = File(inputData.getString(Args.fileWithUris)!!)
         val urisList = withContext(defaultDispatcher) { file.readLines() }
         file.delete()
@@ -111,8 +103,8 @@ class ImportFilesWorker @AssistedInject constructor(
                 itemListIterator(
                     dbItemId = itemId,
                     fileUri = Uri.parse(it),
-                    filePrimitive = fileEncryptionPrimitive,
-                    thumbPrimitive = thumbEncryptionPrimitive
+                    filePrimitive = fileAead,
+                    thumbPrimitive = thumbAead
                 )
                 nextId++
             }
@@ -122,7 +114,7 @@ class ImportFilesWorker @AssistedInject constructor(
     }
 
     private fun shouldDecodeAssociatedData() {
-        if (encryptionInfo.isAssociatedDataEncrypted) {
+        if (aeadInfo.isAssociatedDataEncrypted) {
             TinkConfig.initAead()
             val bytes = inputData.getString(Args.associatedData)!!.fromBase64()
             val decodedData = keysetFactory.transformAssociatedDataToWorkInstance(
@@ -180,9 +172,9 @@ class ImportFilesWorker @AssistedInject constructor(
                 thumb = thumbnailPath.await(),
                 path = outRelativePath,
                 flags = getFlags(itemType, fileUri),
-                encryptionType = fileEncryption,
+                encryptionType = aeadInfo.file?.ordinal ?: -1,
                 creationTime = creationDate,
-                thumbnailEncryptionType = thumbEncryption
+                thumbnailEncryptionType = aeadInfo.file?.ordinal ?: -1
             )
             repository.insert(item)
             if (!saveOriginalFiles) try {

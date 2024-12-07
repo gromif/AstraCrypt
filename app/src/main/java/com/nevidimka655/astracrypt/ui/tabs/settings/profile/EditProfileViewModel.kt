@@ -17,15 +17,14 @@ import coil.size.Scale
 import com.nevidimka655.astracrypt.features.profile.Avatars
 import com.nevidimka655.astracrypt.features.profile.ProfileInfo
 import com.nevidimka655.astracrypt.model.CoilTinkModel
+import com.nevidimka655.astracrypt.utils.AeadManager
 import com.nevidimka655.astracrypt.utils.Api
 import com.nevidimka655.astracrypt.utils.AppConfig
 import com.nevidimka655.astracrypt.utils.CenterCropTransformation
-import com.nevidimka655.astracrypt.utils.EncryptionManager
 import com.nevidimka655.astracrypt.utils.Io
 import com.nevidimka655.astracrypt.utils.datastore.SettingsDataStoreManager
 import com.nevidimka655.astracrypt.utils.extensions.recreate
 import com.nevidimka655.crypto.tink.KeysetFactory
-import com.nevidimka655.crypto.tink.KeysetTemplates
 import com.nevidimka655.crypto.tink.extensions.streamingAeadPrimitive
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -39,7 +38,7 @@ import javax.inject.Inject
 class EditProfileViewModel @Inject constructor(
     private val keysetFactory: KeysetFactory,
     private val settingsDataStoreManager: SettingsDataStoreManager,
-    private val encryptionManager: EncryptionManager,
+    private val aeadManager: AeadManager,
     val imageLoader: ImageLoader,
     io: Io
 ): ViewModel() {
@@ -82,15 +81,14 @@ class EditProfileViewModel @Inject constructor(
         val compressedByteStream = ByteArrayOutputStream().also {
             bitmap.compress(Bitmap.CompressFormat.PNG, 98, it)
         }
-        val encryptionInfo = encryptionManager.getInfo()
-        val thumbEncryption = encryptionInfo.thumbEncryptionOrdinal
+        val aeadInfo = aeadManager.getInfo()
 
         iconFile.recreate()
-        val outputStream = if (thumbEncryption != -1) {
-            keysetFactory.stream(KeysetTemplates.Stream.entries[thumbEncryption])
+        val outputStream = aeadInfo.preview?.let {
+            keysetFactory.stream(it)
                 .streamingAeadPrimitive()
                 .newEncryptingStream(iconFile.outputStream(), keysetFactory.associatedData)
-        } else iconFile.outputStream()
+        } ?: iconFile.outputStream()
 
         outputStream.use { it.write(compressedByteStream.toByteArray()) }
 

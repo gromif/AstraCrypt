@@ -8,7 +8,7 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import com.nevidimka655.astracrypt.features.auth.AuthInfo
 import com.nevidimka655.astracrypt.features.profile.Avatars
 import com.nevidimka655.astracrypt.features.profile.ProfileInfo
-import com.nevidimka655.astracrypt.model.EncryptionInfo
+import com.nevidimka655.astracrypt.model.AeadInfo
 import com.nevidimka655.crypto.tink.KeysetFactory
 import com.nevidimka655.crypto.tink.KeysetTemplates
 import com.nevidimka655.crypto.tink.extensions.aeadPrimitive
@@ -64,17 +64,17 @@ class SettingsDataStoreManager(
 
 
 
-    private suspend fun encryptionInfoKey() = stringPreferencesKey(encryptKey("b1"))
-    val encryptionInfoFlow = dataStore.data.map { prefs ->
-        val key = encryptionInfoKey()
+    private suspend fun aeadInfoKey() = stringPreferencesKey(encryptKey("b1"))
+    val aeadInfoFlow = dataStore.data.map { prefs ->
+        val key = aeadInfoKey()
         prefs[key]?.let {
-            val encryptionInfoJson = decryptValue(key = key.name, value = it)
-            Json.decodeFromString<EncryptionInfo>(encryptionInfoJson)
-        } ?: EncryptionInfo()
+            val aeadInfoJson = decryptValue(key = key.name, value = it)
+            Json.decodeFromString<AeadInfo>(aeadInfoJson)
+        } ?: AeadInfo()
     }
-    suspend fun setEncryptionInfo(encryptionInfo: EncryptionInfo) = dataStore.edit {
-        val key = encryptionInfoKey()
-        it[key] = encryptValue(key = key.name, value = Json.encodeToString(encryptionInfo))
+    suspend fun setEncryptionInfo(aeadInfo: AeadInfo) = dataStore.edit {
+        val key = aeadInfoKey()
+        it[key] = encryptValue(key = key.name, value = Json.encodeToString(aeadInfo))
     }
 
 

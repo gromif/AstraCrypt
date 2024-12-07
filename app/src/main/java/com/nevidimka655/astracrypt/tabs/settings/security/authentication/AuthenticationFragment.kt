@@ -24,16 +24,16 @@ class AuthenticationFragment : Fragment() {
     fun SettingsAuthenticationScreen() {
         val context = LocalContext.current
         val scope = rememberCoroutineScope()
-        val encryptionInfo = encryptionManager.encryptionInfo
+        val aeadInfo = encryptionManager.aeadInfo
         val info = authManager.info
         PreferencesScreen {
             val isAuthConfigured = remember(info) { info.authType != AuthType.NO_AUTH }
             PreferencesGroup(text = stringResource(id = R.string.settings_authentication)) {
                 var dialogPasswordCheckDisableAuth by dialogCheckPassword {
                     disableAuthentication()
-                    if (encryptionInfo.isAssociatedDataEncrypted) {
+                    if (aeadInfo.isAssociatedDataEncrypted) {
                         setBindAssociatedData(
-                            currentEncryptionInfo = encryptionInfo,
+                            currentEncryptionInfo = aeadInfo,
                             newState = false,
                             passPhrase = it
                         )
@@ -109,14 +109,14 @@ class AuthenticationFragment : Fragment() {
             ) {
                 var dialogPasswordCheckBindEncryption by dialogCheckPassword {
                     setBindAssociatedData(
-                        currentEncryptionInfo = encryptionInfo,
-                        newState = !encryptionInfo.isAssociatedDataEncrypted,
+                        currentEncryptionInfo = aeadInfo,
+                        newState = !aeadInfo.isAssociatedDataEncrypted,
                         passPhrase = it
                     )
                 }
                 PreferencesSwitch(
                     titleText = stringResource(id = R.string.settings_bindWithFiles),
-                    isChecked = encryptionInfo.isAssociatedDataEncrypted
+                    isChecked = aeadInfo.isAssociatedDataEncrypted
                 ) {
                     dialogPasswordCheckBindEncryption = true
                 }
@@ -255,7 +255,7 @@ class AuthenticationFragment : Fragment() {
     ) {
         *//*if (newState) KeysetFactory.encryptAssociatedData(passPhrase)
         else KeysetFactory.decryptAssociatedData()*//*
-        encryptionManager.encryptionInfo = currentEncryptionInfo.copy(
+        encryptionManager.aeadInfo = currentEncryptionInfo.copy(
             isAssociatedDataEncrypted = newState
         )
         encryptionManager.save()

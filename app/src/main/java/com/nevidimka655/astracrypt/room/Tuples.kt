@@ -58,8 +58,6 @@ data class DatabaseTransformTuple(
     @ColumnInfo(name = "name") val name: String,
     @ColumnInfo(name = "thumb") val thumb: String,
     @ColumnInfo(name = "path") val path: String,
-    @ColumnInfo(name = "enc_type") val encryptionType: Int = -1,
-    @ColumnInfo(name = "enc_thumb_type") val thumbnailEncryptionType: Int = -1,
     @ColumnInfo(name = "flags") val flags: String
 )
 

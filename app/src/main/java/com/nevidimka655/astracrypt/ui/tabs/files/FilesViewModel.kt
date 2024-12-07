@@ -14,7 +14,7 @@ import androidx.work.workDataOf
 import coil.ImageLoader
 import com.nevidimka655.astracrypt.room.Repository
 import com.nevidimka655.astracrypt.room.StorageItemListTuple
-import com.nevidimka655.astracrypt.utils.EncryptionManager
+import com.nevidimka655.astracrypt.utils.AeadManager
 import com.nevidimka655.astracrypt.utils.Io
 import com.nevidimka655.astracrypt.utils.datastore.AppearanceManager
 import com.nevidimka655.astracrypt.utils.extensions.removeLines
@@ -37,7 +37,7 @@ private typealias Args = ImportFilesWorker.Args
 class FilesViewModel @Inject constructor(
     private val repository: Repository,
     private val keysetFactory: KeysetFactory,
-    private val encryptionManager: EncryptionManager,
+    private val aeadManager: AeadManager,
     val appearanceManager: AppearanceManager,
     val io: Io,
     val workManager: WorkManager,
@@ -72,11 +72,11 @@ class FilesViewModel @Inject constructor(
         saveOriginalFiles: Boolean = false,
         dirId: Long
     ) = viewModelScope.launch {
-        val encryptionInfo = encryptionManager.getInfo()
+        val aeadInfo = aeadManager.getInfo()
         val listToSave = uriList.map { it.toString() }.toTypedArray()
         val fileWithUris = workerSerializer.saveStringArrayToFile(listToSave)
-        val encryptionInfoJson = Json.encodeToString(encryptionInfo)
-        val associatedData = if (encryptionInfo.isAssociatedDataEncrypted)
+        val aeadInfoJson = Json.encodeToString(aeadInfo)
+        val associatedData = if (aeadInfo.isAssociatedDataEncrypted)
             keysetFactory.transformAssociatedDataToWorkInstance(
                 bytesIn = keysetFactory.associatedData,
                 encryptionMode = true,
@@ -87,7 +87,7 @@ class FilesViewModel @Inject constructor(
             Args.fileWithUris to fileWithUris,
             Args.dirId to dirId,
             Args.saveOriginalFiles to saveOriginalFiles,
-            Args.encryptionInfo to encryptionInfoJson,
+            Args.aeadInfo to aeadInfoJson,
             Args.associatedData to associatedData
         )
         val workerRequest = OneTimeWorkRequestBuilder<ImportFilesWorker>().apply {

@@ -7,7 +7,7 @@ import androidx.work.OutOfQuotaPolicy
 import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import androidx.work.workDataOf
-import com.nevidimka655.astracrypt.model.EncryptionInfo
+import com.nevidimka655.astracrypt.model.AeadInfo
 import com.nevidimka655.astracrypt.utils.Io
 import com.nevidimka655.astracrypt.work.LabCombinedZipWorker
 import com.nevidimka655.astracrypt.work.TransformDatabaseWorker
@@ -24,7 +24,7 @@ class WorkerFactory(
 ) {
     var transformWorkLiveData: LiveData<WorkInfo?>? = null
 
-    fun startTransformDatabase(oldInfo: EncryptionInfo, newInfo: EncryptionInfo) {
+    fun startTransformDatabase(oldInfo: AeadInfo, newInfo: AeadInfo) {
         val associatedData = if (newInfo.isAssociatedDataEncrypted)
             keysetFactory.transformAssociatedDataToWorkInstance(
                 bytesIn = keysetFactory.associatedData,
@@ -45,7 +45,7 @@ class WorkerFactory(
         transformWorkLiveData = workManager.getWorkInfoByIdLiveData(workerRequest.id)
     }
 
-    fun startTransformNotes(oldInfo: EncryptionInfo, newInfo: EncryptionInfo) {
+    fun startTransformNotes(oldInfo: AeadInfo, newInfo: AeadInfo) {
         val associatedData = if (newInfo.isAssociatedDataEncrypted)
             keysetFactory.transformAssociatedDataToWorkInstance(
                 bytesIn = keysetFactory.associatedData,

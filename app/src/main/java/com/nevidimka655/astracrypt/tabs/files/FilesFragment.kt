@@ -185,7 +185,7 @@ class FilesFragment : Fragment() {
             menuInflater.inflate(R.menu.files, menu)
             val searchMenuItem = menu.findItem(R.id.search)
 
-            val isSearchSupported = true /*with(vm.encryptionInfo2) {
+            val isSearchSupported = true /*with(vm.aeadInfo2) {
                 (!isDatabaseEncrypted || !isNameEncrypted)
             }*/
             searchMenuItem.isVisible = isSearchSupported

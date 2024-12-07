@@ -6,11 +6,11 @@ class DatabaseColumnsFragment : Fragment() {
     /*private val vm by activityViewModels<MainVM>()
     private val vmState by viewModels<DatabaseColumnsViewModel>()
     private val encryptionManager get() = vm.encryptionManager
-    private val encryptionInfo get() = encryptionManager.encryptionInfo
-    private var encryptionInfoNew: EncryptionInfo
-        get() = vmState.encryptionInfoNew ?: encryptionInfo
+    private val aeadInfo get() = encryptionManager.aeadInfo
+    private var aeadInfoNew: EncryptionInfo
+        get() = vmState.aeadInfoNew ?: aeadInfo
         set(value) {
-            vmState.encryptionInfoNew = value
+            vmState.aeadInfoNew = value
         }
 
     override fun onCreateView(
@@ -92,47 +92,47 @@ class DatabaseColumnsFragment : Fragment() {
         column: DatabaseColumns,
         state: Boolean,
     ) {
-        encryptionInfoNew = when (column) {
+        aeadInfoNew = when (column) {
             DatabaseColumns.Details ->
-                encryptionInfoNew.copy(isFlagsEncrypted = state)
+                aeadInfoNew.copy(isFlagsEncrypted = state)
 
             DatabaseColumns.Name ->
-                encryptionInfoNew.copy(isNameEncrypted = state)
+                aeadInfoNew.copy(isNameEncrypted = state)
 
             DatabaseColumns.Thumbnail ->
-                encryptionInfoNew.copy(isThumbnailEncrypted = state)
+                aeadInfoNew.copy(isThumbnailEncrypted = state)
 
             DatabaseColumns.Path ->
-                encryptionInfoNew.copy(isPathEncrypted = state)
+                aeadInfoNew.copy(isPathEncrypted = state)
 
             DatabaseColumns.EncryptionType ->
-                encryptionInfoNew.copy(isEncryptionTypeEncrypted = state)
+                aeadInfoNew.copy(isEncryptionTypeEncrypted = state)
 
             DatabaseColumns.ThumbEncryptionType ->
-                encryptionInfoNew.copy(isThumbEncryptionTypeEncrypted = state)
+                aeadInfoNew.copy(isThumbEncryptionTypeEncrypted = state)
 
-            else -> encryptionInfoNew
+            else -> aeadInfoNew
         }
     }
 
     private fun isColumnNowSelected(column: DatabaseColumns) = when (column) {
         DatabaseColumns.Details ->
-            encryptionInfoNew.isFlagsEncrypted
+            aeadInfoNew.isFlagsEncrypted
 
         DatabaseColumns.Name ->
-            encryptionInfoNew.isNameEncrypted
+            aeadInfoNew.isNameEncrypted
 
         DatabaseColumns.Thumbnail ->
-            encryptionInfoNew.isThumbnailEncrypted
+            aeadInfoNew.isThumbnailEncrypted
 
         DatabaseColumns.Path ->
-            encryptionInfoNew.isPathEncrypted
+            aeadInfoNew.isPathEncrypted
 
         DatabaseColumns.EncryptionType ->
-            encryptionInfoNew.isEncryptionTypeEncrypted
+            aeadInfoNew.isEncryptionTypeEncrypted
 
         DatabaseColumns.ThumbEncryptionType ->
-            encryptionInfoNew.isThumbEncryptionTypeEncrypted
+            aeadInfoNew.isThumbEncryptionTypeEncrypted
 
         else -> false
     }
@@ -146,7 +146,7 @@ class DatabaseColumnsFragment : Fragment() {
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 when (menuItem.itemId) {
                     R.id.sync_db -> {
-                        if (encryptionInfo.isDatabaseEncrypted && encryptionInfo != encryptionInfoNew) {
+                        if (aeadInfo.isDatabaseEncrypted && aeadInfo != aeadInfoNew) {
                             startDbTransformProcess()
                         } else saveEncryptionInfo()
                     }
@@ -161,15 +161,15 @@ class DatabaseColumnsFragment : Fragment() {
 
     private fun startDbTransformProcess() {
         *//*WorkerFactory.startTransformDatabase(
-            oldInfo = encryptionInfo,
-            newInfo = encryptionInfoNew
+            oldInfo = aeadInfo,
+            newInfo = aeadInfoNew
         )*//*
         DatabaseTransformDialog().show(childFragmentManager, null)
         saveEncryptionInfo()
     }
 
     private fun saveEncryptionInfo() = with(encryptionManager) {
-        *//*encryptionInfo = encryptionInfoNew
+        *//*aeadInfo = aeadInfoNew
         save()*//*
     }*/
 

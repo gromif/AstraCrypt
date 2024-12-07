@@ -14,14 +14,12 @@ import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
 import com.google.crypto.tink.Aead
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.model.EncryptionInfo
+import com.nevidimka655.astracrypt.model.AeadInfo
 import com.nevidimka655.astracrypt.room.DatabaseTransformTuple
 import com.nevidimka655.astracrypt.room.Repository
 import com.nevidimka655.astracrypt.room.RepositoryEncryption
 import com.nevidimka655.astracrypt.utils.Api
-import com.nevidimka655.astracrypt.utils.enums.DatabaseColumns
 import com.nevidimka655.crypto.tink.KeysetFactory
-import com.nevidimka655.crypto.tink.KeysetTemplates
 import com.nevidimka655.crypto.tink.TinkConfig
 import com.nevidimka655.crypto.tink.extensions.aeadPrimitive
 import com.nevidimka655.crypto.tink.extensions.fromBase64
@@ -43,7 +41,7 @@ class TransformDatabaseWorker @AssistedInject constructor(
 ) : CoroutineWorker(appContext, params) {
 
     object Args {
-        const val oldEncryptionInfo = ImportFilesWorker.Args.encryptionInfo
+        const val oldEncryptionInfo = ImportFilesWorker.Args.aeadInfo
         const val newEncryptionInfo = "fe"
         const val associatedData = "query"
         const val TAG_ASSOCIATED_DATA_TRANSPORT = "columns"
@@ -55,27 +53,23 @@ class TransformDatabaseWorker @AssistedInject constructor(
     private var toKeysetHandleKeyId = 0
     private val isEncryptionDifferent by lazy { fromEncryption != toEncryption }
 
-    private val oldEncryptionInfo by lazy {
-        Json.decodeFromString<EncryptionInfo>(inputData.getString(Args.oldEncryptionInfo)!!)
+    private val oldAeadInfo by lazy {
+        Json.decodeFromString<AeadInfo>(inputData.getString(Args.oldEncryptionInfo)!!)
     }
-    private val newEncryptionInfo by lazy {
-        Json.decodeFromString<EncryptionInfo>(inputData.getString(Args.newEncryptionInfo)!!)
+    private val newAeadInfo by lazy {
+        Json.decodeFromString<AeadInfo>(inputData.getString(Args.newEncryptionInfo)!!)
     }
-    private val fromEncryption get() = oldEncryptionInfo.databaseEncryptionOrdinal
-    private val toEncryption get() = newEncryptionInfo.databaseEncryptionOrdinal
-    private val isNameEncrypted get() = oldEncryptionInfo.name
-    private val isThumbEncrypted get() = oldEncryptionInfo.thumb
-    private val isPathEncrypted get() = oldEncryptionInfo.path
-    private val isFlagsEncrypted get() = oldEncryptionInfo.flags
-    private val isEncryptionTypeEncrypted get() = oldEncryptionInfo.encryptionType
-    private val isThumbEncryptionTypeEncrypted get() = oldEncryptionInfo.thumbEncryptionType
+    private val fromEncryption get() = oldAeadInfo.database
+    private val toEncryption get() = newAeadInfo.database
+    private val isNameEncrypted get() = oldAeadInfo.name
+    private val isThumbEncrypted get() = oldAeadInfo.thumb
+    private val isPathEncrypted get() = oldAeadInfo.path
+    private val isFlagsEncrypted get() = oldAeadInfo.flags
 
-    private val encryptName get() = newEncryptionInfo.name
-    private val encryptThumb get() = newEncryptionInfo.thumb
-    private val encryptPath get() = newEncryptionInfo.path
-    private val encryptDetails get() = newEncryptionInfo.flags
-    private val encryptEncryptionType get() = newEncryptionInfo.encryptionType
-    private val encryptThumbEncryptionType get() = newEncryptionInfo.thumbEncryptionType
+    private val encryptName get() = newAeadInfo.name
+    private val encryptThumb get() = newAeadInfo.thumb
+    private val encryptPath get() = newAeadInfo.path
+    private val encryptDetails get() = newAeadInfo.flags
 
     private var notificationId = 0
 
@@ -99,7 +93,7 @@ class TransformDatabaseWorker @AssistedInject constructor(
     }
 
     private fun shouldDecodeAssociatedData() {
-        if (newEncryptionInfo.isAssociatedDataEncrypted) {
+        if (newAeadInfo.isAssociatedDataEncrypted) {
             val bytes = inputData.getString(Args.associatedData)!!.fromBase64()
             val decodedData = keysetFactory.transformAssociatedDataToWorkInstance(
                 bytesIn = bytes,
@@ -112,12 +106,8 @@ class TransformDatabaseWorker @AssistedInject constructor(
 
     private fun initEncryption() {
         TinkConfig.initAead()
-        val keysetHandleFrom = if (fromEncryption > -1) {
-            keysetFactory.aead(KeysetTemplates.AEAD.entries[fromEncryption])
-        } else null
-        val keysetHandleTo = if (toEncryption > -1) {
-            keysetFactory.aead(KeysetTemplates.AEAD.entries[toEncryption])
-        } else null
+        val keysetHandleFrom = fromEncryption?.let { keysetFactory.aead(it.aead) }
+        val keysetHandleTo = toEncryption?.let { keysetFactory.aead(it.aead) }
         fromKeysetHandleKeyId = keysetHandleFrom?.primary?.id ?: 0
         toKeysetHandleKeyId = keysetHandleTo?.primary?.id ?: 0
 
@@ -129,31 +119,17 @@ class TransformDatabaseWorker @AssistedInject constructor(
         val name = operateStringField(encryptName, isNameEncrypted, it.name)
         val thumbnail = operateStringField(encryptThumb, isThumbEncrypted, it.thumb)
         val path = operateStringField(encryptPath, isPathEncrypted, it.path)
-        val encryptionType = operateIntField(
-            associatedInt = it.id.toInt() * DatabaseColumns.EncryptionType.ordinal,
-            encrypt = encryptEncryptionType,
-            encrypted = isEncryptionTypeEncrypted,
-            value = it.encryptionType
-        )
-        val thumbEncryptionType = operateIntField(
-            associatedInt = it.id.toInt() * DatabaseColumns.ThumbEncryptionType.ordinal,
-            encrypt = encryptThumbEncryptionType,
-            encrypted = isThumbEncryptionTypeEncrypted,
-            value = it.thumbnailEncryptionType
-        )
         val details = operateStringField(encryptDetails, isFlagsEncrypted, it.flags)
         repository.updateDbEntry(
             id = it.id,
             name = name,
             thumb = thumbnail,
             path = path,
-            encryptionType = encryptionType,
-            thumbEncryptionType = thumbEncryptionType,
             flags = details
         )
     }
 
-    private fun operateStringField(
+    private suspend fun operateStringField(
         encrypt: Boolean,
         encrypted: Boolean,
         value: String,
@@ -166,32 +142,12 @@ class TransformDatabaseWorker @AssistedInject constructor(
         if (encrypted) decrypt(value) else value
     }
 
-    private fun operateIntField(
-        associatedInt: Int,
-        encrypt: Boolean,
-        encrypted: Boolean,
-        value: Int
-    ) = if (encrypt && toEncryption != -1) {
-        if (!encrypted || isEncryptionDifferent) {
-            val valueToEncrypt = if (fromEncryption == -1 || !encrypted) value
-            else repositoryEncryption.decryptIntField(fromKeysetHandleKeyId, associatedInt, value)
-            repositoryEncryption.encryptIntField(toKeysetHandleKeyId, associatedInt, valueToEncrypt)
-        } else value
-    } else {
-        if (encrypted) repositoryEncryption.decryptIntField(
-            fromKeysetHandleKeyId,
-            associatedInt,
-            value
-        )
-        else value
-    }
-
-    private fun encrypt(str: String) = if (str.isNotEmpty())
-        toPrimitive?.run { repositoryEncryption.encryptStringField(this, str) }
+    private suspend fun encrypt(str: String) = if (str.isNotEmpty())
+        toPrimitive?.run { repositoryEncryption.encrypt(str) }
             ?: str else str
 
     private fun decrypt(str: String) = if (str.isNotEmpty())
-        fromPrimitive?.run { repositoryEncryption.decryptStringField(this, str) }
+        fromPrimitive?.run { repositoryEncryption.decryptString(this, str) }
             ?: str else str
 
     override suspend fun getForegroundInfo(): ForegroundInfo {

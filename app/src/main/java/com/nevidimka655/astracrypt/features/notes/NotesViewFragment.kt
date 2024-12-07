@@ -73,7 +73,7 @@ class NotesViewFragment : Fragment() {
         setupMenu()
         /*requireMainActivity().fabLarge.setOnClickListener {
             lifecycleScope.launch {
-                notesManager.save(vm.encryptionInfo)
+                notesManager.save(vm.aeadInfo)
                 findNavController().popBackStack()
             }
         }*/

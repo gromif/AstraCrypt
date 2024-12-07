@@ -16,7 +16,7 @@ import androidx.work.workDataOf
 import com.nevidimka655.astracrypt.model.ExportUiState
 import com.nevidimka655.astracrypt.room.OpenTuple
 import com.nevidimka655.astracrypt.room.Repository
-import com.nevidimka655.astracrypt.utils.EncryptionManager
+import com.nevidimka655.astracrypt.utils.AeadManager
 import com.nevidimka655.astracrypt.utils.Io
 import com.nevidimka655.astracrypt.work.ExportFilesWorker
 import com.nevidimka655.crypto.tink.KeysetFactory
@@ -41,7 +41,7 @@ private typealias Args = ExportFilesWorker.Args
 
 @HiltViewModel
 class ExportScreenViewModel @Inject constructor(
-    private val encryptionManager: EncryptionManager,
+    private val aeadManager: AeadManager,
     private val repository: Repository,
     private val keysetFactory: KeysetFactory,
     val io: Io,
@@ -61,18 +61,18 @@ class ExportScreenViewModel @Inject constructor(
     }
 
     fun export(itemId: Long, output: String) = viewModelScope.launch {
-        val encryptionInfo = encryptionManager.getInfo()
-        val associatedData = if (encryptionInfo.isAssociatedDataEncrypted)
+        val aeadInfo = aeadManager.getInfo()
+        val associatedData = if (aeadInfo.isAssociatedDataEncrypted)
             keysetFactory.transformAssociatedDataToWorkInstance(
                 bytesIn = keysetFactory.associatedData,
                 encryptionMode = true,
                 authenticationTag = Args.TAG_ASSOCIATED_DATA_TRANSPORT
             ).toBase64()
         else null
-        val encryptionInfoJson = Json.encodeToString(encryptionInfo)
+        val aeadInfoJson = Json.encodeToString(aeadInfo)
         val data = workDataOf(
             Args.itemId to itemId,
-            Args.encryptionInfo to encryptionInfoJson,
+            Args.aeadInfo to aeadInfoJson,
             Args.uriDirOutput to output,
             Args.associatedData to associatedData
         )

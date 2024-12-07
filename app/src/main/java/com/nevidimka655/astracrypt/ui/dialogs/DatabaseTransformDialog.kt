@@ -6,23 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.activityViewModels
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.nevidimka655.astracrypt.MainVM
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.databinding.DialogTransformDbBinding
-import com.nevidimka655.astracrypt.work.utils.WorkerFactory
 
 class DatabaseTransformDialog : DialogFragment(R.layout.dialog_transform_db) {
-    private val vm by activityViewModels<MainVM>()
-
     private var binding: DialogTransformDbBinding? = null
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         isCancelable = false
         return MaterialAlertDialogBuilder(
-            requireActivity(),
-            com.google.android.material.R.style.ThemeOverlay_Material3_MaterialAlertDialog_Centered
+            requireActivity()
         )
             .setTitle(R.string.dialog_dbUpdate)
             .setIcon(R.drawable.ic_db_sync)

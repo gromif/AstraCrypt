@@ -6,7 +6,7 @@ import coil.ImageLoader
 import com.nevidimka655.astracrypt.model.CoilTinkModel
 import com.nevidimka655.astracrypt.room.Repository
 import com.nevidimka655.astracrypt.room.RepositoryEncryption
-import com.nevidimka655.astracrypt.utils.EncryptionManager
+import com.nevidimka655.astracrypt.utils.AeadManager
 import com.nevidimka655.astracrypt.utils.Io
 import com.nevidimka655.astracrypt.utils.datastore.SettingsDataStoreManager
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,7 +22,7 @@ class HomeViewModel @Inject constructor(
     val imageLoader: ImageLoader,
     repository: Repository,
     io: Io,
-    encryptionManager: EncryptionManager,
+    aeadManager: AeadManager,
 ) : ViewModel() {
 
     val coilAvatarModel = CoilTinkModel(absolutePath = io.getProfileIconFile().toString())
@@ -30,7 +30,7 @@ class HomeViewModel @Inject constructor(
     val profileInfoFlow get() = settingsDataStoreManager.profileInfoFlow
 
     val recentFilesStateFlow = repository.getRecentFilesFlow().map { list ->
-        if (encryptionManager.getInfo().db) try {
+        if (aeadManager.getInfo().db) try {
             list.map {
                 repositoryEncryption.decryptStorageItemListTuple(it)
             }

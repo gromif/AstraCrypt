@@ -17,7 +17,7 @@ import androidx.work.ForegroundInfo
 import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.model.EncryptionInfo
+import com.nevidimka655.astracrypt.model.AeadInfo
 import com.nevidimka655.astracrypt.room.ExportTuple
 import com.nevidimka655.astracrypt.room.Repository
 import com.nevidimka655.astracrypt.utils.Api
@@ -47,16 +47,16 @@ class ExportFilesWorker @AssistedInject constructor(
     object Args {
         const val uriDirOutput = "yellow"
         const val itemId = "green"
-        const val encryptionInfo = "blue"
+        const val aeadInfo = "blue"
         const val associatedData = "red"
         const val TAG_ASSOCIATED_DATA_TRANSPORT = "orange"
     }
 
     private val notificationId = 201
 
-    private val encryptionInfo: EncryptionInfo by lazy {
+    private val aeadInfo: AeadInfo by lazy {
         Json.decodeFromString(
-            inputData.getString(Args.encryptionInfo)!!
+            inputData.getString(Args.aeadInfo)!!
         )
     }
 
@@ -121,7 +121,7 @@ class ExportFilesWorker @AssistedInject constructor(
     }
 
     private fun shouldDecodeAssociatedData() {
-        if (encryptionInfo.isAssociatedDataEncrypted) {
+        if (aeadInfo.isAssociatedDataEncrypted) {
             val bytes = inputData.getString(Args.associatedData)!!.fromBase64()
             TinkConfig.initAead()
             val decodedData = keysetFactory.transformAssociatedDataToWorkInstance(

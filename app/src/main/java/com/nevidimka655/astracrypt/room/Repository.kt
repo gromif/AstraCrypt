@@ -6,7 +6,7 @@ import com.nevidimka655.astracrypt.room.daos.NotesDao
 import com.nevidimka655.astracrypt.room.daos.StorageItemDao
 import com.nevidimka655.astracrypt.room.entities.NoteItemEntity
 import com.nevidimka655.astracrypt.room.entities.StorageItemEntity
-import com.nevidimka655.astracrypt.utils.EncryptionManager
+import com.nevidimka655.astracrypt.utils.AeadManager
 import com.nevidimka655.astracrypt.utils.enums.DatabaseColumns
 import com.nevidimka655.astracrypt.utils.enums.StorageItemState
 import com.nevidimka655.astracrypt.utils.enums.StorageItemType
@@ -15,11 +15,11 @@ import kotlinx.coroutines.flow.debounce
 
 class Repository(
     private val repositoryEncryption: RepositoryEncryption,
-    private val encryptionManager: EncryptionManager,
+    private val aeadManager: AeadManager,
     private val storage: StorageItemDao,
     private val notes: NotesDao
 ) {
-    private suspend fun info() = encryptionManager.getInfo()
+    private suspend fun info() = aeadManager.getInfo()
 
     suspend fun insert(item: StorageItemEntity) = storage.insert(
         repositoryEncryption.encryptStorageItemEntity(item)
@@ -38,11 +38,9 @@ class Repository(
         name: String,
         thumb: String,
         path: String,
-        encryptionType: Int,
-        thumbEncryptionType: Int,
         flags: String
     ) = storage.updateDbEntry(
-        DatabaseTransformTuple(id, name, thumb, path, encryptionType, thumbEncryptionType, flags)
+        DatabaseTransformTuple(id, name, thumb, path, flags)
     )
 
     suspend fun updateTransformNotes(id: Long, name: String?, text: String?, textPreview: String?) =
@@ -102,15 +100,7 @@ class Repository(
             name = repositoryEncryption.decryptName(item.name),
             thumb = repositoryEncryption.decryptThumb(item.thumb),
             path = repositoryEncryption.decryptPath(item.path),
-            flags = repositoryEncryption.decryptFlags(item.flags),
-            encryptionType = repositoryEncryption.decryptEncryptionType(
-                itemId = item.id,
-                value = item.encryptionType
-            ),
-            thumbnailEncryptionType = repositoryEncryption.decryptThumbEncryptionType(
-                itemId = item.id,
-                value = item.thumbnailEncryptionType
-            )
+            flags = repositoryEncryption.decryptFlags(item.flags)
         ) else item
     }
 
@@ -123,10 +113,7 @@ class Repository(
         if (info().db) list.map {
             it.copy(
                 name = repositoryEncryption.decryptName(it.name),
-                path = repositoryEncryption.decryptPath(it.path),
-                encryptionType = repositoryEncryption.decryptEncryptionType(
-                    it.id, it.encryptionType
-                )
+                path = repositoryEncryption.decryptPath(it.path)
             )
         } else list
     }
@@ -135,10 +122,7 @@ class Repository(
         val item = storage.getDataToExport(itemId)
         if (info().db) item.copy(
             name = repositoryEncryption.decryptName(item.name),
-            path = repositoryEncryption.decryptPath(item.path),
-            encryptionType = repositoryEncryption.decryptEncryptionType(
-                item.id, item.encryptionType
-            )
+            path = repositoryEncryption.decryptPath(item.path)
         ) else item
     }
 
@@ -173,10 +157,6 @@ class Repository(
         val item = storage.getDataToOpen(id)
         if (info().db) item.copy(
             name = repositoryEncryption.decryptName(item.name),
-            encryptionType = repositoryEncryption.decryptEncryptionType(
-                itemId = id,
-                value = item.encryptionType
-            ),
             path = repositoryEncryption.decryptPath(item.path)
         ) else item
     }
@@ -229,7 +209,7 @@ class Repository(
         searchQuery: String? = null,
         dirIdsForSearch: ArrayList<Long>? = null
     ): PagingSource<Int, StorageItemListTuple> {
-        val info = encryptionManager.getCachedInfo()
+        val info = aeadManager.getCachedInfo()
         val isNameEncrypted = info?.run { db && name } == true
         return storage.listOrderDescAsc(
             parentDirId = if (dirIdsForSearch == null) parentDirectoryId else -1,

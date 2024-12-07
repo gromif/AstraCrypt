@@ -6,7 +6,7 @@ import com.nevidimka655.astracrypt.R
 class AuthFragment : Fragment(R.layout.fragment_auth) {
 
     /*private val vm by activityViewModels<MainVM>()
-    private val encryptionInfo get() = vm.encryptionManager.encryptionInfo
+    private val aeadInfo get() = vm.encryptionManager.aeadInfo
     private val authManager get() = vm.authManager
     private val info get() = authManager.info
 
@@ -20,10 +20,10 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
         }
         binding = FragmentAuthBinding.bind(view)
         setupBinding()
-        vm.loadProfileInfo(!encryptionInfo.isAssociatedDataEncrypted)
+        vm.loadProfileInfo(!aeadInfo.isAssociatedDataEncrypted)
         vm.profileInfoFlow.withViewLifecycle(viewLifecycleOwner) {
             binding?.run {
-                if (encryptionInfo.isAssociatedDataEncrypted) {
+                if (aeadInfo.isAssociatedDataEncrypted) {
                     avatar.setImageResource(AvatarIds.entries.random().resId)
                 } else {
                     if (it.defaultAvatar != null) {
@@ -55,7 +55,7 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
                 val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE)
                         as InputMethodManager
                 imm.hideSoftInputFromWindow(requireActivity().window.decorView.windowToken, 0)
-                if (encryptionInfo.isAssociatedDataEncrypted) {
+                if (aeadInfo.isAssociatedDataEncrypted) {
                     KeysetFactory.initEncryptedAssociatedData(password)
                 }
                 navigateToMainMenu()

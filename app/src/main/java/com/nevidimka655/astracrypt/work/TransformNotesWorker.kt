@@ -14,13 +14,12 @@ import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
 import com.google.crypto.tink.Aead
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.model.EncryptionInfo
+import com.nevidimka655.astracrypt.model.AeadInfo
 import com.nevidimka655.astracrypt.room.Repository
 import com.nevidimka655.astracrypt.room.RepositoryEncryption
 import com.nevidimka655.astracrypt.utils.Api
 import com.nevidimka655.crypto.tink.KeysetFactory
 import com.nevidimka655.crypto.tink.KeysetGroupId
-import com.nevidimka655.crypto.tink.KeysetTemplates
 import com.nevidimka655.crypto.tink.TinkConfig
 import com.nevidimka655.crypto.tink.extensions.aeadPrimitive
 import com.nevidimka655.crypto.tink.extensions.fromBase64
@@ -51,14 +50,14 @@ class TransformNotesWorker @AssistedInject constructor(
     private var toPrimitive: Aead? = null
     private val isEncryptionDifferent by lazy { fromEncryption != toEncryption }
 
-    private val oldEncryptionInfo by lazy {
-        Json.decodeFromString<EncryptionInfo>(inputData.getString(Args.oldEncryptionInfo)!!)
+    private val oldAeadInfo by lazy {
+        Json.decodeFromString<AeadInfo>(inputData.getString(Args.oldEncryptionInfo)!!)
     }
-    private val newEncryptionInfo by lazy {
-        Json.decodeFromString<EncryptionInfo>(inputData.getString(Args.newEncryptionInfo)!!)
+    private val newAeadInfo by lazy {
+        Json.decodeFromString<AeadInfo>(inputData.getString(Args.newEncryptionInfo)!!)
     }
-    private val fromEncryption get() = oldEncryptionInfo.notesEncryptionOrdinal
-    private val toEncryption get() = newEncryptionInfo.notesEncryptionOrdinal
+    private val fromEncryption get() = oldAeadInfo.aeadNotes
+    private val toEncryption get() = newAeadInfo.aeadNotes
     private var notificationId = 3
 
     override suspend fun doWork() = withContext(Dispatchers.IO) {
@@ -87,7 +86,7 @@ class TransformNotesWorker @AssistedInject constructor(
     }
 
     private fun shouldDecodeAssociatedData() {
-        if (newEncryptionInfo.isAssociatedDataEncrypted) {
+        if (newAeadInfo.isAssociatedDataEncrypted) {
             val bytes = inputData.getString(Args.associatedData)!!.fromBase64()
             val decodedData = keysetFactory.transformAssociatedDataToWorkInstance(
                 bytesIn = bytes,
@@ -100,19 +99,17 @@ class TransformNotesWorker @AssistedInject constructor(
 
     private fun initEncryption() {
         TinkConfig.initAead()
-        val keysetHandleFrom = if (fromEncryption > -1) keysetFactory.aead(
-            aead = KeysetTemplates.AEAD.entries[fromEncryption],
-            keysetGroupId = KeysetGroupId.AEAD_NOTES
-        ) else null
-        val keysetHandleTo = if (toEncryption > -1) keysetFactory.aead(
-            aead = KeysetTemplates.AEAD.entries[toEncryption],
-            keysetGroupId = KeysetGroupId.AEAD_NOTES
-        ) else null
+        val keysetHandleFrom = fromEncryption?.let {
+            keysetFactory.aead(it, KeysetGroupId.AEAD_NOTES)
+        }
+        val keysetHandleTo = toEncryption?.let {
+            keysetFactory.aead(it, KeysetGroupId.AEAD_NOTES)
+        }
         fromPrimitive = keysetHandleFrom?.aeadPrimitive()
         toPrimitive = keysetHandleTo?.aeadPrimitive()
     }
 
-    private fun doString(encrypt: Boolean, encrypted: Boolean, value: String?) = value?.run {
+    private suspend fun doString(encrypt: Boolean, encrypted: Boolean, value: String?) = value?.run {
         if (encrypt) {
             if (!encrypted || isEncryptionDifferent) {
                 val nameToEncrypt = if (encrypted) decrypt(this) else this
@@ -123,12 +120,12 @@ class TransformNotesWorker @AssistedInject constructor(
         }
     } ?: value
 
-    private fun encrypt(str: String) = if (str.isNotEmpty())
-        toPrimitive?.run { repositoryEncryption.encryptStringField(this, str) }
+    private suspend fun encrypt(str: String) = if (str.isNotEmpty())
+        toPrimitive?.run { repositoryEncryption.encrypt(str) }
             ?: str else str
 
     private fun decrypt(str: String) = if (str.isNotEmpty())
-        fromPrimitive?.run { repositoryEncryption.decryptStringField(this, str) }
+        fromPrimitive?.run { repositoryEncryption.decryptString(this, str) }
             ?: str else str
 
     override suspend fun getForegroundInfo(): ForegroundInfo {

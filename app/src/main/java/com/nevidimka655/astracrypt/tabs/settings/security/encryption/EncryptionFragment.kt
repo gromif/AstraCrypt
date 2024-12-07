@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 class EncryptionFragment : Fragment() {
    /* private val vm by activityViewModels<MainVM>()
     private val encryptionManager get() = vm.encryptionManager
-    private val encryptionInfoNew get() = encryptionManager.encryptionInfo
+    private val aeadInfoNew get() = encryptionManager.aeadInfo
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         requireMenuHost().addMenuProvider(object : MenuProvider {
@@ -69,10 +69,10 @@ class EncryptionFragment : Fragment() {
                 addNoEncryptionOption(it)
             }
         }
-        val encryptionInfo = encryptionManager.encryptionInfo
+        val aeadInfo = encryptionManager.aeadInfo
         PreferencesScreen {
             PreferencesGroup(text = stringResource(id = R.string.files)) {
-                val filesEncryption = remember(encryptionInfo) {
+                val filesEncryption = remember(aeadInfo) {
                     encryptionManager.getFileEncryptionName()
                         ?: getString(R.string.withoutEncryption)
                 }
@@ -80,7 +80,7 @@ class EncryptionFragment : Fragment() {
                     onSelected = { onFilesEncryptionSelected(which = it) },
                     title = stringResource(id = R.string.files),
                     items = itemsMajor,
-                    selectedItemIndex = with(encryptionInfo.fileEncryptionOrdinal) {
+                    selectedItemIndex = with(aeadInfo.fileEncryptionOrdinal) {
                         if (this != -1) this + 1 else 0
                     }
                 )
@@ -88,7 +88,7 @@ class EncryptionFragment : Fragment() {
                     onSelected = { onThumbEncryptionSelected(which = it) },
                     title = stringResource(id = R.string.thumbnail),
                     items = itemsMinor,
-                    selectedItemIndex = with(encryptionInfo.thumbEncryptionOrdinal) {
+                    selectedItemIndex = with(aeadInfo.thumbEncryptionOrdinal) {
                         if (this != -1) this - 3 else 0
                     }
                 )
@@ -98,7 +98,7 @@ class EncryptionFragment : Fragment() {
                 ) {
                     dialogFilesState = true
                 }
-                val thumbEncryption = remember(encryptionInfo) {
+                val thumbEncryption = remember(aeadInfo) {
                     encryptionManager.getThumbEncryptionName()
                         ?: getString(R.string.withoutEncryption)
                 }
@@ -110,7 +110,7 @@ class EncryptionFragment : Fragment() {
                 }
             }
             PreferencesGroup(text = stringResource(id = R.string.settings_database)) {
-                val dbEncryption = remember(encryptionInfo) {
+                val dbEncryption = remember(aeadInfo) {
                     encryptionManager.getDbEncryptionName() ?: getString(R.string.withoutEncryption)
                 }
                 var selectedDbEncryptionToConfirm by rememberSaveable { mutableIntStateOf(-1) }
@@ -153,7 +153,7 @@ class EncryptionFragment : Fragment() {
                     title = stringResource(id = R.string.notes),
                     items = itemsAead,
                     selectedItemIndex = run {
-                        val keysetType = encryptionInfoNew.notesEncryptionOrdinal
+                        val keysetType = aeadInfoNew.notesEncryptionOrdinal
                         if (keysetType != -1) keysetType + 1 else 0
                     }
                 )
@@ -163,9 +163,9 @@ class EncryptionFragment : Fragment() {
                 ) {
                     dialogDatabaseState = true
                 }
-                val columnsEncrypted = remember(encryptionInfo) {
+                val columnsEncrypted = remember(aeadInfo) {
                     val prefixText = getString(R.string.settings_columns_summary)
-                    val suffix = with(encryptionInfo) {
+                    val suffix = with(aeadInfo) {
                         val str = StringBuilder()
                         fun append(value: String) = str.append("$value, ")
                         if (isNameEncrypted) append(getString(R.string.name))
@@ -184,7 +184,7 @@ class EncryptionFragment : Fragment() {
                 ) {
                     findNavController().navigate(R.id.action_encryptionFragment_to_databaseColumnsFragment)
                 }
-                val notesEncryption = remember(encryptionInfo) {
+                val notesEncryption = remember(aeadInfo) {
                     encryptionManager.getNotesEncryptionName()
                         ?: getString(R.string.withoutEncryption)
                 }
@@ -196,7 +196,7 @@ class EncryptionFragment : Fragment() {
                 }
             }
             PreferencesGroup(text = stringResource(id = R.string.settings)) {
-                var settingsEncryption by remember(encryptionInfo) {
+                var settingsEncryption by remember(aeadInfo) {
                     //mutableIntStateOf(masterSettings.getInt(PrefsKeys.ENCRYPTION_SETTINGS, -1))
                     mutableIntStateOf(-1)
                 }
@@ -236,8 +236,8 @@ class EncryptionFragment : Fragment() {
                     }*//*
                     streamingType.ordinal
                 } else -1
-                encryptionInfo =
-                    encryptionInfoNew.copy(fileEncryptionOrdinal = fileEncryptionOrdinal)
+                aeadInfo =
+                    aeadInfoNew.copy(fileEncryptionOrdinal = fileEncryptionOrdinal)
                 save()
             }
         }
@@ -245,11 +245,11 @@ class EncryptionFragment : Fragment() {
 
     private suspend fun onNotesDatabaseEncryptionSelected(which: Int) {
         val notesEncryptionOrdinal = if (which == 0) -1 else which - 1
-        val oldEncryptionInfo = encryptionInfoNew.copy()
+        val oldEncryptionInfo = aeadInfoNew.copy()
         if (oldEncryptionInfo.notesEncryptionOrdinal != notesEncryptionOrdinal) {
             val newEncryptionInfo = oldEncryptionInfo
                 .copy(notesEncryptionOrdinal = notesEncryptionOrdinal)
-            encryptionManager.encryptionInfo = newEncryptionInfo
+            encryptionManager.aeadInfo = newEncryptionInfo
             *//*WorkerFactory.startTransformNotes(
                 oldInfo = oldEncryptionInfo,
                 newInfo = newEncryptionInfo
@@ -270,7 +270,7 @@ class EncryptionFragment : Fragment() {
 //                    }
                     streamingType.ordinal
                 } else -1
-                encryptionInfo = encryptionInfoNew
+                aeadInfo = aeadInfoNew
                     .copy(thumbEncryptionOrdinal = thumbEncryptionOrdinal)
                 vm.saveProfileInfo(
                     profileInfo = vm.profileInfoFlow.value,
@@ -298,11 +298,11 @@ class EncryptionFragment : Fragment() {
         val databaseEncryptionOrdinal = if (which > 0) {
             KeysetTemplates.AEAD.entries[which - 1].ordinal
         } else -1
-        val oldEncryptionInfo = encryptionInfoNew.copy()
+        val oldEncryptionInfo = aeadInfoNew.copy()
         val newEncryptionInfo = oldEncryptionInfo
             .copy(databaseEncryptionOrdinal = databaseEncryptionOrdinal)
-        encryptionManager.encryptionInfo = newEncryptionInfo
-        with(encryptionManager.encryptionInfo) {
+        encryptionManager.aeadInfo = newEncryptionInfo
+        with(encryptionManager.aeadInfo) {
             if (isEncryptionTypeEncrypted || isNameEncrypted ||
                 isFlagsEncrypted || isPathEncrypted ||
                 isThumbEncryptionTypeEncrypted || isThumbnailEncrypted
