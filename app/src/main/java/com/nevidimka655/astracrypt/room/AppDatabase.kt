@@ -1,6 +1,5 @@
 package com.nevidimka655.astracrypt.room
 
-import androidx.room.AutoMigration
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
@@ -20,10 +19,7 @@ import com.nevidimka655.astracrypt.room.entities.StorageItemEntity
         StorageItemEntity::class,
         NoteItemEntity::class
     ],
-    autoMigrations = [
-        AutoMigration(from = 1, to = 2)
-    ],
-    version = 2
+    version = 1
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun getStorageItemDao(): StorageItemDao
