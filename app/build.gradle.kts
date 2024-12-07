@@ -136,7 +136,6 @@ dependencies {
     implementation(libs.media.exifinterface)
 
     // Google
-    //implementation(libs.google.android.material)
     implementation(libs.google.crypto.tink)
 
     // DI - Hilt
