@@ -1,9 +1,9 @@
 package com.nevidimka655.astracrypt.features.auth
 
 import com.google.crypto.tink.subtle.AesGcmJce
-import com.nevidimka655.astracrypt.utils.AppConfig
-import com.nevidimka655.astracrypt.utils.datastore.DefaultDataStoreManager
-import com.nevidimka655.astracrypt.utils.datastore.SettingsDataStoreManager
+import com.nevidimka655.astracrypt.app.config.AppConfig
+import com.nevidimka655.astracrypt.data.datastore.DefaultDataStoreManager
+import com.nevidimka655.astracrypt.data.datastore.SettingsDataStoreManager
 import com.nevidimka655.crypto.tink.HashStringGenerator
 import com.nevidimka655.crypto.tink.extensions.fromBase64
 import com.nevidimka655.crypto.tink.extensions.sha384

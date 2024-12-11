@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.work.WorkInfo
-import com.nevidimka655.astracrypt.MainVM
+import com.nevidimka655.astracrypt.view.ui.MainVM
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.databinding.FragmentLabFilesBinding
 import kotlinx.coroutines.Dispatchers

@@ -1,7 +1,7 @@
 package com.nevidimka655.astracrypt.features.calculator
 
 import com.nevidimka655.compose_calculator.CalculatorManager
-import com.nevidimka655.astracrypt.tabs.settings.security.authentication.Camouflage
+import com.nevidimka655.astracrypt.view.ui.settings.security.authentication.Camouflage
 import kotlinx.coroutines.channels.Channel
 
 class CalculatorManagerWrap : CalculatorManager() {

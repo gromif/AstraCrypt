@@ -4,12 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Description
-import androidx.compose.material.icons.filled.Edit
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.core.os.bundleOf
@@ -17,13 +12,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
-import androidx.paging.compose.collectAsLazyPagingItems
-import com.nevidimka655.astracrypt.MainVM
+import com.nevidimka655.astracrypt.view.ui.MainVM
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.ui.shared.NoItemsPage
-import com.nevidimka655.astracrypt.ui.theme.AstraCryptTheme
+import com.nevidimka655.astracrypt.app.theme.AstraCryptTheme
 import com.nevidimka655.notes.Notes
 import com.nevidimka655.notes.ui.List
 import com.nevidimka655.notes.ui.Note
@@ -41,7 +33,7 @@ class NotesFragment : Fragment() {
         setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
         setContent {
             AstraCryptTheme {
-                val noteItems = vm.notesPagingFlow.collectAsLazyPagingItems()
+                /*val noteItems = vm.notesPagingFlow.collectAsLazyPagingItems()
                 val isEmptyPageVisible = remember {
                     derivedStateOf {
                         noteItems.itemCount == 0 && noteItems.loadState.refresh !is LoadState.Loading
@@ -50,7 +42,7 @@ class NotesFragment : Fragment() {
                 if (!isEmptyPageVisible.value) NotesScreen(noteItems = noteItems) else NoItemsPage(
                     mainIcon = Icons.Filled.Description,
                     actionIcon = Icons.Filled.Edit
-                )
+                )*/
             }
         }
     }

@@ -35,7 +35,7 @@ import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.ui.theme.AstraCryptTheme
+import com.nevidimka655.astracrypt.app.theme.AstraCryptTheme
 import com.nevidimka655.ui.compose_core.theme.spaces
 
 class LabFragment : Fragment() {

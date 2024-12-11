@@ -1,7 +1,7 @@
 package com.nevidimka655.astracrypt.features.auth
 
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.tabs.settings.security.authentication.Camouflage
+import com.nevidimka655.astracrypt.view.ui.settings.security.authentication.Camouflage
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

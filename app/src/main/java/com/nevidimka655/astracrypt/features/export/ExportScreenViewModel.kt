@@ -13,15 +13,13 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.OutOfQuotaPolicy
 import androidx.work.WorkManager
 import androidx.work.workDataOf
-import com.nevidimka655.astracrypt.model.ExportUiState
-import com.nevidimka655.astracrypt.room.OpenTuple
-import com.nevidimka655.astracrypt.room.Repository
-import com.nevidimka655.astracrypt.utils.AeadManager
-import com.nevidimka655.astracrypt.utils.Io
-import com.nevidimka655.astracrypt.work.ExportFilesWorker
+import com.nevidimka655.astracrypt.domain.repository.Repository
+import com.nevidimka655.astracrypt.data.model.ExportUiState
+import com.nevidimka655.astracrypt.domain.room.OpenTuple
+import com.nevidimka655.astracrypt.app.utils.AeadManager
+import com.nevidimka655.astracrypt.app.utils.Io
+import com.nevidimka655.astracrypt.app.work.ExportFilesWorker
 import com.nevidimka655.crypto.tink.KeysetFactory
-import com.nevidimka655.crypto.tink.KeysetTemplates
-import com.nevidimka655.crypto.tink.extensions.streamingAeadPrimitive
 import com.nevidimka655.crypto.tink.extensions.toBase64
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -93,12 +91,13 @@ class ExportScreenViewModel @Inject constructor(
         uiState = uiState.copy(name = exportTuple.name)
         val outStream = contentResolver.openOutputStream(outputUri)
         val inStream = io.getLocalFile(exportTuple.path).run {
-            if (exportTuple.encryptionType == -1) inputStream()
+            inputStream()
+            /*if (exportTuple.encryptionType == -1) inputStream()
             else {
                 val aeadTemplate = KeysetTemplates.Stream.entries[exportTuple.encryptionType]
                 keysetFactory.stream(aeadTemplate).streamingAeadPrimitive()
                     .newDecryptingStream(inputStream(), keysetFactory.associatedData)
-            }
+            }*/
         }
         inStream.use { ins ->
             outStream?.use { ous ->

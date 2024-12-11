@@ -4,13 +4,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.text.input.TextFieldValue
-import com.nevidimka655.astracrypt.room.Repository
-import com.nevidimka655.astracrypt.room.entities.NoteItemEntity
+import com.nevidimka655.astracrypt.data.repository.PlainRepository
+import com.nevidimka655.astracrypt.domain.room.entities.NoteItemEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class NotesManager(
-    private val repository: Repository
+    private val repository: PlainRepository
 ) {
     var titleState by mutableStateOf(TextFieldValue(""))
     var textState by mutableStateOf(TextFieldValue(""))
@@ -22,9 +22,9 @@ class NotesManager(
         title: String?
     ) = withContext(Dispatchers.IO) {
         this@NotesManager.noteId = noteId
-        val text = repository.getNoteTextById(noteId)
+        /*val text = repository.getNoteTextById(noteId)
         titleState = TextFieldValue(title ?: "")
-        textState = TextFieldValue(text ?: "")
+        textState = TextFieldValue(text ?: "")*/
     }
 
     suspend fun save() = withContext(Dispatchers.IO) {
@@ -39,14 +39,14 @@ class NotesManager(
             textPreview = textPreview,
             creationTime = System.currentTimeMillis()
         )
-        repository.run {
+        /*repository.run {
             if (noteId == 0L) insertNote(noteItemEntity)
             else updateNote(noteItemEntity)
-        }
+        }*/
         reset()
     }
 
-    suspend fun delete(id: Long) = withContext(Dispatchers.IO) { repository.deleteNoteById(id) }
+    suspend fun delete(id: Long) = withContext(Dispatchers.IO) { /*repository.deleteNoteById(id)*/ }
 
     fun reset() {
         noteId = 0L

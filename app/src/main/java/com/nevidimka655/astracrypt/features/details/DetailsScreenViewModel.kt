@@ -5,24 +5,21 @@ import android.text.format.DateFormat
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.InsertDriveFile
 import androidx.compose.material.icons.outlined.AccessTime
-import androidx.compose.material.icons.outlined.ChangeCircle
 import androidx.compose.material.icons.outlined.Folder
 import androidx.compose.material.icons.outlined.FolderOpen
 import androidx.compose.material.icons.outlined.Headphones
-import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material.icons.outlined.PhotoSizeSelectLarge
 import androidx.compose.material.icons.outlined.SdCard
-import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModel
 import coil.ImageLoader
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.model.StorageItemFlags
-import com.nevidimka655.astracrypt.room.Repository
-import com.nevidimka655.astracrypt.utils.Io
+import com.nevidimka655.astracrypt.domain.repository.Repository
+import com.nevidimka655.astracrypt.data.model.StorageItemFlags
+import com.nevidimka655.astracrypt.app.utils.Io
+import com.nevidimka655.astracrypt.data.room.StorageItemType
 import com.nevidimka655.compose_details.DetailsManager
 import com.nevidimka655.compose_details.addItem
 import com.nevidimka655.compose_details.entities.DetailsItem
-import com.nevidimka655.crypto.tink.KeysetTemplates
 import com.nevidimka655.ui.compose_core.wrappers.IconWrap
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -36,19 +33,19 @@ class DetailsScreenViewModel @Inject constructor(
     val detailsManager: DetailsManager,
     val imageLoader: ImageLoader
 ): ViewModel() {
+    var preview: String? = ""
+    var type: StorageItemType = StorageItemType.Other
 
     suspend fun submitDetailsQuery(context: Context, itemId: Long) = detailsManager.run {
         val item = repository.getById(itemId)
         val absolutePath = repository.getAbsolutePath(
             childName = item.name,
-            parentDirId = item.parentDirectoryId
+            parentId = item.parentDirectoryId
         )
         val isFile = item.itemType.isFile
+        type = item.itemType
+        preview = item.preview
         title = item.name
-        extras = bundleOf(
-            "isFile" to isFile,
-            "thumb" to item.thumb
-        )
 
         addGroup(name = TextWrap.Resource(id = R.string.files_options_details)) {
             addItem(
@@ -80,14 +77,14 @@ class DetailsScreenViewModel @Inject constructor(
                 title = TextWrap.Resource(id = R.string.creationTime),
                 summary = TextWrap.Text(text = creationTime)
             )
-            if (item.modificationTime.toInt() != 0) {
+            /*if (item.modificationTime.toInt() != 0) {
                 val modificationTime = DateFormat.format(pattern, item.modificationTime).toString()
                 addItem(
                     icon = IconWrap(imageVector = Icons.Outlined.ChangeCircle),
                     title = TextWrap.Resource(id = R.string.modificationTime),
                     summary = TextWrap.Text(text = modificationTime)
                 )
-            }
+            }*/
         }
         if (isFile) {
             if (item.flags.isNotEmpty()) {
@@ -101,7 +98,7 @@ class DetailsScreenViewModel @Inject constructor(
                 }
             }
             addGroup(name = TextWrap.Resource(id = R.string.settings_encryption)) {
-                addItem(
+                /*addItem(
                     icon = IconWrap(imageVector = Icons.Outlined.Lock),
                     title = TextWrap.Resource(id = R.string.encryption_type),
                     summary = if (item.encryptionType == -1) {
@@ -114,7 +111,7 @@ class DetailsScreenViewModel @Inject constructor(
                     summary = if (item.thumbnailEncryptionType == -1) {
                         TextWrap.Resource(id = R.string.withoutEncryption)
                     } else TextWrap.Text(text = KeysetTemplates.Stream.entries[item.thumbnailEncryptionType].name)
-                )
+                )*/
             }
         } else {
             val content = repository.getFolderContent(item.id)
@@ -135,21 +132,21 @@ class DetailsScreenViewModel @Inject constructor(
                 title = TextWrap.Resource(id = R.string.path),
                 summary = TextWrap.Text(text = item.path)
             )
-            val originalSizeBytes = item.originalSizeInBytes
+            val originalSizeBytes = item.size
             val originalSize = io.bytesToHumanReadable(originalSizeBytes)
             addItem(
                 icon = IconWrap(imageVector = Icons.Outlined.SdCard),
                 title = TextWrap.Resource(id = R.string.originalSize),
                 summary = TextWrap.Text(text = "$originalSize ($originalSizeBytes B)")
             )
-            if (item.thumb.isNotEmpty()) {
-                val thumbnailFile = io.getLocalFile(item.thumb)
+            if (item.preview != null) {
+                val thumbnailFile = io.getLocalFile(item.preview)
                 val thumbnailSizeBytes = thumbnailFile.length()
                 val thumbnailSize = io.bytesToHumanReadable(thumbnailSizeBytes)
                 addItem(
                     icon = IconWrap(imageVector = Icons.Outlined.FolderOpen),
                     title = TextWrap.Resource(id = R.string.thumbnailPath),
-                    summary = TextWrap.Text(text = item.thumb)
+                    summary = TextWrap.Text(text = item.preview)
                 )
                 addItem(
                     icon = IconWrap(imageVector = Icons.Outlined.SdCard),

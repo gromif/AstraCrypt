@@ -21,7 +21,7 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.nevidimka655.astracrypt.features.profile.Avatars
 import com.nevidimka655.astracrypt.features.profile.Avatars.Companion.painter
-import com.nevidimka655.astracrypt.model.CoilTinkModel
+import com.nevidimka655.astracrypt.data.model.CoilTinkModel
 
 @Composable
 fun ProfileIcon(

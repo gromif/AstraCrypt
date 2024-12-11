@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
-        android:name=".ApplicationBootloader"
+        android:name=".app.ApplicationBootloader"
         android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:enableOnBackInvokedCallback="true"
@@ -18,7 +18,7 @@
         android:theme="@style/Theme.AstraCrypt"
         tools:targetApi="tiramisu">
         <activity
-            android:name=".MainActivity"
+            android:name=".view.ui.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.AstraCrypt">
             <intent-filter>
@@ -35,7 +35,7 @@
             android:icon="@mipmap/ic_launcher_calculator"
             android:label="@string/settings_camouflageType_calculator"
             android:roundIcon="@mipmap/ic_launcher_calculator_round"
-            android:targetActivity=".MainActivity">
+            android:targetActivity=".view.ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -44,7 +44,7 @@
         </activity-alias>
 
         <receiver
-            android:name=".utils.receivers.DeviceAdminImpl"
+            android:name=".app.utils.receivers.DeviceAdminImpl"
             android:description="@string/settings_deviceAdminRights_device_summary"
             android:exported="false"
             android:label="@string/app_name"
@@ -63,11 +63,11 @@
             android:foregroundServiceType="dataSync" />
 
         <service
-            android:name=".work.ImportFilesWorker"
+            android:name=".app.work.ImportFilesWorker"
             android:foregroundServiceType="dataSync" />
 
         <service
-            android:name=".tabs.settings.security.quick_actions.tiles.QuickDataDeletion"
+            android:name=".view.ui.settings.security.quick_actions.tiles.QuickDataDeletion"
             android:enabled="false"
             android:exported="true"
             android:icon="@drawable/ic_notification_app_icon"
@@ -85,7 +85,7 @@
             tools:node="remove" />
 
         <provider
-            android:name=".utils.AppFileProvider"
+            android:name=".app.utils.AppFileProvider"
             android:authorities="com.nevidimka655.astracrypt"
             android:exported="false"
             android:grantUriPermissions="true">

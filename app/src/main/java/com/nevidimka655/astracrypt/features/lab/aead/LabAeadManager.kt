@@ -10,7 +10,6 @@ import com.google.crypto.tink.KeyTemplates
 import com.google.crypto.tink.KeysetHandle
 import com.google.crypto.tink.subtle.AesEaxJce
 import com.google.crypto.tink.subtle.AesGcmJce
-import com.nevidimka655.astracrypt.R
 import com.nevidimka655.crypto.tink.Hex2
 import com.nevidimka655.crypto.tink.KeysetTemplates
 import com.nevidimka655.crypto.tink.extensions.aeadPrimitive
@@ -18,7 +17,6 @@ import com.nevidimka655.crypto.tink.extensions.fromBase64
 import com.nevidimka655.crypto.tink.extensions.sha384
 import com.nevidimka655.crypto.tink.extensions.toBase64
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -28,9 +26,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import java.io.ByteArrayOutputStream
 
-class LabAeadManager(
-    private val snackbarChannelMutable: Channel<Int>
-) {
+class LabAeadManager {
     private var keysetPassword = ""
     private var keysetPasswordSha384 = byteArrayOf()
     private var keysetAltPasswordSha384 = byteArrayOf()
@@ -133,7 +129,7 @@ class LabAeadManager(
             ).decodeToString()
         }
     } catch (e: Exception) {
-        snackbarChannelMutable.send(R.string.error)
+        //snackbarChannelMutable.send(R.string.error) TODO: Snackbar
         null
     }
 
@@ -148,7 +144,7 @@ class LabAeadManager(
             ).toBase64()
         }
     } catch (e: Exception) {
-        snackbarChannelMutable.send(R.string.error)
+        //snackbarChannelMutable.send(R.string.error) TODO: Snackbar
         null
     }
 
