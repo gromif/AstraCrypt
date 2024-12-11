@@ -26,25 +26,7 @@ class SecurityFragment : Fragment() {
         setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
         setContent {
             AstraCryptTheme {
-                val isQuickActionsSupported = remember { AppComponentManager.isActionsSupported }
-                PreferencesScreen {
-                    PreferencesGroup {
-                        Preference(titleText = stringResource(id = R.string.settings_encryption)) {
-                            findNavController().navigate(R.id.action_securityFragment_to_encryptionFragment)
-                        }
-                        Preference(titleText = stringResource(id = R.string.settings_authentication)) {
-                            findNavController().navigate(R.id.action_securityFragment_to_authenticationFragment)
-                        }
-                        Preference(titleText = stringResource(id = R.string.settings_deviceAdminRights)) {
-                            findNavController().navigate(R.id.action_securityFragment_to_deviceAdminRightsFragment)
-                        }
-                        if (isQuickActionsSupported) Preference(
-                            titleText = stringResource(id = R.string.settings_quickActions)
-                        ) {
-                            findNavController().navigate(R.id.action_securityFragment_to_quickActionsFragment)
-                        }
-                    }
-                }
+
             }
         }
     }

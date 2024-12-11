@@ -10,9 +10,10 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.nevidimka655.astracrypt.view.ui.MainVM
 import com.nevidimka655.astracrypt.features.profile.ProfileInfo
 import com.nevidimka655.astracrypt.view.UiState
+import com.nevidimka655.astracrypt.view.ViewMode
+import com.nevidimka655.astracrypt.view.ui.MainVM
 import com.nevidimka655.astracrypt.view.ui.navigation.BottomBarItems
 import com.nevidimka655.astracrypt.view.ui.navigation.Route
 import com.nevidimka655.astracrypt.view.ui.tabs.files.FilesScreen
@@ -20,7 +21,6 @@ import com.nevidimka655.astracrypt.view.ui.tabs.files.FilesViewModel
 import com.nevidimka655.astracrypt.view.ui.tabs.home.HomeScreen
 import com.nevidimka655.astracrypt.view.ui.tabs.home.HomeViewModel
 import com.nevidimka655.astracrypt.view.ui.tabs.settings.SettingsScreen
-import com.nevidimka655.astracrypt.view.ViewMode
 import kotlinx.coroutines.channels.Channel
 
 inline fun NavGraphBuilder.tabs(
@@ -98,6 +98,7 @@ inline fun NavGraphBuilder.tabs(
         SettingsScreen(
             navigateToEditProfile = { navController.navigate(Route.EditProfile) },
             navigateToUi = { navController.navigate(Route.SettingsUi) },
+            navigateToSecurity = { navController.navigate(Route.SettingsSecurity) },
             navigateToAbout = { navController.navigate(Route.AboutGraph) }
         )
     }

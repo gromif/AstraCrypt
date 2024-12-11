@@ -107,6 +107,17 @@ object Route {
     }
 
     @Serializable
+    object SettingsSecurity {
+        object Ui {
+            val state = UiState(
+                toolbar = UiState.Toolbar(
+                    title = TextWrap.Resource(id = R.string.settings_security)
+                )
+            )
+        }
+    }
+
+    @Serializable
     object AboutGraph {
 
         @Serializable
