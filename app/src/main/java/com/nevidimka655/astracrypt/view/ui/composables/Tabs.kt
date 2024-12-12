@@ -10,7 +10,10 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.features.profile.ProfileInfo
+import com.nevidimka655.astracrypt.view.Actions
+import com.nevidimka655.astracrypt.view.FabIcons
 import com.nevidimka655.astracrypt.view.UiState
 import com.nevidimka655.astracrypt.view.ViewMode
 import com.nevidimka655.astracrypt.view.ui.MainVM
@@ -21,6 +24,7 @@ import com.nevidimka655.astracrypt.view.ui.tabs.files.FilesViewModel
 import com.nevidimka655.astracrypt.view.ui.tabs.home.HomeScreen
 import com.nevidimka655.astracrypt.view.ui.tabs.home.HomeViewModel
 import com.nevidimka655.astracrypt.view.ui.tabs.settings.SettingsScreen
+import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 import kotlinx.coroutines.channels.Channel
 
 inline fun NavGraphBuilder.tabs(
@@ -30,7 +34,7 @@ inline fun NavGraphBuilder.tabs(
     onFabClick: Channel<Any>
 ) {
     composable<Route.Tabs.Home> {
-        onUiStateChange(Route.Tabs.Home.Ui.state)
+        onUiStateChange(HomeUiState)
         val homeVm: HomeViewModel = hiltViewModel()
         val profileInfo by homeVm.profileInfoFlow.collectAsStateWithLifecycle(
             initialValue = ProfileInfo()
@@ -58,7 +62,7 @@ inline fun NavGraphBuilder.tabs(
     composable<Route.Tabs.Files> {
         val files: Route.Tabs.Files = it.toRoute()
         onUiStateChange(
-            if (files.isStarred) Route.Tabs.Files.Ui.starred else Route.Tabs.Files.Ui.files
+            if (files.isStarred) StarredUiState else FilesUiState
         )
         vm.isStarredScreen = files.isStarred
 
@@ -94,7 +98,7 @@ inline fun NavGraphBuilder.tabs(
         ) { }
     }
     composable<Route.Tabs.Settings> {
-        onUiStateChange(Route.Tabs.Settings.Ui.state)
+        onUiStateChange(SettingsUiState)
         SettingsScreen(
             navigateToEditProfile = { navController.navigate(Route.EditProfile) },
             navigateToUi = { navController.navigate(Route.SettingsUi) },
@@ -103,3 +107,31 @@ inline fun NavGraphBuilder.tabs(
         )
     }
 }
+
+val HomeUiState = UiState(
+    toolbar = UiState.Toolbar(actions = Actions.Home),
+    bottomBarTab = BottomBarItems.Home
+)
+
+val FilesUiState = UiState(
+    toolbar = UiState.Toolbar(
+        title = TextWrap.Resource(id = R.string.files)
+    ),
+    fab = UiState.Fab(icon = FabIcons.Add),
+    bottomBarTab = BottomBarItems.Files,
+    searchBar = true
+)
+
+val StarredUiState = UiState(
+    toolbar = UiState.Toolbar(
+        title = TextWrap.Resource(id = R.string.starred)
+    ),
+    bottomBarTab = BottomBarItems.Starred
+)
+
+val SettingsUiState = UiState(
+    toolbar = UiState.Toolbar(
+        title = TextWrap.Resource(id = R.string.settings)
+    ),
+    bottomBarTab = BottomBarItems.Settings
+)

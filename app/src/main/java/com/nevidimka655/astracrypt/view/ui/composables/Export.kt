@@ -5,16 +5,24 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
+import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.features.export.ExportScreen
 import com.nevidimka655.astracrypt.features.export.ExportScreenViewModel
 import com.nevidimka655.astracrypt.view.UiState
 import com.nevidimka655.astracrypt.view.ui.navigation.Route
+import com.nevidimka655.ui.compose_core.wrappers.TextWrap
+
+val ExportUiState = UiState(
+    toolbar = UiState.Toolbar(
+        title = TextWrap.Resource(id = R.string.files_options_export)
+    )
+)
 
 inline fun NavGraphBuilder.export(
     crossinline onUiStateChange: (UiState) -> Unit
 ) = composable<Route.Export> {
     val export: Route.Export = it.toRoute()
-    onUiStateChange(Route.Export.Ui.state)
+    onUiStateChange(ExportUiState)
     val vm: ExportScreenViewModel = hiltViewModel()
     val context = LocalContext.current
     ExportScreen(

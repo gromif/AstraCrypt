@@ -15,11 +15,19 @@ import com.nevidimka655.astracrypt.view.UiState
 import com.nevidimka655.astracrypt.view.ui.navigation.Route
 import com.nevidimka655.astracrypt.view.ui.tabs.settings.profile.EditProfileScreen
 import com.nevidimka655.astracrypt.view.ui.tabs.settings.profile.EditProfileViewModel
+import com.nevidimka655.ui.compose_core.wrappers.TextWrap
+
+val EditProfileUiState = UiState(
+    toolbar = UiState.Toolbar(
+        title = TextWrap.Resource(id = R.string.settings_editProfile)
+    )
+)
+
 
 inline fun NavGraphBuilder.editProfile(
     crossinline onUiStateChange: (UiState) -> Unit
 ) = composable<Route.EditProfile> {
-    onUiStateChange(Route.EditProfile.Ui.state)
+    onUiStateChange(EditProfileUiState)
     val context = LocalContext.current
     val vm: EditProfileViewModel = hiltViewModel()
     val photoContract = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) {
