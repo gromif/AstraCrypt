@@ -107,6 +107,17 @@ object Route {
     }
 
     @Serializable
+    object SettingsUiFiles {
+        object Ui {
+            val state = UiState(
+                toolbar = UiState.Toolbar(
+                    title = TextWrap.Resource(id = R.string.files)
+                )
+            )
+        }
+    }
+
+    @Serializable
     object SettingsSecurity {
         object Ui {
             val state = UiState(

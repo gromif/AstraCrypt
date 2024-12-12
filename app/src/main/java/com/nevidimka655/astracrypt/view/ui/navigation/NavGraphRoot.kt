@@ -10,6 +10,7 @@ import com.nevidimka655.astracrypt.view.ui.composables.export
 import com.nevidimka655.astracrypt.view.ui.composables.settings.editProfile
 import com.nevidimka655.astracrypt.view.ui.composables.settings.settingsSecurity
 import com.nevidimka655.astracrypt.view.ui.composables.settings.settingsUi
+import com.nevidimka655.astracrypt.view.ui.composables.settings.ui.settingsUiFiles
 import com.nevidimka655.astracrypt.view.ui.composables.tabs
 import kotlinx.coroutines.channels.Channel
 
@@ -32,8 +33,9 @@ inline fun root(
     editProfile(onUiStateChange = onUiStateChange)
     settingsUi(
         onUiStateChange = onUiStateChange,
-        navigateToFilesUiSettings = {  }
+        navigateToFilesUiSettings = { navController.navigate(Route.SettingsUiFiles) }
     )
+    settingsUiFiles(onUiStateChange = onUiStateChange)
     settingsSecurity(onUiStateChange = onUiStateChange)
     aboutGraph(onUiStateChange = onUiStateChange, navController = navController)
 }
