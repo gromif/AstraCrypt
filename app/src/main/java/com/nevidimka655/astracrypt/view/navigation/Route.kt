@@ -24,6 +24,7 @@ object Route {
     @Serializable object SettingsUi
     @Serializable object SettingsUiFiles
     @Serializable object SettingsSecurity
+    @Serializable object SettingsSecurityAdmin
     @Serializable object SettingsSecurityQuickActions
 
     @Serializable

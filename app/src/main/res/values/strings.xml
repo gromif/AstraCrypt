@@ -110,7 +110,7 @@
     <string name="settings_quickActions">Quick Actions</string>
     <string name="settings_quickActions_dataDeletion">Quick data deletion</string>
     <string name="settings_deviceAdminRights">Device administrator rights</string>
-    <string name="settings_deviceAdminRights_warning">You will not be able to uninstall this app while this feature is enabled</string>
+    <string name="settings_deviceAdminRights_warning">You won\'t be able to uninstall this app while this feature is enabled</string>
     <string name="settings_deviceAdminRights_summary">Provides device management functions at the system level</string>
     <string name="settings_deviceAdminRights_device_summary">Allow the application to use some system functions to increase the level of data protection (protection against accidental deletion of the application or data, etc.).</string>
     <string name="settings_changeName">Change Name</string>

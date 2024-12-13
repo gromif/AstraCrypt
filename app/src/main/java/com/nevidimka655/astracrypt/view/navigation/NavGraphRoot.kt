@@ -6,8 +6,9 @@ import com.nevidimka655.astracrypt.view.MainVM
 import com.nevidimka655.astracrypt.view.composables.files.details.details
 import com.nevidimka655.astracrypt.view.composables.settings.about.navigation.aboutGraph
 import com.nevidimka655.astracrypt.view.composables.settings.profile.editProfile
-import com.nevidimka655.astracrypt.view.composables.settings.security.settingsSecurity
+import com.nevidimka655.astracrypt.view.composables.settings.security.admin.settingsSecurityAdmin
 import com.nevidimka655.astracrypt.view.composables.settings.security.quick_actions.settingsSecurityQuickActions
+import com.nevidimka655.astracrypt.view.composables.settings.security.settingsSecurity
 import com.nevidimka655.astracrypt.view.composables.settings.ui.files.settingsUiFiles
 import com.nevidimka655.astracrypt.view.composables.settings.ui.settingsUi
 import com.nevidimka655.astracrypt.view.composables.shared.export.export
@@ -41,9 +42,10 @@ inline fun root(
         onUiStateChange = onUiStateChange,
         navigateToEncryption = {},
         navigateToAuth = {},
-        navigateToDeviceAdmin = {},
+        navigateToDeviceAdmin = { navController.navigate(Route.SettingsSecurityAdmin) },
         navigateToQuickActions = { navController.navigate(Route.SettingsSecurityQuickActions) }
     )
+    settingsSecurityAdmin(onUiStateChange = onUiStateChange)
     settingsSecurityQuickActions(onUiStateChange = onUiStateChange)
     aboutGraph(onUiStateChange = onUiStateChange, navController = navController)
 }
