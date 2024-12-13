@@ -1,8 +1,8 @@
 package com.nevidimka655.astracrypt.app.di
 
-import com.nevidimka655.astracrypt.features.auth.AuthManager
 import com.nevidimka655.astracrypt.data.datastore.DefaultDataStoreManager
 import com.nevidimka655.astracrypt.data.datastore.SettingsDataStoreManager
+import com.nevidimka655.astracrypt.features.auth.AuthManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -11,7 +11,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class AuthModule {
+object AuthModule {
 
     @Singleton
     @Provides

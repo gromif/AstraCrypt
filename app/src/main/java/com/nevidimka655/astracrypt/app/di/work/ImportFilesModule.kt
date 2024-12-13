@@ -15,7 +15,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class ImportFilesModule {
+object ImportFilesModule {
 
     @Provides
     @Singleton
