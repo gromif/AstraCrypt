@@ -2,6 +2,7 @@ package com.nevidimka655.astracrypt.app.tiles
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import com.nevidimka655.astracrypt.app.di.IoDispatcher
 import com.nevidimka655.astracrypt.app.utils.Io
 import com.nevidimka655.astracrypt.data.room.AppDatabase
 import com.nevidimka655.crypto.tink.KeysetFactory
@@ -16,13 +17,15 @@ import javax.inject.Inject
 @RequiresApi(Build.VERSION_CODES.N)
 @AndroidEntryPoint
 class QuickDataDeletion @Inject constructor() : TileServiceCoroutine() {
+    @IoDispatcher
+    @Inject lateinit var defaultDispatcher: CoroutineDispatcher
     @Inject lateinit var database: AppDatabase
     @Inject lateinit var io: Io
     @Inject lateinit var keysetFactory: KeysetFactory
 
     override fun onClick() {
         super.onClick()
-        launch(Dispatchers.IO) {
+        launch(defaultDispatcher) {
             val keyStore = KeyStore.getInstance("AndroidKeyStore")
             keyStore.load(null)
             val aliases = keyStore.aliases()
