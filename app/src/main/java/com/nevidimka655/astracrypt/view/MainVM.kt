@@ -10,26 +10,29 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.data.paging.FilesPagingProvider
-import com.nevidimka655.astracrypt.data.paging.StarredPagingProvider
-import com.nevidimka655.astracrypt.data.repository.RepositoryProvider
-import com.nevidimka655.astracrypt.data.model.NavigatorDirectory
-import com.nevidimka655.astracrypt.domain.room.StorageItemMinimalTuple
-import com.nevidimka655.astracrypt.view.models.UiState
 import com.nevidimka655.astracrypt.app.utils.Io
 import com.nevidimka655.astracrypt.app.utils.SelectorManager
 import com.nevidimka655.astracrypt.app.utils.SetupManager
 import com.nevidimka655.astracrypt.app.utils.ToolsManager
 import com.nevidimka655.astracrypt.data.datastore.AppearanceManager
+import com.nevidimka655.astracrypt.data.model.NavigatorDirectory
+import com.nevidimka655.astracrypt.data.paging.FilesPagingProvider
+import com.nevidimka655.astracrypt.data.paging.StarredPagingProvider
+import com.nevidimka655.astracrypt.data.repository.RepositoryProvider
+import com.nevidimka655.astracrypt.domain.room.StorageItemMinimalTuple
+import com.nevidimka655.astracrypt.view.models.UiState
+import com.nevidimka655.astracrypt.view.models.ViewMode
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -44,6 +47,9 @@ class MainVM @Inject constructor(
     val appearanceManager: AppearanceManager
 ) : ViewModel() {
     var uiState = mutableStateOf(UiState())
+    val filesViewModeState = appearanceManager.filesViewModeFlow.stateIn(
+        viewModelScope, SharingStarted.Lazily, initialValue = ViewMode.Grid
+    )
     val selectorManager by lazy { SelectorManager() }
 
     var isSearching by mutableStateOf(false)

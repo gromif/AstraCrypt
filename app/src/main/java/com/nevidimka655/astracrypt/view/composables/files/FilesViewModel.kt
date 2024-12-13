@@ -17,7 +17,6 @@ import com.nevidimka655.astracrypt.app.utils.AeadManager
 import com.nevidimka655.astracrypt.app.utils.Io
 import com.nevidimka655.astracrypt.app.work.ImportFilesWorker
 import com.nevidimka655.astracrypt.app.work.utils.WorkerSerializer
-import com.nevidimka655.astracrypt.data.datastore.AppearanceManager
 import com.nevidimka655.astracrypt.data.repository.RepositoryProvider
 import com.nevidimka655.astracrypt.domain.room.PagerTuple
 import com.nevidimka655.crypto.tink.KeysetFactory
@@ -39,7 +38,6 @@ class FilesViewModel @Inject constructor(
     private val repositoryProvider: RepositoryProvider,
     private val keysetFactory: KeysetFactory,
     private val aeadManager: AeadManager,
-    val appearanceManager: AppearanceManager,
     val io: Io,
     val workManager: WorkManager,
     val workerSerializer: WorkerSerializer,

@@ -84,16 +84,16 @@ import com.nevidimka655.astracrypt.data.model.NavigatorDirectory
 import com.nevidimka655.astracrypt.data.room.StorageItemState
 import com.nevidimka655.astracrypt.data.room.StorageItemType
 import com.nevidimka655.astracrypt.domain.room.PagerTuple
+import com.nevidimka655.astracrypt.view.MainVM
 import com.nevidimka655.astracrypt.view.composables.files.sheets.filesCreateNewSheet
 import com.nevidimka655.astracrypt.view.composables.files.sheets.filesOptionsSheet
-import com.nevidimka655.astracrypt.view.models.ViewMode
-import com.nevidimka655.astracrypt.view.MainVM
+import com.nevidimka655.astracrypt.view.composables.shared.NoItemsPage
 import com.nevidimka655.astracrypt.view.composables.shared.dialogs.DeleteFile
 import com.nevidimka655.astracrypt.view.composables.shared.dialogs.DeleteOriginalFiles
 import com.nevidimka655.astracrypt.view.composables.shared.dialogs.Dialogs
 import com.nevidimka655.astracrypt.view.composables.shared.dialogs.newFolder
 import com.nevidimka655.astracrypt.view.composables.shared.dialogs.rename
-import com.nevidimka655.astracrypt.view.composables.shared.NoItemsPage
+import com.nevidimka655.astracrypt.view.models.ViewMode
 import com.nevidimka655.haptic.Haptic
 import com.nevidimka655.haptic.hapticLongClick
 import com.nevidimka655.ui.compose_core.ext.LocalWindowWidth
@@ -377,7 +377,7 @@ fun FilesList(
                     })
             }
         } else items(count = pagingItems.itemSnapshotList.size,
-            key = { pagingItems[it]?.id ?: it }) { index ->
+            key = { it }) { index ->
             pagingItems[index]?.let {
                 FilesListItemMedium(modifier = Modifier.animateItem(),
                     imageLoader = imageLoader,

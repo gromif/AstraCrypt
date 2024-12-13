@@ -12,16 +12,15 @@ import androidx.navigation.toRoute
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.features.profile.model.ProfileInfo
-import com.nevidimka655.astracrypt.view.models.Actions
-import com.nevidimka655.astracrypt.view.models.FabIcons
-import com.nevidimka655.astracrypt.view.models.UiState
-import com.nevidimka655.astracrypt.view.models.ViewMode
 import com.nevidimka655.astracrypt.view.MainVM
 import com.nevidimka655.astracrypt.view.composables.files.FilesScreen
 import com.nevidimka655.astracrypt.view.composables.files.FilesViewModel
 import com.nevidimka655.astracrypt.view.composables.home.HomeScreen
 import com.nevidimka655.astracrypt.view.composables.home.HomeViewModel
 import com.nevidimka655.astracrypt.view.composables.settings.SettingsScreen
+import com.nevidimka655.astracrypt.view.models.Actions
+import com.nevidimka655.astracrypt.view.models.FabIcons
+import com.nevidimka655.astracrypt.view.models.UiState
 import com.nevidimka655.astracrypt.view.navigation.BottomBarItems
 import com.nevidimka655.astracrypt.view.navigation.Route
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
@@ -67,9 +66,7 @@ inline fun NavGraphBuilder.tabs(
         vm.isStarredScreen = files.isStarred
 
         val filesVm: FilesViewModel = hiltViewModel()
-        val viewMode by filesVm.appearanceManager.filesViewModeFlow.collectAsStateWithLifecycle(
-            initialValue = ViewMode.Grid
-        )
+        val viewMode by vm.filesViewModeState.collectAsStateWithLifecycle()
         val dialogNewFolderState = rememberSaveable { mutableStateOf(false) }
         val items = (if (files.isStarred) vm.starredPagingFlow else vm.pagingFlow)
             .collectAsLazyPagingItems()
