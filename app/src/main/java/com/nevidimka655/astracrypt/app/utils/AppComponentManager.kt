@@ -4,8 +4,8 @@ import android.annotation.SuppressLint
 import android.content.ComponentName
 import android.content.Context
 import android.content.pm.PackageManager
-import com.nevidimka655.astracrypt.view.ui.MainActivity
-import com.nevidimka655.astracrypt.view.ui.settings.security.quick_actions.tiles.QuickDataDeletion
+import com.nevidimka655.astracrypt.app.tiles.QuickDataDeletion
+import com.nevidimka655.astracrypt.view.MainActivity
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 

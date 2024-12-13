@@ -5,10 +5,10 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
-import com.nevidimka655.astracrypt.features.auth.AuthInfo
-import com.nevidimka655.astracrypt.features.profile.Avatars
-import com.nevidimka655.astracrypt.features.profile.ProfileInfo
 import com.nevidimka655.astracrypt.data.model.AeadInfo
+import com.nevidimka655.astracrypt.features.auth.AuthInfo
+import com.nevidimka655.astracrypt.features.profile.model.Avatars
+import com.nevidimka655.astracrypt.features.profile.model.ProfileInfo
 import com.nevidimka655.crypto.tink.KeysetFactory
 import com.nevidimka655.crypto.tink.KeysetTemplates
 import com.nevidimka655.crypto.tink.extensions.aeadPrimitive

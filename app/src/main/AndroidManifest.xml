@@ -18,7 +18,7 @@
         android:theme="@style/Theme.AstraCrypt"
         tools:targetApi="tiramisu">
         <activity
-            android:name=".view.ui.MainActivity"
+            android:name=".view.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.AstraCrypt">
             <intent-filter>
@@ -35,7 +35,7 @@
             android:icon="@mipmap/ic_launcher_calculator"
             android:label="@string/settings_camouflageType_calculator"
             android:roundIcon="@mipmap/ic_launcher_calculator_round"
-            android:targetActivity=".view.ui.MainActivity">
+            android:targetActivity=".view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -67,7 +67,7 @@
             android:foregroundServiceType="dataSync" />
 
         <service
-            android:name=".view.ui.settings.security.quick_actions.tiles.QuickDataDeletion"
+            android:name=".app.tiles.QuickDataDeletion"
             android:enabled="false"
             android:exported="true"
             android:icon="@drawable/ic_notification_app_icon"

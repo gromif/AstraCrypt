@@ -16,7 +16,7 @@
         app:startDestination="@id/subscriptionsFragment">
         <fragment
             android:id="@+id/subscriptionsOverviewFragment"
-            android:name="com.nevidimka655.astracrypt.view.ui.purchases.PurchasesOverviewFragment"
+            android:name="com.nevidimka655.astracrypt.view.purchases.PurchasesOverviewFragment"
             android:label="{planName}">
             <argument
                 android:name="planName"
@@ -27,7 +27,7 @@
         </fragment>
         <fragment
             android:id="@+id/subscriptionsFragment"
-            android:name="com.nevidimka655.astracrypt.view.ui.purchases.PurchasesFragment"
+            android:name="com.nevidimka655.astracrypt.view.purchases.PurchasesFragment"
             android:label="@string/purchases">
             <action
                 android:id="@+id/action_subscriptionsFragment_to_subscriptionsOverviewFragment"
@@ -59,12 +59,12 @@
     </fragment>
     <fragment
         android:id="@+id/filesFragment"
-        android:name="com.nevidimka655.astracrypt.view.ui.FilesFragment"
+        android:name="com.nevidimka655.astracrypt.view.FilesFragment"
         android:label="@string/files" >
     </fragment>
     <fragment
         android:id="@+id/starredFragment"
-        android:name="com.nevidimka655.astracrypt.view.ui.FilesFragment"
+        android:name="com.nevidimka655.astracrypt.view.FilesFragment"
         android:label="@string/starred" >
     </fragment>
     <navigation
@@ -159,15 +159,15 @@
         </fragment>
         <fragment
             android:id="@+id/databaseColumnsFragment"
-            android:name="com.nevidimka655.astracrypt.view.ui.settings.security.encryption.DatabaseColumnsFragment"
+            android:name="com.nevidimka655.astracrypt.view.security.encryption.DatabaseColumnsFragment"
             android:label="@string/settings_columns" />
         <fragment
             android:id="@+id/authenticationFragment"
-            android:name="com.nevidimka655.astracrypt.view.ui.settings.security.authentication.AuthenticationFragment"
+            android:name="com.nevidimka655.astracrypt.view.security.authentication.AuthenticationFragment"
             android:label="@string/settings_authentication" />
         <fragment
             android:id="@+id/encryptionFragment"
-            android:name="com.nevidimka655.astracrypt.view.ui.settings.security.encryption.EncryptionFragment"
+            android:name="com.nevidimka655.astracrypt.view.security.encryption.EncryptionFragment"
             android:label="@string/settings_encryption">
             <action
                 android:id="@+id/action_encryptionFragment_to_databaseColumnsFragment"
@@ -183,7 +183,7 @@
             android:label="@string/privacyPolicy" />
         <fragment
             android:id="@+id/deviceAdminRightsFragment"
-            android:name="com.nevidimka655.astracrypt.view.ui.settings.security.DeviceAdminRightsFragment"
+            android:name="com.nevidimka655.astracrypt.view.security.DeviceAdminRightsFragment"
             android:label="@string/settings_deviceAdminRights" />
         <fragment
             android:id="@+id/interfaceFragment"

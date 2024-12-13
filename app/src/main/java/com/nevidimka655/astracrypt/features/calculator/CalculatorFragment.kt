@@ -7,7 +7,7 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.nevidimka655.astracrypt.view.ui.MainVM
+import com.nevidimka655.astracrypt.view.MainVM
 import com.nevidimka655.astracrypt.app.theme.AstraCryptTheme
 
 class CalculatorFragment : Fragment() {
