@@ -38,7 +38,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.app.theme.icons.FileType
-import com.nevidimka655.astracrypt.app.theme.icons.photo.Photo
+import com.nevidimka655.astracrypt.app.theme.icons.Photo
 import com.nevidimka655.ui.compose_core.FilledTonalIconButton
 import com.nevidimka655.ui.compose_core.OneLineListItem
 import com.nevidimka655.ui.compose_core.sheets.SheetDefaults

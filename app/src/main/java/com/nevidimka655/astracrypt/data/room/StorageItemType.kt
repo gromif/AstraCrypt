@@ -6,16 +6,16 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import com.nevidimka655.astracrypt.R
+import com.nevidimka655.astracrypt.app.theme.icons.Audio
+import com.nevidimka655.astracrypt.app.theme.icons.AudioAlt
+import com.nevidimka655.astracrypt.app.theme.icons.File
+import com.nevidimka655.astracrypt.app.theme.icons.FileAlt
 import com.nevidimka655.astracrypt.app.theme.icons.FileType
 import com.nevidimka655.astracrypt.app.theme.icons.Folder
-import com.nevidimka655.astracrypt.app.theme.icons.audio.Audio
-import com.nevidimka655.astracrypt.app.theme.icons.audio.AudioAlt
-import com.nevidimka655.astracrypt.app.theme.icons.file.File
-import com.nevidimka655.astracrypt.app.theme.icons.file.FileAlt
-import com.nevidimka655.astracrypt.app.theme.icons.photo.Photo
-import com.nevidimka655.astracrypt.app.theme.icons.photo.PhotoAlt
-import com.nevidimka655.astracrypt.app.theme.icons.video.Video
-import com.nevidimka655.astracrypt.app.theme.icons.video.VideoAlt
+import com.nevidimka655.astracrypt.app.theme.icons.Photo
+import com.nevidimka655.astracrypt.app.theme.icons.PhotoAlt
+import com.nevidimka655.astracrypt.app.theme.icons.Video
+import com.nevidimka655.astracrypt.app.theme.icons.VideoAlt
 
 enum class StorageItemType(@StringRes val title: Int) {
     Folder(title = R.string.folder),
