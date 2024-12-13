@@ -24,27 +24,27 @@ class AppComponentManager @Inject constructor(
     private val _main = Component(context, MainActivity::class.java)
     var main
         get() = getState(comp = _main) == ENABLED
-        set(value) = setComponentState(componentName = _main, state = value)
+        set(value) = setState(comp = _main, state = value)
 
 
     private val _calculator = Component(context, "${context.packageName}.MainActivityCalculator")
     var calculator
         get() = getState(comp = _calculator) == ENABLED
-        set(value) = setComponentState(componentName = _calculator, state = value)
+        set(value) = setState(comp = _calculator, state = value)
 
 
     private val _quickDataDeletion = Component(context, QuickDataDeletion::class.java)
     var quickDataDeletion
         get() = getState(comp = _quickDataDeletion) == ENABLED
-        set(value) = setComponentState(componentName = _quickDataDeletion, state = value)
+        set(value) = setState(comp = _quickDataDeletion, state = value)
 
 
     private fun getState(comp: Component) = packageManager.getComponentEnabledSetting(comp)
 
-    private fun setComponentState(
-        componentName: Component, state: Boolean
+    private fun setState(
+        comp: Component, state: Boolean
     ) = packageManager.setComponentEnabledSetting(
-        componentName, if (state) ENABLED else DISABLED, PackageManager.DONT_KILL_APP
+        comp, if (state) ENABLED else DISABLED, PackageManager.DONT_KILL_APP
     )
 
     companion object {
