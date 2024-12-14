@@ -75,7 +75,7 @@ class FilesViewModel @Inject constructor(
         val listToSave = uriList.map { it.toString() }.toTypedArray()
         val fileWithUris = workerSerializer.saveStringArrayToFile(listToSave)
         val aeadInfoJson = Json.encodeToString(aeadInfo)
-        val associatedData = if (aeadInfo.isAssociatedDataEncrypted)
+        val associatedData = if (aeadInfo.bindAssociatedData)
             keysetFactory.transformAssociatedDataToWorkInstance(
                 bytesIn = keysetFactory.associatedData,
                 encryptionMode = true,

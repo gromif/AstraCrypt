@@ -25,7 +25,7 @@ class WorkerFactory(
     var transformWorkLiveData: LiveData<WorkInfo?>? = null
 
     fun startTransformDatabase(oldInfo: AeadInfo, newInfo: AeadInfo) {
-        val associatedData = if (newInfo.isAssociatedDataEncrypted)
+        val associatedData = if (newInfo.bindAssociatedData)
             keysetFactory.transformAssociatedDataToWorkInstance(
                 bytesIn = keysetFactory.associatedData,
                 encryptionMode = true,
@@ -46,7 +46,7 @@ class WorkerFactory(
     }
 
     fun startTransformNotes(oldInfo: AeadInfo, newInfo: AeadInfo) {
-        val associatedData = if (newInfo.isAssociatedDataEncrypted)
+        val associatedData = if (newInfo.bindAssociatedData)
             keysetFactory.transformAssociatedDataToWorkInstance(
                 bytesIn = keysetFactory.associatedData,
                 encryptionMode = true,

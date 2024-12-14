@@ -60,7 +60,7 @@ class ExportScreenViewModel @Inject constructor(
 
     fun export(itemId: Long, output: String) = viewModelScope.launch {
         val aeadInfo = aeadManager.getInfo()
-        val associatedData = if (aeadInfo.isAssociatedDataEncrypted)
+        val associatedData = if (aeadInfo.bindAssociatedData)
             keysetFactory.transformAssociatedDataToWorkInstance(
                 bytesIn = keysetFactory.associatedData,
                 encryptionMode = true,

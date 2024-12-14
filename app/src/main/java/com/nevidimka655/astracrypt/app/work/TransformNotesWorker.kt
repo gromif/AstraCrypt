@@ -84,7 +84,7 @@ class TransformNotesWorker @AssistedInject constructor(
     }
 
     private fun shouldDecodeAssociatedData() {
-        if (newAeadInfo.isAssociatedDataEncrypted) {
+        if (newAeadInfo.bindAssociatedData) {
             val bytes = inputData.getString(Args.associatedData)!!.fromBase64()
             val decodedData = keysetFactory.transformAssociatedDataToWorkInstance(
                 bytesIn = bytes,

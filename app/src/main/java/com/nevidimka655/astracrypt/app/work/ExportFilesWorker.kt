@@ -118,7 +118,7 @@ class ExportFilesWorker @AssistedInject constructor(
     }
 
     private fun shouldDecodeAssociatedData() {
-        if (aeadInfo.isAssociatedDataEncrypted) {
+        if (aeadInfo.bindAssociatedData) {
             val bytes = inputData.getString(Args.associatedData)!!.fromBase64()
             TinkConfig.initAead()
             val decodedData = keysetFactory.transformAssociatedDataToWorkInstance(
