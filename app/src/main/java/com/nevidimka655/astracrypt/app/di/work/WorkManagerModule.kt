@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.app.di
+package com.nevidimka655.astracrypt.app.di.work
 
 import android.content.Context
 import androidx.work.WorkManager
