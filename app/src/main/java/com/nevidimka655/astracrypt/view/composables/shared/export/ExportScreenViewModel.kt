@@ -13,23 +13,22 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.OutOfQuotaPolicy
 import androidx.work.WorkManager
 import androidx.work.workDataOf
+import com.nevidimka655.astracrypt.app.di.IoDispatcher
 import com.nevidimka655.astracrypt.app.utils.AeadManager
 import com.nevidimka655.astracrypt.app.utils.Io
 import com.nevidimka655.astracrypt.app.work.ExportFilesWorker
 import com.nevidimka655.astracrypt.data.model.ExportUiState
 import com.nevidimka655.astracrypt.domain.repository.files.FilesRepository
-import com.nevidimka655.astracrypt.domain.room.OpenTuple
 import com.nevidimka655.crypto.tink.KeysetFactory
 import com.nevidimka655.crypto.tink.extensions.toBase64
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import java.util.UUID
@@ -39,6 +38,8 @@ private typealias Args = ExportFilesWorker.Args
 
 @HiltViewModel
 class ExportScreenViewModel @Inject constructor(
+    @IoDispatcher
+    private val defaultDispatcher: CoroutineDispatcher,
     private val aeadManager: AeadManager,
     private val filesRepository: FilesRepository,
     private val keysetFactory: KeysetFactory,
@@ -51,40 +52,8 @@ class ExportScreenViewModel @Inject constructor(
 
     fun export(
         itemId: Long, contentResolver: ContentResolver
-    ) = viewModelScope.launch(Dispatchers.IO) {
-        export(
-            exportTuple = filesRepository.getDataForOpening(id = itemId),
-            contentResolver = contentResolver
-        )
-    }
-
-    fun export(itemId: Long, output: String) = viewModelScope.launch {
-        val aeadInfo = aeadManager.getInfo()
-        val associatedData = if (aeadInfo.bindAssociatedData)
-            keysetFactory.transformAssociatedDataToWorkInstance(
-                bytesIn = keysetFactory.associatedData,
-                encryptionMode = true,
-                authenticationTag = Args.TAG_ASSOCIATED_DATA_TRANSPORT
-            ).toBase64()
-        else null
-        val aeadInfoJson = Json.encodeToString(aeadInfo)
-        val data = workDataOf(
-            Args.itemId to itemId,
-            Args.aeadInfo to aeadInfoJson,
-            Args.uriDirOutput to output,
-            Args.associatedData to associatedData
-        )
-        val workerRequest = OneTimeWorkRequestBuilder<ExportFilesWorker>().apply {
-            setId(workUUID)
-            setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
-            setInputData(data)
-        }.build()
-        workManager.enqueue(workerRequest)
-    }
-
-    suspend fun export(
-        exportTuple: OpenTuple, contentResolver: ContentResolver
-    ) = withContext(Dispatchers.IO) {
+    ) = viewModelScope.launch(defaultDispatcher) {
+        val exportTuple = filesRepository.getDataForOpening(id = itemId)
         val exportFile = io.getExportedCacheFile(exportTuple.name)
         val outputUri = io.getExportedCacheFileUri(file = exportFile)
         internalExportUri = outputUri.toString()
@@ -118,7 +87,31 @@ class ExportScreenViewModel @Inject constructor(
         }
     }
 
-    fun observeWorkInfoState() = viewModelScope.launch {
+    fun export(itemId: Long, output: String) = viewModelScope.launch(defaultDispatcher) {
+        val aeadInfo = aeadManager.getInfo()
+        val associatedData = if (aeadInfo.bindAssociatedData)
+            keysetFactory.transformAssociatedDataToWorkInstance(
+                bytesIn = keysetFactory.associatedData,
+                encryptionMode = true,
+                authenticationTag = Args.TAG_ASSOCIATED_DATA_TRANSPORT
+            ).toBase64()
+        else null
+        val aeadInfoJson = Json.encodeToString(aeadInfo)
+        val data = workDataOf(
+            Args.itemId to itemId,
+            Args.aeadInfo to aeadInfoJson,
+            Args.uriDirOutput to output,
+            Args.associatedData to associatedData
+        )
+        val workerRequest = OneTimeWorkRequestBuilder<ExportFilesWorker>().apply {
+            setId(workUUID)
+            setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
+            setInputData(data)
+        }.build()
+        workManager.enqueue(workerRequest)
+    }
+
+    fun observeWorkInfoState() = viewModelScope.launch(defaultDispatcher) {
         workManager.getWorkInfoByIdFlow(id = workUUID).stateIn(this).collectLatest {
             it?.let { workInfo ->
                 if (workInfo.state.isFinished) {
