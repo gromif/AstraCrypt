@@ -15,7 +15,7 @@ data class AeadInfo(
     @SerialName("c") val database: DatabaseAeadInfo? = null,
     @SerialName("d") val aeadNotes: Aead? = Aead.AES128_GCM,
 
-    @SerialName("e") val isAssociatedDataEncrypted: Boolean = false
+    @SerialName("e") val bindAssociatedData: Boolean = false
 ) {
     val db get() = database != null
     val notes by lazy { aeadNotes != null }
