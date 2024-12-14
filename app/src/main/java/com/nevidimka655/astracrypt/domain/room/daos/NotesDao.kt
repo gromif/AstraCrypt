@@ -22,7 +22,7 @@ interface NotesDao {
     suspend fun getById(itemId: Long): NoteItemEntity*/
 
     @Update(entity = NoteItemEntity::class)
-    suspend fun updateTransform(transformNotesTuple: TransformNotesTuple)
+    suspend fun updateTransform(transformTuple: TransformNotesTuple)
 
     @RewriteQueriesToDropUnusedColumns
     @Query("select * from notes limit :pageSize offset :pageIndex * :pageSize")
