@@ -17,17 +17,18 @@ import androidx.work.ForegroundInfo
 import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import com.nevidimka655.astracrypt.R
+import com.nevidimka655.astracrypt.app.di.IoDispatcher
+import com.nevidimka655.astracrypt.app.utils.Api
+import com.nevidimka655.astracrypt.app.utils.Io
 import com.nevidimka655.astracrypt.data.model.AeadInfo
 import com.nevidimka655.astracrypt.domain.repository.files.FilesRepository
 import com.nevidimka655.astracrypt.domain.room.ExportTuple
-import com.nevidimka655.astracrypt.app.utils.Api
-import com.nevidimka655.astracrypt.app.utils.Io
 import com.nevidimka655.crypto.tink.KeysetFactory
 import com.nevidimka655.crypto.tink.TinkConfig
 import com.nevidimka655.crypto.tink.extensions.fromBase64
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
 
@@ -35,6 +36,8 @@ import kotlinx.serialization.json.Json
 class ExportFilesWorker @AssistedInject constructor(
     @Assisted context: Context,
     @Assisted params: WorkerParameters,
+    @IoDispatcher
+    private val defaultDispatcher: CoroutineDispatcher,
     private val filesRepository: FilesRepository,
     private val keysetFactory: KeysetFactory,
     private val io: Io,
@@ -57,7 +60,7 @@ class ExportFilesWorker @AssistedInject constructor(
         )
     }
 
-    override suspend fun doWork() = withContext(Dispatchers.IO) {
+    override suspend fun doWork() = withContext(defaultDispatcher) {
         setForeground(getForegroundInfo())
         TinkConfig.initStream()
         shouldDecodeAssociatedData()
