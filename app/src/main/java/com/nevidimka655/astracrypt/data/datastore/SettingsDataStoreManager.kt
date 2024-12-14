@@ -6,7 +6,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.nevidimka655.astracrypt.data.model.AeadInfo
-import com.nevidimka655.astracrypt.features.auth.AuthInfo
+import com.nevidimka655.astracrypt.features.auth.model.AuthInfo
 import com.nevidimka655.astracrypt.features.profile.model.Avatars
 import com.nevidimka655.astracrypt.features.profile.model.ProfileInfo
 import com.nevidimka655.crypto.tink.KeysetFactory
@@ -72,7 +72,7 @@ class SettingsDataStoreManager(
             Json.decodeFromString<AeadInfo>(aeadInfoJson)
         } ?: AeadInfo()
     }
-    suspend fun setEncryptionInfo(aeadInfo: AeadInfo) = dataStore.edit {
+    suspend fun setAeadInfo(aeadInfo: AeadInfo) = dataStore.edit {
         val key = aeadInfoKey()
         it[key] = encryptValue(key = key.name, value = Json.encodeToString(aeadInfo))
     }
