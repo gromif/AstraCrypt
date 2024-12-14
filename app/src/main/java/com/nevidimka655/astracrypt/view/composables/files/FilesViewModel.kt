@@ -12,6 +12,7 @@ import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import androidx.work.workDataOf
 import coil.ImageLoader
+import com.nevidimka655.astracrypt.app.di.IoDispatcher
 import com.nevidimka655.astracrypt.app.extensions.removeLines
 import com.nevidimka655.astracrypt.app.utils.AeadManager
 import com.nevidimka655.astracrypt.app.utils.Io
@@ -22,7 +23,7 @@ import com.nevidimka655.astracrypt.domain.room.PagerTuple
 import com.nevidimka655.crypto.tink.KeysetFactory
 import com.nevidimka655.crypto.tink.extensions.toBase64
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.first
@@ -35,6 +36,8 @@ private typealias Args = ImportFilesWorker.Args
 
 @HiltViewModel
 class FilesViewModel @Inject constructor(
+    @IoDispatcher
+    private val defaultDispatcher: CoroutineDispatcher,
     private val filesRepositoryProvider: FilesRepositoryProvider,
     private val keysetFactory: KeysetFactory,
     private val aeadManager: AeadManager,
@@ -59,7 +62,7 @@ class FilesViewModel @Inject constructor(
         state: Boolean,
         id: Long? = null,
         itemsArr: List<Long>? = null
-    ) = viewModelScope.launch(Dispatchers.IO) {
+    ) = viewModelScope.launch(defaultDispatcher) {
         filesRepositoryProvider.filesRepository.first().setStarred(id, itemsArr, state)
         /*showSnackbar(
             if (state) R.string.snack_starred else R.string.snack_unstarred
@@ -70,7 +73,7 @@ class FilesViewModel @Inject constructor(
         vararg uriList: Uri,
         saveOriginalFiles: Boolean = false,
         dirId: Long
-    ) = viewModelScope.launch {
+    ) = viewModelScope.launch(defaultDispatcher) {
         val aeadInfo = aeadManager.getInfo()
         val listToSave = uriList.map { it.toString() }.toTypedArray()
         val fileWithUris = workerSerializer.saveStringArrayToFile(listToSave)
@@ -110,7 +113,7 @@ class FilesViewModel @Inject constructor(
         }
     }
 
-    fun rename(id: Long, name: String) = viewModelScope.launch(Dispatchers.IO) {
+    fun rename(id: Long, name: String) = viewModelScope.launch(defaultDispatcher) {
         val newName = name.removeLines().trim()
         val repository = filesRepositoryProvider.filesRepository.first()
         repository.updateName(id, newName)
