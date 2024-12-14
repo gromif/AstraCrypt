@@ -14,9 +14,10 @@ import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
 import com.google.crypto.tink.Aead
 import com.nevidimka655.astracrypt.R
+import com.nevidimka655.astracrypt.app.di.IoDispatcher
+import com.nevidimka655.astracrypt.app.utils.Api
 import com.nevidimka655.astracrypt.data.model.AeadInfo
 import com.nevidimka655.astracrypt.data.room.RepositoryEncryption
-import com.nevidimka655.astracrypt.app.utils.Api
 import com.nevidimka655.crypto.tink.KeysetFactory
 import com.nevidimka655.crypto.tink.KeysetGroupId
 import com.nevidimka655.crypto.tink.TinkConfig
@@ -24,7 +25,7 @@ import com.nevidimka655.crypto.tink.extensions.aeadPrimitive
 import com.nevidimka655.crypto.tink.extensions.fromBase64
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
@@ -33,6 +34,8 @@ import kotlinx.serialization.json.Json
 class TransformNotesWorker @AssistedInject constructor(
     @Assisted appContext: Context,
     @Assisted params: WorkerParameters,
+    @IoDispatcher
+    private val defaultDispatcher: CoroutineDispatcher,
     private val repositoryEncryption: RepositoryEncryption,
     private val keysetFactory: KeysetFactory,
 ) : CoroutineWorker(appContext, params) {
@@ -58,7 +61,7 @@ class TransformNotesWorker @AssistedInject constructor(
     private val toEncryption get() = newAeadInfo.aeadNotes
     private var notificationId = 3
 
-    override suspend fun doWork() = withContext(Dispatchers.IO) {
+    override suspend fun doWork() = withContext(defaultDispatcher) {
         setForeground(getForegroundInfo())
         initEncryption()
         shouldDecodeAssociatedData()

@@ -1,12 +1,15 @@
 package com.nevidimka655.astracrypt.app.work.utils
 
+import com.nevidimka655.astracrypt.app.di.IoDispatcher
 import com.nevidimka655.astracrypt.app.utils.Io
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import java.io.File
 import javax.inject.Inject
 
 class WorkerSerializer @Inject constructor(
+    @IoDispatcher
+    private val defaultDispatcher: CoroutineDispatcher,
     private val io: Io
 ) {
 
@@ -16,7 +19,7 @@ class WorkerSerializer @Inject constructor(
         return file.toString()
     }
 
-    suspend fun saveStringArrayToFile(arr: Array<String>) = withContext(Dispatchers.IO) {
+    suspend fun saveStringArrayToFile(arr: Array<String>) = withContext(defaultDispatcher) {
         val file = io.createTempFileInCache()
         val text = arr.joinToString(separator = "\n").trimEnd()
         file.writeText(text)

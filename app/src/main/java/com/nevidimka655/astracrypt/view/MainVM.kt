@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.nevidimka655.astracrypt.R
+import com.nevidimka655.astracrypt.app.di.IoDispatcher
 import com.nevidimka655.astracrypt.app.utils.Io
 import com.nevidimka655.astracrypt.app.utils.SelectorManager
 import com.nevidimka655.astracrypt.app.utils.SetupManager
@@ -23,7 +24,7 @@ import com.nevidimka655.astracrypt.domain.room.StorageItemMinimalTuple
 import com.nevidimka655.astracrypt.view.models.UiState
 import com.nevidimka655.astracrypt.view.models.ViewMode
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
@@ -34,11 +35,12 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
 class MainVM @Inject constructor(
+    @IoDispatcher
+    private val defaultDispatcher: CoroutineDispatcher,
     private val filesRepositoryProvider: FilesRepositoryProvider,
     private val setupManager: SetupManager,
     private val io: Io,
@@ -101,7 +103,7 @@ class MainVM @Inject constructor(
         id: Long,
         dirName: String,
         popBackStack: Boolean = false
-    ) = viewModelScope.launch {
+    ) = viewModelScope.launch(defaultDispatcher) {
         val formattedFolderName = if (dirName.length > 20) "${dirName.take(20)}.." else dirName
         val navigatorDirectory = NavigatorDirectory(id, formattedFolderName)
         with(filesNavigatorList) {
@@ -113,7 +115,7 @@ class MainVM @Inject constructor(
         triggerListUpdate()
     }
 
-    fun openDirectoryFromSelector(index: Int?) = viewModelScope.launch {
+    fun openDirectoryFromSelector(index: Int?) = viewModelScope.launch(defaultDispatcher) {
         if (index == null) {
             filesNavigatorList.clear()
             triggerListUpdate()
@@ -140,7 +142,7 @@ class MainVM @Inject constructor(
 
     fun triggerFilesListUpdate() = filesPagingProvider.invalidate()
 
-    fun newDirectory(directoryName: String) = viewModelScope.launch(Dispatchers.IO) {
+    fun newDirectory(directoryName: String) = viewModelScope.launch(defaultDispatcher) {
         filesRepositoryProvider.filesRepository.first().newDirectory(
             name = directoryName,
             parentId = filesNavigatorList.lastOrNull()?.id
@@ -148,7 +150,7 @@ class MainVM @Inject constructor(
         showSnackbar(R.string.snack_folderCreated)
     }
 
-    fun delete(storageItemId: Long) = viewModelScope.launch(Dispatchers.IO) {
+    fun delete(storageItemId: Long) = viewModelScope.launch(defaultDispatcher) {
         val repository = filesRepositoryProvider.filesRepository.first()
         val idsList = arrayListOf<Long>()
         val itemToDelete = repository.getMinimalItemData(storageItemId)
@@ -173,12 +175,12 @@ class MainVM @Inject constructor(
         )
     }
 
-    fun deleteSelected(itemsArr: List<Long>) = viewModelScope.launch(Dispatchers.IO) {
+    fun deleteSelected(itemsArr: List<Long>) = viewModelScope.launch(defaultDispatcher) {
         itemsArr.forEach { delete(it) }
         showSnackbar(R.string.snack_itemsDeleted)
     }
 
-    fun move(itemsArr: List<Long>, movingDirId: Long?) = viewModelScope.launch(Dispatchers.IO) {
+    fun move(itemsArr: List<Long>, movingDirId: Long?) = viewModelScope.launch(defaultDispatcher) {
         val repository = filesRepositoryProvider.filesRepository.first()
         repository.moveItems(
             idsArray = itemsArr,
@@ -191,9 +193,9 @@ class MainVM @Inject constructor(
     fun setSearchIsEnabled(state: Boolean) {
         if (state) {
             if (searchSetupJob != null) return
-            searchSetupJob = viewModelScope.launch {
+            searchSetupJob = viewModelScope.launch(defaultDispatcher) {
                 val idToIterate = currentFolderId
-                if (idToIterate.toInt() != 0) withContext(Dispatchers.IO) {
+                if (idToIterate.toInt() != 0) {
                     searchDirsIndexesList.clear()
                     val array = searchDirsIndexesList
                     val repository = filesRepositoryProvider.filesRepository.first()
@@ -247,7 +249,8 @@ class MainVM @Inject constructor(
     }
 
     init {
-        if (!setupManager.isDatabaseCreated()) viewModelScope.launch { setupManager.setup() }
+        if (!setupManager.isDatabaseCreated())
+            viewModelScope.launch(defaultDispatcher) { setupManager.setup() }
     }
 
 }

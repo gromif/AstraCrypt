@@ -20,8 +20,9 @@ import com.google.crypto.tink.JsonKeysetReader
 import com.google.crypto.tink.KeysetHandle
 import com.google.crypto.tink.StreamingAead
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.app.utils.Api
+import com.nevidimka655.astracrypt.app.di.IoDispatcher
 import com.nevidimka655.astracrypt.app.extensions.contentResolver
+import com.nevidimka655.astracrypt.app.utils.Api
 import com.nevidimka655.crypto.tink.KeysetFactory
 import com.nevidimka655.crypto.tink.KeysetTemplates
 import com.nevidimka655.crypto.tink.TinkConfig
@@ -30,12 +31,14 @@ import com.nevidimka655.crypto.tink.extensions.fromBase64
 import com.nevidimka655.crypto.tink.extensions.streamingAeadPrimitive
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
 class LabFilesWorker @AssistedInject constructor(
     @Assisted appContext: Context,
     @Assisted params: WorkerParameters,
+    @IoDispatcher
+    private val defaultDispatcher: CoroutineDispatcher,
     private val keysetFactory: KeysetFactory,
     private val workManager: WorkManager
 ) : CoroutineWorker(appContext, params) {
@@ -55,7 +58,7 @@ class LabFilesWorker @AssistedInject constructor(
 
     private val notificationId = 202
 
-    override suspend fun doWork() = withContext(Dispatchers.IO) {
+    override suspend fun doWork() = withContext(defaultDispatcher) {
         var workerResult = Result.success()
         setForeground(getForegroundInfo())
         TinkConfig.initStream()

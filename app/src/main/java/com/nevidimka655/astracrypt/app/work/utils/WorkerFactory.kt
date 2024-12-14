@@ -11,7 +11,6 @@ import com.nevidimka655.astracrypt.app.work.LabCombinedZipWorker
 import com.nevidimka655.astracrypt.app.work.TransformDatabaseWorker
 import com.nevidimka655.astracrypt.app.work.TransformNotesWorker
 import com.nevidimka655.astracrypt.data.model.AeadInfo
-import com.nevidimka655.astracrypt.app.utils.Io
 import com.nevidimka655.crypto.tink.KeysetFactory
 import com.nevidimka655.crypto.tink.extensions.toBase64
 import kotlinx.serialization.encodeToString
@@ -19,8 +18,8 @@ import kotlinx.serialization.json.Json
 
 class WorkerFactory(
     private val workManager: WorkManager,
-    private val keysetFactory: KeysetFactory,
-    private val io: Io
+    private val workerSerializer: WorkerSerializer,
+    private val keysetFactory: KeysetFactory
 ) {
     var transformWorkLiveData: LiveData<WorkInfo?>? = null
 
@@ -72,7 +71,7 @@ class WorkerFactory(
         zipFilesContentStringArray: Array<String>
     ) {
         val fileWithZipContentPath =
-            WorkerSerializer(io).saveStringArrayToFile(zipFilesContentStringArray)
+            workerSerializer.saveStringArrayToFile(zipFilesContentStringArray)
         val data = workDataOf(
             Pair(LabCombinedZipWorker.Args.ZIP_FILE_URI, fileWithZipContentPath),
             Pair(LabCombinedZipWorker.Args.SOURCE_URI, sourceUri.toString()),

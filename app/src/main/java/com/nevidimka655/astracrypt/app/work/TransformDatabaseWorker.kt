@@ -14,18 +14,19 @@ import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
 import com.google.crypto.tink.Aead
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.domain.repository.files.FilesRepository
-import com.nevidimka655.astracrypt.data.model.AeadInfo
-import com.nevidimka655.astracrypt.domain.room.DatabaseTransformTuple
-import com.nevidimka655.astracrypt.data.room.RepositoryEncryption
+import com.nevidimka655.astracrypt.app.di.IoDispatcher
 import com.nevidimka655.astracrypt.app.utils.Api
+import com.nevidimka655.astracrypt.data.model.AeadInfo
+import com.nevidimka655.astracrypt.data.room.RepositoryEncryption
+import com.nevidimka655.astracrypt.domain.repository.files.FilesRepository
+import com.nevidimka655.astracrypt.domain.room.DatabaseTransformTuple
 import com.nevidimka655.crypto.tink.KeysetFactory
 import com.nevidimka655.crypto.tink.TinkConfig
 import com.nevidimka655.crypto.tink.extensions.aeadPrimitive
 import com.nevidimka655.crypto.tink.extensions.fromBase64
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
@@ -35,6 +36,8 @@ import kotlin.random.Random
 class TransformDatabaseWorker @AssistedInject constructor(
     @Assisted appContext: Context,
     @Assisted params: WorkerParameters,
+    @IoDispatcher
+    private val defaultDispatcher: CoroutineDispatcher,
     private val filesRepository: FilesRepository,
     private val repositoryEncryption: RepositoryEncryption,
     private val keysetFactory: KeysetFactory
@@ -76,7 +79,7 @@ class TransformDatabaseWorker @AssistedInject constructor(
     override suspend fun doWork(): Result {
         notificationId = Random.nextInt(0, 101)
         setForeground(getForegroundInfo())
-        withContext(Dispatchers.IO) {
+        withContext(defaultDispatcher) {
             initEncryption()
             shouldDecodeAssociatedData()
             var pageIndex = 0
