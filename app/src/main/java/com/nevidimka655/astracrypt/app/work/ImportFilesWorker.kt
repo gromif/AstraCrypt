@@ -29,15 +29,16 @@ import coil.request.ImageRequest
 import com.google.crypto.tink.StreamingAead
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.app.config.AppConfig
+import com.nevidimka655.astracrypt.app.di.IoDispatcher
 import com.nevidimka655.astracrypt.app.utils.Api
 import com.nevidimka655.astracrypt.app.utils.Io
 import com.nevidimka655.astracrypt.app.utils.MediaMetadataRetrieverCompat
 import com.nevidimka655.astracrypt.app.utils.Randomizer
-import com.nevidimka655.astracrypt.domain.repository.files.FilesRepository
 import com.nevidimka655.astracrypt.data.model.AeadInfo
 import com.nevidimka655.astracrypt.data.model.StorageItemFlags
-import com.nevidimka655.astracrypt.domain.room.entities.StorageItemEntity
 import com.nevidimka655.astracrypt.data.room.StorageItemType
+import com.nevidimka655.astracrypt.domain.repository.files.FilesRepository
+import com.nevidimka655.astracrypt.domain.room.entities.StorageItemEntity
 import com.nevidimka655.crypto.tink.KeysetFactory
 import com.nevidimka655.crypto.tink.TinkConfig
 import com.nevidimka655.crypto.tink.extensions.fromBase64
@@ -57,6 +58,8 @@ import java.io.OutputStream
 class ImportFilesWorker @AssistedInject constructor(
     @Assisted context: Context,
     @Assisted params: WorkerParameters,
+    @IoDispatcher
+    private val defaultDispatcher: CoroutineDispatcher,
     private val filesRepository: FilesRepository,
     private val keysetFactory: KeysetFactory,
     private val io: Io,
@@ -64,7 +67,6 @@ class ImportFilesWorker @AssistedInject constructor(
     private val imageLoader: ImageLoader,
     private val defaultCoilRequestBuilder: ImageRequest.Builder
 ) : CoroutineWorker(context, params) {
-    private val defaultDispatcher = Dispatchers.IO
     private val contentResolver get() = applicationContext.contentResolver
 
     object Args {
