@@ -4,7 +4,7 @@ import android.content.Context
 import coil.request.CachePolicy
 import coil.request.ImageRequest
 import coil.size.Scale
-import com.nevidimka655.astracrypt.app.config.AppConfig
+import com.nevidimka655.astracrypt.app.AppConfig
 import com.nevidimka655.astracrypt.app.utils.CenterCropTransformation
 import dagger.Module
 import dagger.Provides

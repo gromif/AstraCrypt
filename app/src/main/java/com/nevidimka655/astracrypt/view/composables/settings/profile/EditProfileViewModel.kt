@@ -14,7 +14,7 @@ import coil.ImageLoader
 import coil.request.CachePolicy
 import coil.request.ImageRequest
 import coil.size.Scale
-import com.nevidimka655.astracrypt.app.config.AppConfig
+import com.nevidimka655.astracrypt.app.AppConfig
 import com.nevidimka655.astracrypt.app.di.IoDispatcher
 import com.nevidimka655.astracrypt.app.extensions.recreate
 import com.nevidimka655.astracrypt.app.utils.AeadManager

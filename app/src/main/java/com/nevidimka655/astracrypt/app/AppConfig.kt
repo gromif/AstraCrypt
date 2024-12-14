@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.app.config
+package com.nevidimka655.astracrypt.app
 
 object AppConfig {
     const val DB_DIRS_COUNT = 25

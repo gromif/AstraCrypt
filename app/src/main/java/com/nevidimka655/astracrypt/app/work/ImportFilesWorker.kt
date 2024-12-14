@@ -28,7 +28,7 @@ import coil.ImageLoader
 import coil.request.ImageRequest
 import com.google.crypto.tink.StreamingAead
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.app.config.AppConfig
+import com.nevidimka655.astracrypt.app.AppConfig
 import com.nevidimka655.astracrypt.app.di.IoDispatcher
 import com.nevidimka655.astracrypt.app.utils.Api
 import com.nevidimka655.astracrypt.app.utils.Io

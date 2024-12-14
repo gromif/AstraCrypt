@@ -1,7 +1,7 @@
 package com.nevidimka655.astracrypt.app.di
 
 import android.content.Context
-import com.nevidimka655.astracrypt.app.config.AppConfig
+import com.nevidimka655.astracrypt.app.AppConfig
 import com.nevidimka655.astracrypt.app.utils.Io
 import com.nevidimka655.crypto.tink.KeysetFactory
 import dagger.Module
