@@ -6,11 +6,11 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
-import com.nevidimka655.astracrypt.view.MainVM
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.databinding.FragmentLabTextBinding
 import com.nevidimka655.astracrypt.app.extensions.clipboardManager
 import com.nevidimka655.astracrypt.app.extensions.setTooltip
+import com.nevidimka655.astracrypt.databinding.FragmentLabTextBinding
+import com.nevidimka655.astracrypt.view.MainVM
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

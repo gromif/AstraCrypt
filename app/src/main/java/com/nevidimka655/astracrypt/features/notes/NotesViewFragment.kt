@@ -16,10 +16,10 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.nevidimka655.astracrypt.view.MainVM
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.app.theme.AstraCryptTheme
 import com.nevidimka655.astracrypt.app.extensions.requireMenuHost
+import com.nevidimka655.astracrypt.app.theme.AstraCryptTheme
+import com.nevidimka655.astracrypt.view.MainVM
 import com.nevidimka655.notes.Notes
 import com.nevidimka655.notes.ui.OverviewScreen
 import kotlinx.coroutines.launch

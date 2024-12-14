@@ -35,12 +35,12 @@ import androidx.compose.ui.unit.dp
 import coil.ImageLoader
 import coil.compose.AsyncImage
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.features.profile.model.Avatars
-import com.nevidimka655.astracrypt.features.profile.shared.ProfileWidget
 import com.nevidimka655.astracrypt.data.model.CoilTinkModel
-import com.nevidimka655.astracrypt.domain.room.PagerTuple
 import com.nevidimka655.astracrypt.data.room.StorageItemState
 import com.nevidimka655.astracrypt.data.room.StorageItemType
+import com.nevidimka655.astracrypt.domain.room.PagerTuple
+import com.nevidimka655.astracrypt.features.profile.model.Avatars
+import com.nevidimka655.astracrypt.features.profile.shared.ProfileWidget
 import com.nevidimka655.ui.compose_core.CardWithTitle
 import com.nevidimka655.ui.compose_core.theme.spaces
 

@@ -49,14 +49,14 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.nevidimka655.astracrypt.view.MainVM
 import com.nevidimka655.astracrypt.R
+import com.nevidimka655.astracrypt.app.extensions.requireMenuHost
+import com.nevidimka655.astracrypt.app.theme.AstraCryptTheme
 import com.nevidimka655.astracrypt.features.help.HelpFragment
 import com.nevidimka655.astracrypt.features.help.HelpIndex
+import com.nevidimka655.astracrypt.view.MainVM
 import com.nevidimka655.astracrypt.view.composables.shared.BaseNoItemsPage
 import com.nevidimka655.astracrypt.view.composables.shared.NoItemsPageSize
-import com.nevidimka655.astracrypt.app.theme.AstraCryptTheme
-import com.nevidimka655.astracrypt.app.extensions.requireMenuHost
 import com.nevidimka655.ui.compose_core.CardWithTitle
 import com.nevidimka655.ui.compose_core.ext.LocalWindowWidth
 import com.nevidimka655.ui.compose_core.ext.isCompact

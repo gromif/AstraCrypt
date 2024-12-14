@@ -3,9 +3,9 @@ package com.nevidimka655.astracrypt.data.paging
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingSource
+import com.nevidimka655.astracrypt.app.AppConfig
 import com.nevidimka655.astracrypt.data.repository.files.FilesRepositoryProvider
 import com.nevidimka655.astracrypt.domain.room.PagerTuple
-import com.nevidimka655.astracrypt.app.AppConfig
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flatMapLatest

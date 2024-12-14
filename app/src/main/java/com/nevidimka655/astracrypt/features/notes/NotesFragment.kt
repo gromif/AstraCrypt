@@ -13,9 +13,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.compose.LazyPagingItems
-import com.nevidimka655.astracrypt.view.MainVM
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.app.theme.AstraCryptTheme
+import com.nevidimka655.astracrypt.view.MainVM
 import com.nevidimka655.notes.Notes
 import com.nevidimka655.notes.ui.List
 import com.nevidimka655.notes.ui.Note
