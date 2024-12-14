@@ -14,20 +14,21 @@ import coil.ImageLoader
 import coil.request.CachePolicy
 import coil.request.ImageRequest
 import coil.size.Scale
-import com.nevidimka655.astracrypt.features.profile.model.Avatars
-import com.nevidimka655.astracrypt.features.profile.model.ProfileInfo
-import com.nevidimka655.astracrypt.data.model.CoilTinkModel
+import com.nevidimka655.astracrypt.app.config.AppConfig
+import com.nevidimka655.astracrypt.app.di.IoDispatcher
+import com.nevidimka655.astracrypt.app.extensions.recreate
 import com.nevidimka655.astracrypt.app.utils.AeadManager
 import com.nevidimka655.astracrypt.app.utils.Api
-import com.nevidimka655.astracrypt.app.config.AppConfig
 import com.nevidimka655.astracrypt.app.utils.CenterCropTransformation
 import com.nevidimka655.astracrypt.app.utils.Io
 import com.nevidimka655.astracrypt.data.datastore.SettingsDataStoreManager
-import com.nevidimka655.astracrypt.app.extensions.recreate
+import com.nevidimka655.astracrypt.data.model.CoilTinkModel
+import com.nevidimka655.astracrypt.features.profile.model.Avatars
+import com.nevidimka655.astracrypt.features.profile.model.ProfileInfo
 import com.nevidimka655.crypto.tink.KeysetFactory
 import com.nevidimka655.crypto.tink.extensions.streamingAeadPrimitive
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -36,6 +37,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class EditProfileViewModel @Inject constructor(
+    @IoDispatcher
+    private val defaultDispatcher: CoroutineDispatcher,
     private val keysetFactory: KeysetFactory,
     private val settingsDataStoreManager: SettingsDataStoreManager,
     private val aeadManager: AeadManager,
@@ -49,20 +52,20 @@ class EditProfileViewModel @Inject constructor(
 
     private suspend fun updateProfile(
         updateBlock: (ProfileInfo) -> ProfileInfo
-    ) = withContext(Dispatchers.IO) {
+    ) = withContext(defaultDispatcher) {
         val newProfile = updateBlock(profileInfoFlow.first())
         settingsDataStoreManager.setProfileInfo(newProfile)
     }
 
-    fun updateName(name: String) = viewModelScope.launch {
+    fun updateName(name: String) = viewModelScope.launch(defaultDispatcher) {
         updateProfile { it.copy(name = name) }
     }
 
-    fun setDefaultAvatar(avatar: Avatars?) = viewModelScope.launch {
+    fun setDefaultAvatar(avatar: Avatars?) = viewModelScope.launch(defaultDispatcher) {
         updateProfile { it.copy(defaultAvatar = avatar) }
     }
 
-    fun setGalleryAvatar(context: Context, uri: Uri) = viewModelScope.launch(Dispatchers.IO) {
+    fun setGalleryAvatar(context: Context, uri: Uri) = viewModelScope.launch(defaultDispatcher) {
         isImageProcessing = true
         val bitmap = if (Api.atLeast10()) {
             context.contentResolver.loadThumbnail(
