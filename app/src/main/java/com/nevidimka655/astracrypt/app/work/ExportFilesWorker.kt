@@ -18,7 +18,7 @@ import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.data.model.AeadInfo
-import com.nevidimka655.astracrypt.domain.repository.Repository
+import com.nevidimka655.astracrypt.domain.repository.files.FilesRepository
 import com.nevidimka655.astracrypt.domain.room.ExportTuple
 import com.nevidimka655.astracrypt.app.utils.Api
 import com.nevidimka655.astracrypt.app.utils.Io
@@ -35,7 +35,7 @@ import kotlinx.serialization.json.Json
 class ExportFilesWorker @AssistedInject constructor(
     @Assisted context: Context,
     @Assisted params: WorkerParameters,
-    private val repository: Repository,
+    private val filesRepository: FilesRepository,
     private val keysetFactory: KeysetFactory,
     private val io: Io,
     private val workManager: WorkManager,
@@ -64,10 +64,10 @@ class ExportFilesWorker @AssistedInject constructor(
         val outputDirUri = inputData.getString(Args.uriDirOutput)!!
         val itemId = inputData.getLong(Args.itemId, 0)
         val startDir = createStartDocumentFile(outputDirUri.toUri())
-        val itemIsFile = repository.getTypeById(id = itemId).isFile
+        val itemIsFile = filesRepository.getTypeById(id = itemId).isFile
         if (startDir != null) {
             if (itemIsFile) fileIterator(
-                exportTuple = repository.getDataToExport(itemId),
+                exportTuple = filesRepository.getDataToExport(itemId),
                 parentDir = startDir
             ) else directoryIterator(
                 dirId = itemId,
@@ -81,10 +81,10 @@ class ExportFilesWorker @AssistedInject constructor(
         DocumentFile.fromTreeUri(applicationContext, startUri)
 
     private suspend fun directoryIterator(dirId: Long, parentDir: DocumentFile?) {
-        val dirName = repository.getDataToExport(dirId).name
+        val dirName = filesRepository.getDataToExport(dirId).name
         val newDirectory = parentDir?.createDirectory(dirName)
         if (newDirectory != null) {
-            repository.getListDataToExportFromDir(dirId).forEach {
+            filesRepository.getListDataToExportFromDir(dirId).forEach {
                 if (!isStopped) {
                     if (it.path.isNotEmpty()) fileIterator(it, newDirectory)
                     else directoryIterator(it.id, newDirectory)

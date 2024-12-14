@@ -1,26 +1,24 @@
-package com.nevidimka655.astracrypt.data.repository
+package com.nevidimka655.astracrypt.data.repository.files
 
 import androidx.paging.PagingSource
 import com.nevidimka655.astracrypt.data.model.DetailsFolderContent
-import com.nevidimka655.astracrypt.domain.repository.Repository
-import com.nevidimka655.astracrypt.domain.room.daos.StorageItemDao
+import com.nevidimka655.astracrypt.data.room.DatabaseColumns
+import com.nevidimka655.astracrypt.data.room.StorageItemState
+import com.nevidimka655.astracrypt.data.room.StorageItemType
+import com.nevidimka655.astracrypt.domain.repository.files.FilesRepository
 import com.nevidimka655.astracrypt.domain.room.DatabaseTransformTuple
 import com.nevidimka655.astracrypt.domain.room.ExportTuple
 import com.nevidimka655.astracrypt.domain.room.OpenTuple
 import com.nevidimka655.astracrypt.domain.room.PagerTuple
 import com.nevidimka655.astracrypt.domain.room.StorageDirMinimalTuple
 import com.nevidimka655.astracrypt.domain.room.StorageItemMinimalTuple
+import com.nevidimka655.astracrypt.domain.room.daos.StorageItemDao
 import com.nevidimka655.astracrypt.domain.room.entities.StorageItemEntity
-import com.nevidimka655.astracrypt.data.room.DatabaseColumns
-import com.nevidimka655.astracrypt.data.room.StorageItemState
-import com.nevidimka655.astracrypt.data.room.StorageItemType
 import kotlinx.coroutines.flow.Flow
 
-class PlainRepository(
-    private val storage: StorageItemDao
-): Repository {
+class FilesFilesRepositoryImpl(private val dao: StorageItemDao): FilesRepository {
     override suspend fun insert(item: StorageItemEntity) {
-        storage.insert(item)
+        dao.insert(item)
     }
 
     override suspend fun updateDbEntry(
@@ -30,7 +28,7 @@ class PlainRepository(
         path: String,
         flags: String
     ) {
-        storage.updateDbEntry(
+        dao.updateDbEntry(
             DatabaseTransformTuple(id, name, thumb, path, flags)
         )
     }
@@ -46,7 +44,7 @@ class PlainRepository(
     }
 
     override suspend fun deleteByIds(storageItemIds: ArrayList<Long>) {
-        storage.deleteByIds(storageItemIds)
+        dao.deleteByIds(storageItemIds)
     }
 
     override suspend fun setStarred(
@@ -56,11 +54,11 @@ class PlainRepository(
     ) {
         val newState = if (state) StorageItemState.Starred else StorageItemState.Default
         if (id != null) {
-            storage.setStarred(
+            dao.setStarred(
                 id = id,
                 state = newState
             )
-        } else if (idsArray != null) storage.setStarred(
+        } else if (idsArray != null) dao.setStarred(
             idsArray = idsArray,
             state = newState
         )
@@ -70,55 +68,55 @@ class PlainRepository(
         idsArray: List<Long>,
         newDirId: Long
     ) {
-        storage.moveItems(idsArray = idsArray, newDirId = newDirId)
+        dao.moveItems(idsArray = idsArray, newDirId = newDirId)
     }
 
     override suspend fun updateName(id: Long, name: String) {
-        storage.updateName(id, name)
+        dao.updateName(id, name)
     }
 
     override suspend fun getById(itemId: Long): StorageItemEntity {
-        return storage.getById(itemId)
+        return dao.getById(itemId)
     }
 
     override suspend fun getMaxId(): Long {
-        return storage.getMaxId()
+        return dao.getMaxId()
     }
 
     override suspend fun getTypeById(id: Long): StorageItemType {
-        return storage.getTypeById(id)
+        return dao.getTypeById(id)
     }
 
     override suspend fun getDirIdsList(dirId: Long): List<Long> {
-        return storage.getDirIdsList(dirId)
+        return dao.getDirIdsList(dirId)
     }
 
     override suspend fun getFilesCountFlow(dirId: Long): Int {
-        return storage.getFilesCountFlow(dirId)
+        return dao.getFilesCountFlow(dirId)
     }
 
     override suspend fun getListDataToExportFromDir(dirId: Long): List<ExportTuple> {
-        return storage.getListDataToExport(dirId)
+        return dao.getListDataToExport(dirId)
     }
 
     override suspend fun getDataToExport(itemId: Long): ExportTuple {
-        return storage.getDataToExport(itemId)
+        return dao.getDataToExport(itemId)
     }
 
     override suspend fun getMinimalItemsDataInDir(dirId: Long): List<StorageItemMinimalTuple> {
-        return storage.getMinimalItemsDataInDir(dirId)
+        return dao.getMinimalItemsDataInDir(dirId)
     }
 
     override suspend fun getMinimalItemData(id: Long): StorageItemMinimalTuple {
-        return storage.getMinimalItemData(id)
+        return dao.getMinimalItemData(id)
     }
 
     override suspend fun getDataForOpening(id: Long): OpenTuple {
-        return storage.getDataToOpen(id)
+        return dao.getDataToOpen(id)
     }
 
     override suspend fun getParentDirInfo(dirId: Long): StorageDirMinimalTuple? {
-        return storage.getParentDirInfo(dirId)
+        return dao.getParentDirInfo(dirId)
     }
 
     override suspend fun getAbsolutePath(
@@ -141,7 +139,7 @@ class PlainRepository(
         pageSize: Int,
         pageIndex: Int
     ): List<DatabaseTransformTuple> {
-        return storage.getDatabaseTransformItems(pageSize, pageIndex)
+        return dao.getDatabaseTransformItems(pageSize, pageIndex)
     }
 
     override suspend fun getFolderContent(id: Long): DetailsFolderContent {
@@ -160,7 +158,7 @@ class PlainRepository(
     }
 
     override fun getRecentFilesFlow(): Flow<List<PagerTuple>> {
-        return storage.getRecentFilesFlow()
+        return dao.getRecentFilesFlow()
     }
 
     override fun getList(
@@ -168,7 +166,7 @@ class PlainRepository(
         searchQuery: String?,
         dirIdsForSearch: List<Long>
     ): PagingSource<Int, PagerTuple> {
-        return storage.listOrderDescAsc(
+        return dao.listOrderDescAsc(
             parentDirId = if (dirIdsForSearch.isEmpty()) parentDirectoryId else -1,
             query = searchQuery,
             dirIdsForSearch = dirIdsForSearch,
@@ -180,7 +178,7 @@ class PlainRepository(
     override fun getStarredList(
         searchQuery: String?
     ): PagingSource<Int, PagerTuple> {
-        return storage.listOrderDescAsc(
+        return dao.listOrderDescAsc(
             isStarredOnly = true,
             query = searchQuery,
             sortingItemType = StorageItemType.Folder.ordinal,

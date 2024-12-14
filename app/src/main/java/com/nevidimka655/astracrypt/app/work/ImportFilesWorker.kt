@@ -33,7 +33,7 @@ import com.nevidimka655.astracrypt.app.utils.Api
 import com.nevidimka655.astracrypt.app.utils.Io
 import com.nevidimka655.astracrypt.app.utils.MediaMetadataRetrieverCompat
 import com.nevidimka655.astracrypt.app.utils.Randomizer
-import com.nevidimka655.astracrypt.domain.repository.Repository
+import com.nevidimka655.astracrypt.domain.repository.files.FilesRepository
 import com.nevidimka655.astracrypt.data.model.AeadInfo
 import com.nevidimka655.astracrypt.data.model.StorageItemFlags
 import com.nevidimka655.astracrypt.domain.room.entities.StorageItemEntity
@@ -57,7 +57,7 @@ import java.io.OutputStream
 class ImportFilesWorker @AssistedInject constructor(
     @Assisted context: Context,
     @Assisted params: WorkerParameters,
-    private val repository: Repository,
+    private val filesRepository: FilesRepository,
     private val keysetFactory: KeysetFactory,
     private val io: Io,
     private val randomizer: Randomizer,
@@ -98,7 +98,7 @@ class ImportFilesWorker @AssistedInject constructor(
         val file = File(inputData.getString(Args.fileWithUris)!!)
         val urisList = withContext(defaultDispatcher) { file.readLines() }
         file.delete()
-        var nextId = withContext(defaultDispatcher) { repository.getMaxId() }
+        var nextId = withContext(defaultDispatcher) { filesRepository.getMaxId() }
         try {
             urisList.forEach {
                 yield()
@@ -180,7 +180,7 @@ class ImportFilesWorker @AssistedInject constructor(
                 creationTime = creationDate,
                 //thumbnailEncryptionType = aeadInfo.file?.ordinal ?: -1
             )
-            repository.insert(item)
+            filesRepository.insert(item)
             if (!saveOriginalFiles) try {
                 val isFileDeleted = docFile.delete()
                 if (isFileDeleted) return@coroutineScope

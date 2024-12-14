@@ -14,7 +14,7 @@ import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
 import com.google.crypto.tink.Aead
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.domain.repository.Repository
+import com.nevidimka655.astracrypt.domain.repository.files.FilesRepository
 import com.nevidimka655.astracrypt.data.model.AeadInfo
 import com.nevidimka655.astracrypt.domain.room.DatabaseTransformTuple
 import com.nevidimka655.astracrypt.data.room.RepositoryEncryption
@@ -35,7 +35,7 @@ import kotlin.random.Random
 class TransformDatabaseWorker @AssistedInject constructor(
     @Assisted appContext: Context,
     @Assisted params: WorkerParameters,
-    private val repository: Repository,
+    private val filesRepository: FilesRepository,
     private val repositoryEncryption: RepositoryEncryption,
     private val keysetFactory: KeysetFactory
 ) : CoroutineWorker(appContext, params) {
@@ -81,11 +81,11 @@ class TransformDatabaseWorker @AssistedInject constructor(
             shouldDecodeAssociatedData()
             var pageIndex = 0
             val pageSize = 20
-            var itemsList = repository.getDatabaseTransformItems(pageSize, pageIndex)
+            var itemsList = filesRepository.getDatabaseTransformItems(pageSize, pageIndex)
             while (itemsList.isNotEmpty()) {
                 iterateDatabaseItems(itemsList)
                 pageIndex++
-                itemsList = repository.getDatabaseTransformItems(pageSize, pageIndex)
+                itemsList = filesRepository.getDatabaseTransformItems(pageSize, pageIndex)
             }
         }
         delay(500)
@@ -120,7 +120,7 @@ class TransformDatabaseWorker @AssistedInject constructor(
         val thumbnail = operateStringField(encryptThumb, isThumbEncrypted, it.preview)
         val path = operateStringField(encryptPath, isPathEncrypted, it.path)
         val details = operateStringField(encryptDetails, isFlagsEncrypted, it.flags)
-        repository.updateDbEntry(
+        filesRepository.updateDbEntry(
             id = it.id,
             name = name,
             thumb = thumbnail,

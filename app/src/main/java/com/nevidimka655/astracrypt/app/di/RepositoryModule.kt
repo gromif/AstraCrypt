@@ -2,14 +2,14 @@ package com.nevidimka655.astracrypt.app.di
 
 import android.content.Context
 import androidx.room.Room
-import com.nevidimka655.astracrypt.data.repository.PlainRepository
-import com.nevidimka655.astracrypt.data.repository.RepositoryProvider
-import com.nevidimka655.astracrypt.data.room.AppDatabase
-import com.nevidimka655.astracrypt.domain.repository.Repository
-import com.nevidimka655.astracrypt.domain.room.daos.StorageItemDao
-import com.nevidimka655.astracrypt.data.room.RepositoryEncryption
 import com.nevidimka655.astracrypt.app.utils.AeadManager
 import com.nevidimka655.astracrypt.data.datastore.SettingsDataStoreManager
+import com.nevidimka655.astracrypt.data.repository.files.FilesFilesRepositoryImpl
+import com.nevidimka655.astracrypt.data.repository.files.FilesRepositoryProvider
+import com.nevidimka655.astracrypt.data.room.AppDatabase
+import com.nevidimka655.astracrypt.data.room.RepositoryEncryption
+import com.nevidimka655.astracrypt.domain.repository.files.FilesRepository
+import com.nevidimka655.astracrypt.domain.room.daos.StorageItemDao
 import com.nevidimka655.crypto.tink.KeysetFactory
 import dagger.Module
 import dagger.Provides
@@ -26,23 +26,23 @@ object RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideRepository(
+    fun provideFilesRepository(
         storage: StorageItemDao
-    ): Repository = PlainRepository(storage = storage)
+    ): FilesRepository = FilesFilesRepositoryImpl(dao = storage)
 
     @Singleton
     @Provides
-    fun provideRepositoryProvider(
-        plainRepository: Repository,
+    fun provideFilesRepositoryProvider(
+        plainFilesRepository: FilesRepository,
         settingsDataStoreManager: SettingsDataStoreManager
-    ): RepositoryProvider = RepositoryProvider(
-        plainRepository = plainRepository,
+    ): FilesRepositoryProvider = FilesRepositoryProvider(
+        plainFilesRepository = plainFilesRepository,
         aeadInfoFlow = settingsDataStoreManager.aeadInfoFlow
     )
 
     @Singleton
     @Provides
-    fun provideRepositoryEncryption(
+    fun provideFilesAeadRepository(
         keysetFactory: KeysetFactory, aeadManager: AeadManager
     ) = RepositoryEncryption(keysetFactory = keysetFactory, aeadManager = aeadManager)
 

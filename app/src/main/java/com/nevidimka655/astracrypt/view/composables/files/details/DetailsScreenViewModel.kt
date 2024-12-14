@@ -13,7 +13,7 @@ import androidx.compose.material.icons.outlined.SdCard
 import androidx.lifecycle.ViewModel
 import coil.ImageLoader
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.domain.repository.Repository
+import com.nevidimka655.astracrypt.domain.repository.files.FilesRepository
 import com.nevidimka655.astracrypt.data.model.StorageItemFlags
 import com.nevidimka655.astracrypt.app.utils.Io
 import com.nevidimka655.astracrypt.data.room.StorageItemType
@@ -28,7 +28,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailsScreenViewModel @Inject constructor(
-    private val repository: Repository,
+    private val filesRepository: FilesRepository,
     private val io: Io,
     val detailsManager: DetailsManager,
     val imageLoader: ImageLoader
@@ -37,8 +37,8 @@ class DetailsScreenViewModel @Inject constructor(
     var type: StorageItemType = StorageItemType.Other
 
     suspend fun submitDetailsQuery(context: Context, itemId: Long) = detailsManager.run {
-        val item = repository.getById(itemId)
-        val absolutePath = repository.getAbsolutePath(
+        val item = filesRepository.getById(itemId)
+        val absolutePath = filesRepository.getAbsolutePath(
             childName = item.name,
             parentId = item.parentDirectoryId
         )
@@ -114,7 +114,7 @@ class DetailsScreenViewModel @Inject constructor(
                 )*/
             }
         } else {
-            val content = repository.getFolderContent(item.id)
+            val content = filesRepository.getFolderContent(item.id)
             addGroup(name = TextWrap.Resource(id = R.string.folder)) {
                 val files = context.getString(R.string.files)
                 val folders = context.getString(R.string.folders)

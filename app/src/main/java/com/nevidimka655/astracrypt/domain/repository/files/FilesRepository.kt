@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.domain.repository
+package com.nevidimka655.astracrypt.domain.repository.files
 
 import androidx.paging.PagingSource
 import com.nevidimka655.astracrypt.data.model.DetailsFolderContent
@@ -12,7 +12,7 @@ import com.nevidimka655.astracrypt.domain.room.entities.StorageItemEntity
 import com.nevidimka655.astracrypt.data.room.StorageItemType
 import kotlinx.coroutines.flow.Flow
 
-interface Repository {
+interface FilesRepository {
 
     suspend fun insert(item: StorageItemEntity)
 

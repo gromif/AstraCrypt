@@ -17,7 +17,7 @@ import com.nevidimka655.astracrypt.app.utils.AeadManager
 import com.nevidimka655.astracrypt.app.utils.Io
 import com.nevidimka655.astracrypt.app.work.ExportFilesWorker
 import com.nevidimka655.astracrypt.data.model.ExportUiState
-import com.nevidimka655.astracrypt.domain.repository.Repository
+import com.nevidimka655.astracrypt.domain.repository.files.FilesRepository
 import com.nevidimka655.astracrypt.domain.room.OpenTuple
 import com.nevidimka655.crypto.tink.KeysetFactory
 import com.nevidimka655.crypto.tink.extensions.toBase64
@@ -40,7 +40,7 @@ private typealias Args = ExportFilesWorker.Args
 @HiltViewModel
 class ExportScreenViewModel @Inject constructor(
     private val aeadManager: AeadManager,
-    private val repository: Repository,
+    private val filesRepository: FilesRepository,
     private val keysetFactory: KeysetFactory,
     val io: Io,
     val workManager: WorkManager
@@ -53,7 +53,7 @@ class ExportScreenViewModel @Inject constructor(
         itemId: Long, contentResolver: ContentResolver
     ) = viewModelScope.launch(Dispatchers.IO) {
         export(
-            exportTuple = repository.getDataForOpening(id = itemId),
+            exportTuple = filesRepository.getDataForOpening(id = itemId),
             contentResolver = contentResolver
         )
     }

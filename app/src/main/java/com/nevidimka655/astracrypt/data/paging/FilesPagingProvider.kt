@@ -5,10 +5,10 @@ import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingSource
-import com.nevidimka655.astracrypt.data.repository.RepositoryProvider
-import com.nevidimka655.astracrypt.data.model.NavigatorDirectory
-import com.nevidimka655.astracrypt.domain.room.PagerTuple
 import com.nevidimka655.astracrypt.app.config.AppConfig
+import com.nevidimka655.astracrypt.data.model.NavigatorDirectory
+import com.nevidimka655.astracrypt.data.repository.files.FilesRepositoryProvider
+import com.nevidimka655.astracrypt.domain.room.PagerTuple
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flatMapLatest
@@ -16,7 +16,7 @@ import okhttp3.internal.toImmutableList
 import javax.inject.Inject
 
 class FilesPagingProvider @Inject constructor(
-    private val repositoryProvider: RepositoryProvider
+    private val filesRepositoryProvider: FilesRepositoryProvider
 ) {
     private val pagingSource = MutableStateFlow<PagingSource<Int, PagerTuple>?>(null)
 
@@ -27,7 +27,7 @@ class FilesPagingProvider @Inject constructor(
         filesNavigatorList: SnapshotStateList<NavigatorDirectory>,
         searchQuery: MutableState<String?>,
         searchDirsIndexesList: SnapshotStateList<Long>
-    ) = repositoryProvider.repository.flatMapLatest { currentRepository ->
+    ) = filesRepositoryProvider.filesRepository.flatMapLatest { currentRepository ->
         Pager(
             PagingConfig(
                 pageSize = AppConfig.PAGING_PAGE_SIZE,
