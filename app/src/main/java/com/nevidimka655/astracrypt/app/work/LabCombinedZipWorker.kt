@@ -17,11 +17,12 @@ import androidx.work.ForegroundInfo
 import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.app.utils.Api
+import com.nevidimka655.astracrypt.app.di.IoDispatcher
 import com.nevidimka655.astracrypt.app.extensions.contentResolver
+import com.nevidimka655.astracrypt.app.utils.Api
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import okio.use
 import java.io.File
@@ -32,6 +33,8 @@ import java.util.zip.ZipOutputStream
 class LabCombinedZipWorker @AssistedInject constructor(
     @Assisted appContext: Context,
     @Assisted params: WorkerParameters,
+    @IoDispatcher
+    private val defaultDispatcher: CoroutineDispatcher,
     private val workManager: WorkManager
 ) : CoroutineWorker(appContext, params) {
 
@@ -43,7 +46,7 @@ class LabCombinedZipWorker @AssistedInject constructor(
 
     private val notificationId = 203
 
-    override suspend fun doWork() = withContext(Dispatchers.IO) {
+    override suspend fun doWork() = withContext(defaultDispatcher) {
         var workerResult = Result.success()
         setForeground(getForegroundInfo())
         val destinationUri = inputData.getString(Args.TARGET_URI)!!.toUri()
