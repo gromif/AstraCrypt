@@ -1,6 +1,5 @@
 package com.nevidimka655.astracrypt.view.composables.shared.appbar
 
-import android.R
 import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -34,7 +33,7 @@ fun SearchBarImpl(
             expanded = expanded,
             onExpandedChange = onExpandedChange,
             placeholder = {
-                Text(text = stringResource(id = R.string.search_go))
+                Text(text = stringResource(id = android.R.string.search_go))
             },
             leadingIcon = {
                 val localBackDispatcher = LocalOnBackPressedDispatcherOwner.current
