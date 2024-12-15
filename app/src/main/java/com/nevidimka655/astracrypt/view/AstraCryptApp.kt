@@ -48,7 +48,6 @@ fun AstraCryptApp(
     vm: MainVM = viewModel<MainVM>(),
     navController: NavHostController = rememberNavController()
 ) = AstraCryptTheme(dynamicThemeFlow = vm.appearanceManager.dynamicThemeFlow) {
-    val context = LocalContext.current
     var uiState by vm.uiState
     val (toolbar, fab, bottomBarTab, searchBar) = uiState
     var searchBarExpanded by rememberSaveable { mutableStateOf(false) }
@@ -108,6 +107,7 @@ fun AstraCryptApp(
             )
         },
         floatingActionButton = {
+            val context = LocalContext.current
             FloatingActionButtonImpl(
                 visible = !toolbarIsCollapsing && (fab != null) && !vm.isSearching && !searchBarExpanded,
                 imageVector = fab?.icon,
