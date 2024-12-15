@@ -2,7 +2,7 @@ package com.nevidimka655.astracrypt.view.navigation
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
-import com.nevidimka655.astracrypt.data.model.ToolbarAction
+import com.nevidimka655.astracrypt.view.models.ToolbarAction
 import com.nevidimka655.astracrypt.view.MainVM
 import com.nevidimka655.astracrypt.view.composables.files.details.details
 import com.nevidimka655.astracrypt.view.composables.notes.notesGraph

@@ -1,7 +1,6 @@
 package com.nevidimka655.astracrypt.view.models
 
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.data.model.ToolbarAction
 import com.nevidimka655.astracrypt.view.navigation.BottomBarItems
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 

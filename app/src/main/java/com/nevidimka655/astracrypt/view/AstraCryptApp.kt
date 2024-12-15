@@ -28,7 +28,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
 import com.nevidimka655.astracrypt.app.theme.AstraCryptTheme
-import com.nevidimka655.astracrypt.data.model.ToolbarAction
+import com.nevidimka655.astracrypt.view.models.ToolbarAction
 import com.nevidimka655.astracrypt.view.composables.shared.BottomBarImpl
 import com.nevidimka655.astracrypt.view.composables.shared.FloatingActionButtonImpl
 import com.nevidimka655.astracrypt.view.composables.shared.appbar.SearchBarImpl

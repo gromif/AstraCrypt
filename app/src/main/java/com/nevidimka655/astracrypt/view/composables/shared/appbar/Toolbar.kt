@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.data.model.ToolbarAction
+import com.nevidimka655.astracrypt.view.models.ToolbarAction
 import com.nevidimka655.ui.compose_core.IconButton
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 

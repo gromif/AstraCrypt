@@ -4,7 +4,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Science
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.data.model.ToolbarAction
+import com.nevidimka655.astracrypt.view.models.ToolbarAction
 
 class ToolbarActionLab(
     override val contentDescription: Int = R.string.lab,

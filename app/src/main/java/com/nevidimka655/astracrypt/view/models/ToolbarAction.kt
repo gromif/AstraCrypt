@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.data.model
+package com.nevidimka655.astracrypt.view.models
 
 import androidx.compose.ui.graphics.vector.ImageVector
 
