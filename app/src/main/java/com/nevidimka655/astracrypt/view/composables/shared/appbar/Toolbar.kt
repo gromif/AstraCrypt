@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.view.models.Actions
+import com.nevidimka655.astracrypt.data.model.ToolbarAction
 import com.nevidimka655.ui.compose_core.IconButton
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 
@@ -22,9 +22,9 @@ fun ToolbarImpl(
     modifier: Modifier = Modifier,
     title: TextWrap,
     backButton: Boolean,
-    actions: Actions?,
+    actions: List<ToolbarAction>?,
     onNavigateUp: () -> Unit,
-    onActionPressed: (Actions) -> Unit,
+    onActionPressed: (ToolbarAction) -> Unit,
     scrollBehavior: TopAppBarScrollBehavior
 ) {
     val context = LocalContext.current
@@ -38,11 +38,11 @@ fun ToolbarImpl(
             )
         },
         actions = {
-            actions?.list?.forEach {
+            actions?.forEach {
                 IconButton(
                     icon = it.icon,
                     contentDescription = stringResource(id = it.contentDescription),
-                    onClick = { onActionPressed(actions) }
+                    onClick = { onActionPressed(it) }
                 )
             }
         },

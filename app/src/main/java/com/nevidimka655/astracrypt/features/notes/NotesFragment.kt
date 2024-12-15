@@ -4,22 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.paging.compose.LazyPagingItems
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.app.theme.AstraCryptTheme
 import com.nevidimka655.astracrypt.view.MainVM
-import com.nevidimka655.notes.Notes
-import com.nevidimka655.notes.ui.List
-import com.nevidimka655.notes.ui.Note
-import kotlinx.coroutines.launch
 
 class NotesFragment : Fragment() {
     private val vm by activityViewModels<MainVM>()
@@ -47,29 +40,7 @@ class NotesFragment : Fragment() {
         }
     }
 
-    @Composable
-    fun NotesScreen(noteItems: LazyPagingItems<Notes.Item>) = Notes.List {
-        items(
-            count = noteItems.itemSnapshotList.size,
-            key = { noteItems[it]?.id ?: it }
-        ) { index ->
-            noteItems[index]?.let {
-                Notes.Note(
-                    title = it.title,
-                    summary = it.textPreview,
-                    date = it.creationTime
-                ) {
-                    lifecycleScope.launch {
-                        notesManager.preloadText(
-                            noteId = it.id,
-                            title = it.title
-                        )
-                    }
-                    showNote(title = it.title)
-                }
-            }
-        }
-    }
+
 
     private fun showNote(title: String? = null) {
         findNavController().navigate(

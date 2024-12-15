@@ -1,7 +1,7 @@
 package com.nevidimka655.astracrypt.domain.repository.notes
 
 import androidx.paging.PagingSource
-import com.nevidimka655.astracrypt.domain.room.NoteItemListTuple
+import com.nevidimka655.astracrypt.domain.room.NotesPagerTuple
 import com.nevidimka655.astracrypt.domain.room.TransformNotesTuple
 import com.nevidimka655.astracrypt.domain.room.entities.NoteItemEntity
 
@@ -21,6 +21,6 @@ interface NotesRepository {
 
     suspend fun getTextId(itemId: Long): String?
 
-    fun listOrderDescAsc(): PagingSource<Int, NoteItemListTuple>
+    fun listOrderDescAsc(): PagingSource<Int, NotesPagerTuple>
 
 }

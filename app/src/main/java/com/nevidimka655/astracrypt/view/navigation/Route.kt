@@ -12,6 +12,11 @@ object Route {
     }
 
     @Serializable
+    object NotesGraph {
+        @Serializable object NotesList
+    }
+
+    @Serializable
     data class Details(
         @StringRes val titleId: Int = R.string.files_options_details,
         val itemId: Long

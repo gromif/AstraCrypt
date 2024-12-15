@@ -2,7 +2,7 @@ package com.nevidimka655.astracrypt.domain.room.daos
 
 import androidx.paging.PagingSource
 import androidx.room.*
-import com.nevidimka655.astracrypt.domain.room.NoteItemListTuple
+import com.nevidimka655.astracrypt.domain.room.NotesPagerTuple
 import com.nevidimka655.astracrypt.domain.room.TransformNotesTuple
 import com.nevidimka655.astracrypt.domain.room.entities.NoteItemEntity
 
@@ -33,6 +33,6 @@ interface NotesDao {
 
     @RewriteQueriesToDropUnusedColumns
     @Query("select * from notes order by id desc")
-    fun listOrderDescAsc(): PagingSource<Int, NoteItemListTuple>
+    fun listOrderDescAsc(): PagingSource<Int, NotesPagerTuple>
 
 }

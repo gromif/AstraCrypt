@@ -1,5 +1,6 @@
 package com.nevidimka655.astracrypt.view.composables
 
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -11,6 +12,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.nevidimka655.astracrypt.R
+import com.nevidimka655.astracrypt.data.model.ToolbarAction
 import com.nevidimka655.astracrypt.features.profile.model.ProfileInfo
 import com.nevidimka655.astracrypt.view.MainVM
 import com.nevidimka655.astracrypt.view.composables.files.FilesScreen
@@ -18,19 +20,23 @@ import com.nevidimka655.astracrypt.view.composables.files.FilesViewModel
 import com.nevidimka655.astracrypt.view.composables.home.HomeScreen
 import com.nevidimka655.astracrypt.view.composables.home.HomeViewModel
 import com.nevidimka655.astracrypt.view.composables.settings.SettingsScreen
-import com.nevidimka655.astracrypt.view.models.Actions
 import com.nevidimka655.astracrypt.view.models.FabIcons
 import com.nevidimka655.astracrypt.view.models.UiState
+import com.nevidimka655.astracrypt.view.models.actions.ToolbarActionLab
+import com.nevidimka655.astracrypt.view.models.actions.ToolbarActionNotes
 import com.nevidimka655.astracrypt.view.navigation.BottomBarItems
 import com.nevidimka655.astracrypt.view.navigation.Route
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.receiveAsFlow
 
 inline fun NavGraphBuilder.tabs(
     crossinline onUiStateChange: (UiState) -> Unit,
     vm: MainVM,
     navController: NavController,
-    onFabClick: Channel<Any>
+    onFabClick: Channel<Any>,
+    onToolbarActions: Channel<ToolbarAction>
 ) {
     composable<Route.Tabs.Home> {
         onUiStateChange(HomeUiState)
@@ -39,6 +45,13 @@ inline fun NavGraphBuilder.tabs(
             initialValue = ProfileInfo()
         )
         val recentFiles by homeVm.recentFilesStateFlow.collectAsStateWithLifecycle()
+        LaunchedEffect(Unit) {
+            onToolbarActions.receiveAsFlow().collectLatest {
+                when (it) {
+                    is ToolbarActionNotes -> navController.navigate(Route.NotesGraph)
+                }
+            }
+        }
         HomeScreen(
             recentFiles = recentFiles,
             imageLoader = homeVm.imageLoader,
@@ -106,7 +119,12 @@ inline fun NavGraphBuilder.tabs(
 }
 
 val HomeUiState = UiState(
-    toolbar = UiState.Toolbar(actions = Actions.Home),
+    toolbar = UiState.Toolbar(
+        actions = listOf(
+            ToolbarActionNotes(),
+            ToolbarActionLab()
+        )
+    ),
     bottomBarTab = BottomBarItems.Home
 )
 

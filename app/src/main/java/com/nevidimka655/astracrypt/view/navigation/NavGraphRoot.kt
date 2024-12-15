@@ -2,8 +2,10 @@ package com.nevidimka655.astracrypt.view.navigation
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
+import com.nevidimka655.astracrypt.data.model.ToolbarAction
 import com.nevidimka655.astracrypt.view.MainVM
 import com.nevidimka655.astracrypt.view.composables.files.details.details
+import com.nevidimka655.astracrypt.view.composables.notes.notesGraph
 import com.nevidimka655.astracrypt.view.composables.settings.about.navigation.aboutGraph
 import com.nevidimka655.astracrypt.view.composables.settings.profile.editProfile
 import com.nevidimka655.astracrypt.view.composables.settings.security.admin.settingsSecurityAdmin
@@ -21,11 +23,18 @@ inline fun root(
     crossinline onUiStateChange: (UiState) -> Unit,
     vm: MainVM,
     navController: NavController,
-    onFabClick: Channel<Any>
+    onFabClick: Channel<Any>,
+    onToolbarActions: Channel<ToolbarAction>
 ): NavGraphBuilder.() -> Unit = {
     tabs(
         onUiStateChange = onUiStateChange,
         vm = vm,
+        navController = navController,
+        onFabClick = onFabClick,
+        onToolbarActions = onToolbarActions
+    )
+    notesGraph(
+        onUiStateChange = onUiStateChange,
         navController = navController,
         onFabClick = onFabClick
     )

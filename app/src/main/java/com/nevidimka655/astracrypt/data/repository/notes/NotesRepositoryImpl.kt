@@ -2,7 +2,7 @@ package com.nevidimka655.astracrypt.data.repository.notes
 
 import androidx.paging.PagingSource
 import com.nevidimka655.astracrypt.domain.repository.notes.NotesRepository
-import com.nevidimka655.astracrypt.domain.room.NoteItemListTuple
+import com.nevidimka655.astracrypt.domain.room.NotesPagerTuple
 import com.nevidimka655.astracrypt.domain.room.TransformNotesTuple
 import com.nevidimka655.astracrypt.domain.room.daos.NotesDao
 import com.nevidimka655.astracrypt.domain.room.entities.NoteItemEntity
@@ -34,7 +34,7 @@ class NotesRepositoryImpl(private val dao: NotesDao) : NotesRepository {
         return dao.getTextId(itemId)
     }
 
-    override fun listOrderDescAsc(): PagingSource<Int, NoteItemListTuple> {
+    override fun listOrderDescAsc(): PagingSource<Int, NotesPagerTuple> {
         return dao.listOrderDescAsc()
     }
 }

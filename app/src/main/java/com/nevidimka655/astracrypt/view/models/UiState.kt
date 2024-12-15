@@ -2,6 +2,7 @@ package com.nevidimka655.astracrypt.view.models
 
 import androidx.compose.runtime.saveable.Saver
 import com.nevidimka655.astracrypt.R
+import com.nevidimka655.astracrypt.data.model.ToolbarAction
 import com.nevidimka655.astracrypt.view.navigation.BottomBarItems
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 
@@ -30,7 +31,7 @@ data class UiState(
 
     data class Toolbar(
         val title: TextWrap = TextWrap.Resource(id = R.string.home),
-        val actions: Actions? = null
+        val actions: List<ToolbarAction>? = null
     )
 
     data class Fab(

@@ -28,6 +28,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
 import com.nevidimka655.astracrypt.app.theme.AstraCryptTheme
+import com.nevidimka655.astracrypt.data.model.ToolbarAction
 import com.nevidimka655.astracrypt.view.composables.shared.BottomBarImpl
 import com.nevidimka655.astracrypt.view.composables.shared.FloatingActionButtonImpl
 import com.nevidimka655.astracrypt.view.composables.shared.appbar.SearchBarImpl
@@ -51,7 +52,7 @@ fun AstraCryptApp(
     val (toolbar, fab, bottomBarTab, searchBar) = uiState
     var searchBarExpanded by rememberSaveable { mutableStateOf(false) }
     val onFabClick = remember { Channel<Any>(0) }
-    val onToolbarActions = remember { Channel<Any>(0) }
+    val onToolbarActions = remember { Channel<ToolbarAction>(0) }
 
     val coroutineScope = rememberCoroutineScope()
     val topBarScroll = TopAppBarDefaults.enterAlwaysScrollBehavior()
@@ -137,7 +138,8 @@ fun AstraCryptApp(
                 onUiStateChange = { uiState = it },
                 vm = vm,
                 navController = navController,
-                onFabClick = onFabClick
+                onFabClick = onFabClick,
+                onToolbarActions = onToolbarActions
             )
         )
     }

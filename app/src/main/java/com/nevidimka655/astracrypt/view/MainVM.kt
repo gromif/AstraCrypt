@@ -80,25 +80,6 @@ class MainVM @Inject constructor(
         lastSearchQuery = searchQuery.value
     ).cachedIn(viewModelScope)
 
-    /*val notesPagingFlow = Pager(
-        PagingConfig(
-            pageSize = 10,
-            enablePlaceholders = false,
-            initialLoadSize = 10
-        ),
-        pagingSourceFactory = { repository.getNotesList() }
-    ).flow.map { pagingData ->
-        val timePattern = "d MMMM yyyy"
-        repositoryEncryption.decryptNotesPager(pagingData).map {
-            Notes.Item(
-                id = it.id,
-                title = it.name,
-                textPreview = it.textPreview?.run { "$this..." },
-                creationTime = DateFormat.format(timePattern, it.creationTime).toString()
-            )
-        }
-    }.cachedIn(viewModelScope)*/
-
     fun openDirectory(
         id: Long,
         dirName: String,

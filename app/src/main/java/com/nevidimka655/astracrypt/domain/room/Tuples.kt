@@ -58,7 +58,7 @@ data class DatabaseTransformTuple(
 
 // Notes
 
-data class NoteItemListTuple(
+data class NotesPagerTuple(
     @PrimaryKey val id: Long = 0,
     @ColumnInfo(name = "name") val name: String? = null,
     @ColumnInfo(name = "text_preview") val textPreview: String? = null,

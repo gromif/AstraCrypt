@@ -4,7 +4,7 @@ import androidx.paging.PagingData
 import androidx.paging.map
 import com.google.crypto.tink.Aead
 import com.nevidimka655.astracrypt.app.utils.AeadManager
-import com.nevidimka655.astracrypt.domain.room.NoteItemListTuple
+import com.nevidimka655.astracrypt.domain.room.NotesPagerTuple
 import com.nevidimka655.astracrypt.domain.room.PagerTuple
 import com.nevidimka655.astracrypt.domain.room.entities.NoteItemEntity
 import com.nevidimka655.astracrypt.domain.room.entities.StorageItemEntity
@@ -21,7 +21,7 @@ class RepositoryEncryption(
     private suspend fun getDbAead() = keysetFactory.aead(info().database!!.aead).aeadPrimitive()
     private suspend fun getNotesPrimitive() = keysetFactory.aead(info().aeadNotes!!).aeadPrimitive()
 
-    fun decryptNotesPager(pagingData: PagingData<NoteItemListTuple>) = pagingData.map {
+    fun decryptNotesPager(pagingData: PagingData<NotesPagerTuple>) = pagingData.map {
         val aeadInfo = info()
         if (aeadInfo.notes) {
             it.copy(
