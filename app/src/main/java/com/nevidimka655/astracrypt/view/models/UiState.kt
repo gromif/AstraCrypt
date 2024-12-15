@@ -1,6 +1,5 @@
 package com.nevidimka655.astracrypt.view.models
 
-import androidx.compose.runtime.saveable.Saver
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.data.model.ToolbarAction
 import com.nevidimka655.astracrypt.view.navigation.BottomBarItems
@@ -12,22 +11,6 @@ data class UiState(
     val bottomBarTab: BottomBarItems? = null,
     val searchBar: Boolean = false
 ) {
-
-    companion object {
-        val saver = Saver<UiState, Any>(
-            save = {
-                listOf(
-                    it.bottomBarTab
-                )
-            },
-            restore = {
-                val params = it as List<*>
-                UiState(
-                    bottomBarTab = params[0] as BottomBarItems
-                )
-            }
-        )
-    }
 
     data class Toolbar(
         val title: TextWrap = TextWrap.Resource(id = R.string.home),
