@@ -13,8 +13,8 @@ import androidx.compose.ui.graphics.vector.ImageVector
 @Composable
 fun FloatingActionButtonImpl(
     visible: Boolean,
-    imageVector: ImageVector,
-    contentDescription: String,
+    imageVector: ImageVector?,
+    contentDescription: String?,
     onFabClick: () -> Unit
 ) {
     AnimatedVisibility(
@@ -24,6 +24,6 @@ fun FloatingActionButtonImpl(
     ) {
         LargeFloatingActionButton(
             onClick = onFabClick,
-        ) { Icon(imageVector, contentDescription) }
+        ) { if (imageVector != null) Icon(imageVector, contentDescription) }
     }
 }

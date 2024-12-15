@@ -1,12 +1,13 @@
 package com.nevidimka655.astracrypt.view.models
 
+import androidx.compose.ui.graphics.vector.ImageVector
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.view.navigation.BottomBarItems
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 
 data class UiState(
     val toolbar: Toolbar = Toolbar(),
-    val fab: Fab = Fab(false, FabIcons.Add),
+    val fab: Fab? = null,
     val bottomBarTab: BottomBarItems? = null,
     val searchBar: Boolean = false
 ) {
@@ -17,8 +18,7 @@ data class UiState(
     )
 
     data class Fab(
-        val visible: Boolean = true,
-        val icon: FabIcons,
+        val icon: ImageVector,
         val contentDescription: TextWrap = TextWrap.Text("")
     )
 

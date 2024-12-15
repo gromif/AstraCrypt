@@ -1,5 +1,7 @@
 package com.nevidimka655.astracrypt.view.composables
 
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -12,7 +14,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.view.models.ToolbarAction
 import com.nevidimka655.astracrypt.features.profile.model.ProfileInfo
 import com.nevidimka655.astracrypt.view.MainVM
 import com.nevidimka655.astracrypt.view.composables.files.FilesScreen
@@ -20,7 +21,7 @@ import com.nevidimka655.astracrypt.view.composables.files.FilesViewModel
 import com.nevidimka655.astracrypt.view.composables.home.HomeScreen
 import com.nevidimka655.astracrypt.view.composables.home.HomeViewModel
 import com.nevidimka655.astracrypt.view.composables.settings.SettingsScreen
-import com.nevidimka655.astracrypt.view.models.FabIcons
+import com.nevidimka655.astracrypt.view.models.ToolbarAction
 import com.nevidimka655.astracrypt.view.models.UiState
 import com.nevidimka655.astracrypt.view.models.actions.ToolbarActionLab
 import com.nevidimka655.astracrypt.view.models.actions.ToolbarActionNotes
@@ -132,7 +133,7 @@ val FilesUiState = UiState(
     toolbar = UiState.Toolbar(
         title = TextWrap.Resource(id = R.string.files)
     ),
-    fab = UiState.Fab(icon = FabIcons.Add),
+    fab = UiState.Fab(icon = Icons.Default.Add),
     bottomBarTab = BottomBarItems.Files,
     searchBar = true
 )

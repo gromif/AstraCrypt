@@ -28,11 +28,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
 import com.nevidimka655.astracrypt.app.theme.AstraCryptTheme
-import com.nevidimka655.astracrypt.view.models.ToolbarAction
 import com.nevidimka655.astracrypt.view.composables.shared.BottomBarImpl
 import com.nevidimka655.astracrypt.view.composables.shared.FloatingActionButtonImpl
 import com.nevidimka655.astracrypt.view.composables.shared.appbar.SearchBarImpl
 import com.nevidimka655.astracrypt.view.composables.shared.appbar.ToolbarImpl
+import com.nevidimka655.astracrypt.view.models.ToolbarAction
 import com.nevidimka655.astracrypt.view.navigation.BottomBarItems
 import com.nevidimka655.astracrypt.view.navigation.Route
 import com.nevidimka655.astracrypt.view.navigation.root
@@ -56,8 +56,8 @@ fun AstraCryptApp(
 
     val coroutineScope = rememberCoroutineScope()
     val topBarScroll = TopAppBarDefaults.enterAlwaysScrollBehavior()
-    var fabAnimatedVisibilityState by rememberSaveable(fab) { mutableStateOf(fab.visible) }
-    if (fab.visible) LaunchedEffect(topBarScroll.state.collapsedFraction) {
+    var fabAnimatedVisibilityState by rememberSaveable(fab) { mutableStateOf(fab != null) }
+    if (fab != null) LaunchedEffect(topBarScroll.state.collapsedFraction) {
         val toolbarIsCollapsing = topBarScroll.state.collapsedFraction > 0f
         fabAnimatedVisibilityState = !toolbarIsCollapsing
     }
@@ -111,8 +111,8 @@ fun AstraCryptApp(
         floatingActionButton = {
             FloatingActionButtonImpl(
                 visible = !vm.isSearching && !searchBarExpanded && fabAnimatedVisibilityState,
-                imageVector = fab.icon.imageVector,
-                contentDescription = fab.contentDescription.resolve(context)
+                imageVector = fab?.icon,
+                contentDescription = fab?.contentDescription?.resolve(context)
             ) { coroutineScope.launch { onFabClick.send(0) } }
         },
         bottomBar = {
