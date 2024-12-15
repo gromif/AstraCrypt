@@ -7,6 +7,7 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
@@ -56,11 +57,8 @@ fun AstraCryptApp(
 
     val coroutineScope = rememberCoroutineScope()
     val topBarScroll = TopAppBarDefaults.enterAlwaysScrollBehavior()
-    var fabAnimatedVisibilityState by rememberSaveable(fab) { mutableStateOf(fab != null) }
-    if (fab != null) LaunchedEffect(topBarScroll.state.collapsedFraction) {
-        val toolbarIsCollapsing = topBarScroll.state.collapsedFraction > 0f
-        fabAnimatedVisibilityState = !toolbarIsCollapsing
-    }
+    val barCollapsedFraction = topBarScroll.state.collapsedFraction
+    val toolbarIsCollapsing = remember(barCollapsedFraction) { barCollapsedFraction > 0f }
     Scaffold(
         modifier = modifier.nestedScroll(topBarScroll.nestedScrollConnection),
         topBar = {
@@ -71,7 +69,7 @@ fun AstraCryptApp(
                     vm.setSearchIsEnabled(false)
                 }
             }
-            if (searchBar) Box(modifier = Modifier.fillMaxWidth()) {
+            if (searchBar) Box(modifier = Modifier.fillMaxWidth().statusBarsPadding()) {
                 BackHandler(enabled = vm.isSearching) {
                     vm.isSearching = false
                     vm.searchQuery.value = null
@@ -79,6 +77,7 @@ fun AstraCryptApp(
                 }
                 SearchBarImpl(
                     modifier = Modifier.align(Alignment.TopCenter),
+                    visible = !toolbarIsCollapsing,
                     query = vm.searchQuery.value ?: "",
                     onSearch = {
                         searchBarExpanded = false
@@ -110,14 +109,14 @@ fun AstraCryptApp(
         },
         floatingActionButton = {
             FloatingActionButtonImpl(
-                visible = !vm.isSearching && !searchBarExpanded && fabAnimatedVisibilityState,
+                visible = !toolbarIsCollapsing && (fab != null) && !vm.isSearching && !searchBarExpanded,
                 imageVector = fab?.icon,
                 contentDescription = fab?.contentDescription?.resolve(context)
             ) { coroutineScope.launch { onFabClick.send(0) } }
         },
         bottomBar = {
             BottomBarImpl(
-                visible = !vm.isSearching && !searchBarExpanded && bottomBarTab != null,
+                visible = !toolbarIsCollapsing && !vm.isSearching && !searchBarExpanded && bottomBarTab != null,
                 selected = bottomBarTab
             ) {
                 val options = navOptions {
