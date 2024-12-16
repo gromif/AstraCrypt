@@ -84,15 +84,15 @@ android {
 }
 
 dependencies {
-    implementation(project(mapOf("path" to ":ui:compose-core")))
-    implementation(project(mapOf("path" to ":ui:compose-calculator")))
-    implementation(project(mapOf("path" to ":ui:compose-color-schemes")))
-    implementation(project(mapOf("path" to ":ui:compose-details")))
-    implementation(project(mapOf("path" to ":ui:compose-help")))
-    implementation(project(mapOf("path" to ":ui:compose-notes")))
-    implementation(project(mapOf("path" to ":core:haptic")))
-    implementation(project(mapOf("path" to ":core:tiles-with-coroutines")))
-    implementation(project(mapOf("path" to ":crypto:tink")))
+    implementation(project(":ui:compose-core"))
+    implementation(project(":ui:compose-calculator"))
+    implementation(project(":ui:compose-color-schemes"))
+    implementation(project(":ui:compose-details"))
+    implementation(project(":ui:compose-help"))
+    implementation(project(":ui:compose-notes"))
+    implementation(project(":core:haptic"))
+    implementation(project(":core:tiles-with-coroutines"))
+    implementation(project(":crypto:tink"))
 
     // Navigation
     implementation(libs.navigation.fragment.ktx)
