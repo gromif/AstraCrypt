@@ -1,7 +1,7 @@
 [versions]
-kotlin = "2.0.21"
+kotlin = "2.1.0"
 gradle = "8.7.3"
-gradle-ksp = "2.0.21-1.0.28"
+gradle-ksp = "2.1.0-1.0.29"
 
 room = "2.6.1"
 lifecycle = "2.8.7"
@@ -24,7 +24,7 @@ serialization = "1.7.3"
 
 # GOOGLE VERSIONS --------------------------------------------------------------------------------------------------------------------------------
 google-tink = "1.15.0"
-hilt = "2.52"
+hilt = "2.53.1"
 hilt-work = "1.2.0"
 hilt-compiler = "1.2.0"
 hilt-compose-navigation = "1.2.0"
