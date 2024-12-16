@@ -29,6 +29,9 @@ hilt-work = "1.2.0"
 hilt-compiler = "1.2.0"
 hilt-compose-navigation = "1.2.0"
 datastore-preferences = "1.1.1"
+junit = "4.13.2"
+junit-version = "1.2.1"
+espresso-core = "3.6.1"
 
 [libraries] # ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -93,7 +96,9 @@ hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-comp
 hilt-compiler = { group = "androidx.hilt", name = "hilt-compiler", version.ref = "hilt-compiler" }
 hilt-work = { group = "androidx.hilt", name = "hilt-work", version.ref = "hilt-work" }
 hilt-compose-navigation = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hilt-compose-navigation" }
-
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junit-version" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
 [plugins] # ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 android-application = { id = "com.android.application", version.ref = "gradle" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "gradle-ksp" }

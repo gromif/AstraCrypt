@@ -6,7 +6,7 @@ val coreModules = listOf(
     "haptic",
     "tiles-with-coroutines"
 )
-val cryptoModules = listOf("tink")
+val cryptoModules = listOf("tink", "tink-lab")
 val uiModules = listOf(
     "compose-core",
     "compose-calculator",
