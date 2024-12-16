@@ -11,6 +11,8 @@ object Route {
         @Serializable object Settings
     }
 
+    @Serializable object LabList
+
     @Serializable
     object NotesGraph {
         @Serializable object NotesList

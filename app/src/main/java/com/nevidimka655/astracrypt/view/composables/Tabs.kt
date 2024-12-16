@@ -50,6 +50,7 @@ inline fun NavGraphBuilder.tabs(
             onToolbarActions.receiveAsFlow().collectLatest {
                 when (it) {
                     is ToolbarActionNotes -> navController.navigate(Route.NotesGraph)
+                    is ToolbarActionLab -> navController.navigate(Route.LabList)
                 }
             }
         }

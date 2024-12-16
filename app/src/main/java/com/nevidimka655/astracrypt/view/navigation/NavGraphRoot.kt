@@ -2,9 +2,9 @@ package com.nevidimka655.astracrypt.view.navigation
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
-import com.nevidimka655.astracrypt.view.models.ToolbarAction
 import com.nevidimka655.astracrypt.view.MainVM
 import com.nevidimka655.astracrypt.view.composables.files.details.details
+import com.nevidimka655.astracrypt.view.composables.lab.labList
 import com.nevidimka655.astracrypt.view.composables.notes.notesGraph
 import com.nevidimka655.astracrypt.view.composables.settings.about.navigation.aboutGraph
 import com.nevidimka655.astracrypt.view.composables.settings.profile.editProfile
@@ -16,6 +16,7 @@ import com.nevidimka655.astracrypt.view.composables.settings.ui.files.settingsUi
 import com.nevidimka655.astracrypt.view.composables.settings.ui.settingsUi
 import com.nevidimka655.astracrypt.view.composables.shared.export.export
 import com.nevidimka655.astracrypt.view.composables.tabs
+import com.nevidimka655.astracrypt.view.models.ToolbarAction
 import com.nevidimka655.astracrypt.view.models.UiState
 import kotlinx.coroutines.channels.Channel
 
@@ -38,6 +39,7 @@ inline fun root(
         navController = navController,
         onFabClick = onFabClick
     )
+    labList(onUiStateChange = onUiStateChange)
     details(onUiStateChange = onUiStateChange)
     export(onUiStateChange = onUiStateChange)
 
