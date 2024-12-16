@@ -35,8 +35,5 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         gradlePluginPortal()
-        maven {
-            setUrl("https://swisscodemonkeys.github.io/appbrain-sdk/maven")
-        }
     }
 }
