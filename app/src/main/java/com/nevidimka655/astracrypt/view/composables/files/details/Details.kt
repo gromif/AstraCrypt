@@ -30,7 +30,7 @@ fun DetailsScreen(
         headerImage = {
             if (preview.isNullOrEmpty()) Icon(
                 modifier = Modifier.fillMaxSize(0.5f),
-                painter = itemType.icon,
+                imageVector = itemType.icon,
                 contentDescription = null,
                 tint = if (itemType.isFile) Color.Unspecified else MaterialTheme.colorScheme.onSurfaceVariant
             ) else AsyncImage(

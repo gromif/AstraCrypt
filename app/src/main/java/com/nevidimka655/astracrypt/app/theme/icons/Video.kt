@@ -10,11 +10,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.graphics.vector.VectorPainter
 import androidx.compose.ui.graphics.vector.path
-import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastForEach
@@ -26,23 +23,23 @@ val _FileType.Video @Composable get() = default()
 val _FileType.VideoAlt @Composable get() = alt()
 
 @Composable
-private fun default(): VectorPainter = with(MaterialTheme.extendedColorScheme.violet) {
-    rememberVectorPainter(video(foreground = onColorContainer))
+private fun default(): ImageVector = with(MaterialTheme.extendedColorScheme.violet) {
+    video(foreground = onColorContainer)
 }
 
 @Composable
-private fun alt(): VectorPainter = with(MaterialTheme.colorScheme) {
-    rememberVectorPainter(video(foreground = onSurfaceVariant))
+private fun alt(): ImageVector = with(MaterialTheme.colorScheme) {
+    video(foreground = onSurfaceVariant)
 }
 
 @Preview
 @Composable
-private fun Preview(painterList: List<Painter> = listOf(default(), alt())) = Column {
-    painterList.forEach { painter ->
+private fun Preview(vectors: List<ImageVector> = listOf(default(), alt())) = Column {
+    vectors.forEach { vector ->
         Row {
             listOf(lightScheme, darkScheme).fastForEach {
                 MaterialTheme(colorScheme = it) {
-                    Surface { Icon(painter, null, Modifier.size(128.dp), Color.Unspecified) }
+                    Surface { Icon(vector, null, Modifier.size(128.dp), Color.Unspecified) }
                 }
             }
         }

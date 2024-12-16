@@ -16,7 +16,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.nevidimka655.ui.compose_core.ext.LocalWindowWidth
@@ -85,7 +84,7 @@ inline fun SettingsGroupItem(
                     )
                     .padding(10.dp)
                     .size(32.dp),
-                painter = rememberVectorPainter(image = imageVector),
+                imageVector = imageVector,
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.primary
             )

@@ -34,7 +34,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
@@ -168,14 +167,14 @@ class ArchiveFragment : Fragment() {
                     onClick = onClearClick
                 ) {
                     Icon(
-                        painter = rememberVectorPainter(image = Icons.Default.Clear),
+                        imageVector = Icons.Default.Clear,
                         contentDescription = stringResource(id = R.string.add)
                     )
                 }
                 Button(onClick = onAddClick, enabled = addButtonEnabled) {
                     Icon(
                         modifier = Modifier.size(ButtonDefaults.IconSize),
-                        painter = rememberVectorPainter(image = Icons.Default.Add),
+                        imageVector = Icons.Default.Add,
                         contentDescription = stringResource(id = R.string.add)
                     )
                     Spacer(modifier = Modifier.size(ButtonDefaults.IconSpacing))

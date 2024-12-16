@@ -63,7 +63,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.dimensionResource
@@ -143,7 +142,7 @@ fun FilesGridItem(
         ) {
             if (preview == null) Icon(
                 modifier = Modifier.size(72.dp),
-                painter = itemType.iconAlt,
+                imageVector = itemType.iconAlt,
                 contentDescription = null,
                 tint = itemType.iconTint
             ) else AsyncImage(modifier = Modifier.fillMaxSize(),
@@ -172,7 +171,7 @@ fun FilesGridItem(
                         )
                         .padding(MaterialTheme.spaces.spaceAltSmall)
                         .size(14.dp),
-                    painter = rememberVectorPainter(image = Icons.Filled.Star),
+                    imageVector = Icons.Filled.Star,
                     tint = MaterialTheme.colorScheme.surface,
                     contentDescription = null
                 )
@@ -188,7 +187,7 @@ fun FilesGridItem(
             ) {
                 if (itemType.isFile) Icon(
                     modifier = Modifier.size(28.dp),
-                    painter = itemType.icon,
+                    imageVector = itemType.icon,
                     contentDescription = null,
                     tint = itemType.iconTint
                 )
@@ -207,7 +206,7 @@ fun FilesGridItem(
             ) {
                 if (isChecked) Icon(
                     modifier = Modifier.size(24.dp),
-                    painter = rememberVectorPainter(image = Icons.Filled.CheckCircle),
+                    imageVector = Icons.Filled.CheckCircle,
                     tint = MaterialTheme.colorScheme.onSurfaceVariant,
                     contentDescription = null
                 ) else IconButton(
@@ -216,7 +215,7 @@ fun FilesGridItem(
                 ) {
                     Icon(
                         modifier = Modifier.size(24.dp),
-                        painter = rememberVectorPainter(image = Icons.Filled.MoreVert),
+                        imageVector = Icons.Filled.MoreVert,
                         tint = MaterialTheme.colorScheme.onSurfaceVariant,
                         contentDescription = null
                     )
@@ -262,7 +261,7 @@ fun FilesListItemMedium(
         ) {
             if (preview == null) Icon(
                 modifier = Modifier.size(60.dp),
-                painter = itemType.iconAlt,
+                imageVector = itemType.iconAlt,
                 contentDescription = null,
                 tint = itemType.iconTint
             ) else AsyncImage(
@@ -296,7 +295,7 @@ fun FilesListItemMedium(
                         )
                         .padding(MaterialTheme.spaces.spaceAltSmall)
                         .size(14.dp),
-                    painter = rememberVectorPainter(Icons.Filled.Star),
+                    imageVector = Icons.Filled.Star,
                     tint = MaterialTheme.colorScheme.surface,
                     contentDescription = null
                 )

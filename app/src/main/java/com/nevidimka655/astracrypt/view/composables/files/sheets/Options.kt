@@ -30,7 +30,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.graphics.vector.VectorPainter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -51,7 +50,7 @@ import com.nevidimka655.ui.compose_core.theme.spaces
 fun filesOptionsSheet(
     state: MutableState<Boolean> = mutableStateOf(false),
     name: String = "Test",
-    itemIcon: VectorPainter = Icons.FileType.Photo,
+    itemIcon: ImageVector = Icons.FileType.Photo,
     isFolder: Boolean = true,
     isStarred: Boolean = false,
     sheetState: SheetState = SheetDefaults.state(),
@@ -110,7 +109,7 @@ fun filesOptionsSheet(
 fun SheetFilesOptionsHeader(
     modifier: Modifier = Modifier,
     text: String = "Test",
-    itemIcon: VectorPainter = Icons.FileType.Photo,
+    itemIcon: ImageVector = Icons.FileType.Photo,
     isFolder: Boolean = true,
     onRename: () -> Unit = {},
     onDelete: () -> Unit = {}
@@ -137,7 +136,7 @@ fun SheetFilesOptionsHeader(
             contentDescription = context.getString(R.string.files_options_delete)
         )
         Icon(
-            painter = itemIcon,
+            imageVector = itemIcon,
             contentDescription = null,
             modifier = Modifier.size(48.dp),
             tint = if (isFolder) MaterialTheme.colorScheme.onSurfaceVariant else Color.Unspecified
