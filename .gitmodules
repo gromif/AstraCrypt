@@ -27,4 +27,4 @@
 	url = git@github.com:Nevidimka655/ui_compose_notes.git
 [submodule "crypto/tink-lab"]
 	path = crypto/tink-lab
-	url = https://github.com/Nevidimka655/crypto_tink_lab.git
+	url = git@github.com:Nevidimka655/crypto_tink_lab.git
