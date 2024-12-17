@@ -15,7 +15,7 @@ val LabListUiState = UiState(
 
 inline fun NavGraphBuilder.labList(
     crossinline onUiStateChange: (UiState) -> Unit
-) = composable<Route.LabList> {
+) = composable<Route.Lab.List> {
     onUiStateChange(LabListUiState)
 
     LabScreen(
