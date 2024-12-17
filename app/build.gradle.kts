@@ -93,6 +93,7 @@ dependencies {
     implementation(project(":core:haptic"))
     implementation(project(":core:tiles-with-coroutines"))
     implementation(project(":crypto:tink"))
+    implementation(project(":crypto:tink-lab"))
 
     // Navigation
     implementation(libs.navigation.fragment.ktx)
