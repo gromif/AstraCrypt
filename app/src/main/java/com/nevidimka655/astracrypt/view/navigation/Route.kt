@@ -1,3 +1,5 @@
+@file:Suppress("ClassName")
+
 package com.nevidimka655.astracrypt.view.navigation
 
 import androidx.annotation.StringRes
@@ -11,7 +13,9 @@ object Route {
         @Serializable object Settings
     }
 
-    @Serializable object LabList
+    object Lab {
+        @Serializable object List
+    }
 
     @Serializable
     object NotesGraph {
