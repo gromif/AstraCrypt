@@ -4,7 +4,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import com.nevidimka655.astracrypt.view.MainVM
 import com.nevidimka655.astracrypt.view.composables.files.details.details
-import com.nevidimka655.astracrypt.view.composables.lab.labList
+import com.nevidimka655.astracrypt.view.composables.lab.labGraph
 import com.nevidimka655.astracrypt.view.composables.notes.notesGraph
 import com.nevidimka655.astracrypt.view.composables.settings.about.navigation.aboutGraph
 import com.nevidimka655.astracrypt.view.composables.settings.profile.editProfile
@@ -39,9 +39,10 @@ inline fun root(
         navController = navController,
         onFabClick = onFabClick
     )
-    labList(onUiStateChange = onUiStateChange)
     details(onUiStateChange = onUiStateChange)
     export(onUiStateChange = onUiStateChange)
+
+    labGraph(onUiStateChange = onUiStateChange, navController = navController)
 
     // settings
     editProfile(onUiStateChange = onUiStateChange)

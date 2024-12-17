@@ -13,8 +13,15 @@ object Route {
         @Serializable object Settings
     }
 
-    object Lab {
+    @Serializable
+    object LabGraph {
         @Serializable object List
+
+        @Serializable
+        object TinkGraph {
+            @Serializable object Key
+        }
+
     }
 
     @Serializable
