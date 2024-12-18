@@ -48,11 +48,6 @@ android {
         ksp {
             arg("room.schemaLocation", "$projectDir/schemas")
         }
-        kotlinOptions.jvmTarget = "17"
-        java {
-            sourceCompatibility = JavaVersion.VERSION_17
-            targetCompatibility = JavaVersion.VERSION_17
-        }
     }
 
     buildTypes {
@@ -76,11 +71,11 @@ android {
             signingConfig = signingConfigs.getByName("release")
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
     namespace = project.property("applicationId").toString()
+}
+
+kotlin {
+    jvmToolchain(project.property("kotlinJvmToolchainVersion").toString().toInt())
 }
 
 dependencies {
