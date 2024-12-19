@@ -12,16 +12,16 @@ import kotlinx.coroutines.flow.map
 class DefaultDataStoreManager(
     private val dataStore: DataStore<Preferences>
 ) {
-    private val PASSWORD_HASH = stringPreferencesKey("papaya")
+    private val passwordHash = stringPreferencesKey("papaya")
     val passwordHashFlow = dataStore.data.map {
-        val hash = it[PASSWORD_HASH]
+        val hash = it[passwordHash]
         if (!hash.isNullOrEmpty()) hash.fromBase64()
         else ByteArray(0)
     }
     suspend fun getPasswordHash() = passwordHashFlow.first()
 
     suspend fun setPasswordHash(hash: ByteArray?) = dataStore.edit { preferences ->
-        preferences[PASSWORD_HASH] = hash?.toBase64() ?: ""
+        preferences[passwordHash] = hash?.toBase64() ?: ""
     }
 
 }
