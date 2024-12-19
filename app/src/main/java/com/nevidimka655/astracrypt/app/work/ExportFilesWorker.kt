@@ -23,7 +23,7 @@ import com.nevidimka655.astracrypt.app.utils.Io
 import com.nevidimka655.astracrypt.data.model.AeadInfo
 import com.nevidimka655.astracrypt.domain.repository.files.FilesRepository
 import com.nevidimka655.astracrypt.domain.room.ExportTuple
-import com.nevidimka655.crypto.tink.KeysetFactory
+import com.nevidimka655.crypto.tink.KeysetManager
 import com.nevidimka655.crypto.tink.TinkConfig
 import com.nevidimka655.crypto.tink.extensions.fromBase64
 import dagger.assisted.Assisted
@@ -39,7 +39,7 @@ class ExportFilesWorker @AssistedInject constructor(
     @IoDispatcher
     private val defaultDispatcher: CoroutineDispatcher,
     private val filesRepository: FilesRepository,
-    private val keysetFactory: KeysetFactory,
+    private val keysetManager: KeysetManager,
     private val io: Io,
     private val workManager: WorkManager,
 ) : CoroutineWorker(context, params) {
@@ -120,16 +120,16 @@ class ExportFilesWorker @AssistedInject constructor(
         }*/
     }
 
-    private fun shouldDecodeAssociatedData() {
+    private suspend fun shouldDecodeAssociatedData() {
         if (aeadInfo.bindAssociatedData) {
             val bytes = inputData.getString(Args.associatedData)!!.fromBase64()
             TinkConfig.initAead()
-            val decodedData = keysetFactory.transformAssociatedDataToWorkInstance(
+            val decodedData = keysetManager.transformAssociatedDataToWorkInstance(
                 bytesIn = bytes,
                 encryptionMode = false,
                 authenticationTag = Args.TAG_ASSOCIATED_DATA_TRANSPORT
             )
-            keysetFactory.setAssociatedDataExplicitly(decodedData)
+            keysetManager.setAssociatedDataExplicitly(decodedData)
         }
     }
 

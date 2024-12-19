@@ -39,14 +39,18 @@ import com.nevidimka655.astracrypt.data.model.StorageItemFlags
 import com.nevidimka655.astracrypt.data.room.StorageItemType
 import com.nevidimka655.astracrypt.domain.repository.files.FilesRepository
 import com.nevidimka655.astracrypt.domain.room.entities.StorageItemEntity
-import com.nevidimka655.crypto.tink.KeysetFactory
+import com.nevidimka655.crypto.tink.KeysetManager
 import com.nevidimka655.crypto.tink.TinkConfig
 import com.nevidimka655.crypto.tink.extensions.fromBase64
 import com.nevidimka655.crypto.tink.extensions.secureRandom
 import com.nevidimka655.crypto.tink.extensions.streamingAeadPrimitive
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.withContext
+import kotlinx.coroutines.yield
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import java.io.ByteArrayOutputStream
@@ -61,7 +65,7 @@ class ImportFilesWorker @AssistedInject constructor(
     @IoDispatcher
     private val defaultDispatcher: CoroutineDispatcher,
     private val filesRepository: FilesRepository,
-    private val keysetFactory: KeysetFactory,
+    private val keysetManager: KeysetManager,
     private val io: Io,
     private val randomizer: Randomizer,
     private val imageLoader: ImageLoader,
@@ -94,9 +98,9 @@ class ImportFilesWorker @AssistedInject constructor(
         setForeground(getForegroundInfo())
         TinkConfig.initStream()
         shouldDecodeAssociatedData()
-        val fileAead = aeadInfo.file?.let { keysetFactory.stream(it) }?.streamingAeadPrimitive()
+        val fileAead = aeadInfo.file?.let { keysetManager.stream(it) }?.streamingAeadPrimitive()
         val thumbAead =
-            aeadInfo.preview?.let { keysetFactory.stream(it) }?.streamingAeadPrimitive()
+            aeadInfo.preview?.let { keysetManager.stream(it) }?.streamingAeadPrimitive()
         val file = File(inputData.getString(Args.fileWithUris)!!)
         val urisList = withContext(defaultDispatcher) { file.readLines() }
         file.delete()
@@ -119,16 +123,16 @@ class ImportFilesWorker @AssistedInject constructor(
         return Result.success()
     }
 
-    private fun shouldDecodeAssociatedData() {
+    private suspend fun shouldDecodeAssociatedData() {
         if (aeadInfo.bindAssociatedData) {
             TinkConfig.initAead()
             val bytes = inputData.getString(Args.associatedData)!!.fromBase64()
-            val decodedData = keysetFactory.transformAssociatedDataToWorkInstance(
+            val decodedData = keysetManager.transformAssociatedDataToWorkInstance(
                 bytesIn = bytes,
                 encryptionMode = false,
                 authenticationTag = Args.TAG_ASSOCIATED_DATA_TRANSPORT
             )
-            keysetFactory.setAssociatedDataExplicitly(decodedData)
+            keysetManager.setAssociatedDataExplicitly(decodedData)
         }
     }
 
@@ -161,7 +165,7 @@ class ImportFilesWorker @AssistedInject constructor(
         val outFile = File("${io.dataDir}/$outRelativePath")
         contentResolver.openInputStream(fileUri)!!.use { inStream ->
             filePrimitive?.newEncryptingStream(
-                outFile.outputStream(), keysetFactory.associatedData
+                outFile.outputStream(), keysetManager.associatedData
             )?.use { writeData(inStream, it) } ?: outFile.outputStream().use {
                 writeData(inStream, it)
             }
@@ -307,7 +311,7 @@ class ImportFilesWorker @AssistedInject constructor(
         val fileOut = File("${io.dataDir}/$relativePath")
         primitive?.newEncryptingStream(
             fileOut.outputStream(),
-            keysetFactory.associatedData
+            keysetManager.associatedData
         )?.use {
             it.write(compressedByteStream.toByteArray())
         } ?: fileOut.outputStream().use { it.write(compressedByteStream.toByteArray()) }

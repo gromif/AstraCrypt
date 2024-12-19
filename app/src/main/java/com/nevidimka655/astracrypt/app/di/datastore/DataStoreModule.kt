@@ -13,8 +13,9 @@ import dagger.hilt.components.SingletonComponent
 import javax.inject.Qualifier
 import javax.inject.Singleton
 
-private const val DEFAULT = "pomegranate"
-private const val SETTINGS = "tomato"
+private const val DEFAULT = "default"
+private const val SETTINGS = "settings"
+private const val KEYSET = "keyset"
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -44,6 +45,18 @@ object DataStoreModule {
         produceFile = { context.preferencesDataStoreFile(SETTINGS) }
     )
 
+    @KeysetDataStore
+    @Singleton
+    @Provides
+    fun provideKeysetDataStore(
+        @ApplicationContext context: Context
+    ) = PreferenceDataStoreFactory.create(
+        corruptionHandler = ReplaceFileCorruptionHandler(
+            produceNewData = { emptyPreferences() }
+        ),
+        produceFile = { context.preferencesDataStoreFile(KEYSET) }
+    )
+
 }
 
 @Qualifier
@@ -53,3 +66,7 @@ annotation class DefaultDataStore
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
 annotation class SettingsDataStore
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class KeysetDataStore

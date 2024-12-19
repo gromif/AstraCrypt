@@ -13,7 +13,7 @@ import com.nevidimka655.astracrypt.data.room.RepositoryEncryption
 import com.nevidimka655.astracrypt.domain.repository.files.FilesRepository
 import com.nevidimka655.astracrypt.domain.room.daos.NotesDao
 import com.nevidimka655.astracrypt.domain.room.daos.StorageItemDao
-import com.nevidimka655.crypto.tink.KeysetFactory
+import com.nevidimka655.crypto.tink.KeysetManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -46,8 +46,8 @@ object RepositoryModule {
     @Singleton
     @Provides
     fun provideFilesAeadRepository(
-        keysetFactory: KeysetFactory, aeadManager: AeadManager
-    ) = RepositoryEncryption(keysetFactory = keysetFactory, aeadManager = aeadManager)
+        keysetManager: KeysetManager, aeadManager: AeadManager
+    ) = RepositoryEncryption(keysetManager = keysetManager, aeadManager = aeadManager)
 
     @Singleton
     @Provides

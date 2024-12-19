@@ -25,7 +25,7 @@ import com.nevidimka655.astracrypt.data.datastore.SettingsDataStoreManager
 import com.nevidimka655.astracrypt.data.model.CoilTinkModel
 import com.nevidimka655.astracrypt.features.profile.model.Avatars
 import com.nevidimka655.astracrypt.features.profile.model.ProfileInfo
-import com.nevidimka655.crypto.tink.KeysetFactory
+import com.nevidimka655.crypto.tink.KeysetManager
 import com.nevidimka655.crypto.tink.extensions.streamingAeadPrimitive
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
@@ -39,7 +39,7 @@ import javax.inject.Inject
 class EditProfileViewModel @Inject constructor(
     @IoDispatcher
     private val defaultDispatcher: CoroutineDispatcher,
-    private val keysetFactory: KeysetFactory,
+    private val keysetManager: KeysetManager,
     private val settingsDataStoreManager: SettingsDataStoreManager,
     private val aeadManager: AeadManager,
     val imageLoader: ImageLoader,
@@ -88,9 +88,9 @@ class EditProfileViewModel @Inject constructor(
 
         iconFile.recreate()
         val outputStream = aeadInfo.preview?.let {
-            keysetFactory.stream(it)
+            keysetManager.stream(it)
                 .streamingAeadPrimitive()
-                .newEncryptingStream(iconFile.outputStream(), keysetFactory.associatedData)
+                .newEncryptingStream(iconFile.outputStream(), keysetManager.associatedData)
         } ?: iconFile.outputStream()
 
         outputStream.use { it.write(compressedByteStream.toByteArray()) }

@@ -8,18 +8,18 @@ import com.nevidimka655.astracrypt.domain.room.NotesPagerTuple
 import com.nevidimka655.astracrypt.domain.room.PagerTuple
 import com.nevidimka655.astracrypt.domain.room.entities.NoteItemEntity
 import com.nevidimka655.astracrypt.domain.room.entities.StorageItemEntity
-import com.nevidimka655.crypto.tink.KeysetFactory
+import com.nevidimka655.crypto.tink.KeysetManager
 import com.nevidimka655.crypto.tink.extensions.aeadPrimitive
 import com.nevidimka655.crypto.tink.extensions.fromBase64
 import com.nevidimka655.crypto.tink.extensions.toBase64
 
 class RepositoryEncryption(
-    private val keysetFactory: KeysetFactory,
+    private val keysetManager: KeysetManager,
     private val aeadManager: AeadManager
 ) {
     private suspend fun info() = aeadManager.getInfo()
-    private suspend fun getDbAead() = keysetFactory.aead(info().database!!.aead).aeadPrimitive()
-    private suspend fun getNotesPrimitive() = keysetFactory.aead(info().aeadNotes!!).aeadPrimitive()
+    private suspend fun getDbAead() = keysetManager.aead(info().database!!.aead).aeadPrimitive()
+    private suspend fun getNotesPrimitive() = keysetManager.aead(info().aeadNotes!!).aeadPrimitive()
 
     fun decryptNotesPager(pagingData: PagingData<NotesPagerTuple>) = pagingData.map {
         val aeadInfo = info()
@@ -49,7 +49,7 @@ class RepositoryEncryption(
 
     fun decryptString(aead: Aead, value: String): String {
         val base64Decrypted = value.fromBase64()
-        return aead.decrypt(base64Decrypted, keysetFactory.associatedData).decodeToString()
+        return aead.decrypt(base64Decrypted, keysetManager.associatedData).decodeToString()
     }
 
     private suspend fun encryptNoteName(value: String?) = value?.run { encrypt(this) }
@@ -68,7 +68,7 @@ class RepositoryEncryption(
     suspend fun encryptName(value: String) = if (info().name) encrypt(value) else value
 
     suspend fun encrypt(value: String) = getDbAead().run {
-        encrypt(value.toByteArray(), keysetFactory.associatedData).toBase64()
+        encrypt(value.toByteArray(), keysetManager.associatedData).toBase64()
     }
 
     suspend fun encryptStorageItemEntity(item: StorageItemEntity) = if (info().db) item.copy(

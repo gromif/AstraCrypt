@@ -4,8 +4,9 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import com.nevidimka655.astracrypt.data.datastore.AppearanceManager
 import com.nevidimka655.astracrypt.data.datastore.DefaultDataStoreManager
+import com.nevidimka655.astracrypt.data.datastore.KeysetDataStoreManager
 import com.nevidimka655.astracrypt.data.datastore.SettingsDataStoreManager
-import com.nevidimka655.crypto.tink.KeysetFactory
+import com.nevidimka655.crypto.tink.KeysetManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,6 +25,12 @@ object DataStoreManagersModule {
 
     @Singleton
     @Provides
+    fun provideKeysetDataStoreManager(
+        @KeysetDataStore dataStore: DataStore<Preferences>
+    ) = KeysetDataStoreManager(dataStore = dataStore)
+
+    @Singleton
+    @Provides
     fun provideAppearanceManager(
         @DefaultDataStore dataStore: DataStore<Preferences>
     ) = AppearanceManager(dataStore = dataStore)
@@ -32,7 +39,7 @@ object DataStoreManagersModule {
     @Provides
     fun provideSettingsDataStoreManager(
         @SettingsDataStore dataStore: DataStore<Preferences>,
-        keysetFactory: KeysetFactory
-    ) = SettingsDataStoreManager(dataStore = dataStore, keysetFactory = keysetFactory)
+        keysetManager: KeysetManager
+    ) = SettingsDataStoreManager(dataStore = dataStore, keysetManager = keysetManager)
 
 }

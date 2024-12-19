@@ -5,11 +5,12 @@ import androidx.annotation.RequiresApi
 import com.nevidimka655.astracrypt.app.di.IoDispatcher
 import com.nevidimka655.astracrypt.app.utils.Io
 import com.nevidimka655.astracrypt.data.room.AppDatabase
-import com.nevidimka655.crypto.tink.KeysetFactory
+import com.nevidimka655.crypto.tink.KeysetManager
 import com.nevidimka655.crypto.tink.extensions.secureRandom
 import com.nevidimka655.tiles_with_coroutines.TileServiceCoroutine
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.launch
 import java.io.RandomAccessFile
 import java.security.KeyStore
 import javax.inject.Inject
@@ -21,7 +22,7 @@ class QuickDataDeletion @Inject constructor() : TileServiceCoroutine() {
     @Inject lateinit var defaultDispatcher: CoroutineDispatcher
     @Inject lateinit var database: AppDatabase
     @Inject lateinit var io: Io
-    @Inject lateinit var keysetFactory: KeysetFactory
+    @Inject lateinit var keysetManager: KeysetManager
 
     override fun onClick() {
         super.onClick()
@@ -41,7 +42,7 @@ class QuickDataDeletion @Inject constructor() : TileServiceCoroutine() {
 
             database.clearAllTables()
 
-            RandomAccessFile(keysetFactory.dataFile, "rws").use {
+            RandomAccessFile(keysetManager.dataFile, "rws").use {
                 val byteArray = ByteArray(96)
                 val secureSeed = "${System.currentTimeMillis()}AC_$classLoader".toByteArray()
                 secureRandom(secureSeed).nextBytes(byteArray)

@@ -7,7 +7,7 @@ import com.nevidimka655.astracrypt.app.utils.AeadManager
 import com.nevidimka655.astracrypt.app.utils.AppComponentManager
 import com.nevidimka655.astracrypt.features.auth.AuthManager
 import com.nevidimka655.astracrypt.features.auth.model.Skin
-import com.nevidimka655.crypto.tink.KeysetFactory
+import com.nevidimka655.crypto.tink.KeysetManager
 import com.nevidimka655.crypto.tink.extensions.sha256
 import com.nevidimka655.crypto.tink.extensions.toBase64
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,7 +22,7 @@ class SettingsAuthViewModel @Inject constructor(
     private val defaultDispatcher: CoroutineDispatcher,
     private val authManager: AuthManager,
     private val aeadManager: AeadManager,
-    private val keysetFactory: KeysetFactory,
+    private val keysetManager: KeysetManager,
     private val appComponentManager: AppComponentManager
 ) : ViewModel() {
     val authInfoFlow get() = authManager.infoFlow
@@ -56,8 +56,8 @@ class SettingsAuthViewModel @Inject constructor(
     ) = viewModelScope.launch(defaultDispatcher) {
         launch { aeadManager.setBindAssociatedData(state = state) }
         launch {
-            if (state) keysetFactory.encryptAssociatedData(password)
-            else keysetFactory.decryptAssociatedData()
+            if (state) keysetManager.encryptAssociatedData(password)
+            else keysetManager.decryptAssociatedData()
         }
     }
 

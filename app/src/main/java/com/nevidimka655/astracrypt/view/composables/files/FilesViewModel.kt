@@ -20,7 +20,7 @@ import com.nevidimka655.astracrypt.app.work.ImportFilesWorker
 import com.nevidimka655.astracrypt.app.work.utils.WorkerSerializer
 import com.nevidimka655.astracrypt.data.repository.files.FilesRepositoryProvider
 import com.nevidimka655.astracrypt.domain.room.PagerTuple
-import com.nevidimka655.crypto.tink.KeysetFactory
+import com.nevidimka655.crypto.tink.KeysetManager
 import com.nevidimka655.crypto.tink.extensions.toBase64
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
@@ -39,7 +39,7 @@ class FilesViewModel @Inject constructor(
     @IoDispatcher
     private val defaultDispatcher: CoroutineDispatcher,
     private val filesRepositoryProvider: FilesRepositoryProvider,
-    private val keysetFactory: KeysetFactory,
+    private val keysetManager: KeysetManager,
     private val aeadManager: AeadManager,
     val io: Io,
     val workManager: WorkManager,
@@ -79,8 +79,8 @@ class FilesViewModel @Inject constructor(
         val fileWithUris = workerSerializer.saveStringArrayToFile(listToSave)
         val aeadInfoJson = Json.encodeToString(aeadInfo)
         val associatedData = if (aeadInfo.bindAssociatedData)
-            keysetFactory.transformAssociatedDataToWorkInstance(
-                bytesIn = keysetFactory.associatedData,
+            keysetManager.transformAssociatedDataToWorkInstance(
+                bytesIn = keysetManager.associatedData,
                 encryptionMode = true,
                 authenticationTag = Args.TAG_ASSOCIATED_DATA_TRANSPORT
             ).toBase64()

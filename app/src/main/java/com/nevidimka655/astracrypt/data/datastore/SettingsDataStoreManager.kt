@@ -9,7 +9,7 @@ import com.nevidimka655.astracrypt.data.model.AeadInfo
 import com.nevidimka655.astracrypt.features.auth.model.AuthInfo
 import com.nevidimka655.astracrypt.features.profile.model.Avatars
 import com.nevidimka655.astracrypt.features.profile.model.ProfileInfo
-import com.nevidimka655.crypto.tink.KeysetFactory
+import com.nevidimka655.crypto.tink.KeysetManager
 import com.nevidimka655.crypto.tink.KeysetTemplates
 import com.nevidimka655.crypto.tink.extensions.aeadPrimitive
 import com.nevidimka655.crypto.tink.extensions.deterministicAeadPrimitive
@@ -21,12 +21,15 @@ import kotlinx.coroutines.flow.map
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
+private const val KEYSET_TAG_KEY = "3Bd~43?k"
+private const val KEYSET_TAG_VALUE = "l0_ShH%OLq"
+
 class SettingsDataStoreManager(
     private val dataStore: DataStore<Preferences>,
-    private val keysetFactory: KeysetFactory
+    private val keysetManager: KeysetManager
 ) {
     private val encryptionSettingsKey = intPreferencesKey("a1")
-    suspend fun getEncryptionSettings() = dataStore.data.first()[encryptionSettingsKey] ?: -1
+    suspend fun getEncryptionSettings() = dataStore.data.first()[encryptionSettingsKey] ?: 0
     private suspend fun getEncryptionTemplate() = getEncryptionSettings().let {
         if (it > -1) KeysetTemplates.AEAD.entries[it]
         else null
@@ -80,17 +83,26 @@ class SettingsDataStoreManager(
 
 
     private suspend fun encryptKey(key: String) = getEncryptionTemplate()?.let {
-        val aead = keysetFactory.deterministic().deterministicAeadPrimitive()
+        val aead = keysetManager.getKeyset(
+            tag = KEYSET_TAG_KEY,
+            keyParams = KeysetTemplates.DeterministicAEAD.AES256_SIV.params
+        ).deterministicAeadPrimitive()
         aead.encryptDeterministically(key.toByteArray(), key.sha256()).toBase64()
     } ?: key
 
     private suspend fun encryptValue(key: String, value: String) = getEncryptionTemplate()?.let {
-        val aead = keysetFactory.aead(it).aeadPrimitive()
+        val aead = keysetManager.getKeyset(
+            tag = KEYSET_TAG_VALUE,
+            keyParams = it.params
+        ).aeadPrimitive()
         aead.encrypt(value.toByteArray(), key.toByteArray()).toBase64()
     } ?: value
 
     private suspend fun decryptValue(key: String, value: String) = getEncryptionTemplate()?.let {
-        val aead = keysetFactory.aead(it).aeadPrimitive()
-        aead.decrypt(value.fromBase64(), key.fromBase64()).decodeToString()
+        val aead = keysetManager.getKeyset(
+            tag = KEYSET_TAG_VALUE,
+            keyParams = it.params
+        ).aeadPrimitive()
+        aead.decrypt(value.fromBase64(), key.toByteArray()).decodeToString()
     } ?: value
 }

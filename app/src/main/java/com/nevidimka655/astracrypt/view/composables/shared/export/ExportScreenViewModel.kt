@@ -19,7 +19,7 @@ import com.nevidimka655.astracrypt.app.utils.Io
 import com.nevidimka655.astracrypt.app.work.ExportFilesWorker
 import com.nevidimka655.astracrypt.data.model.ExportUiState
 import com.nevidimka655.astracrypt.domain.repository.files.FilesRepository
-import com.nevidimka655.crypto.tink.KeysetFactory
+import com.nevidimka655.crypto.tink.KeysetManager
 import com.nevidimka655.crypto.tink.extensions.toBase64
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
@@ -42,7 +42,7 @@ class ExportScreenViewModel @Inject constructor(
     private val defaultDispatcher: CoroutineDispatcher,
     private val aeadManager: AeadManager,
     private val filesRepository: FilesRepository,
-    private val keysetFactory: KeysetFactory,
+    private val keysetManager: KeysetManager,
     val io: Io,
     val workManager: WorkManager
 ) : ViewModel() {
@@ -90,8 +90,8 @@ class ExportScreenViewModel @Inject constructor(
     fun export(itemId: Long, output: String) = viewModelScope.launch(defaultDispatcher) {
         val aeadInfo = aeadManager.getInfo()
         val associatedData = if (aeadInfo.bindAssociatedData)
-            keysetFactory.transformAssociatedDataToWorkInstance(
-                bytesIn = keysetFactory.associatedData,
+            keysetManager.transformAssociatedDataToWorkInstance(
+                bytesIn = keysetManager.associatedData,
                 encryptionMode = true,
                 authenticationTag = Args.TAG_ASSOCIATED_DATA_TRANSPORT
             ).toBase64()

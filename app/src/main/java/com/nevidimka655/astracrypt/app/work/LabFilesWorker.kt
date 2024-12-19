@@ -23,7 +23,7 @@ import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.app.di.IoDispatcher
 import com.nevidimka655.astracrypt.app.extensions.contentResolver
 import com.nevidimka655.astracrypt.app.utils.Api
-import com.nevidimka655.crypto.tink.KeysetFactory
+import com.nevidimka655.crypto.tink.KeysetManager
 import com.nevidimka655.crypto.tink.KeysetTemplates
 import com.nevidimka655.crypto.tink.TinkConfig
 import com.nevidimka655.crypto.tink.extensions.aeadPrimitive
@@ -39,7 +39,7 @@ class LabFilesWorker @AssistedInject constructor(
     @Assisted params: WorkerParameters,
     @IoDispatcher
     private val defaultDispatcher: CoroutineDispatcher,
-    private val keysetFactory: KeysetFactory,
+    private val keysetManager: KeysetManager,
     private val workManager: WorkManager
 ) : CoroutineWorker(appContext, params) {
 
@@ -62,7 +62,7 @@ class LabFilesWorker @AssistedInject constructor(
         var workerResult = Result.success()
         setForeground(getForegroundInfo())
         TinkConfig.initStream()
-        val aeadForKeyset = keysetFactory.aead(KeysetTemplates.AEAD.AES256_GCM).aeadPrimitive()
+        val aeadForKeyset = keysetManager.aead(KeysetTemplates.AEAD.AES256_GCM).aeadPrimitive()
         val keysetHandle = inputData.getString(Args.ENCRYPTED_KEYSET)!!.run {
             KeysetHandle.readWithAssociatedData(
                 JsonKeysetReader.withBytes(fromBase64()),

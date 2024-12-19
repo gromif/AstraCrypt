@@ -4,7 +4,7 @@ import android.content.Context
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.app.di.IoDispatcher
 import com.nevidimka655.astracrypt.data.repository.files.FilesRepositoryProvider
-import com.nevidimka655.crypto.tink.KeysetFactory
+import com.nevidimka655.crypto.tink.KeysetManager
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -19,7 +19,7 @@ class SetupManager @Inject constructor(
     @IoDispatcher
     private val defaultDispatcher: CoroutineDispatcher = Dispatchers.Default,
 
-    private val keysetFactory: KeysetFactory,
+    private val keysetManager: KeysetManager,
     private val filesRepositoryProvider: FilesRepositoryProvider,
     private val io: Io
 ) {
@@ -27,7 +27,7 @@ class SetupManager @Inject constructor(
 
     suspend fun setup() = withContext(defaultDispatcher) {
         io.dataDir.mkdir()
-        keysetFactory.associatedData
+        keysetManager.associatedData
         val foldersArray = arrayOf(
             R.string.music, R.string.document, R.string.video, R.string.photo
         )
