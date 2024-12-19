@@ -8,6 +8,7 @@ import com.nevidimka655.astracrypt.data.datastore.KeysetDataStoreManager
 import com.nevidimka655.astracrypt.domain.usecase.crypto.MasterKeyNameUseCase
 import com.nevidimka655.astracrypt.domain.usecase.crypto.PrefsKeyNameUseCase
 import com.nevidimka655.crypto.tink.KeysetManager
+import com.nevidimka655.crypto.tink.domain.model.AssociatedDataConfig
 import com.nevidimka655.crypto.tink.domain.usecase.ParseKeysetByAeadUseCase
 import com.nevidimka655.crypto.tink.domain.usecase.SerializeKeysetByAeadUseCase
 import com.nevidimka655.crypto.tink.domain.usecase.encoder.HexUseCase
@@ -30,7 +31,7 @@ object KeysetManagerModule {
         io: Io,
         keysetFactoryImpl: KeysetFactoryImpl
     ) = KeysetManager(
-        associatedDataConfig = KeysetManager.AssociatedDataConfig(
+        associatedDataConfig = AssociatedDataConfig(
             dataFile = File("${io.dataDir}/grapefruit.ss0"),
             dataLength = AppConfig.CRYPTO_NONCE_SIZE,
             dataPasswordHashLength = AppConfig.AUTH_PASSWORD_HASH_LENGTH
