@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.data.room
+package com.nevidimka655.astracrypt.data.database
 
 enum class StorageItemState {
     Default, Deleted, Starred;

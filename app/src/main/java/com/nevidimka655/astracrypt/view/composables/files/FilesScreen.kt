@@ -80,9 +80,9 @@ import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.app.extensions.removeLines
 import com.nevidimka655.astracrypt.data.model.CoilTinkModel
 import com.nevidimka655.astracrypt.data.model.NavigatorDirectory
-import com.nevidimka655.astracrypt.data.room.StorageItemState
-import com.nevidimka655.astracrypt.data.room.StorageItemType
-import com.nevidimka655.astracrypt.domain.room.PagerTuple
+import com.nevidimka655.astracrypt.data.database.StorageItemState
+import com.nevidimka655.astracrypt.data.database.StorageItemType
+import com.nevidimka655.astracrypt.domain.database.PagerTuple
 import com.nevidimka655.astracrypt.view.MainVM
 import com.nevidimka655.astracrypt.view.composables.files.sheets.filesCreateNewSheet
 import com.nevidimka655.astracrypt.view.composables.files.sheets.filesOptionsSheet

@@ -11,7 +11,7 @@ import androidx.compose.ui.layout.ContentScale
 import coil.ImageLoader
 import coil.compose.AsyncImage
 import com.nevidimka655.astracrypt.data.model.CoilTinkModel
-import com.nevidimka655.astracrypt.data.room.StorageItemType
+import com.nevidimka655.astracrypt.data.database.StorageItemType
 import com.nevidimka655.compose_details.Details
 import com.nevidimka655.compose_details.DetailsManager
 import com.nevidimka655.compose_details.Screen

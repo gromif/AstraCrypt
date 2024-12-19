@@ -15,7 +15,7 @@ import coil.ImageLoader
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.app.utils.Io
 import com.nevidimka655.astracrypt.data.model.StorageItemFlags
-import com.nevidimka655.astracrypt.data.room.StorageItemType
+import com.nevidimka655.astracrypt.data.database.StorageItemType
 import com.nevidimka655.astracrypt.domain.repository.files.FilesRepository
 import com.nevidimka655.compose_details.DetailsManager
 import com.nevidimka655.compose_details.addItem

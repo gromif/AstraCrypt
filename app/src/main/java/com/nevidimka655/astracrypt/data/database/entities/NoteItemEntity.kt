@@ -1,9 +1,9 @@
-package com.nevidimka655.astracrypt.domain.room.entities
+package com.nevidimka655.astracrypt.data.database.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.nevidimka655.astracrypt.data.room.StorageItemState
+import com.nevidimka655.astracrypt.data.database.StorageItemState
 
 @Entity(tableName = "notes")
 data class NoteItemEntity(

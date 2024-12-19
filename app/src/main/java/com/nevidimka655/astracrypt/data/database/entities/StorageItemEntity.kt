@@ -1,10 +1,10 @@
-package com.nevidimka655.astracrypt.domain.room.entities
+package com.nevidimka655.astracrypt.data.database.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.nevidimka655.astracrypt.data.room.StorageItemState
-import com.nevidimka655.astracrypt.data.room.StorageItemType
+import com.nevidimka655.astracrypt.data.database.StorageItemState
+import com.nevidimka655.astracrypt.data.database.StorageItemType
 
 @Entity(tableName = "store_items")
 data class StorageItemEntity(

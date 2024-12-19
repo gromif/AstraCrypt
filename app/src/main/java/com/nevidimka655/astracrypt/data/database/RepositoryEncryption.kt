@@ -1,13 +1,13 @@
-package com.nevidimka655.astracrypt.data.room
+package com.nevidimka655.astracrypt.data.database
 
 import androidx.paging.PagingData
 import androidx.paging.map
 import com.google.crypto.tink.Aead
 import com.nevidimka655.astracrypt.app.utils.AeadManager
-import com.nevidimka655.astracrypt.domain.room.NotesPagerTuple
-import com.nevidimka655.astracrypt.domain.room.PagerTuple
-import com.nevidimka655.astracrypt.domain.room.entities.NoteItemEntity
-import com.nevidimka655.astracrypt.domain.room.entities.StorageItemEntity
+import com.nevidimka655.astracrypt.domain.database.NotesPagerTuple
+import com.nevidimka655.astracrypt.domain.database.PagerTuple
+import com.nevidimka655.astracrypt.data.database.entities.NoteItemEntity
+import com.nevidimka655.astracrypt.data.database.entities.StorageItemEntity
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import com.nevidimka655.crypto.tink.extensions.aeadPrimitive
 import com.nevidimka655.crypto.tink.extensions.fromBase64

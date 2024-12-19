@@ -20,7 +20,7 @@ import com.nevidimka655.astracrypt.data.model.NavigatorDirectory
 import com.nevidimka655.astracrypt.data.paging.FilesPagingProvider
 import com.nevidimka655.astracrypt.data.paging.StarredPagingProvider
 import com.nevidimka655.astracrypt.data.repository.files.FilesRepositoryProvider
-import com.nevidimka655.astracrypt.domain.room.StorageItemMinimalTuple
+import com.nevidimka655.astracrypt.domain.database.StorageItemMinimalTuple
 import com.nevidimka655.astracrypt.view.models.UiState
 import com.nevidimka655.astracrypt.view.models.ViewMode
 import dagger.hilt.android.lifecycle.HiltViewModel

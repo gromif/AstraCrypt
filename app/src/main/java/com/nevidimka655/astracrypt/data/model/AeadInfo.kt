@@ -1,6 +1,6 @@
 package com.nevidimka655.astracrypt.data.model
 
-import com.nevidimka655.astracrypt.data.room.DatabaseColumns
+import com.nevidimka655.astracrypt.data.database.DatabaseColumns
 import com.nevidimka655.crypto.tink.domain.KeysetTemplates
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

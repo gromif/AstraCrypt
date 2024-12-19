@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.text.input.TextFieldValue
 import com.nevidimka655.astracrypt.data.repository.files.FilesFilesRepositoryImpl
-import com.nevidimka655.astracrypt.domain.room.entities.NoteItemEntity
+import com.nevidimka655.astracrypt.data.database.entities.NoteItemEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

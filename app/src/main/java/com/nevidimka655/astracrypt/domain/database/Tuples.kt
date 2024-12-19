@@ -1,9 +1,9 @@
-package com.nevidimka655.astracrypt.domain.room
+package com.nevidimka655.astracrypt.domain.database
 
 import androidx.room.ColumnInfo
 import androidx.room.PrimaryKey
-import com.nevidimka655.astracrypt.data.room.StorageItemState
-import com.nevidimka655.astracrypt.data.room.StorageItemType
+import com.nevidimka655.astracrypt.data.database.StorageItemState
+import com.nevidimka655.astracrypt.data.database.StorageItemType
 
 data class PagerTuple(
     @PrimaryKey val id: Long = -1,

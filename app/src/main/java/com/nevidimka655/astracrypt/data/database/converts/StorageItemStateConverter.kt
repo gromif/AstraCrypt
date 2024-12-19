@@ -1,7 +1,7 @@
-package com.nevidimka655.astracrypt.data.room.converts
+package com.nevidimka655.astracrypt.data.database.converts
 
 import androidx.room.TypeConverter
-import com.nevidimka655.astracrypt.data.room.StorageItemState
+import com.nevidimka655.astracrypt.data.database.StorageItemState
 
 class StorageItemStateConverter {
     @TypeConverter

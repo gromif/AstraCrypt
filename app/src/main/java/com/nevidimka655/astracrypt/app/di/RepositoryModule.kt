@@ -8,11 +8,11 @@ import com.nevidimka655.astracrypt.data.repository.files.FilesFilesRepositoryImp
 import com.nevidimka655.astracrypt.data.repository.files.FilesRepositoryProvider
 import com.nevidimka655.astracrypt.data.repository.notes.NotesRepositoryImpl
 import com.nevidimka655.astracrypt.data.repository.notes.NotesRepositoryProvider
-import com.nevidimka655.astracrypt.data.room.AppDatabase
-import com.nevidimka655.astracrypt.data.room.RepositoryEncryption
+import com.nevidimka655.astracrypt.data.database.AppDatabase
+import com.nevidimka655.astracrypt.data.database.RepositoryEncryption
 import com.nevidimka655.astracrypt.domain.repository.files.FilesRepository
-import com.nevidimka655.astracrypt.domain.room.daos.NotesDao
-import com.nevidimka655.astracrypt.domain.room.daos.StorageItemDao
+import com.nevidimka655.astracrypt.data.database.daos.NotesDao
+import com.nevidimka655.astracrypt.data.database.daos.StorageItemDao
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import dagger.Module
 import dagger.Provides

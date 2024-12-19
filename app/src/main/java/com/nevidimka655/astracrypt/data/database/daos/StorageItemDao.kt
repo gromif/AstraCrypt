@@ -1,16 +1,16 @@
-package com.nevidimka655.astracrypt.domain.room.daos
+package com.nevidimka655.astracrypt.data.database.daos
 
 import androidx.paging.PagingSource
 import androidx.room.*
-import com.nevidimka655.astracrypt.data.room.StorageItemState
-import com.nevidimka655.astracrypt.data.room.StorageItemType
-import com.nevidimka655.astracrypt.domain.room.DatabaseTransformTuple
-import com.nevidimka655.astracrypt.domain.room.ExportTuple
-import com.nevidimka655.astracrypt.domain.room.OpenTuple
-import com.nevidimka655.astracrypt.domain.room.PagerTuple
-import com.nevidimka655.astracrypt.domain.room.StorageDirMinimalTuple
-import com.nevidimka655.astracrypt.domain.room.StorageItemMinimalTuple
-import com.nevidimka655.astracrypt.domain.room.entities.StorageItemEntity
+import com.nevidimka655.astracrypt.data.database.StorageItemState
+import com.nevidimka655.astracrypt.data.database.StorageItemType
+import com.nevidimka655.astracrypt.domain.database.DatabaseTransformTuple
+import com.nevidimka655.astracrypt.domain.database.ExportTuple
+import com.nevidimka655.astracrypt.domain.database.OpenTuple
+import com.nevidimka655.astracrypt.domain.database.PagerTuple
+import com.nevidimka655.astracrypt.domain.database.StorageDirMinimalTuple
+import com.nevidimka655.astracrypt.domain.database.StorageItemMinimalTuple
+import com.nevidimka655.astracrypt.data.database.entities.StorageItemEntity
 import kotlinx.coroutines.flow.Flow
 import java.util.ArrayList
 

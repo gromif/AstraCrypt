@@ -2,14 +2,14 @@ package com.nevidimka655.astracrypt.domain.repository.files
 
 import androidx.paging.PagingSource
 import com.nevidimka655.astracrypt.data.model.DetailsFolderContent
-import com.nevidimka655.astracrypt.data.room.StorageItemType
-import com.nevidimka655.astracrypt.domain.room.DatabaseTransformTuple
-import com.nevidimka655.astracrypt.domain.room.ExportTuple
-import com.nevidimka655.astracrypt.domain.room.OpenTuple
-import com.nevidimka655.astracrypt.domain.room.PagerTuple
-import com.nevidimka655.astracrypt.domain.room.StorageDirMinimalTuple
-import com.nevidimka655.astracrypt.domain.room.StorageItemMinimalTuple
-import com.nevidimka655.astracrypt.domain.room.entities.StorageItemEntity
+import com.nevidimka655.astracrypt.data.database.StorageItemType
+import com.nevidimka655.astracrypt.domain.database.DatabaseTransformTuple
+import com.nevidimka655.astracrypt.domain.database.ExportTuple
+import com.nevidimka655.astracrypt.domain.database.OpenTuple
+import com.nevidimka655.astracrypt.domain.database.PagerTuple
+import com.nevidimka655.astracrypt.domain.database.StorageDirMinimalTuple
+import com.nevidimka655.astracrypt.domain.database.StorageItemMinimalTuple
+import com.nevidimka655.astracrypt.data.database.entities.StorageItemEntity
 import kotlinx.coroutines.flow.Flow
 
 interface FilesRepository {

@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.domain.room.model
+package com.nevidimka655.astracrypt.domain.database.model
 
 import com.nevidimka655.crypto.tink.domain.KeysetTemplates
 import kotlinx.serialization.SerialName

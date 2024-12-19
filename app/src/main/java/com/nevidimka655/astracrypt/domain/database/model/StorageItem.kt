@@ -1,7 +1,7 @@
-package com.nevidimka655.astracrypt.domain.room.model
+package com.nevidimka655.astracrypt.domain.database.model
 
-import com.nevidimka655.astracrypt.data.room.StorageItemState
-import com.nevidimka655.astracrypt.data.room.StorageItemType
+import com.nevidimka655.astracrypt.data.database.StorageItemState
+import com.nevidimka655.astracrypt.data.database.StorageItemType
 
 data class StorageItem(
     val id: Long = 0,

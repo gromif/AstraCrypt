@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.domain.room.model
+package com.nevidimka655.astracrypt.domain.database.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

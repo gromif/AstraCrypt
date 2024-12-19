@@ -36,9 +36,9 @@ import com.nevidimka655.astracrypt.app.utils.MediaMetadataRetrieverCompat
 import com.nevidimka655.astracrypt.app.utils.Randomizer
 import com.nevidimka655.astracrypt.data.model.AeadInfo
 import com.nevidimka655.astracrypt.data.model.StorageItemFlags
-import com.nevidimka655.astracrypt.data.room.StorageItemType
+import com.nevidimka655.astracrypt.data.database.StorageItemType
 import com.nevidimka655.astracrypt.domain.repository.files.FilesRepository
-import com.nevidimka655.astracrypt.domain.room.entities.StorageItemEntity
+import com.nevidimka655.astracrypt.data.database.entities.StorageItemEntity
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import com.nevidimka655.crypto.tink.data.TinkConfig
 import com.nevidimka655.crypto.tink.extensions.fromBase64
