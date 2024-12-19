@@ -10,7 +10,7 @@ import com.google.crypto.tink.KeyTemplates
 import com.google.crypto.tink.KeysetHandle
 import com.google.crypto.tink.subtle.AesEaxJce
 import com.google.crypto.tink.subtle.AesGcmJce
-import com.nevidimka655.crypto.tink.Hex2
+import com.google.crypto.tink.subtle.Hex
 import com.nevidimka655.crypto.tink.KeysetTemplates
 import com.nevidimka655.crypto.tink.extensions.aeadPrimitive
 import com.nevidimka655.crypto.tink.extensions.fromBase64
@@ -62,13 +62,13 @@ class LabAeadManager {
         try {
             contentResolver.openInputStream(uri)?.use {
                 val hexEncodedLabKey = it.readBytes().decodeToString()
-                val encryptedLabKey = Hex2.decode(Hex2.Modes.A, hexEncodedLabKey)
+                val encryptedLabKey = Hex.decode(hexEncodedLabKey)
                 val serializedLabKey = serializePrimitive.decrypt(
                     encryptedLabKey, serializeAssociatedData
                 ).decodeToString()
                 val labKey = Json.decodeFromString<LabKey>(serializedLabKey)
                 val decryptedKeysetHandle = KeysetHandle.readWithAssociatedData(
-                    JsonKeysetReader.withBytes(Hex2.decode(Hex2.Modes.B, labKey.encryptedKeyset!!)),
+                    JsonKeysetReader.withBytes(Hex.decode(labKey.encryptedKeyset!!)),
                     keysetPrimitive,
                     keysetAssociatedData
                 )
@@ -93,7 +93,7 @@ class LabAeadManager {
             keysetPrimitive,
             keysetAssociatedData
         )
-        val keyset = Hex2.encode(Hex2.Modes.B, keysetByteEncryptedOutput.toByteArray())
+        val keyset = Hex.encode(keysetByteEncryptedOutput.toByteArray())
         val labKey = LabKey(
             dataType = dataType.ordinal,
             encryptedKeyset = keyset,
@@ -112,7 +112,7 @@ class LabAeadManager {
             val encryptedJson = serializePrimitive.encrypt(
                 keyFileJson.toByteArray(), serializeAssociatedData
             )
-            val keyFileSerialized = Hex2.encode(Hex2.Modes.A, encryptedJson).toByteArray()
+            val keyFileSerialized = Hex.encode(encryptedJson).toByteArray()
             it.write(keyFileSerialized)
         }
     }
