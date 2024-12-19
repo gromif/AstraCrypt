@@ -1,3 +1,5 @@
+@file:Suppress("ClassName")
+
 package com.nevidimka655.astracrypt.app.theme.icons
 
 import androidx.compose.material.icons.Icons
