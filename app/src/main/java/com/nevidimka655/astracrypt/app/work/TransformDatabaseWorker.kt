@@ -20,7 +20,7 @@ import com.nevidimka655.astracrypt.data.model.AeadInfo
 import com.nevidimka655.astracrypt.data.room.RepositoryEncryption
 import com.nevidimka655.astracrypt.domain.repository.files.FilesRepository
 import com.nevidimka655.astracrypt.domain.room.DatabaseTransformTuple
-import com.nevidimka655.crypto.tink.KeysetFactory
+import com.nevidimka655.crypto.tink.KeysetManager
 import com.nevidimka655.crypto.tink.TinkConfig
 import com.nevidimka655.crypto.tink.extensions.aeadPrimitive
 import com.nevidimka655.crypto.tink.extensions.fromBase64
@@ -40,7 +40,7 @@ class TransformDatabaseWorker @AssistedInject constructor(
     private val defaultDispatcher: CoroutineDispatcher,
     private val filesRepository: FilesRepository,
     private val repositoryEncryption: RepositoryEncryption,
-    private val keysetFactory: KeysetFactory
+    private val keysetManager: KeysetManager
 ) : CoroutineWorker(appContext, params) {
 
     object Args {
@@ -95,22 +95,22 @@ class TransformDatabaseWorker @AssistedInject constructor(
         return Result.success()
     }
 
-    private fun shouldDecodeAssociatedData() {
+    private suspend fun shouldDecodeAssociatedData() {
         if (newAeadInfo.bindAssociatedData) {
             val bytes = inputData.getString(Args.associatedData)!!.fromBase64()
-            val decodedData = keysetFactory.transformAssociatedDataToWorkInstance(
+            val decodedData = keysetManager.transformAssociatedDataToWorkInstance(
                 bytesIn = bytes,
                 encryptionMode = false,
                 authenticationTag = Args.TAG_ASSOCIATED_DATA_TRANSPORT
             )
-            keysetFactory.setAssociatedDataExplicitly(decodedData)
+            keysetManager.setAssociatedDataExplicitly(decodedData)
         }
     }
 
-    private fun initEncryption() {
+    private suspend fun initEncryption() {
         TinkConfig.initAead()
-        val keysetHandleFrom = fromEncryption?.let { keysetFactory.aead(it.aead) }
-        val keysetHandleTo = toEncryption?.let { keysetFactory.aead(it.aead) }
+        val keysetHandleFrom = fromEncryption?.let { keysetManager.aead(it.aead) }
+        val keysetHandleTo = toEncryption?.let { keysetManager.aead(it.aead) }
         fromKeysetHandleKeyId = keysetHandleFrom?.primary?.id ?: 0
         toKeysetHandleKeyId = keysetHandleTo?.primary?.id ?: 0
 

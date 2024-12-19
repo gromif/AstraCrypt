@@ -11,7 +11,7 @@ import com.nevidimka655.astracrypt.app.work.LabCombinedZipWorker
 import com.nevidimka655.astracrypt.app.work.TransformDatabaseWorker
 import com.nevidimka655.astracrypt.app.work.TransformNotesWorker
 import com.nevidimka655.astracrypt.data.model.AeadInfo
-import com.nevidimka655.crypto.tink.KeysetFactory
+import com.nevidimka655.crypto.tink.KeysetManager
 import com.nevidimka655.crypto.tink.extensions.toBase64
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -19,14 +19,14 @@ import kotlinx.serialization.json.Json
 class WorkerFactory(
     private val workManager: WorkManager,
     private val workerSerializer: WorkerSerializer,
-    private val keysetFactory: KeysetFactory
+    private val keysetManager: KeysetManager
 ) {
     var transformWorkLiveData: LiveData<WorkInfo?>? = null
 
-    fun startTransformDatabase(oldInfo: AeadInfo, newInfo: AeadInfo) {
+    suspend fun startTransformDatabase(oldInfo: AeadInfo, newInfo: AeadInfo) {
         val associatedData = if (newInfo.bindAssociatedData)
-            keysetFactory.transformAssociatedDataToWorkInstance(
-                bytesIn = keysetFactory.associatedData,
+            keysetManager.transformAssociatedDataToWorkInstance(
+                bytesIn = keysetManager.associatedData,
                 encryptionMode = true,
                 authenticationTag = TransformDatabaseWorker.Args.TAG_ASSOCIATED_DATA_TRANSPORT
             ).toBase64()
@@ -44,10 +44,10 @@ class WorkerFactory(
         transformWorkLiveData = workManager.getWorkInfoByIdLiveData(workerRequest.id)
     }
 
-    fun startTransformNotes(oldInfo: AeadInfo, newInfo: AeadInfo) {
+    suspend fun startTransformNotes(oldInfo: AeadInfo, newInfo: AeadInfo) {
         val associatedData = if (newInfo.bindAssociatedData)
-            keysetFactory.transformAssociatedDataToWorkInstance(
-                bytesIn = keysetFactory.associatedData,
+            keysetManager.transformAssociatedDataToWorkInstance(
+                bytesIn = keysetManager.associatedData,
                 encryptionMode = true,
                 authenticationTag = TransformNotesWorker.Args.TAG_ASSOCIATED_DATA_TRANSPORT
             ).toBase64()

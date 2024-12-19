@@ -8,7 +8,7 @@ import coil.fetch.Fetcher
 import coil.fetch.SourceResult
 import coil.request.Options
 import com.nevidimka655.astracrypt.data.model.CoilTinkModel
-import com.nevidimka655.crypto.tink.KeysetFactory
+import com.nevidimka655.crypto.tink.KeysetManager
 import com.nevidimka655.crypto.tink.extensions.streamingAeadPrimitive
 import okio.buffer
 import okio.source
@@ -16,7 +16,7 @@ import java.io.File
 import javax.inject.Inject
 
 class TinkCoilFetcherFactory @Inject constructor(
-    private val keysetFactory: KeysetFactory,
+    private val keysetManager: KeysetManager,
     private val aeadManager: AeadManager,
     private val io: Io
 ) : Fetcher.Factory<CoilTinkModel> {
@@ -29,8 +29,8 @@ class TinkCoilFetcherFactory @Inject constructor(
             val path = data.absolutePath ?: "${io.dataDir}/${data.path}"
             val file = File(path)
             val sourceInputChannel = aeadInfo.preview?.let {
-                keysetFactory.stream(it).streamingAeadPrimitive()
-                    .newDecryptingStream(file.inputStream(), keysetFactory.associatedData)
+                keysetManager.stream(it).streamingAeadPrimitive()
+                    .newDecryptingStream(file.inputStream(), keysetManager.associatedData)
             } ?: file.inputStream()
             return SourceResult(
                 source = ImageSource(
