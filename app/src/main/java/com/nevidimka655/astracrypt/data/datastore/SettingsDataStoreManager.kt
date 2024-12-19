@@ -11,10 +11,10 @@ import com.nevidimka655.astracrypt.features.profile.model.Avatars
 import com.nevidimka655.astracrypt.features.profile.model.ProfileInfo
 import com.nevidimka655.crypto.tink.KeysetManager
 import com.nevidimka655.crypto.tink.KeysetTemplates
+import com.nevidimka655.crypto.tink.domain.usecase.hash.Sha256UseCase
 import com.nevidimka655.crypto.tink.extensions.aeadPrimitive
 import com.nevidimka655.crypto.tink.extensions.deterministicAeadPrimitive
 import com.nevidimka655.crypto.tink.extensions.fromBase64
-import com.nevidimka655.crypto.tink.extensions.sha256
 import com.nevidimka655.crypto.tink.extensions.toBase64
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
@@ -26,7 +26,8 @@ private const val KEYSET_TAG_VALUE = "l0_ShH%OLq"
 
 class SettingsDataStoreManager(
     private val dataStore: DataStore<Preferences>,
-    private val keysetManager: KeysetManager
+    private val keysetManager: KeysetManager,
+    private val sha256UseCase: Sha256UseCase
 ) {
     private val encryptionSettingsKey = intPreferencesKey("a1")
     suspend fun getEncryptionSettings() = dataStore.data.first()[encryptionSettingsKey] ?: 0
@@ -87,7 +88,8 @@ class SettingsDataStoreManager(
             tag = KEYSET_TAG_KEY,
             keyParams = KeysetTemplates.DeterministicAEAD.AES256_SIV.params
         ).deterministicAeadPrimitive()
-        aead.encryptDeterministically(key.toByteArray(), key.sha256()).toBase64()
+        val associatedData = sha256UseCase.compute(value = key.toByteArray())
+        aead.encryptDeterministically(key.toByteArray(), associatedData).toBase64()
     } ?: key
 
     private suspend fun encryptValue(key: String, value: String) = getEncryptionTemplate()?.let {
