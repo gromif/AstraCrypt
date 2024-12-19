@@ -14,7 +14,6 @@ import com.nevidimka655.crypto.tink.Hex2
 import com.nevidimka655.crypto.tink.KeysetTemplates
 import com.nevidimka655.crypto.tink.extensions.aeadPrimitive
 import com.nevidimka655.crypto.tink.extensions.fromBase64
-import com.nevidimka655.crypto.tink.extensions.sha384
 import com.nevidimka655.crypto.tink.extensions.toBase64
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -183,7 +182,7 @@ class LabAeadManager {
     fun newKeysetPassword(pass: String): Boolean {
         if (keysetPassword != pass) {
             keysetPassword = pass
-            keysetPasswordSha384 = pass.sha384()
+            keysetPasswordSha384 = pass.toByteArray()
             val alternativePassword = StringBuilder().apply {
                 append(pass.length.toString())
                 appendLine(pass.reversed())
@@ -192,7 +191,7 @@ class LabAeadManager {
                 append("SAlt")
                 append(pass.toBase64())
             }.toString()
-            keysetAltPasswordSha384 = alternativePassword.sha384()
+            keysetAltPasswordSha384 = alternativePassword.toByteArray()
             return true
         }
         return false
