@@ -11,7 +11,7 @@ import com.nevidimka655.astracrypt.app.work.LabCombinedZipWorker
 import com.nevidimka655.astracrypt.app.work.TransformDatabaseWorker
 import com.nevidimka655.astracrypt.app.work.TransformNotesWorker
 import com.nevidimka655.astracrypt.data.model.AeadInfo
-import com.nevidimka655.crypto.tink.KeysetManager
+import com.nevidimka655.crypto.tink.data.KeysetManager
 import com.nevidimka655.crypto.tink.extensions.toBase64
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json

@@ -25,7 +25,7 @@ import com.nevidimka655.astracrypt.data.datastore.SettingsDataStoreManager
 import com.nevidimka655.astracrypt.data.model.CoilTinkModel
 import com.nevidimka655.astracrypt.features.profile.model.Avatars
 import com.nevidimka655.astracrypt.features.profile.model.ProfileInfo
-import com.nevidimka655.crypto.tink.KeysetManager
+import com.nevidimka655.crypto.tink.data.KeysetManager
 import com.nevidimka655.crypto.tink.extensions.streamingAeadPrimitive
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher

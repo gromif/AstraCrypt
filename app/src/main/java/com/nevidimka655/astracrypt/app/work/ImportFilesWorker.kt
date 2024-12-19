@@ -39,8 +39,8 @@ import com.nevidimka655.astracrypt.data.model.StorageItemFlags
 import com.nevidimka655.astracrypt.data.room.StorageItemType
 import com.nevidimka655.astracrypt.domain.repository.files.FilesRepository
 import com.nevidimka655.astracrypt.domain.room.entities.StorageItemEntity
-import com.nevidimka655.crypto.tink.KeysetManager
-import com.nevidimka655.crypto.tink.TinkConfig
+import com.nevidimka655.crypto.tink.data.KeysetManager
+import com.nevidimka655.crypto.tink.data.TinkConfig
 import com.nevidimka655.crypto.tink.extensions.fromBase64
 import com.nevidimka655.crypto.tink.extensions.secureRandom
 import com.nevidimka655.crypto.tink.extensions.streamingAeadPrimitive

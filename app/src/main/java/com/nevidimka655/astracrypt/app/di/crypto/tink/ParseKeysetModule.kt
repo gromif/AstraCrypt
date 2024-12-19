@@ -1,7 +1,7 @@
 package com.nevidimka655.astracrypt.app.di.crypto.tink
 
-import com.nevidimka655.crypto.tink.domain.usecase.ParseKeysetByAeadUseCase
-import com.nevidimka655.crypto.tink.domain.usecase.encoder.HexUseCase
+import com.nevidimka655.crypto.tink.core.encoders.HexService
+import com.nevidimka655.crypto.tink.data.parsers.ParseKeysetByAeadService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,7 +14,7 @@ object ParseKeysetModule {
 
     @Singleton
     @Provides
-    fun provideParseKeysetByAeadUseCase(
-        hexUseCase: HexUseCase
-    ) = ParseKeysetByAeadUseCase(hexUseCase = hexUseCase)
+    fun provideParseKeysetByAead(
+        hexService: HexService
+    ) = ParseKeysetByAeadService(hexService = hexService)
 }

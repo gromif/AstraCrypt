@@ -1,6 +1,6 @@
 package com.nevidimka655.astracrypt.app.utils.billing
 
-import com.nevidimka655.crypto.tink.KeysetTemplates
+import com.nevidimka655.crypto.tink.domain.KeysetTemplates
 
 object AlgorithmPaywallListFactory {
 

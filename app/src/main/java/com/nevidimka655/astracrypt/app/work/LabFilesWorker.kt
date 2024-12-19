@@ -23,9 +23,9 @@ import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.app.di.IoDispatcher
 import com.nevidimka655.astracrypt.app.extensions.contentResolver
 import com.nevidimka655.astracrypt.app.utils.Api
-import com.nevidimka655.crypto.tink.KeysetManager
-import com.nevidimka655.crypto.tink.KeysetTemplates
-import com.nevidimka655.crypto.tink.TinkConfig
+import com.nevidimka655.crypto.tink.data.KeysetManager
+import com.nevidimka655.crypto.tink.data.TinkConfig
+import com.nevidimka655.crypto.tink.domain.KeysetTemplates
 import com.nevidimka655.crypto.tink.extensions.aeadPrimitive
 import com.nevidimka655.crypto.tink.extensions.fromBase64
 import com.nevidimka655.crypto.tink.extensions.streamingAeadPrimitive

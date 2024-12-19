@@ -8,7 +8,7 @@ import coil.transition.CrossfadeTransition
 import com.nevidimka655.astracrypt.app.utils.AeadManager
 import com.nevidimka655.astracrypt.app.utils.Io
 import com.nevidimka655.astracrypt.app.utils.TinkCoilFetcherFactory
-import com.nevidimka655.crypto.tink.KeysetManager
+import com.nevidimka655.crypto.tink.data.KeysetManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

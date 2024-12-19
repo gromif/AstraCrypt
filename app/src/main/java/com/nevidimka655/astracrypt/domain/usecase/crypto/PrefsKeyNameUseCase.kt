@@ -1,13 +1,12 @@
 package com.nevidimka655.astracrypt.domain.usecase.crypto
 
-import com.nevidimka655.crypto.tink.domain.model.keyset.PrefsKeyName
-import com.nevidimka655.crypto.tink.domain.usecase.encoder.HexUseCase
-import com.nevidimka655.crypto.tink.domain.usecase.hash.Sha256UseCase
-import com.nevidimka655.crypto.tink.domain.usecase.hash.Sha384UseCase
+import com.nevidimka655.crypto.tink.domain.keyset.PrefsKeyName
+import com.nevidimka655.crypto.tink.core.encoders.HexService
+import com.nevidimka655.crypto.tink.core.hash.Sha384Service
 
 class PrefsKeyNameUseCase(
-    private val hexUseCase: HexUseCase,
-    private val sha384UseCase: Sha384UseCase
+    private val hexService: HexService,
+    private val sha384Service: Sha384Service
 ): PrefsKeyName {
 
     override fun get(
@@ -16,8 +15,8 @@ class PrefsKeyNameUseCase(
     ): String {
         val tagBytes = tag.toByteArray()
         val prefsAliasBytes = byteArrayOf(*associatedData, *tagBytes)
-        val prefsAliasHashBytes = sha384UseCase.compute(value = prefsAliasBytes)
-        return hexUseCase.encode(bytes = prefsAliasHashBytes)
+        val prefsAliasHashBytes = sha384Service.compute(value = prefsAliasBytes)
+        return hexService.encode(bytes = prefsAliasHashBytes)
     }
 
 }

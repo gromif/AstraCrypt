@@ -8,7 +8,7 @@ import coil.fetch.Fetcher
 import coil.fetch.SourceResult
 import coil.request.Options
 import com.nevidimka655.astracrypt.data.model.CoilTinkModel
-import com.nevidimka655.crypto.tink.KeysetManager
+import com.nevidimka655.crypto.tink.data.KeysetManager
 import com.nevidimka655.crypto.tink.extensions.streamingAeadPrimitive
 import okio.buffer
 import okio.source

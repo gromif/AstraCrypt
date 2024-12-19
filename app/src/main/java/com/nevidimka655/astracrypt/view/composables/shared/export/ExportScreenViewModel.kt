@@ -19,7 +19,7 @@ import com.nevidimka655.astracrypt.app.utils.Io
 import com.nevidimka655.astracrypt.app.work.ExportFilesWorker
 import com.nevidimka655.astracrypt.data.model.ExportUiState
 import com.nevidimka655.astracrypt.domain.repository.files.FilesRepository
-import com.nevidimka655.crypto.tink.KeysetManager
+import com.nevidimka655.crypto.tink.data.KeysetManager
 import com.nevidimka655.crypto.tink.extensions.toBase64
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher

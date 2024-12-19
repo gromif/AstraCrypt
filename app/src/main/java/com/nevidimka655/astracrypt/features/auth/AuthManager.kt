@@ -5,7 +5,7 @@ import com.nevidimka655.astracrypt.data.datastore.SettingsDataStoreManager
 import com.nevidimka655.astracrypt.features.auth.model.AuthInfo
 import com.nevidimka655.astracrypt.features.auth.model.AuthType
 import com.nevidimka655.astracrypt.features.auth.model.Skin
-import com.nevidimka655.crypto.tink.domain.usecase.hash.Sha384UseCase
+import com.nevidimka655.crypto.tink.core.hash.Sha384Service
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.first
@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 class AuthManager(
     private val defaultDataStoreManager: DefaultDataStoreManager,
     private val settingsDataStoreManager: SettingsDataStoreManager,
-    private val sha384UseCase: Sha384UseCase
+    private val sha384Service: Sha384Service
 ) {
     val infoFlow get() = settingsDataStoreManager.authInfoFlow
 
@@ -28,14 +28,14 @@ class AuthManager(
     suspend fun setPassword(password: String) = coroutineScope {
         launch {
             defaultDataStoreManager.setPasswordHash(
-                hash = sha384UseCase.compute(value = password.toByteArray())
+                hash = sha384Service.compute(value = password.toByteArray())
             )
         }
         launch { saveInfo(authInfo = infoFlow.first().copy(type = AuthType.PASSWORD)) }
     }
 
     suspend fun verifyPassword(password: String) = coroutineScope {
-        val currentHash = async { sha384UseCase.compute(value = password.toByteArray()) }
+        val currentHash = async { sha384Service.compute(value = password.toByteArray()) }
         val savedHash = async { defaultDataStoreManager.getPasswordHash() }
         currentHash.await().contentEquals(savedHash.await())
     }

@@ -13,7 +13,7 @@ import com.nevidimka655.astracrypt.data.room.RepositoryEncryption
 import com.nevidimka655.astracrypt.domain.repository.files.FilesRepository
 import com.nevidimka655.astracrypt.domain.room.daos.NotesDao
 import com.nevidimka655.astracrypt.domain.room.daos.StorageItemDao
-import com.nevidimka655.crypto.tink.KeysetManager
+import com.nevidimka655.crypto.tink.data.KeysetManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

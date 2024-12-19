@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.nevidimka655.crypto.tink.TinkConfig
+import com.nevidimka655.crypto.tink.data.TinkConfig
 import com.nevidimka655.haptic.Haptic
 import dagger.hilt.android.AndroidEntryPoint
 

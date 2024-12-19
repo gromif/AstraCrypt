@@ -11,7 +11,7 @@ import com.google.crypto.tink.KeysetHandle
 import com.google.crypto.tink.subtle.AesEaxJce
 import com.google.crypto.tink.subtle.AesGcmJce
 import com.google.crypto.tink.subtle.Hex
-import com.nevidimka655.crypto.tink.KeysetTemplates
+import com.nevidimka655.crypto.tink.domain.KeysetTemplates
 import com.nevidimka655.crypto.tink.extensions.aeadPrimitive
 import com.nevidimka655.crypto.tink.extensions.fromBase64
 import com.nevidimka655.crypto.tink.extensions.toBase64

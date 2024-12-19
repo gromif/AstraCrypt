@@ -1,19 +1,18 @@
 package com.nevidimka655.astracrypt.app.di
 
-import com.google.crypto.tink.config.TinkConfig
 import com.nevidimka655.astracrypt.app.AppConfig
 import com.nevidimka655.astracrypt.app.utils.Io
 import com.nevidimka655.astracrypt.data.crypto.KeysetFactoryImpl
 import com.nevidimka655.astracrypt.data.datastore.KeysetDataStoreManager
 import com.nevidimka655.astracrypt.domain.usecase.crypto.MasterKeyNameUseCase
 import com.nevidimka655.astracrypt.domain.usecase.crypto.PrefsKeyNameUseCase
-import com.nevidimka655.crypto.tink.KeysetManager
-import com.nevidimka655.crypto.tink.domain.model.AssociatedDataConfig
-import com.nevidimka655.crypto.tink.domain.usecase.ParseKeysetByAeadUseCase
-import com.nevidimka655.crypto.tink.domain.usecase.SerializeKeysetByAeadUseCase
-import com.nevidimka655.crypto.tink.domain.usecase.encoder.HexUseCase
-import com.nevidimka655.crypto.tink.domain.usecase.hash.Sha256UseCase
-import com.nevidimka655.crypto.tink.domain.usecase.hash.Sha384UseCase
+import com.nevidimka655.crypto.tink.core.encoders.HexService
+import com.nevidimka655.crypto.tink.core.hash.Sha256Service
+import com.nevidimka655.crypto.tink.core.hash.Sha384Service
+import com.nevidimka655.crypto.tink.data.KeysetManager
+import com.nevidimka655.crypto.tink.data.parsers.ParseKeysetByAeadService
+import com.nevidimka655.crypto.tink.data.serializers.SerializeKeysetByAeadService
+import com.nevidimka655.crypto.tink.domain.AssociatedDataConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -37,23 +36,23 @@ object KeysetManagerModule {
             dataPasswordHashLength = AppConfig.AUTH_PASSWORD_HASH_LENGTH
         ),
         keysetFactory = keysetFactoryImpl
-    ).also {
+    )/*.also {
         TinkConfig.register() // Register all Tink types
-    }
+    }*/
 
 
     @Singleton
     @Provides
     fun provideKeysetFactory(
         keysetDataStoreManager: KeysetDataStoreManager,
-        serializeKeysetByAeadUseCase: SerializeKeysetByAeadUseCase,
-        parseKeysetByAeadUseCase: ParseKeysetByAeadUseCase,
+        serializeKeysetByAeadService: SerializeKeysetByAeadService,
+        parseKeysetByAeadService: ParseKeysetByAeadService,
         prefsKeyNameUseCase: PrefsKeyNameUseCase,
         masterKeyNameUseCase: MasterKeyNameUseCase
     ) = KeysetFactoryImpl(
         keysetDataStoreManager = keysetDataStoreManager,
-        serializeKeysetByAeadUseCase = serializeKeysetByAeadUseCase,
-        parseKeysetByAeadUseCase = parseKeysetByAeadUseCase,
+        serializeKeysetByAeadService = serializeKeysetByAeadService,
+        parseKeysetByAeadService = parseKeysetByAeadService,
         prefsKeyNameUseCase = prefsKeyNameUseCase,
         masterKeyNameUseCase = masterKeyNameUseCase
     )
@@ -61,15 +60,15 @@ object KeysetManagerModule {
     @Singleton
     @Provides
     fun provideMasterKeyNameUseCase(
-        hexUseCase: HexUseCase,
-        sha256UseCase: Sha256UseCase
-    ) = MasterKeyNameUseCase(hexUseCase = hexUseCase, sha256UseCase = sha256UseCase)
+        hexService: HexService,
+        sha256Service: Sha256Service
+    ) = MasterKeyNameUseCase(hexService = hexService, sha256Service = sha256Service)
 
     @Singleton
     @Provides
     fun providePrefsKeyNameUseCase(
-        hexUseCase: HexUseCase,
-        sha384UseCase: Sha384UseCase
-    ) = PrefsKeyNameUseCase(hexUseCase = hexUseCase, sha384UseCase = sha384UseCase)
+        hexService: HexService,
+        sha384Service: Sha384Service
+    ) = PrefsKeyNameUseCase(hexService = hexService, sha384Service = sha384Service)
 
 }
