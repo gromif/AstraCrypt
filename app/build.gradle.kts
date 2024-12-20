@@ -78,6 +78,10 @@ kotlin {
     jvmToolchain(project.property("kotlinJvmToolchainVersion").toString().toInt())
 }
 
+hilt {
+    enableAggregatingTask = true
+}
+
 dependencies {
     implementation(project(":core:haptic"))
     implementation(project(":core:tiles-with-coroutines"))
