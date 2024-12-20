@@ -1,8 +1,8 @@
 package com.nevidimka655.astracrypt.view.composables.notes
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.NoteAdd
 import androidx.compose.material.icons.filled.Description
-import androidx.compose.material.icons.filled.Edit
 import androidx.compose.runtime.Composable
 import androidx.paging.compose.LazyPagingItems
 import com.nevidimka655.astracrypt.view.composables.components.NoItemsPage
@@ -17,7 +17,7 @@ fun NotesListScreen(
 ) {
     if (showEmptyPage) NoItemsPage(
         mainIcon = Icons.Filled.Description,
-        actionIcon = Icons.Filled.Edit
+        actionIcon = Icons.AutoMirrored.Default.NoteAdd
     ) else Notes.List {
         items(
             count = noteItems.itemSnapshotList.size,

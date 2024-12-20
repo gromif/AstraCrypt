@@ -16,7 +16,16 @@ class NotesRepositoryImpl(private val dao: NotesDao) : NotesRepository {
         dao.update(noteItemEntity = noteItemEntity)
     }
 
-    override suspend fun insert(noteItemEntity: NoteItemEntity) {
+    override suspend fun insert(name: String, text: String) {
+        val trimmedName = name.trim().ifEmpty { null }
+        val trimmedText = text.trim()
+        val textPreview = if (trimmedText.isNotEmpty()) trimmedText.take(80) else null
+        val noteItemEntity = NoteItemEntity(
+            name = trimmedName,
+            text = trimmedText,
+            textPreview = textPreview,
+            creationTime = System.currentTimeMillis()
+        )
         dao.insert(noteItemEntity = noteItemEntity)
     }
 

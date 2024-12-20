@@ -25,30 +25,6 @@ import kotlinx.coroutines.launch
 class NotesViewFragment : Fragment() {
     private val notesManager: NotesManager get() = TODO()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ) = ComposeView(requireContext()).apply {
-        setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
-        setContent {
-            AstraCryptTheme {
-                Notes.OverviewScreen(
-                    firstFieldLabel = stringResource(id = R.string.note_title),
-                    firstFieldValue = notesManager.titleState,
-                    onFirstFieldValueChange = {
-                        if (it.text.length <= 64) notesManager.titleState = it
-                    },
-                    secondFieldLabel = stringResource(id = R.string.text),
-                    secondFieldValue = notesManager.textState,
-                    onSecondFieldValueChange = {
-                        notesManager.textState = it
-                    }
-                )
-            }
-        }
-    }
-
     private fun setupMenu() = (requireActivity() as MenuHost).addMenuProvider(object : MenuProvider {
         override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
             menuInflater.inflate(R.menu.notes_view, menu)

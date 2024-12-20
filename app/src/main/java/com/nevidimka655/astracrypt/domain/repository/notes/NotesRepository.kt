@@ -11,7 +11,7 @@ interface NotesRepository {
 
     suspend fun update(noteItemEntity: NoteItemEntity)
 
-    suspend fun insert(noteItemEntity: NoteItemEntity)
+    suspend fun insert(name: String, text: String)
 
     // suspend fun getById(itemId: Long): NoteItemEntity
 

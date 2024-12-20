@@ -26,7 +26,8 @@ object Route {
 
     @Serializable
     object NotesGraph {
-        @Serializable object NotesList
+        @Serializable object List
+        @Serializable object Create
     }
 
     @Serializable
