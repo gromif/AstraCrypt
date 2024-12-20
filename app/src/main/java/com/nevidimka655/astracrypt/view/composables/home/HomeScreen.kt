@@ -75,10 +75,10 @@ fun HomeScreen(
 }
 
 @Composable
-inline fun RecentList(
+fun RecentList(
     recentFiles: List<PagerTuple>,
     imageLoader: ImageLoader,
-    crossinline onClick: (item: PagerTuple) -> Unit
+    onClick: (item: PagerTuple) -> Unit
 ) = LazyRow(
     modifier = Modifier.fillMaxSize(),
     horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spaces.spaceMedium)
@@ -99,14 +99,14 @@ inline fun RecentList(
 }
 
 @Composable
-inline fun RecentListItem(
+fun RecentListItem(
     modifier: Modifier = Modifier,
     imageLoader: ImageLoader,
     name: String,
     preview: String? = null,
     itemType: StorageItemType,
     state: StorageState,
-    crossinline onClick: () -> Unit
+    onClick: () -> Unit
 ) = OutlinedCard(
     modifier = modifier
         .fillMaxHeight()

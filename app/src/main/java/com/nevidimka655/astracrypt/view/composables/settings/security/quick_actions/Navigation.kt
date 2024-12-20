@@ -18,8 +18,8 @@ val SettingsSecurityQuickActionsUiState = UiState(
     )
 )
 
-inline fun NavGraphBuilder.settingsSecurityQuickActions(
-    crossinline onUiStateChange: (UiState) -> Unit
+fun NavGraphBuilder.settingsSecurityQuickActions(
+    onUiStateChange: (UiState) -> Unit
 ) = composable<Route.SettingsSecurityQuickActions> {
     onUiStateChange(SettingsSecurityQuickActionsUiState)
     val vm: SettingsQuickActionsViewModel = hiltViewModel()

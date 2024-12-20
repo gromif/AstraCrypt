@@ -14,9 +14,9 @@ val AboutUiState = UiState(
     )
 )
 
-inline fun NavGraphBuilder.about(
-    crossinline onUiStateChange: (UiState) -> Unit,
-    noinline navigateToPrivacyPolicy: () -> Unit
+fun NavGraphBuilder.about(
+    onUiStateChange: (UiState) -> Unit,
+    navigateToPrivacyPolicy: () -> Unit
 ) = composable<Route.AboutGraph.About> {
     onUiStateChange(AboutUiState)
     AboutScreen(

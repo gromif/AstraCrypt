@@ -16,8 +16,8 @@ val ExportUiState = UiState(
     )
 )
 
-inline fun NavGraphBuilder.export(
-    crossinline onUiStateChange: (UiState) -> Unit
+fun NavGraphBuilder.export(
+    onUiStateChange: (UiState) -> Unit
 ) = composable<Route.Export> {
     val export: Route.Export = it.toRoute()
     onUiStateChange(ExportUiState)

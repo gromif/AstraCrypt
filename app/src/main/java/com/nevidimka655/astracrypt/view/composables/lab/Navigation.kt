@@ -13,10 +13,10 @@ val LabListUiState = UiState(
     )
 )
 
-inline fun NavGraphBuilder.labList(
-    crossinline onUiStateChange: (UiState) -> Unit,
-    noinline navigateToAeadEncryption: () -> Unit = {},
-    noinline navigateToCombinedZip: () -> Unit = {}
+fun NavGraphBuilder.labList(
+    onUiStateChange: (UiState) -> Unit,
+    navigateToAeadEncryption: () -> Unit = {},
+    navigateToCombinedZip: () -> Unit = {}
 ) = composable<Route.LabGraph.List> {
     onUiStateChange(LabListUiState)
 

@@ -39,6 +39,7 @@ import com.nevidimka655.astracrypt.view.navigation.Route
 import com.nevidimka655.astracrypt.view.navigation.root
 import com.nevidimka655.haptic.Haptic
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -137,8 +138,8 @@ fun AstraCryptApp(
                 onUiStateChange = { uiState = it },
                 vm = vm,
                 navController = navController,
-                onFabClick = onFabClick,
-                onToolbarActions = onToolbarActions
+                onFabClick = onFabClick.receiveAsFlow(),
+                onToolbarActions = onToolbarActions.receiveAsFlow()
             )
         )
     }

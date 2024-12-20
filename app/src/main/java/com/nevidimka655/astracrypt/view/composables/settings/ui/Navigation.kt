@@ -16,9 +16,9 @@ val SettingsUi_UiState = UiState(
     )
 )
 
-inline fun NavGraphBuilder.settingsUi(
-    crossinline onUiStateChange: (UiState) -> Unit,
-    noinline navigateToFilesUiSettings: () -> Unit
+fun NavGraphBuilder.settingsUi(
+    onUiStateChange: (UiState) -> Unit,
+    navigateToFilesUiSettings: () -> Unit
 ) = composable<Route.SettingsUi> {
     onUiStateChange(SettingsUi_UiState)
     val vm: SettingsUiViewModel = hiltViewModel()

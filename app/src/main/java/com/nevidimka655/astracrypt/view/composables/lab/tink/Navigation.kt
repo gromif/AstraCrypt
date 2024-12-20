@@ -26,8 +26,8 @@ val _LabTinkUiState = UiState(
     )
 )
 
-inline fun NavGraphBuilder.tinkKey(
-    crossinline onUiStateChange: (UiState) -> Unit
+fun NavGraphBuilder.tinkKey(
+    onUiStateChange: (UiState) -> Unit
 ) = composable<Route.LabGraph.TinkGraph.Key> {
     onUiStateChange(_LabTinkUiState)
     val vm: TinkLabKeyViewModel = hiltViewModel()

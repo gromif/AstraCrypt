@@ -99,6 +99,7 @@ import com.nevidimka655.ui.compose_core.ext.cellsCount
 import com.nevidimka655.ui.compose_core.theme.spaces
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
@@ -479,7 +480,7 @@ fun FilesScreen(
     items: LazyPagingItems<PagerTuple>,
     isStarred: Boolean,
     dialogNewFolderState: MutableState<Boolean>,
-    onFabClick: Channel<Any>,
+    onFabClick: Flow<Any>,
     onNavigateUp: () -> Unit,
     onNavigateToDetails: (Long) -> Unit,
     onOpenStarredDir: () -> Unit,
@@ -504,7 +505,7 @@ fun FilesScreen(
     ) { vm.delete(filesVM.optionsItem.id) }
     var isCreateSheetVisible = remember { mutableStateOf(false) }
     LaunchedEffect(Unit) {
-        onFabClick.receiveAsFlow().collectLatest {
+        onFabClick.collectLatest {
             Haptic.rise()
             isCreateSheetVisible.value = true
         }

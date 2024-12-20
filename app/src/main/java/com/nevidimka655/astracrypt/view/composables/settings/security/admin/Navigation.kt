@@ -19,8 +19,8 @@ val SettingsSecurityAdminUiState = UiState(
     )
 )
 
-inline fun NavGraphBuilder.settingsSecurityAdmin(
-    crossinline onUiStateChange: (UiState) -> Unit
+fun NavGraphBuilder.settingsSecurityAdmin(
+    onUiStateChange: (UiState) -> Unit
 ) = composable<Route.SettingsSecurityAdmin> {
     onUiStateChange(SettingsSecurityAdminUiState)
     val vm: SettingsAdminViewModel = hiltViewModel()

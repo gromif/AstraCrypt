@@ -22,8 +22,8 @@ val EditProfileUiState = UiState(
 )
 
 
-inline fun NavGraphBuilder.editProfile(
-    crossinline onUiStateChange: (UiState) -> Unit
+fun NavGraphBuilder.editProfile(
+    onUiStateChange: (UiState) -> Unit
 ) = composable<Route.EditProfile> {
     onUiStateChange(EditProfileUiState)
     val context = LocalContext.current

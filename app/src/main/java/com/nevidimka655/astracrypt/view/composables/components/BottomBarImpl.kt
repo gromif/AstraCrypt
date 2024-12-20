@@ -18,10 +18,10 @@ import androidx.compose.ui.text.font.FontWeight
 import com.nevidimka655.astracrypt.view.navigation.BottomBarItems
 
 @Composable
-inline fun BottomBarImpl(
+fun BottomBarImpl(
     visible: Boolean,
     selected: BottomBarItems?,
-    crossinline onTabClick: (BottomBarItems) -> Unit
+    onTabClick: (BottomBarItems) -> Unit
 ) {
     val localDensity = LocalDensity.current
     val windowInsets = WindowInsets.systemBars

@@ -7,8 +7,8 @@ import com.nevidimka655.astracrypt.view.composables.lab.tink.labTinkGraph
 import com.nevidimka655.astracrypt.view.models.UiState
 import com.nevidimka655.astracrypt.view.navigation.Route
 
-inline fun NavGraphBuilder.labGraph(
-    crossinline onUiStateChange: (UiState) -> Unit,
+fun NavGraphBuilder.labGraph(
+    onUiStateChange: (UiState) -> Unit,
     navController: NavController
 ) = navigation<Route.LabGraph>(startDestination = Route.LabGraph.List) {
     labList(

@@ -19,13 +19,14 @@ import com.nevidimka655.astracrypt.view.composables.tabs
 import com.nevidimka655.astracrypt.view.models.ToolbarAction
 import com.nevidimka655.astracrypt.view.models.UiState
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.Flow
 
-inline fun root(
-    crossinline onUiStateChange: (UiState) -> Unit,
+fun root(
+    onUiStateChange: (UiState) -> Unit,
     vm: MainVM,
     navController: NavController,
-    onFabClick: Channel<Any>,
-    onToolbarActions: Channel<ToolbarAction>
+    onFabClick: Flow<Any>,
+    onToolbarActions: Flow<ToolbarAction>
 ): NavGraphBuilder.() -> Unit = {
     tabs(
         onUiStateChange = onUiStateChange,

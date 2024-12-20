@@ -6,8 +6,8 @@ import androidx.navigation.navigation
 import com.nevidimka655.astracrypt.view.models.UiState
 import com.nevidimka655.astracrypt.view.navigation.Route
 
-inline fun NavGraphBuilder.aboutGraph(
-    crossinline onUiStateChange: (UiState) -> Unit,
+fun NavGraphBuilder.aboutGraph(
+    onUiStateChange: (UiState) -> Unit,
     navController: NavController
 ) = navigation<Route.AboutGraph>(startDestination = Route.AboutGraph.About) {
     about(

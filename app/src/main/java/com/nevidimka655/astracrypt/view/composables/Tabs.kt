@@ -29,15 +29,16 @@ import com.nevidimka655.astracrypt.view.navigation.BottomBarItems
 import com.nevidimka655.astracrypt.view.navigation.Route
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.receiveAsFlow
 
-inline fun NavGraphBuilder.tabs(
-    crossinline onUiStateChange: (UiState) -> Unit,
+fun NavGraphBuilder.tabs(
+    onUiStateChange: (UiState) -> Unit,
     vm: MainVM,
     navController: NavController,
-    onFabClick: Channel<Any>,
-    onToolbarActions: Channel<ToolbarAction>
+    onFabClick: Flow<Any>,
+    onToolbarActions: Flow<ToolbarAction>
 ) {
     composable<Route.Tabs.Home> {
         onUiStateChange(HomeUiState)
@@ -47,7 +48,7 @@ inline fun NavGraphBuilder.tabs(
         )
         val recentFiles by homeVm.recentFilesStateFlow.collectAsStateWithLifecycle()
         LaunchedEffect(Unit) {
-            onToolbarActions.receiveAsFlow().collectLatest {
+            onToolbarActions.collectLatest {
                 when (it) {
                     is ToolbarActionNotes -> navController.navigate(Route.NotesGraph)
                     is ToolbarActionLab -> navController.navigate(Route.LabGraph)

@@ -14,12 +14,12 @@ val SettingsSecurityUiState = UiState(
     )
 )
 
-inline fun NavGraphBuilder.settingsSecurity(
-    crossinline onUiStateChange: (UiState) -> Unit,
-    noinline navigateToEncryption: () -> Unit,
-    noinline navigateToAuth: () -> Unit,
-    noinline navigateToDeviceAdmin: () -> Unit,
-    noinline navigateToQuickActions: () -> Unit
+fun NavGraphBuilder.settingsSecurity(
+    onUiStateChange: (UiState) -> Unit,
+    navigateToEncryption: () -> Unit,
+    navigateToAuth: () -> Unit,
+    navigateToDeviceAdmin: () -> Unit,
+    navigateToQuickActions: () -> Unit
 ) = composable<Route.SettingsSecurity> {
     onUiStateChange(SettingsSecurityUiState)
     SettingsSecurityScreen(

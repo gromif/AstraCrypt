@@ -20,8 +20,8 @@ val PrivacyPolicyUiState = UiState(
     )
 )
 
-inline fun NavGraphBuilder.privacyPolicy(
-    crossinline onUiStateChange: (UiState) -> Unit
+fun NavGraphBuilder.privacyPolicy(
+    onUiStateChange: (UiState) -> Unit
 ) = composable<Route.AboutGraph.PrivacyPolicy> {
     onUiStateChange(PrivacyPolicyUiState)
     val context = LocalContext.current

@@ -16,8 +16,8 @@ val DetailsUiState = UiState(
     )
 )
 
-inline fun NavGraphBuilder.details(
-    crossinline onUiStateChange: (UiState) -> Unit
+fun NavGraphBuilder.details(
+    onUiStateChange: (UiState) -> Unit
 ) = composable<Route.Details> {
     val details: Route.Details = it.toRoute()
     onUiStateChange(DetailsUiState)

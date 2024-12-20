@@ -21,8 +21,8 @@ val SettingsSecurityAuthUiState = UiState(
     )
 )
 
-inline fun NavGraphBuilder.settingsSecurityAuth(
-    crossinline onUiStateChange: (UiState) -> Unit
+fun NavGraphBuilder.settingsSecurityAuth(
+    onUiStateChange: (UiState) -> Unit
 ) = composable<Route.SettingsSecurityAuth> {
     onUiStateChange(SettingsSecurityAuthUiState)
     val vm: SettingsAuthViewModel = hiltViewModel()

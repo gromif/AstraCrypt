@@ -58,10 +58,10 @@ fun SettingsScreen(
 }
 
 @Composable
-inline fun SettingsGroupItem(
+fun SettingsGroupItem(
     title: String,
     imageVector: ImageVector,
-    crossinline onClick: () -> Unit
+    onClick: () -> Unit
 ) {
     ElevatedCard(
         modifier = Modifier.aspectRatio(1f)
