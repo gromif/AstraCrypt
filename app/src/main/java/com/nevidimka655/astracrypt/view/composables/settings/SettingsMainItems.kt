@@ -27,10 +27,6 @@ enum class SettingsMainItems(
         imageVector = Icons.Outlined.Palette,
         titleId = R.string.settings_interface
     ),
-    Purchases(
-        imageVector = Icons.Outlined.Storefront,
-        titleId = R.string.purchases
-    ),
     About(
         imageVector = Icons.Outlined.Info,
         titleId = R.string.settings_about

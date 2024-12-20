@@ -50,7 +50,6 @@ fun SettingsScreen(
                     SettingsMainItems.EditProfile -> navigateToEditProfile()
                     SettingsMainItems.Security -> navigateToSecurity()
                     SettingsMainItems.Interface -> navigateToUi()
-                    SettingsMainItems.Purchases -> TODO()
                     SettingsMainItems.About -> navigateToAbout()
                 }
             }

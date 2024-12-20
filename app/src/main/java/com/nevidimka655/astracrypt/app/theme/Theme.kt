@@ -16,15 +16,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.nevidimka655.astracrypt.app.theme.icons.Purchases
-import com.nevidimka655.astracrypt.app.theme.icons.reset
 import com.nevidimka655.astracrypt.app.utils.Api
 import com.nevidimka655.compose_color_schemes._ColorSchemes
 import com.nevidimka655.ui.compose_core.ext.windowSizeClassLocalProviders
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
-
-private var isDarkModeEnabled = false
 
 @Composable
 fun AstraCryptTheme(
@@ -42,10 +38,6 @@ fun AstraCryptTheme(
         darkTheme -> darkScheme
         else -> lightScheme
     }
-    if (isDarkModeEnabled != darkTheme) {
-        isDarkModeEnabled = darkTheme
-        Icons.reset()
-    }
     val view = LocalView.current
     val activity = (view.context as Activity)
     if (!view.isInEditMode) SideEffect {
@@ -61,10 +53,6 @@ fun AstraCryptTheme(
             content = content
         )
     }
-}
-
-fun Icons.reset() = with(this) {
-    Purchases.reset()
 }
 
 val lightScheme = lightColorScheme(
