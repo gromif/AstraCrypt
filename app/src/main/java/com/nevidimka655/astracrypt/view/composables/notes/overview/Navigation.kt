@@ -42,12 +42,17 @@ fun NavGraphBuilder.overviewNote(
     var editMode by remember { mutableStateOf(overview.noteId != -1L) }
 
     if (editMode) LaunchedEffect(Unit) {
-        launch { vm.load(id = overview.noteId)  }
-        launch {
-            onToolbarActions.collectLatest {
-                if (it is ToolbarActionDelete) vm.delete().invokeOnCompletion {
-                    backDispatcher?.onBackPressed()
-                }
+        vm.load(id = overview.noteId)
+        onToolbarActions.collectLatest {
+            if (it is ToolbarActionDelete) vm.delete().invokeOnCompletion {
+                backDispatcher?.onBackPressed()
+            }
+        }
+    }
+    LaunchedEffect(Unit) {
+        onFabClick.collectLatest {
+            vm.save().invokeOnCompletion {
+                backDispatcher?.onBackPressed()
             }
         }
     }
@@ -67,14 +72,6 @@ fun NavGraphBuilder.overviewNote(
             fab = fabState
         )
     )
-
-    LaunchedEffect(Unit) {
-        onFabClick.collectLatest {
-            vm.save().invokeOnCompletion {
-                backDispatcher?.onBackPressed()
-            }
-        }
-    }
 
 
     Notes.OverviewScreen(
