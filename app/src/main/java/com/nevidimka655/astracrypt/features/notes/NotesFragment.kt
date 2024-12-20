@@ -8,15 +8,11 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.app.theme.AstraCryptTheme
-import com.nevidimka655.astracrypt.view.MainVM
 
 class NotesFragment : Fragment() {
-    private val vm by activityViewModels<MainVM>()
-    private val notesManager get() = vm.toolsManager.notesManager
 
     override fun onCreateView(
         inflater: LayoutInflater,

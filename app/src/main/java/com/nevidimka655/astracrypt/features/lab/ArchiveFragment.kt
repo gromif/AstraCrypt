@@ -45,7 +45,6 @@ import androidx.core.os.bundleOf
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -53,7 +52,6 @@ import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.app.theme.AstraCryptTheme
 import com.nevidimka655.astracrypt.features.help.HelpFragment
 import com.nevidimka655.astracrypt.features.help.HelpIndex
-import com.nevidimka655.astracrypt.view.MainVM
 import com.nevidimka655.astracrypt.view.composables.shared.BaseNoItemsPage
 import com.nevidimka655.astracrypt.view.composables.shared.NoItemsPageSize
 import com.nevidimka655.ui.compose_core.CardWithTitle
@@ -63,8 +61,7 @@ import com.nevidimka655.ui.compose_core.theme.spaces
 import kotlinx.coroutines.launch
 
 class ArchiveFragment : Fragment() {
-    private val vm by activityViewModels<MainVM>()
-    private val labCombineZipManager get() = vm.toolsManager.labCombineZipManager
+    private val labCombineZipManager: LabCombineZipManager get() = TODO()
 
     private val addFilesContract = registerForActivityResult(
         ActivityResultContracts.OpenMultipleDocuments()

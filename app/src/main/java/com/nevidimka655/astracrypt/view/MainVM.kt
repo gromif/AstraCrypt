@@ -11,16 +11,15 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.app.di.IoDispatcher
-import com.nevidimka655.astracrypt.data.io.FilesService
-import com.nevidimka655.astracrypt.app.utils.SelectorManager
 import com.nevidimka655.astracrypt.app.utils.FileSystemSetupManager
-import com.nevidimka655.astracrypt.app.utils.ToolsManager
+import com.nevidimka655.astracrypt.app.utils.SelectorManager
 import com.nevidimka655.astracrypt.data.datastore.AppearanceManager
-import com.nevidimka655.astracrypt.view.models.NavigatorDirectory
+import com.nevidimka655.astracrypt.data.io.FilesService
 import com.nevidimka655.astracrypt.data.paging.FilesPagingProvider
 import com.nevidimka655.astracrypt.data.paging.StarredPagingProvider
 import com.nevidimka655.astracrypt.data.repository.files.FilesRepositoryProvider
 import com.nevidimka655.astracrypt.domain.database.StorageItemMinimalTuple
+import com.nevidimka655.astracrypt.view.models.NavigatorDirectory
 import com.nevidimka655.astracrypt.view.models.UiState
 import com.nevidimka655.astracrypt.view.models.ViewMode
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -65,8 +64,6 @@ class MainVM @Inject constructor(
     var lastUriListToImport: List<Uri>? = null
 
     private var _searchChannel: Channel<String>? = null
-
-    val toolsManager = ToolsManager()
 
     var isStarredScreen = false
 

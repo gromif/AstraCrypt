@@ -6,18 +6,15 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.documentfile.provider.DocumentFile
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.work.WorkInfo
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.databinding.FragmentLabFilesBinding
-import com.nevidimka655.astracrypt.view.MainVM
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class AeadFilesFragment : Fragment(R.layout.fragment_lab_files) {
-    private val vm by activityViewModels<MainVM>()
-    private val labManager get() = vm.toolsManager.labManager
+    private val labManager: LabAeadManager get() = TODO()
     private var binding: FragmentLabFilesBinding? = null
 
     private val openFileContract = registerForActivityResult(

@@ -13,20 +13,17 @@ import androidx.compose.ui.res.stringResource
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.app.theme.AstraCryptTheme
-import com.nevidimka655.astracrypt.view.MainVM
 import com.nevidimka655.notes.Notes
 import com.nevidimka655.notes.ui.OverviewScreen
 import kotlinx.coroutines.launch
 
 class NotesViewFragment : Fragment() {
-    private val vm by activityViewModels<MainVM>()
-    private val notesManager get() = vm.toolsManager.notesManager
+    private val notesManager: NotesManager get() = TODO()
 
     override fun onCreateView(
         inflater: LayoutInflater,

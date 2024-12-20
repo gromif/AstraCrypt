@@ -6,18 +6,15 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.databinding.FragmentLabTextBinding
-import com.nevidimka655.astracrypt.view.MainVM
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class AeadTextFragment : androidx.fragment.app.Fragment(R.layout.fragment_lab_text) {
-    private val vm by activityViewModels<MainVM>()
-    private val labManager get() = vm.toolsManager.labManager
+    private val labManager: LabAeadManager get() = TODO()
     private var binding: FragmentLabTextBinding? = null
 
     private val clipboardManager by lazy {
