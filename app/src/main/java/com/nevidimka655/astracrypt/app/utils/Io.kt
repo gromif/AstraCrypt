@@ -28,7 +28,7 @@ class Io (
     }
 
     fun getExportedCacheFile(name: String) = File(exportedCacheDir, name).also {
-        it.recreate()
+        it.createNewFile()
     }
 
     fun getExportedCacheFileUri(file: File) = FileProvider.getUriForFile(

@@ -16,11 +16,10 @@ import coil.request.ImageRequest
 import coil.size.Scale
 import com.nevidimka655.astracrypt.app.AppConfig
 import com.nevidimka655.astracrypt.app.di.IoDispatcher
-import com.nevidimka655.astracrypt.app.extensions.recreate
-import com.nevidimka655.astracrypt.app.utils.AeadManager
 import com.nevidimka655.astracrypt.app.utils.Api
 import com.nevidimka655.astracrypt.app.utils.CenterCropTransformation
 import com.nevidimka655.astracrypt.app.utils.Io
+import com.nevidimka655.astracrypt.data.crypto.AeadManager
 import com.nevidimka655.astracrypt.data.datastore.SettingsDataStoreManager
 import com.nevidimka655.astracrypt.data.model.CoilTinkModel
 import com.nevidimka655.astracrypt.features.profile.model.Avatars
@@ -86,7 +85,7 @@ class EditProfileViewModel @Inject constructor(
         }
         val aeadInfo = aeadManager.getInfo()
 
-        iconFile.recreate()
+        iconFile.createNewFile()
         val outputStream = aeadInfo.preview?.let {
             keysetManager.stream(it)
                 .streamingAeadPrimitive()
