@@ -13,7 +13,6 @@ import com.google.android.material.textfield.TextInputLayout
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.app.extensions.setTooltip
 import com.nevidimka655.astracrypt.app.extensions.viewLifecycleScope
-import com.nevidimka655.astracrypt.app.extensions.withViewLifecycle
 import com.nevidimka655.astracrypt.app.utils.billing.AlgorithmPaywallListFactory
 import com.nevidimka655.astracrypt.databinding.FragmentLabBinding
 import com.nevidimka655.astracrypt.view.MainVM
@@ -93,11 +92,6 @@ class AeadFragment : androidx.fragment.app.Fragment(R.layout.fragment_lab) {
             load.setTooltip(R.string.load)
         }
         updateUi()
-        labManager.keyStateFlow.withViewLifecycle(viewLifecycleOwner) {
-            if (it != null) binding?.run {
-                keysetEt.setText(it.encryptedKeyset)
-            }
-        }
     }
 
     private fun updateUi() {
