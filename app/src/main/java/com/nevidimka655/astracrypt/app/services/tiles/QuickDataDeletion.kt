@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.app.tiles
+package com.nevidimka655.astracrypt.app.services.tiles
 
 import android.os.Build
 import androidx.annotation.RequiresApi

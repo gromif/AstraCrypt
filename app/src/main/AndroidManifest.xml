@@ -63,11 +63,11 @@
             android:foregroundServiceType="dataSync" />
 
         <service
-            android:name=".app.work.ImportFilesWorker"
+            android:name=".app.services.ImportFilesWorker"
             android:foregroundServiceType="dataSync" />
 
         <service
-            android:name=".app.tiles.QuickDataDeletion"
+            android:name=".app.services.tiles.QuickDataDeletion"
             android:enabled="false"
             android:exported="true"
             android:icon="@drawable/ic_notification_app_icon"

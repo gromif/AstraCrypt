@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.app.work
+package com.nevidimka655.astracrypt.app.services
 
 import android.app.NotificationChannel
 import android.app.NotificationManager

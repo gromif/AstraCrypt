@@ -16,7 +16,7 @@ import androidx.work.workDataOf
 import com.nevidimka655.astracrypt.app.di.IoDispatcher
 import com.nevidimka655.astracrypt.data.crypto.AeadManager
 import com.nevidimka655.astracrypt.data.io.FilesService
-import com.nevidimka655.astracrypt.app.work.ExportFilesWorker
+import com.nevidimka655.astracrypt.app.services.ExportFilesWorker
 import com.nevidimka655.astracrypt.view.models.ExportUiState
 import com.nevidimka655.astracrypt.domain.repository.files.FilesRepository
 import com.nevidimka655.crypto.tink.data.KeysetManager

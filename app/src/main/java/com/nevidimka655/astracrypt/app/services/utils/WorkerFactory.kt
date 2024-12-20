@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.app.work.utils
+package com.nevidimka655.astracrypt.app.services.utils
 
 import android.net.Uri
 import androidx.lifecycle.LiveData
@@ -7,9 +7,9 @@ import androidx.work.OutOfQuotaPolicy
 import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import androidx.work.workDataOf
-import com.nevidimka655.astracrypt.app.work.LabCombinedZipWorker
-import com.nevidimka655.astracrypt.app.work.TransformDatabaseWorker
-import com.nevidimka655.astracrypt.app.work.TransformNotesWorker
+import com.nevidimka655.astracrypt.app.services.LabCombinedZipWorker
+import com.nevidimka655.astracrypt.app.services.TransformDatabaseWorker
+import com.nevidimka655.astracrypt.app.services.TransformNotesWorker
 import com.nevidimka655.astracrypt.data.model.AeadInfo
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import com.nevidimka655.crypto.tink.extensions.toBase64

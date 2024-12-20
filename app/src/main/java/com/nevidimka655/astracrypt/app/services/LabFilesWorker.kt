@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.app.work
+package com.nevidimka655.astracrypt.app.services
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -7,75 +7,117 @@ import android.content.Context
 import android.content.pm.ServiceInfo
 import android.net.Uri
 import android.os.Build
+import android.text.format.DateFormat
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.net.toUri
 import androidx.documentfile.provider.DocumentFile
-import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.ForegroundInfo
 import androidx.work.WorkManager
 import androidx.work.WorkerParameters
+import com.google.crypto.tink.JsonKeysetReader
+import com.google.crypto.tink.KeysetHandle
+import com.google.crypto.tink.StreamingAead
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.app.di.IoDispatcher
 import com.nevidimka655.astracrypt.app.utils.Api
+import com.nevidimka655.crypto.tink.data.KeysetManager
+import com.nevidimka655.crypto.tink.data.TinkConfig
+import com.nevidimka655.crypto.tink.domain.KeysetTemplates
+import com.nevidimka655.crypto.tink.extensions.aeadPrimitive
+import com.nevidimka655.crypto.tink.extensions.fromBase64
+import com.nevidimka655.crypto.tink.extensions.streamingAeadPrimitive
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
-import okio.use
-import java.io.File
-import java.util.zip.ZipEntry
-import java.util.zip.ZipOutputStream
 
-@HiltWorker
-class LabCombinedZipWorker @AssistedInject constructor(
+class LabFilesWorker @AssistedInject constructor(
     @Assisted context: Context,
     @Assisted params: WorkerParameters,
     @IoDispatcher
     private val defaultDispatcher: CoroutineDispatcher,
+    private val keysetManager: KeysetManager,
     private val workManager: WorkManager
 ) : CoroutineWorker(context, params) {
     private val contentResolver: ContentResolver = applicationContext.contentResolver
 
     object Args {
-        const val SOURCE_URI = "a1"
+        const val SOURCE_URI_ARRAY = "a1"
         const val TARGET_URI = "a2"
-        const val ZIP_FILE_URI = "a3"
+        const val ENCRYPTED_AD = "a3"
+        const val ENCRYPTED_KEYSET = "a4"
+        const val MODE = "a5"
     }
 
-    private val notificationId = 203
+    companion object {
+        const val keysetTransportAssociatedData = "b1"
+        const val associatedDataTransportAssociatedData = "b2"
+    }
+
+    private val notificationId = 202
 
     override suspend fun doWork() = withContext(defaultDispatcher) {
         var workerResult = Result.success()
         setForeground(getForegroundInfo())
+        TinkConfig.initStream()
+        val aeadForKeyset = keysetManager.aead(KeysetTemplates.AEAD.AES256_GCM).aeadPrimitive()
+        val keysetHandle = inputData.getString(Args.ENCRYPTED_KEYSET)!!.run {
+            KeysetHandle.readWithAssociatedData(
+                JsonKeysetReader.withBytes(fromBase64()),
+                aeadForKeyset,
+                keysetTransportAssociatedData.toByteArray()
+            )
+        }
+        val associatedData = inputData.getString(Args.ENCRYPTED_AD)!!.run {
+            aeadForKeyset.decrypt(
+                fromBase64(),
+                associatedDataTransportAssociatedData.toByteArray()
+            )
+        }
+        val mode = inputData.getBoolean(Args.MODE, false)
         val destinationUri = inputData.getString(Args.TARGET_URI)!!.toUri()
-        val sourceUri = inputData.getString(Args.SOURCE_URI)!!.toUri()
-        val destinationDocument = DocumentFile.fromSingleUri(applicationContext, destinationUri)!!
-        val zipFileContentUrisFile = File(inputData.getString(Args.ZIP_FILE_URI)!!)
+        val sourceUriArray = inputData.getStringArray(Args.SOURCE_URI_ARRAY)!!.map { it.toUri() }
+        val destinationRoot = DocumentFile.fromTreeUri(applicationContext, destinationUri)!!
+        val datePattern = "dd_mm_yyyy_hh:mm:ss"
+        val date = DateFormat.format(datePattern, System.currentTimeMillis()).toString()
+        val destination = destinationRoot.createDirectory("Exported_$date")!!
+        val streamAead = keysetHandle.streamingAeadPrimitive()
         try {
-            contentResolver.openOutputStream(destinationUri)?.use { out ->
-                contentResolver.openInputStream(sourceUri)?.use { it.copyTo(out) }
-                ZipOutputStream(out).use { zipOut ->
-                    zipFileContentUrisFile.forEachLine { line ->
-                        val documentUri = Uri.parse(line)
-                        val currentDocument = DocumentFile
-                            .fromSingleUri(applicationContext, documentUri)!!
-                        val zipEntry = ZipEntry(currentDocument.name!!)
-                        zipOut.putNextEntry(zipEntry)
-                        contentResolver.openInputStream(documentUri)?.use { it.copyTo(zipOut) }
-                        zipOut.closeEntry()
-                    }
-                }
+            sourceUriArray.forEach {
+                iterator(
+                    mode = mode,
+                    stream = streamAead,
+                    associatedData = associatedData,
+                    destination = destination,
+                    sourceUri = it
+                )
             }
         } catch (e: Exception) {
-            e.toString()
-            destinationDocument.delete()
+            destination.delete()
             workerResult = Result.failure()
         }
-        zipFileContentUrisFile.delete()
         workerResult
+    }
+
+    private fun iterator(
+        mode: Boolean,
+        stream: StreamingAead,
+        associatedData: ByteArray,
+        destination: DocumentFile,
+        sourceUri: Uri
+    ) {
+        val source = DocumentFile.fromSingleUri(applicationContext, sourceUri)!!
+        val outputUri = destination.createFile(source.type!!, source.name!!)?.uri
+        val input = contentResolver.openInputStream(sourceUri)!!
+        val out = contentResolver.openOutputStream(outputUri!!, "wt")!!
+        if (mode) stream.newEncryptingStream(out, associatedData).use { outputStream ->
+            input.use { it.copyTo(outputStream) }
+        } else stream.newDecryptingStream(input, associatedData).use { inputStream ->
+            out.use { inputStream.copyTo(it) }
+        }
     }
 
     override suspend fun getForegroundInfo(): ForegroundInfo {

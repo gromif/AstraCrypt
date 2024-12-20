@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.app.work
+package com.nevidimka655.astracrypt.app.services
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -18,8 +18,6 @@ import com.nevidimka655.astracrypt.app.di.IoDispatcher
 import com.nevidimka655.astracrypt.app.utils.Api
 import com.nevidimka655.astracrypt.data.model.AeadInfo
 import com.nevidimka655.astracrypt.data.database.RepositoryEncryption
-import com.nevidimka655.astracrypt.domain.repository.files.FilesRepository
-import com.nevidimka655.astracrypt.domain.database.DatabaseTransformTuple
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import com.nevidimka655.crypto.tink.data.TinkConfig
 import com.nevidimka655.crypto.tink.extensions.aeadPrimitive
@@ -30,30 +28,26 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
-import kotlin.random.Random
 
 @HiltWorker
-class TransformDatabaseWorker @AssistedInject constructor(
+class TransformNotesWorker @AssistedInject constructor(
     @Assisted appContext: Context,
     @Assisted params: WorkerParameters,
     @IoDispatcher
     private val defaultDispatcher: CoroutineDispatcher,
-    private val filesRepository: FilesRepository,
     private val repositoryEncryption: RepositoryEncryption,
-    private val keysetManager: KeysetManager
+    private val keysetManager: KeysetManager,
 ) : CoroutineWorker(appContext, params) {
 
     object Args {
-        const val oldEncryptionInfo = ImportFilesWorker.Args.aeadInfo
-        const val newEncryptionInfo = "fe"
-        const val associatedData = "query"
-        const val TAG_ASSOCIATED_DATA_TRANSPORT = "columns"
+        const val oldEncryptionInfo = ImportFilesWorker.Args.associatedData
+        const val newEncryptionInfo = ImportFilesWorker.Args.fileWithUris
+        const val associatedData = "the_royal_palace"
+        const val TAG_ASSOCIATED_DATA_TRANSPORT = "the_city_of_light"
     }
 
     private var fromPrimitive: Aead? = null
     private var toPrimitive: Aead? = null
-    private var fromKeysetHandleKeyId = 0
-    private var toKeysetHandleKeyId = 0
     private val isEncryptionDifferent by lazy { fromEncryption != toEncryption }
 
     private val oldAeadInfo by lazy {
@@ -62,37 +56,33 @@ class TransformDatabaseWorker @AssistedInject constructor(
     private val newAeadInfo by lazy {
         Json.decodeFromString<AeadInfo>(inputData.getString(Args.newEncryptionInfo)!!)
     }
-    private val fromEncryption get() = oldAeadInfo.database
-    private val toEncryption get() = newAeadInfo.database
-    private val isNameEncrypted get() = oldAeadInfo.name
-    private val isThumbEncrypted get() = oldAeadInfo.thumb
-    private val isPathEncrypted get() = oldAeadInfo.path
-    private val isFlagsEncrypted get() = oldAeadInfo.flags
+    private val fromEncryption get() = oldAeadInfo.aeadNotes
+    private val toEncryption get() = newAeadInfo.aeadNotes
+    private var notificationId = 3
 
-    private val encryptName get() = newAeadInfo.name
-    private val encryptThumb get() = newAeadInfo.thumb
-    private val encryptPath get() = newAeadInfo.path
-    private val encryptDetails get() = newAeadInfo.flags
-
-    private var notificationId = 0
-
-    override suspend fun doWork(): Result {
-        notificationId = Random.nextInt(0, 101)
+    override suspend fun doWork() = withContext(defaultDispatcher) {
         setForeground(getForegroundInfo())
-        withContext(defaultDispatcher) {
-            initEncryption()
-            shouldDecodeAssociatedData()
-            var pageIndex = 0
-            val pageSize = 20
-            var itemsList = filesRepository.getDatabaseTransformItems(pageSize, pageIndex)
-            while (itemsList.isNotEmpty()) {
-                iterateDatabaseItems(itemsList)
-                pageIndex++
-                itemsList = filesRepository.getDatabaseTransformItems(pageSize, pageIndex)
+        initEncryption()
+        shouldDecodeAssociatedData()
+        var pageIndex = 0
+        val pageSize = 20
+        /*var itemsList = repository.getTransformNotesItems(pageSize, pageIndex)
+        while (itemsList.isNotEmpty()) {
+            val encrypt = toPrimitive != null
+            val isEncrypted = fromPrimitive != null
+            itemsList.forEach {
+                val name = doString(encrypt, isEncrypted, it.name)
+                val text = doString(encrypt, isEncrypted, it.text)
+                val textPreview = doString(encrypt, isEncrypted, it.textPreview)
+                repository.updateTransformNotes(
+                    id = it.id, name = name, text = text, textPreview = textPreview
+                )
             }
-        }
+            pageIndex++
+            itemsList = repository.getTransformNotesItems(pageSize, pageIndex)
+        }*/
         delay(500)
-        return Result.success()
+        Result.success()
     }
 
     private suspend fun shouldDecodeAssociatedData() {
@@ -109,41 +99,26 @@ class TransformDatabaseWorker @AssistedInject constructor(
 
     private suspend fun initEncryption() {
         TinkConfig.initAead()
-        val keysetHandleFrom = fromEncryption?.let { keysetManager.aead(it.aead) }
-        val keysetHandleTo = toEncryption?.let { keysetManager.aead(it.aead) }
-        fromKeysetHandleKeyId = keysetHandleFrom?.primary?.id ?: 0
-        toKeysetHandleKeyId = keysetHandleTo?.primary?.id ?: 0
-
+        val keysetHandleFrom = fromEncryption?.let {
+            keysetManager.aead(it)
+        }
+        val keysetHandleTo = toEncryption?.let {
+            keysetManager.aead(it)
+        }
         fromPrimitive = keysetHandleFrom?.aeadPrimitive()
         toPrimitive = keysetHandleTo?.aeadPrimitive()
     }
 
-    private suspend fun iterateDatabaseItems(list: List<DatabaseTransformTuple>) = list.forEach {
-        val name = operateStringField(encryptName, isNameEncrypted, it.name)
-        val thumbnail = operateStringField(encryptThumb, isThumbEncrypted, it.preview)
-        val path = operateStringField(encryptPath, isPathEncrypted, it.path)
-        val details = operateStringField(encryptDetails, isFlagsEncrypted, it.flags)
-        filesRepository.updateDbEntry(
-            id = it.id,
-            name = name,
-            thumb = thumbnail,
-            path = path,
-            flags = details
-        )
-    }
-
-    private suspend fun operateStringField(
-        encrypt: Boolean,
-        encrypted: Boolean,
-        value: String,
-    ) = if (encrypt) {
-        if (!encrypted || isEncryptionDifferent) {
-            val nameToEncrypt = if (encrypted) decrypt(value) else value
-            encrypt(nameToEncrypt)
-        } else value
-    } else {
-        if (encrypted) decrypt(value) else value
-    }
+    private suspend fun doString(encrypt: Boolean, encrypted: Boolean, value: String?) = value?.run {
+        if (encrypt) {
+            if (!encrypted || isEncryptionDifferent) {
+                val nameToEncrypt = if (encrypted) decrypt(this) else this
+                encrypt(nameToEncrypt)
+            } else this
+        } else {
+            if (encrypted) decrypt(this) else this
+        }
+    } ?: value
 
     private suspend fun encrypt(str: String) = if (str.isNotEmpty())
         toPrimitive?.run { repositoryEncryption.encrypt(str) }
@@ -183,9 +158,8 @@ class TransformDatabaseWorker @AssistedInject constructor(
             R.string.notification_channel_fileOperations_desc
         )
         val importance = NotificationManager.IMPORTANCE_DEFAULT
-        val channelId = applicationContext.getString(
-            R.string.notification_channel_fileOperations_id
-        )
+        val channelId =
+            applicationContext.getString(R.string.notification_channel_fileOperations_id)
         val channel = NotificationChannel(channelId, name, importance).apply {
             description = descriptionText
         }

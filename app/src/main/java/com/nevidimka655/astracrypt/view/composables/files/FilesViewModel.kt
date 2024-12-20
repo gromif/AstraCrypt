@@ -15,8 +15,8 @@ import coil.ImageLoader
 import com.nevidimka655.astracrypt.app.di.IoDispatcher
 import com.nevidimka655.astracrypt.data.crypto.AeadManager
 import com.nevidimka655.astracrypt.data.io.FilesService
-import com.nevidimka655.astracrypt.app.work.ImportFilesWorker
-import com.nevidimka655.astracrypt.app.work.utils.WorkerSerializer
+import com.nevidimka655.astracrypt.app.services.ImportFilesWorker
+import com.nevidimka655.astracrypt.app.services.utils.WorkerSerializer
 import com.nevidimka655.astracrypt.data.repository.files.FilesRepositoryProvider
 import com.nevidimka655.astracrypt.domain.database.PagerTuple
 import com.nevidimka655.crypto.tink.data.KeysetManager
