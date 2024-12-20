@@ -33,7 +33,8 @@ val NotesListUiState = UiState(
 fun NavGraphBuilder.notesList(
     onUiStateChange: (UiState) -> Unit,
     onFabClick: Flow<Any>,
-    navigateToCreate: () -> Unit
+    navigateToCreate: () -> Unit,
+    navigateToView: (id: Long) -> Unit
 ) = composable<Route.NotesGraph.List> {
     onUiStateChange(NotesListUiState)
     val vm: NotesListViewModel = hiltViewModel()
@@ -50,6 +51,7 @@ fun NavGraphBuilder.notesList(
 
     NotesListScreen(
         noteItems = items,
-        showEmptyPage = showEmptyPage
+        showEmptyPage = showEmptyPage,
+        onClick = navigateToView
     )
 }

@@ -13,7 +13,8 @@ import com.nevidimka655.notes.ui.Note
 @Composable
 fun NotesListScreen(
     noteItems: LazyPagingItems<Notes.Item>,
-    showEmptyPage: Boolean
+    showEmptyPage: Boolean,
+    onClick: (id: Long) -> Unit
 ) {
     if (showEmptyPage) NoItemsPage(
         mainIcon = Icons.Filled.Description,
@@ -29,13 +30,7 @@ fun NotesListScreen(
                     summary = it.textPreview,
                     date = it.creationTime
                 ) {
-                    /*lifecycleScope.launch {
-                        notesManager.preloadText(
-                            noteId = it.id,
-                            title = it.title
-                        )
-                    }
-                    showNote(title = it.title)*/
+                    onClick(it.id)
                 }
             }
         }

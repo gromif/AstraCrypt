@@ -27,7 +27,9 @@ object Route {
     @Serializable
     object NotesGraph {
         @Serializable object List
-        @Serializable object Create
+
+        @Serializable
+        data class Overview(val noteId: Long = -1)
     }
 
     @Serializable
