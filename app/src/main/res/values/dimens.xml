@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="cardRadius">14dp</dimen>
     <dimen name="padding_default">16dp</dimen>
     <dimen name="padding_double">32dp</dimen>
     <dimen name="setup_userIconSize">70dp</dimen>
-    <dimen name="settingsGroupItemHeight">180dp</dimen>
     <dimen name="filesListItemMediumHeight">100dp</dimen>
     <dimen name="dialog_view_padding">10dp</dimen>
 </resources>

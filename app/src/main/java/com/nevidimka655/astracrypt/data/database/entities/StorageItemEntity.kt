@@ -3,8 +3,8 @@ package com.nevidimka655.astracrypt.data.database.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.nevidimka655.astracrypt.domain.model.db.StorageState
 import com.nevidimka655.astracrypt.data.database.StorageItemType
+import com.nevidimka655.astracrypt.domain.model.db.StorageState
 
 @Entity(tableName = "store_items")
 data class StorageItemEntity(

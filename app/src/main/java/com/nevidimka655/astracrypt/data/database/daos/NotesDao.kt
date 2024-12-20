@@ -1,7 +1,11 @@
 package com.nevidimka655.astracrypt.data.database.daos
 
 import androidx.paging.PagingSource
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.Query
+import androidx.room.RewriteQueriesToDropUnusedColumns
+import androidx.room.Update
 import com.nevidimka655.astracrypt.data.database.NotesPagerTuple
 import com.nevidimka655.astracrypt.data.database.TransformNotesTuple
 import com.nevidimka655.astracrypt.data.database.entities.NoteItemEntity

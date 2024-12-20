@@ -4,8 +4,8 @@ import android.app.admin.DevicePolicyManager
 import android.content.ComponentName
 import android.content.Context
 import com.nevidimka655.astracrypt.app.device_admin.DeviceAdminManager
-import com.nevidimka655.astracrypt.app.device_admin.RequestDeviceAdminContract
 import com.nevidimka655.astracrypt.app.device_admin.DeviceAdminReceiverImpl
+import com.nevidimka655.astracrypt.app.device_admin.RequestDeviceAdminContract
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

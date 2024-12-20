@@ -5,8 +5,8 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingSource
 import androidx.paging.map
-import com.nevidimka655.astracrypt.data.repository.notes.NotesRepositoryProvider
 import com.nevidimka655.astracrypt.data.database.NotesPagerTuple
+import com.nevidimka655.astracrypt.data.repository.notes.NotesRepositoryProvider
 import com.nevidimka655.notes.Notes
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow

@@ -1,6 +1,5 @@
 package com.nevidimka655.astracrypt.view.composables.settings.ui
 
-import androidx.compose.material.icons.Icons
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nevidimka655.astracrypt.app.utils.Api
