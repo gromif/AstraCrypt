@@ -2,6 +2,7 @@ package com.nevidimka655.astracrypt.app.di.notes
 
 import com.nevidimka655.astracrypt.data.repository.notes.NotesRepositoryImpl
 import com.nevidimka655.astracrypt.domain.usecase.notes.CreateNewNoteUseCase
+import com.nevidimka655.astracrypt.domain.usecase.notes.DeleteByIdUseCase
 import com.nevidimka655.astracrypt.domain.usecase.notes.LoadNoteByIdUseCase
 import com.nevidimka655.astracrypt.domain.usecase.notes.UpdateNoteByIdUseCase
 import dagger.Module
@@ -31,6 +32,13 @@ object NotesModule {
     fun provideUpdateNoteByIdUseCase(
         notesRepositoryImpl: NotesRepositoryImpl
     ): UpdateNoteByIdUseCase = UpdateNoteByIdUseCase(
+        repository = notesRepositoryImpl
+    )
+
+    @Provides
+    fun provideDeleteByIdUseCase(
+        notesRepositoryImpl: NotesRepositoryImpl
+    ): DeleteByIdUseCase = DeleteByIdUseCase(
         repository = notesRepositoryImpl
     )
 
