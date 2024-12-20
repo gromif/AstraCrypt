@@ -6,7 +6,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingSource
 import com.nevidimka655.astracrypt.app.AppConfig
-import com.nevidimka655.astracrypt.data.model.NavigatorDirectory
+import com.nevidimka655.astracrypt.view.models.NavigatorDirectory
 import com.nevidimka655.astracrypt.data.repository.files.FilesRepositoryProvider
 import com.nevidimka655.astracrypt.domain.database.PagerTuple
 import kotlinx.coroutines.ExperimentalCoroutinesApi

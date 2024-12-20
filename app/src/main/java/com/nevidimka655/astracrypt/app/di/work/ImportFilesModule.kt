@@ -5,7 +5,7 @@ import coil.request.CachePolicy
 import coil.request.ImageRequest
 import coil.size.Scale
 import com.nevidimka655.astracrypt.app.AppConfig
-import com.nevidimka655.astracrypt.app.utils.CenterCropTransformation
+import com.nevidimka655.astracrypt.view.models.CenterCropTransformation
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

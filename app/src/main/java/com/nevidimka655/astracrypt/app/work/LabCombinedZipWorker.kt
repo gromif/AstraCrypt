@@ -2,6 +2,7 @@ package com.nevidimka655.astracrypt.app.work
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.content.ContentResolver
 import android.content.Context
 import android.content.pm.ServiceInfo
 import android.net.Uri
@@ -18,7 +19,6 @@ import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.app.di.IoDispatcher
-import com.nevidimka655.astracrypt.app.extensions.contentResolver
 import com.nevidimka655.astracrypt.app.utils.Api
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
@@ -31,12 +31,13 @@ import java.util.zip.ZipOutputStream
 
 @HiltWorker
 class LabCombinedZipWorker @AssistedInject constructor(
-    @Assisted appContext: Context,
+    @Assisted context: Context,
     @Assisted params: WorkerParameters,
     @IoDispatcher
     private val defaultDispatcher: CoroutineDispatcher,
     private val workManager: WorkManager
-) : CoroutineWorker(appContext, params) {
+) : CoroutineWorker(context, params) {
+    private val contentResolver: ContentResolver = applicationContext.contentResolver
 
     object Args {
         const val SOURCE_URI = "a1"

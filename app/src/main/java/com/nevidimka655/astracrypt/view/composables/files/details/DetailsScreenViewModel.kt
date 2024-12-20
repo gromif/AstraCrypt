@@ -13,10 +13,11 @@ import androidx.compose.material.icons.outlined.SdCard
 import androidx.lifecycle.ViewModel
 import coil.ImageLoader
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.app.utils.Io
-import com.nevidimka655.astracrypt.data.model.StorageItemFlags
+import com.nevidimka655.astracrypt.data.io.FilesService
+import com.nevidimka655.astracrypt.data.database.StorageItemFlags
 import com.nevidimka655.astracrypt.data.database.StorageItemType
 import com.nevidimka655.astracrypt.domain.repository.files.FilesRepository
+import com.nevidimka655.astracrypt.domain.usecase.BytesToHumanReadableUseCase
 import com.nevidimka655.compose_details.DetailsManager
 import com.nevidimka655.compose_details.addItem
 import com.nevidimka655.compose_details.entities.DetailsItem
@@ -29,7 +30,8 @@ import javax.inject.Inject
 @HiltViewModel
 class DetailsScreenViewModel @Inject constructor(
     private val filesRepository: FilesRepository,
-    private val io: Io,
+    private val filesService: FilesService,
+    private val bytesToHumanReadableUseCase: BytesToHumanReadableUseCase,
     val detailsManager: DetailsManager,
     val imageLoader: ImageLoader
 ): ViewModel() {
@@ -60,9 +62,9 @@ class DetailsScreenViewModel @Inject constructor(
             )
             // SIZE
             if (isFile) {
-                val file = io.getLocalFile(item.path)
+                val file = filesService.getLocalFile(item.path)
                 val currentSizeBytes = file.length()
-                val currentSize = io.bytesToHumanReadable(currentSizeBytes)
+                val currentSize = bytesToHumanReadableUseCase.invoke(currentSizeBytes)
                 addItem(
                     icon = IconWrap(imageVector = Icons.Outlined.SdCard),
                     title = TextWrap.Resource(id = R.string.currentSize),
@@ -133,16 +135,16 @@ class DetailsScreenViewModel @Inject constructor(
                 summary = TextWrap.Text(text = item.path)
             )
             val originalSizeBytes = item.size
-            val originalSize = io.bytesToHumanReadable(originalSizeBytes)
+            val originalSize = bytesToHumanReadableUseCase.invoke(originalSizeBytes)
             addItem(
                 icon = IconWrap(imageVector = Icons.Outlined.SdCard),
                 title = TextWrap.Resource(id = R.string.originalSize),
                 summary = TextWrap.Text(text = "$originalSize ($originalSizeBytes B)")
             )
             if (item.preview != null) {
-                val thumbnailFile = io.getLocalFile(item.preview)
+                val thumbnailFile = filesService.getLocalFile(item.preview)
                 val thumbnailSizeBytes = thumbnailFile.length()
-                val thumbnailSize = io.bytesToHumanReadable(thumbnailSizeBytes)
+                val thumbnailSize = bytesToHumanReadableUseCase.invoke(thumbnailSizeBytes)
                 addItem(
                     icon = IconWrap(imageVector = Icons.Outlined.FolderOpen),
                     title = TextWrap.Resource(id = R.string.thumbnailPath),

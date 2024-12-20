@@ -14,10 +14,10 @@ import androidx.work.OutOfQuotaPolicy
 import androidx.work.WorkManager
 import androidx.work.workDataOf
 import com.nevidimka655.astracrypt.app.di.IoDispatcher
-import com.nevidimka655.astracrypt.app.utils.AeadManager
-import com.nevidimka655.astracrypt.app.utils.Io
+import com.nevidimka655.astracrypt.data.crypto.AeadManager
+import com.nevidimka655.astracrypt.data.io.FilesService
 import com.nevidimka655.astracrypt.app.work.ExportFilesWorker
-import com.nevidimka655.astracrypt.data.model.ExportUiState
+import com.nevidimka655.astracrypt.view.models.ExportUiState
 import com.nevidimka655.astracrypt.domain.repository.files.FilesRepository
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import com.nevidimka655.crypto.tink.extensions.toBase64
@@ -43,7 +43,7 @@ class ExportScreenViewModel @Inject constructor(
     private val aeadManager: AeadManager,
     private val filesRepository: FilesRepository,
     private val keysetManager: KeysetManager,
-    val io: Io,
+    val filesService: FilesService,
     val workManager: WorkManager
 ) : ViewModel() {
     private val workUUID = UUID.randomUUID()
@@ -54,12 +54,12 @@ class ExportScreenViewModel @Inject constructor(
         itemId: Long, contentResolver: ContentResolver
     ) = viewModelScope.launch(defaultDispatcher) {
         val exportTuple = filesRepository.getDataForOpening(id = itemId)
-        val exportFile = io.getExportedCacheFile(exportTuple.name)
-        val outputUri = io.getExportedCacheFileUri(file = exportFile)
+        val exportFile = filesService.getExportedCacheFile(exportTuple.name)
+        val outputUri = filesService.getExportedCacheFileUri(file = exportFile)
         internalExportUri = outputUri.toString()
         uiState = uiState.copy(name = exportTuple.name)
         val outStream = contentResolver.openOutputStream(outputUri)
-        val inStream = io.getLocalFile(exportTuple.path).run {
+        val inStream = filesService.getLocalFile(exportTuple.path).run {
             inputStream()
             /*if (exportTuple.encryptionType == -1) inputStream()
             else {
@@ -135,6 +135,6 @@ class ExportScreenViewModel @Inject constructor(
 
     fun cancelExport() = workManager.cancelWorkById(id = workUUID)
 
-    fun onDispose() = io.clearExportedCache()
+    fun onDispose() = filesService.clearExportedCache()
 
 }

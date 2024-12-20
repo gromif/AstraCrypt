@@ -42,6 +42,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.os.bundleOf
+import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -49,7 +50,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.app.extensions.requireMenuHost
 import com.nevidimka655.astracrypt.app.theme.AstraCryptTheme
 import com.nevidimka655.astracrypt.features.help.HelpFragment
 import com.nevidimka655.astracrypt.features.help.HelpIndex
@@ -200,7 +200,7 @@ class ArchiveFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        requireMenuHost().addMenuProvider(object : MenuProvider {
+        (requireActivity() as MenuHost).addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.combined_zip, menu)
             }

@@ -11,12 +11,12 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.app.di.IoDispatcher
-import com.nevidimka655.astracrypt.app.utils.Io
+import com.nevidimka655.astracrypt.data.io.FilesService
 import com.nevidimka655.astracrypt.app.utils.SelectorManager
-import com.nevidimka655.astracrypt.app.utils.SetupManager
+import com.nevidimka655.astracrypt.app.utils.FileSystemSetupManager
 import com.nevidimka655.astracrypt.app.utils.ToolsManager
 import com.nevidimka655.astracrypt.data.datastore.AppearanceManager
-import com.nevidimka655.astracrypt.data.model.NavigatorDirectory
+import com.nevidimka655.astracrypt.view.models.NavigatorDirectory
 import com.nevidimka655.astracrypt.data.paging.FilesPagingProvider
 import com.nevidimka655.astracrypt.data.paging.StarredPagingProvider
 import com.nevidimka655.astracrypt.data.repository.files.FilesRepositoryProvider
@@ -42,8 +42,8 @@ class MainVM @Inject constructor(
     @IoDispatcher
     private val defaultDispatcher: CoroutineDispatcher,
     private val filesRepositoryProvider: FilesRepositoryProvider,
-    private val setupManager: SetupManager,
-    private val io: Io,
+    private val fileSystemSetupManager: FileSystemSetupManager,
+    private val filesService: FilesService,
     private val filesPagingProvider: FilesPagingProvider,
     private val starredPagingProvider: StarredPagingProvider,
     val appearanceManager: AppearanceManager
@@ -138,9 +138,9 @@ class MainVM @Inject constructor(
         suspend fun deleteIterator(itemToDelete: StorageItemMinimalTuple) {
             idsList.add(itemToDelete.id)
             if (itemToDelete.path.isNotEmpty()) {
-                val localFile = io.getLocalFile(itemToDelete.path)
+                val localFile = filesService.getLocalFile(itemToDelete.path)
                 if (localFile.exists()) {
-                    val thumbLocalFile = io.getLocalFile(itemToDelete.preview)
+                    val thumbLocalFile = filesService.getLocalFile(itemToDelete.preview)
                     thumbLocalFile.delete()
                     localFile.delete()
                 }
@@ -230,8 +230,8 @@ class MainVM @Inject constructor(
     }
 
     init {
-        if (!setupManager.isDatabaseCreated())
-            viewModelScope.launch(defaultDispatcher) { setupManager.setup() }
+        if (!fileSystemSetupManager.isDatabaseCreated())
+            viewModelScope.launch(defaultDispatcher) { fileSystemSetupManager.setup() }
     }
 
 }

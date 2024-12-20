@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.data.model
+package com.nevidimka655.astracrypt.view.models
 
 data class ExportUiState(
     val isDone: Boolean = false,

@@ -2,6 +2,7 @@ package com.nevidimka655.astracrypt.app.work
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.content.ContentResolver
 import android.content.Context
 import android.content.pm.ServiceInfo
 import android.net.Uri
@@ -21,7 +22,6 @@ import com.google.crypto.tink.KeysetHandle
 import com.google.crypto.tink.StreamingAead
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.app.di.IoDispatcher
-import com.nevidimka655.astracrypt.app.extensions.contentResolver
 import com.nevidimka655.astracrypt.app.utils.Api
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import com.nevidimka655.crypto.tink.data.TinkConfig
@@ -35,13 +35,14 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
 class LabFilesWorker @AssistedInject constructor(
-    @Assisted appContext: Context,
+    @Assisted context: Context,
     @Assisted params: WorkerParameters,
     @IoDispatcher
     private val defaultDispatcher: CoroutineDispatcher,
     private val keysetManager: KeysetManager,
     private val workManager: WorkManager
-) : CoroutineWorker(appContext, params) {
+) : CoroutineWorker(context, params) {
+    private val contentResolver: ContentResolver = applicationContext.contentResolver
 
     object Args {
         const val SOURCE_URI_ARRAY = "a1"

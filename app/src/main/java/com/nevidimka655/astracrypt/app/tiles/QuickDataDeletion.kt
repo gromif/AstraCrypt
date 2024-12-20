@@ -3,7 +3,7 @@ package com.nevidimka655.astracrypt.app.tiles
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.nevidimka655.astracrypt.app.di.IoDispatcher
-import com.nevidimka655.astracrypt.app.utils.Io
+import com.nevidimka655.astracrypt.data.io.FilesService
 import com.nevidimka655.astracrypt.data.database.AppDatabase
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import com.nevidimka655.crypto.tink.extensions.secureRandom
@@ -21,7 +21,7 @@ class QuickDataDeletion @Inject constructor() : TileServiceCoroutine() {
     @IoDispatcher
     @Inject lateinit var defaultDispatcher: CoroutineDispatcher
     @Inject lateinit var database: AppDatabase
-    @Inject lateinit var io: Io
+    @Inject lateinit var filesService: FilesService
     @Inject lateinit var keysetManager: KeysetManager
 
     override fun onClick() {
@@ -35,7 +35,7 @@ class QuickDataDeletion @Inject constructor() : TileServiceCoroutine() {
                 keyStore.deleteEntry(alias)
             }
 
-            with(io) {
+            with(filesService) {
                 dataDir.deleteRecursively()
                 cacheDir.deleteRecursively()
             }

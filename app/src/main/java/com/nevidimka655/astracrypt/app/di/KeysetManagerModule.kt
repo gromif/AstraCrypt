@@ -1,7 +1,7 @@
 package com.nevidimka655.astracrypt.app.di
 
 import com.nevidimka655.astracrypt.app.AppConfig
-import com.nevidimka655.astracrypt.app.utils.Io
+import com.nevidimka655.astracrypt.data.io.FilesService
 import com.nevidimka655.astracrypt.data.crypto.KeysetFactoryImpl
 import com.nevidimka655.astracrypt.data.datastore.KeysetDataStoreManager
 import com.nevidimka655.astracrypt.domain.usecase.crypto.MasterKeyNameUseCase
@@ -27,11 +27,11 @@ object KeysetManagerModule {
     @Singleton
     @Provides
     fun provideKeysetManager(
-        io: Io,
+        filesService: FilesService,
         keysetFactoryImpl: KeysetFactoryImpl
     ) = KeysetManager(
         associatedDataConfig = AssociatedDataConfig(
-            dataFile = File("${io.dataDir}/grapefruit.ss0"),
+            dataFile = File("${filesService.dataDir}/grapefruit.ss0"),
             dataLength = AppConfig.CRYPTO_NONCE_SIZE,
             dataPasswordHashLength = AppConfig.AUTH_PASSWORD_HASH_LENGTH
         ),

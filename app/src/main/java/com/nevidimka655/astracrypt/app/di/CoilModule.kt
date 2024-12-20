@@ -5,9 +5,9 @@ import coil.ImageLoader
 import coil.decode.VideoFrameDecoder
 import coil.request.CachePolicy
 import coil.transition.CrossfadeTransition
-import com.nevidimka655.astracrypt.app.utils.AeadManager
-import com.nevidimka655.astracrypt.app.utils.Io
-import com.nevidimka655.astracrypt.app.utils.TinkCoilFetcherFactory
+import com.nevidimka655.astracrypt.data.crypto.AeadManager
+import com.nevidimka655.astracrypt.data.io.FilesService
+import com.nevidimka655.astracrypt.data.io.TinkCoilFetcherFactory
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import dagger.Module
 import dagger.Provides
@@ -40,11 +40,11 @@ object CoilModule {
     @Singleton
     @Provides
     fun provideTinkCoilFetcherFactory(
-        io: Io,
+        filesService: FilesService,
         keysetManager: KeysetManager,
         aeadManager: AeadManager
     ): TinkCoilFetcherFactory = TinkCoilFetcherFactory(
-        io = io,
+        filesService = filesService,
         aeadManager = aeadManager,
         keysetManager = keysetManager
     )

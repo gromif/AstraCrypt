@@ -2,7 +2,7 @@ package com.nevidimka655.astracrypt.app.di
 
 import android.content.Context
 import androidx.room.Room
-import com.nevidimka655.astracrypt.app.utils.AeadManager
+import com.nevidimka655.astracrypt.data.crypto.AeadManager
 import com.nevidimka655.astracrypt.data.datastore.SettingsDataStoreManager
 import com.nevidimka655.astracrypt.data.repository.files.FilesFilesRepositoryImpl
 import com.nevidimka655.astracrypt.data.repository.files.FilesRepositoryProvider

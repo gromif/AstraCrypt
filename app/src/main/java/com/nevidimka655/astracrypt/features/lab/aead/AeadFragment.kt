@@ -7,13 +7,11 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import com.google.android.material.textfield.TextInputLayout
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.app.extensions.setTooltip
-import com.nevidimka655.astracrypt.app.extensions.viewLifecycleScope
-import com.nevidimka655.astracrypt.app.utils.billing.AlgorithmPaywallListFactory
 import com.nevidimka655.astracrypt.databinding.FragmentLabBinding
 import com.nevidimka655.astracrypt.view.MainVM
 import kotlinx.coroutines.Dispatchers
@@ -35,7 +33,7 @@ class AeadFragment : androidx.fragment.app.Fragment(R.layout.fragment_lab) {
     private val saveKeysetContract = registerForActivityResult(
         ActivityResultContracts.CreateDocument("text/plain")
     ) { uri ->
-        if (uri != null) viewLifecycleScope.launch(Dispatchers.IO) {
+        if (uri != null) viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
             labManager.saveKeyFile(requireContext().contentResolver, uri)
         }
     }
@@ -88,8 +86,6 @@ class AeadFragment : androidx.fragment.app.Fragment(R.layout.fragment_lab) {
             load.setOnClickListener {
                 openKeysetContract.launch(arrayOf("text/plain"))
             }
-            save.setTooltip(R.string.save)
-            load.setTooltip(R.string.load)
         }
         updateUi()
     }
@@ -122,10 +118,10 @@ class AeadFragment : androidx.fragment.app.Fragment(R.layout.fragment_lab) {
     private fun shuffleKey() {
         labManager.keysetUri = null
         updateUi()
-        viewLifecycleScope.launch { labManager.shuffleKey() }
+        viewLifecycleOwner.lifecycleScope.launch { labManager.shuffleKey() }
     }
 
-    private fun done() = viewLifecycleScope.launch(Dispatchers.Main) {
+    private fun done() = viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
         var dataType = labManager.dataType.ordinal
         if (labManager.keysetUri != null) {
             val contentResolver = requireContext().contentResolver
@@ -153,20 +149,6 @@ class AeadFragment : androidx.fragment.app.Fragment(R.layout.fragment_lab) {
     override fun onDestroyView() {
         binding = null
         super.onDestroyView()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        viewLifecycleScope.launch {
-            itemsMajor = AlgorithmPaywallListFactory.fetchItemsMajor(
-            ).toTypedArray()
-            itemsAead = AlgorithmPaywallListFactory.fetchItemsAead(
-            ).toTypedArray()
-            if (labManager.keysetUri == null && labManager.currentLabKey == null) shuffleKey()
-            withContext(Dispatchers.Main) {
-                setupEncryptionTypes(binding?.encryptionType)
-            }
-        }
     }
 
 }

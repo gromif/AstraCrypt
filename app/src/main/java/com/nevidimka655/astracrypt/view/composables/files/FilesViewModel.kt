@@ -14,7 +14,7 @@ import androidx.work.workDataOf
 import coil.ImageLoader
 import com.nevidimka655.astracrypt.app.di.IoDispatcher
 import com.nevidimka655.astracrypt.data.crypto.AeadManager
-import com.nevidimka655.astracrypt.app.utils.Io
+import com.nevidimka655.astracrypt.data.io.FilesService
 import com.nevidimka655.astracrypt.app.work.ImportFilesWorker
 import com.nevidimka655.astracrypt.app.work.utils.WorkerSerializer
 import com.nevidimka655.astracrypt.data.repository.files.FilesRepositoryProvider
@@ -40,7 +40,7 @@ class FilesViewModel @Inject constructor(
     private val filesRepositoryProvider: FilesRepositoryProvider,
     private val keysetManager: KeysetManager,
     private val aeadManager: AeadManager,
-    val io: Io,
+    val filesService: FilesService,
     val workManager: WorkManager,
     val workerSerializer: WorkerSerializer,
     val imageLoader: ImageLoader
@@ -53,8 +53,8 @@ class FilesViewModel @Inject constructor(
     val dialogRenameState = mutableStateOf(false)
     val dialogDeleteState = mutableStateOf(false)
 
-    fun getCameraScanOutputUri() = io.getExportedCacheFileUri(
-        file = io.getExportedCacheCameraFile()
+    fun getCameraScanOutputUri() = filesService.getExportedCacheFileUri(
+        file = filesService.getExportedCacheCameraFile()
     ).also { cameraScanOutputUri = it }
 
     fun setStarredFlag(

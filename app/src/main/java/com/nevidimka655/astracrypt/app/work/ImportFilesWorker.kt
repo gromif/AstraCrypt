@@ -31,11 +31,11 @@ import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.app.AppConfig
 import com.nevidimka655.astracrypt.app.di.IoDispatcher
 import com.nevidimka655.astracrypt.app.utils.Api
-import com.nevidimka655.astracrypt.app.utils.Io
+import com.nevidimka655.astracrypt.data.io.FilesService
 import com.nevidimka655.astracrypt.app.utils.MediaMetadataRetrieverCompat
 import com.nevidimka655.astracrypt.app.utils.Randomizer
 import com.nevidimka655.astracrypt.data.model.AeadInfo
-import com.nevidimka655.astracrypt.data.model.StorageItemFlags
+import com.nevidimka655.astracrypt.data.database.StorageItemFlags
 import com.nevidimka655.astracrypt.data.database.StorageItemType
 import com.nevidimka655.astracrypt.domain.repository.files.FilesRepository
 import com.nevidimka655.astracrypt.data.database.entities.StorageItemEntity
@@ -66,7 +66,7 @@ class ImportFilesWorker @AssistedInject constructor(
     private val defaultDispatcher: CoroutineDispatcher,
     private val filesRepository: FilesRepository,
     private val keysetManager: KeysetManager,
-    private val io: Io,
+    private val filesService: FilesService,
     private val randomizer: Randomizer,
     private val imageLoader: ImageLoader,
     private val defaultCoilRequestBuilder: ImageRequest.Builder
@@ -162,7 +162,7 @@ class ImportFilesWorker @AssistedInject constructor(
             random = secureRandom(fileUri.toString().toByteArray()),
         )
         val outRelativePath = "$randomNum/$randomFileName"
-        val outFile = File("${io.dataDir}/$outRelativePath")
+        val outFile = File("${filesService.dataDir}/$outRelativePath")
         contentResolver.openInputStream(fileUri)!!.use { inStream ->
             filePrimitive?.newEncryptingStream(
                 outFile.outputStream(), keysetManager.associatedData
@@ -204,7 +204,7 @@ class ImportFilesWorker @AssistedInject constructor(
             }
         } else {
             outFile.delete()
-            File("${io.dataDir}/$thumbnailPath").delete()
+            File("${filesService.dataDir}/$thumbnailPath").delete()
         }
     }
 
@@ -308,7 +308,7 @@ class ImportFilesWorker @AssistedInject constructor(
             )
         }
         val relativePath = "$randomDir/$thumbnailFileName"
-        val fileOut = File("${io.dataDir}/$relativePath")
+        val fileOut = File("${filesService.dataDir}/$relativePath")
         primitive?.newEncryptingStream(
             fileOut.outputStream(),
             keysetManager.associatedData
@@ -393,7 +393,7 @@ class ImportFilesWorker @AssistedInject constructor(
     private fun getRandomDirectory(seed: String): String {
         val randomNum =
             secureRandom(seed.toByteArray()).nextInt(1, AppConfig.DB_DIRS_COUNT + 1)
-        val randomDirFile = File("${io.dataDir}/$randomNum")
+        val randomDirFile = File("${filesService.dataDir}/$randomNum")
         if (!randomDirFile.exists()) randomDirFile.mkdir()
         return randomNum.toString()
     }

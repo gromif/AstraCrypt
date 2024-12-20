@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.app.utils
+package com.nevidimka655.astracrypt.data.crypto
 
 import com.nevidimka655.astracrypt.data.datastore.SettingsDataStoreManager
 import com.nevidimka655.astracrypt.data.model.AeadInfo

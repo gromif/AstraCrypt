@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.res.stringResource
+import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -17,7 +18,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.app.extensions.requireMenuHost
 import com.nevidimka655.astracrypt.app.theme.AstraCryptTheme
 import com.nevidimka655.astracrypt.view.MainVM
 import com.nevidimka655.notes.Notes
@@ -52,7 +52,7 @@ class NotesViewFragment : Fragment() {
         }
     }
 
-    private fun setupMenu() = requireMenuHost().addMenuProvider(object : MenuProvider {
+    private fun setupMenu() = (requireActivity() as MenuHost).addMenuProvider(object : MenuProvider {
         override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
             menuInflater.inflate(R.menu.notes_view, menu)
         }

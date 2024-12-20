@@ -18,7 +18,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.app.theme.AstraCryptTheme
-import com.nevidimka655.astracrypt.app.utils.billing.PurchaseManager
+import com.nevidimka655.astracrypt.view.models.PurchaseType
 import com.nevidimka655.ui.compose_core.ext.LocalWindowWidth
 import com.nevidimka655.ui.compose_core.ext.cellsCount
 import com.nevidimka655.ui.compose_core.theme.spaces
@@ -50,18 +50,18 @@ class PurchasesFragment : Fragment() {
         ) {
             item {
                 PurchaseCard { planNameRes ->
-                    openPlan(planNameRes, PurchaseManager.Purchase.Basic)
+                    openPlan(planNameRes, PurchaseType.Basic)
                 }
             }
             item {
                 PurchasePremiumCard(isPurchased = true) { planNameRes ->
-                    openPlan(planNameRes, PurchaseManager.Purchase.Premium)
+                    openPlan(planNameRes, PurchaseType.Premium)
                 }
             }
         }
     }
 
-    private fun openPlan(planNameRes: Int, purchase: PurchaseManager.Purchase) {
+    private fun openPlan(planNameRes: Int, purchase: PurchaseType) {
         findNavController().navigate(
             R.id.action_subscriptionsFragment_to_subscriptionsOverviewFragment,
             bundleOf(

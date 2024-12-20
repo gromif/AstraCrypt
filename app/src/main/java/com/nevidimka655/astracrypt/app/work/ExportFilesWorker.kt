@@ -19,7 +19,7 @@ import androidx.work.WorkerParameters
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.app.di.IoDispatcher
 import com.nevidimka655.astracrypt.app.utils.Api
-import com.nevidimka655.astracrypt.app.utils.Io
+import com.nevidimka655.astracrypt.data.io.FilesService
 import com.nevidimka655.astracrypt.data.model.AeadInfo
 import com.nevidimka655.astracrypt.domain.repository.files.FilesRepository
 import com.nevidimka655.astracrypt.domain.database.ExportTuple
@@ -40,7 +40,7 @@ class ExportFilesWorker @AssistedInject constructor(
     private val defaultDispatcher: CoroutineDispatcher,
     private val filesRepository: FilesRepository,
     private val keysetManager: KeysetManager,
-    private val io: Io,
+    private val filesService: FilesService,
     private val workManager: WorkManager,
 ) : CoroutineWorker(context, params) {
 

@@ -1,7 +1,7 @@
 package com.nevidimka655.astracrypt.app.di
 
 import android.content.Context
-import com.nevidimka655.astracrypt.app.utils.Io
+import com.nevidimka655.astracrypt.data.io.FilesService
 import com.nevidimka655.astracrypt.app.utils.Randomizer
 import dagger.Module
 import dagger.Provides
@@ -19,7 +19,7 @@ object IoModule {
     fun provideIo(
         @ApplicationContext context: Context,
         randomizer: Randomizer
-    ) = Io(
+    ) = FilesService(
         context = context,
         randomizer = randomizer
     )

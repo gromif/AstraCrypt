@@ -3,7 +3,7 @@ package com.nevidimka655.astracrypt.data.database
 import androidx.paging.PagingData
 import androidx.paging.map
 import com.google.crypto.tink.Aead
-import com.nevidimka655.astracrypt.app.utils.AeadManager
+import com.nevidimka655.astracrypt.data.crypto.AeadManager
 import com.nevidimka655.astracrypt.domain.database.NotesPagerTuple
 import com.nevidimka655.astracrypt.domain.database.PagerTuple
 import com.nevidimka655.astracrypt.data.database.entities.NoteItemEntity

@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.app.utils
+package com.nevidimka655.astracrypt.view.models
 
 import android.graphics.Bitmap
 import android.media.ThumbnailUtils

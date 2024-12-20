@@ -1,13 +1,13 @@
-package com.nevidimka655.astracrypt.app.utils
+package com.nevidimka655.astracrypt.data.io
 
 import android.content.Context
 import android.text.format.DateFormat
 import androidx.core.content.FileProvider
-import com.nevidimka655.astracrypt.app.extensions.recreate
+import com.nevidimka655.astracrypt.app.utils.Randomizer
 import java.io.File
 import java.text.DecimalFormat
 
-class Io (
+class FilesService (
     private val context: Context,
     private val randomizer: Randomizer
 ) {
@@ -44,20 +44,5 @@ class Io (
     fun getLocalFile(relativePath: String?) = File("$dataDir/$relativePath")
 
     fun getProfileIconFile() = File("$filesDir/icon")
-
-    fun bytesToHumanReadable(bytesSize: Long): String {
-        val kilobytes = bytesSize / 1024.0
-        val megabytes = kilobytes / 1024.0
-        val gigabytes = megabytes / 1024.0
-        val terabytes = gigabytes / 1024.0
-        val decimalFormat = DecimalFormat("0.00")
-        return when {
-            terabytes > 1 -> decimalFormat.format(terabytes) + " Tb"
-            gigabytes > 1 -> decimalFormat.format(gigabytes) + " Gb"
-            megabytes > 1 -> decimalFormat.format(megabytes) + " Mb"
-            kilobytes > 1 -> decimalFormat.format(kilobytes) + " Kb"
-            else -> decimalFormat.format(bytesSize) + " B"
-        }
-    }
 
 }

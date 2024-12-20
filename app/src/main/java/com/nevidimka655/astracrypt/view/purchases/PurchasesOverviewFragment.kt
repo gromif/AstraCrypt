@@ -34,7 +34,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.app.theme.AstraCryptTheme
-import com.nevidimka655.astracrypt.app.utils.billing.PurchaseManager
+import com.nevidimka655.astracrypt.view.models.PurchaseType
 import com.nevidimka655.ui.compose_core.CardWithTitle
 import com.nevidimka655.ui.compose_core.ext.LocalWindowWidth
 import com.nevidimka655.ui.compose_core.ext.cellsCount
@@ -42,7 +42,7 @@ import com.nevidimka655.ui.compose_core.theme.spaces
 
 class PurchasesOverviewFragment : Fragment() {
     private val args by navArgs<PurchasesOverviewFragmentArgs>()
-    private val purchase by lazy { PurchaseManager.Purchase.entries[args.planCardId] }
+    private val purchase by lazy { PurchaseType.entries[args.planCardId] }
 
     object Args {
         const val PLAN_NAME = "planName"
@@ -65,13 +65,13 @@ class PurchasesOverviewFragment : Fragment() {
     @Preview
     @Composable
     fun PurchasesOverviewScreen(
-        purchase: PurchaseManager.Purchase = PurchaseManager.Purchase.Basic
+        purchase: PurchaseType = PurchaseType.Basic
     ) {
         val widthSizeClass = LocalWindowWidth.current
         val privileges = rememberSaveable {
             when (purchase) {
-                PurchaseManager.Purchase.Basic -> createStarterPrivilegesList()
-                PurchaseManager.Purchase.Premium -> createExtremePrivilegesList()
+                PurchaseType.Basic -> createStarterPrivilegesList()
+                PurchaseType.Premium -> createExtremePrivilegesList()
             }
         }
         val columnsCount = remember { widthSizeClass.cellsCount() }
@@ -84,8 +84,8 @@ class PurchasesOverviewFragment : Fragment() {
         ) {
             item {
                 when (purchase) {
-                    PurchaseManager.Purchase.Basic -> PurchaseCard()
-                    PurchaseManager.Purchase.Premium -> PurchasePremiumCard()
+                    PurchaseType.Basic -> PurchaseCard()
+                    PurchaseType.Premium -> PurchasePremiumCard()
                 }
             }
             item { ManageSubscription() }

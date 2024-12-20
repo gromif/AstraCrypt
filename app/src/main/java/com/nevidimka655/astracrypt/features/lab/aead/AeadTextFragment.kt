@@ -1,14 +1,14 @@
 package com.nevidimka655.astracrypt.features.lab.aead
 
 import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.app.extensions.clipboardManager
-import com.nevidimka655.astracrypt.app.extensions.setTooltip
 import com.nevidimka655.astracrypt.databinding.FragmentLabTextBinding
 import com.nevidimka655.astracrypt.view.MainVM
 import kotlinx.coroutines.Dispatchers
@@ -21,7 +21,7 @@ class AeadTextFragment : androidx.fragment.app.Fragment(R.layout.fragment_lab_te
     private var binding: FragmentLabTextBinding? = null
 
     private val clipboardManager by lazy {
-        requireContext().clipboardManager()
+        requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -32,11 +32,9 @@ class AeadTextFragment : androidx.fragment.app.Fragment(R.layout.fragment_lab_te
             clear.setOnClickListener { updateText("") }
             copy.run {
                 setOnClickListener { copyText() }
-                setTooltip(R.string.copy)
             }
             paste.run {
                 setOnClickListener { pasteText() }
-                setTooltip(R.string.paste)
             }
         }
     }
