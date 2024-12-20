@@ -32,7 +32,7 @@ class CreateNoteViewModel @Inject constructor(
     }
 
     fun save() = viewModelScope.launch(defaultDispatcher) {
-        createNewNoteUseCase.save(
+        createNewNoteUseCase(
             name = nameState.value,
             text = textState.value
         )

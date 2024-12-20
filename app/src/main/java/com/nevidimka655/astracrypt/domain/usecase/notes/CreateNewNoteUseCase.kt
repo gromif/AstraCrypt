@@ -6,7 +6,7 @@ class CreateNewNoteUseCase(
     private val repository: NotesRepository
 ) {
 
-    suspend fun save(name: String, text: String) {
+    suspend operator fun invoke(name: String, text: String) {
         repository.insert(
             name = name,
             text = text
