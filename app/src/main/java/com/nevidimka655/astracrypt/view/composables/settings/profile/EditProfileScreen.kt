@@ -21,9 +21,9 @@ import coil.ImageLoader
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.app.AppConfig
 import com.nevidimka655.astracrypt.data.model.CoilTinkModel
-import com.nevidimka655.astracrypt.features.profile.model.Avatars
-import com.nevidimka655.astracrypt.features.profile.model.Avatars.Companion.painter
-import com.nevidimka655.astracrypt.features.profile.shared.ProfileIcon
+import com.nevidimka655.astracrypt.domain.model.profile.Avatars
+import com.nevidimka655.astracrypt.view.composables.components.profile.ProfileIcon
+import com.nevidimka655.astracrypt.view.composables.components.profile.defaultProfileAvatar
 import com.nevidimka655.ui.compose_core.Compose
 import com.nevidimka655.ui.compose_core.Preference
 import com.nevidimka655.ui.compose_core.PreferencesGroup
@@ -119,7 +119,7 @@ private fun DialogChangeAvatar(
                                     state.value = false
                                     onDefaultAvatarClick(it)
                                 },
-                            painter = it.painter(),
+                            painter = defaultProfileAvatar(it),
                             contentDescription = null
                         )
                     }

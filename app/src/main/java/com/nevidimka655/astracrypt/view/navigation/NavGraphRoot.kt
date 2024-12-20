@@ -14,7 +14,7 @@ import com.nevidimka655.astracrypt.view.composables.settings.security.quick_acti
 import com.nevidimka655.astracrypt.view.composables.settings.security.settingsSecurity
 import com.nevidimka655.astracrypt.view.composables.settings.ui.files.settingsUiFiles
 import com.nevidimka655.astracrypt.view.composables.settings.ui.settingsUi
-import com.nevidimka655.astracrypt.view.composables.shared.export.export
+import com.nevidimka655.astracrypt.view.composables.export.export
 import com.nevidimka655.astracrypt.view.composables.tabs
 import com.nevidimka655.astracrypt.view.models.ToolbarAction
 import com.nevidimka655.astracrypt.view.models.UiState

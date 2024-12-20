@@ -9,8 +9,8 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.data.model.AeadInfo
-import com.nevidimka655.astracrypt.features.auth.model.AuthInfo
-import com.nevidimka655.astracrypt.features.auth.model.Skin
+import com.nevidimka655.astracrypt.domain.model.auth.Auth
+import com.nevidimka655.astracrypt.domain.model.auth.Skin
 import com.nevidimka655.astracrypt.view.models.UiState
 import com.nevidimka655.astracrypt.view.navigation.Route
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
@@ -26,23 +26,23 @@ inline fun NavGraphBuilder.settingsSecurityAuth(
 ) = composable<Route.SettingsSecurityAuth> {
     onUiStateChange(SettingsSecurityAuthUiState)
     val vm: SettingsAuthViewModel = hiltViewModel()
-    val authInfo by vm.authInfoFlow.collectAsStateWithLifecycle(initialValue = AuthInfo())
+    val auth by vm.authInfoFlow.collectAsStateWithLifecycle(initialValue = Auth())
     val aeadInfo by vm.aeadInfoFlow.collectAsStateWithLifecycle(initialValue = AeadInfo())
 
-    val typeIndex = remember(authInfo.type) {
-        authInfo.type?.let { it.ordinal + 1 } ?: 0
+    val typeIndex = remember(auth.type) {
+        auth.type?.let { it.ordinal + 1 } ?: 0
     }
-    val skinIndex = remember(authInfo.skin) {
-        when (authInfo.skin) {
+    val skinIndex = remember(auth.skin) {
+        when (auth.skin) {
             null -> 0
             is Skin.Calculator -> 1
         }
     }
     SettingsAuthScreen(
-        isAuthEnabled = authInfo.type != null,
+        isAuthEnabled = auth.type != null,
         isAssociatedDataEncrypted = aeadInfo.bindAssociatedData,
-        hintState = authInfo.hintState,
-        hintText = authInfo.hintText ?: stringResource(R.string.none),
+        hintState = auth.hintState,
+        hintText = auth.hintText ?: stringResource(R.string.none),
         skinIndex = skinIndex,
         typeIndex = typeIndex,
         onDisableAuth = {

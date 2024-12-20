@@ -4,9 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nevidimka655.astracrypt.app.di.IoDispatcher
 import com.nevidimka655.astracrypt.data.crypto.AeadManager
-import com.nevidimka655.astracrypt.app.utils.AppComponentManager
-import com.nevidimka655.astracrypt.features.auth.AuthManager
-import com.nevidimka655.astracrypt.features.auth.model.Skin
+import com.nevidimka655.astracrypt.app.utils.AppComponentService
+import com.nevidimka655.astracrypt.data.auth.AuthManager
+import com.nevidimka655.astracrypt.domain.model.auth.Skin
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import com.nevidimka655.crypto.tink.core.hash.Sha256Service
 import com.nevidimka655.crypto.tink.extensions.toBase64
@@ -23,7 +23,7 @@ class SettingsAuthViewModel @Inject constructor(
     private val authManager: AuthManager,
     private val aeadManager: AeadManager,
     private val keysetManager: KeysetManager,
-    private val appComponentManager: AppComponentManager,
+    private val appComponentService: AppComponentService,
     private val sha256Service: Sha256Service
 ) : ViewModel() {
     val authInfoFlow get() = authManager.infoFlow
@@ -35,7 +35,7 @@ class SettingsAuthViewModel @Inject constructor(
 
     fun disableSkin() = viewModelScope.launch(defaultDispatcher) {
         authManager.setSkin(skin = null)
-        with(appComponentManager) {
+        with(appComponentService) {
             main = true
             calculator = false
         }
@@ -47,7 +47,7 @@ class SettingsAuthViewModel @Inject constructor(
             combinationHash = combinationHashSha256.toBase64()
         }
         authManager.setSkin(skin = skin)
-        with(appComponentManager) {
+        with(appComponentService) {
             calculator = true
             main = false
         }

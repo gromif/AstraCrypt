@@ -1,12 +1,12 @@
 package com.nevidimka655.astracrypt.data.database.converts
 
 import androidx.room.TypeConverter
-import com.nevidimka655.astracrypt.data.database.StorageItemState
+import com.nevidimka655.astracrypt.domain.model.db.StorageState
 
 class StorageItemStateConverter {
     @TypeConverter
-    fun fromInt(value: Int) = StorageItemState.entries[value]
+    fun fromInt(value: Int) = StorageState.entries[value]
 
     @TypeConverter
-    fun toInt(value: StorageItemState) = value.ordinal
+    fun toInt(value: StorageState) = value.ordinal
 }

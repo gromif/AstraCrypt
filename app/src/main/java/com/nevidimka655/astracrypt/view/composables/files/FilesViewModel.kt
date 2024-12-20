@@ -18,7 +18,7 @@ import com.nevidimka655.astracrypt.data.io.FilesService
 import com.nevidimka655.astracrypt.app.services.ImportFilesWorker
 import com.nevidimka655.astracrypt.app.services.utils.WorkerSerializer
 import com.nevidimka655.astracrypt.data.repository.files.FilesRepositoryProvider
-import com.nevidimka655.astracrypt.domain.database.PagerTuple
+import com.nevidimka655.astracrypt.data.database.PagerTuple
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import com.nevidimka655.crypto.tink.extensions.toBase64
 import dagger.hilt.android.lifecycle.HiltViewModel

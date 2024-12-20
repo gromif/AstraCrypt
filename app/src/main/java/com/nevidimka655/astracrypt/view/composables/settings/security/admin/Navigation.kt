@@ -26,7 +26,7 @@ inline fun NavGraphBuilder.settingsSecurityAdmin(
     val vm: SettingsAdminViewModel = hiltViewModel()
 
     var adminRightsState by remember { mutableStateOf(vm.isActive) }
-    val requestDeviceAdmin = rememberLauncherForActivityResult(vm.requestDeviceAdmin) {
+    val requestDeviceAdmin = rememberLauncherForActivityResult(vm.requestDeviceAdminContract) {
         adminRightsState = it
     }
     SettingsAdminScreen(

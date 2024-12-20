@@ -2,7 +2,7 @@ package com.nevidimka655.astracrypt.app.di
 
 import android.content.Context
 import com.nevidimka655.astracrypt.data.io.FilesService
-import com.nevidimka655.astracrypt.app.utils.Randomizer
+import com.nevidimka655.astracrypt.data.io.Randomizer
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

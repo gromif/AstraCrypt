@@ -33,9 +33,9 @@ import com.nevidimka655.astracrypt.app.di.IoDispatcher
 import com.nevidimka655.astracrypt.app.utils.Api
 import com.nevidimka655.astracrypt.data.io.FilesService
 import com.nevidimka655.astracrypt.app.utils.MediaMetadataRetrieverCompat
-import com.nevidimka655.astracrypt.app.utils.Randomizer
+import com.nevidimka655.astracrypt.data.io.Randomizer
 import com.nevidimka655.astracrypt.data.model.AeadInfo
-import com.nevidimka655.astracrypt.data.database.StorageItemFlags
+import com.nevidimka655.astracrypt.domain.model.db.StorageFlags
 import com.nevidimka655.astracrypt.data.database.StorageItemType
 import com.nevidimka655.astracrypt.domain.repository.files.FilesRepository
 import com.nevidimka655.astracrypt.data.database.entities.StorageItemEntity
@@ -335,8 +335,8 @@ class ImportFilesWorker @AssistedInject constructor(
         } else ""
     }
 
-    private fun getImageFlags(fileUri: Uri, inFileStream: InputStream): StorageItemFlags {
-        val imageFlags = StorageItemFlags.Image()
+    private fun getImageFlags(fileUri: Uri, inFileStream: InputStream): StorageFlags {
+        val imageFlags = StorageFlags.Image()
         var height: Int
         var width: Int
         ExifInterface(inFileStream).run {
@@ -359,8 +359,8 @@ class ImportFilesWorker @AssistedInject constructor(
         }
     }
 
-    private fun getVideoFlags(fileUri: Uri): StorageItemFlags {
-        val videoFlags = StorageItemFlags.Video()
+    private fun getVideoFlags(fileUri: Uri): StorageFlags {
+        val videoFlags = StorageFlags.Video()
         getMediaMetadataRetrieverCompat(fileUri).use {
             val width = it.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_WIDTH)
             val height = it.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_HEIGHT)
@@ -370,8 +370,8 @@ class ImportFilesWorker @AssistedInject constructor(
     }
 
     @SuppressLint("InlinedApi")
-    private fun getMusicFlags(fileUri: Uri): StorageItemFlags {
-        val musicFlags = StorageItemFlags.Music()
+    private fun getMusicFlags(fileUri: Uri): StorageFlags {
+        val musicFlags = StorageFlags.Music()
         applicationContext.contentResolver.openFileDescriptor(
             fileUri,
             "r"

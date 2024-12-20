@@ -40,7 +40,7 @@
     </navigation>
     <fragment
         android:id="@+id/authFragment"
-        android:name="com.nevidimka655.astracrypt.features.auth.AuthFragment"
+        android:name="com.nevidimka655.astracrypt.view.composables.AuthFragment"
         android:label="@string/signIn"
         tools:layout="@layout/fragment_auth"/>
     <fragment
@@ -268,7 +268,7 @@
     </navigation>
     <fragment
         android:id="@+id/calculatorFragment"
-        android:name="com.nevidimka655.astracrypt.features.calculator.CalculatorFragment"
+        android:name="com.nevidimka655.astracrypt.view.composables.CalculatorFragment"
         android:label="CalculatorFragment" /><action android:id="@+id/action_global_calculatorFragment" app:destination="@id/calculatorFragment"/>
     <action
         android:id="@+id/action_global_homeFragment"

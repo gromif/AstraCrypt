@@ -52,8 +52,8 @@ import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.app.theme.AstraCryptTheme
 import com.nevidimka655.astracrypt.features.help.HelpFragment
 import com.nevidimka655.astracrypt.features.help.HelpIndex
-import com.nevidimka655.astracrypt.view.composables.shared.BaseNoItemsPage
-import com.nevidimka655.astracrypt.view.composables.shared.NoItemsPageSize
+import com.nevidimka655.astracrypt.view.composables.components.BaseNoItemsPage
+import com.nevidimka655.astracrypt.view.composables.components.NoItemsPageSize
 import com.nevidimka655.ui.compose_core.CardWithTitle
 import com.nevidimka655.ui.compose_core.ext.LocalWindowWidth
 import com.nevidimka655.ui.compose_core.ext.isCompact

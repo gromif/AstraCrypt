@@ -2,14 +2,14 @@ package com.nevidimka655.astracrypt.data.database.daos
 
 import androidx.paging.PagingSource
 import androidx.room.*
-import com.nevidimka655.astracrypt.data.database.StorageItemState
+import com.nevidimka655.astracrypt.domain.model.db.StorageState
 import com.nevidimka655.astracrypt.data.database.StorageItemType
-import com.nevidimka655.astracrypt.domain.database.DatabaseTransformTuple
-import com.nevidimka655.astracrypt.domain.database.ExportTuple
-import com.nevidimka655.astracrypt.domain.database.OpenTuple
-import com.nevidimka655.astracrypt.domain.database.PagerTuple
-import com.nevidimka655.astracrypt.domain.database.StorageDirMinimalTuple
-import com.nevidimka655.astracrypt.domain.database.StorageItemMinimalTuple
+import com.nevidimka655.astracrypt.data.database.DatabaseTransformTuple
+import com.nevidimka655.astracrypt.data.database.ExportTuple
+import com.nevidimka655.astracrypt.data.database.OpenTuple
+import com.nevidimka655.astracrypt.data.database.PagerTuple
+import com.nevidimka655.astracrypt.data.database.StorageDirMinimalTuple
+import com.nevidimka655.astracrypt.data.database.StorageItemMinimalTuple
 import com.nevidimka655.astracrypt.data.database.entities.StorageItemEntity
 import kotlinx.coroutines.flow.Flow
 import java.util.ArrayList
@@ -39,10 +39,10 @@ interface StorageItemDao {
     suspend fun updateName(id: Long, name: String)
 
     @Query("update store_items set state = :state where id = :id")
-    suspend fun setStarred(id: Long, state: StorageItemState)
+    suspend fun setStarred(id: Long, state: StorageState)
 
     @Query("update store_items set state = :state where id in (:idsArray)")
-    suspend fun setStarred(idsArray: List<Long>, state: StorageItemState)
+    suspend fun setStarred(idsArray: List<Long>, state: StorageState)
 
     @RewriteQueriesToDropUnusedColumns
     @Query("select * from store_items where id = :id")

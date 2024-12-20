@@ -1,6 +1,6 @@
 package com.nevidimka655.astracrypt.data.model
 
-import com.nevidimka655.astracrypt.data.database.DatabaseColumns
+import com.nevidimka655.astracrypt.domain.model.db.StorageColumns
 import com.nevidimka655.crypto.tink.domain.KeysetTemplates
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -20,8 +20,8 @@ data class AeadInfo(
     val db get() = database != null
     val notes by lazy { aeadNotes != null }
 
-    val name get() = database?.columns?.contains(DatabaseColumns.Name) == true
-    val path get() = database?.columns?.contains(DatabaseColumns.File) == true
-    val flags get() = database?.columns?.contains(DatabaseColumns.Flags) == true
-    val thumb get() = database?.columns?.contains(DatabaseColumns.Preview) == true
+    val name get() = database?.columns?.contains(StorageColumns.Name) == true
+    val path get() = database?.columns?.contains(StorageColumns.File) == true
+    val flags get() = database?.columns?.contains(StorageColumns.Flags) == true
+    val thumb get() = database?.columns?.contains(StorageColumns.Preview) == true
 }

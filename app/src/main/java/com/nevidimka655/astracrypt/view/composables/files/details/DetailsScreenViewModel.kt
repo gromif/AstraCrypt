@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModel
 import coil.ImageLoader
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.data.io.FilesService
-import com.nevidimka655.astracrypt.data.database.StorageItemFlags
+import com.nevidimka655.astracrypt.domain.model.db.StorageFlags
 import com.nevidimka655.astracrypt.data.database.StorageItemType
 import com.nevidimka655.astracrypt.domain.repository.files.FilesRepository
 import com.nevidimka655.astracrypt.domain.usecase.BytesToHumanReadableUseCase
@@ -91,11 +91,11 @@ class DetailsScreenViewModel @Inject constructor(
         if (isFile) {
             if (item.flags.isNotEmpty()) {
                 addGroup(name = TextWrap.Resource(id = item.itemType.title)) {
-                    when (val flags = Json.decodeFromString<StorageItemFlags>(item.flags)) {
-                        is StorageItemFlags.App -> flags.toString()
-                        is StorageItemFlags.Image -> addImageFlags(flags)
-                        is StorageItemFlags.Music -> addMusicFlags(flags)
-                        is StorageItemFlags.Video -> addVideoFlags(flags)
+                    when (val flags = Json.decodeFromString<StorageFlags>(item.flags)) {
+                        is StorageFlags.App -> flags.toString()
+                        is StorageFlags.Image -> addImageFlags(flags)
+                        is StorageFlags.Music -> addMusicFlags(flags)
+                        is StorageFlags.Video -> addVideoFlags(flags)
                     }
                 }
             }
@@ -159,7 +159,7 @@ class DetailsScreenViewModel @Inject constructor(
         }
     }
 
-    private fun MutableList<DetailsItem>.addImageFlags(flags: StorageItemFlags.Image) {
+    private fun MutableList<DetailsItem>.addImageFlags(flags: StorageFlags.Image) {
         addItem(
             icon = IconWrap(imageVector = Icons.Outlined.PhotoSizeSelectLarge),
             title = TextWrap.Resource(id = R.string.imageResolution),
@@ -167,7 +167,7 @@ class DetailsScreenViewModel @Inject constructor(
         )
     }
 
-    private fun MutableList<DetailsItem>.addMusicFlags(flags: StorageItemFlags.Music) {
+    private fun MutableList<DetailsItem>.addMusicFlags(flags: StorageFlags.Music) {
         addItem(
             icon = IconWrap(imageVector = Icons.Outlined.Headphones),
             title = TextWrap.Resource(id = R.string.sample_rate),
@@ -175,7 +175,7 @@ class DetailsScreenViewModel @Inject constructor(
         )
     }
 
-    private fun MutableList<DetailsItem>.addVideoFlags(flags: StorageItemFlags.Video) {
+    private fun MutableList<DetailsItem>.addVideoFlags(flags: StorageFlags.Video) {
         addItem(
             icon = IconWrap(imageVector = Icons.Outlined.PhotoSizeSelectLarge),
             title = TextWrap.Resource(id = R.string.videoResolution),

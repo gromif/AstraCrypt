@@ -19,7 +19,7 @@ import com.nevidimka655.astracrypt.app.utils.Api
 import com.nevidimka655.astracrypt.data.model.AeadInfo
 import com.nevidimka655.astracrypt.data.database.RepositoryEncryption
 import com.nevidimka655.astracrypt.domain.repository.files.FilesRepository
-import com.nevidimka655.astracrypt.domain.database.DatabaseTransformTuple
+import com.nevidimka655.astracrypt.data.database.DatabaseTransformTuple
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import com.nevidimka655.crypto.tink.data.TinkConfig
 import com.nevidimka655.crypto.tink.extensions.aeadPrimitive

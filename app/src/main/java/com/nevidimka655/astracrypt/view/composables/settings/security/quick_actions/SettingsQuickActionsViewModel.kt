@@ -1,16 +1,16 @@
 package com.nevidimka655.astracrypt.view.composables.settings.security.quick_actions
 
 import androidx.lifecycle.ViewModel
-import com.nevidimka655.astracrypt.app.utils.AppComponentManager
+import com.nevidimka655.astracrypt.app.utils.AppComponentService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class SettingsQuickActionsViewModel @Inject constructor(
-    private val appComponentManager: AppComponentManager
+    private val appComponentService: AppComponentService
 ): ViewModel() {
     var quickDataDeletion
-        get() = appComponentManager.quickDataDeletion
-        set(value) { appComponentManager.quickDataDeletion = value }
+        get() = appComponentService.quickDataDeletion
+        set(value) { appComponentService.quickDataDeletion = value }
 
 }

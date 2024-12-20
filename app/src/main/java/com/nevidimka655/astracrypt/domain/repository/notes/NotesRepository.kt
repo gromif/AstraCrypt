@@ -1,8 +1,8 @@
 package com.nevidimka655.astracrypt.domain.repository.notes
 
 import androidx.paging.PagingSource
-import com.nevidimka655.astracrypt.domain.database.NotesPagerTuple
-import com.nevidimka655.astracrypt.domain.database.TransformNotesTuple
+import com.nevidimka655.astracrypt.data.database.NotesPagerTuple
+import com.nevidimka655.astracrypt.data.database.TransformNotesTuple
 import com.nevidimka655.astracrypt.data.database.entities.NoteItemEntity
 
 interface NotesRepository {

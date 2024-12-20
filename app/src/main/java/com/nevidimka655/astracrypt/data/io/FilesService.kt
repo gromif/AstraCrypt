@@ -3,7 +3,7 @@ package com.nevidimka655.astracrypt.data.io
 import android.content.Context
 import android.text.format.DateFormat
 import androidx.core.content.FileProvider
-import com.nevidimka655.astracrypt.app.utils.Randomizer
+import com.nevidimka655.astracrypt.data.io.Randomizer
 import java.io.File
 import java.text.DecimalFormat
 

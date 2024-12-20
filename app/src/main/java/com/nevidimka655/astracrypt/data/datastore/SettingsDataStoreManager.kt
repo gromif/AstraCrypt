@@ -6,9 +6,9 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.nevidimka655.astracrypt.data.model.AeadInfo
-import com.nevidimka655.astracrypt.features.auth.model.AuthInfo
-import com.nevidimka655.astracrypt.features.profile.model.Avatars
-import com.nevidimka655.astracrypt.features.profile.model.ProfileInfo
+import com.nevidimka655.astracrypt.domain.model.auth.Auth
+import com.nevidimka655.astracrypt.domain.model.profile.Avatars
+import com.nevidimka655.astracrypt.domain.model.profile.ProfileInfo
 import com.nevidimka655.crypto.tink.core.hash.Sha256Service
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import com.nevidimka655.crypto.tink.domain.KeysetTemplates
@@ -54,16 +54,16 @@ class SettingsDataStoreManager(
 
 
     private suspend fun authInfoKey() = stringPreferencesKey(encryptKey("a3"))
-    val authInfoFlow = dataStore.data.map { prefs ->
+    val authFlow = dataStore.data.map { prefs ->
         val key = authInfoKey()
         prefs[key]?.let {
             val authInfoJson = decryptValue(key = key.name, value = it)
-            Json.decodeFromString<AuthInfo>(authInfoJson)
-        } ?: AuthInfo()
+            Json.decodeFromString<Auth>(authInfoJson)
+        } ?: Auth()
     }
-    suspend fun setAuthInfo(authInfo: AuthInfo) = dataStore.edit {
+    suspend fun setAuthInfo(auth: Auth) = dataStore.edit {
         val key = authInfoKey()
-        it[key] = encryptValue(key = key.name, value = Json.encodeToString(authInfo))
+        it[key] = encryptValue(key = key.name, value = Json.encodeToString(auth))
     }
 
 

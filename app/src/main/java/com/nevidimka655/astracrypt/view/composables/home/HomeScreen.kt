@@ -35,11 +35,11 @@ import coil.ImageLoader
 import coil.compose.AsyncImage
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.data.model.CoilTinkModel
-import com.nevidimka655.astracrypt.data.database.StorageItemState
+import com.nevidimka655.astracrypt.domain.model.db.StorageState
 import com.nevidimka655.astracrypt.data.database.StorageItemType
-import com.nevidimka655.astracrypt.domain.database.PagerTuple
-import com.nevidimka655.astracrypt.features.profile.model.Avatars
-import com.nevidimka655.astracrypt.features.profile.shared.ProfileWidget
+import com.nevidimka655.astracrypt.data.database.PagerTuple
+import com.nevidimka655.astracrypt.domain.model.profile.Avatars
+import com.nevidimka655.astracrypt.view.composables.components.profile.ProfileWidget
 import com.nevidimka655.ui.compose_core.CardWithTitle
 import com.nevidimka655.ui.compose_core.theme.spaces
 
@@ -105,7 +105,7 @@ inline fun RecentListItem(
     name: String,
     preview: String? = null,
     itemType: StorageItemType,
-    state: StorageItemState,
+    state: StorageState,
     crossinline onClick: () -> Unit
 ) = OutlinedCard(
     modifier = modifier

@@ -2,16 +2,16 @@ package com.nevidimka655.astracrypt.data.repository.files
 
 import androidx.paging.PagingSource
 import com.nevidimka655.astracrypt.data.model.DetailsFolderContent
-import com.nevidimka655.astracrypt.data.database.DatabaseColumns
-import com.nevidimka655.astracrypt.data.database.StorageItemState
+import com.nevidimka655.astracrypt.domain.model.db.StorageColumns
+import com.nevidimka655.astracrypt.domain.model.db.StorageState
 import com.nevidimka655.astracrypt.data.database.StorageItemType
 import com.nevidimka655.astracrypt.domain.repository.files.FilesRepository
-import com.nevidimka655.astracrypt.domain.database.DatabaseTransformTuple
-import com.nevidimka655.astracrypt.domain.database.ExportTuple
-import com.nevidimka655.astracrypt.domain.database.OpenTuple
-import com.nevidimka655.astracrypt.domain.database.PagerTuple
-import com.nevidimka655.astracrypt.domain.database.StorageDirMinimalTuple
-import com.nevidimka655.astracrypt.domain.database.StorageItemMinimalTuple
+import com.nevidimka655.astracrypt.data.database.DatabaseTransformTuple
+import com.nevidimka655.astracrypt.data.database.ExportTuple
+import com.nevidimka655.astracrypt.data.database.OpenTuple
+import com.nevidimka655.astracrypt.data.database.PagerTuple
+import com.nevidimka655.astracrypt.data.database.StorageDirMinimalTuple
+import com.nevidimka655.astracrypt.data.database.StorageItemMinimalTuple
 import com.nevidimka655.astracrypt.data.database.daos.StorageItemDao
 import com.nevidimka655.astracrypt.data.database.entities.StorageItemEntity
 import kotlinx.coroutines.flow.Flow
@@ -52,7 +52,7 @@ class FilesFilesRepositoryImpl(private val dao: StorageItemDao): FilesRepository
         idsArray: List<Long>?,
         state: Boolean
     ) {
-        val newState = if (state) StorageItemState.Starred else StorageItemState.Default
+        val newState = if (state) StorageState.Starred else StorageState.Default
         if (id != null) {
             dao.setStarred(
                 id = id,
@@ -171,7 +171,7 @@ class FilesFilesRepositoryImpl(private val dao: StorageItemDao): FilesRepository
             query = searchQuery,
             dirIdsForSearch = dirIdsForSearch,
             sortingItemType = StorageItemType.Folder.ordinal,
-            sortingSecondType = DatabaseColumns.Name.ordinal
+            sortingSecondType = StorageColumns.Name.ordinal
         )
     }
 
@@ -182,7 +182,7 @@ class FilesFilesRepositoryImpl(private val dao: StorageItemDao): FilesRepository
             isStarredOnly = true,
             query = searchQuery,
             sortingItemType = StorageItemType.Folder.ordinal,
-            sortingSecondType = DatabaseColumns.Name.ordinal
+            sortingSecondType = StorageColumns.Name.ordinal
         )
     }
 }

@@ -5,7 +5,7 @@ import androidx.compose.material.icons.filled.Description
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.runtime.Composable
 import androidx.paging.compose.LazyPagingItems
-import com.nevidimka655.astracrypt.view.composables.shared.NoItemsPage
+import com.nevidimka655.astracrypt.view.composables.components.NoItemsPage
 import com.nevidimka655.notes.Notes
 import com.nevidimka655.notes.ui.List
 import com.nevidimka655.notes.ui.Note

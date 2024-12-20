@@ -2,7 +2,7 @@ package com.nevidimka655.astracrypt.app.di
 
 import com.nevidimka655.astracrypt.data.datastore.DefaultDataStoreManager
 import com.nevidimka655.astracrypt.data.datastore.SettingsDataStoreManager
-import com.nevidimka655.astracrypt.features.auth.AuthManager
+import com.nevidimka655.astracrypt.data.auth.AuthManager
 import com.nevidimka655.crypto.tink.core.hash.Sha384Service
 import dagger.Module
 import dagger.Provides

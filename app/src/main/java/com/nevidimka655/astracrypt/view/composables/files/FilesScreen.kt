@@ -79,18 +79,18 @@ import coil.compose.AsyncImagePainter
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.data.model.CoilTinkModel
 import com.nevidimka655.astracrypt.view.models.NavigatorDirectory
-import com.nevidimka655.astracrypt.data.database.StorageItemState
+import com.nevidimka655.astracrypt.domain.model.db.StorageState
 import com.nevidimka655.astracrypt.data.database.StorageItemType
-import com.nevidimka655.astracrypt.domain.database.PagerTuple
+import com.nevidimka655.astracrypt.data.database.PagerTuple
 import com.nevidimka655.astracrypt.view.MainVM
 import com.nevidimka655.astracrypt.view.composables.files.sheets.filesCreateNewSheet
 import com.nevidimka655.astracrypt.view.composables.files.sheets.filesOptionsSheet
-import com.nevidimka655.astracrypt.view.composables.shared.NoItemsPage
-import com.nevidimka655.astracrypt.view.composables.shared.dialogs.DeleteFile
-import com.nevidimka655.astracrypt.view.composables.shared.dialogs.DeleteOriginalFiles
-import com.nevidimka655.astracrypt.view.composables.shared.dialogs.Dialogs
-import com.nevidimka655.astracrypt.view.composables.shared.dialogs.newFolder
-import com.nevidimka655.astracrypt.view.composables.shared.dialogs.rename
+import com.nevidimka655.astracrypt.view.composables.components.NoItemsPage
+import com.nevidimka655.astracrypt.view.composables.components.dialogs.DeleteFile
+import com.nevidimka655.astracrypt.view.composables.components.dialogs.DeleteOriginalFiles
+import com.nevidimka655.astracrypt.view.composables.components.dialogs.Dialogs
+import com.nevidimka655.astracrypt.view.composables.components.dialogs.newFolder
+import com.nevidimka655.astracrypt.view.composables.components.dialogs.rename
 import com.nevidimka655.astracrypt.view.models.ViewMode
 import com.nevidimka655.haptic.Haptic
 import com.nevidimka655.haptic.hapticLongClick
@@ -112,7 +112,7 @@ fun FilesGridItem(
     name: String,
     preview: String?,
     itemType: StorageItemType,
-    state: StorageItemState,
+    state: StorageState,
     isChecked: Boolean,
     onOptions: () -> Unit,
     onClick: () -> Unit,
@@ -232,7 +232,7 @@ fun FilesListItemMedium(
     name: String = "TEST_NAME",
     preview: String? = null,
     itemType: StorageItemType = StorageItemType.Document,
-    state: StorageItemState = StorageItemState.Default,
+    state: StorageState = StorageState.Default,
     isChecked: Boolean = false,
     isBackgroundTransparent: Boolean = false,
     onLongClick: () -> Unit = {},

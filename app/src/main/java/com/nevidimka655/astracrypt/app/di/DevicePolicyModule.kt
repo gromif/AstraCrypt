@@ -3,9 +3,9 @@ package com.nevidimka655.astracrypt.app.di
 import android.app.admin.DevicePolicyManager
 import android.content.ComponentName
 import android.content.Context
-import com.nevidimka655.astracrypt.app.utils.DeviceAdminManager
-import com.nevidimka655.astracrypt.app.utils.contracts.RequestDeviceAdmin
-import com.nevidimka655.astracrypt.app.utils.receivers.DeviceAdminImpl
+import com.nevidimka655.astracrypt.app.device_admin.DeviceAdminManager
+import com.nevidimka655.astracrypt.app.device_admin.RequestDeviceAdminContract
+import com.nevidimka655.astracrypt.app.device_admin.DeviceAdminReceiverImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,7 +18,7 @@ object DevicePolicyModule {
 
     @Provides
     fun provideAdminComponentImpl(@ApplicationContext context: Context) =
-        ComponentName(context, DeviceAdminImpl::class.java)
+        ComponentName(context, DeviceAdminReceiverImpl::class.java)
 
     @Provides
     fun provideDeviceAdminManager(
@@ -31,7 +31,7 @@ object DevicePolicyModule {
 
     @Provides
     fun provideRequestDeviceAdmin(adminComponentImpl: ComponentName) =
-        RequestDeviceAdmin(adminComponentImpl = adminComponentImpl)
+        RequestDeviceAdminContract(adminComponentImpl = adminComponentImpl)
 
     @Provides
     fun provideDevicePolicyManager(@ApplicationContext context: Context) =
