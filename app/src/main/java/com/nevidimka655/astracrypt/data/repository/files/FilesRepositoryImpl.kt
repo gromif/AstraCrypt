@@ -16,7 +16,7 @@ import com.nevidimka655.astracrypt.domain.model.db.StorageState
 import com.nevidimka655.astracrypt.domain.repository.files.FilesRepository
 import kotlinx.coroutines.flow.Flow
 
-class FilesFilesRepositoryImpl(private val dao: StorageItemDao): FilesRepository {
+class FilesRepositoryImpl(private val dao: StorageItemDao): FilesRepository {
     override suspend fun insert(item: StorageItemEntity) {
         dao.insert(item)
     }
