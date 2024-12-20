@@ -1,5 +1,7 @@
 package com.nevidimka655.astracrypt.data.repository.notes
 
+import android.R.attr.name
+import android.R.attr.text
 import androidx.paging.PagingSource
 import com.nevidimka655.astracrypt.data.database.NotesPagerTuple
 import com.nevidimka655.astracrypt.data.database.TransformNotesTuple
@@ -12,20 +14,26 @@ class NotesRepositoryImpl(private val dao: NotesDao) : NotesRepository {
         dao.deleteById(id = id)
     }
 
-    override suspend fun update(noteItemEntity: NoteItemEntity) {
-        dao.update(noteItemEntity = noteItemEntity)
-    }
-
-    override suspend fun insert(name: String, text: String) {
+    private fun createNoteItemEntity(id: Long = 0L, name: String, text: String): NoteItemEntity {
         val trimmedName = name.trim().ifEmpty { null }
         val trimmedText = text.trim()
         val textPreview = if (trimmedText.isNotEmpty()) trimmedText.take(80) else null
-        val noteItemEntity = NoteItemEntity(
+        return NoteItemEntity(
+            id = id,
             name = trimmedName,
             text = trimmedText,
             textPreview = textPreview,
             creationTime = System.currentTimeMillis()
         )
+    }
+
+    override suspend fun update(id: Long, name: String, text: String) {
+        val noteItemEntity = createNoteItemEntity(id = id, name, text)
+        dao.update(noteItemEntity = noteItemEntity)
+    }
+
+    override suspend fun insert(name: String, text: String) {
+        val noteItemEntity = createNoteItemEntity(name = name, text = text)
         dao.insert(noteItemEntity = noteItemEntity)
     }
 

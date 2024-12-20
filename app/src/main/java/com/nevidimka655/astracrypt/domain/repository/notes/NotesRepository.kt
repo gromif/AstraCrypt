@@ -9,7 +9,7 @@ interface NotesRepository {
 
     suspend fun deleteById(id: Long)
 
-    suspend fun update(noteItemEntity: NoteItemEntity)
+    suspend fun update(id: Long, name: String, text: String)
 
     suspend fun insert(name: String, text: String)
 
