@@ -22,8 +22,8 @@ interface NotesDao {
     @Insert
     suspend fun insert(noteItemEntity: NoteItemEntity)
 
-    /*@Query("select * from notes WHERE id like :itemId")
-    suspend fun getById(itemId: Long): NoteItemEntity*/
+    @Query("select * from notes WHERE id like :id")
+    suspend fun getById(id: Long): NoteItemEntity
 
     @Update(entity = NoteItemEntity::class)
     suspend fun updateTransform(transformTuple: TransformNotesTuple)

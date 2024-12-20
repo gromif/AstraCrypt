@@ -13,7 +13,7 @@ interface NotesRepository {
 
     suspend fun insert(name: String, text: String)
 
-    // suspend fun getById(itemId: Long): NoteItemEntity
+    suspend fun getById(id: Long): NoteItemEntity
 
     suspend fun updateTransform(transformNotesTuple: TransformNotesTuple)
 

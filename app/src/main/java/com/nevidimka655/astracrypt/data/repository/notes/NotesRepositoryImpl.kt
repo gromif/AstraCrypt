@@ -29,6 +29,10 @@ class NotesRepositoryImpl(private val dao: NotesDao) : NotesRepository {
         dao.insert(noteItemEntity = noteItemEntity)
     }
 
+    override suspend fun getById(id: Long): NoteItemEntity {
+        return dao.getById(id = id)
+    }
+
     override suspend fun updateTransform(transformTuple: TransformNotesTuple) {
         dao.updateTransform(transformTuple = transformTuple)
     }
