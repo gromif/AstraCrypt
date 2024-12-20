@@ -15,28 +15,42 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import com.nevidimka655.astracrypt.R
+import com.nevidimka655.astracrypt.view.models.ToolbarAction
 import com.nevidimka655.astracrypt.view.models.UiState
+import com.nevidimka655.astracrypt.view.models.actions.ToolbarActionDelete
 import com.nevidimka655.astracrypt.view.navigation.Route
 import com.nevidimka655.notes.Notes
 import com.nevidimka655.notes.ui.OverviewScreen
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 private val SaveFabUiState = UiState.Fab(icon = Icons.Default.SaveAs)
 
 fun NavGraphBuilder.overviewNote(
     onUiStateChange: (UiState) -> Unit,
+    onToolbarActions: Flow<ToolbarAction>,
     onFabClick: Flow<Any>
 ) = composable<Route.NotesGraph.Overview> {
     val overview: Route.NotesGraph.Overview = it.toRoute()
+    val backDispatcher = LocalOnBackPressedDispatcherOwner.current?.onBackPressedDispatcher
+
     val vm: OverviewNoteViewModel = hiltViewModel()
     val name by vm.nameState.collectAsStateWithLifecycle()
     val text by vm.textState.collectAsStateWithLifecycle()
-
     var editMode by remember { mutableStateOf(overview.noteId != -1L) }
 
-    if (editMode) LaunchedEffect(Unit) { vm.load(id = overview.noteId) }
+    if (editMode) LaunchedEffect(Unit) {
+        launch { vm.load(id = overview.noteId)  }
+        launch {
+            onToolbarActions.collectLatest {
+                if (it is ToolbarActionDelete) vm.delete().invokeOnCompletion {
+                    backDispatcher?.onBackPressed()
+                }
+            }
+        }
+    }
 
     val newName = remember(name) { if (name.length > 16) name.take(16) + "…" else name }
     val fabState = remember(name, text) {
@@ -47,13 +61,13 @@ fun NavGraphBuilder.overviewNote(
             toolbar = UiState.Toolbar(
                 title = if (newName.isBlank() && !editMode) {
                     TextWrap.Resource(id = R.string.createNew)
-                } else TextWrap.Text(text = newName)
+                } else TextWrap.Text(text = newName),
+                actions = if (editMode) listOf(ToolbarActionDelete()) else null
             ),
             fab = fabState
         )
     )
 
-    val backDispatcher = LocalOnBackPressedDispatcherOwner.current?.onBackPressedDispatcher
     LaunchedEffect(Unit) {
         onFabClick.collectLatest {
             vm.save().invokeOnCompletion {

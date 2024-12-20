@@ -38,6 +38,7 @@ fun root(
     notesGraph(
         onUiStateChange = onUiStateChange,
         navController = navController,
+        onToolbarActions = onToolbarActions,
         onFabClick = onFabClick
     )
     details(onUiStateChange = onUiStateChange)

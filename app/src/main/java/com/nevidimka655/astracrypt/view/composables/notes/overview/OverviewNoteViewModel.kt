@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.nevidimka655.astracrypt.app.di.IoDispatcher
 import com.nevidimka655.astracrypt.data.database.entities.NoteItemEntity
 import com.nevidimka655.astracrypt.domain.usecase.notes.CreateNewNoteUseCase
+import com.nevidimka655.astracrypt.domain.usecase.notes.DeleteByIdUseCase
 import com.nevidimka655.astracrypt.domain.usecase.notes.LoadNoteByIdUseCase
 import com.nevidimka655.astracrypt.domain.usecase.notes.UpdateNoteByIdUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,6 +26,7 @@ class OverviewNoteViewModel @Inject constructor(
     private val createNewNoteUseCase: CreateNewNoteUseCase,
     private val loadNoteByIdUseCase: LoadNoteByIdUseCase,
     private val updateNoteByIdUseCase: UpdateNoteByIdUseCase,
+    private val deleteByIdUseCase: DeleteByIdUseCase
 ) : ViewModel() {
     private val idState = state.getStateFlow(STATE_ID, -1L)
     val nameState = state.getStateFlow(STATE_NAME, "")
@@ -45,6 +47,10 @@ class OverviewNoteViewModel @Inject constructor(
             setName(name = note.name ?: "")
             setText(text = note.text ?: "")
         }
+    }
+
+    fun delete() = viewModelScope.launch(defaultDispatcher) {
+        deleteByIdUseCase(id = idState.value)
     }
 
     fun save() = viewModelScope.launch(defaultDispatcher) {
