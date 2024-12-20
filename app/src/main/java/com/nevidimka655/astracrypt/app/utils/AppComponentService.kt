@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.content.ComponentName
 import android.content.Context
 import android.content.pm.PackageManager
-import com.nevidimka655.astracrypt.app.services.tiles.QuickDataDeletion
+import com.nevidimka655.astracrypt.app.services.tiles.WipeTile
 import com.nevidimka655.astracrypt.view.MainActivity
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
@@ -33,10 +33,10 @@ class AppComponentService @Inject constructor(
         set(value) = setState(comp = _calculator, state = value)
 
 
-    private val _quickDataDeletion = Component(context, QuickDataDeletion::class.java)
+    private val _wipeTile = Component(context, WipeTile::class.java)
     var quickDataDeletion
-        get() = getState(comp = _quickDataDeletion) == ENABLED
-        set(value) = setState(comp = _quickDataDeletion, state = value)
+        get() = getState(comp = _wipeTile) == ENABLED
+        set(value) = setState(comp = _wipeTile, state = value)
 
 
     private fun getState(comp: Component) = packageManager.getComponentEnabledSetting(comp)

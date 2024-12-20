@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 @RequiresApi(Build.VERSION_CODES.N)
 @AndroidEntryPoint
-class QuickDataDeletion @Inject constructor() : TileServiceCoroutine() {
+class WipeTile @Inject constructor() : TileServiceCoroutine() {
     @IoDispatcher
     @Inject lateinit var defaultDispatcher: CoroutineDispatcher
     @Inject lateinit var database: AppDatabase
@@ -35,19 +35,16 @@ class QuickDataDeletion @Inject constructor() : TileServiceCoroutine() {
                 keyStore.deleteEntry(alias)
             }
 
+            RandomAccessFile(keysetManager.dataFile, "rws").use {
+                it.write(ByteArray(96))
+            }
+
             with(filesService) {
                 dataDir.deleteRecursively()
                 cacheDir.deleteRecursively()
             }
 
             database.clearAllTables()
-
-            RandomAccessFile(keysetManager.dataFile, "rws").use {
-                val byteArray = ByteArray(96)
-                val secureSeed = "${System.currentTimeMillis()}AC_$classLoader".toByteArray()
-                secureRandom(secureSeed).nextBytes(byteArray)
-                it.write(byteArray)
-            }
         }
     }
 }

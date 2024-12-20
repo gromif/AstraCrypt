@@ -67,7 +67,7 @@
             android:foregroundServiceType="dataSync" />
 
         <service
-            android:name=".app.services.tiles.QuickDataDeletion"
+            android:name=".app.services.tiles.WipeTile"
             android:enabled="false"
             android:exported="true"
             android:icon="@drawable/ic_notification_app_icon"
