@@ -32,9 +32,6 @@ interface NotesDao {
     @Query("select * from notes limit :pageSize offset :pageIndex * :pageSize")
     suspend fun getTransformItems(pageSize: Int, pageIndex: Int): List<TransformNotesTuple>
 
-    @Query("select text from notes WHERE id like :itemId")
-    suspend fun getTextId(itemId: Long): String?
-
     @RewriteQueriesToDropUnusedColumns
     @Query("select * from notes order by id desc")
     fun listOrderDescAsc(): PagingSource<Int, NotesPagerTuple>
