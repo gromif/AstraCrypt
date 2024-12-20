@@ -13,8 +13,7 @@ import androidx.work.WorkManager
 import androidx.work.workDataOf
 import coil.ImageLoader
 import com.nevidimka655.astracrypt.app.di.IoDispatcher
-import com.nevidimka655.astracrypt.app.extensions.removeLines
-import com.nevidimka655.astracrypt.app.utils.AeadManager
+import com.nevidimka655.astracrypt.data.crypto.AeadManager
 import com.nevidimka655.astracrypt.app.utils.Io
 import com.nevidimka655.astracrypt.app.work.ImportFilesWorker
 import com.nevidimka655.astracrypt.app.work.utils.WorkerSerializer
@@ -114,7 +113,7 @@ class FilesViewModel @Inject constructor(
     }
 
     fun rename(id: Long, name: String) = viewModelScope.launch(defaultDispatcher) {
-        val newName = name.removeLines().trim()
+        val newName = name.trim()
         val repository = filesRepositoryProvider.filesRepository.first()
         repository.updateName(id, newName)
         //showSnackbar(R.string.snack_itemRenamed) TODO: Snackbar

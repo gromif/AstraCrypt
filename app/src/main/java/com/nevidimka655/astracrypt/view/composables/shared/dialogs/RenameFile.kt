@@ -5,7 +5,6 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.ui.res.stringResource
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.app.AppConfig
-import com.nevidimka655.astracrypt.app.extensions.removeLines
 import com.nevidimka655.ui.compose_core.dialogs.DialogsCore
 import com.nevidimka655.ui.compose_core.dialogs.default
 
@@ -18,7 +17,7 @@ fun Dialogs.rename(
     state = state,
     title = stringResource(id = R.string.files_options_rename),
     params = DialogsCore.TextFields.Params(
-        text = name.removeLines(),
+        text = name,
         label = stringResource(id = R.string.name),
         maxLength = AppConfig.ITEM_NAME_MAX_SIZE,
         singleLine = true

@@ -77,9 +77,8 @@ import coil.ImageLoader
 import coil.compose.AsyncImage
 import coil.compose.AsyncImagePainter
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.app.extensions.removeLines
 import com.nevidimka655.astracrypt.data.model.CoilTinkModel
-import com.nevidimka655.astracrypt.data.model.NavigatorDirectory
+import com.nevidimka655.astracrypt.view.models.NavigatorDirectory
 import com.nevidimka655.astracrypt.data.database.StorageItemState
 import com.nevidimka655.astracrypt.data.database.StorageItemType
 import com.nevidimka655.astracrypt.domain.database.PagerTuple
@@ -493,12 +492,12 @@ fun FilesScreen(
 ) {
     val scope = rememberCoroutineScope()
     var dialogNewFolder by Dialogs.newFolder(state = dialogNewFolderState) {
-        onNewFolder(it.removeLines().trim())
+        onNewFolder(it.trim())
     }
     var dialogRename by Dialogs.rename(
         state = filesVM.dialogRenameState,
         name = filesVM.optionsItem.name
-    ) { onRename(filesVM.optionsItem.id, it.removeLines().trim()) }
+    ) { onRename(filesVM.optionsItem.id, it) }
     if (filesVM.dialogDeleteState.value) Dialogs.DeleteFile(
         state = filesVM.dialogDeleteState,
         name = filesVM.optionsItem.name
