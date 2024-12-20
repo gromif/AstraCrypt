@@ -79,16 +79,19 @@ kotlin {
 }
 
 dependencies {
+    implementation(project(":core:haptic"))
+    implementation(project(":core:tiles-with-coroutines"))
+
+    implementation(project(":crypto:tink"))
+    implementation(project(":crypto:tink-lab"))
+
+    implementation(project(":features:compose-notes"))
+
     implementation(project(":ui:compose-core"))
     implementation(project(":ui:compose-calculator"))
     implementation(project(":ui:compose-color-schemes"))
     implementation(project(":ui:compose-details"))
     implementation(project(":ui:compose-help"))
-    implementation(project(":features:compose-notes"))
-    implementation(project(":core:haptic"))
-    implementation(project(":core:tiles-with-coroutines"))
-    implementation(project(":crypto:tink"))
-    implementation(project(":crypto:tink-lab"))
 
     // Navigation
     implementation(libs.navigation.fragment.ktx)
