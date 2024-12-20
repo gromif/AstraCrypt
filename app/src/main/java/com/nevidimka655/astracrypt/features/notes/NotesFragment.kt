@@ -39,10 +39,10 @@ class NotesFragment : Fragment() {
 
 
     private fun showNote(title: String? = null) {
-        findNavController().navigate(
+        /*findNavController().navigate(
             R.id.action_notesFragment_to_notesViewFragment,
             args = bundleOf(Pair("noteName", title ?: getString(R.string.notes)))
-        )
+        )*/
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -205,7 +205,7 @@ class ArchiveFragment : Fragment() {
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 when (menuItem.itemId) {
                     R.id.help -> findNavController().navigate(
-                        R.id.action_global_helpFragment, args = bundleOf(
+                        0, args = bundleOf(
                             Pair(
                                 HelpFragment.ARGS_HELP_INDEX_NAME,
                                 HelpIndex.LAB_COMBINED_ZIP.ordinal

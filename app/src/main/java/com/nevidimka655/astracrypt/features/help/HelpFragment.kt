@@ -13,7 +13,6 @@ import com.nevidimka655.compose_help.Help
 import com.nevidimka655.compose_help.HelpScreen
 
 class HelpFragment : Fragment() {
-    private val navArgs by navArgs<HelpFragmentArgs>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,13 +22,13 @@ class HelpFragment : Fragment() {
         setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
         setContent {
             AstraCryptTheme {
-                val textIdsList = remember {
+                /*val textIdsList = remember {
                     when(HelpIndex.entries[navArgs.helpIndex]) {
                         HelpIndex.SETTINGS_ENCRYPTION -> Help.settingsSecurityEncryption()
                         HelpIndex.LAB_COMBINED_ZIP -> Help.labZip()
                     }
                 }
-                HelpScreen(list = textIdsList)
+                HelpScreen(list = textIdsList)*/
             }
         }
     }

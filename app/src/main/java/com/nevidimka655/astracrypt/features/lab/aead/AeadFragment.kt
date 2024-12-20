@@ -133,14 +133,14 @@ class AeadFragment : androidx.fragment.app.Fragment(R.layout.fragment_lab) {
             val currentLabKey = labManager.currentLabKey
             dataType = currentLabKey!!.dataType
         }
-        when (dataType) {
+        /*when (dataType) {
             LabAeadManager.DataType.Text.ordinal -> findNavController().navigate(
                 R.id.action_aeadFragment_to_aeadTextFragment
             )
             LabAeadManager.DataType.Files.ordinal -> findNavController().navigate(
                 R.id.action_aeadFragment_to_aeadFilesFragment
             )
-        }
+        }*/
     }
 
     override fun onDestroyView() {
