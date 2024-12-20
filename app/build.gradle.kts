@@ -84,7 +84,7 @@ dependencies {
     implementation(project(":ui:compose-color-schemes"))
     implementation(project(":ui:compose-details"))
     implementation(project(":ui:compose-help"))
-    implementation(project(":ui:compose-notes"))
+    implementation(project(":features:compose-notes"))
     implementation(project(":core:haptic"))
     implementation(project(":core:tiles-with-coroutines"))
     implementation(project(":crypto:tink"))

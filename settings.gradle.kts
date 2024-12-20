@@ -6,17 +6,20 @@ val coreModules = listOf(
     "haptic",
     "tiles-with-coroutines"
 )
+val features = listOf(
+    "compose-notes"
+)
 val cryptoModules = listOf("tink", "tink-lab")
 val uiModules = listOf(
     "compose-core",
     "compose-calculator",
     "compose-color-schemes",
     "compose-details",
-    "compose-help",
-    "compose-notes"
+    "compose-help"
 )
 
 include(group = "core", modules = coreModules)
+include(group = "features", modules = features)
 include(group = "crypto", modules = cryptoModules)
 include(group = "ui", modules = uiModules)
 

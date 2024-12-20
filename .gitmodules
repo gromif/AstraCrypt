@@ -23,7 +23,7 @@
 	path = ui/compose-help
 	url = git@github.com:Nevidimka655/ui_compose_help.git
 [submodule "ui/compose-notes"]
-	path = ui/compose-notes
+	path = features/compose-notes
 	url = git@github.com:Nevidimka655/ui_compose_notes.git
 [submodule "crypto/tink-lab"]
 	path = crypto/tink-lab
