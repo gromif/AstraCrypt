@@ -1,7 +1,5 @@
 package com.nevidimka655.astracrypt.data.repository.notes
 
-import android.R.attr.name
-import android.R.attr.text
 import androidx.paging.PagingSource
 import com.nevidimka655.astracrypt.data.database.NotesPagerTuple
 import com.nevidimka655.astracrypt.data.database.TransformNotesTuple
@@ -49,10 +47,6 @@ class NotesRepositoryImpl(private val dao: NotesDao) : NotesRepository {
         pageSize: Int, pageIndex: Int
     ): List<TransformNotesTuple> {
         return dao.getTransformItems(pageSize, pageIndex)
-    }
-
-    override suspend fun getTextId(itemId: Long): String? {
-        return dao.getTextId(itemId)
     }
 
     override fun listOrderDescAsc(): PagingSource<Int, NotesPagerTuple> {

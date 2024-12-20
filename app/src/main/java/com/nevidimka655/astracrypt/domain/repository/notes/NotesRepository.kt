@@ -19,8 +19,6 @@ interface NotesRepository {
 
     suspend fun getTransformItems(pageSize: Int, pageIndex: Int): List<TransformNotesTuple>
 
-    suspend fun getTextId(itemId: Long): String?
-
     fun listOrderDescAsc(): PagingSource<Int, NotesPagerTuple>
 
 }
