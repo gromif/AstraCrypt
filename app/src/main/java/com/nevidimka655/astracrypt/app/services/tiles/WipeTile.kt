@@ -6,7 +6,6 @@ import com.nevidimka655.astracrypt.app.di.IoDispatcher
 import com.nevidimka655.astracrypt.data.database.AppDatabase
 import com.nevidimka655.astracrypt.data.io.FilesService
 import com.nevidimka655.crypto.tink.data.KeysetManager
-import com.nevidimka655.crypto.tink.extensions.secureRandom
 import com.nevidimka655.tiles_with_coroutines.TileServiceCoroutine
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineDispatcher
