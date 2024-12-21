@@ -1,7 +1,6 @@
 package com.nevidimka655.astracrypt.view.models.actions
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.Notes
 import androidx.compose.material.icons.outlined.DeleteOutline
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.nevidimka655.astracrypt.R
