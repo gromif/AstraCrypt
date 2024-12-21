@@ -16,7 +16,7 @@ import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.data.io.FilesService
 import com.nevidimka655.astracrypt.domain.model.db.StorageFlags
 import com.nevidimka655.astracrypt.data.database.StorageItemType
-import com.nevidimka655.astracrypt.domain.repository.files.FilesRepository
+import com.nevidimka655.astracrypt.domain.repository.Repository
 import com.nevidimka655.astracrypt.domain.usecase.BytesToHumanReadableUseCase
 import com.nevidimka655.compose_details.DetailsManager
 import com.nevidimka655.compose_details.addItem
@@ -29,7 +29,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailsScreenViewModel @Inject constructor(
-    private val filesRepository: FilesRepository,
+    private val repository: Repository,
     private val filesService: FilesService,
     private val bytesToHumanReadableUseCase: BytesToHumanReadableUseCase,
     val detailsManager: DetailsManager,
@@ -39,8 +39,8 @@ class DetailsScreenViewModel @Inject constructor(
     var type: StorageItemType = StorageItemType.Other
 
     suspend fun submitDetailsQuery(context: Context, itemId: Long) = detailsManager.run {
-        val item = filesRepository.getById(itemId)
-        val absolutePath = filesRepository.getAbsolutePath(
+        val item = repository.getById(itemId)
+        val absolutePath = repository.getAbsolutePath(
             childName = item.name,
             parentId = item.parentDirectoryId
         )
@@ -116,7 +116,7 @@ class DetailsScreenViewModel @Inject constructor(
                 )*/
             }
         } else {
-            val content = filesRepository.getFolderContent(item.id)
+            val content = repository.getFolderContent(item.id)
             addGroup(name = TextWrap.Resource(id = R.string.folder)) {
                 val files = context.getString(R.string.files)
                 val folders = context.getString(R.string.folders)

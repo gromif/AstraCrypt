@@ -22,7 +22,7 @@ import com.nevidimka655.astracrypt.app.utils.Api
 import com.nevidimka655.astracrypt.data.database.ExportTuple
 import com.nevidimka655.astracrypt.data.io.FilesService
 import com.nevidimka655.astracrypt.data.model.AeadInfo
-import com.nevidimka655.astracrypt.domain.repository.files.FilesRepository
+import com.nevidimka655.astracrypt.domain.repository.Repository
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import com.nevidimka655.crypto.tink.data.TinkConfig
 import com.nevidimka655.crypto.tink.extensions.fromBase64
@@ -38,7 +38,7 @@ class ExportFilesWorker @AssistedInject constructor(
     @Assisted params: WorkerParameters,
     @IoDispatcher
     private val defaultDispatcher: CoroutineDispatcher,
-    private val filesRepository: FilesRepository,
+    private val repository: Repository,
     private val keysetManager: KeysetManager,
     private val filesService: FilesService,
     private val workManager: WorkManager,
@@ -67,10 +67,10 @@ class ExportFilesWorker @AssistedInject constructor(
         val outputDirUri = inputData.getString(Args.uriDirOutput)!!
         val itemId = inputData.getLong(Args.itemId, 0)
         val startDir = createStartDocumentFile(outputDirUri.toUri())
-        val itemIsFile = filesRepository.getTypeById(id = itemId).isFile
+        val itemIsFile = repository.getTypeById(id = itemId).isFile
         if (startDir != null) {
             if (itemIsFile) fileIterator(
-                exportTuple = filesRepository.getDataToExport(itemId),
+                exportTuple = repository.getDataToExport(itemId),
                 parentDir = startDir
             ) else directoryIterator(
                 dirId = itemId,
@@ -84,10 +84,10 @@ class ExportFilesWorker @AssistedInject constructor(
         DocumentFile.fromTreeUri(applicationContext, startUri)
 
     private suspend fun directoryIterator(dirId: Long, parentDir: DocumentFile?) {
-        val dirName = filesRepository.getDataToExport(dirId).name
+        val dirName = repository.getDataToExport(dirId).name
         val newDirectory = parentDir?.createDirectory(dirName)
         if (newDirectory != null) {
-            filesRepository.getListDataToExportFromDir(dirId).forEach {
+            repository.getListDataToExportFromDir(dirId).forEach {
                 if (!isStopped) {
                     if (it.path.isNotEmpty()) fileIterator(it, newDirectory)
                     else directoryIterator(it.id, newDirectory)

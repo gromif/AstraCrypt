@@ -19,7 +19,7 @@ import com.nevidimka655.astracrypt.app.utils.Api
 import com.nevidimka655.astracrypt.data.database.DatabaseTransformTuple
 import com.nevidimka655.astracrypt.data.database.RepositoryEncryption
 import com.nevidimka655.astracrypt.data.model.AeadInfo
-import com.nevidimka655.astracrypt.domain.repository.files.FilesRepository
+import com.nevidimka655.astracrypt.domain.repository.Repository
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import com.nevidimka655.crypto.tink.data.TinkConfig
 import com.nevidimka655.crypto.tink.extensions.aeadPrimitive
@@ -38,7 +38,7 @@ class TransformDatabaseWorker @AssistedInject constructor(
     @Assisted params: WorkerParameters,
     @IoDispatcher
     private val defaultDispatcher: CoroutineDispatcher,
-    private val filesRepository: FilesRepository,
+    private val repository: Repository,
     private val repositoryEncryption: RepositoryEncryption,
     private val keysetManager: KeysetManager
 ) : CoroutineWorker(appContext, params) {
@@ -84,11 +84,11 @@ class TransformDatabaseWorker @AssistedInject constructor(
             shouldDecodeAssociatedData()
             var pageIndex = 0
             val pageSize = 20
-            var itemsList = filesRepository.getDatabaseTransformItems(pageSize, pageIndex)
+            var itemsList = repository.getDatabaseTransformItems(pageSize, pageIndex)
             while (itemsList.isNotEmpty()) {
                 iterateDatabaseItems(itemsList)
                 pageIndex++
-                itemsList = filesRepository.getDatabaseTransformItems(pageSize, pageIndex)
+                itemsList = repository.getDatabaseTransformItems(pageSize, pageIndex)
             }
         }
         delay(500)
@@ -123,7 +123,7 @@ class TransformDatabaseWorker @AssistedInject constructor(
         val thumbnail = operateStringField(encryptThumb, isThumbEncrypted, it.preview)
         val path = operateStringField(encryptPath, isPathEncrypted, it.path)
         val details = operateStringField(encryptDetails, isFlagsEncrypted, it.flags)
-        filesRepository.updateDbEntry(
+        repository.updateDbEntry(
             id = it.id,
             name = name,
             thumb = thumbnail,

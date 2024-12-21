@@ -18,7 +18,7 @@ import com.nevidimka655.astracrypt.data.crypto.AeadManager
 import com.nevidimka655.astracrypt.data.io.FilesService
 import com.nevidimka655.astracrypt.app.services.ExportFilesWorker
 import com.nevidimka655.astracrypt.view.models.ExportUiState
-import com.nevidimka655.astracrypt.domain.repository.files.FilesRepository
+import com.nevidimka655.astracrypt.domain.repository.Repository
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import com.nevidimka655.crypto.tink.extensions.toBase64
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -41,7 +41,7 @@ class ExportScreenViewModel @Inject constructor(
     @IoDispatcher
     private val defaultDispatcher: CoroutineDispatcher,
     private val aeadManager: AeadManager,
-    private val filesRepository: FilesRepository,
+    private val repository: Repository,
     private val keysetManager: KeysetManager,
     val filesService: FilesService,
     val workManager: WorkManager
@@ -53,7 +53,7 @@ class ExportScreenViewModel @Inject constructor(
     fun export(
         itemId: Long, contentResolver: ContentResolver
     ) = viewModelScope.launch(defaultDispatcher) {
-        val exportTuple = filesRepository.getDataForOpening(id = itemId)
+        val exportTuple = repository.getDataForOpening(id = itemId)
         val exportFile = filesService.getExportedCacheFile(exportTuple.name)
         val outputUri = filesService.getExportedCacheFileUri(file = exportFile)
         internalExportUri = outputUri.toString()

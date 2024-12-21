@@ -17,7 +17,7 @@ import com.nevidimka655.astracrypt.data.crypto.AeadManager
 import com.nevidimka655.astracrypt.data.io.FilesService
 import com.nevidimka655.astracrypt.app.services.ImportFilesWorker
 import com.nevidimka655.astracrypt.app.services.utils.WorkerSerializer
-import com.nevidimka655.astracrypt.data.repository.files.FilesRepositoryProvider
+import com.nevidimka655.astracrypt.data.repository.RepositoryProviderImpl
 import com.nevidimka655.astracrypt.data.database.PagerTuple
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import com.nevidimka655.crypto.tink.extensions.toBase64
@@ -37,7 +37,7 @@ private typealias Args = ImportFilesWorker.Args
 class FilesViewModel @Inject constructor(
     @IoDispatcher
     private val defaultDispatcher: CoroutineDispatcher,
-    private val filesRepositoryProvider: FilesRepositoryProvider,
+    private val repositoryProviderImpl: RepositoryProviderImpl,
     private val keysetManager: KeysetManager,
     private val aeadManager: AeadManager,
     val filesService: FilesService,
@@ -62,7 +62,7 @@ class FilesViewModel @Inject constructor(
         id: Long? = null,
         itemsArr: List<Long>? = null
     ) = viewModelScope.launch(defaultDispatcher) {
-        filesRepositoryProvider.filesRepository.first().setStarred(id, itemsArr, state)
+        repositoryProviderImpl.repository.first().setStarred(id, itemsArr, state)
         /*showSnackbar(
             if (state) R.string.snack_starred else R.string.snack_unstarred
         )*/ // TODO: Snackbar
@@ -114,7 +114,7 @@ class FilesViewModel @Inject constructor(
 
     fun rename(id: Long, name: String) = viewModelScope.launch(defaultDispatcher) {
         val newName = name.trim()
-        val repository = filesRepositoryProvider.filesRepository.first()
+        val repository = repositoryProviderImpl.repository.first()
         repository.updateName(id, newName)
         //showSnackbar(R.string.snack_itemRenamed) TODO: Snackbar
     }

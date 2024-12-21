@@ -7,9 +7,9 @@ import com.nevidimka655.astracrypt.data.database.AppDatabase
 import com.nevidimka655.astracrypt.data.database.RepositoryEncryption
 import com.nevidimka655.astracrypt.data.database.daos.StorageItemDao
 import com.nevidimka655.astracrypt.data.datastore.SettingsDataStoreManager
-import com.nevidimka655.astracrypt.data.repository.files.FilesRepositoryImpl
-import com.nevidimka655.astracrypt.data.repository.files.FilesRepositoryProvider
-import com.nevidimka655.astracrypt.domain.repository.files.FilesRepository
+import com.nevidimka655.astracrypt.data.repository.RepositoryImpl
+import com.nevidimka655.astracrypt.data.repository.RepositoryProviderImpl
+import com.nevidimka655.astracrypt.domain.repository.Repository
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import dagger.Module
 import dagger.Provides
@@ -26,23 +26,23 @@ object RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideFilesRepository(
+    fun provideRepository(
         storage: StorageItemDao
-    ): FilesRepository = FilesRepositoryImpl(dao = storage)
+    ): Repository = RepositoryImpl(dao = storage)
 
     @Singleton
     @Provides
-    fun provideFilesRepositoryProvider(
-        plainFilesRepository: FilesRepository,
+    fun provideRepositoryProvider(
+        plainRepository: Repository,
         settingsDataStoreManager: SettingsDataStoreManager
-    ): FilesRepositoryProvider = FilesRepositoryProvider(
-        plainFilesRepository = plainFilesRepository,
+    ): RepositoryProviderImpl = RepositoryProviderImpl(
+        plainRepository = plainRepository,
         aeadInfoFlow = settingsDataStoreManager.aeadInfoFlow
     )
 
     @Singleton
     @Provides
-    fun provideFilesAeadRepository(
+    fun provideAeadRepository(
         keysetManager: KeysetManager, aeadManager: AeadManager
     ) = RepositoryEncryption(keysetManager = keysetManager, aeadManager = aeadManager)
 

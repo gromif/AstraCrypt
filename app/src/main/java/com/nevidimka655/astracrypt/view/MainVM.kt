@@ -17,7 +17,7 @@ import com.nevidimka655.astracrypt.data.datastore.AppearanceManager
 import com.nevidimka655.astracrypt.data.io.FilesService
 import com.nevidimka655.astracrypt.data.paging.FilesPagingProvider
 import com.nevidimka655.astracrypt.data.paging.StarredPagingProvider
-import com.nevidimka655.astracrypt.data.repository.files.FilesRepositoryProvider
+import com.nevidimka655.astracrypt.data.repository.RepositoryProviderImpl
 import com.nevidimka655.astracrypt.view.models.NavigatorDirectory
 import com.nevidimka655.astracrypt.view.models.UiState
 import com.nevidimka655.astracrypt.view.models.ViewMode
@@ -39,7 +39,7 @@ import javax.inject.Inject
 class MainVM @Inject constructor(
     @IoDispatcher
     private val defaultDispatcher: CoroutineDispatcher,
-    private val filesRepositoryProvider: FilesRepositoryProvider,
+    private val repositoryProviderImpl: RepositoryProviderImpl,
     private val fileSystemSetupManager: FileSystemSetupManager,
     private val filesService: FilesService,
     private val filesPagingProvider: FilesPagingProvider,
@@ -120,7 +120,7 @@ class MainVM @Inject constructor(
     fun triggerFilesListUpdate() = filesPagingProvider.invalidate()
 
     fun newDirectory(directoryName: String) = viewModelScope.launch(defaultDispatcher) {
-        filesRepositoryProvider.filesRepository.first().newDirectory(
+        repositoryProviderImpl.repository.first().newDirectory(
             name = directoryName,
             parentId = filesNavigatorList.lastOrNull()?.id
         )
@@ -128,7 +128,7 @@ class MainVM @Inject constructor(
     }
 
     fun delete(storageItemId: Long) = viewModelScope.launch(defaultDispatcher) {
-        val repository = filesRepositoryProvider.filesRepository.first()
+        val repository = repositoryProviderImpl.repository.first()
         val idsList = arrayListOf<Long>()
         val itemToDelete = repository.getMinimalItemData(storageItemId)
         suspend fun deleteIterator(itemToDelete: StorageItemMinimalTuple) {
@@ -158,7 +158,7 @@ class MainVM @Inject constructor(
     }
 
     fun move(itemsArr: List<Long>, movingDirId: Long?) = viewModelScope.launch(defaultDispatcher) {
-        val repository = filesRepositoryProvider.filesRepository.first()
+        val repository = repositoryProviderImpl.repository.first()
         repository.moveItems(
             idsArray = itemsArr,
             newDirId = movingDirId ?: 0
@@ -175,7 +175,7 @@ class MainVM @Inject constructor(
                 if (idToIterate.toInt() != 0) {
                     searchDirsIndexesList.clear()
                     val array = searchDirsIndexesList
-                    val repository = filesRepositoryProvider.filesRepository.first()
+                    val repository = repositoryProviderImpl.repository.first()
                     suspend fun iterate(id: Long) {
                         array.add(id)
                         repository.getDirIdsList(id).forEach {

@@ -5,14 +5,14 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingSource
 import com.nevidimka655.astracrypt.app.AppConfig
 import com.nevidimka655.astracrypt.data.database.PagerTuple
-import com.nevidimka655.astracrypt.data.repository.files.FilesRepositoryProvider
+import com.nevidimka655.astracrypt.data.repository.RepositoryProviderImpl
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flatMapLatest
 import javax.inject.Inject
 
 class StarredPagingProvider @Inject constructor(
-    private val filesRepositoryProvider: FilesRepositoryProvider
+    private val repositoryProviderImpl: RepositoryProviderImpl
 ) {
     private val pagingSource = MutableStateFlow<PagingSource<Int, PagerTuple>?>(null)
 
@@ -21,7 +21,7 @@ class StarredPagingProvider @Inject constructor(
     @OptIn(ExperimentalCoroutinesApi::class)
     fun createPagingSource(
         lastSearchQuery: String?
-    ) = filesRepositoryProvider.filesRepository.flatMapLatest { currentRepository ->
+    ) = repositoryProviderImpl.repository.flatMapLatest { currentRepository ->
         Pager(
             PagingConfig(
                 pageSize = AppConfig.PAGING_PAGE_SIZE,

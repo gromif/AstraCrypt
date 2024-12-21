@@ -38,7 +38,7 @@ import com.nevidimka655.astracrypt.data.io.FilesService
 import com.nevidimka655.astracrypt.data.io.Randomizer
 import com.nevidimka655.astracrypt.data.model.AeadInfo
 import com.nevidimka655.astracrypt.domain.model.db.StorageFlags
-import com.nevidimka655.astracrypt.domain.repository.files.FilesRepository
+import com.nevidimka655.astracrypt.domain.repository.Repository
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import com.nevidimka655.crypto.tink.data.TinkConfig
 import com.nevidimka655.crypto.tink.extensions.fromBase64
@@ -64,7 +64,7 @@ class ImportFilesWorker @AssistedInject constructor(
     @Assisted params: WorkerParameters,
     @IoDispatcher
     private val defaultDispatcher: CoroutineDispatcher,
-    private val filesRepository: FilesRepository,
+    private val repository: Repository,
     private val keysetManager: KeysetManager,
     private val filesService: FilesService,
     private val randomizer: Randomizer,
@@ -104,7 +104,7 @@ class ImportFilesWorker @AssistedInject constructor(
         val file = File(inputData.getString(Args.fileWithUris)!!)
         val urisList = withContext(defaultDispatcher) { file.readLines() }
         file.delete()
-        var nextId = withContext(defaultDispatcher) { filesRepository.getMaxId() }
+        var nextId = withContext(defaultDispatcher) { repository.getMaxId() }
         try {
             urisList.forEach {
                 yield()
@@ -186,7 +186,7 @@ class ImportFilesWorker @AssistedInject constructor(
                 creationTime = creationDate,
                 //thumbnailEncryptionType = aeadInfo.file?.ordinal ?: -1
             )
-            filesRepository.insert(item)
+            repository.insert(item)
             if (!saveOriginalFiles) try {
                 val isFileDeleted = docFile.delete()
                 if (isFileDeleted) return@coroutineScope

@@ -7,7 +7,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingSource
 import com.nevidimka655.astracrypt.app.AppConfig
 import com.nevidimka655.astracrypt.data.database.PagerTuple
-import com.nevidimka655.astracrypt.data.repository.files.FilesRepositoryProvider
+import com.nevidimka655.astracrypt.data.repository.RepositoryProviderImpl
 import com.nevidimka655.astracrypt.view.models.NavigatorDirectory
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,7 +16,7 @@ import okhttp3.internal.toImmutableList
 import javax.inject.Inject
 
 class FilesPagingProvider @Inject constructor(
-    private val filesRepositoryProvider: FilesRepositoryProvider
+    private val repositoryProviderImpl: RepositoryProviderImpl
 ) {
     private val pagingSource = MutableStateFlow<PagingSource<Int, PagerTuple>?>(null)
 
@@ -27,7 +27,7 @@ class FilesPagingProvider @Inject constructor(
         filesNavigatorList: SnapshotStateList<NavigatorDirectory>,
         searchQuery: MutableState<String?>,
         searchDirsIndexesList: SnapshotStateList<Long>
-    ) = filesRepositoryProvider.filesRepository.flatMapLatest { currentRepository ->
+    ) = repositoryProviderImpl.repository.flatMapLatest { currentRepository ->
         Pager(
             PagingConfig(
                 pageSize = AppConfig.PAGING_PAGE_SIZE,

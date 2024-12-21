@@ -4,7 +4,7 @@ import android.content.Context
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.app.di.IoDispatcher
 import com.nevidimka655.astracrypt.data.io.FilesService
-import com.nevidimka655.astracrypt.data.repository.files.FilesRepositoryProvider
+import com.nevidimka655.astracrypt.data.repository.RepositoryProviderImpl
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineDispatcher
@@ -21,7 +21,7 @@ class FileSystemSetupManager @Inject constructor(
     private val defaultDispatcher: CoroutineDispatcher = Dispatchers.Default,
 
     private val keysetManager: KeysetManager,
-    private val filesRepositoryProvider: FilesRepositoryProvider,
+    private val repositoryProviderImpl: RepositoryProviderImpl,
     private val filesService: FilesService
 ) {
     fun isDatabaseCreated() = filesService.dataDir.exists()
@@ -32,7 +32,7 @@ class FileSystemSetupManager @Inject constructor(
         val foldersArray = arrayOf(
             R.string.music, R.string.document, R.string.video, R.string.photo
         )
-        filesRepositoryProvider.filesRepository.first().let { repository ->
+        repositoryProviderImpl.repository.first().let { repository ->
             foldersArray.forEach {
                 repository.newDirectory(name = context.getString(it), parentId = 0)
             }

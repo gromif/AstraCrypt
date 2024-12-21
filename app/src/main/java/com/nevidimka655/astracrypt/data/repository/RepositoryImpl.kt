@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.data.repository.files
+package com.nevidimka655.astracrypt.data.repository
 
 import androidx.paging.PagingSource
 import com.nevidimka655.astracrypt.data.database.DatabaseTransformTuple
@@ -13,10 +13,10 @@ import com.nevidimka655.astracrypt.data.database.entities.StorageItemEntity
 import com.nevidimka655.astracrypt.data.model.DetailsFolderContent
 import com.nevidimka655.astracrypt.domain.model.db.StorageColumns
 import com.nevidimka655.astracrypt.domain.model.db.StorageState
-import com.nevidimka655.astracrypt.domain.repository.files.FilesRepository
+import com.nevidimka655.astracrypt.domain.repository.Repository
 import kotlinx.coroutines.flow.Flow
 
-class FilesRepositoryImpl(private val dao: StorageItemDao): FilesRepository {
+class RepositoryImpl(private val dao: StorageItemDao): Repository {
     override suspend fun insert(item: StorageItemEntity) {
         dao.insert(item)
     }

@@ -6,7 +6,7 @@ import coil.ImageLoader
 import com.nevidimka655.astracrypt.data.io.FilesService
 import com.nevidimka655.astracrypt.data.datastore.SettingsDataStoreManager
 import com.nevidimka655.astracrypt.data.model.CoilTinkModel
-import com.nevidimka655.astracrypt.data.repository.files.FilesRepositoryProvider
+import com.nevidimka655.astracrypt.data.repository.RepositoryProviderImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    filesRepositoryProvider: FilesRepositoryProvider,
+    repositoryProviderImpl: RepositoryProviderImpl,
     filesService: FilesService,
     private val settingsDataStoreManager: SettingsDataStoreManager,
     val imageLoader: ImageLoader
@@ -22,7 +22,7 @@ class HomeViewModel @Inject constructor(
     val coilAvatarModel = CoilTinkModel(absolutePath = filesService.getProfileIconFile().toString())
 
     val profileInfoFlow get() = settingsDataStoreManager.profileInfoFlow
-    val recentFilesStateFlow = filesRepositoryProvider.repositoryFlow { it.getRecentFilesFlow() }
+    val recentFilesStateFlow = repositoryProviderImpl.repositoryFlow { it.getRecentFilesFlow() }
         .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
 
 }
