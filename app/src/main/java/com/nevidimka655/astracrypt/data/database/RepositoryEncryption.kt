@@ -1,15 +1,13 @@
 package com.nevidimka655.astracrypt.data.database
 
-import androidx.paging.PagingData
-import androidx.paging.map
 import com.google.crypto.tink.Aead
 import com.nevidimka655.astracrypt.data.crypto.AeadManager
-import com.nevidimka655.astracrypt.data.database.entities.NoteItemEntity
 import com.nevidimka655.astracrypt.data.database.entities.StorageItemEntity
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import com.nevidimka655.crypto.tink.extensions.aeadPrimitive
 import com.nevidimka655.crypto.tink.extensions.fromBase64
 import com.nevidimka655.crypto.tink.extensions.toBase64
+import com.nevidimka655.notes.data.database.NoteItemEntity
 
 class RepositoryEncryption(
     private val keysetManager: KeysetManager,
@@ -19,7 +17,7 @@ class RepositoryEncryption(
     private suspend fun getDbAead() = keysetManager.aead(info().database!!.aead).aeadPrimitive()
     private suspend fun getNotesPrimitive() = keysetManager.aead(info().aeadNotes!!).aeadPrimitive()
 
-    fun decryptNotesPager(pagingData: PagingData<NotesPagerTuple>) = pagingData.map {
+    /*fun decryptNotesPager(pagingData: PagingData<NotesPagerTuple>) = pagingData.map {
         val aeadInfo = info()
         if (aeadInfo.notes) {
             it.copy(
@@ -27,7 +25,7 @@ class RepositoryEncryption(
                 textPreview = decryptNoteTextPreview(it.textPreview)
             )
         } else it
-    }
+    }*/
 
     suspend fun decryptPagerTuple(tuple: PagerTuple) = tuple.copy(
         name = decryptName(tuple.name),

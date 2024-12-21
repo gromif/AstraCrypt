@@ -5,13 +5,10 @@ import androidx.room.Room
 import com.nevidimka655.astracrypt.data.crypto.AeadManager
 import com.nevidimka655.astracrypt.data.database.AppDatabase
 import com.nevidimka655.astracrypt.data.database.RepositoryEncryption
-import com.nevidimka655.astracrypt.data.database.daos.NotesDao
 import com.nevidimka655.astracrypt.data.database.daos.StorageItemDao
 import com.nevidimka655.astracrypt.data.datastore.SettingsDataStoreManager
 import com.nevidimka655.astracrypt.data.repository.files.FilesRepositoryImpl
 import com.nevidimka655.astracrypt.data.repository.files.FilesRepositoryProvider
-import com.nevidimka655.astracrypt.data.repository.notes.NotesRepositoryImpl
-import com.nevidimka655.astracrypt.data.repository.notes.NotesRepositoryProvider
 import com.nevidimka655.astracrypt.domain.repository.files.FilesRepository
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import dagger.Module
@@ -52,6 +49,10 @@ object RepositoryModule {
     @Singleton
     @Provides
     fun provideStorageDao(database: AppDatabase) = database.getStorageItemDao()
+
+    @Singleton
+    @Provides
+    fun provideNotesDao(database: AppDatabase) = database.getNotesDao()
 
     @Singleton
     @Provides
