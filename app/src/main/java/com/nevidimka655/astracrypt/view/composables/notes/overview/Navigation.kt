@@ -20,11 +20,11 @@ import com.nevidimka655.astracrypt.view.models.UiState
 import com.nevidimka655.astracrypt.view.models.actions.ToolbarActionDelete
 import com.nevidimka655.astracrypt.view.navigation.Route
 import com.nevidimka655.notes.Notes
-import com.nevidimka655.notes.ui.OverviewScreen
+import com.nevidimka655.notes.ui.overview.OverviewNoteViewModel
+import com.nevidimka655.notes.ui.overview.OverviewScreen
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
 private val SaveFabUiState = UiState.Fab(icon = Icons.Default.SaveAs)
 
