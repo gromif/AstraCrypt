@@ -11,7 +11,7 @@
 	path = ui/compose-details
 	url = git@github.com:Nevidimka655/ui_compose_details.git
 [submodule "crypto/tink"]
-	path = crypto/tink
+	path = core/tink
 	url = git@github.com:Nevidimka655/crypto_tink.git
 [submodule "core/haptic"]
 	path = core/haptic

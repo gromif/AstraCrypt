@@ -4,13 +4,14 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 include(":app")
 
 val coreModules = listOf(
+    "tink",
     "haptic",
     "tiles-with-coroutines"
 )
 val features = listOf(
     "compose-notes"
 )
-val cryptoModules = listOf("tink", "tink-lab")
+val cryptoModules = listOf("tink-lab")
 val uiModules = listOf(
     "compose-core",
     "compose-calculator",

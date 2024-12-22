@@ -70,7 +70,7 @@ dependencies {
     implementation(project(":core:haptic"))
     implementation(project(":core:tiles-with-coroutines"))
 
-    implementation(project(":crypto:tink"))
+    implementation(projects.core.tink)
     implementation(project(":crypto:tink-lab"))
 
     implementation(projects.data.notes)
