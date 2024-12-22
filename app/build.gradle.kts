@@ -71,7 +71,7 @@ dependencies {
     implementation(project(":core:tiles-with-coroutines"))
 
     implementation(projects.core.tink)
-    implementation(project(":crypto:tink-lab"))
+    implementation(projects.features.tinkLab)
 
     implementation(projects.data.notes)
     implementation(projects.features.composeNotes)

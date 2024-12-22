@@ -9,9 +9,9 @@ val coreModules = listOf(
     "tiles-with-coroutines"
 )
 val features = listOf(
-    "compose-notes"
+    "compose-notes",
+    "tink-lab"
 )
-val cryptoModules = listOf("tink-lab")
 val uiModules = listOf(
     "compose-core",
     "compose-calculator",
@@ -22,7 +22,6 @@ val uiModules = listOf(
 
 include(group = "core", modules = coreModules)
 include(group = "features", modules = features)
-include(group = "crypto", modules = cryptoModules)
 include(group = "ui", modules = uiModules)
 
 //project(":$group:$it").projectDir = File("$modulesDir\\$group\\$it")
