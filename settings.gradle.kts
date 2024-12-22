@@ -1,4 +1,5 @@
 rootProject.name = "AstraCrypt"
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 include(":app")
 
@@ -27,6 +28,7 @@ include(group = "ui", modules = uiModules)
 fun include(group: String, modules: List<String>) = modules.forEach { include(":$group:$it") }
 
 pluginManagement {
+    includeBuild("build-logic")
     repositories {
         google()
         mavenCentral()
@@ -40,3 +42,4 @@ dependencyResolutionManagement {
         gradlePluginPortal()
     }
 }
+include(":domain:notes")

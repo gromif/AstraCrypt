@@ -1,7 +1,7 @@
 [versions]
 kotlin = "2.1.0"
-gradle = "8.8.0-rc02"
-gradle-ksp = "2.1.0-1.0.29"
+agp = "8.8.0-rc02"
+ksp = "2.1.0-1.0.29"
 
 room = "2.6.1"
 lifecycle = "2.8.7"
@@ -32,6 +32,7 @@ datastore-preferences = "1.1.1"
 junit = "4.13.2"
 junit-version = "1.2.1"
 espresso-core = "3.6.1"
+material = "1.12.0"
 
 [libraries] # ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -99,9 +100,16 @@ hilt-compose-navigation = { group = "androidx.hilt", name = "hilt-navigation-com
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junit-version" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+
+# Dependencies of the included build-logic
+android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
+kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+ksp-gradlePlugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
+
 [plugins] # ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-android-application = { id = "com.android.application", version.ref = "gradle" }
-ksp = { id = "com.google.devtools.ksp", version.ref = "gradle-ksp" }
+android-application = { id = "com.android.application", version.ref = "agp" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 kotlin-navigation-safeargs = { id = "androidx.navigation.safeargs", version.ref = "navigation" }
@@ -110,4 +118,7 @@ compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "
 
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 
-androidLibrary = { id = "com.android.library", version.ref = "gradle" }
+androidLibrary = { id = "com.android.library", version.ref = "agp" }
+
+# Plugins defined by this project
+astracrypt-android-library = { id = "astracrypt.android.library" }
