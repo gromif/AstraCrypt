@@ -2,6 +2,7 @@ import com.android.build.api.dsl.ApplicationExtension
 import com.nevidimka655.buildlogic.AppConfig
 import com.nevidimka655.buildlogic.configureDefaultConfig
 import com.nevidimka655.buildlogic.configureKotlinAndroid
+import dagger.hilt.android.plugin.HiltExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
@@ -10,6 +11,7 @@ class AndroidApplicationConventionPlugin: Plugin<Project> {
     override fun apply(target: Project): Unit = with(target) {
         with(pluginManager) {
             apply("com.android.application")
+            apply("dagger.hilt.android.plugin")
             apply("org.jetbrains.kotlin.android")
         }
 
@@ -25,6 +27,9 @@ class AndroidApplicationConventionPlugin: Plugin<Project> {
                 vectorDrawables.useSupportLibrary = true
             }
             configureKotlinAndroid()
+        }
+        extensions.configure<HiltExtension> {
+            enableAggregatingTask = true
         }
     }
 }
