@@ -106,6 +106,7 @@ material = { group = "com.google.android.material", name = "material", version.r
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 ksp-gradlePlugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
+hilt-gradlePlugin = { group = "com.google.dagger", name = "hilt-android-gradle-plugin", version.ref = "hilt" }
 
 [plugins] # ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -125,3 +126,4 @@ astracrypt-android-application = { id = "astracrypt.android.application" }
 astracrypt-android-application-compose = { id = "astracrypt.android.application.compose" }
 astracrypt-android-library = { id = "astracrypt.android.library" }
 astracrypt-android-library-compose = { id = "astracrypt.android.compose" }
+astracrypt-android-hilt = { id = "astracrypt.android.hilt" }

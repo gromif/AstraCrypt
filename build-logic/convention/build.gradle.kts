@@ -12,6 +12,7 @@ dependencies {
     compileOnly(libs.android.gradlePlugin)
     compileOnly(libs.kotlin.gradlePlugin)
     compileOnly(libs.ksp.gradlePlugin)
+    compileOnly(libs.hilt.gradlePlugin)
 }
 
 gradlePlugin {
@@ -31,6 +32,10 @@ gradlePlugin {
         register("androidApplicationCompose") {
             id = "astracrypt.android.application.compose"
             implementationClass = "AndroidApplicationComposeConventionPlugin"
+        }
+        register("androidHilt") {
+            id = "astracrypt.android.hilt"
+            implementationClass = "AndroidHiltConventionPlugin"
         }
     }
 }
