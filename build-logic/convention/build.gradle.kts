@@ -37,5 +37,9 @@ gradlePlugin {
             id = "astracrypt.android.hilt"
             implementationClass = "AndroidHiltConventionPlugin"
         }
+        register("kotlinSerialization") {
+            id = "astracrypt.kotlin.serialization"
+            implementationClass = "KotlinSerializationConventionPlugin"
+        }
     }
 }
