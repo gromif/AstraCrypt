@@ -41,5 +41,9 @@ gradlePlugin {
             id = "astracrypt.kotlin.serialization"
             implementationClass = "KotlinSerializationConventionPlugin"
         }
+        register("kotlinCoroutines") {
+            id = "astracrypt.kotlin.coroutines"
+            implementationClass = "KotlinCoroutinesConventionPlugin"
+        }
     }
 }

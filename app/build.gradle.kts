@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.astracrypt.android.application)
     alias(libs.plugins.astracrypt.android.application.compose)
     alias(libs.plugins.astracrypt.android.hilt)
+    alias(libs.plugins.astracrypt.kotlin.coroutines)
     alias(libs.plugins.astracrypt.kotlin.serialization)
     alias(libs.plugins.kotlin.navigation.safeargs)
 }
@@ -125,9 +126,6 @@ dependencies {
     // DI - Hilt
     implementation(libs.hilt.compose.navigation)
     implementation(libs.hilt.work)
-
-    // Kotlin
-    implementation(libs.kotlin.coroutines)
 
     // Other
     implementation(libs.androidx.core.ktx)
