@@ -1,13 +1,13 @@
 package com.nevidimka655.buildlogic
 
-import com.android.build.gradle.LibraryExtension
+import com.android.build.api.dsl.CommonExtension
 import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.dsl.kotlinExtension
 
 internal fun Project.configureKotlinAndroid(
-    libraryExtension: LibraryExtension
+    commonExtension: CommonExtension<*, *, *, *, *, *>
 ) {
-    with(libraryExtension) {
+    with(commonExtension) {
         defaultConfig.minSdk = AppConfig.MIN_SDK
         compileSdk = AppConfig.COMPILE_SDK
         buildTypes {
