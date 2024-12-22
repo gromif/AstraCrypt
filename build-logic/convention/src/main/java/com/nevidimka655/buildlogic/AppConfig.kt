@@ -19,6 +19,8 @@ internal object AppConfig {
 
         const val CODE = MAJOR * 10000 + MINOR * 100 + PATCH
         const val NAME = "$MAJOR.$MINOR.$PATCH"
+
+        const val BUILD_TOOLS = "35.0.0"
     }
 
 }
