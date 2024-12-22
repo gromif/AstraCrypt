@@ -89,6 +89,7 @@ dependencies {
     implementation(project(":crypto:tink"))
     implementation(project(":crypto:tink-lab"))
 
+    implementation(projects.domain.notes)
     implementation(project(":features:compose-notes"))
 
     implementation(project(":ui:compose-core"))
