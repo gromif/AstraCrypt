@@ -28,5 +28,9 @@ gradlePlugin {
             id = "astracrypt.android.compose"
             implementationClass = "AndroidLibraryComposeConventionPlugin"
         }
+        register("androidApplicationCompose") {
+            id = "astracrypt.android.application.compose"
+            implementationClass = "AndroidApplicationComposeConventionPlugin"
+        }
     }
 }

@@ -122,5 +122,6 @@ androidLibrary = { id = "com.android.library", version.ref = "agp" }
 
 # Plugins defined by this project
 astracrypt-android-application = { id = "astracrypt.android.application" }
+astracrypt-android-application-compose = { id = "astracrypt.android.application.compose" }
 astracrypt-android-library = { id = "astracrypt.android.library" }
 astracrypt-android-library-compose = { id = "astracrypt.android.compose" }

@@ -3,11 +3,11 @@ import java.util.Properties
 
 plugins {
     alias(libs.plugins.astracrypt.android.application)
+    alias(libs.plugins.astracrypt.android.application.compose)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
     alias(libs.plugins.kotlin.navigation.safeargs)
-    alias(libs.plugins.compose.compiler)
 }
 
 // Create a variable called keystorePropertiesFile, and initialize it to your
@@ -25,7 +25,6 @@ android {
 
     defaultConfig {
         buildFeatures.run {
-            compose = true
             viewBinding = true
             buildConfig = true
         }
@@ -79,7 +78,6 @@ dependencies {
     implementation(projects.domain.notes)
     implementation(projects.features.composeNotes)
 
-    implementation(project(":ui:compose-core"))
     implementation(project(":ui:compose-calculator"))
     implementation(project(":ui:compose-color-schemes"))
     implementation(project(":ui:compose-details"))
