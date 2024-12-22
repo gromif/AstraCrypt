@@ -41,6 +41,10 @@ gradlePlugin {
             id = "astracrypt.android.room"
             implementationClass = "AndroidRoomConventionPlugin"
         }
+        register("androidPaging") {
+            id = "astracrypt.android.paging"
+            implementationClass = "AndroidPagingConventionPlugin"
+        }
         register("kotlinSerialization") {
             id = "astracrypt.kotlin.serialization"
             implementationClass = "KotlinSerializationConventionPlugin"
