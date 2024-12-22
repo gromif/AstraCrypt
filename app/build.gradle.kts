@@ -4,9 +4,8 @@ import java.util.Properties
 plugins {
     alias(libs.plugins.astracrypt.android.application)
     alias(libs.plugins.astracrypt.android.application.compose)
+    alias(libs.plugins.astracrypt.android.hilt)
     alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.ksp)
-    alias(libs.plugins.hilt)
     alias(libs.plugins.kotlin.navigation.safeargs)
 }
 
@@ -62,10 +61,6 @@ android {
             signingConfig = signingConfigs.getByName("release")
         }
     }
-}
-
-hilt {
-    enableAggregatingTask = true
 }
 
 dependencies {
@@ -128,10 +123,7 @@ dependencies {
     implementation(libs.google.crypto.tink)
 
     // DI - Hilt
-    ksp(libs.hilt.android.compiler)
-    ksp(libs.hilt.compiler)
     implementation(libs.hilt.compose.navigation)
-    implementation(libs.hilt.android)
     implementation(libs.hilt.work)
 
     // Kotlin
