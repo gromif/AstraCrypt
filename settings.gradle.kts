@@ -43,3 +43,5 @@ dependencyResolutionManagement {
     }
 }
 include(":domain:notes")
+include(":data:notes")
+include(":di:notes")
