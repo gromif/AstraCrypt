@@ -7,9 +7,9 @@ import org.jetbrains.kotlin.gradle.dsl.kotlinExtension
 internal fun Project.configureDefaultConfig(
     commonExtension: CommonExtension<*,*,*,*,*,*>
 ): Unit = with(commonExtension) {
-    defaultConfig.minSdk = AppConfig.MIN_SDK
-    compileSdk = AppConfig.COMPILE_SDK
+    defaultConfig.minSdk = AppConfig.SDK.MIN
+    compileSdk = AppConfig.SDK.COMPILE
 }
 
 internal fun Project.configureKotlinAndroid() =
-    kotlinExtension.jvmToolchain(AppConfig.KOTLIN_JVM_TOOLCHAIN_VERSION)
+    kotlinExtension.jvmToolchain(AppConfig.Kotlin.JVM_TOOLCHAIN_VERSION)
