@@ -1,10 +1,7 @@
-import com.google.devtools.ksp.gradle.KspExtension
 import com.nevidimka655.buildlogic.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
-import kotlin.text.get
 
 class AndroidRoomConventionPlugin: Plugin<Project> {
     override fun apply(target: Project): Unit = with(target) {
