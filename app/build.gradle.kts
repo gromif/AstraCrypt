@@ -4,9 +4,11 @@ import java.util.Properties
 plugins {
     alias(libs.plugins.astracrypt.android.application)
     alias(libs.plugins.astracrypt.android.application.compose)
-    alias(libs.plugins.astracrypt.android.hilt)
     alias(libs.plugins.astracrypt.kotlin.coroutines)
     alias(libs.plugins.astracrypt.kotlin.serialization)
+    alias(libs.plugins.astracrypt.android.hilt)
+    alias(libs.plugins.astracrypt.android.room)
+    alias(libs.plugins.astracrypt.android.paging)
     alias(libs.plugins.kotlin.navigation.safeargs)
 }
 
@@ -95,16 +97,6 @@ dependencies {
     debugImplementation(libs.compose.ui.tooling)
     debugImplementation(libs.compose.ui.tooling.preview)
     debugImplementation(libs.compose.ui.test.manifest)
-
-    // Paging
-    implementation(libs.paging.compose)
-    implementation(libs.paging.runtime.ktx)
-
-    // Room
-    implementation(libs.room.runtime)
-    implementation(libs.room.ktx)
-    implementation(libs.room.paging)
-    ksp(libs.room.compiler)
 
     // Background
     implementation(libs.androidx.work.runtime.ktx)
