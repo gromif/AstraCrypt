@@ -37,6 +37,10 @@ gradlePlugin {
             id = "astracrypt.android.hilt"
             implementationClass = "AndroidHiltConventionPlugin"
         }
+        register("androidRoom") {
+            id = "astracrypt.android.room"
+            implementationClass = "AndroidRoomConventionPlugin"
+        }
         register("kotlinSerialization") {
             id = "astracrypt.kotlin.serialization"
             implementationClass = "KotlinSerializationConventionPlugin"
