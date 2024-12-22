@@ -1,5 +1,6 @@
 import com.android.build.gradle.LibraryExtension
 import com.nevidimka655.buildlogic.AppConfig
+import com.nevidimka655.buildlogic.configureDefaultConfig
 import com.nevidimka655.buildlogic.configureKotlinAndroid
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -13,8 +14,15 @@ class AndroidLibraryConventionPlugin: Plugin<Project> {
         }
 
         extensions.configure<LibraryExtension> {
-            configureKotlinAndroid(this)
+            configureDefaultConfig(this)
             defaultConfig.targetSdk = AppConfig.TARGET_SDK
+            configureKotlinAndroid()
+
+            buildTypes {
+                release {
+                    isMinifyEnabled = false
+                }
+            }
         }
     }
 }
