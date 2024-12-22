@@ -20,5 +20,9 @@ gradlePlugin {
             id = "astracrypt.android.library"
             implementationClass = "AndroidLibraryConventionPlugin"
         }
+        register("androidApplication") {
+            id = "astracrypt.android.application"
+            implementationClass = "AndroidApplicationConventionPlugin"
+        }
     }
 }

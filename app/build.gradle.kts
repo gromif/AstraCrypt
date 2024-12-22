@@ -2,8 +2,7 @@ import java.io.FileInputStream
 import java.util.Properties
 
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.astracrypt.android.application)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
@@ -22,16 +21,9 @@ val keystoreProperties = Properties()
 keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 
 android {
-    compileSdk = project.property("compileSdk").toString().toInt()
-    buildToolsVersion = project.property("buildTools").toString()
+    namespace = "com.nevidimka655.astracrypt"
 
     defaultConfig {
-        applicationId = project.property("applicationId").toString()
-        minSdk = project.property("minSdk").toString().toInt()
-        targetSdk = project.property("targetSdk").toString().toInt()
-        versionCode = getVersionCode()
-        versionName = getVersionName()
-        vectorDrawables.useSupportLibrary = true
         buildFeatures.run {
             compose = true
             viewBinding = true
@@ -71,11 +63,6 @@ android {
             signingConfig = signingConfigs.getByName("release")
         }
     }
-    namespace = project.property("applicationId").toString()
-}
-
-kotlin {
-    jvmToolchain(project.property("kotlinJvmToolchainVersion").toString().toInt())
 }
 
 hilt {
@@ -157,16 +144,4 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.datastore.preferences)
-}
-
-fun getVersionCode() = project.property("versionMajor").toString().toInt() * 10000 +
-        project.property("versionMinor").toString().toInt() * 100 +
-        project.property("versionPatch").toString().toInt()
-
-fun getVersionName() = buildString {
-    append(project.property("versionMajor"))
-    append(".")
-    append(project.property("versionMinor"))
-    append(".")
-    append(project.property("versionPatch"))
 }
