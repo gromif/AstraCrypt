@@ -4,21 +4,14 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.NoteAdd
 import androidx.compose.material.icons.filled.Description
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import androidx.paging.LoadState
-import androidx.paging.compose.collectAsLazyPagingItems
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.view.composables.components.NoItemsPage
 import com.nevidimka655.astracrypt.view.models.UiState
 import com.nevidimka655.astracrypt.view.navigation.Route
 import com.nevidimka655.notes.Notes
 import com.nevidimka655.notes.ui.NotesListScreen
-import com.nevidimka655.notes.ui.NotesListViewModel
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
@@ -37,23 +30,18 @@ fun NavGraphBuilder.notesList(
     navigateToView: (id: Long) -> Unit
 ) = composable<Route.NotesGraph.List> {
     onUiStateChange(NotesListUiState)
-    val vm: NotesListViewModel = hiltViewModel()
-    val items = vm.notesPaging.collectAsLazyPagingItems()
-    val showEmptyPage by remember {
-        derivedStateOf {
-            items.itemCount == 0 && items.loadState.refresh !is LoadState.Loading
-        }
-    }
 
     LaunchedEffect(Unit) {
         onFabClick.collectLatest { navigateToCreate() }
     }
 
-    if (showEmptyPage) NoItemsPage(
-        mainIcon = Icons.Filled.Description,
-        actionIcon = Icons.AutoMirrored.Default.NoteAdd
-    ) else Notes.NotesListScreen(
-        noteItems = items,
+    Notes.NotesListScreen(
+        onEmptyList = {
+            NoItemsPage(
+                mainIcon = Icons.Filled.Description,
+                actionIcon = Icons.AutoMirrored.Default.NoteAdd
+            )
+        },
         onClick = navigateToView
     )
 }
