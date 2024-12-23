@@ -2,7 +2,7 @@ package com.nevidimka655.astracrypt.app.utils
 
 import android.content.Context
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.app.di.IoDispatcher
+import com.nevidimka655.astracrypt.core.di.IoDispatcher
 import com.nevidimka655.astracrypt.data.io.FilesService
 import com.nevidimka655.astracrypt.data.repository.RepositoryProviderImpl
 import com.nevidimka655.crypto.tink.data.KeysetManager

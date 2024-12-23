@@ -76,6 +76,8 @@ dependencies {
     implementation(projects.data.notes)
     implementation(projects.features.composeNotes)
 
+    implementation(projects.di.core)
+
     implementation(project(":ui:compose-calculator"))
     implementation(project(":ui:compose-color-schemes"))
     implementation(project(":ui:compose-details"))

@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.nevidimka655.astracrypt.R
-import com.nevidimka655.astracrypt.app.di.IoDispatcher
+import com.nevidimka655.astracrypt.core.di.IoDispatcher
 import com.nevidimka655.astracrypt.app.utils.FileSystemSetupManager
 import com.nevidimka655.astracrypt.data.database.StorageItemMinimalTuple
 import com.nevidimka655.astracrypt.data.datastore.AppearanceManager

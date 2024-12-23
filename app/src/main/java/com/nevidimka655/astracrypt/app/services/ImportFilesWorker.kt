@@ -29,7 +29,7 @@ import coil.request.ImageRequest
 import com.google.crypto.tink.StreamingAead
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.app.AppConfig
-import com.nevidimka655.astracrypt.app.di.IoDispatcher
+import com.nevidimka655.astracrypt.core.di.IoDispatcher
 import com.nevidimka655.astracrypt.app.utils.Api
 import com.nevidimka655.astracrypt.app.utils.MediaMetadataRetrieverCompat
 import com.nevidimka655.astracrypt.data.database.StorageItemType

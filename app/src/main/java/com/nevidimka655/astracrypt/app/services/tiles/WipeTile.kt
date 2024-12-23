@@ -2,7 +2,7 @@ package com.nevidimka655.astracrypt.app.services.tiles
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import com.nevidimka655.astracrypt.app.di.IoDispatcher
+import com.nevidimka655.astracrypt.core.di.IoDispatcher
 import com.nevidimka655.astracrypt.data.database.AppDatabase
 import com.nevidimka655.astracrypt.data.io.FilesService
 import com.nevidimka655.crypto.tink.data.KeysetManager

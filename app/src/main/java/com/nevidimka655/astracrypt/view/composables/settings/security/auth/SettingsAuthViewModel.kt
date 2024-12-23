@@ -2,7 +2,7 @@ package com.nevidimka655.astracrypt.view.composables.settings.security.auth
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nevidimka655.astracrypt.app.di.IoDispatcher
+import com.nevidimka655.astracrypt.core.di.IoDispatcher
 import com.nevidimka655.astracrypt.data.crypto.AeadManager
 import com.nevidimka655.astracrypt.app.utils.AppComponentService
 import com.nevidimka655.astracrypt.data.auth.AuthManager

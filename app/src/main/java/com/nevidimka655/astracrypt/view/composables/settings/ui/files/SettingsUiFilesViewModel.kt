@@ -2,7 +2,7 @@ package com.nevidimka655.astracrypt.view.composables.settings.ui.files
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nevidimka655.astracrypt.app.di.IoDispatcher
+import com.nevidimka655.astracrypt.core.di.IoDispatcher
 import com.nevidimka655.astracrypt.data.datastore.AppearanceManager
 import com.nevidimka655.astracrypt.view.models.ViewMode
 import dagger.hilt.android.lifecycle.HiltViewModel

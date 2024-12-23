@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.app.di
+package com.nevidimka655.astracrypt.core.di
 
 import dagger.Module
 import dagger.Provides

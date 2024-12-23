@@ -1,6 +1,6 @@
 package com.nevidimka655.astracrypt.app.services.utils
 
-import com.nevidimka655.astracrypt.app.di.IoDispatcher
+import com.nevidimka655.astracrypt.core.di.IoDispatcher
 import com.nevidimka655.astracrypt.data.io.FilesService
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
