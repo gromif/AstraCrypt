@@ -7,7 +7,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
@@ -72,8 +71,6 @@ fun NavGraphBuilder.overviewNote(
         onSaveRequestChannel = onSaveRequestChannel,
         onDeleteRequestChannel = onDeleteRequestChannel,
         onChangeName = { name = it },
-        onChangeText = { text = it },
-        nameFieldLabel = stringResource(id = R.string.note_title),
-        textFieldLabel = stringResource(id = R.string.text)
+        onChangeText = { text = it }
     )
 }
