@@ -37,6 +37,10 @@ gradlePlugin {
             id = "astracrypt.android.hilt"
             implementationClass = "AndroidHiltConventionPlugin"
         }
+        register("androidHiltCompose") {
+            id = "astracrypt.android.hilt.compose"
+            implementationClass = "AndroidHiltComposeConventionPlugin"
+        }
         register("androidRoom") {
             id = "astracrypt.android.room"
             implementationClass = "AndroidRoomConventionPlugin"

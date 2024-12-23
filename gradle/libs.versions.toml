@@ -128,5 +128,6 @@ astracrypt-android-library-compose = { id = "astracrypt.android.compose" }
 astracrypt-android-room = { id = "astracrypt.android.room" }
 astracrypt-android-paging = { id = "astracrypt.android.paging" }
 astracrypt-android-hilt = { id = "astracrypt.android.hilt" }
+astracrypt-android-hilt-compose = { id = "astracrypt.android.hilt.compose" }
 astracrypt-kotlin-coroutines = { id = "astracrypt.kotlin.coroutines" }
 astracrypt-kotlin-serialization = { id = "astracrypt.kotlin.serialization" }
