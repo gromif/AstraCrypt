@@ -16,7 +16,10 @@ import androidx.navigation.compose.composable
 import com.nevidimka655.astracrypt.R
 import com.nevidimka655.astracrypt.view.models.UiState
 import com.nevidimka655.astracrypt.view.navigation.Route
-import com.nevidimka655.tink_lab.ui.TinkLabKeyScreen
+import com.nevidimka655.tink_lab.domain.model.DataItem
+import com.nevidimka655.tink_lab.domain.model.DataType
+import com.nevidimka655.tink_lab.TinkLabKeyScreen
+import com.nevidimka655.tink_lab.TinkLabKeyViewModel
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 
 @Suppress("ObjectPropertyName")
@@ -33,7 +36,12 @@ fun NavGraphBuilder.tinkKey(
     val vm: TinkLabKeyViewModel = hiltViewModel()
 
     val context = LocalContext.current
-    val dataTypes = remember { vm.buildDataTypesList(context = context) }
+    val dataTypes = remember {
+        listOf(
+            DataItem(context.getString(R.string.files), DataType.Files),
+            DataItem(context.getString(R.string.text), DataType.Text)
+        )
+    }
     var selectedDataTypeIndex by rememberSaveable { mutableIntStateOf(0) }
     var keysetPassword by rememberSaveable { mutableStateOf("") }
     var aeadType by rememberSaveable { mutableStateOf("") }

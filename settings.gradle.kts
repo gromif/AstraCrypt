@@ -45,3 +45,6 @@ dependencyResolutionManagement {
 include(":domain:notes")
 include(":data:notes")
 include(":di:notes")
+include(":domain:tink-lab")
+include(":data:tink-lab")
+include(":di:tink-lab")
