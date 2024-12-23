@@ -76,7 +76,7 @@ import androidx.paging.compose.LazyPagingItems
 import coil.ImageLoader
 import coil.compose.AsyncImage
 import coil.compose.AsyncImagePainter
-import com.nevidimka655.astracrypt.R
+import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.astracrypt.data.model.CoilTinkModel
 import com.nevidimka655.astracrypt.view.models.NavigatorDirectory
 import com.nevidimka655.astracrypt.domain.model.db.StorageState

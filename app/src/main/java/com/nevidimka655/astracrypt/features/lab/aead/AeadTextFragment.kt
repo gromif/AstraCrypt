@@ -7,13 +7,13 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
-import com.nevidimka655.astracrypt.R
+import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.astracrypt.databinding.FragmentLabTextBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class AeadTextFragment : androidx.fragment.app.Fragment(R.layout.fragment_lab_text) {
+class AeadTextFragment : androidx.fragment.app.Fragment() {
     private val labManager: LabAeadManager get() = TODO()
     private var binding: FragmentLabTextBinding? = null
 

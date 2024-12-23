@@ -27,7 +27,7 @@ import androidx.work.WorkerParameters
 import coil.ImageLoader
 import coil.request.ImageRequest
 import com.google.crypto.tink.StreamingAead
-import com.nevidimka655.astracrypt.R
+import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.astracrypt.app.AppConfig
 import com.nevidimka655.astracrypt.core.di.IoDispatcher
 import com.nevidimka655.astracrypt.app.utils.Api

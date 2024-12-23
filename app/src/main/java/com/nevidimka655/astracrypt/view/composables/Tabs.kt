@@ -13,7 +13,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.nevidimka655.astracrypt.R
+import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.astracrypt.domain.model.profile.ProfileInfo
 import com.nevidimka655.astracrypt.view.MainVM
 import com.nevidimka655.astracrypt.view.composables.files.FilesScreen

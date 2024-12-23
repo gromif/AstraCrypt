@@ -1,6 +1,6 @@
 package com.nevidimka655.astracrypt.features.help
 
-import com.nevidimka655.astracrypt.R
+import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.compose_help.Help
 
 fun Help.settingsSecurityEncryption() = listOf(

@@ -12,7 +12,7 @@ import androidx.compose.material.icons.outlined.PhotoSizeSelectLarge
 import androidx.compose.material.icons.outlined.SdCard
 import androidx.lifecycle.ViewModel
 import coil.ImageLoader
-import com.nevidimka655.astracrypt.R
+import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.astracrypt.data.io.FilesService
 import com.nevidimka655.astracrypt.domain.model.db.StorageFlags
 import com.nevidimka655.astracrypt.data.database.StorageItemType

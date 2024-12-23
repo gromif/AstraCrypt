@@ -27,7 +27,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.nevidimka655.astracrypt.R
+import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.ui.compose_core.IconWithBorder
 import com.nevidimka655.ui.compose_core.sheets.SheetDefaults
 import com.nevidimka655.ui.compose_core.sheets.default

@@ -68,6 +68,7 @@ android {
 }
 
 dependencies {
+    implementation(projects.core.resources)
     implementation(project(":core:haptic"))
     implementation(project(":core:tiles-with-coroutines"))
 

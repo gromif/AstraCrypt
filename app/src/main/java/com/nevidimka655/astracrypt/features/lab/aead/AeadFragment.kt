@@ -10,7 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import com.google.android.material.textfield.TextInputLayout
-import com.nevidimka655.astracrypt.R
+import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.astracrypt.databinding.FragmentLabBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -18,7 +18,7 @@ import kotlinx.coroutines.withContext
 import kotlin.math.abs
 import kotlin.random.Random
 
-class AeadFragment : androidx.fragment.app.Fragment(R.layout.fragment_lab) {
+class AeadFragment : androidx.fragment.app.Fragment() {
     private val labManager: LabAeadManager get() = TODO()
     private var binding: FragmentLabBinding? = null
 

@@ -35,7 +35,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.nevidimka655.astracrypt.R
+import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.astracrypt.app.theme.icons.FileType
 import com.nevidimka655.astracrypt.app.theme.icons.Photo
 import com.nevidimka655.ui.compose_core.FilledTonalIconButton

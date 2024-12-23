@@ -5,7 +5,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import com.nevidimka655.astracrypt.R
+import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.astracrypt.app.theme.icons.Audio
 import com.nevidimka655.astracrypt.app.theme.icons.AudioAlt
 import com.nevidimka655.astracrypt.app.theme.icons.File

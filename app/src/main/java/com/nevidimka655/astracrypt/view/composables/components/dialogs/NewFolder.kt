@@ -3,7 +3,7 @@ package com.nevidimka655.astracrypt.view.composables.components.dialogs
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.res.stringResource
-import com.nevidimka655.astracrypt.R
+import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.astracrypt.app.AppConfig
 import com.nevidimka655.ui.compose_core.dialogs.DialogsCore
 import com.nevidimka655.ui.compose_core.dialogs.default

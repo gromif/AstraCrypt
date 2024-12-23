@@ -1,7 +1,7 @@
 package com.nevidimka655.astracrypt.view.models
 
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.nevidimka655.astracrypt.R
+import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.astracrypt.view.navigation.BottomBarItems
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 

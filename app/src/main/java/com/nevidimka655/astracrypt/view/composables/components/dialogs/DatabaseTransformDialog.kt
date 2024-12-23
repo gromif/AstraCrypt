@@ -7,10 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.nevidimka655.astracrypt.R
+import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.astracrypt.databinding.DialogTransformDbBinding
 
-class DatabaseTransformDialog : DialogFragment(R.layout.dialog_transform_db) {
+class DatabaseTransformDialog : DialogFragment() {
     private var binding: DialogTransformDbBinding? = null
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

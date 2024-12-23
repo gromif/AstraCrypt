@@ -24,7 +24,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import com.nevidimka655.astracrypt.BuildConfig
-import com.nevidimka655.astracrypt.R
+import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.astracrypt.app.utils.NetworkUtils
 import com.nevidimka655.ui.compose_core.OneLineListItem
 import com.nevidimka655.ui.compose_core.PreferencesGroup
