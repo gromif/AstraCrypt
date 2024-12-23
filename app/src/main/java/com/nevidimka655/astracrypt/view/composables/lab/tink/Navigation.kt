@@ -1,6 +1,5 @@
 package com.nevidimka655.astracrypt.view.composables.lab.tink
 
-import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.nevidimka655.astracrypt.resources.R
@@ -21,13 +20,5 @@ fun NavGraphBuilder.tinkKey(
 ) = composable<Route.LabGraph.TinkGraph.Key> {
     onUiStateChange(_LabTinkUiState)
 
-    TinkLabKeyScreen(
-        aeadTypeString = stringResource(id = R.string.encryption_type),
-        dataTypeString = stringResource(id = R.string.lab_dataType),
-        keysetKeyString = stringResource(id = R.string.lab_keySetPassword),
-        dataTypeFilesString = stringResource(id = R.string.files),
-        dataTypeTextString = stringResource(id = R.string.text),
-        buttonLoadString = stringResource(id = R.string.load),
-        buttonSaveString = stringResource(id = R.string.save)
-    )
+    TinkLabKeyScreen()
 }
