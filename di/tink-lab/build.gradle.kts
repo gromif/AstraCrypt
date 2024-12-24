@@ -9,5 +9,7 @@ android {
 
 dependencies {
     implementation(projects.domain.tinkLab)
+    implementation(projects.data.tinkLab)
+
     implementation(projects.core.tink)
 }
