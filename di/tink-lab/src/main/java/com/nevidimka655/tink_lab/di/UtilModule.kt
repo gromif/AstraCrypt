@@ -8,10 +8,10 @@ import com.nevidimka655.crypto.tink.core.encoders.HexService
 import com.nevidimka655.crypto.tink.core.hash.Sha256Service
 import com.nevidimka655.crypto.tink.data.serializers.SerializeKeysetByKeyService
 import com.nevidimka655.tink_lab.data.dto.KeyDto
-import com.nevidimka655.tink_lab.data.util.KeyFactory
+import com.nevidimka655.tink_lab.data.util.KeyGeneratorImpl
 import com.nevidimka655.tink_lab.data.util.KeyWriterImpl
-import com.nevidimka655.tink_lab.domain.model.DataType
 import com.nevidimka655.tink_lab.domain.model.Key
+import com.nevidimka655.tink_lab.domain.util.KeyGenerator
 import com.nevidimka655.tink_lab.domain.util.KeyWriter
 import dagger.Module
 import dagger.Provides
@@ -24,16 +24,14 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 object UtilModule {
 
     @Provides
-    fun provideKeyFactory(
+    fun provideKeyGenerator(
         serializeKeysetByKeyService: SerializeKeysetByKeyService,
         sha256Service: Sha256Service,
-        hexService: HexService,
-        dataTypeToIdMapper: Mapper<DataType, Int>
-    ): KeyFactory = KeyFactory(
+        hexService: HexService
+    ): KeyGenerator = KeyGeneratorImpl(
         serializeKeysetByKeyService = serializeKeysetByKeyService,
         sha256Service = sha256Service,
-        hexService = hexService,
-        dataTypeToIdMapper = dataTypeToIdMapper
+        hexService = hexService
     )
 
 

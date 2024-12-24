@@ -1,33 +1,29 @@
 package com.nevidimka655.tink_lab.data.repository
 
-import com.nevidimka655.astracrypt.utils.Mapper
 import com.nevidimka655.crypto.tink.domain.KeysetTemplates
-import com.nevidimka655.tink_lab.data.dto.KeyDto
-import com.nevidimka655.tink_lab.data.util.KeyFactory
 import com.nevidimka655.tink_lab.domain.model.DataType
 import com.nevidimka655.tink_lab.domain.model.Key
 import com.nevidimka655.tink_lab.domain.model.Repository
+import com.nevidimka655.tink_lab.domain.util.KeyGenerator
 import com.nevidimka655.tink_lab.domain.util.KeyWriter
 
 private val keysetAssociatedData = "labKey".toByteArray()
 
 class RepositoryImpl(
-    private val keyFactory: KeyFactory,
-    private val keyWriter: KeyWriter,
-    private val dtoToKeyMapper: Mapper<KeyDto, Key>
+    private val keyGenerator: KeyGenerator,
+    private val keyWriter: KeyWriter
 ) : Repository {
     override fun createKey(
         keysetPassword: String,
         dataType: DataType,
         aeadType: String
     ): Key {
-        val keyDto = keyFactory.create(
+        return keyGenerator(
             keysetPassword = keysetPassword,
             keysetAssociatedData = keysetAssociatedData,
             dataType = dataType,
             aeadType = aeadType
         )
-        return dtoToKeyMapper(keyDto)
     }
 
     override fun save(key: Key, uriString: String) {
