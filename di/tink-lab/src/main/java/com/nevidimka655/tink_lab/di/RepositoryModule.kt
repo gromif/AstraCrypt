@@ -1,15 +1,12 @@
 package com.nevidimka655.tink_lab.di
 
-import android.net.Uri
 import com.nevidimka655.astracrypt.utils.Mapper
 import com.nevidimka655.tink_lab.data.dto.KeyDto
-import com.nevidimka655.tink_lab.data.mapper.DtoToKeyMapper
-import com.nevidimka655.tink_lab.data.mapper.KeyToDtoMapper
 import com.nevidimka655.tink_lab.data.repository.RepositoryImpl
 import com.nevidimka655.tink_lab.data.util.KeyFactory
-import com.nevidimka655.tink_lab.data.util.KeyWriter
 import com.nevidimka655.tink_lab.domain.model.Key
 import com.nevidimka655.tink_lab.domain.model.Repository
+import com.nevidimka655.tink_lab.domain.util.KeyWriter
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,15 +20,11 @@ object RepositoryModule {
     fun provideRepository(
         keyFactory: KeyFactory,
         keyWriter: KeyWriter,
-        keyToDtoMapper: Mapper<Key, KeyDto>,
-        dtoToKeyMapper: Mapper<KeyDto, Key>,
-        stringToUriMapper: Mapper<String, Uri>
+        dtoToKeyMapper: Mapper<KeyDto, Key>
     ): Repository = RepositoryImpl(
         keyFactory = keyFactory,
         keyWriter = keyWriter,
-        keyToDtoMapper = keyToDtoMapper,
-        dtoToKeyMapper = dtoToKeyMapper,
-        stringToUriMapper = stringToUriMapper
+        dtoToKeyMapper = dtoToKeyMapper
     )
 
 }

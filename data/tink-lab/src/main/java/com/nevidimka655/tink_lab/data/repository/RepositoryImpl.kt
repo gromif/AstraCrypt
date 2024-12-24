@@ -1,23 +1,20 @@
 package com.nevidimka655.tink_lab.data.repository
 
-import android.net.Uri
 import com.nevidimka655.astracrypt.utils.Mapper
 import com.nevidimka655.crypto.tink.domain.KeysetTemplates
 import com.nevidimka655.tink_lab.data.dto.KeyDto
 import com.nevidimka655.tink_lab.data.util.KeyFactory
-import com.nevidimka655.tink_lab.data.util.KeyWriter
 import com.nevidimka655.tink_lab.domain.model.DataType
 import com.nevidimka655.tink_lab.domain.model.Key
 import com.nevidimka655.tink_lab.domain.model.Repository
+import com.nevidimka655.tink_lab.domain.util.KeyWriter
 
 private val keysetAssociatedData = "labKey".toByteArray()
 
 class RepositoryImpl(
     private val keyFactory: KeyFactory,
     private val keyWriter: KeyWriter,
-    private val keyToDtoMapper: Mapper<Key, KeyDto>,
-    private val dtoToKeyMapper: Mapper<KeyDto, Key>,
-    private val stringToUriMapper: Mapper<String, Uri>
+    private val dtoToKeyMapper: Mapper<KeyDto, Key>
 ) : Repository {
     override fun createKey(
         keysetPassword: String,
@@ -34,10 +31,9 @@ class RepositoryImpl(
     }
 
     override fun save(key: Key, uriString: String) {
-        val uri = stringToUriMapper(uriString)
         keyWriter(
-            uri = uri,
-            keyDto = keyToDtoMapper(key)
+            uriString = uriString,
+            key = key
         )
     }
 
