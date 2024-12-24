@@ -1,9 +1,11 @@
 package com.nevidimka655.tink_lab.di
 
-import com.nevidimka655.crypto.tink.core.encoders.HexService
-import com.nevidimka655.crypto.tink.core.hash.Sha256Service
-import com.nevidimka655.crypto.tink.data.serializers.SerializeKeysetByKeyService
+import com.nevidimka655.astracrypt.utils.Mapper
+import com.nevidimka655.tink_lab.data.dto.KeyDto
+import com.nevidimka655.tink_lab.data.mapper.DtoToKeyMapper
 import com.nevidimka655.tink_lab.data.repository.RepositoryImpl
+import com.nevidimka655.tink_lab.data.util.KeyFactory
+import com.nevidimka655.tink_lab.domain.model.Key
 import com.nevidimka655.tink_lab.domain.model.Repository
 import dagger.Module
 import dagger.Provides
@@ -16,13 +18,11 @@ object RepositoryModule {
 
     @Provides
     fun provideRepository(
-        serializeKeysetByKeyService: SerializeKeysetByKeyService,
-        sha256Service: Sha256Service,
-        hexService: HexService
+        keyFactory: KeyFactory,
+        dtoToKeyMapper: Mapper<KeyDto, Key>
     ): Repository = RepositoryImpl(
-        serializeKeysetByKeyService = serializeKeysetByKeyService,
-        sha256Service = sha256Service,
-        hexService = hexService
+        keyFactory = keyFactory,
+        dtoToKeyMapper = dtoToKeyMapper
     )
 
 }
