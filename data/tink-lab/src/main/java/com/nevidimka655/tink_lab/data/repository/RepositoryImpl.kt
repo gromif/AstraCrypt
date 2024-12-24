@@ -8,7 +8,7 @@ import com.nevidimka655.crypto.tink.data.serializers.SerializeKeysetByKeyService
 import com.nevidimka655.crypto.tink.domain.KeysetTemplates
 import com.nevidimka655.tink_lab.domain.model.DataType
 import com.nevidimka655.tink_lab.domain.model.Repository
-import com.nevidimka655.tink_lab.domain.model.TinkLabKey
+import com.nevidimka655.tink_lab.domain.model.Key
 
 private val keysetAssociatedData = "labKey".toByteArray()
 
@@ -21,7 +21,7 @@ class RepositoryImpl(
         keysetPassword: String,
         dataType: DataType,
         aeadType: String
-    ): TinkLabKey {
+    ): Key {
         val template = KeyTemplates.get(
             if (dataType == DataType.Files) "${aeadType}_1MB" else aeadType
         )
@@ -35,7 +35,7 @@ class RepositoryImpl(
             value = serializedEncryptedKeyset.toByteArray()
         )
         val keysetHash = hexService.encode(bytes = keysetHashArray)
-        return TinkLabKey(
+        return Key(
             dataType = dataType,
             encryptedKeyset = serializedEncryptedKeyset,
             aeadType = aeadType,

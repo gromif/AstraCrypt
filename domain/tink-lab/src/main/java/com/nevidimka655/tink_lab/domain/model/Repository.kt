@@ -6,7 +6,7 @@ interface Repository {
         keysetPassword: String,
         dataType: DataType,
         aeadType: String
-    ) : TinkLabKey
+    ) : Key
 
     fun getFileAeadList() : List<String>
 

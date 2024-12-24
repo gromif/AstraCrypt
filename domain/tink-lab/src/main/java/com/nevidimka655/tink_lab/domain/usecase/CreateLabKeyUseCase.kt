@@ -2,7 +2,7 @@ package com.nevidimka655.tink_lab.domain.usecase
 
 import com.nevidimka655.tink_lab.domain.model.DataType
 import com.nevidimka655.tink_lab.domain.model.Repository
-import com.nevidimka655.tink_lab.domain.model.TinkLabKey
+import com.nevidimka655.tink_lab.domain.model.Key
 
 
 class CreateLabKeyUseCase(
@@ -13,7 +13,7 @@ class CreateLabKeyUseCase(
         keysetPassword: String,
         dataType: DataType,
         aeadType: String
-    ): TinkLabKey {
+    ): Key {
         return repository.createKey(
             keysetPassword = keysetPassword,
             dataType = dataType,
