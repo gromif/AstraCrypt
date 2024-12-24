@@ -6,7 +6,3 @@ plugins {
 android {
     namespace = "com.nevidimka655.tink_lab.domain"
 }
-
-dependencies {
-    implementation(projects.core.tink)
-}
