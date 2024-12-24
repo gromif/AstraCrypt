@@ -11,5 +11,6 @@ dependencies {
     implementation(projects.domain.tinkLab)
     implementation(projects.data.tinkLab)
 
+    implementation(projects.core.utils)
     implementation(projects.core.tink)
 }

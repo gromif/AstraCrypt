@@ -13,5 +13,6 @@ android {
 dependencies {
     implementation(projects.domain.tinkLab)
 
+    implementation(projects.core.utils)
     implementation(projects.core.tink)
 }
