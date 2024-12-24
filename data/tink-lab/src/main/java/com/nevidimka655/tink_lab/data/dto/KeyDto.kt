@@ -1,6 +1,5 @@
 package com.nevidimka655.tink_lab.data.dto
 
-import com.nevidimka655.tink_lab.domain.model.DataType
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -8,15 +7,15 @@ import kotlinx.serialization.Serializable
 data class KeyDto(
 
     @SerialName("a")
-    val dataType: DataType = DataType.Files,
+    val dataTypeId: Int,
 
     @SerialName("b")
-    val aeadType: String = "",
+    val aeadType: String,
 
     @SerialName("c")
-    val encryptedKeyset: String? = null,
+    val encryptedKeyset: String?,
 
     @SerialName("d")
-    val hash: String = ""
+    val hash: String
 
 )
