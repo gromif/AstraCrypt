@@ -34,6 +34,14 @@ class RepositoryImpl(
         return dtoToKeyMapper(keyDto)
     }
 
+    override fun save(key: Key, uriString: String) {
+        val uri = stringToUriMapper(uriString)
+        keyWriter(
+            uri = uri,
+            keyDto = keyToDtoMapper(key)
+        )
+    }
+
     override fun getFileAeadList(): List<String> {
         return KeysetTemplates.Stream.entries
             .filter { it.name.endsWith("MB") }
