@@ -4,6 +4,7 @@ import android.net.Uri
 import com.nevidimka655.astracrypt.utils.Mapper
 import com.nevidimka655.tink_lab.data.dto.KeyDto
 import com.nevidimka655.tink_lab.data.mapper.DtoToKeyMapper
+import com.nevidimka655.tink_lab.data.mapper.KeyToDtoMapper
 import com.nevidimka655.tink_lab.data.repository.RepositoryImpl
 import com.nevidimka655.tink_lab.data.util.KeyFactory
 import com.nevidimka655.tink_lab.data.util.KeyWriter
@@ -22,11 +23,13 @@ object RepositoryModule {
     fun provideRepository(
         keyFactory: KeyFactory,
         keyWriter: KeyWriter,
+        keyToDtoMapper: Mapper<Key, KeyDto>,
         dtoToKeyMapper: Mapper<KeyDto, Key>,
         stringToUriMapper: Mapper<String, Uri>
     ): Repository = RepositoryImpl(
         keyFactory = keyFactory,
         keyWriter = keyWriter,
+        keyToDtoMapper = keyToDtoMapper,
         dtoToKeyMapper = dtoToKeyMapper,
         stringToUriMapper = stringToUriMapper
     )
