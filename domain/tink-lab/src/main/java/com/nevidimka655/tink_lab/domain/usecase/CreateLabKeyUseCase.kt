@@ -1,8 +1,8 @@
 package com.nevidimka655.tink_lab.domain.usecase
 
 import com.nevidimka655.tink_lab.domain.model.DataType
-import com.nevidimka655.tink_lab.domain.model.Repository
 import com.nevidimka655.tink_lab.domain.model.Key
+import com.nevidimka655.tink_lab.domain.model.Repository
 
 
 class CreateLabKeyUseCase(
