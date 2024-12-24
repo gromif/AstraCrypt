@@ -1,4 +1,4 @@
-package com.nevidimka655.domain.notes.model
+package com.nevidimka655.astracrypt.utils
 
 interface Mapper<T, R> {
 
