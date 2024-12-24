@@ -1,5 +1,8 @@
 package com.nevidimka655.tink_lab.di
 
+import com.nevidimka655.crypto.tink.core.encoders.HexService
+import com.nevidimka655.crypto.tink.core.hash.Sha256Service
+import com.nevidimka655.crypto.tink.data.serializers.SerializeKeysetByKeyService
 import com.nevidimka655.tink_lab.data.repository.RepositoryImpl
 import com.nevidimka655.tink_lab.domain.model.Repository
 import dagger.Module
@@ -12,6 +15,14 @@ import dagger.hilt.android.components.ViewModelComponent
 object RepositoryModule {
 
     @Provides
-    fun provideRepository(): Repository = RepositoryImpl()
+    fun provideRepository(
+        serializeKeysetByKeyService: SerializeKeysetByKeyService,
+        sha256Service: Sha256Service,
+        hexService: HexService
+    ): Repository = RepositoryImpl(
+        serializeKeysetByKeyService = serializeKeysetByKeyService,
+        sha256Service = sha256Service,
+        hexService = hexService
+    )
 
 }
