@@ -1,15 +1,20 @@
 package com.nevidimka655.tink_lab.di
 
+import android.content.Context
 import com.nevidimka655.astracrypt.utils.Mapper
+import com.nevidimka655.astracrypt.utils.Serializer
 import com.nevidimka655.crypto.tink.core.encoders.HexService
 import com.nevidimka655.crypto.tink.core.hash.Sha256Service
 import com.nevidimka655.crypto.tink.data.serializers.SerializeKeysetByKeyService
+import com.nevidimka655.tink_lab.data.dto.KeyDto
 import com.nevidimka655.tink_lab.data.util.KeyFactory
+import com.nevidimka655.tink_lab.data.util.KeyWriter
 import com.nevidimka655.tink_lab.domain.model.DataType
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
 
 @Module
 @InstallIn(ViewModelComponent::class)
@@ -26,6 +31,17 @@ object UtilModule {
         sha256Service = sha256Service,
         hexService = hexService,
         dataTypeToIdMapper = dataTypeToIdMapper
+    )
+
+
+    @Provides
+    fun provideKeyWriter(
+        @ApplicationContext
+        context: Context,
+        keySerializer: Serializer<KeyDto, String>
+    ): KeyWriter = KeyWriter(
+        contentResolver = context.contentResolver,
+        keySerializer = keySerializer
     )
 
 }
