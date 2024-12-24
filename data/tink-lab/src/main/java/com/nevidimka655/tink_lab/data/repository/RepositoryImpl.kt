@@ -15,7 +15,8 @@ private val keysetAssociatedData = "labKey".toByteArray()
 class RepositoryImpl(
     private val keyFactory: KeyFactory,
     private val keyWriter: KeyWriter,
-    private val dtoToKeyMapper: Mapper<KeyDto, Key>
+    private val dtoToKeyMapper: Mapper<KeyDto, Key>,
+    private val stringToUriMapper: Mapper<String, Uri>
 ) : Repository {
     override fun createKey(
         keysetPassword: String,
