@@ -11,3 +11,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 }
+
+dependencies {
+    implementation(projects.core.utils)
+}
