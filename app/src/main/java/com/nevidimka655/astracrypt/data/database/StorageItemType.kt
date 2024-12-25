@@ -5,17 +5,17 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import com.nevidimka655.atracrypt.core.design_system.icons.Audio
+import com.nevidimka655.atracrypt.core.design_system.icons.AudioAlt
+import com.nevidimka655.atracrypt.core.design_system.icons.File
+import com.nevidimka655.atracrypt.core.design_system.icons.FileAlt
+import com.nevidimka655.atracrypt.core.design_system.icons.FileType
+import com.nevidimka655.atracrypt.core.design_system.icons.Folder
+import com.nevidimka655.atracrypt.core.design_system.icons.Photo
+import com.nevidimka655.atracrypt.core.design_system.icons.PhotoAlt
+import com.nevidimka655.atracrypt.core.design_system.icons.Video
+import com.nevidimka655.atracrypt.core.design_system.icons.VideoAlt
 import com.nevidimka655.astracrypt.resources.R
-import com.nevidimka655.astracrypt.app.theme.icons.Audio
-import com.nevidimka655.astracrypt.app.theme.icons.AudioAlt
-import com.nevidimka655.astracrypt.app.theme.icons.File
-import com.nevidimka655.astracrypt.app.theme.icons.FileAlt
-import com.nevidimka655.astracrypt.app.theme.icons.FileType
-import com.nevidimka655.astracrypt.app.theme.icons.Folder
-import com.nevidimka655.astracrypt.app.theme.icons.Photo
-import com.nevidimka655.astracrypt.app.theme.icons.PhotoAlt
-import com.nevidimka655.astracrypt.app.theme.icons.Video
-import com.nevidimka655.astracrypt.app.theme.icons.VideoAlt
 
 enum class StorageItemType(@StringRes val title: Int) {
     Folder(title = R.string.folder),

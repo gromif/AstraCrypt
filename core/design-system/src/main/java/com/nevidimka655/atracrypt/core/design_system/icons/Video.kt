@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.app.theme.icons
+package com.nevidimka655.atracrypt.core.design_system.icons
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -15,9 +15,9 @@ import androidx.compose.ui.graphics.vector.path
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastForEach
-import com.nevidimka655.astracrypt.app.theme.darkScheme
-import com.nevidimka655.astracrypt.app.theme.extendedColorScheme
-import com.nevidimka655.astracrypt.app.theme.lightScheme
+import com.nevidimka655.atracrypt.core.design_system.darkScheme
+import com.nevidimka655.atracrypt.core.design_system.extendedColorScheme
+import com.nevidimka655.atracrypt.core.design_system.lightScheme
 
 val _FileType.Video @Composable get() = default()
 val _FileType.VideoAlt @Composable get() = alt()

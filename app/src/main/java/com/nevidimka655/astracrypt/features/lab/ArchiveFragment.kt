@@ -49,7 +49,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.nevidimka655.astracrypt.resources.R
-import com.nevidimka655.astracrypt.app.theme.AstraCryptTheme
+import com.nevidimka655.atracrypt.core.design_system.AstraCryptTheme
 import com.nevidimka655.astracrypt.features.help.HelpFragment
 import com.nevidimka655.astracrypt.features.help.HelpIndex
 import com.nevidimka655.astracrypt.view.composables.components.BaseNoItemsPage

@@ -68,6 +68,8 @@ android {
 }
 
 dependencies {
+    implementation(projects.core.designSystem)
+    implementation(projects.core.utils)
     implementation(projects.core.resources)
     implementation(project(":core:haptic"))
     implementation(project(":core:tiles-with-coroutines"))
@@ -109,7 +111,6 @@ dependencies {
     implementation(libs.lifecycle.viewmodel.ktx)
     implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.lifecycle.viewmodel.compose)
-    implementation(libs.lifecycle.runtime.compose)
 
     // Media
     implementation(libs.media.coil.compose)

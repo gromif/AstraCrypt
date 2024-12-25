@@ -1,5 +1,6 @@
 import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.dsl.LibraryExtension
+import com.nevidimka655.buildlogic.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
@@ -19,6 +20,7 @@ class AndroidApplicationComposeConventionPlugin: Plugin<Project> {
 
             dependencies {
                 add("implementation", project(":ui:compose-core"))
+                "implementation"(libs.findLibrary("lifecycle.runtime.compose").get())
             }
         }
     }

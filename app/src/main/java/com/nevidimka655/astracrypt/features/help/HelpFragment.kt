@@ -3,14 +3,10 @@ package com.nevidimka655.astracrypt.features.help
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.navArgs
-import com.nevidimka655.astracrypt.app.theme.AstraCryptTheme
-import com.nevidimka655.compose_help.Help
-import com.nevidimka655.compose_help.HelpScreen
+import com.nevidimka655.atracrypt.core.design_system.AstraCryptTheme
 
 class HelpFragment : Fragment() {
 

@@ -28,7 +28,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
-import com.nevidimka655.astracrypt.app.theme.AstraCryptTheme
+import com.nevidimka655.atracrypt.core.design_system.AstraCryptTheme
+import com.nevidimka655.astracrypt.app.utils.Api
 import com.nevidimka655.astracrypt.view.composables.components.BottomBarImpl
 import com.nevidimka655.astracrypt.view.composables.components.FloatingActionButtonImpl
 import com.nevidimka655.astracrypt.view.composables.components.appbar.SearchBarImpl
@@ -48,7 +49,10 @@ fun AstraCryptApp(
     modifier: Modifier = Modifier,
     vm: MainVM = viewModel<MainVM>(),
     navController: NavHostController = rememberNavController()
-) = AstraCryptTheme(dynamicThemeFlow = vm.appearanceManager.dynamicThemeFlow) {
+) = AstraCryptTheme(
+    isDynamicThemeSupported = Api.atLeast12(),
+    dynamicThemeFlow = vm.appearanceManager.dynamicThemeFlow
+) {
     var uiState by vm.uiState
     val (toolbar, fab, bottomBarTab, searchBar) = uiState
     var searchBarExpanded by rememberSaveable { mutableStateOf(false) }

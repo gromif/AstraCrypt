@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.app.theme
+package com.nevidimka655.atracrypt.core.design_system
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
@@ -25,7 +25,7 @@ data class ExtendedColorScheme(
     val tela: ColorFamily,
 )
 
-val extendedLight = ExtendedColorScheme(
+internal val extendedLight = ExtendedColorScheme(
     blue = ColorFamily(
         blueLight,
         onBlueLight,
@@ -70,7 +70,7 @@ val extendedLight = ExtendedColorScheme(
     ),
 )
 
-val extendedDark = ExtendedColorScheme(
+internal val extendedDark = ExtendedColorScheme(
     blue = ColorFamily(
         blueDark,
         onBlueDark,
@@ -115,7 +115,7 @@ val extendedDark = ExtendedColorScheme(
     ),
 )
 
-val extendedLightMediumContrast = ExtendedColorScheme(
+internal val extendedLightMediumContrast = ExtendedColorScheme(
     blue = ColorFamily(
         blueLightMediumContrast,
         onBlueLightMediumContrast,
@@ -160,7 +160,7 @@ val extendedLightMediumContrast = ExtendedColorScheme(
     ),
 )
 
-val extendedLightHighContrast = ExtendedColorScheme(
+internal val extendedLightHighContrast = ExtendedColorScheme(
     blue = ColorFamily(
         blueLightHighContrast,
         onBlueLightHighContrast,
@@ -205,7 +205,7 @@ val extendedLightHighContrast = ExtendedColorScheme(
     ),
 )
 
-val extendedDarkMediumContrast = ExtendedColorScheme(
+internal val extendedDarkMediumContrast = ExtendedColorScheme(
     blue = ColorFamily(
         blueDarkMediumContrast,
         onBlueDarkMediumContrast,
@@ -250,7 +250,7 @@ val extendedDarkMediumContrast = ExtendedColorScheme(
     ),
 )
 
-val extendedDarkHighContrast = ExtendedColorScheme(
+internal val extendedDarkHighContrast = ExtendedColorScheme(
     blue = ColorFamily(
         blueDarkHighContrast,
         onBlueDarkHighContrast,
@@ -303,6 +303,6 @@ data class ColorFamily(
     val onColorContainer: Color
 )
 
-val unspecified_scheme = ColorFamily(
+internal val unspecified_scheme = ColorFamily(
     Color.Unspecified, Color.Unspecified, Color.Unspecified, Color.Unspecified
 )
