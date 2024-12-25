@@ -4,11 +4,7 @@ import com.nevidimka655.tink_lab.domain.util.KeyReader
 
 interface Repository {
 
-    fun createKey(
-        keysetPassword: String,
-        dataType: DataType,
-        aeadType: String
-    ) : Key
+    fun createKey(dataType: DataType, aeadType: String) : Key
 
     fun save(key: Key, uriString: String, keysetPassword: String)
 

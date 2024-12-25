@@ -9,12 +9,10 @@ class CreateLabKeyUseCase(
 ) {
 
     operator fun invoke(
-        keysetPassword: String,
         dataType: DataType,
         aeadType: String
     ): Key {
         return repository.createKey(
-            keysetPassword = keysetPassword,
             dataType = dataType,
             aeadType = aeadType
         )

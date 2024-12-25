@@ -5,11 +5,6 @@ import com.nevidimka655.tink_lab.domain.model.Key
 
 interface KeyGenerator {
 
-    operator fun invoke(
-        keysetPassword: String,
-        keysetAssociatedData: ByteArray,
-        dataType: DataType,
-        aeadType: String
-    ): Key
+    operator fun invoke(dataType: DataType, aeadType: String): Key
 
 }

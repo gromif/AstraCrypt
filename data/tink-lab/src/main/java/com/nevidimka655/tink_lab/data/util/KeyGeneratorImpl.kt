@@ -16,12 +16,7 @@ class KeyGeneratorImpl(
     private val hexUtil: HexUtil
 ): KeyGenerator {
 
-    override fun invoke(
-        keysetPassword: String,
-        keysetAssociatedData: ByteArray,
-        dataType: DataType,
-        aeadType: String
-    ): Key {
+    override fun invoke(dataType: DataType, aeadType: String): Key {
         val template = KeyTemplates.get(
             if (dataType == DataType.Files) "${aeadType}_1MB" else aeadType
         )

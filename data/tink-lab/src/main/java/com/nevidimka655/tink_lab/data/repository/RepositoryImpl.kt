@@ -15,17 +15,8 @@ class RepositoryImpl(
     private val keyWriter: KeyWriter,
     private val keyReader: KeyReader
 ) : Repository {
-    override fun createKey(
-        keysetPassword: String,
-        dataType: DataType,
-        aeadType: String
-    ): Key {
-        return keyGenerator(
-            keysetPassword = keysetPassword,
-            keysetAssociatedData = keysetAssociatedData,
-            dataType = dataType,
-            aeadType = aeadType
-        )
+    override fun createKey(dataType: DataType, aeadType: String): Key {
+        return keyGenerator(dataType = dataType, aeadType = aeadType)
     }
 
     override fun save(key: Key, uriString: String, keysetPassword: String) {
