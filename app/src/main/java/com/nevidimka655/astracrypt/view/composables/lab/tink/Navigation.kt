@@ -39,7 +39,7 @@ fun NavGraphBuilder.tinkKey(
 
     TinkLabKeyScreen(
         onRequestKeysetChannel = onRequestKeysetChannel.receiveAsFlow(),
-        onFinish = {
+        navigateToTextMode = {
 
         }
     )
