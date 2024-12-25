@@ -11,9 +11,7 @@ import com.nevidimka655.tink_lab.domain.model.Key
 import com.nevidimka655.tink_lab.domain.util.KeyGenerator
 
 class KeyGeneratorImpl(
-    private val keysetSerializer: KeysetSerializer,
-    private val sha256Util: Sha256Util,
-    private val hexUtil: HexUtil
+    private val keysetSerializer: KeysetSerializer
 ): KeyGenerator {
 
     override fun invoke(dataType: DataType, aeadType: String): Key {
@@ -22,15 +20,10 @@ class KeyGeneratorImpl(
         )
         val keysetHandle = KeysetHandle.generateNew(template)
         val serializedEncryptedKeyset = keysetSerializer(keysetHandle)
-        val keysetHashArray = sha256Util.compute(
-            value = serializedEncryptedKeyset.toByteArray()
-        )
-        val keysetHash = hexUtil.encode(bytes = keysetHashArray)
         return Key(
             dataType = dataType,
             rawKeyset = serializedEncryptedKeyset,
-            aeadType = aeadType,
-            hash = keysetHash
+            aeadType = aeadType
         )
     }
 

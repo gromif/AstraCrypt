@@ -31,15 +31,8 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 object UtilModule {
 
     @Provides
-    fun provideKeyGenerator(
-        keysetSerializer: KeysetSerializer,
-        sha256Util: Sha256Util,
-        hexUtil: HexUtil
-    ): KeyGenerator = KeyGeneratorImpl(
-        keysetSerializer = keysetSerializer,
-        sha256Util = sha256Util,
-        hexUtil = hexUtil
-    )
+    fun provideKeyGenerator(keysetSerializer: KeysetSerializer): KeyGenerator =
+        KeyGeneratorImpl(keysetSerializer = keysetSerializer)
 
     @Provides
     fun provideKeyWriter(
