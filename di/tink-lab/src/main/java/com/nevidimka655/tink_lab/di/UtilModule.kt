@@ -7,11 +7,13 @@ import com.nevidimka655.astracrypt.utils.Parser
 import com.nevidimka655.astracrypt.utils.Serializer
 import com.nevidimka655.crypto.tink.core.encoders.HexUtil
 import com.nevidimka655.crypto.tink.core.hash.Sha256Util
+import com.nevidimka655.crypto.tink.core.parsers.KeysetParser
 import com.nevidimka655.crypto.tink.core.parsers.KeysetParserWithKey
 import com.nevidimka655.crypto.tink.core.serializers.KeysetSerializer
 import com.nevidimka655.crypto.tink.core.serializers.KeysetSerializerWithKey
 import com.nevidimka655.tink_lab.data.dto.KeyDto
 import com.nevidimka655.tink_lab.data.util.KeyGeneratorImpl
+import com.nevidimka655.tink_lab.data.util.KeyParser
 import com.nevidimka655.tink_lab.data.util.KeyReaderImpl
 import com.nevidimka655.tink_lab.data.util.KeyWriterImpl
 import com.nevidimka655.tink_lab.domain.model.Key
@@ -43,11 +45,15 @@ object UtilModule {
     fun provideKeyWriter(
         @ApplicationContext
         context: Context,
+        keysetParser: KeysetParser,
+        keysetSerializerWithKey: KeysetSerializerWithKey,
         keyToDtoMapper: Mapper<Key, KeyDto>,
         stringToUriMapper: Mapper<String, Uri>,
         keySerializer: Serializer<KeyDto, String>
     ): KeyWriter = KeyWriterImpl(
         contentResolver = context.contentResolver,
+        keysetParser = keysetParser,
+        keysetSerializerWithKey = keysetSerializerWithKey,
         stringToUriMapper = stringToUriMapper,
         keyToDtoMapper = keyToDtoMapper,
         keySerializer = keySerializer

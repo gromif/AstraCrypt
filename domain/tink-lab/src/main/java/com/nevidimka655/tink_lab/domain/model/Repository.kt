@@ -10,7 +10,7 @@ interface Repository {
         aeadType: String
     ) : Key
 
-    fun save(key: Key, uriString: String)
+    fun save(key: Key, uriString: String, keysetPassword: String)
 
     fun load(uriString: String, keysetPassword: String): KeyReader.Result
 

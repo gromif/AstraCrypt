@@ -28,10 +28,12 @@ class RepositoryImpl(
         )
     }
 
-    override fun save(key: Key, uriString: String) {
+    override fun save(key: Key, uriString: String, keysetPassword: String) {
         keyWriter(
             uriString = uriString,
-            key = key
+            key = key,
+            keysetPassword = keysetPassword,
+            keysetAssociatedData = keysetAssociatedData
         )
     }
 
