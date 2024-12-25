@@ -13,7 +13,7 @@ data class KeyDto(
     val aeadType: String,
 
     @SerialName("c")
-    val encryptedKeyset: String?,
+    val encryptedKeyset: String,
 
     @SerialName("d")
     val hash: String
