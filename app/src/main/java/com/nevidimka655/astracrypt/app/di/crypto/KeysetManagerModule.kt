@@ -10,8 +10,8 @@ import com.nevidimka655.crypto.tink.core.encoders.HexService
 import com.nevidimka655.crypto.tink.core.hash.Sha256Service
 import com.nevidimka655.crypto.tink.core.hash.Sha384Service
 import com.nevidimka655.crypto.tink.data.KeysetManager
-import com.nevidimka655.crypto.tink.data.parsers.ParseKeysetByAeadService
-import com.nevidimka655.crypto.tink.data.serializers.SerializeKeysetByAeadService
+import com.nevidimka655.crypto.tink.core.parsers.KeysetParserWithAead
+import com.nevidimka655.crypto.tink.core.serializers.KeysetSerializerWithAead
 import com.nevidimka655.crypto.tink.domain.AssociatedDataConfig
 import dagger.Module
 import dagger.Provides
@@ -43,14 +43,14 @@ object KeysetManagerModule {
     @Provides
     fun provideKeysetFactory(
         keysetDataStoreManager: KeysetDataStoreManager,
-        serializeKeysetByAeadService: SerializeKeysetByAeadService,
-        parseKeysetByAeadService: ParseKeysetByAeadService,
+        keysetSerializerWithAead: KeysetSerializerWithAead,
+        keysetParserWithAead: KeysetParserWithAead,
         prefsKeyNameUseCase: PrefsKeyNameUseCase,
         masterKeyNameUseCase: MasterKeyNameUseCase
     ) = KeysetFactoryImpl(
         keysetDataStoreManager = keysetDataStoreManager,
-        serializeKeysetByAeadService = serializeKeysetByAeadService,
-        parseKeysetByAeadService = parseKeysetByAeadService,
+        keysetSerializerWithAead = keysetSerializerWithAead,
+        keysetParserWithAead = keysetParserWithAead,
         prefsKeyNameUseCase = prefsKeyNameUseCase,
         masterKeyNameUseCase = masterKeyNameUseCase
     )

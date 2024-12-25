@@ -2,8 +2,8 @@ package com.nevidimka655.astracrypt.app.di.crypto.tink
 
 import com.nevidimka655.crypto.tink.core.encoders.HexService
 import com.nevidimka655.crypto.tink.data.keyset.KeysetAeadFactory
-import com.nevidimka655.crypto.tink.data.parsers.ParseKeysetByAeadService
-import com.nevidimka655.crypto.tink.data.parsers.ParseKeysetByKeyService
+import com.nevidimka655.crypto.tink.core.parsers.KeysetParserWithAead
+import com.nevidimka655.crypto.tink.core.parsers.KeysetParserWithKey
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,15 +18,15 @@ object ParseKeysetModule {
     @Provides
     fun provideParseKeysetByAead(
         hexService: HexService
-    ) = ParseKeysetByAeadService(hexService = hexService)
+    ) = KeysetParserWithAead(hexService = hexService)
 
     @Singleton
     @Provides
     fun provideParseKeysetByKey(
-        parseKeysetByAeadService: ParseKeysetByAeadService,
+        keysetParserWithAead: KeysetParserWithAead,
         keysetAeadFactory: KeysetAeadFactory
-    ) = ParseKeysetByKeyService(
-        parseKeysetByAeadService = parseKeysetByAeadService,
+    ) = KeysetParserWithKey(
+        keysetParserWithAead = keysetParserWithAead,
         keysetAeadFactory = keysetAeadFactory
     )
 }

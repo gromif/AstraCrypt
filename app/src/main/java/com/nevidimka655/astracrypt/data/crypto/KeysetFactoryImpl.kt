@@ -6,14 +6,14 @@ import com.google.crypto.tink.integration.android.AndroidKeystore
 import com.nevidimka655.astracrypt.data.datastore.KeysetDataStoreManager
 import com.nevidimka655.astracrypt.domain.usecase.crypto.MasterKeyNameUseCase
 import com.nevidimka655.astracrypt.domain.usecase.crypto.PrefsKeyNameUseCase
-import com.nevidimka655.crypto.tink.data.parsers.ParseKeysetByAeadService
-import com.nevidimka655.crypto.tink.data.serializers.SerializeKeysetByAeadService
+import com.nevidimka655.crypto.tink.core.parsers.KeysetParserWithAead
+import com.nevidimka655.crypto.tink.core.serializers.KeysetSerializerWithAead
 import com.nevidimka655.crypto.tink.domain.keyset.KeysetFactory
 
 class KeysetFactoryImpl(
     private val keysetDataStoreManager: KeysetDataStoreManager,
-    private val serializeKeysetByAeadService: SerializeKeysetByAeadService,
-    private val parseKeysetByAeadService: ParseKeysetByAeadService,
+    private val keysetSerializerWithAead: KeysetSerializerWithAead,
+    private val keysetParserWithAead: KeysetParserWithAead,
     private val prefsKeyNameUseCase: PrefsKeyNameUseCase,
     private val masterKeyNameUseCase: MasterKeyNameUseCase
 ) : KeysetFactory {
@@ -47,7 +47,7 @@ class KeysetFactoryImpl(
             val keysetAead = AndroidKeystore.getAead(masterKey)
 
             val keysetHandle = KeysetHandle.generateNew(keyParams)
-            val serializedKeyset = serializeKeysetByAeadService.serialize(
+            val serializedKeyset = keysetSerializerWithAead(
                 keysetHandle = keysetHandle,
                 aead = keysetAead,
                 associatedData = newAssociatedData
@@ -56,7 +56,7 @@ class KeysetFactoryImpl(
             return keysetHandle
         } else {
             val keysetAead = AndroidKeystore.getAead(masterKey)
-            return parseKeysetByAeadService.parse(
+            return keysetParserWithAead(
                 serializedKeyset = savedKeyset,
                 aead = keysetAead,
                 associatedData = newAssociatedData

@@ -4,8 +4,8 @@ import com.nevidimka655.crypto.tink.core.encoders.HexService
 import com.nevidimka655.crypto.tink.core.hash.Sha384Service
 import com.nevidimka655.crypto.tink.data.keyset.KeysetAeadFactory
 import com.nevidimka655.crypto.tink.data.keyset.KeysetKeyFactory
-import com.nevidimka655.crypto.tink.data.serializers.SerializeKeysetByAeadService
-import com.nevidimka655.crypto.tink.data.serializers.SerializeKeysetByKeyService
+import com.nevidimka655.crypto.tink.core.serializers.KeysetSerializerWithAead
+import com.nevidimka655.crypto.tink.core.serializers.KeysetSerializerWithKey
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,10 +19,10 @@ object SerializeKeysetModule {
     @Singleton
     @Provides
     fun provideSerializeKeysetByKeyService(
-        serializeKeysetByAeadService: SerializeKeysetByAeadService,
+        keysetSerializerWithAead: KeysetSerializerWithAead,
         keysetAeadFactory: KeysetAeadFactory
-    ) = SerializeKeysetByKeyService(
-        serializeKeysetByAeadService = serializeKeysetByAeadService,
+    ) = KeysetSerializerWithKey(
+        keysetSerializerWithAead = keysetSerializerWithAead,
         keysetAeadFactory = keysetAeadFactory
     )
 
@@ -30,7 +30,7 @@ object SerializeKeysetModule {
     @Provides
     fun provideSerializeKeysetByAeadService(
         hexService: HexService
-    ) = SerializeKeysetByAeadService(hexService = hexService)
+    ) = KeysetSerializerWithAead(hexService = hexService)
 
     @Singleton
     @Provides
