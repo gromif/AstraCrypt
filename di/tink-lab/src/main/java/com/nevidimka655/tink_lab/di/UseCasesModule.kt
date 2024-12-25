@@ -4,6 +4,7 @@ import com.nevidimka655.tink_lab.domain.model.Repository
 import com.nevidimka655.tink_lab.domain.usecase.CreateLabKeyUseCase
 import com.nevidimka655.tink_lab.domain.usecase.GetFileAeadListUseCase
 import com.nevidimka655.tink_lab.domain.usecase.GetTextAeadListUseCase
+import com.nevidimka655.tink_lab.domain.usecase.LoadKeyUseCase
 import com.nevidimka655.tink_lab.domain.usecase.SaveKeyUseCase
 import dagger.Module
 import dagger.Provides
@@ -28,5 +29,8 @@ object UseCasesModule {
 
     @Provides
     fun provideSaveKeyUseCase(repository: Repository) = SaveKeyUseCase(repository = repository)
+
+    @Provides
+    fun provideLoadKeyUseCase(repository: Repository) = LoadKeyUseCase(repository = repository)
 
 }

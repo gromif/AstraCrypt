@@ -44,7 +44,11 @@ fun root(
     details(onUiStateChange = onUiStateChange)
     export(onUiStateChange = onUiStateChange)
 
-    labGraph(onUiStateChange = onUiStateChange, navController = navController)
+    labGraph(
+        onUiStateChange = onUiStateChange,
+        navController = navController,
+        onFabClick = onFabClick
+    )
 
     // settings
     editProfile(onUiStateChange = onUiStateChange)
