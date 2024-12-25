@@ -41,6 +41,9 @@ fun NavGraphBuilder.tinkKey(
         onRequestKeysetChannel = onRequestKeysetChannel.receiveAsFlow(),
         navigateToTextMode = {
 
+        },
+        navigateToFilesMode = {
+
         }
     )
 }
