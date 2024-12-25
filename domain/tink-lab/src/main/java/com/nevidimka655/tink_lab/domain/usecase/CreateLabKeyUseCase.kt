@@ -4,7 +4,6 @@ import com.nevidimka655.tink_lab.domain.model.DataType
 import com.nevidimka655.tink_lab.domain.model.Key
 import com.nevidimka655.tink_lab.domain.model.Repository
 
-
 class CreateLabKeyUseCase(
     private val repository: Repository
 ) {
