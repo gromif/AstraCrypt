@@ -8,7 +8,7 @@ import com.nevidimka655.astracrypt.app.utils.AppComponentService
 import com.nevidimka655.astracrypt.data.auth.AuthManager
 import com.nevidimka655.astracrypt.domain.model.auth.Skin
 import com.nevidimka655.crypto.tink.data.KeysetManager
-import com.nevidimka655.crypto.tink.core.hash.Sha256Service
+import com.nevidimka655.crypto.tink.core.hash.Sha256Util
 import com.nevidimka655.crypto.tink.extensions.toBase64
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
@@ -24,7 +24,7 @@ class SettingsAuthViewModel @Inject constructor(
     private val aeadManager: AeadManager,
     private val keysetManager: KeysetManager,
     private val appComponentService: AppComponentService,
-    private val sha256Service: Sha256Service
+    private val sha256Util: Sha256Util
 ) : ViewModel() {
     val authInfoFlow get() = authManager.infoFlow
     val aeadInfoFlow get() = aeadManager.infoFlow
@@ -43,7 +43,7 @@ class SettingsAuthViewModel @Inject constructor(
 
     fun setCalculatorSkin(combination: String) = viewModelScope.launch(defaultDispatcher) {
         val skin = Skin.Calculator().apply {
-            val combinationHashSha256 = sha256Service.compute(value = combination.toByteArray())
+            val combinationHashSha256 = sha256Util.compute(value = combination.toByteArray())
             combinationHash = combinationHashSha256.toBase64()
         }
         authManager.setSkin(skin = skin)

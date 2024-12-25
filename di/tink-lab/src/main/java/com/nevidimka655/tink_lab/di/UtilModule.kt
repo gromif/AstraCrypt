@@ -5,8 +5,8 @@ import android.net.Uri
 import com.nevidimka655.astracrypt.utils.Mapper
 import com.nevidimka655.astracrypt.utils.Parser
 import com.nevidimka655.astracrypt.utils.Serializer
-import com.nevidimka655.crypto.tink.core.encoders.HexService
-import com.nevidimka655.crypto.tink.core.hash.Sha256Service
+import com.nevidimka655.crypto.tink.core.encoders.HexUtil
+import com.nevidimka655.crypto.tink.core.hash.Sha256Util
 import com.nevidimka655.crypto.tink.core.parsers.KeysetParserWithKey
 import com.nevidimka655.crypto.tink.core.serializers.KeysetSerializerWithKey
 import com.nevidimka655.tink_lab.data.dto.KeyDto
@@ -30,12 +30,12 @@ object UtilModule {
     @Provides
     fun provideKeyGenerator(
         keysetSerializerWithKey: KeysetSerializerWithKey,
-        sha256Service: Sha256Service,
-        hexService: HexService
+        sha256Util: Sha256Util,
+        hexUtil: HexUtil
     ): KeyGenerator = KeyGeneratorImpl(
         keysetSerializerWithKey = keysetSerializerWithKey,
-        sha256Service = sha256Service,
-        hexService = hexService
+        sha256Util = sha256Util,
+        hexUtil = hexUtil
     )
 
     @Provides

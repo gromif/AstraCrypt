@@ -6,8 +6,8 @@ import com.nevidimka655.astracrypt.data.datastore.AppearanceManager
 import com.nevidimka655.astracrypt.data.datastore.DefaultDataStoreManager
 import com.nevidimka655.astracrypt.data.datastore.KeysetDataStoreManager
 import com.nevidimka655.astracrypt.data.datastore.SettingsDataStoreManager
-import com.nevidimka655.crypto.tink.core.encoders.Base64Service
-import com.nevidimka655.crypto.tink.core.hash.Sha256Service
+import com.nevidimka655.crypto.tink.core.encoders.Base64Util
+import com.nevidimka655.crypto.tink.core.hash.Sha256Util
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import dagger.Module
 import dagger.Provides
@@ -42,13 +42,13 @@ object DataStoreManagersModule {
     fun provideSettingsDataStoreManager(
         @SettingsDataStore dataStore: DataStore<Preferences>,
         keysetManager: KeysetManager,
-        sha256Service: Sha256Service,
-        base64Service: Base64Service
+        sha256Util: Sha256Util,
+        base64Util: Base64Util
     ) = SettingsDataStoreManager(
         dataStore = dataStore,
         keysetManager = keysetManager,
-        sha256Service = sha256Service,
-        base64Service = base64Service
+        sha256Util = sha256Util,
+        base64Util = base64Util
     )
 
 }

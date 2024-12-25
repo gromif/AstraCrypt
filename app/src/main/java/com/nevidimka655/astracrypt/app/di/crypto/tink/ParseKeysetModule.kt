@@ -1,6 +1,6 @@
 package com.nevidimka655.astracrypt.app.di.crypto.tink
 
-import com.nevidimka655.crypto.tink.core.encoders.HexService
+import com.nevidimka655.crypto.tink.core.encoders.HexUtil
 import com.nevidimka655.crypto.tink.data.keyset.KeysetAeadFactory
 import com.nevidimka655.crypto.tink.core.parsers.KeysetParserWithAead
 import com.nevidimka655.crypto.tink.core.parsers.KeysetParserWithKey
@@ -17,8 +17,8 @@ object ParseKeysetModule {
     @Singleton
     @Provides
     fun provideParseKeysetByAead(
-        hexService: HexService
-    ) = KeysetParserWithAead(hexService = hexService)
+        hexUtil: HexUtil
+    ) = KeysetParserWithAead(hexUtil = hexUtil)
 
     @Singleton
     @Provides

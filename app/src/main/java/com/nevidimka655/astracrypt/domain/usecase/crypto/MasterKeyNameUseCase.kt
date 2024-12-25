@@ -1,12 +1,12 @@
 package com.nevidimka655.astracrypt.domain.usecase.crypto
 
 import com.nevidimka655.crypto.tink.domain.keyset.MasterKeyName
-import com.nevidimka655.crypto.tink.core.encoders.HexService
-import com.nevidimka655.crypto.tink.core.hash.Sha256Service
+import com.nevidimka655.crypto.tink.core.encoders.HexUtil
+import com.nevidimka655.crypto.tink.core.hash.Sha256Util
 
 class MasterKeyNameUseCase(
-    private val hexService: HexService,
-    private val sha256Service: Sha256Service
+    private val hexUtil: HexUtil,
+    private val sha256Util: Sha256Util
 ): MasterKeyName {
 
     override suspend fun get(
@@ -15,8 +15,8 @@ class MasterKeyNameUseCase(
     ): String {
         val tagBytes = tag.toByteArray()
         val masterAliasBytes = byteArrayOf(*tagBytes, *associatedData)
-        val masterAliasHashBytes = sha256Service.compute(value = masterAliasBytes)
-        return hexService.encode(bytes = masterAliasHashBytes)
+        val masterAliasHashBytes = sha256Util.compute(value = masterAliasBytes)
+        return hexUtil.encode(bytes = masterAliasHashBytes)
     }
 
 }

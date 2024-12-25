@@ -9,8 +9,8 @@ import com.nevidimka655.astracrypt.data.model.AeadInfo
 import com.nevidimka655.astracrypt.domain.model.auth.Auth
 import com.nevidimka655.astracrypt.domain.model.profile.Avatars
 import com.nevidimka655.astracrypt.domain.model.profile.ProfileInfo
-import com.nevidimka655.crypto.tink.core.encoders.Base64Service
-import com.nevidimka655.crypto.tink.core.hash.Sha256Service
+import com.nevidimka655.crypto.tink.core.encoders.Base64Util
+import com.nevidimka655.crypto.tink.core.hash.Sha256Util
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import com.nevidimka655.crypto.tink.domain.KeysetTemplates
 import com.nevidimka655.crypto.tink.extensions.aeadPrimitive
@@ -26,8 +26,8 @@ private const val KEYSET_TAG_VALUE = "l0_ShH%OLq"
 class SettingsDataStoreManager(
     private val dataStore: DataStore<Preferences>,
     private val keysetManager: KeysetManager,
-    private val sha256Service: Sha256Service,
-    private val base64Service: Base64Service
+    private val sha256Util: Sha256Util,
+    private val base64Util: Base64Util
 ) {
     private val encryptionSettingsKey = intPreferencesKey("a1")
     suspend fun getEncryptionSettings() = dataStore.data.first()[encryptionSettingsKey] ?: 0
@@ -88,9 +88,9 @@ class SettingsDataStoreManager(
             tag = KEYSET_TAG_KEY,
             keyParams = KeysetTemplates.DeterministicAEAD.AES256_SIV.params
         ).deterministicAeadPrimitive()
-        val associatedData = sha256Service.compute(value = key.toByteArray())
+        val associatedData = sha256Util.compute(value = key.toByteArray())
         val encryptedBytes = aead.encryptDeterministically(key.toByteArray(), associatedData)
-        base64Service.encode(bytes = encryptedBytes)
+        base64Util.encode(bytes = encryptedBytes)
     } ?: key
 
     private suspend fun encryptValue(key: String, value: String) = getEncryptionTemplate()?.let {
@@ -99,7 +99,7 @@ class SettingsDataStoreManager(
             keyParams = it.params
         ).aeadPrimitive()
         val encryptedBytes = aead.encrypt(value.toByteArray(), key.toByteArray())
-        base64Service.encode(bytes = encryptedBytes)
+        base64Util.encode(bytes = encryptedBytes)
     } ?: value
 
     private suspend fun decryptValue(key: String, value: String) = getEncryptionTemplate()?.let {
@@ -107,7 +107,7 @@ class SettingsDataStoreManager(
             tag = KEYSET_TAG_VALUE,
             keyParams = it.params
         ).aeadPrimitive()
-        val encryptedBytes = base64Service.decode(value = value)
+        val encryptedBytes = base64Util.decode(value = value)
         aead.decrypt(encryptedBytes, key.toByteArray()).decodeToString()
     } ?: value
 }

@@ -3,7 +3,7 @@ package com.nevidimka655.astracrypt.app.di
 import com.nevidimka655.astracrypt.data.auth.AuthManager
 import com.nevidimka655.astracrypt.data.datastore.DefaultDataStoreManager
 import com.nevidimka655.astracrypt.data.datastore.SettingsDataStoreManager
-import com.nevidimka655.crypto.tink.core.hash.Sha384Service
+import com.nevidimka655.crypto.tink.core.hash.Sha384Util
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,11 +19,11 @@ object AuthModule {
     fun provideAuthManager(
         defaultDataStoreManager: DefaultDataStoreManager,
         settingsDataStoreManager: SettingsDataStoreManager,
-        sha384Service: Sha384Service
+        sha384Util: Sha384Util
     ) = AuthManager(
         defaultDataStoreManager = defaultDataStoreManager,
         settingsDataStoreManager = settingsDataStoreManager,
-        sha384Service = sha384Service
+        sha384Util = sha384Util
     )
 
 }

@@ -1,7 +1,7 @@
 package com.nevidimka655.astracrypt.app.di.crypto.tink
 
-import com.nevidimka655.crypto.tink.core.encoders.HexService
-import com.nevidimka655.crypto.tink.core.hash.Sha384Service
+import com.nevidimka655.crypto.tink.core.encoders.HexUtil
+import com.nevidimka655.crypto.tink.core.hash.Sha384Util
 import com.nevidimka655.crypto.tink.data.keyset.KeysetAeadFactory
 import com.nevidimka655.crypto.tink.data.keyset.KeysetKeyFactory
 import com.nevidimka655.crypto.tink.core.serializers.KeysetSerializerWithAead
@@ -29,8 +29,8 @@ object SerializeKeysetModule {
     @Singleton
     @Provides
     fun provideSerializeKeysetByAeadService(
-        hexService: HexService
-    ) = KeysetSerializerWithAead(hexService = hexService)
+        hexUtil: HexUtil
+    ) = KeysetSerializerWithAead(hexUtil = hexUtil)
 
     @Singleton
     @Provides
@@ -39,6 +39,6 @@ object SerializeKeysetModule {
 
     @Singleton
     @Provides
-    fun provideKeysetKeyFactory(sha384Service: Sha384Service) =
-        KeysetKeyFactory(sha384Service = sha384Service)
+    fun provideKeysetKeyFactory(sha384Util: Sha384Util) =
+        KeysetKeyFactory(sha384Util = sha384Util)
 }

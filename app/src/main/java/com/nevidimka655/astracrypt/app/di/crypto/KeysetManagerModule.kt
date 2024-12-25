@@ -6,9 +6,9 @@ import com.nevidimka655.astracrypt.data.datastore.KeysetDataStoreManager
 import com.nevidimka655.astracrypt.data.io.FilesService
 import com.nevidimka655.astracrypt.domain.usecase.crypto.MasterKeyNameUseCase
 import com.nevidimka655.astracrypt.domain.usecase.crypto.PrefsKeyNameUseCase
-import com.nevidimka655.crypto.tink.core.encoders.HexService
-import com.nevidimka655.crypto.tink.core.hash.Sha256Service
-import com.nevidimka655.crypto.tink.core.hash.Sha384Service
+import com.nevidimka655.crypto.tink.core.encoders.HexUtil
+import com.nevidimka655.crypto.tink.core.hash.Sha256Util
+import com.nevidimka655.crypto.tink.core.hash.Sha384Util
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import com.nevidimka655.crypto.tink.core.parsers.KeysetParserWithAead
 import com.nevidimka655.crypto.tink.core.serializers.KeysetSerializerWithAead
@@ -58,15 +58,15 @@ object KeysetManagerModule {
     @Singleton
     @Provides
     fun provideMasterKeyNameUseCase(
-        hexService: HexService,
-        sha256Service: Sha256Service
-    ) = MasterKeyNameUseCase(hexService = hexService, sha256Service = sha256Service)
+        hexUtil: HexUtil,
+        sha256Util: Sha256Util
+    ) = MasterKeyNameUseCase(hexUtil = hexUtil, sha256Util = sha256Util)
 
     @Singleton
     @Provides
     fun providePrefsKeyNameUseCase(
-        hexService: HexService,
-        sha384Service: Sha384Service
-    ) = PrefsKeyNameUseCase(hexService = hexService, sha384Service = sha384Service)
+        hexUtil: HexUtil,
+        sha384Util: Sha384Util
+    ) = PrefsKeyNameUseCase(hexUtil = hexUtil, sha384Util = sha384Util)
 
 }
