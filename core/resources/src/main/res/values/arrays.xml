@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <string-array name="lab_data_types">
-        <item>@string/text</item>
-        <item>@string/files</item>
-    </string-array>
-
-</resources>
