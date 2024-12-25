@@ -12,7 +12,7 @@ class DtoToKeyMapper(
         Key(
             dataType = idToDataTypeMapper(dataTypeId),
             aeadType = aeadType,
-            encryptedKeyset = encryptedKeyset,
+            rawKeyset = encryptedKeyset,
             hash = hash
         )
     }

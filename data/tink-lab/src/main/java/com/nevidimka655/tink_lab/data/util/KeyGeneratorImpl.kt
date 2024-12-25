@@ -36,7 +36,7 @@ class KeyGeneratorImpl(
         val keysetHash = hexUtil.encode(bytes = keysetHashArray)
         return Key(
             dataType = dataType,
-            encryptedKeyset = serializedEncryptedKeyset,
+            rawKeyset = serializedEncryptedKeyset,
             aeadType = aeadType,
             hash = keysetHash
         )
