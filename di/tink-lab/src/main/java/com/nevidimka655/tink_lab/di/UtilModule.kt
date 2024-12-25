@@ -8,6 +8,7 @@ import com.nevidimka655.astracrypt.utils.Serializer
 import com.nevidimka655.crypto.tink.core.encoders.HexUtil
 import com.nevidimka655.crypto.tink.core.hash.Sha256Util
 import com.nevidimka655.crypto.tink.core.parsers.KeysetParserWithKey
+import com.nevidimka655.crypto.tink.core.serializers.KeysetSerializer
 import com.nevidimka655.crypto.tink.core.serializers.KeysetSerializerWithKey
 import com.nevidimka655.tink_lab.data.dto.KeyDto
 import com.nevidimka655.tink_lab.data.util.KeyGeneratorImpl
@@ -29,11 +30,11 @@ object UtilModule {
 
     @Provides
     fun provideKeyGenerator(
-        keysetSerializerWithKey: KeysetSerializerWithKey,
+        keysetSerializer: KeysetSerializer,
         sha256Util: Sha256Util,
         hexUtil: HexUtil
     ): KeyGenerator = KeyGeneratorImpl(
-        keysetSerializerWithKey = keysetSerializerWithKey,
+        keysetSerializer = keysetSerializer,
         sha256Util = sha256Util,
         hexUtil = hexUtil
     )
