@@ -37,7 +37,6 @@ material = "1.12.0"
 [libraries] # ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # NAVIGATION LIBRARIES --------------------------------------------------------------------------------------------------------------------------------
-navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigation" }
 navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigation" }
 
 # COMPOSE LIBRARIES --------------------------------------------------------------------------------------------------------------------------------
@@ -89,7 +88,6 @@ kotlin-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutine
 kotlin-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "serialization" }
 
 # OTHER LIBRARIES --------------------------------------------------------------------------------------------------------------------------------
-androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
 androidx-datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore-preferences" }
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
