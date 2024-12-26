@@ -3,7 +3,6 @@ package com.nevidimka655.astracrypt.view.composables.notes
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.navigation
-import com.nevidimka655.astracrypt.view.composables.notes.overview.overviewNote
 import com.nevidimka655.astracrypt.view.models.ToolbarAction
 import com.nevidimka655.astracrypt.view.models.UiState
 import com.nevidimka655.astracrypt.view.navigation.Route

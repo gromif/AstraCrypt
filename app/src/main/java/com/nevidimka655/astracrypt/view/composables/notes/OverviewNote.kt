@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.view.composables.notes.overview
+package com.nevidimka655.astracrypt.view.composables.notes
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.SaveAs
