@@ -20,6 +20,7 @@ object Route {
         @Serializable
         object TinkGraph {
             @Serializable object Key
+            @Serializable data class Text(val rawKeyset: String)
         }
 
     }
