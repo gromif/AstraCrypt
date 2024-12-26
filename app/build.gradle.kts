@@ -123,6 +123,5 @@ dependencies {
     implementation(libs.hilt.work)
 
     // Other
-    implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.datastore.preferences)
 }
