@@ -6,14 +6,12 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.astracrypt.data.database.PagerTuple
 
 class FilesFragment : Fragment() {
-    private val vm by activityViewModels<MainVM>()
 
-    private val selectorManager get() = vm.selectorManager
+    private val selectorManager: SelectorManager get() = TODO()
 
     private fun initSelecting(item: PagerTuple) = with(selectorManager) {
         if (!isInitialized) setupContextualActionMode()
@@ -75,7 +73,6 @@ class FilesFragment : Fragment() {
             override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
                 if (item != null) when (item.itemId) {
                     R.id.move -> {
-                        vm.cacheUiState()
                         selectorManager.blockItems = true
                         mode?.invalidate()
                         /*vm.setUiState(
@@ -89,7 +86,7 @@ class FilesFragment : Fragment() {
                     R.id.createDir -> {/*vm.dialogNewFolderState.value = true*/}
 
                     R.id.delete -> {
-                        vm.deleteSelected(selectorManager.getSelectedItemsList())
+                        //vm.deleteSelected(selectorManager.getSelectedItemsList())
                     }
                 }
                 return true

@@ -88,7 +88,6 @@ dependencies {
     implementation(project(":ui:compose-help"))
 
     // Navigation
-    implementation(libs.navigation.fragment.ktx)
     implementation(libs.navigation.ui.ktx)
 
     // Compose
