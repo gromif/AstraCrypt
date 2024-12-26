@@ -9,6 +9,7 @@ import androidx.navigation.compose.composable
 import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.astracrypt.view.models.UiState
 import com.nevidimka655.astracrypt.view.navigation.Route
+import com.nevidimka655.tink_lab.TinkLab
 import com.nevidimka655.tink_lab.key.KeyScreen
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 import kotlinx.coroutines.channels.Channel
@@ -37,7 +38,7 @@ fun NavGraphBuilder.tinkKey(
         }
     }
 
-    KeyScreen(
+    TinkLab.KeyScreen(
         onRequestKeysetChannel = onRequestKeysetChannel.receiveAsFlow(),
         navigateToTextMode = {
 
