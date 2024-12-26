@@ -58,6 +58,7 @@ object UtilModule {
         context: Context,
         stringToUriMapper: Mapper<String, Uri>,
         keyParser: Parser<String, KeyDto>,
+        keysetSerializer: KeysetSerializer,
         keysetParserWithKey: KeysetParserWithKey,
         dtoToKeyMapper: Mapper<KeyDto, Key>
     ): KeyReader = KeyReaderImpl(
@@ -65,6 +66,7 @@ object UtilModule {
         stringToUriMapper = stringToUriMapper,
         keyParser = keyParser,
         keysetParserWithKey = keysetParserWithKey,
+        keysetSerializer = keysetSerializer,
         dtoToKeyMapper = dtoToKeyMapper,
     )
 
