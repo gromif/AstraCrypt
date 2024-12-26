@@ -1,4 +1,4 @@
-package com.nevidimka655.notes.data.database
+package com.nevidimka655.astracrypt.notes.db
 
 import androidx.paging.PagingSource
 import androidx.room.Dao
@@ -6,7 +6,7 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.RewriteQueriesToDropUnusedColumns
 import androidx.room.Update
-import com.nevidimka655.notes.data.database.tuples.TransformNotesTuple
+import com.nevidimka655.astracrypt.notes.db.tuples.TransformNotesTuple
 
 @Dao
 interface NotesDao {

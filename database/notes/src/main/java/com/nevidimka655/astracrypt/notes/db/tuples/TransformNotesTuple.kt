@@ -1,4 +1,4 @@
-package com.nevidimka655.notes.data.database.tuples
+package com.nevidimka655.astracrypt.notes.db.tuples
 
 import androidx.room.ColumnInfo
 import androidx.room.PrimaryKey

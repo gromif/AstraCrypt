@@ -3,11 +3,11 @@ package com.nevidimka655.astracrypt.data.database
 import com.google.crypto.tink.Aead
 import com.nevidimka655.astracrypt.data.crypto.AeadManager
 import com.nevidimka655.astracrypt.data.database.entities.StorageItemEntity
+import com.nevidimka655.astracrypt.notes.db.NoteItemEntity
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import com.nevidimka655.crypto.tink.extensions.aeadPrimitive
 import com.nevidimka655.crypto.tink.extensions.fromBase64
 import com.nevidimka655.crypto.tink.extensions.toBase64
-import com.nevidimka655.notes.data.database.NoteItemEntity
 
 class RepositoryEncryption(
     private val keysetManager: KeysetManager,

@@ -5,8 +5,8 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.nevidimka655.astracrypt.data.database.daos.StorageItemDao
 import com.nevidimka655.astracrypt.data.database.entities.StorageItemEntity
-import com.nevidimka655.notes.data.database.NoteItemEntity
-import com.nevidimka655.notes.data.database.NotesDao
+import com.nevidimka655.astracrypt.notes.db.NoteItemEntity
+import com.nevidimka655.astracrypt.notes.db.NotesDao
 
 @TypeConverters(
     com.nevidimka655.astracrypt.data.database.converts.StorageItemTypeConverter::class,

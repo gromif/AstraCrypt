@@ -1,7 +1,7 @@
 package com.nevidimka655.notes.data.mappers
 
 import android.text.format.DateFormat
-import com.nevidimka655.notes.data.database.NoteItemEntity
+import com.nevidimka655.astracrypt.notes.db.NoteItemEntity
 import com.nevidimka655.astracrypt.utils.Mapper
 import com.nevidimka655.domain.notes.model.Note
 import com.nevidimka655.domain.notes.model.NoteState

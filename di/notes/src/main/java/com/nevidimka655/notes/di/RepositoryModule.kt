@@ -1,8 +1,8 @@
 package com.nevidimka655.notes.di
 
+import com.nevidimka655.astracrypt.notes.db.NotesDao
 import com.nevidimka655.domain.notes.paging.PagingProvider
 import com.nevidimka655.domain.notes.repository.Repository
-import com.nevidimka655.notes.data.database.NotesDao
 import com.nevidimka655.notes.data.mappers.DataToDomainMapper
 import com.nevidimka655.notes.data.paging.PagingProviderImpl
 import com.nevidimka655.notes.data.repository.RepositoryImpl

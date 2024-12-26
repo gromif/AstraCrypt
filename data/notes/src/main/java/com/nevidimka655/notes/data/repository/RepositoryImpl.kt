@@ -4,8 +4,8 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.map
-import com.nevidimka655.notes.data.database.NoteItemEntity
-import com.nevidimka655.notes.data.database.NotesDao
+import com.nevidimka655.astracrypt.notes.db.NoteItemEntity
+import com.nevidimka655.astracrypt.notes.db.NotesDao
 import com.nevidimka655.notes.data.mappers.DataToDomainMapper
 import com.nevidimka655.domain.notes.model.Note
 import com.nevidimka655.domain.notes.repository.Repository

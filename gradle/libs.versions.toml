@@ -32,6 +32,7 @@ junit = "4.13.2"
 junit-version = "1.2.1"
 espresso-core = "3.6.1"
 material = "1.12.0"
+appcompat = "1.7.0"
 
 [libraries] # ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -104,6 +105,7 @@ android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", ver
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 ksp-gradlePlugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
 hilt-gradlePlugin = { group = "com.google.dagger", name = "hilt-android-gradle-plugin", version.ref = "hilt" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 
 [plugins] # ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 android-application = { id = "com.android.application", version.ref = "agp" }

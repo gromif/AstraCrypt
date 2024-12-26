@@ -73,11 +73,10 @@ dependencies {
     implementation(projects.core.resources)
     implementation(project(":core:haptic"))
     implementation(project(":core:tiles-with-coroutines"))
+    implementation(projects.database.notes)
 
     implementation(projects.core.tink)
     implementation(projects.features.tinkLab)
-
-    implementation(projects.data.notes)
     implementation(projects.features.composeNotes)
 
     implementation(projects.di.core)
