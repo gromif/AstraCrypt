@@ -17,8 +17,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.receiveAsFlow
 
-@Suppress("ObjectPropertyName")
-val _LabTinkUiState = UiState(
+private val ScreenUiState = UiState(
     toolbar = UiState.Toolbar(
         title = TextWrap.Resource(id = R.string.lab_aeadEncryption)
     ),
@@ -27,9 +26,11 @@ val _LabTinkUiState = UiState(
 
 fun NavGraphBuilder.tinkKey(
     onUiStateChange: (UiState) -> Unit,
-    onFabClick: Flow<Any>
+    onFabClick: Flow<Any>,
+    navigateToTextMode: (String) -> Unit,
+    navigateToFilesMode: (String) -> Unit
 ) = composable<Route.LabGraph.TinkGraph.Key> {
-    onUiStateChange(_LabTinkUiState)
+    onUiStateChange(ScreenUiState)
     val onRequestKeysetChannel = remember { Channel<Unit>() }
 
     LaunchedEffect(Unit) {
@@ -40,11 +41,7 @@ fun NavGraphBuilder.tinkKey(
 
     TinkLab.KeyScreen(
         onRequestKeysetChannel = onRequestKeysetChannel.receiveAsFlow(),
-        navigateToTextMode = {
-
-        },
-        navigateToFilesMode = {
-
-        }
+        navigateToTextMode = navigateToTextMode,
+        navigateToFilesMode = navigateToFilesMode
     )
 }
