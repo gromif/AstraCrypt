@@ -1,24 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/move"
         android:icon="@drawable/ic_folder_move_outline"
-        android:title="@string/files_options_move"
-        app:showAsAction="always" />
+        android:title="@string/files_options_move" />
     <item
         android:id="@+id/delete"
         android:icon="@drawable/ic_delete_variant_outline"
-        android:title="@string/files_options_delete"
-        app:showAsAction="ifRoom" />
+        android:title="@string/files_options_delete" />
     <item
         android:id="@+id/addToStarred"
         android:icon="@drawable/ic_menu_favourite"
-        android:title="@string/files_options_addToStarred"
-        app:showAsAction="ifRoom" />
+        android:title="@string/files_options_addToStarred" />
     <item
         android:id="@+id/createDir"
         android:title="@android:string/selectAll"
-        android:visible="false"
-        app:showAsAction="ifRoom" />
+        android:visible="false" />
 </menu>

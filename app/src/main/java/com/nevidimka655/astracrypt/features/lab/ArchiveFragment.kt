@@ -203,7 +203,7 @@ class ArchiveFragment : Fragment() {
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                when (menuItem.itemId) {
+                /*when (menuItem.itemId) {
                     R.id.help -> findNavController().navigate(
                         0, args = bundleOf(
                             Pair(
@@ -213,7 +213,7 @@ class ArchiveFragment : Fragment() {
                         )
                     )
                     else -> return false
-                }
+                }*/
                 return true
             }
         }, viewLifecycleOwner, Lifecycle.State.STARTED)
