@@ -6,6 +6,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import androidx.navigation.toRoute
 import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.astracrypt.view.models.UiState
 import com.nevidimka655.astracrypt.view.navigation.Route
@@ -21,10 +22,12 @@ fun NavGraphBuilder.tinkText(
     onUiStateChange: (UiState) -> Unit
 ) = composable<Route.LabGraph.TinkGraph.Text> {
     onUiStateChange(ScreenUiState)
+    val route: Route.LabGraph.TinkGraph.Text = it.toRoute()
 
     TinkLab.TextScreen(
         modifier = Modifier
             .fillMaxSize()
-            .verticalScroll(rememberScrollState())
+            .verticalScroll(rememberScrollState()),
+        rawKeyset = route.rawKeyset
     )
 }
