@@ -34,6 +34,7 @@ espresso-core = "3.6.1"
 material = "1.12.0"
 appcompat = "1.7.0"
 annotation-jvm = "1.9.1"
+documentfile = "1.0.1"
 
 [libraries] # ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -108,6 +109,7 @@ ksp-gradlePlugin = { group = "com.google.devtools.ksp", name = "com.google.devto
 hilt-gradlePlugin = { group = "com.google.dagger", name = "hilt-android-gradle-plugin", version.ref = "hilt" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 androidx-annotation-jvm = { group = "androidx.annotation", name = "annotation-jvm", version.ref = "annotation-jvm" }
+androidx-documentfile = { group = "androidx.documentfile", name = "documentfile", version.ref = "documentfile" }
 
 [plugins] # ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 android-application = { id = "com.android.application", version.ref = "agp" }
