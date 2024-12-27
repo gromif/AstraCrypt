@@ -10,6 +10,7 @@ plugins {
     alias(libs.plugins.astracrypt.android.hilt.compose)
     alias(libs.plugins.astracrypt.android.room)
     alias(libs.plugins.astracrypt.android.paging)
+    alias(libs.plugins.astracrypt.android.work)
     alias(libs.plugins.kotlin.navigation.safeargs)
 }
 
@@ -101,9 +102,6 @@ dependencies {
     debugImplementation(libs.compose.ui.tooling)
     debugImplementation(libs.compose.ui.tooling.preview)
     debugImplementation(libs.compose.ui.test.manifest)
-
-    // Background
-    implementation(libs.androidx.work.runtime.ktx)
 
     // Lifecycle
     implementation(libs.lifecycle.viewmodel.ktx)
