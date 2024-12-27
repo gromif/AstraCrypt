@@ -5,6 +5,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.pm.PackageManager
 import com.nevidimka655.astracrypt.app.services.tiles.WipeTile
+import com.nevidimka655.astracrypt.utils.Api
 import com.nevidimka655.astracrypt.view.MainActivity
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject

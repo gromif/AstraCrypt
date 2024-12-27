@@ -16,7 +16,7 @@ import coil.request.ImageRequest
 import coil.size.Scale
 import com.nevidimka655.astracrypt.app.AppConfig
 import com.nevidimka655.astracrypt.core.di.IoDispatcher
-import com.nevidimka655.astracrypt.app.utils.Api
+import com.nevidimka655.astracrypt.utils.Api
 import com.nevidimka655.astracrypt.view.models.CenterCropTransformation
 import com.nevidimka655.astracrypt.data.io.FilesService
 import com.nevidimka655.astracrypt.data.crypto.AeadManager

@@ -18,7 +18,7 @@ import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.astracrypt.core.di.IoDispatcher
-import com.nevidimka655.astracrypt.app.utils.Api
+import com.nevidimka655.astracrypt.utils.Api
 import com.nevidimka655.astracrypt.data.database.ExportTuple
 import com.nevidimka655.astracrypt.data.io.FilesService
 import com.nevidimka655.astracrypt.data.model.AeadInfo
