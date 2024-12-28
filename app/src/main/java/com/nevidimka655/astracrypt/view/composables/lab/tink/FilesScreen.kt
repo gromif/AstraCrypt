@@ -1,5 +1,9 @@
 package com.nevidimka655.astracrypt.view.composables.lab.tink
 
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
@@ -22,5 +26,10 @@ fun NavGraphBuilder.tinkFiles(
     onUiStateChange(ScreenUiState)
     val route: ComposableRoute = it.toRoute()
 
-    TinkLab.FilesScreen()
+    TinkLab.FilesScreen(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState()),
+        rawKeyset = route.rawKeyset
+    )
 }
