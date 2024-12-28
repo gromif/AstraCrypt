@@ -21,6 +21,7 @@ object Route {
         object TinkGraph {
             @Serializable object Key
             @Serializable data class Text(val rawKeyset: String)
+            @Serializable data class Files(val rawKeyset: String)
         }
 
     }

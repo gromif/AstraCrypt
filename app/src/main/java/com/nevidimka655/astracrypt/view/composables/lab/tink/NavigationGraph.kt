@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.Flow
 private typealias Graph = Route.LabGraph.TinkGraph
 private typealias Key = Route.LabGraph.TinkGraph.Key
 private typealias Text = Route.LabGraph.TinkGraph.Text
+private typealias Files = Route.LabGraph.TinkGraph.Files
 
 fun NavGraphBuilder.labTinkGraph(
     onUiStateChange: (UiState) -> Unit,
@@ -20,7 +21,8 @@ fun NavGraphBuilder.labTinkGraph(
         onUiStateChange = onUiStateChange,
         onFabClick = onFabClick,
         navigateToTextMode = { navController.navigate(Text(rawKeyset = it)) },
-        navigateToFilesMode = {}
+        navigateToFilesMode = { navController.navigate(Files(rawKeyset = it)) }
     )
     tinkText(onUiStateChange = onUiStateChange)
+    tinkFiles(onUiStateChange = onUiStateChange)
 }
