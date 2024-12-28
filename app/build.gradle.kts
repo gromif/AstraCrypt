@@ -115,9 +115,6 @@ dependencies {
     // Google
     implementation(libs.google.crypto.tink)
 
-    // DI - Hilt
-    implementation(libs.hilt.work)
-
     // Other
     implementation(libs.androidx.datastore.preferences)
 }
