@@ -15,6 +15,8 @@ dependencies {
     implementation(projects.domain.labZip)
     implementation(projects.di.labZip)
 
+    implementation(libs.androidx.documentfile)
+
     implementation(projects.core.resources)
     implementation(projects.di.core)
     implementation(projects.core.utils)
