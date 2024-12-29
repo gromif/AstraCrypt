@@ -1,9 +1,6 @@
 package com.nevidimka655.astracrypt.view.composables
 
-import androidx.fragment.app.Fragment
-import com.nevidimka655.astracrypt.resources.R
-
-class AuthFragment : Fragment() {
+class AuthFragment {
 
     /*private val vm by activityViewModels<MainVM>()
     private val aeadInfo get() = vm.encryptionManager.aeadInfo

@@ -2,9 +2,8 @@ package com.nevidimka655.astracrypt.view.composables.components.dialogs
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.DialogFragment
 
-class DatabaseTransformDialog : DialogFragment() {
+class DatabaseTransformDialog {
 
     /*override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         isCancelable = false
@@ -17,17 +16,14 @@ class DatabaseTransformDialog : DialogFragment() {
             .create()
     }*/
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        /*WorkerFactory.transformWorkLiveData?.observe(viewLifecycleOwner) {
-            if (it != null) {
-                if (it.state.isFinished) with(vm) {
-                    WorkerFactory.transformWorkLiveData = null
-                    pagingSource?.invalidate()
-                    pagingStarredSource?.invalidate()
-                    dismiss()
-                }
-            }
-        }*/
-    }
+    /*WorkerFactory.transformWorkLiveData?.observe(viewLifecycleOwner) {
+           if (it != null) {
+               if (it.state.isFinished) with(vm) {
+                   WorkerFactory.transformWorkLiveData = null
+                   pagingSource?.invalidate()
+                   pagingStarredSource?.invalidate()
+                   dismiss()
+               }
+           }
+       }*/
 }

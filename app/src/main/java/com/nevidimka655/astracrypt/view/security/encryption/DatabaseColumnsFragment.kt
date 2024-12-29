@@ -1,8 +1,6 @@
 package com.nevidimka655.astracrypt.view.security.encryption
 
-import androidx.fragment.app.Fragment
-
-class DatabaseColumnsFragment : Fragment() {
+class DatabaseColumnsFragment {
     /*private val vm by activityViewModels<MainVM>()
     private val vmState by viewModels<DatabaseColumnsViewModel>()
     private val encryptionManager get() = vm.encryptionManager

@@ -1,8 +1,6 @@
 package com.nevidimka655.astracrypt.view.security.encryption
 
-import androidx.fragment.app.Fragment
-
-class EncryptionFragment : Fragment() {
+class EncryptionFragment {
    /* private val vm by activityViewModels<MainVM>()
     private val encryptionManager get() = vm.encryptionManager
     private val aeadInfoNew get() = encryptionManager.aeadInfo

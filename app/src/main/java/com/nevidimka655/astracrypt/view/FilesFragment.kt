@@ -1,15 +1,12 @@
 package com.nevidimka655.astracrypt.view
 
-import android.os.Bundle
 import android.view.ActionMode
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import androidx.fragment.app.Fragment
-import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.astracrypt.data.database.PagerTuple
+import com.nevidimka655.astracrypt.resources.R
 
-class FilesFragment : Fragment() {
+class FilesFragment {
 
     private val selectorManager: SelectorManager get() = TODO()
 
@@ -19,16 +16,16 @@ class FilesFragment : Fragment() {
         setItemState(item.id, !getItemState(item.id))
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    /*override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (selectorManager.isInitialized) {
-//            fab.hide()
             with(selectorManager) {
+                fab.hide()
                 setupContextualActionMode()
                 init()
             }
         }
-    }
+    }*/
 
 
 
@@ -56,9 +53,9 @@ class FilesFragment : Fragment() {
 
             override fun onPrepareActionMode(mode: ActionMode?, menu: Menu?): Boolean {
                 mode?.run {
-                    title = getString(R.string.toolbar_selected, selectorManager.itemsMapState.size)
+                    //title = getString(R.string.toolbar_selected, selectorManager.itemsMapState.size)
                     if (selectorManager.blockItems) {
-                        subtitle = getString(R.string.toolbar_selectDestination)
+                        //subtitle = getString(R.string.toolbar_selectDestination)
                         if (menu != null) with(menu) {
                             findItem(R.id.createDir).isVisible = true
                             findItem(R.id.delete).isVisible = false
