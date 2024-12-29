@@ -7,7 +7,7 @@ import com.nevidimka655.astracrypt.view.models.UiState
 import com.nevidimka655.astracrypt.view.navigation.Route
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 
-val LabListUiState = UiState(
+private val ScreenUiState = UiState(
     toolbar = UiState.Toolbar(
         title = TextWrap.Resource(id = R.string.lab)
     )
@@ -18,7 +18,7 @@ fun NavGraphBuilder.labList(
     navigateToAeadEncryption: () -> Unit = {},
     navigateToCombinedZip: () -> Unit = {}
 ) = composable<Route.LabGraph.List> {
-    onUiStateChange(LabListUiState)
+    onUiStateChange(ScreenUiState)
 
     LabScreen(
         navigateToAeadEncryption = navigateToAeadEncryption,
