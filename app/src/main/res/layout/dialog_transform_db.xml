@@ -5,11 +5,11 @@
     android:orientation="vertical"
     android:padding="@dimen/dialog_view_padding">
 
-    <com.google.android.material.progressindicator.LinearProgressIndicator
+    <!--<com.google.android.material.progressindicator.LinearProgressIndicator
         android:id="@+id/progressBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:indeterminate="true" />
+        android:indeterminate="true" />-->
 
     <TextView
         android:layout_width="match_parent"
