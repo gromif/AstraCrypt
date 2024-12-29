@@ -7,7 +7,6 @@ class AndroidPagingConventionPlugin: Plugin<Project> {
     override fun apply(target: Project): Unit = with(target) {
         dependencies {
             add("implementation", libs.findLibrary("paging.compose").get())
-            add("implementation", libs.findLibrary("paging.runtime.ktx").get())
         }
     }
 }
