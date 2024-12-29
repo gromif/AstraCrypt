@@ -16,11 +16,12 @@ fun NavGraphBuilder.labGraph(
     labList(
         onUiStateChange = onUiStateChange,
         navigateToAeadEncryption = { navController.navigate(Route.LabGraph.TinkGraph) },
-        navigateToCombinedZip = { TODO() },
+        navigateToCombinedZip = { navController.navigate(Route.LabGraph.CombinedZip) },
     )
     labTinkGraph(
         onUiStateChange = onUiStateChange,
         navController = navController,
         onFabClick = onFabClick
     )
+    labCombinedZip(onUiStateChange = onUiStateChange, onFabClick = onFabClick)
 }

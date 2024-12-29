@@ -24,6 +24,8 @@ object Route {
             @Serializable data class Files(val rawKeyset: String)
         }
 
+        @Serializable object CombinedZip
+
     }
 
     @Serializable
