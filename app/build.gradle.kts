@@ -11,7 +11,6 @@ plugins {
     alias(libs.plugins.astracrypt.android.room)
     alias(libs.plugins.astracrypt.android.paging)
     alias(libs.plugins.astracrypt.android.work)
-    alias(libs.plugins.kotlin.navigation.safeargs)
 }
 
 // Create a variable called keystorePropertiesFile, and initialize it to your
@@ -72,12 +71,13 @@ dependencies {
     implementation(projects.core.designSystem)
     implementation(projects.core.utils)
     implementation(projects.core.resources)
-    implementation(project(":core:haptic"))
-    implementation(project(":core:tiles-with-coroutines"))
+    implementation(projects.core.haptic)
+    implementation(projects.core.tilesWithCoroutines)
     implementation(projects.database.notes)
 
     implementation(projects.core.tink)
     implementation(projects.features.tinkLab)
+    implementation(projects.features.labZip)
     implementation(projects.features.composeNotes)
 
     implementation(projects.di.core)
@@ -86,9 +86,6 @@ dependencies {
     implementation(project(":ui:compose-color-schemes"))
     implementation(project(":ui:compose-details"))
     implementation(project(":ui:compose-help"))
-
-    // Navigation
-    implementation(libs.navigation.ui.ktx)
 
     // Compose
     implementation(platform(libs.compose.bom))
@@ -103,10 +100,6 @@ dependencies {
     debugImplementation(libs.compose.ui.tooling.preview)
     debugImplementation(libs.compose.ui.test.manifest)
 
-    // Lifecycle
-    implementation(libs.lifecycle.viewmodel.ktx)
-    implementation(libs.lifecycle.viewmodel.compose)
-
     // Media
     implementation(libs.media.coil.compose)
     implementation(libs.media.coil.video)
@@ -116,5 +109,6 @@ dependencies {
     implementation(libs.google.crypto.tink)
 
     // Other
+    implementation(libs.androidx.documentfile)
     implementation(libs.androidx.datastore.preferences)
 }
