@@ -20,6 +20,7 @@ class AndroidApplicationComposeConventionPlugin: Plugin<Project> {
 
             dependencies {
                 add("implementation", project(":ui:compose-core"))
+                "implementation"(libs.findLibrary("lifecycle.viewmodel.compose").get())
                 "implementation"(libs.findLibrary("lifecycle.runtime.compose").get())
             }
         }
