@@ -25,7 +25,6 @@ class AndroidApplicationConventionPlugin: Plugin<Project> {
                 versionName = AppConfig.Versions.NAME
 
                 buildFeatures.buildConfig = true
-                vectorDrawables.useSupportLibrary = true
             }
             configureKotlinAndroid()
         }
