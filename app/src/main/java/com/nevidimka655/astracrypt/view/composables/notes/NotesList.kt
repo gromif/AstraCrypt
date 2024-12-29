@@ -16,7 +16,9 @@ import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 
-private val notesListUiState = UiState(
+private typealias ComposableRoute = Route.NotesGraph.List
+
+private val ScreenUiState = UiState(
     toolbar = UiState.Toolbar(
         title = TextWrap.Resource(id = R.string.notes)
     ),
@@ -28,8 +30,8 @@ fun NavGraphBuilder.notesList(
     onFabClick: Flow<Any>,
     navigateToCreate: () -> Unit,
     navigateToView: (id: Long) -> Unit
-) = composable<Route.NotesGraph.List> {
-    onUiStateChange(notesListUiState)
+) = composable<ComposableRoute> {
+    onUiStateChange(ScreenUiState)
 
     LaunchedEffect(Unit) {
         onFabClick.collectLatest { navigateToCreate() }
