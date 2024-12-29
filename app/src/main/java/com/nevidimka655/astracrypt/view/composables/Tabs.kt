@@ -121,7 +121,7 @@ fun NavGraphBuilder.tabs(
     }
 }
 
-val HomeUiState = UiState(
+private val HomeUiState = UiState(
     toolbar = UiState.Toolbar(
         actions = listOf(
             ToolbarActionNotes(),
@@ -131,7 +131,7 @@ val HomeUiState = UiState(
     bottomBarTab = BottomBarItems.Home
 )
 
-val FilesUiState = UiState(
+private val FilesUiState = UiState(
     toolbar = UiState.Toolbar(
         title = TextWrap.Resource(id = R.string.files)
     ),
@@ -140,14 +140,14 @@ val FilesUiState = UiState(
     searchBar = true
 )
 
-val StarredUiState = UiState(
+private val StarredUiState = UiState(
     toolbar = UiState.Toolbar(
         title = TextWrap.Resource(id = R.string.starred)
     ),
     bottomBarTab = BottomBarItems.Starred
 )
 
-val SettingsUiState = UiState(
+private val SettingsUiState = UiState(
     toolbar = UiState.Toolbar(
         title = TextWrap.Resource(id = R.string.settings)
     ),

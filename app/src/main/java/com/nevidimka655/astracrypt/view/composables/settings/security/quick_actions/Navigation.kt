@@ -12,7 +12,7 @@ import com.nevidimka655.astracrypt.view.models.UiState
 import com.nevidimka655.astracrypt.view.navigation.Route
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 
-val SettingsSecurityQuickActionsUiState = UiState(
+private val SettingsSecurityQuickActionsUiState = UiState(
     toolbar = UiState.Toolbar(
         title = TextWrap.Resource(id = R.string.settings_quickActions)
     )
