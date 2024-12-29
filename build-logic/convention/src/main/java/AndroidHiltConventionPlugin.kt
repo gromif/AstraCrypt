@@ -2,12 +2,17 @@ import com.nevidimka655.buildlogic.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
+import org.gradle.kotlin.dsl.exclude
 
 class AndroidHiltConventionPlugin: Plugin<Project> {
     override fun apply(target: Project): Unit = with(target) {
         with(pluginManager) {
             apply("dagger.hilt.android.plugin")
             apply("com.google.devtools.ksp")
+        }
+
+        configurations.all {
+            exclude(group = "androidx.viewpager")
         }
 
         dependencies {
