@@ -1,14 +1,10 @@
 package com.nevidimka655.astracrypt.view.composables.components.dialogs
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import com.nevidimka655.astracrypt.databinding.DialogTransformDbBinding
 
 class DatabaseTransformDialog : DialogFragment() {
-    private var binding: DialogTransformDbBinding? = null
 
     /*override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         isCancelable = false
@@ -20,14 +16,6 @@ class DatabaseTransformDialog : DialogFragment() {
             .setView(onCreateView(layoutInflater, null, savedInstanceState))
             .create()
     }*/
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ) = binding?.root ?: DialogTransformDbBinding.inflate(inflater, container, false).also {
-        binding = it
-    }.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -41,10 +29,5 @@ class DatabaseTransformDialog : DialogFragment() {
                 }
             }
         }*/
-    }
-
-    override fun onDestroyView() {
-        binding = null
-        super.onDestroyView()
     }
 }

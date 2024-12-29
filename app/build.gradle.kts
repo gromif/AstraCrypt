@@ -27,10 +27,7 @@ android {
     namespace = "com.nevidimka655.astracrypt"
 
     defaultConfig {
-        buildFeatures.run {
-            viewBinding = true
-            buildConfig = true
-        }
+        buildFeatures.buildConfig = true
         signingConfigs {
             create("release") {
                 keyAlias = keystoreProperties["keyAlias"] as String
