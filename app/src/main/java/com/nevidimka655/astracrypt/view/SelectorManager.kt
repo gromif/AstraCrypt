@@ -3,7 +3,6 @@ package com.nevidimka655.astracrypt.view
 import android.view.ActionMode
 import android.view.View
 import androidx.compose.runtime.mutableStateMapOf
-import com.google.android.material.appbar.MaterialToolbar
 
 class SelectorManager {
     val itemsMapState = mutableStateMapOf<Long, Boolean>()
@@ -45,10 +44,8 @@ class SelectorManager {
     }
 
     fun setView(
-        viewInstance: MaterialToolbar,
         actionModeInstance: ActionMode.Callback? = null
     ) {
-        view = viewInstance
         actionModeCallback = actionModeInstance
     }
 
