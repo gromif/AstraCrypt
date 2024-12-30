@@ -74,8 +74,8 @@ class FilesViewModel @Inject constructor(
         dirId: Long
     ) = viewModelScope.launch(defaultDispatcher) {
         val aeadInfo = aeadManager.getInfo()
-        val listToSave = uriList.map { it.toString() }.toTypedArray()
-        val fileWithUris = workerSerializer.saveStringArrayToFile(listToSave)
+        val listToSave = uriList.map { it.toString() }
+        val fileWithUris = workerSerializer.saveStringListToFile(listToSave)
         val aeadInfoJson = Json.encodeToString(aeadInfo)
         val associatedData = if (aeadInfo.bindAssociatedData)
             keysetManager.transformAssociatedDataToWorkInstance(
