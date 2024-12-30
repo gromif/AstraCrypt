@@ -62,23 +62,4 @@ class WorkerFactory(
         transformWorkLiveData = workManager.getWorkInfoByIdLiveData(workerRequest.id)
     }
 
-    /*suspend fun startCombinedZipWorker(
-        sourceUri: Uri,
-        destinationUri: Uri,
-        zipFilesContentStringArray: Array<String>
-    ) {
-        val fileWithZipContentPath =
-            workerSerializer.saveStringArrayToFile(zipFilesContentStringArray)
-        val data = workDataOf(
-            Pair(LabCombinedZipWorker.Args.ZIP_FILE_URI, fileWithZipContentPath),
-            Pair(LabCombinedZipWorker.Args.SOURCE_URI, sourceUri.toString()),
-            Pair(LabCombinedZipWorker.Args.TARGET_URI, destinationUri.toString())
-        )
-        val workerRequest = OneTimeWorkRequestBuilder<LabCombinedZipWorker>()
-            .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
-            .setInputData(data)
-            .build()
-        workManager.enqueue(workerRequest)
-    }*/
-
 }
