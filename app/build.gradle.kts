@@ -76,7 +76,7 @@ dependencies {
     implementation(projects.features.labZip)
     implementation(projects.features.composeNotes)
 
-    implementation(projects.di.core)
+    implementation(projects.di.utils)
 
     implementation(project(":ui:compose-calculator"))
     implementation(project(":ui:compose-color-schemes"))
