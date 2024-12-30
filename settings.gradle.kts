@@ -3,28 +3,24 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 include(":app")
 
-val coreModules = listOf(
-    "tink",
-    "haptic",
-    "tiles-with-coroutines"
-)
-val features = listOf(
-    "compose-notes",
-    "tink-lab"
-)
-val uiModules = listOf(
-    "compose-core",
-    "compose-calculator",
-    "compose-color-schemes",
-    "compose-details",
-    "compose-help"
-)
+val coreModules = listOf("tink", "haptic", "tiles-with-coroutines", "resources", "utils", "design-system")
+val featuresModules = listOf("compose-notes", "tink-lab", "help", "lab-zip")
+val uiModules = listOf("compose-core", "compose-calculator", "compose-color-schemes", "compose-details")
+val domainModules = listOf("notes", "tink-lab", "lab-zip")
+val dataModules = listOf("notes", "tink-lab", "lab-zip")
+val diModules = listOf("notes", "tink-lab", "lab-zip", "utils")
+val databaseModules = listOf("notes")
 
-include(group = "core", modules = coreModules)
-include(group = "features", modules = features)
-include(group = "ui", modules = uiModules)
+// Include all modules
+include(":app")
+include("core", coreModules)
+include("features", featuresModules)
+include("ui", uiModules)
+include("domain", domainModules)
+include("data", dataModules)
+include("di", diModules)
+include("database", databaseModules)
 
-//project(":$group:$it").projectDir = File("$modulesDir\\$group\\$it")
 fun include(group: String, modules: List<String>) = modules.forEach { include(":$group:$it") }
 
 pluginManagement {
@@ -42,18 +38,3 @@ dependencyResolutionManagement {
         gradlePluginPortal()
     }
 }
-include(":domain:notes")
-include(":data:notes")
-include(":di:notes")
-include(":domain:tink-lab")
-include(":data:tink-lab")
-include(":di:tink-lab")
-include(":di:utils")
-include(":core:resources")
-include(":core:utils")
-include(":core:design-system")
-include(":database:notes")
-include(":features:lab-zip")
-include(":domain:lab-zip")
-include(":data:lab-zip")
-include(":di:lab-zip")
