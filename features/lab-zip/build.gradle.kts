@@ -20,4 +20,5 @@ dependencies {
     implementation(projects.core.resources)
     implementation(projects.di.core)
     implementation(projects.core.utils)
+    implementation(projects.core.tink)
 }
