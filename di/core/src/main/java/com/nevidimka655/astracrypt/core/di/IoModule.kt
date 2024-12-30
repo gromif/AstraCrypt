@@ -1,8 +1,9 @@
-package com.nevidimka655.astracrypt.app.di
+package com.nevidimka655.astracrypt.core.di
 
 import android.content.Context
-import com.nevidimka655.astracrypt.data.io.FilesService
-import com.nevidimka655.astracrypt.data.io.Randomizer
+import com.nevidimka655.astracrypt.utils.io.FilesUtil
+import com.nevidimka655.astracrypt.utils.io.Randomizer
+import com.nevidimka655.astracrypt.utils.io.WorkerSerializer
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,12 +17,20 @@ object IoModule {
 
     @Singleton
     @Provides
-    fun provideIo(
+    fun provideWorkerSerializer(filesUtil: FilesUtil) = WorkerSerializer(filesUtil = filesUtil)
+
+    @Singleton
+    @Provides
+    fun provideFilesUtil(
         @ApplicationContext context: Context,
         randomizer: Randomizer
-    ) = FilesService(
+    ) = FilesUtil(
         context = context,
         randomizer = randomizer
     )
-    
+
+    @Singleton
+    @Provides
+    fun provideRandomizer() = Randomizer()
+
 }

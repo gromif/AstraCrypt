@@ -14,7 +14,7 @@ import com.nevidimka655.astracrypt.core.di.IoDispatcher
 import com.nevidimka655.astracrypt.app.utils.FileSystemSetupManager
 import com.nevidimka655.astracrypt.data.database.StorageItemMinimalTuple
 import com.nevidimka655.astracrypt.data.datastore.AppearanceManager
-import com.nevidimka655.astracrypt.data.io.FilesService
+import com.nevidimka655.astracrypt.utils.io.FilesUtil
 import com.nevidimka655.astracrypt.data.paging.FilesPagingProvider
 import com.nevidimka655.astracrypt.data.paging.StarredPagingProvider
 import com.nevidimka655.astracrypt.data.repository.RepositoryProviderImpl
@@ -41,7 +41,7 @@ class MainVM @Inject constructor(
     private val defaultDispatcher: CoroutineDispatcher,
     private val repositoryProviderImpl: RepositoryProviderImpl,
     private val fileSystemSetupManager: FileSystemSetupManager,
-    private val filesService: FilesService,
+    private val filesUtil: FilesUtil,
     private val filesPagingProvider: FilesPagingProvider,
     private val starredPagingProvider: StarredPagingProvider,
     val appearanceManager: AppearanceManager
@@ -134,9 +134,9 @@ class MainVM @Inject constructor(
         suspend fun deleteIterator(itemToDelete: StorageItemMinimalTuple) {
             idsList.add(itemToDelete.id)
             if (itemToDelete.path.isNotEmpty()) {
-                val localFile = filesService.getLocalFile(itemToDelete.path)
+                val localFile = filesUtil.getLocalFile(itemToDelete.path)
                 if (localFile.exists()) {
-                    val thumbLocalFile = filesService.getLocalFile(itemToDelete.preview)
+                    val thumbLocalFile = filesUtil.getLocalFile(itemToDelete.preview)
                     thumbLocalFile.delete()
                     localFile.delete()
                 }

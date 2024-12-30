@@ -13,7 +13,7 @@ import androidx.compose.material.icons.outlined.SdCard
 import androidx.lifecycle.ViewModel
 import coil.ImageLoader
 import com.nevidimka655.astracrypt.resources.R
-import com.nevidimka655.astracrypt.data.io.FilesService
+import com.nevidimka655.astracrypt.utils.io.FilesUtil
 import com.nevidimka655.astracrypt.domain.model.db.StorageFlags
 import com.nevidimka655.astracrypt.data.database.StorageItemType
 import com.nevidimka655.astracrypt.domain.repository.Repository
@@ -30,7 +30,7 @@ import javax.inject.Inject
 @HiltViewModel
 class DetailsScreenViewModel @Inject constructor(
     private val repository: Repository,
-    private val filesService: FilesService,
+    private val filesUtil: FilesUtil,
     private val bytesToHumanReadableUseCase: BytesToHumanReadableUseCase,
     val detailsManager: DetailsManager,
     val imageLoader: ImageLoader
@@ -62,7 +62,7 @@ class DetailsScreenViewModel @Inject constructor(
             )
             // SIZE
             if (isFile) {
-                val file = filesService.getLocalFile(item.path)
+                val file = filesUtil.getLocalFile(item.path)
                 val currentSizeBytes = file.length()
                 val currentSize = bytesToHumanReadableUseCase.invoke(currentSizeBytes)
                 addItem(
@@ -142,7 +142,7 @@ class DetailsScreenViewModel @Inject constructor(
                 summary = TextWrap.Text(text = "$originalSize ($originalSizeBytes B)")
             )
             if (item.preview != null) {
-                val thumbnailFile = filesService.getLocalFile(item.preview)
+                val thumbnailFile = filesUtil.getLocalFile(item.preview)
                 val thumbnailSizeBytes = thumbnailFile.length()
                 val thumbnailSize = bytesToHumanReadableUseCase.invoke(thumbnailSizeBytes)
                 addItem(

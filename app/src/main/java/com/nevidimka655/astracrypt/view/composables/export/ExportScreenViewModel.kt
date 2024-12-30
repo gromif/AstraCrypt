@@ -15,7 +15,7 @@ import androidx.work.WorkManager
 import androidx.work.workDataOf
 import com.nevidimka655.astracrypt.core.di.IoDispatcher
 import com.nevidimka655.astracrypt.data.crypto.AeadManager
-import com.nevidimka655.astracrypt.data.io.FilesService
+import com.nevidimka655.astracrypt.utils.io.FilesUtil
 import com.nevidimka655.astracrypt.app.services.ExportFilesWorker
 import com.nevidimka655.astracrypt.view.models.ExportUiState
 import com.nevidimka655.astracrypt.domain.repository.Repository
@@ -43,7 +43,7 @@ class ExportScreenViewModel @Inject constructor(
     private val aeadManager: AeadManager,
     private val repository: Repository,
     private val keysetManager: KeysetManager,
-    val filesService: FilesService,
+    val filesUtil: FilesUtil,
     val workManager: WorkManager
 ) : ViewModel() {
     private val workUUID = UUID.randomUUID()
@@ -54,12 +54,12 @@ class ExportScreenViewModel @Inject constructor(
         itemId: Long, contentResolver: ContentResolver
     ) = viewModelScope.launch(defaultDispatcher) {
         val exportTuple = repository.getDataForOpening(id = itemId)
-        val exportFile = filesService.getExportedCacheFile(exportTuple.name)
-        val outputUri = filesService.getExportedCacheFileUri(file = exportFile)
+        val exportFile = filesUtil.getExportedCacheFile(exportTuple.name)
+        val outputUri = filesUtil.getExportedCacheFileUri(file = exportFile)
         internalExportUri = outputUri.toString()
         uiState = uiState.copy(name = exportTuple.name)
         val outStream = contentResolver.openOutputStream(outputUri)
-        val inStream = filesService.getLocalFile(exportTuple.path).run {
+        val inStream = filesUtil.getLocalFile(exportTuple.path).run {
             inputStream()
             /*if (exportTuple.encryptionType == -1) inputStream()
             else {
@@ -135,6 +135,6 @@ class ExportScreenViewModel @Inject constructor(
 
     fun cancelExport() = workManager.cancelWorkById(id = workUUID)
 
-    fun onDispose() = filesService.clearExportedCache()
+    fun onDispose() = filesUtil.clearExportedCache()
 
 }

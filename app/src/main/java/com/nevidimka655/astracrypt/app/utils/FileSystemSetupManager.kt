@@ -3,7 +3,7 @@ package com.nevidimka655.astracrypt.app.utils
 import android.content.Context
 import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.astracrypt.core.di.IoDispatcher
-import com.nevidimka655.astracrypt.data.io.FilesService
+import com.nevidimka655.astracrypt.utils.io.FilesUtil
 import com.nevidimka655.astracrypt.data.repository.RepositoryProviderImpl
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -22,12 +22,12 @@ class FileSystemSetupManager @Inject constructor(
 
     private val keysetManager: KeysetManager,
     private val repositoryProviderImpl: RepositoryProviderImpl,
-    private val filesService: FilesService
+    private val filesUtil: FilesUtil
 ) {
-    fun isDatabaseCreated() = filesService.dataDir.exists()
+    fun isDatabaseCreated() = filesUtil.dataDir.exists()
 
     suspend fun setup() = withContext(defaultDispatcher) {
-        filesService.dataDir.mkdir()
+        filesUtil.dataDir.mkdir()
         keysetManager.associatedData
         val foldersArray = arrayOf(
             R.string.music, R.string.document, R.string.video, R.string.photo

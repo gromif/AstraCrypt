@@ -1,11 +1,11 @@
-package com.nevidimka655.astracrypt.data.io
+package com.nevidimka655.astracrypt.utils.io
 
 import android.content.Context
 import android.text.format.DateFormat
 import androidx.core.content.FileProvider
 import java.io.File
 
-class FilesService (
+class FilesUtil (
     private val context: Context,
     private val randomizer: Randomizer
 ) {

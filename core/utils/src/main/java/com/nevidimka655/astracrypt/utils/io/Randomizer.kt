@@ -1,11 +1,8 @@
-package com.nevidimka655.astracrypt.data.io
+package com.nevidimka655.astracrypt.utils.io
 
-import javax.inject.Inject
-import javax.inject.Singleton
 import kotlin.random.Random
 
-@Singleton
-class Randomizer @Inject constructor() {
+class Randomizer {
     companion object {
         private const val ENG_LOWERCASE = "abcdefghijklmnopqrstuvwxyz"
         private const val ENG_UPPERCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"

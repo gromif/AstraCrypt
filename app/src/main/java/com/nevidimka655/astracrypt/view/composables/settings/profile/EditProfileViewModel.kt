@@ -18,7 +18,7 @@ import com.nevidimka655.astracrypt.app.AppConfig
 import com.nevidimka655.astracrypt.core.di.IoDispatcher
 import com.nevidimka655.astracrypt.utils.Api
 import com.nevidimka655.astracrypt.view.models.CenterCropTransformation
-import com.nevidimka655.astracrypt.data.io.FilesService
+import com.nevidimka655.astracrypt.utils.io.FilesUtil
 import com.nevidimka655.astracrypt.data.crypto.AeadManager
 import com.nevidimka655.astracrypt.data.datastore.SettingsDataStoreManager
 import com.nevidimka655.astracrypt.data.model.CoilTinkModel
@@ -42,9 +42,9 @@ class EditProfileViewModel @Inject constructor(
     private val settingsDataStoreManager: SettingsDataStoreManager,
     private val aeadManager: AeadManager,
     val imageLoader: ImageLoader,
-    filesService: FilesService
+    filesUtil: FilesUtil
 ): ViewModel() {
-    private val iconFile = filesService.getProfileIconFile()
+    private val iconFile = filesUtil.getProfileIconFile()
     val profileInfoFlow get() = settingsDataStoreManager.profileInfoFlow
     val coilAvatarModel = CoilTinkModel(absolutePath = iconFile.toString())
     var isImageProcessing by mutableStateOf(false)

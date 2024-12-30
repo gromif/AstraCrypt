@@ -4,7 +4,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import com.nevidimka655.astracrypt.core.di.IoDispatcher
 import com.nevidimka655.astracrypt.data.database.AppDatabase
-import com.nevidimka655.astracrypt.data.io.FilesService
+import com.nevidimka655.astracrypt.utils.io.FilesUtil
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import com.nevidimka655.tiles_with_coroutines.TileServiceCoroutine
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,7 +20,7 @@ class WipeTile @Inject constructor() : TileServiceCoroutine() {
     @IoDispatcher
     @Inject lateinit var defaultDispatcher: CoroutineDispatcher
     @Inject lateinit var database: AppDatabase
-    @Inject lateinit var filesService: FilesService
+    @Inject lateinit var filesUtil: FilesUtil
     @Inject lateinit var keysetManager: KeysetManager
 
     override fun onClick() {
@@ -38,7 +38,7 @@ class WipeTile @Inject constructor() : TileServiceCoroutine() {
                 it.write(ByteArray(96))
             }
 
-            with(filesService) {
+            with(filesUtil) {
                 dataDir.deleteRecursively()
                 cacheDir.deleteRecursively()
             }
