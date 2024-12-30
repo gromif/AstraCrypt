@@ -11,9 +11,9 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import com.nevidimka655.astracrypt.resources.R
-import com.nevidimka655.astracrypt.view.models.ToolbarAction
 import com.nevidimka655.astracrypt.view.models.UiState
-import com.nevidimka655.astracrypt.view.models.actions.ToolbarActionDelete
+import com.nevidimka655.astracrypt.view.models.actions.ToolbarActions
+import com.nevidimka655.astracrypt.view.models.actions.delete
 import com.nevidimka655.astracrypt.view.navigation.Route
 import com.nevidimka655.notes.Notes
 import com.nevidimka655.notes.ui.overview.OverviewScreen
@@ -26,7 +26,7 @@ private val SaveFabUiState = UiState.Fab(icon = Icons.Default.SaveAs)
 
 fun NavGraphBuilder.overviewNote(
     onUiStateChange: (UiState) -> Unit,
-    onToolbarActions: Flow<ToolbarAction>,
+    onToolbarActions: Flow<ToolbarActions.Action>,
     onFabClick: Flow<Any>
 ) = composable<Route.NotesGraph.Overview> {
     val overview: Route.NotesGraph.Overview = it.toRoute()
@@ -37,7 +37,7 @@ fun NavGraphBuilder.overviewNote(
 
     if (editMode) LaunchedEffect(Unit) {
         onToolbarActions.collectLatest {
-            if (it is ToolbarActionDelete) onDeleteRequestChannel.send(Unit)
+            if (it == ToolbarActions.delete) onDeleteRequestChannel.send(Unit)
         }
     }
     LaunchedEffect(Unit) {
@@ -59,7 +59,7 @@ fun NavGraphBuilder.overviewNote(
                 title = if (newName.isBlank() && !editMode) {
                     TextWrap.Resource(id = R.string.createNew)
                 } else TextWrap.Text(text = newName),
-                actions = if (editMode) listOf(ToolbarActionDelete()) else null
+                actions = if (editMode) listOf(ToolbarActions.delete) else null
             ),
             fab = fabState
         )

@@ -13,32 +13,30 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.astracrypt.domain.model.profile.ProfileInfo
+import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.astracrypt.view.MainVM
 import com.nevidimka655.astracrypt.view.composables.files.FilesScreen
 import com.nevidimka655.astracrypt.view.composables.files.FilesViewModel
 import com.nevidimka655.astracrypt.view.composables.home.HomeScreen
 import com.nevidimka655.astracrypt.view.composables.home.HomeViewModel
 import com.nevidimka655.astracrypt.view.composables.settings.SettingsScreen
-import com.nevidimka655.astracrypt.view.models.ToolbarAction
 import com.nevidimka655.astracrypt.view.models.UiState
-import com.nevidimka655.astracrypt.view.models.actions.ToolbarActionLab
-import com.nevidimka655.astracrypt.view.models.actions.ToolbarActionNotes
+import com.nevidimka655.astracrypt.view.models.actions.ToolbarActions
+import com.nevidimka655.astracrypt.view.models.actions.lab
+import com.nevidimka655.astracrypt.view.models.actions.notes
 import com.nevidimka655.astracrypt.view.navigation.BottomBarItems
 import com.nevidimka655.astracrypt.view.navigation.Route
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.receiveAsFlow
 
 fun NavGraphBuilder.tabs(
     onUiStateChange: (UiState) -> Unit,
     vm: MainVM,
     navController: NavController,
     onFabClick: Flow<Any>,
-    onToolbarActions: Flow<ToolbarAction>
+    onToolbarActions: Flow<ToolbarActions.Action>
 ) {
     composable<Route.Tabs.Home> {
         onUiStateChange(HomeUiState)
@@ -50,8 +48,8 @@ fun NavGraphBuilder.tabs(
         LaunchedEffect(Unit) {
             onToolbarActions.collectLatest {
                 when (it) {
-                    is ToolbarActionNotes -> navController.navigate(Route.NotesGraph)
-                    is ToolbarActionLab -> navController.navigate(Route.LabGraph)
+                    ToolbarActions.notes -> navController.navigate(Route.NotesGraph)
+                    ToolbarActions.lab -> navController.navigate(Route.LabGraph)
                 }
             }
         }
@@ -123,10 +121,7 @@ fun NavGraphBuilder.tabs(
 
 private val HomeUiState = UiState(
     toolbar = UiState.Toolbar(
-        actions = listOf(
-            ToolbarActionNotes(),
-            ToolbarActionLab()
-        )
+        actions = listOf(ToolbarActions.notes, ToolbarActions.lab)
     ),
     bottomBarTab = BottomBarItems.Home
 )

@@ -28,16 +28,16 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
-import com.nevidimka655.atracrypt.core.design_system.AstraCryptTheme
 import com.nevidimka655.astracrypt.utils.Api
 import com.nevidimka655.astracrypt.view.composables.components.BottomBarImpl
 import com.nevidimka655.astracrypt.view.composables.components.FloatingActionButtonImpl
 import com.nevidimka655.astracrypt.view.composables.components.appbar.SearchBarImpl
 import com.nevidimka655.astracrypt.view.composables.components.appbar.ToolbarImpl
-import com.nevidimka655.astracrypt.view.models.ToolbarAction
+import com.nevidimka655.astracrypt.view.models.actions.ToolbarActions
 import com.nevidimka655.astracrypt.view.navigation.BottomBarItems
 import com.nevidimka655.astracrypt.view.navigation.Route
 import com.nevidimka655.astracrypt.view.navigation.root
+import com.nevidimka655.atracrypt.core.design_system.AstraCryptTheme
 import com.nevidimka655.haptic.Haptic
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -57,7 +57,7 @@ fun AstraCryptApp(
     val (toolbar, fab, bottomBarTab, searchBar) = uiState
     var searchBarExpanded by rememberSaveable { mutableStateOf(false) }
     val onFabClick = remember { Channel<Any>(0) }
-    val onToolbarActions = remember { Channel<ToolbarAction>(0) }
+    val onToolbarActions = remember { Channel<ToolbarActions.Action>(0) }
 
     val coroutineScope = rememberCoroutineScope()
     val topBarScroll = TopAppBarDefaults.enterAlwaysScrollBehavior()

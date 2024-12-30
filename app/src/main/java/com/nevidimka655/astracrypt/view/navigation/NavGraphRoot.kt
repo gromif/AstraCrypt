@@ -3,6 +3,7 @@ package com.nevidimka655.astracrypt.view.navigation
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import com.nevidimka655.astracrypt.view.MainVM
+import com.nevidimka655.astracrypt.view.composables.export.export
 import com.nevidimka655.astracrypt.view.composables.files.details.details
 import com.nevidimka655.astracrypt.view.composables.lab.labGraph
 import com.nevidimka655.astracrypt.view.composables.notes.notesGraph
@@ -14,11 +15,9 @@ import com.nevidimka655.astracrypt.view.composables.settings.security.quick_acti
 import com.nevidimka655.astracrypt.view.composables.settings.security.settingsSecurity
 import com.nevidimka655.astracrypt.view.composables.settings.ui.files.settingsUiFiles
 import com.nevidimka655.astracrypt.view.composables.settings.ui.settingsUi
-import com.nevidimka655.astracrypt.view.composables.export.export
 import com.nevidimka655.astracrypt.view.composables.tabs
-import com.nevidimka655.astracrypt.view.models.ToolbarAction
 import com.nevidimka655.astracrypt.view.models.UiState
-import kotlinx.coroutines.channels.Channel
+import com.nevidimka655.astracrypt.view.models.actions.ToolbarActions
 import kotlinx.coroutines.flow.Flow
 
 fun root(
@@ -26,7 +25,7 @@ fun root(
     vm: MainVM,
     navController: NavController,
     onFabClick: Flow<Any>,
-    onToolbarActions: Flow<ToolbarAction>
+    onToolbarActions: Flow<ToolbarActions.Action>
 ): NavGraphBuilder.() -> Unit = {
     tabs(
         onUiStateChange = onUiStateChange,
