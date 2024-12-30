@@ -85,7 +85,7 @@ import com.nevidimka655.astracrypt.data.database.PagerTuple
 import com.nevidimka655.astracrypt.view.MainVM
 import com.nevidimka655.astracrypt.view.composables.files.sheets.filesCreateNewSheet
 import com.nevidimka655.astracrypt.view.composables.files.sheets.filesOptionsSheet
-import com.nevidimka655.astracrypt.view.composables.components.NoItemsPage
+import com.nevidimka655.ui.compose_core.NoItemsPage
 import com.nevidimka655.astracrypt.view.composables.components.dialogs.DeleteFile
 import com.nevidimka655.astracrypt.view.composables.components.dialogs.DeleteOriginalFiles
 import com.nevidimka655.astracrypt.view.composables.components.dialogs.Dialogs
@@ -98,10 +98,8 @@ import com.nevidimka655.ui.compose_core.ext.LocalWindowWidth
 import com.nevidimka655.ui.compose_core.ext.cellsCount
 import com.nevidimka655.ui.compose_core.theme.spaces
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -674,17 +672,23 @@ fun FilesScreen(
         ) {
             when {
                 isStarred -> NoItemsPage(
-                    mainIcon = Icons.Outlined.StarOutline, actionIcon = Icons.Outlined.StarOutline
+                    mainIcon = Icons.Outlined.StarOutline,
+                    actionIcon = Icons.Outlined.StarOutline,
+                    title = stringResource(R.string.noItemsTitle),
+                    summary = stringResource(R.string.noItemsSummary)
                 )
 
                 vm.isSearching -> NoItemsPage(
                     mainIcon = Icons.Filled.Search,
                     actionIcon = Icons.Filled.Search,
-                    title = R.string.noItemsTitleSearch,
-                    summary = R.string.noItemsSummarySearch
+                    title = stringResource(R.string.noItemsTitleSearch),
+                    summary = stringResource(R.string.noItemsSummarySearch)
                 )
 
-                else -> NoItemsPage()
+                else -> NoItemsPage(
+                    title = stringResource(R.string.noItemsTitle),
+                    summary = stringResource(R.string.noItemsSummary)
+                )
             }
         }
     }
