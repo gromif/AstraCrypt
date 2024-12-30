@@ -5,7 +5,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FolderZip
-import androidx.compose.material3.Icon
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -15,6 +14,8 @@ import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.astracrypt.view.composables.components.BaseNoItemsPage
 import com.nevidimka655.astracrypt.view.composables.components.NoItemsPageSize
 import com.nevidimka655.astracrypt.view.models.UiState
+import com.nevidimka655.astracrypt.view.models.actions.ToolbarActions
+import com.nevidimka655.astracrypt.view.models.actions.help
 import com.nevidimka655.astracrypt.view.navigation.Route
 import com.nevidimka655.features.lab_zip.CombineZipScreen
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
@@ -27,7 +28,8 @@ private typealias ComposableRoute = Route.LabGraph.CombinedZip
 
 private val ScreenUiState = UiState(
     toolbar = UiState.Toolbar(
-        title = TextWrap.Resource(id = R.string.lab_combinedZip)
+        title = TextWrap.Resource(id = R.string.lab_combinedZip),
+        actions = listOf(ToolbarActions.help)
     ),
     fab = UiState.Fab(icon = Icons.Default.FolderZip)
 )
@@ -57,3 +59,7 @@ fun NavGraphBuilder.labCombinedZip(
         }
     )
 }
+
+private val HelpList = listOf(
+    R.string.lab_combinedZip, R.string.help_lab_zip_general
+)
