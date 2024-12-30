@@ -1,13 +1,11 @@
 package com.nevidimka655.astracrypt.app.services.utils
 
-import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.OutOfQuotaPolicy
 import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import androidx.work.workDataOf
-import com.nevidimka655.astracrypt.app.services.LabCombinedZipWorker
 import com.nevidimka655.astracrypt.app.services.TransformDatabaseWorker
 import com.nevidimka655.astracrypt.app.services.TransformNotesWorker
 import com.nevidimka655.astracrypt.data.model.AeadInfo
@@ -18,7 +16,6 @@ import kotlinx.serialization.json.Json
 
 class WorkerFactory(
     private val workManager: WorkManager,
-    private val workerSerializer: WorkerSerializer,
     private val keysetManager: KeysetManager
 ) {
     var transformWorkLiveData: LiveData<WorkInfo?>? = null
@@ -65,7 +62,7 @@ class WorkerFactory(
         transformWorkLiveData = workManager.getWorkInfoByIdLiveData(workerRequest.id)
     }
 
-    suspend fun startCombinedZipWorker(
+    /*suspend fun startCombinedZipWorker(
         sourceUri: Uri,
         destinationUri: Uri,
         zipFilesContentStringArray: Array<String>
@@ -82,6 +79,6 @@ class WorkerFactory(
             .setInputData(data)
             .build()
         workManager.enqueue(workerRequest)
-    }
+    }*/
 
 }
