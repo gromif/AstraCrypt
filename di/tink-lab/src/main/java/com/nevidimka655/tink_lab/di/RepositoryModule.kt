@@ -12,7 +12,7 @@ import dagger.hilt.android.components.ViewModelComponent
 
 @Module
 @InstallIn(ViewModelComponent::class)
-object RepositoryModule {
+internal object RepositoryModule {
 
     @Provides
     fun provideRepository(

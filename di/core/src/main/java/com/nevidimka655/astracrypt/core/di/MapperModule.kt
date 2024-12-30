@@ -12,7 +12,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object MapperModule {
+internal object MapperModule {
 
     @Singleton
     @Provides

@@ -15,7 +15,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 
 @Module
 @InstallIn(ViewModelComponent::class)
-object RepositoryModule {
+internal object RepositoryModule {
 
     @Provides
     fun provideRepository(

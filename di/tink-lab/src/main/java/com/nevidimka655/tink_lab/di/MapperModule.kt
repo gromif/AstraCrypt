@@ -15,7 +15,7 @@ import dagger.hilt.android.components.ViewModelComponent
 
 @Module
 @InstallIn(ViewModelComponent::class)
-object MapperModule {
+internal object MapperModule {
 
     @Provides
     fun provideDtoToKeyMapper(idToDataTypeMapper: Mapper<Int, DataType>): Mapper<KeyDto, Key> =

@@ -10,7 +10,7 @@ import dagger.hilt.android.components.ViewModelComponent
 
 @Module
 @InstallIn(ViewModelComponent::class)
-object UsecaseModule {
+internal object UsecaseModule {
 
     @Provides
     fun provideGetSourceFileInfoUseCase(

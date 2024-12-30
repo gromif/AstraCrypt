@@ -11,7 +11,7 @@ import dagger.hilt.android.components.ViewModelComponent
 
 @Module
 @InstallIn(ViewModelComponent::class)
-object ParserModule {
+internal object ParserModule {
 
     @Provides
     fun provideKeyParser(hexUtil: HexUtil): Parser<String, KeyDto> =

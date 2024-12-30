@@ -11,7 +11,7 @@ import dagger.hilt.android.components.ViewModelComponent
 
 @Module
 @InstallIn(ViewModelComponent::class)
-object SerializerModule {
+internal object SerializerModule {
 
     @Provides
     fun provideKeySerializer(hexUtil: HexUtil): Serializer<KeyDto, String> =

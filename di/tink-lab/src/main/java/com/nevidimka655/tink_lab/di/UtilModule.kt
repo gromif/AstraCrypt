@@ -28,7 +28,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 
 @Module
 @InstallIn(ViewModelComponent::class)
-object UtilModule {
+internal object UtilModule {
 
     @Provides
     fun provideKeyGenerator(keysetSerializer: KeysetSerializer): KeyGenerator =
