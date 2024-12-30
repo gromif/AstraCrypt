@@ -75,13 +75,13 @@ dependencies {
     implementation(projects.features.tinkLab)
     implementation(projects.features.labZip)
     implementation(projects.features.composeNotes)
+    implementation(projects.features.help)
 
     implementation(projects.di.utils)
 
     implementation(project(":ui:compose-calculator"))
     implementation(project(":ui:compose-color-schemes"))
     implementation(project(":ui:compose-details"))
-    implementation(project(":ui:compose-help"))
 
     // Compose
     implementation(platform(libs.compose.bom))

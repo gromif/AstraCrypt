@@ -20,7 +20,7 @@
 	path = core/tiles-with-coroutines
 	url = git@github.com:Nevidimka655/core_tiles_with_coroutines.git
 [submodule "ui/compose-help"]
-	path = ui/compose-help
+	path = features/help
 	url = git@github.com:Nevidimka655/ui_compose_help.git
 [submodule "ui/compose-notes"]
 	path = features/compose-notes
