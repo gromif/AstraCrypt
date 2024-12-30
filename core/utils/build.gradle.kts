@@ -12,4 +12,5 @@ android {
 
 dependencies {
     implementation(libs.androidx.annotation.jvm)
+    implementation(libs.androidx.core.ktx)
 }
