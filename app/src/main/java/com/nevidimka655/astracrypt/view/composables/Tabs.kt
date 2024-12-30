@@ -21,10 +21,10 @@ import com.nevidimka655.astracrypt.view.composables.files.FilesViewModel
 import com.nevidimka655.astracrypt.view.composables.home.HomeScreen
 import com.nevidimka655.astracrypt.view.composables.home.HomeViewModel
 import com.nevidimka655.astracrypt.view.composables.settings.SettingsScreen
-import com.nevidimka655.astracrypt.view.models.UiState
-import com.nevidimka655.astracrypt.view.models.actions.ToolbarActions
-import com.nevidimka655.astracrypt.view.models.actions.lab
-import com.nevidimka655.astracrypt.view.models.actions.notes
+import com.nevidimka655.astracrypt.view.navigation.models.UiState
+import com.nevidimka655.astracrypt.view.navigation.models.actions.ToolbarActions
+import com.nevidimka655.astracrypt.view.navigation.models.actions.lab
+import com.nevidimka655.astracrypt.view.navigation.models.actions.notes
 import com.nevidimka655.astracrypt.view.navigation.BottomBarItems
 import com.nevidimka655.astracrypt.view.navigation.Route
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap

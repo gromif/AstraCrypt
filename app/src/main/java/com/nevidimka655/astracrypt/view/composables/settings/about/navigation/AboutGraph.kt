@@ -3,7 +3,7 @@ package com.nevidimka655.astracrypt.view.composables.settings.about.navigation
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.navigation
-import com.nevidimka655.astracrypt.view.models.UiState
+import com.nevidimka655.astracrypt.view.navigation.models.UiState
 import com.nevidimka655.astracrypt.view.navigation.Route
 
 fun NavGraphBuilder.aboutGraph(

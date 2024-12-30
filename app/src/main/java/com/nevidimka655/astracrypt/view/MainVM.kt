@@ -19,7 +19,7 @@ import com.nevidimka655.astracrypt.data.paging.FilesPagingProvider
 import com.nevidimka655.astracrypt.data.paging.StarredPagingProvider
 import com.nevidimka655.astracrypt.data.repository.RepositoryProviderImpl
 import com.nevidimka655.astracrypt.view.models.NavigatorDirectory
-import com.nevidimka655.astracrypt.view.models.UiState
+import com.nevidimka655.astracrypt.view.navigation.models.UiState
 import com.nevidimka655.astracrypt.view.models.ViewMode
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher

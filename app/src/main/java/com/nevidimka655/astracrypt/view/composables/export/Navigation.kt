@@ -6,7 +6,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import com.nevidimka655.astracrypt.resources.R
-import com.nevidimka655.astracrypt.view.models.UiState
+import com.nevidimka655.astracrypt.view.navigation.models.UiState
 import com.nevidimka655.astracrypt.view.navigation.Route
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 
@@ -29,7 +29,7 @@ fun NavGraphBuilder.export(
         onStart = {
             if (export.outUri != null) vm.export(
                 itemId = export.itemId,
-                output = export.outUri
+                output = export.outUri!!
             ).invokeOnCompletion { vm.observeWorkInfoState() } else vm.export(
                 itemId = export.itemId,
                 contentResolver = context.contentResolver

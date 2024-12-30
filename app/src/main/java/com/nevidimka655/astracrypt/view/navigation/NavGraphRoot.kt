@@ -5,8 +5,8 @@ import androidx.navigation.NavGraphBuilder
 import com.nevidimka655.astracrypt.view.MainVM
 import com.nevidimka655.astracrypt.view.composables.export.export
 import com.nevidimka655.astracrypt.view.composables.files.details.details
-import com.nevidimka655.astracrypt.view.composables.lab.labGraph
-import com.nevidimka655.astracrypt.view.composables.notes.notesGraph
+import com.nevidimka655.astracrypt.view.navigation.lab.labGraph
+import com.nevidimka655.astracrypt.view.navigation.notes.notesGraph
 import com.nevidimka655.astracrypt.view.composables.settings.about.navigation.aboutGraph
 import com.nevidimka655.astracrypt.view.composables.settings.profile.editProfile
 import com.nevidimka655.astracrypt.view.composables.settings.security.admin.settingsSecurityAdmin
@@ -16,8 +16,8 @@ import com.nevidimka655.astracrypt.view.composables.settings.security.settingsSe
 import com.nevidimka655.astracrypt.view.composables.settings.ui.files.settingsUiFiles
 import com.nevidimka655.astracrypt.view.composables.settings.ui.settingsUi
 import com.nevidimka655.astracrypt.view.composables.tabs
-import com.nevidimka655.astracrypt.view.models.UiState
-import com.nevidimka655.astracrypt.view.models.actions.ToolbarActions
+import com.nevidimka655.astracrypt.view.navigation.models.UiState
+import com.nevidimka655.astracrypt.view.navigation.models.actions.ToolbarActions
 import com.nevidimka655.astracrypt.view.navigation.help.help
 import kotlinx.coroutines.flow.Flow
 

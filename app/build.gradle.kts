@@ -64,6 +64,7 @@ android {
 }
 
 dependencies {
+    implementation(projects.core.navigation)
     implementation(projects.core.designSystem)
     implementation(projects.core.utils)
     implementation(projects.core.resources)
@@ -72,10 +73,6 @@ dependencies {
     implementation(projects.database.notes)
 
     implementation(projects.core.tink)
-    implementation(projects.features.tinkLab)
-    implementation(projects.features.labZip)
-    implementation(projects.features.composeNotes)
-    implementation(projects.features.help)
 
     implementation(projects.di.utils)
 
@@ -100,9 +97,6 @@ dependencies {
     implementation(libs.media.coil.compose)
     implementation(libs.media.coil.video)
     implementation(libs.media.exifinterface)
-
-    // Google
-    implementation(libs.google.crypto.tink)
 
     // Other
     implementation(libs.androidx.documentfile)

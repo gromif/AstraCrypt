@@ -29,11 +29,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
 import com.nevidimka655.astracrypt.utils.Api
-import com.nevidimka655.astracrypt.view.composables.components.BottomBarImpl
-import com.nevidimka655.astracrypt.view.composables.components.FloatingActionButtonImpl
-import com.nevidimka655.astracrypt.view.composables.components.appbar.SearchBarImpl
-import com.nevidimka655.astracrypt.view.composables.components.appbar.ToolbarImpl
-import com.nevidimka655.astracrypt.view.models.actions.ToolbarActions
+import com.nevidimka655.astracrypt.view.navigation.composables.BottomBarImpl
+import com.nevidimka655.astracrypt.view.navigation.composables.FloatingActionButtonImpl
+import com.nevidimka655.astracrypt.view.navigation.composables.appbar.SearchBarImpl
+import com.nevidimka655.astracrypt.view.navigation.composables.appbar.ToolbarImpl
+import com.nevidimka655.astracrypt.view.navigation.models.actions.ToolbarActions
 import com.nevidimka655.astracrypt.view.navigation.BottomBarItems
 import com.nevidimka655.astracrypt.view.navigation.Route
 import com.nevidimka655.astracrypt.view.navigation.root
