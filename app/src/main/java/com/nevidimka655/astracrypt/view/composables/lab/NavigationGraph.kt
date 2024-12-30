@@ -5,12 +5,16 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.navigation
 import com.nevidimka655.astracrypt.view.composables.lab.tink.labTinkGraph
 import com.nevidimka655.astracrypt.view.models.UiState
+import com.nevidimka655.astracrypt.view.models.actions.ToolbarActions
 import com.nevidimka655.astracrypt.view.navigation.Route
 import kotlinx.coroutines.flow.Flow
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 fun NavGraphBuilder.labGraph(
     onUiStateChange: (UiState) -> Unit,
     navController: NavController,
+    onToolbarActions: Flow<ToolbarActions.Action>,
     onFabClick: Flow<Any>
 ) = navigation<Route.LabGraph>(startDestination = Route.LabGraph.List) {
     labList(
@@ -23,5 +27,14 @@ fun NavGraphBuilder.labGraph(
         navController = navController,
         onFabClick = onFabClick
     )
-    labCombinedZip(onUiStateChange = onUiStateChange, onFabClick = onFabClick)
+    labCombinedZip(
+        onUiStateChange = onUiStateChange,
+        onToolbarActions = onToolbarActions,
+        onFabClick = onFabClick,
+        navigateToHelp = {
+            navController.navigate(
+                Route.Help(helpList = Json.encodeToString(it))
+            )
+        }
+    )
 }

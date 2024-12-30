@@ -17,6 +17,7 @@ import com.nevidimka655.astracrypt.view.models.UiState
 import com.nevidimka655.astracrypt.view.models.actions.ToolbarActions
 import com.nevidimka655.astracrypt.view.models.actions.help
 import com.nevidimka655.astracrypt.view.navigation.Route
+import com.nevidimka655.compose_help.HelpItem
 import com.nevidimka655.features.lab_zip.CombineZipScreen
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 import kotlinx.coroutines.channels.Channel
@@ -36,11 +37,19 @@ private val ScreenUiState = UiState(
 
 fun NavGraphBuilder.labCombinedZip(
     onUiStateChange: (UiState) -> Unit,
-    onFabClick: Flow<Any>
+    onToolbarActions: Flow<ToolbarActions.Action>,
+    onFabClick: Flow<Any>,
+    navigateToHelp: (List<HelpItem>) -> Unit
 ) = composable<ComposableRoute> {
     onUiStateChange(ScreenUiState)
 
     val onRequestCombiningChannel = remember { Channel<Unit>() }
+
+    LaunchedEffect(Unit) {
+        onToolbarActions.collectLatest {
+            if (it == ToolbarActions.help) navigateToHelp(HelpList)
+        }
+    }
 
     LaunchedEffect(Unit) {
         onFabClick.collectLatest { onRequestCombiningChannel.send(Unit) }
@@ -61,5 +70,5 @@ fun NavGraphBuilder.labCombinedZip(
 }
 
 private val HelpList = listOf(
-    R.string.lab_combinedZip, R.string.help_lab_zip_general
+    HelpItem(R.string.lab_combinedZip, R.string.help_lab_zip_general)
 )

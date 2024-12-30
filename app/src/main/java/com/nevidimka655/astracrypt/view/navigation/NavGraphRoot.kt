@@ -18,6 +18,7 @@ import com.nevidimka655.astracrypt.view.composables.settings.ui.settingsUi
 import com.nevidimka655.astracrypt.view.composables.tabs
 import com.nevidimka655.astracrypt.view.models.UiState
 import com.nevidimka655.astracrypt.view.models.actions.ToolbarActions
+import com.nevidimka655.astracrypt.view.navigation.help.help
 import kotlinx.coroutines.flow.Flow
 
 fun root(
@@ -46,6 +47,7 @@ fun root(
     labGraph(
         onUiStateChange = onUiStateChange,
         navController = navController,
+        onToolbarActions = onToolbarActions,
         onFabClick = onFabClick
     )
 
@@ -67,4 +69,6 @@ fun root(
     settingsSecurityAuth(onUiStateChange = onUiStateChange)
     settingsSecurityQuickActions(onUiStateChange = onUiStateChange)
     aboutGraph(onUiStateChange = onUiStateChange, navController = navController)
+
+    help(onUiStateChange = onUiStateChange)
 }
