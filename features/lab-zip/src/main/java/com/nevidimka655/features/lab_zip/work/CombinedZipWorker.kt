@@ -1,8 +1,7 @@
-package com.nevidimka655.astracrypt.app.services
+package com.nevidimka655.features.lab_zip.work
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.content.ContentResolver
 import android.content.Context
 import android.content.pm.ServiceInfo
 import android.net.Uri
@@ -10,53 +9,64 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.core.net.toUri
 import androidx.documentfile.provider.DocumentFile
 import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.ForegroundInfo
 import androidx.work.WorkManager
 import androidx.work.WorkerParameters
-import com.nevidimka655.astracrypt.resources.R
+import com.google.crypto.tink.integration.android.AndroidKeystore
 import com.nevidimka655.astracrypt.core.di.IoDispatcher
+import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.astracrypt.utils.Api
+import com.nevidimka655.astracrypt.utils.Mapper
+import com.nevidimka655.crypto.tink.core.encoders.Base64Util
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
-import okio.use
 import java.io.File
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
 
 @HiltWorker
-class LabCombinedZipWorker @AssistedInject constructor(
+internal class CombinedZipWorker @AssistedInject constructor(
     @Assisted context: Context,
     @Assisted params: WorkerParameters,
     @IoDispatcher
     private val defaultDispatcher: CoroutineDispatcher,
-    private val workManager: WorkManager
+    private val workManager: WorkManager,
+    private val base64Util: Base64Util,
+    private val stringToUriMapper: Mapper<String, Uri>
 ) : CoroutineWorker(context, params) {
-    private val contentResolver: ContentResolver = applicationContext.contentResolver
-
-    object Args {
-        const val SOURCE_URI = "a1"
-        const val TARGET_URI = "a2"
-        const val ZIP_FILE_URI = "a3"
-    }
-
     private val notificationId = 203
 
     override suspend fun doWork() = withContext(defaultDispatcher) {
         var workerResult = Result.success()
         setForeground(getForegroundInfo())
-        val destinationUri = inputData.getString(Args.TARGET_URI)!!.toUri()
-        val sourceUri = inputData.getString(Args.SOURCE_URI)!!.toUri()
+
+        val dataAead = AndroidKeystore.getAead(ANDROID_KEYSET_ALIAS)
+        val dataAD = ASSOCIATED_DATA.toByteArray()
+        val destinationUriString = dataAead.decrypt(
+            base64Util.decode(inputData.getString(Args.TARGET_URI)!!), dataAD
+        ).decodeToString()
+        val sourceUriString = dataAead.decrypt(
+            base64Util.decode(inputData.getString(Args.SOURCE_URI)!!), dataAD
+        ).decodeToString()
+        val contentUrisFile = dataAead.decrypt(
+            base64Util.decode(inputData.getString(Args.ZIP_FILE_URI)!!), dataAD
+        ).decodeToString()
+        AndroidKeystore.deleteKey(ANDROID_KEYSET_ALIAS)
+
+        val sourceUri = stringToUriMapper(sourceUriString)
+        val destinationUri = stringToUriMapper(destinationUriString)
         val destinationDocument = DocumentFile.fromSingleUri(applicationContext, destinationUri)!!
-        val zipFileContentUrisFile = File(inputData.getString(Args.ZIP_FILE_URI)!!)
+        val zipFileContentUrisFile = File(contentUrisFile)
+
         try {
-            contentResolver.openOutputStream(destinationUri)?.use { out ->
-                contentResolver.openInputStream(sourceUri)?.use { it.copyTo(out) }
+            applicationContext.contentResolver.openOutputStream(destinationUri)?.use { out ->
+                applicationContext.contentResolver.openInputStream(sourceUri)
+                    ?.use { it.copyTo(out) }
                 ZipOutputStream(out).use { zipOut ->
                     zipFileContentUrisFile.forEachLine { line ->
                         val documentUri = Uri.parse(line)
@@ -64,7 +74,8 @@ class LabCombinedZipWorker @AssistedInject constructor(
                             .fromSingleUri(applicationContext, documentUri)!!
                         val zipEntry = ZipEntry(currentDocument.name!!)
                         zipOut.putNextEntry(zipEntry)
-                        contentResolver.openInputStream(documentUri)?.use { it.copyTo(zipOut) }
+                        applicationContext.contentResolver.openInputStream(documentUri)
+                            ?.use { it.copyTo(zipOut) }
                         zipOut.closeEntry()
                     }
                 }
@@ -97,7 +108,11 @@ class LabCombinedZipWorker @AssistedInject constructor(
             setOngoing(true)
             addAction(R.drawable.ic_close, cancelText, workerStopPendingIntent)
         }.build()
-        return ForegroundInfo(notificationId, notification, ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC)
+        return ForegroundInfo(
+            notificationId,
+            notification,
+            ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC
+        )
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -117,6 +132,17 @@ class LabCombinedZipWorker @AssistedInject constructor(
         }
         // Register the channel with the system
         NotificationManagerCompat.from(applicationContext).createNotificationChannel(channel)
+    }
+
+    object Args {
+        const val SOURCE_URI = "a1"
+        const val TARGET_URI = "a2"
+        const val ZIP_FILE_URI = "a3"
+    }
+
+    companion object {
+        const val ANDROID_KEYSET_ALIAS = "source"
+        const val ASSOCIATED_DATA = "ForegroundInfo"
     }
 
 }

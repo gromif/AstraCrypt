@@ -55,7 +55,7 @@ fun CombineZipScreen(
     ) { if (it.isNotEmpty()) vm.addFiles(it) }
     val createContract = rememberLauncherForActivityResult(
         ActivityResultContracts.CreateDocument("image/*")
-    ) { }
+    ) { if (it != null) vm.startCombinedZipWorker(targetUri = it) }
 
     LaunchedEffect(Unit) {
         onRequestCombiningFlow.collectLatest {
