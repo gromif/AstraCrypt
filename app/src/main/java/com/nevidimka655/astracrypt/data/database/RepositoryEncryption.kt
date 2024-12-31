@@ -4,7 +4,6 @@ import com.google.crypto.tink.Aead
 import com.nevidimka655.astracrypt.data.crypto.AeadManager
 import com.nevidimka655.astracrypt.data.files.db.FilesEntity
 import com.nevidimka655.astracrypt.data.files.db.tuples.PagerTuple
-import com.nevidimka655.astracrypt.notes.db.NoteItemEntity
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import com.nevidimka655.crypto.tink.extensions.aeadPrimitive
 import com.nevidimka655.crypto.tink.extensions.fromBase64
@@ -75,10 +74,10 @@ class RepositoryEncryption(
         flags = if (info().flags) encrypt(item.flags) else item.flags
     ) else item
 
-    suspend fun encryptNoteItemEntity(item: NoteItemEntity) = if (info().notes) item.copy(
+    /*suspend fun encryptNoteItemEntity(item: NoteItemEntity) = if (info().notes) item.copy(
         name = encryptNoteName(item.name),
         textPreview = encryptNoteTextPreview(item.textPreview),
         text = encryptNoteText(item.text)
-    ) else item
+    ) else item*/
 
 }

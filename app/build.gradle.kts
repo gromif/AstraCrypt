@@ -69,7 +69,6 @@ dependencies {
 
     implementation(projects.core.database.appDatabase)
     implementation(projects.core.database.files)
-    implementation(projects.core.database.notes)
 
     implementation(projects.core.tink)
 
