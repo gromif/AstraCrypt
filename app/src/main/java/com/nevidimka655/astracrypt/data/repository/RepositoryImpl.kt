@@ -37,7 +37,7 @@ class RepositoryImpl(private val dao: StorageItemDao): Repository {
         val item = StorageItemEntity(
             name = name,
             type = StorageItemType.Folder.ordinal,
-            parentDirectoryId = parentId ?: 0,
+            dirId = parentId ?: 0,
             creationTime = System.currentTimeMillis()
         )
         insert(item)

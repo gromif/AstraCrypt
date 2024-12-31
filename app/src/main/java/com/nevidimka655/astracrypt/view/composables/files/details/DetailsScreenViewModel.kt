@@ -1,10 +1,8 @@
 package com.nevidimka655.astracrypt.view.composables.files.details
 
-import android.R.attr.name
 import android.content.Context
 import android.text.format.DateFormat
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.outlined.InsertDriveFile
 import androidx.compose.material.icons.outlined.AccessTime
 import androidx.compose.material.icons.outlined.Folder
 import androidx.compose.material.icons.outlined.FolderOpen
@@ -25,7 +23,6 @@ import com.nevidimka655.compose_details.entities.DetailsItem
 import com.nevidimka655.ui.compose_core.wrappers.IconWrap
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.serialization.json.Json
 import javax.inject.Inject
 
 @HiltViewModel
@@ -43,7 +40,7 @@ class DetailsScreenViewModel @Inject constructor(
         val item = repository.getById(itemId)
         val absolutePath = repository.getAbsolutePath(
             childName = item.name,
-            parentId = item.parentDirectoryId
+            parentId = item.dirId
         )
         val isFile = item.type > 0
         type = StorageItemType.entries[item.type]

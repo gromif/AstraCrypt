@@ -177,7 +177,7 @@ class ImportFilesWorker @AssistedInject constructor(
                 id = dbItemId,
                 name = fileName,
                 type = itemType.ordinal,
-                parentDirectoryId = parentDirectoryId,
+                dirId = parentDirectoryId,
                 size = docFile.length(),
                 preview = thumbnailPath.await(),
                 path = outRelativePath,

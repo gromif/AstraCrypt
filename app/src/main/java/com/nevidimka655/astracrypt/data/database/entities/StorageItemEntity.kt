@@ -9,7 +9,7 @@ data class StorageItemEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     @ColumnInfo(name = "name") val name: String = "",
     @ColumnInfo(name = "item_type") val type: Int = 0,
-    @ColumnInfo(name = "dir_id") val parentDirectoryId: Long = 0,
+    @ColumnInfo(name = "dir_id") val dirId: Long = 0,
     @ColumnInfo(name = "size") val size: Long = 0,
     @ColumnInfo(name = "state") val state: Int = 0,
     @ColumnInfo(name = "preview") val preview: String? = null,
