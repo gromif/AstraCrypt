@@ -74,6 +74,8 @@ dependencies {
 
     implementation(projects.di.utils)
 
+    implementation(projects.domain.auth)
+
     implementation(project(":ui:compose-calculator"))
     implementation(project(":ui:compose-color-schemes"))
     implementation(project(":ui:compose-details"))
