@@ -11,6 +11,7 @@ dependencies {
     implementation(projects.domain.auth)
     implementation(projects.data.auth)
 
+    implementation(libs.androidx.datastore.preferences)
     implementation(projects.core.utils)
     implementation(projects.core.tink)
 }
