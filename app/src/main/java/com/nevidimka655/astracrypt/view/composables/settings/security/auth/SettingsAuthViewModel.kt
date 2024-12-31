@@ -6,7 +6,7 @@ import com.nevidimka655.astracrypt.core.di.IoDispatcher
 import com.nevidimka655.astracrypt.data.crypto.AeadManager
 import com.nevidimka655.astracrypt.app.utils.AppComponentService
 import com.nevidimka655.astracrypt.data.auth.AuthManager
-import com.nevidimka655.astracrypt.domain.model.auth.Skin
+import com.nevidimka655.astracrypt.auth.domain.Skin
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import com.nevidimka655.crypto.tink.core.hash.Sha256Util
 import com.nevidimka655.crypto.tink.extensions.toBase64

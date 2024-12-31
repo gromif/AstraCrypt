@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.domain.model.auth
+package com.nevidimka655.astracrypt.auth.domain
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

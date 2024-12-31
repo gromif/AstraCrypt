@@ -2,9 +2,9 @@ package com.nevidimka655.astracrypt.data.auth
 
 import com.nevidimka655.astracrypt.data.datastore.DefaultDataStoreManager
 import com.nevidimka655.astracrypt.data.datastore.SettingsDataStoreManager
-import com.nevidimka655.astracrypt.domain.model.auth.Auth
-import com.nevidimka655.astracrypt.domain.model.auth.AuthType
-import com.nevidimka655.astracrypt.domain.model.auth.Skin
+import com.nevidimka655.astracrypt.auth.domain.Auth
+import com.nevidimka655.astracrypt.auth.domain.AuthType
+import com.nevidimka655.astracrypt.auth.domain.Skin
 import com.nevidimka655.crypto.tink.core.hash.Sha384Util
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope

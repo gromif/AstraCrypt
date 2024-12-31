@@ -1,6 +1,6 @@
 package com.nevidimka655.astracrypt.app.utils
 
-import com.nevidimka655.astracrypt.domain.model.auth.Skin
+import com.nevidimka655.astracrypt.auth.domain.Skin
 import com.nevidimka655.compose_calculator.CalculatorManager
 import kotlinx.coroutines.channels.Channel
 
