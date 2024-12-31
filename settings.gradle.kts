@@ -13,7 +13,7 @@ val featuresModules = listOf("compose-notes", "tink-lab", "help", "lab-zip")
 val uiModules = listOf("compose-core", "compose-calculator", "compose-color-schemes", "compose-details")
 val domainModules = listOf("auth", "notes", "tink-lab", "lab-zip")
 val dataModules = listOf("auth", "notes", "tink-lab", "lab-zip")
-val diModules = listOf("notes", "tink-lab", "lab-zip", "utils")
+val diModules = listOf("auth", "notes", "tink-lab", "lab-zip", "utils")
 
 // Include all modules
 include(":app")
