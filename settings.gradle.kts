@@ -4,7 +4,7 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 include(":app")
 
 val coreModules = listOf(
-    "database:notes",
+    "database:app-database", "database:files", "database:notes",
     "tink", "haptic", "tiles-with-coroutines",
     "resources", "utils", "design-system",
     "navigation"
@@ -41,4 +41,3 @@ dependencyResolutionManagement {
         gradlePluginPortal()
     }
 }
-include(":core:database:files")
