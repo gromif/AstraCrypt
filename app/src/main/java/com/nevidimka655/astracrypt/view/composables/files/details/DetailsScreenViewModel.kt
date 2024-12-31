@@ -1,5 +1,6 @@
 package com.nevidimka655.astracrypt.view.composables.files.details
 
+import android.R.attr.name
 import android.content.Context
 import android.text.format.DateFormat
 import androidx.compose.material.icons.Icons
@@ -44,17 +45,17 @@ class DetailsScreenViewModel @Inject constructor(
             childName = item.name,
             parentId = item.parentDirectoryId
         )
-        val isFile = item.itemType.isFile
-        type = item.itemType
+        val isFile = item.type > 0
+        type = StorageItemType.entries[item.type]
         preview = item.preview
         title = item.name
 
         addGroup(name = TextWrap.Resource(id = R.string.files_options_details)) {
-            addItem(
+            /*addItem(
                 icon = IconWrap(imageVector = Icons.AutoMirrored.Outlined.InsertDriveFile),
                 title = TextWrap.Resource(id = R.string.itemType),
-                summary = TextWrap.Resource(id = item.itemType.title)
-            )
+                summary = TextWrap.Resource(id = item.type.title)
+            )*/
             addItem(
                 icon = IconWrap(imageVector = Icons.Outlined.FolderOpen),
                 title = TextWrap.Resource(id = R.string.path),
@@ -89,8 +90,8 @@ class DetailsScreenViewModel @Inject constructor(
             }*/
         }
         if (isFile) {
-            if (item.flags.isNotEmpty()) {
-                addGroup(name = TextWrap.Resource(id = item.itemType.title)) {
+            /*if (item.flags.isNotEmpty()) {
+                addGroup(name = TextWrap.Resource(id = item.type.title)) {
                     when (val flags = Json.decodeFromString<StorageFlags>(item.flags)) {
                         is StorageFlags.App -> flags.toString()
                         is StorageFlags.Image -> addImageFlags(flags)
@@ -98,7 +99,7 @@ class DetailsScreenViewModel @Inject constructor(
                         is StorageFlags.Video -> addVideoFlags(flags)
                     }
                 }
-            }
+            }*/
             addGroup(name = TextWrap.Resource(id = R.string.settings_encryption)) {
                 /*addItem(
                     icon = IconWrap(imageVector = Icons.Outlined.Lock),

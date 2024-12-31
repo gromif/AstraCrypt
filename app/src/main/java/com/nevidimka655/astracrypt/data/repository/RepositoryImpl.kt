@@ -36,7 +36,7 @@ class RepositoryImpl(private val dao: StorageItemDao): Repository {
     override suspend fun newDirectory(name: String, parentId: Long?) {
         val item = StorageItemEntity(
             name = name,
-            itemType = StorageItemType.Folder,
+            type = StorageItemType.Folder.ordinal,
             parentDirectoryId = parentId ?: 0,
             creationTime = System.currentTimeMillis()
         )

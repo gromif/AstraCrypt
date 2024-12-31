@@ -176,7 +176,7 @@ class ImportFilesWorker @AssistedInject constructor(
             val item = StorageItemEntity(
                 id = dbItemId,
                 name = fileName,
-                itemType = itemType,
+                type = itemType.ordinal,
                 parentDirectoryId = parentDirectoryId,
                 size = docFile.length(),
                 preview = thumbnailPath.await(),
