@@ -72,7 +72,7 @@ class SettingsAuthViewModel @Inject constructor(
     }
 
     fun setHintState(state: Boolean) = viewModelScope.launch(defaultDispatcher) {
-        authManager.setHintState(state = state)
+        authManager.setHintVisibility(state = state)
     }
 
     fun setHintText(text: String) = viewModelScope.launch(defaultDispatcher) {
