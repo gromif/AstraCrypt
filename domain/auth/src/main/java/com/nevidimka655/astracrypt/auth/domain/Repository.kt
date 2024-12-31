@@ -12,7 +12,7 @@ interface Repository {
 
     suspend fun setPassword(auth: Auth, password: String?)
 
-    suspend fun verifyPassword(password: String)
+    suspend fun verifyPassword(password: String): Boolean
 
     suspend fun disable(auth: Auth)
 

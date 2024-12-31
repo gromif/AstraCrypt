@@ -67,7 +67,7 @@ class RepositoryImpl(
         }
     }
 
-    override suspend fun verifyPassword(password: String): Unit = coroutineScope {
+    override suspend fun verifyPassword(password: String): Boolean = coroutineScope {
         val currentHash = async {
             calculateHash(string = password, outputLength = PASSWORD_HASH_LENGTH)
         }
