@@ -5,7 +5,7 @@ import androidx.room.Room
 import com.nevidimka655.astracrypt.data.crypto.AeadManager
 import com.nevidimka655.astracrypt.data.database.AppDatabase
 import com.nevidimka655.astracrypt.data.database.RepositoryEncryption
-import com.nevidimka655.astracrypt.data.database.daos.StorageItemDao
+import com.nevidimka655.astracrypt.data.files.db.FilesDao
 import com.nevidimka655.astracrypt.data.datastore.SettingsDataStoreManager
 import com.nevidimka655.astracrypt.data.repository.RepositoryImpl
 import com.nevidimka655.astracrypt.data.repository.RepositoryProviderImpl
@@ -27,7 +27,7 @@ object RepositoryModule {
     @Singleton
     @Provides
     fun provideRepository(
-        storage: StorageItemDao
+        storage: FilesDao
     ): Repository = RepositoryImpl(dao = storage)
 
     @Singleton

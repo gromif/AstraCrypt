@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.data.database.daos
+package com.nevidimka655.astracrypt.data.files.db
 
 import androidx.paging.PagingSource
 import androidx.room.Dao
@@ -6,50 +6,47 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.RewriteQueriesToDropUnusedColumns
 import androidx.room.Update
-import com.nevidimka655.astracrypt.data.database.DatabaseTransformTuple
-import com.nevidimka655.astracrypt.data.database.ExportTuple
-import com.nevidimka655.astracrypt.data.database.OpenTuple
-import com.nevidimka655.astracrypt.data.database.PagerTuple
-import com.nevidimka655.astracrypt.data.database.StorageDirMinimalTuple
-import com.nevidimka655.astracrypt.data.database.StorageItemMinimalTuple
-import com.nevidimka655.astracrypt.data.database.StorageItemType
-import com.nevidimka655.astracrypt.data.database.entities.StorageItemEntity
-import com.nevidimka655.astracrypt.domain.model.db.StorageState
+import com.nevidimka655.astracrypt.data.files.db.tuples.DatabaseTransformTuple
+import com.nevidimka655.astracrypt.data.files.db.tuples.ExportTuple
+import com.nevidimka655.astracrypt.data.files.db.tuples.FilesDirMinimalTuple
+import com.nevidimka655.astracrypt.data.files.db.tuples.FilesMinimalTuple
+import com.nevidimka655.astracrypt.data.files.db.tuples.OpenTuple
+import com.nevidimka655.astracrypt.data.files.db.tuples.PagerTuple
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface StorageItemDao {
+interface FilesDao {
 
     @Query("select max(id) from store_items")
     suspend fun getMaxId(): Long
 
     @Query("select item_type from store_items where id = :id")
-    suspend fun getTypeById(id: Long): StorageItemType
+    suspend fun getTypeById(id: Long): Int
 
     @Query("select * from store_items WHERE id = :id")
-    suspend fun getById(id: Long): StorageItemEntity
+    suspend fun getById(id: Long): FilesEntity
 
     @Query("delete from store_items where id in (:ids)")
     suspend fun deleteByIds(ids: ArrayList<Long>)
 
     @Insert
-    suspend fun insert(storageItems: StorageItemEntity)
+    suspend fun insert(storageItems: FilesEntity)
 
-    @Update(entity = StorageItemEntity::class)
+    @Update(entity = FilesEntity::class)
     suspend fun updateDbEntry(databaseTransformTuple: DatabaseTransformTuple)
 
     @Query("update store_items set name = :name where id = :id")
     suspend fun updateName(id: Long, name: String)
 
     @Query("update store_items set state = :state where id = :id")
-    suspend fun setStarred(id: Long, state: StorageState)
+    suspend fun setStarred(id: Long, state: Int)
 
     @Query("update store_items set state = :state where id in (:idsArray)")
-    suspend fun setStarred(idsArray: List<Long>, state: StorageState)
+    suspend fun setStarred(idsArray: List<Long>, state: Int)
 
     @RewriteQueriesToDropUnusedColumns
     @Query("select * from store_items where id = :id")
-    suspend fun getMinimalItemData(id: Long): StorageItemMinimalTuple
+    suspend fun getMinimalItemData(id: Long): FilesMinimalTuple
 
     @RewriteQueriesToDropUnusedColumns
     @Query("select * from store_items where id = :id")
@@ -60,11 +57,11 @@ interface StorageItemDao {
 
     @RewriteQueriesToDropUnusedColumns
     @Query("select * from store_items where id = :dirId")
-    suspend fun getParentDirInfo(dirId: Long): StorageDirMinimalTuple?
+    suspend fun getParentDirInfo(dirId: Long): FilesDirMinimalTuple?
 
     @RewriteQueriesToDropUnusedColumns
     @Query("select * from store_items where dir_id = :dirId")
-    suspend fun getMinimalItemsDataInDir(dirId: Long): List<StorageItemMinimalTuple>
+    suspend fun getMinimalItemsDataInDir(dirId: Long): List<FilesMinimalTuple>
 
     @Query("update store_items set dir_id = :newDirId where id in (:idsArray)")
     suspend fun moveItems(idsArray: List<Long>, newDirId: Long)

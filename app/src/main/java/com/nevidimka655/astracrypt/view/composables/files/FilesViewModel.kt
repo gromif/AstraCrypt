@@ -18,7 +18,8 @@ import com.nevidimka655.astracrypt.utils.io.FilesUtil
 import com.nevidimka655.astracrypt.app.services.ImportFilesWorker
 import com.nevidimka655.astracrypt.utils.io.WorkerSerializer
 import com.nevidimka655.astracrypt.data.repository.RepositoryProviderImpl
-import com.nevidimka655.astracrypt.data.database.PagerTuple
+import com.nevidimka655.astracrypt.data.files.db.tuples.PagerTuple
+import com.nevidimka655.astracrypt.domain.model.db.FileItem
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import com.nevidimka655.crypto.tink.extensions.toBase64
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -47,7 +48,7 @@ class FilesViewModel @Inject constructor(
 ) : ViewModel() {
     private var cameraScanOutputUri: Uri? = null
 
-    var optionsItem by mutableStateOf(PagerTuple())
+    var optionsItem by mutableStateOf(FileItem  ())
 
     val sheetOptionsState = mutableStateOf(false)
     val dialogRenameState = mutableStateOf(false)

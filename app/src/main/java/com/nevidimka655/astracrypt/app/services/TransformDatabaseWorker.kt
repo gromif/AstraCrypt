@@ -13,13 +13,13 @@ import androidx.work.CoroutineWorker
 import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
 import com.google.crypto.tink.Aead
-import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.astracrypt.core.di.IoDispatcher
-import com.nevidimka655.astracrypt.utils.Api
-import com.nevidimka655.astracrypt.data.database.DatabaseTransformTuple
 import com.nevidimka655.astracrypt.data.database.RepositoryEncryption
+import com.nevidimka655.astracrypt.data.files.db.tuples.DatabaseTransformTuple
 import com.nevidimka655.astracrypt.data.model.AeadInfo
 import com.nevidimka655.astracrypt.domain.repository.Repository
+import com.nevidimka655.astracrypt.resources.R
+import com.nevidimka655.astracrypt.utils.Api
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import com.nevidimka655.crypto.tink.data.TinkConfig
 import com.nevidimka655.crypto.tink.extensions.aeadPrimitive
@@ -30,6 +30,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
+import kotlin.collections.isNotEmpty
 import kotlin.random.Random
 
 @HiltWorker

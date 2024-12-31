@@ -4,11 +4,11 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-sealed class StorageFlags {
+sealed class FileFlags {
 
     @Serializable
     @SerialName("img")
-    class Image: StorageFlags() {
+    class Image: FileFlags() {
 
         @SerialName("c1")
         var resolution = ""
@@ -17,7 +17,7 @@ sealed class StorageFlags {
 
     @Serializable
     @SerialName("vid")
-    class Video: StorageFlags() {
+    class Video: FileFlags() {
 
         @SerialName("d1")
         var resolution = ""
@@ -26,7 +26,7 @@ sealed class StorageFlags {
 
     @Serializable
     @SerialName("mus")
-    class Music: StorageFlags() {
+    class Music: FileFlags() {
         @SerialName("b1") var title: String? = null
         @SerialName("b2") var sampleRate = 0
         @SerialName("b3") var author: String? = null
@@ -34,5 +34,5 @@ sealed class StorageFlags {
 
     @Serializable
     @SerialName("app")
-    class App: StorageFlags()
+    class App: FileFlags()
 }

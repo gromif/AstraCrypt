@@ -69,6 +69,7 @@ dependencies {
     implementation(projects.core.resources)
     implementation(projects.core.haptic)
     implementation(projects.core.tilesWithCoroutines)
+    implementation(projects.core.database.files)
     implementation(projects.core.database.notes)
 
     implementation(projects.core.tink)

@@ -41,3 +41,4 @@ dependencyResolutionManagement {
         gradlePluginPortal()
     }
 }
+include(":core:database:files")

@@ -79,9 +79,9 @@ import coil.compose.AsyncImagePainter
 import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.astracrypt.data.model.CoilTinkModel
 import com.nevidimka655.astracrypt.view.models.NavigatorDirectory
-import com.nevidimka655.astracrypt.domain.model.db.StorageState
-import com.nevidimka655.astracrypt.data.database.StorageItemType
-import com.nevidimka655.astracrypt.data.database.PagerTuple
+import com.nevidimka655.astracrypt.domain.model.db.FileState
+import com.nevidimka655.astracrypt.data.database.FileTypes
+import com.nevidimka655.astracrypt.domain.model.db.FileItem
 import com.nevidimka655.astracrypt.view.MainVM
 import com.nevidimka655.astracrypt.view.composables.files.sheets.filesCreateNewSheet
 import com.nevidimka655.astracrypt.view.composables.files.sheets.filesOptionsSheet
@@ -110,8 +110,8 @@ fun FilesGridItem(
     imageLoader: ImageLoader,
     name: String,
     preview: String?,
-    itemType: StorageItemType,
-    state: StorageState,
+    itemType: FileTypes,
+    state: FileState,
     isChecked: Boolean,
     onOptions: () -> Unit,
     onClick: () -> Unit,
@@ -230,8 +230,8 @@ fun FilesListItemMedium(
     imageLoader: ImageLoader,
     name: String = "TEST_NAME",
     preview: String? = null,
-    itemType: StorageItemType = StorageItemType.Document,
-    state: StorageState = StorageState.Default,
+    itemType: FileTypes = FileTypes.Document,
+    state: FileState = FileState.Default,
     isChecked: Boolean = false,
     isBackgroundTransparent: Boolean = false,
     onLongClick: () -> Unit = {},
@@ -322,12 +322,12 @@ fun FilesListItemMedium(
 @Composable
 fun FilesList(
     viewMode: ViewMode = ViewMode.Grid,
-    pagingItems: LazyPagingItems<PagerTuple>,
+    pagingItems: LazyPagingItems<FileItem>,
     listCheckedState: SnapshotStateMap<Long, Boolean>,
     imageLoader: ImageLoader,
-    onOptions: (item: PagerTuple) -> Unit,
-    onClick: (item: PagerTuple) -> Unit,
-    onLongPress: (item: PagerTuple) -> Unit
+    onOptions: (item: FileItem) -> Unit,
+    onClick: (item: FileItem) -> Unit,
+    onLongPress: (item: FileItem) -> Unit
 ) {
     val view = LocalView.current
     val cells = when (viewMode) {
@@ -359,8 +359,8 @@ fun FilesList(
                 FilesGridItem(modifier = Modifier.animateItem(),
                     imageLoader = imageLoader,
                     name = it.name,
-                    preview = it.preview,
-                    itemType = it.itemType,
+                    preview = /*it.preview*/ null,
+                    itemType = it.type,
                     state = it.state,
                     isChecked = listCheckedState.getOrElse(it.id) { false },
                     onOptions = {
@@ -379,8 +379,8 @@ fun FilesList(
                 FilesListItemMedium(modifier = Modifier.animateItem(),
                     imageLoader = imageLoader,
                     name = it.name,
-                    preview = it.preview,
-                    itemType = it.itemType,
+                    preview = /*it.preview*/ null,
+                    itemType = it.type,
                     state = it.state,
                     isChecked = listCheckedState.getOrElse(it.id) { false },
                     onLongClick = {
@@ -446,9 +446,9 @@ private fun openItem(
     isStarred: Boolean,
     onOpenStarredDir: () -> Unit,
     onOpenFile: (Long) -> Unit,
-    item: PagerTuple
+    item: FileItem
 ) {
-    if (item.itemType.isFile) onOpenFile(item.id) else {
+    if (item.isFile) onOpenFile(item.id) else {
         //closeSearchView()
         if (isStarred) {
             vm.openDirectory(
@@ -475,7 +475,7 @@ fun FilesScreen(
     vm: MainVM,
     filesVM: FilesViewModel,
     viewMode: ViewMode,
-    items: LazyPagingItems<PagerTuple>,
+    items: LazyPagingItems<FileItem>,
     isStarred: Boolean,
     dialogNewFolderState: MutableState<Boolean>,
     onFabClick: Flow<Any>,
@@ -484,10 +484,10 @@ fun FilesScreen(
     onOpenStarredDir: () -> Unit,
     onOpenFile: (Long) -> Unit,
     onNewFolder: (String) -> Unit,
-    onExport: (itemId: Long, outUri: Uri) -> Unit,
-    onRename: (itemId: Long, newName: String) -> Unit,
-    onNavigatorClick: (index: Int?) -> Unit,
-    onLongPress: (item: PagerTuple) -> Unit
+    onExport: (Long, Uri) -> Unit,
+    onRename: (Long, String) -> Unit,
+    onNavigatorClick: (Int?) -> Unit,
+    onLongPress: (FileItem) -> Unit
 ) {
     val scope = rememberCoroutineScope()
     var dialogNewFolder by Dialogs.newFolder(state = dialogNewFolderState) {
@@ -580,8 +580,8 @@ fun FilesScreen(
     filesOptionsSheet(
         state = filesVM.sheetOptionsState,
         name = filesVM.optionsItem.name,
-        itemIcon = filesVM.optionsItem.itemType.icon,
-        isFolder = filesVM.optionsItem.isDirectory,
+        //itemIcon = filesVM.optionsItem.itemType.icon,
+        isFolder = filesVM.optionsItem.isFolder,
         isStarred = filesVM.optionsItem.state.isStarred,
         onOpen = {
             filesVM.sheetOptionsState.value = false
@@ -652,7 +652,7 @@ fun FilesScreen(
 
                         vm.selectorManager.blockItems -> {
                             val isNotSelected = !vm.selectorManager.getItemState(it.id)
-                            if (isNotSelected && it.isDirectory) openItem(
+                            if (isNotSelected && it.isFolder) openItem(
                                 vm = vm,
                                 isStarred = isStarred,
                                 onOpenStarredDir = onOpenStarredDir,

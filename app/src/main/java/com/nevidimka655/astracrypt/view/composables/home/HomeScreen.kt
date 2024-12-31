@@ -35,9 +35,10 @@ import coil.ImageLoader
 import coil.compose.AsyncImage
 import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.astracrypt.data.model.CoilTinkModel
-import com.nevidimka655.astracrypt.domain.model.db.StorageState
-import com.nevidimka655.astracrypt.data.database.StorageItemType
-import com.nevidimka655.astracrypt.data.database.PagerTuple
+import com.nevidimka655.astracrypt.domain.model.db.FileState
+import com.nevidimka655.astracrypt.data.database.FileTypes
+import com.nevidimka655.astracrypt.data.files.db.tuples.PagerTuple
+import com.nevidimka655.astracrypt.domain.model.db.FileItem
 import com.nevidimka655.astracrypt.domain.model.profile.Avatars
 import com.nevidimka655.astracrypt.view.composables.components.profile.ProfileWidget
 import com.nevidimka655.ui.compose_core.CardWithTitle
@@ -45,12 +46,12 @@ import com.nevidimka655.ui.compose_core.theme.spaces
 
 @Composable
 fun HomeScreen(
-    recentFiles: List<PagerTuple>,
+    recentFiles: List<FileItem>,
     imageLoader: ImageLoader,
     coilAvatarModel: CoilTinkModel?,
     defaultAvatar: Avatars? = null,
     name: String?,
-    onOpenRecent: (PagerTuple) -> Unit
+    onOpenRecent: (FileItem) -> Unit
 ) = Column(
     modifier = Modifier
         .fillMaxSize()
@@ -76,9 +77,9 @@ fun HomeScreen(
 
 @Composable
 fun RecentList(
-    recentFiles: List<PagerTuple>,
+    recentFiles: List<FileItem>,
     imageLoader: ImageLoader,
-    onClick: (item: PagerTuple) -> Unit
+    onClick: (item: FileItem) -> Unit
 ) = LazyRow(
     modifier = Modifier.fillMaxSize(),
     horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spaces.spaceMedium)
@@ -91,8 +92,8 @@ fun RecentList(
         RecentListItem(
             name = item.name,
             imageLoader = imageLoader,
-            preview = item.preview,
-            itemType = item.itemType,
+            preview = /*item.preview*/ null,
+            itemType = item.type,
             state = item.state
         ) { onClick(item) }
     }
@@ -104,8 +105,8 @@ fun RecentListItem(
     imageLoader: ImageLoader,
     name: String,
     preview: String? = null,
-    itemType: StorageItemType,
-    state: StorageState,
+    itemType: FileTypes,
+    state: FileState,
     onClick: () -> Unit
 ) = OutlinedCard(
     modifier = modifier

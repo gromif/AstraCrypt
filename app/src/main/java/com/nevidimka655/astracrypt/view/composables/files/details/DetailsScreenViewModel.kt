@@ -13,8 +13,8 @@ import androidx.lifecycle.ViewModel
 import coil.ImageLoader
 import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.astracrypt.utils.io.FilesUtil
-import com.nevidimka655.astracrypt.domain.model.db.StorageFlags
-import com.nevidimka655.astracrypt.data.database.StorageItemType
+import com.nevidimka655.astracrypt.domain.model.db.FileFlags
+import com.nevidimka655.astracrypt.data.database.FileTypes
 import com.nevidimka655.astracrypt.domain.repository.Repository
 import com.nevidimka655.astracrypt.domain.usecase.BytesToHumanReadableUseCase
 import com.nevidimka655.compose_details.DetailsManager
@@ -34,7 +34,7 @@ class DetailsScreenViewModel @Inject constructor(
     val imageLoader: ImageLoader
 ): ViewModel() {
     var preview: String? = ""
-    var type: StorageItemType = StorageItemType.Other
+    var type: FileTypes = FileTypes.Other
 
     suspend fun submitDetailsQuery(context: Context, itemId: Long) = detailsManager.run {
         val item = repository.getById(itemId)
@@ -43,7 +43,7 @@ class DetailsScreenViewModel @Inject constructor(
             parentId = item.dirId
         )
         val isFile = item.type > 0
-        type = StorageItemType.entries[item.type]
+        type = FileTypes.entries[item.type]
         preview = item.preview
         title = item.name
 
@@ -146,7 +146,7 @@ class DetailsScreenViewModel @Inject constructor(
                 addItem(
                     icon = IconWrap(imageVector = Icons.Outlined.FolderOpen),
                     title = TextWrap.Resource(id = R.string.thumbnailPath),
-                    summary = TextWrap.Text(text = item.preview)
+                    summary = TextWrap.Text(text = item.preview!!)
                 )
                 addItem(
                     icon = IconWrap(imageVector = Icons.Outlined.SdCard),
@@ -157,7 +157,7 @@ class DetailsScreenViewModel @Inject constructor(
         }
     }
 
-    private fun MutableList<DetailsItem>.addImageFlags(flags: StorageFlags.Image) {
+    private fun MutableList<DetailsItem>.addImageFlags(flags: FileFlags.Image) {
         addItem(
             icon = IconWrap(imageVector = Icons.Outlined.PhotoSizeSelectLarge),
             title = TextWrap.Resource(id = R.string.imageResolution),
@@ -165,7 +165,7 @@ class DetailsScreenViewModel @Inject constructor(
         )
     }
 
-    private fun MutableList<DetailsItem>.addMusicFlags(flags: StorageFlags.Music) {
+    private fun MutableList<DetailsItem>.addMusicFlags(flags: FileFlags.Music) {
         addItem(
             icon = IconWrap(imageVector = Icons.Outlined.Headphones),
             title = TextWrap.Resource(id = R.string.sample_rate),
@@ -173,7 +173,7 @@ class DetailsScreenViewModel @Inject constructor(
         )
     }
 
-    private fun MutableList<DetailsItem>.addVideoFlags(flags: StorageFlags.Video) {
+    private fun MutableList<DetailsItem>.addVideoFlags(flags: FileFlags.Video) {
         addItem(
             icon = IconWrap(imageVector = Icons.Outlined.PhotoSizeSelectLarge),
             title = TextWrap.Resource(id = R.string.videoResolution),

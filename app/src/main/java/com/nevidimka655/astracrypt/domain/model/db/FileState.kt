@@ -1,6 +1,6 @@
 package com.nevidimka655.astracrypt.domain.model.db
 
-enum class StorageState {
+enum class FileState {
     Default, Deleted, Starred;
 
     val isDefault get() = this == Default

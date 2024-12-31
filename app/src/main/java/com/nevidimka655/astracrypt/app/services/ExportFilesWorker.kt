@@ -16,13 +16,13 @@ import androidx.work.CoroutineWorker
 import androidx.work.ForegroundInfo
 import androidx.work.WorkManager
 import androidx.work.WorkerParameters
-import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.astracrypt.core.di.IoDispatcher
-import com.nevidimka655.astracrypt.utils.Api
-import com.nevidimka655.astracrypt.data.database.ExportTuple
-import com.nevidimka655.astracrypt.utils.io.FilesUtil
+import com.nevidimka655.astracrypt.data.files.db.tuples.ExportTuple
 import com.nevidimka655.astracrypt.data.model.AeadInfo
 import com.nevidimka655.astracrypt.domain.repository.Repository
+import com.nevidimka655.astracrypt.resources.R
+import com.nevidimka655.astracrypt.utils.Api
+import com.nevidimka655.astracrypt.utils.io.FilesUtil
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import com.nevidimka655.crypto.tink.data.TinkConfig
 import com.nevidimka655.crypto.tink.extensions.fromBase64

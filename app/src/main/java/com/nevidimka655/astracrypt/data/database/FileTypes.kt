@@ -17,7 +17,7 @@ import com.nevidimka655.atracrypt.core.design_system.icons.Video
 import com.nevidimka655.atracrypt.core.design_system.icons.VideoAlt
 import com.nevidimka655.astracrypt.resources.R
 
-enum class StorageItemType(@StringRes val title: Int) {
+enum class FileTypes(@StringRes val title: Int) {
     Folder(title = R.string.folder),
     Photo(title = R.string.photo),
     Music(title = R.string.music),

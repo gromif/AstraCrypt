@@ -1,23 +1,23 @@
 package com.nevidimka655.astracrypt.data.repository
 
 import androidx.paging.PagingSource
-import com.nevidimka655.astracrypt.data.database.DatabaseTransformTuple
-import com.nevidimka655.astracrypt.data.database.ExportTuple
-import com.nevidimka655.astracrypt.data.database.OpenTuple
-import com.nevidimka655.astracrypt.data.database.PagerTuple
-import com.nevidimka655.astracrypt.data.database.StorageDirMinimalTuple
-import com.nevidimka655.astracrypt.data.database.StorageItemMinimalTuple
-import com.nevidimka655.astracrypt.data.database.StorageItemType
-import com.nevidimka655.astracrypt.data.database.daos.StorageItemDao
-import com.nevidimka655.astracrypt.data.database.entities.StorageItemEntity
+import com.nevidimka655.astracrypt.data.files.db.tuples.OpenTuple
+import com.nevidimka655.astracrypt.data.files.db.tuples.PagerTuple
+import com.nevidimka655.astracrypt.data.files.db.tuples.FilesDirMinimalTuple
+import com.nevidimka655.astracrypt.data.files.db.tuples.FilesMinimalTuple
+import com.nevidimka655.astracrypt.data.database.FileTypes
+import com.nevidimka655.astracrypt.data.files.db.FilesDao
+import com.nevidimka655.astracrypt.data.files.db.FilesEntity
+import com.nevidimka655.astracrypt.data.files.db.tuples.DatabaseTransformTuple
+import com.nevidimka655.astracrypt.data.files.db.tuples.ExportTuple
 import com.nevidimka655.astracrypt.data.model.DetailsFolderContent
-import com.nevidimka655.astracrypt.domain.model.db.StorageColumns
-import com.nevidimka655.astracrypt.domain.model.db.StorageState
+import com.nevidimka655.astracrypt.domain.model.db.FilesColumns
+import com.nevidimka655.astracrypt.domain.model.db.FileState
 import com.nevidimka655.astracrypt.domain.repository.Repository
 import kotlinx.coroutines.flow.Flow
 
-class RepositoryImpl(private val dao: StorageItemDao): Repository {
-    override suspend fun insert(item: StorageItemEntity) {
+class RepositoryImpl(private val dao: FilesDao): Repository {
+    override suspend fun insert(item: FilesEntity) {
         dao.insert(item)
     }
 
@@ -34,9 +34,9 @@ class RepositoryImpl(private val dao: StorageItemDao): Repository {
     }
 
     override suspend fun newDirectory(name: String, parentId: Long?) {
-        val item = StorageItemEntity(
+        val item = FilesEntity(
             name = name,
-            type = StorageItemType.Folder.ordinal,
+            type = FileTypes.Folder.ordinal,
             dirId = parentId ?: 0,
             creationTime = System.currentTimeMillis()
         )
@@ -52,15 +52,15 @@ class RepositoryImpl(private val dao: StorageItemDao): Repository {
         idsArray: List<Long>?,
         state: Boolean
     ) {
-        val newState = if (state) StorageState.Starred else StorageState.Default
+        val newState = if (state) FileState.Starred else FileState.Default
         if (id != null) {
             dao.setStarred(
                 id = id,
-                state = newState
+                state = newState.ordinal
             )
         } else if (idsArray != null) dao.setStarred(
             idsArray = idsArray,
-            state = newState
+            state = newState.ordinal
         )
     }
 
@@ -75,7 +75,7 @@ class RepositoryImpl(private val dao: StorageItemDao): Repository {
         dao.updateName(id, name)
     }
 
-    override suspend fun getById(itemId: Long): StorageItemEntity {
+    override suspend fun getById(itemId: Long): FilesEntity {
         return dao.getById(itemId)
     }
 
@@ -83,8 +83,8 @@ class RepositoryImpl(private val dao: StorageItemDao): Repository {
         return dao.getMaxId()
     }
 
-    override suspend fun getTypeById(id: Long): StorageItemType {
-        return dao.getTypeById(id)
+    override suspend fun getTypeById(id: Long): FileTypes {
+        return FileTypes.entries[dao.getTypeById(id)]
     }
 
     override suspend fun getDirIdsList(dirId: Long): List<Long> {
@@ -103,11 +103,11 @@ class RepositoryImpl(private val dao: StorageItemDao): Repository {
         return dao.getDataToExport(itemId)
     }
 
-    override suspend fun getMinimalItemsDataInDir(dirId: Long): List<StorageItemMinimalTuple> {
+    override suspend fun getMinimalItemsDataInDir(dirId: Long): List<FilesMinimalTuple> {
         return dao.getMinimalItemsDataInDir(dirId)
     }
 
-    override suspend fun getMinimalItemData(id: Long): StorageItemMinimalTuple {
+    override suspend fun getMinimalItemData(id: Long): FilesMinimalTuple {
         return dao.getMinimalItemData(id)
     }
 
@@ -115,7 +115,7 @@ class RepositoryImpl(private val dao: StorageItemDao): Repository {
         return dao.getDataToOpen(id)
     }
 
-    override suspend fun getParentDirInfo(dirId: Long): StorageDirMinimalTuple? {
+    override suspend fun getParentDirInfo(dirId: Long): FilesDirMinimalTuple? {
         return dao.getParentDirInfo(dirId)
     }
 
@@ -170,8 +170,8 @@ class RepositoryImpl(private val dao: StorageItemDao): Repository {
             parentDirId = if (dirIdsForSearch.isEmpty()) parentDirectoryId else -1,
             query = searchQuery,
             dirIdsForSearch = dirIdsForSearch,
-            sortingItemType = StorageItemType.Folder.ordinal,
-            sortingSecondType = StorageColumns.Name.ordinal
+            sortingItemType = FileTypes.Folder.ordinal,
+            sortingSecondType = FilesColumns.Name.ordinal
         )
     }
 
@@ -181,8 +181,8 @@ class RepositoryImpl(private val dao: StorageItemDao): Repository {
         return dao.listOrderDescAsc(
             isStarredOnly = true,
             query = searchQuery,
-            sortingItemType = StorageItemType.Folder.ordinal,
-            sortingSecondType = StorageColumns.Name.ordinal
+            sortingItemType = FileTypes.Folder.ordinal,
+            sortingSecondType = FilesColumns.Name.ordinal
         )
     }
 }

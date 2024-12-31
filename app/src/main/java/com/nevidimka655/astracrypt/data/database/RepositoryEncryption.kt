@@ -2,7 +2,8 @@ package com.nevidimka655.astracrypt.data.database
 
 import com.google.crypto.tink.Aead
 import com.nevidimka655.astracrypt.data.crypto.AeadManager
-import com.nevidimka655.astracrypt.data.database.entities.StorageItemEntity
+import com.nevidimka655.astracrypt.data.files.db.FilesEntity
+import com.nevidimka655.astracrypt.data.files.db.tuples.PagerTuple
 import com.nevidimka655.astracrypt.notes.db.NoteItemEntity
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import com.nevidimka655.crypto.tink.extensions.aeadPrimitive
@@ -67,7 +68,7 @@ class RepositoryEncryption(
         encrypt(value.toByteArray(), keysetManager.associatedData).toBase64()
     }
 
-    suspend fun encryptStorageItemEntity(item: StorageItemEntity) = if (info().db) item.copy(
+    suspend fun encryptStorageItemEntity(item: FilesEntity) = if (info().db) item.copy(
         name = if (info().name) encrypt(item.name) else item.name,
         //preview = if (info().thumb) encrypt(item.preview) else item.preview,
         path = if (info().path) encrypt(item.path) else item.path,

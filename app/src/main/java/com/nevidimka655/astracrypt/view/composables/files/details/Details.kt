@@ -11,7 +11,7 @@ import androidx.compose.ui.layout.ContentScale
 import coil.ImageLoader
 import coil.compose.AsyncImage
 import com.nevidimka655.astracrypt.data.model.CoilTinkModel
-import com.nevidimka655.astracrypt.data.database.StorageItemType
+import com.nevidimka655.astracrypt.data.database.FileTypes
 import com.nevidimka655.compose_details.Details
 import com.nevidimka655.compose_details.DetailsManager
 import com.nevidimka655.compose_details.Screen
@@ -21,7 +21,7 @@ fun DetailsScreen(
     detailsManager: DetailsManager,
     preview: String?,
     imageLoader: ImageLoader,
-    itemType: StorageItemType,
+    itemType: FileTypes,
     onStart: suspend () -> Unit
 ) {
     LaunchedEffect(Unit) { onStart() }

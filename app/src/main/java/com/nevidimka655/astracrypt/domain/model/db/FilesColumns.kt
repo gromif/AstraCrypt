@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-enum class StorageColumns {
+enum class FilesColumns {
     @SerialName("a") ID,
     @SerialName("b") Name,
     @SerialName("c") ItemType,

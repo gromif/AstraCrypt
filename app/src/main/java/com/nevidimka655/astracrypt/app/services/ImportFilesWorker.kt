@@ -32,12 +32,12 @@ import com.nevidimka655.astracrypt.app.AppConfig
 import com.nevidimka655.astracrypt.core.di.IoDispatcher
 import com.nevidimka655.astracrypt.utils.Api
 import com.nevidimka655.astracrypt.app.utils.MediaMetadataRetrieverCompat
-import com.nevidimka655.astracrypt.data.database.StorageItemType
-import com.nevidimka655.astracrypt.data.database.entities.StorageItemEntity
+import com.nevidimka655.astracrypt.data.database.FileTypes
+import com.nevidimka655.astracrypt.data.files.db.FilesEntity
 import com.nevidimka655.astracrypt.utils.io.FilesUtil
 import com.nevidimka655.astracrypt.utils.io.Randomizer
 import com.nevidimka655.astracrypt.data.model.AeadInfo
-import com.nevidimka655.astracrypt.domain.model.db.StorageFlags
+import com.nevidimka655.astracrypt.domain.model.db.FileFlags
 import com.nevidimka655.astracrypt.domain.repository.Repository
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import com.nevidimka655.crypto.tink.data.TinkConfig
@@ -148,7 +148,7 @@ class ImportFilesWorker @AssistedInject constructor(
         val docType = docFile.type
         val itemType = if (docType != null) {
             parseUriFileType(docType)
-        } else StorageItemType.Photo
+        } else FileTypes.Photo
         val thumbnailPath = async(defaultDispatcher) {
             tryToSaveThumbnail(
                 uri = fileUri,
@@ -173,7 +173,7 @@ class ImportFilesWorker @AssistedInject constructor(
         if (!isStopped) {
             var creationDate = docFile.lastModified()
             if (creationDate == 0L) creationDate = System.currentTimeMillis()
-            val item = StorageItemEntity(
+            val item = FilesEntity(
                 id = dbItemId,
                 name = fileName,
                 type = itemType.ordinal,
@@ -257,22 +257,22 @@ class ImportFilesWorker @AssistedInject constructor(
     }
 
     private fun parseUriFileType(type: String) = when {
-        type.startsWith("image") -> StorageItemType.Photo
-        type.startsWith("audio") -> StorageItemType.Music
-        type.startsWith("video") -> StorageItemType.Video
-        type.startsWith("text") -> StorageItemType.Text
-        else -> StorageItemType.Other
+        type.startsWith("image") -> FileTypes.Photo
+        type.startsWith("audio") -> FileTypes.Music
+        type.startsWith("video") -> FileTypes.Video
+        type.startsWith("text") -> FileTypes.Text
+        else -> FileTypes.Other
     }
 
     @SuppressLint("NewApi")
     private suspend fun tryToSaveThumbnail(
         uri: Uri,
         primitive: StreamingAead?,
-        itemType: StorageItemType
+        itemType: FileTypes
     ): String? {
         val bitmap = try {
             when (itemType) {
-                StorageItemType.Music -> getMediaMetadataRetrieverCompat(uri).use { retriever ->
+                FileTypes.Music -> getMediaMetadataRetrieverCompat(uri).use { retriever ->
                     retriever.embeddedPicture?.let {
                         val request = defaultCoilRequestBuilder.data(it).build()
                         val bitmapDrawable =
@@ -319,14 +319,14 @@ class ImportFilesWorker @AssistedInject constructor(
     }
 
     private fun getFlags(
-        type: StorageItemType,
+        type: FileTypes,
         fileUri: Uri
     ): String {
         val inFileStream = applicationContext.contentResolver.openInputStream(fileUri)!!
         val flags = when (type) {
-            StorageItemType.Photo -> getImageFlags(fileUri, inFileStream)
-            StorageItemType.Video -> getVideoFlags(fileUri)
-            StorageItemType.Music -> getMusicFlags(fileUri)
+            FileTypes.Photo -> getImageFlags(fileUri, inFileStream)
+            FileTypes.Video -> getVideoFlags(fileUri)
+            FileTypes.Music -> getMusicFlags(fileUri)
             else -> null
         }
         inFileStream.close()
@@ -335,8 +335,8 @@ class ImportFilesWorker @AssistedInject constructor(
         } else ""
     }
 
-    private fun getImageFlags(fileUri: Uri, inFileStream: InputStream): StorageFlags {
-        val imageFlags = StorageFlags.Image()
+    private fun getImageFlags(fileUri: Uri, inFileStream: InputStream): FileFlags {
+        val imageFlags = FileFlags.Image()
         var height: Int
         var width: Int
         ExifInterface(inFileStream).run {
@@ -359,8 +359,8 @@ class ImportFilesWorker @AssistedInject constructor(
         }
     }
 
-    private fun getVideoFlags(fileUri: Uri): StorageFlags {
-        val videoFlags = StorageFlags.Video()
+    private fun getVideoFlags(fileUri: Uri): FileFlags {
+        val videoFlags = FileFlags.Video()
         getMediaMetadataRetrieverCompat(fileUri).use {
             val width = it.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_WIDTH)
             val height = it.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_HEIGHT)
@@ -370,8 +370,8 @@ class ImportFilesWorker @AssistedInject constructor(
     }
 
     @SuppressLint("InlinedApi")
-    private fun getMusicFlags(fileUri: Uri): StorageFlags {
-        val musicFlags = StorageFlags.Music()
+    private fun getMusicFlags(fileUri: Uri): FileFlags {
+        val musicFlags = FileFlags.Music()
         applicationContext.contentResolver.openFileDescriptor(
             fileUri,
             "r"

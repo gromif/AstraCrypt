@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class StorageFileTime(
+data class FileTime(
     @SerialName("a") val creation: Long = 0,
     @SerialName("b") val modification: Long = 0
 )

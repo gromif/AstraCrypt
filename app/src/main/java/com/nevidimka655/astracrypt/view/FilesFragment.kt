@@ -3,7 +3,7 @@ package com.nevidimka655.astracrypt.view
 import android.view.ActionMode
 import android.view.Menu
 import android.view.MenuItem
-import com.nevidimka655.astracrypt.data.database.PagerTuple
+import com.nevidimka655.astracrypt.data.files.db.tuples.PagerTuple
 import com.nevidimka655.astracrypt.resources.R
 
 class FilesFragment {

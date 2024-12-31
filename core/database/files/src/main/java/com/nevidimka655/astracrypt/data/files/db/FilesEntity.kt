@@ -1,11 +1,11 @@
-package com.nevidimka655.astracrypt.data.database.entities
+package com.nevidimka655.astracrypt.data.files.db
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "store_items")
-data class StorageItemEntity(
+data class FilesEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     @ColumnInfo(name = "name") val name: String = "",
     @ColumnInfo(name = "item_type") val type: Int = 0,

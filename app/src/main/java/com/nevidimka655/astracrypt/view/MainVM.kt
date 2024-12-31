@@ -12,7 +12,7 @@ import androidx.paging.cachedIn
 import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.astracrypt.core.di.IoDispatcher
 import com.nevidimka655.astracrypt.app.utils.FileSystemSetupManager
-import com.nevidimka655.astracrypt.data.database.StorageItemMinimalTuple
+import com.nevidimka655.astracrypt.data.files.db.tuples.FilesMinimalTuple
 import com.nevidimka655.astracrypt.data.datastore.AppearanceManager
 import com.nevidimka655.astracrypt.utils.io.FilesUtil
 import com.nevidimka655.astracrypt.data.paging.FilesPagingProvider
@@ -131,7 +131,7 @@ class MainVM @Inject constructor(
         val repository = repositoryProviderImpl.repository.first()
         val idsList = arrayListOf<Long>()
         val itemToDelete = repository.getMinimalItemData(storageItemId)
-        suspend fun deleteIterator(itemToDelete: StorageItemMinimalTuple) {
+        suspend fun deleteIterator(itemToDelete: FilesMinimalTuple) {
             idsList.add(itemToDelete.id)
             if (itemToDelete.path.isNotEmpty()) {
                 val localFile = filesUtil.getLocalFile(itemToDelete.path)
