@@ -3,7 +3,7 @@ package com.nevidimka655.astracrypt.app.di
 import android.content.Context
 import androidx.room.Room
 import com.nevidimka655.astracrypt.data.crypto.AeadManager
-import com.nevidimka655.astracrypt.data.database.AppDatabase
+import com.nevidimka655.astracrypt.data.db.AppDatabase
 import com.nevidimka655.astracrypt.data.database.RepositoryEncryption
 import com.nevidimka655.astracrypt.data.files.db.FilesDao
 import com.nevidimka655.astracrypt.data.datastore.SettingsDataStoreManager

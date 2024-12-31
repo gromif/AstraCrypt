@@ -35,9 +35,6 @@ android {
                 storePassword = keystoreProperties["storePassword"] as String
             }
         }
-        ksp {
-            arg("room.schemaLocation", "$projectDir/schemas")
-        }
     }
 
     buildTypes {
@@ -69,6 +66,8 @@ dependencies {
     implementation(projects.core.resources)
     implementation(projects.core.haptic)
     implementation(projects.core.tilesWithCoroutines)
+
+    implementation(projects.core.database.appDatabase)
     implementation(projects.core.database.files)
     implementation(projects.core.database.notes)
 
