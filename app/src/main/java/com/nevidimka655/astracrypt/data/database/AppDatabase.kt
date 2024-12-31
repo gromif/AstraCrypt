@@ -8,10 +8,6 @@ import com.nevidimka655.astracrypt.data.files.db.FilesEntity
 import com.nevidimka655.astracrypt.notes.db.NoteItemEntity
 import com.nevidimka655.astracrypt.notes.db.NotesDao
 
-@TypeConverters(
-    com.nevidimka655.astracrypt.data.database.converts.StorageItemTypeConverter::class,
-    com.nevidimka655.astracrypt.data.database.converts.StorageItemStateConverter::class
-)
 @Database(
     entities = [
         FilesEntity::class,
