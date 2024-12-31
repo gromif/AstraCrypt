@@ -15,6 +15,6 @@ import com.nevidimka655.astracrypt.notes.db.NotesDao
     version = 1
 )
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun getStorageItemDao(): FilesDao
+    abstract fun getFilesDao(): FilesDao
     abstract fun getNotesDao(): NotesDao
 }

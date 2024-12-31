@@ -17,7 +17,7 @@ internal object AppDatabaseModule {
 
     @Singleton
     @Provides
-    fun provideStorageDao(database: AppDatabase) = database.getStorageItemDao()
+    fun provideFilesDao(database: AppDatabase) = database.getFilesDao()
 
     @Singleton
     @Provides
