@@ -53,21 +53,6 @@ class SettingsDataStoreManager(
 
 
 
-    private suspend fun authInfoKey() = stringPreferencesKey(encryptKey("a3"))
-    val authFlow = dataStore.data.map { prefs ->
-        val key = authInfoKey()
-        prefs[key]?.let {
-            val authInfoJson = decryptValue(key = key.name, value = it)
-            Json.decodeFromString<Auth>(authInfoJson)
-        } ?: Auth()
-    }
-    suspend fun setAuthInfo(auth: Auth) = dataStore.edit {
-        val key = authInfoKey()
-        it[key] = encryptValue(key = key.name, value = Json.encodeToString(auth))
-    }
-
-
-
     private suspend fun aeadInfoKey() = stringPreferencesKey(encryptKey("b1"))
     val aeadInfoFlow = dataStore.data.map { prefs ->
         val key = aeadInfoKey()
