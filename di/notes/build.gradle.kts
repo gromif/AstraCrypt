@@ -11,6 +11,6 @@ dependencies {
     implementation(projects.domain.notes)
     implementation(projects.data.notes)
 
-    implementation(projects.database.notes)
+    implementation(projects.core.database.notes)
     implementation(projects.core.utils)
 }
