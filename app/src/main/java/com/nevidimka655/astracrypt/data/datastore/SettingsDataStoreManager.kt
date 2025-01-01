@@ -6,7 +6,6 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.nevidimka655.astracrypt.data.model.AeadInfo
-import com.nevidimka655.astracrypt.auth.domain.Auth
 import com.nevidimka655.astracrypt.domain.model.profile.Avatars
 import com.nevidimka655.astracrypt.domain.model.profile.ProfileInfo
 import com.nevidimka655.crypto.tink.core.encoders.Base64Util
@@ -14,7 +13,7 @@ import com.nevidimka655.crypto.tink.core.hash.Sha256Util
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import com.nevidimka655.crypto.tink.domain.KeysetTemplates
 import com.nevidimka655.crypto.tink.extensions.aeadPrimitive
-import com.nevidimka655.crypto.tink.extensions.deterministicAeadPrimitive
+import com.nevidimka655.crypto.tink.extensions.deterministicAead
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.serialization.encodeToString
@@ -72,7 +71,7 @@ class SettingsDataStoreManager(
         val aead = keysetManager.getKeyset(
             tag = KEYSET_TAG_KEY,
             keyParams = KeysetTemplates.DeterministicAEAD.AES256_SIV.params
-        ).deterministicAeadPrimitive()
+        ).deterministicAead()
         val associatedData = sha256Util.compute(value = key.toByteArray())
         val encryptedBytes = aead.encryptDeterministically(key.toByteArray(), associatedData)
         base64Util.encode(bytes = encryptedBytes)
