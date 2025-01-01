@@ -7,19 +7,16 @@ import com.nevidimka655.astracrypt.auth.domain.Auth
 import com.nevidimka655.astracrypt.auth.domain.Repository
 import com.nevidimka655.astracrypt.utils.Mapper
 import com.nevidimka655.crypto.tink.core.encoders.Base64Util
-import com.nevidimka655.crypto.tink.core.hash.Sha384Util
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
+import dagger.hilt.android.components.ViewModelComponent
 
 @Module
-@InstallIn(SingletonComponent::class)
+@InstallIn(ViewModelComponent::class)
 internal object RepositoryModule {
 
-    @Singleton
     @Provides
     fun provideRepository(
         keysetManager: KeysetManager,
