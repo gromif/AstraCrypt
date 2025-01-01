@@ -88,7 +88,7 @@ private fun Screen(
                     }
                 },
                 placeholder = TextFields.placeholder(text = stringResource(R.string.password)),
-                label = TextFields.labelText(text = stringResource(R.string.password)),
+                label = TextFields.label(text = stringResource(R.string.password)),
                 visualTransformation = TextFields.passwordVisualTransform(state = passwordVisible)
             )
             if (isHintVisible) OutlinedButton(onClick = onShowHint) {
