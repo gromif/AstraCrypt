@@ -11,6 +11,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Key
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
@@ -145,12 +147,14 @@ fun AstraCryptApp(
                 when (it.type) {
                     AuthType.PASSWORD -> {
                         uiState = UiState(
-                            toolbar = UiState.Toolbar(title = TextWrap.Resource(id = R.string.settings_authentication))
+                            toolbar = UiState.Toolbar(title = TextWrap.Resource(id = R.string.settings_authentication)),
+                            fab = UiState.Fab(icon = Icons.Default.Key)
                         )
                         PasswordLoginScreen(
                             modifier = Modifier
                                 .fillMaxSize()
                                 .verticalScroll(rememberScrollState()),
+                            onFabClick = onFabClick.receiveAsFlow(),
                             onAuthenticated = {
                                 vm.userIsAuthenticated = true
                             }
