@@ -126,11 +126,10 @@ fun AstraCryptApp(
                 visible = !toolbarIsCollapsing && !vm.isSearching && !searchBarExpanded && bottomBarTab != null,
                 selected = bottomBarTab
             ) {
-                val options = navOptions {
+                navController.navigate(route = it.route) {
                     launchSingleTop = true
                     popUpTo(Route.Tabs.Home) { inclusive = false }
                 }
-                navController.navigate(route = it.route, navOptions = options)
             }
         }
     ) { padding ->
