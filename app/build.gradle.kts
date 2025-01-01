@@ -71,6 +71,7 @@ dependencies {
     implementation(projects.core.database.files)
 
     implementation(projects.core.tink)
+    implementation(projects.features.auth.login)
 
     implementation(projects.di.utils)
 

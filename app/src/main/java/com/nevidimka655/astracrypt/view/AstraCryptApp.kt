@@ -5,14 +5,18 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -23,24 +27,26 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navOptions
 import com.nevidimka655.astracrypt.auth.domain.AuthType
+import com.nevidimka655.astracrypt.auth.login.PasswordLoginScreen
+import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.astracrypt.utils.Api
+import com.nevidimka655.astracrypt.view.navigation.BottomBarItems
+import com.nevidimka655.astracrypt.view.navigation.Route
 import com.nevidimka655.astracrypt.view.navigation.composables.BottomBarImpl
 import com.nevidimka655.astracrypt.view.navigation.composables.FloatingActionButtonImpl
 import com.nevidimka655.astracrypt.view.navigation.composables.appbar.SearchBarImpl
 import com.nevidimka655.astracrypt.view.navigation.composables.appbar.ToolbarImpl
+import com.nevidimka655.astracrypt.view.navigation.models.UiState
 import com.nevidimka655.astracrypt.view.navigation.models.actions.ToolbarActions
-import com.nevidimka655.astracrypt.view.navigation.BottomBarItems
-import com.nevidimka655.astracrypt.view.navigation.Route
 import com.nevidimka655.astracrypt.view.navigation.root
 import com.nevidimka655.atracrypt.core.design_system.AstraCryptTheme
 import com.nevidimka655.haptic.Haptic
+import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
@@ -101,7 +107,7 @@ fun AstraCryptApp(
                 )
             } else ToolbarImpl(
                 title = toolbar.title,
-                backButton = bottomBarTab == null,
+                backButton = vm.userIsAuthenticated && bottomBarTab == null,
                 actions = toolbar.actions,
                 onNavigateUp = {
                     Haptic.click()
@@ -134,19 +140,27 @@ fun AstraCryptApp(
         }
     ) { padding ->
         if (!vm.userIsAuthenticated) {
-            val auth by vm.authState.collectAsStateWithLifecycle()
-            LaunchedEffect(auth) {
-                auth?.let {
-                    when (it.type) {
-                        AuthType.PASSWORD -> navController.navigate(Route.AuthGraph.Password)
-                        null -> {}
+            val auth by vm.authState.collectAsState()
+            auth?.let {
+                when (it.type) {
+                    AuthType.PASSWORD -> {
+                        uiState = UiState(
+                            toolbar = UiState.Toolbar(title = TextWrap.Resource(id = R.string.settings_authentication))
+                        )
+                        PasswordLoginScreen(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .verticalScroll(rememberScrollState()),
+                            onAuthenticated = {
+                                vm.userIsAuthenticated = true
+                            }
+                        )
                     }
-                    vm.userIsAuthenticated = true
+
+                    null -> { vm.userIsAuthenticated = true }
                 }
             }
-        }
-
-        NavHost(
+        } else NavHost(
             navController,
             startDestination = BottomBarItems.Home.route,
             enterTransition = { fadeIn(animationSpec = tween(300)) },
