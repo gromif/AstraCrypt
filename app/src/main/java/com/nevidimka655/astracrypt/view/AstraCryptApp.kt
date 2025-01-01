@@ -23,11 +23,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
+import com.nevidimka655.astracrypt.auth.domain.AuthType
 import com.nevidimka655.astracrypt.utils.Api
 import com.nevidimka655.astracrypt.view.navigation.composables.BottomBarImpl
 import com.nevidimka655.astracrypt.view.navigation.composables.FloatingActionButtonImpl
@@ -132,6 +134,19 @@ fun AstraCryptApp(
             }
         }
     ) { padding ->
+        if (!vm.userIsAuthenticated) {
+            val auth by vm.authState.collectAsStateWithLifecycle()
+            LaunchedEffect(auth) {
+                auth?.let {
+                    when (it.type) {
+                        AuthType.PASSWORD -> navController.navigate(Route.AuthGraph.Password)
+                        null -> {}
+                    }
+                    vm.userIsAuthenticated = true
+                }
+            }
+        }
+
         NavHost(
             navController,
             startDestination = BottomBarItems.Home.route,

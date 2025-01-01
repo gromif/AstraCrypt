@@ -5,6 +5,7 @@ import androidx.annotation.StringRes
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -12,6 +13,7 @@ import androidx.paging.cachedIn
 import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.astracrypt.core.di.IoDispatcher
 import com.nevidimka655.astracrypt.app.utils.FileSystemSetupManager
+import com.nevidimka655.astracrypt.auth.domain.usecase.GetAuthFlowUseCase
 import com.nevidimka655.astracrypt.data.files.db.tuples.FilesMinimalTuple
 import com.nevidimka655.astracrypt.data.datastore.AppearanceManager
 import com.nevidimka655.astracrypt.utils.io.FilesUtil
@@ -27,6 +29,7 @@ import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.WhileSubscribed
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.first
@@ -44,9 +47,18 @@ class MainVM @Inject constructor(
     private val filesUtil: FilesUtil,
     private val filesPagingProvider: FilesPagingProvider,
     private val starredPagingProvider: StarredPagingProvider,
+    getAuthFlowUseCase: GetAuthFlowUseCase,
     val appearanceManager: AppearanceManager
 ) : ViewModel() {
     var uiState = mutableStateOf(UiState())
+
+    var userIsAuthenticated by mutableStateOf(false)
+    val authState = getAuthFlowUseCase().stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(),
+        initialValue = null
+    )
+
     val filesViewModeState = appearanceManager.filesViewModeFlow.stateIn(
         viewModelScope, SharingStarted.Lazily, initialValue = ViewMode.Grid
     )

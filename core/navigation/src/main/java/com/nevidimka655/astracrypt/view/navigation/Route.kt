@@ -5,6 +5,10 @@ import androidx.annotation.StringRes
 import com.nevidimka655.astracrypt.resources.R
 
 object Route {
+    object AuthGraph {
+        @Serializable object Password
+    }
+
     object Tabs {
         @Serializable object Home
         @Serializable data class Files(val isStarred: Boolean = false)
