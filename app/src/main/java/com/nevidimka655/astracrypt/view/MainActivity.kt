@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.nevidimka655.crypto.tink.data.TinkConfig
 import com.nevidimka655.haptic.Haptic
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -15,7 +14,6 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         Haptic.init(context = applicationContext)
-        TinkConfig.init()
         setContent { AstraCryptApp() }
         /*savedInstanceState ?: shouldShowAuthScreen(navController)
         navController.addOnDestinationChangedListener { _, dest, _ ->
