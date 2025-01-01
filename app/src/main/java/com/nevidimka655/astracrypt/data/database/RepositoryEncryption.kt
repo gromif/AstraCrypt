@@ -5,7 +5,7 @@ import com.nevidimka655.astracrypt.data.crypto.AeadManager
 import com.nevidimka655.astracrypt.data.files.db.FilesEntity
 import com.nevidimka655.astracrypt.data.files.db.tuples.PagerTuple
 import com.nevidimka655.crypto.tink.data.KeysetManager
-import com.nevidimka655.crypto.tink.extensions.aeadPrimitive
+import com.nevidimka655.crypto.tink.extensions.aead
 import com.nevidimka655.crypto.tink.extensions.fromBase64
 import com.nevidimka655.crypto.tink.extensions.toBase64
 
@@ -14,8 +14,8 @@ class RepositoryEncryption(
     private val aeadManager: AeadManager
 ) {
     private suspend fun info() = aeadManager.getInfo()
-    private suspend fun getDbAead() = keysetManager.aead(info().database!!.aead).aeadPrimitive()
-    private suspend fun getNotesPrimitive() = keysetManager.aead(info().aeadNotes!!).aeadPrimitive()
+    private suspend fun getDbAead() = keysetManager.aead(info().database!!.aead).aead()
+    private suspend fun getNotesPrimitive() = keysetManager.aead(info().aeadNotes!!).aead()
 
     /*fun decryptNotesPager(pagingData: PagingData<NotesPagerTuple>) = pagingData.map {
         val aeadInfo = info()

@@ -12,7 +12,7 @@ import com.nevidimka655.crypto.tink.core.encoders.Base64Util
 import com.nevidimka655.crypto.tink.core.hash.Sha256Util
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import com.nevidimka655.crypto.tink.domain.KeysetTemplates
-import com.nevidimka655.crypto.tink.extensions.aeadPrimitive
+import com.nevidimka655.crypto.tink.extensions.aead
 import com.nevidimka655.crypto.tink.extensions.deterministicAead
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
@@ -81,7 +81,7 @@ class SettingsDataStoreManager(
         val aead = keysetManager.getKeyset(
             tag = KEYSET_TAG_VALUE,
             keyParams = it.params
-        ).aeadPrimitive()
+        ).aead()
         val encryptedBytes = aead.encrypt(value.toByteArray(), key.toByteArray())
         base64Util.encode(bytes = encryptedBytes)
     } ?: value
@@ -90,7 +90,7 @@ class SettingsDataStoreManager(
         val aead = keysetManager.getKeyset(
             tag = KEYSET_TAG_VALUE,
             keyParams = it.params
-        ).aeadPrimitive()
+        ).aead()
         val encryptedBytes = base64Util.decode(value = value)
         aead.decrypt(encryptedBytes, key.toByteArray()).decodeToString()
     } ?: value

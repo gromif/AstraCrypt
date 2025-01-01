@@ -22,7 +22,7 @@ import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.astracrypt.utils.Api
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import com.nevidimka655.crypto.tink.data.TinkConfig
-import com.nevidimka655.crypto.tink.extensions.aeadPrimitive
+import com.nevidimka655.crypto.tink.extensions.aead
 import com.nevidimka655.crypto.tink.extensions.fromBase64
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
@@ -115,8 +115,8 @@ class TransformDatabaseWorker @AssistedInject constructor(
         fromKeysetHandleKeyId = keysetHandleFrom?.primary?.id ?: 0
         toKeysetHandleKeyId = keysetHandleTo?.primary?.id ?: 0
 
-        fromPrimitive = keysetHandleFrom?.aeadPrimitive()
-        toPrimitive = keysetHandleTo?.aeadPrimitive()
+        fromPrimitive = keysetHandleFrom?.aead()
+        toPrimitive = keysetHandleTo?.aead()
     }
 
     private suspend fun iterateDatabaseItems(list: List<DatabaseTransformTuple>) = list.forEach {

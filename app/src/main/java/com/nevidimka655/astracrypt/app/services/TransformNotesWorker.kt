@@ -20,7 +20,7 @@ import com.nevidimka655.astracrypt.data.database.RepositoryEncryption
 import com.nevidimka655.astracrypt.data.model.AeadInfo
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import com.nevidimka655.crypto.tink.data.TinkConfig
-import com.nevidimka655.crypto.tink.extensions.aeadPrimitive
+import com.nevidimka655.crypto.tink.extensions.aead
 import com.nevidimka655.crypto.tink.extensions.fromBase64
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
@@ -105,8 +105,8 @@ class TransformNotesWorker @AssistedInject constructor(
         val keysetHandleTo = toEncryption?.let {
             keysetManager.aead(it)
         }
-        fromPrimitive = keysetHandleFrom?.aeadPrimitive()
-        toPrimitive = keysetHandleTo?.aeadPrimitive()
+        fromPrimitive = keysetHandleFrom?.aead()
+        toPrimitive = keysetHandleTo?.aead()
     }
 
     private suspend fun doString(encrypt: Boolean, encrypted: Boolean, value: String?) = value?.run {

@@ -9,7 +9,7 @@ import com.nevidimka655.astracrypt.auth.data.dto.AuthDto
 import com.nevidimka655.crypto.tink.core.encoders.Base64Util
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import com.nevidimka655.crypto.tink.domain.KeysetTemplates
-import com.nevidimka655.crypto.tink.extensions.aeadPrimitive
+import com.nevidimka655.crypto.tink.extensions.aead
 import com.nevidimka655.crypto.tink.extensions.fromBase64
 import com.nevidimka655.crypto.tink.extensions.prf
 import kotlinx.coroutines.flow.first
@@ -74,7 +74,7 @@ class AuthDataStoreManager(
             tag = KEYSET_TAG_VALUE,
             associatedData = KEYSET_TAG_VALUE_AD,
             keyParams = it.params
-        ).aeadPrimitive()
+        ).aead()
         val encryptedBytes = aead.encrypt(value.toByteArray(), key.toByteArray())
         base64Util.encode(bytes = encryptedBytes)
     } ?: value
@@ -84,7 +84,7 @@ class AuthDataStoreManager(
             tag = KEYSET_TAG_VALUE,
             associatedData = KEYSET_TAG_VALUE_AD,
             keyParams = it.params
-        ).aeadPrimitive()
+        ).aead()
         val encryptedBytes = base64Util.decode(value = value)
         aead.decrypt(encryptedBytes, key.toByteArray()).decodeToString()
     } ?: value
