@@ -11,7 +11,7 @@ import com.nevidimka655.astracrypt.utils.Mapper
 import com.nevidimka655.crypto.tink.core.encoders.Base64Util
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import com.nevidimka655.crypto.tink.domain.KeysetTemplates
-import com.nevidimka655.crypto.tink.extensions.prfPrimitive
+import com.nevidimka655.crypto.tink.extensions.prf
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
@@ -31,7 +31,7 @@ class RepositoryImpl(
             tag = KEYSET_TAG_HASH,
             associatedData = KEYSET_TAG_HASH_AD,
             keyParams = KeysetTemplates.PRF.HMAC_SHA512_PRF.params
-        ).prfPrimitive()
+        ).prf()
         return prf.computePrimary(string.toByteArray(), outputLength)
     }
 

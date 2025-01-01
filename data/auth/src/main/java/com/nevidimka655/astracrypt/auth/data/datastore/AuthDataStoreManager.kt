@@ -11,7 +11,7 @@ import com.nevidimka655.crypto.tink.data.KeysetManager
 import com.nevidimka655.crypto.tink.domain.KeysetTemplates
 import com.nevidimka655.crypto.tink.extensions.aeadPrimitive
 import com.nevidimka655.crypto.tink.extensions.fromBase64
-import com.nevidimka655.crypto.tink.extensions.prfPrimitive
+import com.nevidimka655.crypto.tink.extensions.prf
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.serialization.encodeToString
@@ -64,7 +64,7 @@ class AuthDataStoreManager(
             tag = KEYSET_TAG_KEY,
             associatedData = KEYSET_TAG_KEY_AD,
             keyParams = KeysetTemplates.PRF.HKDF_SHA256.params
-        ).prfPrimitive()
+        ).prf()
         val prfBytes = prf.computePrimary(key.toByteArray(), 32)
         base64Util.encode(bytes = prfBytes)
     } ?: key
