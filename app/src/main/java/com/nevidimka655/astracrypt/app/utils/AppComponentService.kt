@@ -48,8 +48,4 @@ class AppComponentService @Inject constructor(
         comp, if (state) ENABLED else DISABLED, PackageManager.DONT_KILL_APP
     )
 
-    companion object {
-        val isActionsSupported = Api.atLeast7()
-    }
-
 }
