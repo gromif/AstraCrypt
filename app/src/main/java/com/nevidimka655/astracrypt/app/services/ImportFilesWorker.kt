@@ -43,7 +43,7 @@ import com.nevidimka655.crypto.tink.data.KeysetManager
 import com.nevidimka655.crypto.tink.data.TinkConfig
 import com.nevidimka655.crypto.tink.extensions.fromBase64
 import com.nevidimka655.crypto.tink.extensions.secureRandom
-import com.nevidimka655.crypto.tink.extensions.streamingAeadPrimitive
+import com.nevidimka655.crypto.tink.extensions.streamingAead
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.CoroutineDispatcher
@@ -98,9 +98,9 @@ class ImportFilesWorker @AssistedInject constructor(
         setForeground(getForegroundInfo())
         TinkConfig.initStream()
         shouldDecodeAssociatedData()
-        val fileAead = aeadInfo.file?.let { keysetManager.stream(it) }?.streamingAeadPrimitive()
+        val fileAead = aeadInfo.file?.let { keysetManager.stream(it) }?.streamingAead()
         val thumbAead =
-            aeadInfo.preview?.let { keysetManager.stream(it) }?.streamingAeadPrimitive()
+            aeadInfo.preview?.let { keysetManager.stream(it) }?.streamingAead()
         val file = File(inputData.getString(Args.fileWithUris)!!)
         val urisList = withContext(defaultDispatcher) { file.readLines() }
         file.delete()

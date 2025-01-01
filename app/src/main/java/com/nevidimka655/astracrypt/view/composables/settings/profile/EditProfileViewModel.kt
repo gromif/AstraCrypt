@@ -25,7 +25,7 @@ import com.nevidimka655.astracrypt.data.model.CoilTinkModel
 import com.nevidimka655.astracrypt.domain.model.profile.Avatars
 import com.nevidimka655.astracrypt.domain.model.profile.ProfileInfo
 import com.nevidimka655.crypto.tink.data.KeysetManager
-import com.nevidimka655.crypto.tink.extensions.streamingAeadPrimitive
+import com.nevidimka655.crypto.tink.extensions.streamingAead
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.first
@@ -88,7 +88,7 @@ class EditProfileViewModel @Inject constructor(
         iconFile.createNewFile()
         val outputStream = aeadInfo.preview?.let {
             keysetManager.stream(it)
-                .streamingAeadPrimitive()
+                .streamingAead()
                 .newEncryptingStream(iconFile.outputStream(), keysetManager.associatedData)
         } ?: iconFile.outputStream()
 
