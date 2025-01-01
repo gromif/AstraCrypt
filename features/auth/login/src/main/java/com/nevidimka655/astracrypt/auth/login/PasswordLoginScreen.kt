@@ -87,7 +87,7 @@ private fun Screen(
                         passwordVisible = it
                     }
                 },
-                placeholder = TextFields.placeholderText(text = stringResource(R.string.password)),
+                placeholder = TextFields.placeholder(text = stringResource(R.string.password)),
                 label = TextFields.labelText(text = stringResource(R.string.password)),
                 visualTransformation = TextFields.passwordVisualTransform(state = passwordVisible)
             )
