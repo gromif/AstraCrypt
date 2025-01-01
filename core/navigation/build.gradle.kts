@@ -12,6 +12,7 @@ android {
 dependencies {
     implementation(projects.core.resources)
 
+    implementation(projects.features.auth.login)
     implementation(projects.features.tinkLab)
     implementation(projects.features.labZip)
     implementation(projects.features.composeNotes)
