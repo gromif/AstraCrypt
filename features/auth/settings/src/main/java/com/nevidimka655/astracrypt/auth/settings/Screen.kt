@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.view.composables.settings.security.auth
+package com.nevidimka655.astracrypt.auth.settings
 
 import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
@@ -12,8 +12,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import com.nevidimka655.astracrypt.resources.R
-import com.nevidimka655.astracrypt.app.AppConfig
-import com.nevidimka655.compose_calculator.CalculatorManager
 import com.nevidimka655.ui.compose_core.Preference
 import com.nevidimka655.ui.compose_core.PreferencesGroup
 import com.nevidimka655.ui.compose_core.PreferencesGroupAnimated
@@ -31,7 +29,7 @@ private val skinMethods = listOf(
 )
 
 @Composable
-fun SettingsAuthScreen(
+internal fun SettingsAuthScreen(
     isAuthEnabled: Boolean,
     isAssociatedDataEncrypted: Boolean,
     hintState: Boolean,
@@ -128,7 +126,7 @@ private fun dialogCamouflageMethods(
 )
 
 @Composable
-fun dialogCheckPassword(
+private fun dialogCheckPassword(
     onVerify: suspend (String) -> Boolean,
     onMatch: (phrase: String) -> Unit
 ): MutableState<Boolean> {
@@ -150,7 +148,7 @@ private fun dialogPassword(onResult: (String) -> Unit) = DialogsCore.TextFields.
     title = stringResource(id = R.string.password),
     params = DialogsCore.TextFields.Params(
         label = stringResource(id = R.string.password),
-        maxLength = AppConfig.AUTH_PASSWORD_MAX_LENGTH,
+        //maxLength = AppConfig.AUTH_PASSWORD_MAX_LENGTH,
         singleLine = true
     ),
     onResult = onResult
@@ -166,7 +164,7 @@ private fun dialogHintEditor(
         text = currentHint,
         label = stringResource(id = R.string.hint),
         selectAllText = true,
-        maxLength = AppConfig.AUTH_HINT_MAX_LENGTH,
+        //maxLength = AppConfig.AUTH_HINT_MAX_LENGTH,
     ),
     onResult = onResult
 )
@@ -179,7 +177,7 @@ private fun dialogCalculatorCombination(
     params = DialogsCore.TextFields.Params(
         label = stringResource(id = R.string.settings_camouflage_numberCombination),
         selectAllText = true,
-        maxLength = CalculatorManager.MAX_NUM_LENGTH,
+        //maxLength = CalculatorManager.MAX_NUM_LENGTH,
         singleLine = true,
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword)
     ),

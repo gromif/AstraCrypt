@@ -17,6 +17,8 @@ dependencies {
     implementation(projects.features.composeNotes)
     implementation(projects.features.help)
 
+    implementation(projects.features.auth.settings)
+
     implementation(libs.androidx.annotation.jvm)
     implementation(libs.compose.navigation)
 }

@@ -1,33 +1,19 @@
-package com.nevidimka655.astracrypt.view.composables.settings.security.auth
+package com.nevidimka655.astracrypt.auth.settings
 
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.compose.composable
-import com.nevidimka655.astracrypt.resources.R
-import com.nevidimka655.astracrypt.data.model.AeadInfo
-import com.nevidimka655.astracrypt.auth.domain.Auth
 import com.nevidimka655.astracrypt.auth.domain.Skin
-import com.nevidimka655.astracrypt.view.navigation.models.UiState
-import com.nevidimka655.astracrypt.view.navigation.Route
-import com.nevidimka655.ui.compose_core.wrappers.TextWrap
+import com.nevidimka655.astracrypt.resources.R
 
-private val SettingsSecurityAuthUiState = UiState(
-    toolbar = UiState.Toolbar(
-        title = TextWrap.Resource(id = R.string.settings_authentication)
-    )
-)
-
-fun NavGraphBuilder.settingsSecurityAuth(
-    onUiStateChange: (UiState) -> Unit
-) = composable<Route.SettingsSecurityAuth> {
-    onUiStateChange(SettingsSecurityAuthUiState)
-    val vm: SettingsAuthViewModel = hiltViewModel()
-    val auth by vm.authInfoFlow.collectAsStateWithLifecycle(initialValue = Auth())
-    val aeadInfo by vm.aeadInfoFlow.collectAsStateWithLifecycle(initialValue = AeadInfo())
+@Composable
+fun AuthSettingsScreen() {
+    val vm: AuthSettingsViewModel = hiltViewModel()
+    val auth by vm.authState.collectAsState()
 
     val typeIndex = remember(auth.type) {
         auth.type?.let { it.ordinal + 1 } ?: 0
@@ -40,7 +26,7 @@ fun NavGraphBuilder.settingsSecurityAuth(
     }
     SettingsAuthScreen(
         isAuthEnabled = auth.type != null,
-        isAssociatedDataEncrypted = aeadInfo.bindAssociatedData,
+        isAssociatedDataEncrypted = /*aeadInfo.bindAssociatedData*/ false,
         hintState = auth.hintState,
         hintText = auth.hintText ?: stringResource(R.string.none),
         skinIndex = skinIndex,
@@ -57,4 +43,5 @@ fun NavGraphBuilder.settingsSecurityAuth(
         onChangeHintState = { vm.setHintState(state = it) },
         onChangeHintText = { vm.setHintText(text = it) }
     )
+
 }

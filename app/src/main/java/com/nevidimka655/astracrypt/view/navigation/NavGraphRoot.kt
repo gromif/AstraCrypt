@@ -10,7 +10,7 @@ import com.nevidimka655.astracrypt.view.navigation.notes.notesGraph
 import com.nevidimka655.astracrypt.view.composables.settings.about.navigation.aboutGraph
 import com.nevidimka655.astracrypt.view.composables.settings.profile.editProfile
 import com.nevidimka655.astracrypt.view.composables.settings.security.admin.settingsSecurityAdmin
-import com.nevidimka655.astracrypt.view.composables.settings.security.auth.settingsSecurityAuth
+import com.nevidimka655.astracrypt.view.navigation.auth.settingsSecurityAuth
 import com.nevidimka655.astracrypt.view.composables.settings.security.quick_actions.settingsSecurityQuickActions
 import com.nevidimka655.astracrypt.view.composables.settings.security.settingsSecurity
 import com.nevidimka655.astracrypt.view.composables.settings.ui.files.settingsUiFiles
