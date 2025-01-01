@@ -25,7 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.nevidimka655.astracrypt.auth.domain.Auth
 import com.nevidimka655.astracrypt.resources.R
-import com.nevidimka655.ui.compose_core.TextFieldsDefaults
+import com.nevidimka655.ui.compose_core.TextFields
 import com.nevidimka655.ui.compose_core.text_fields.Password
 import com.nevidimka655.ui.compose_core.text_fields.icons.PasswordToggleIconButton
 import com.nevidimka655.ui.compose_core.theme.spaces
@@ -83,13 +83,13 @@ private fun Screen(
                 singleLine = true,
                 keyboardOptions = KeyboardOptions.Default.Password,
                 trailingIcon = {
-                    TextFieldsDefaults.Icons.PasswordToggleIconButton(passwordVisible) {
+                    TextFields.Icons.PasswordToggleIconButton(passwordVisible) {
                         passwordVisible = it
                     }
                 },
-                placeholder = TextFieldsDefaults.placeholderText(text = stringResource(R.string.password)),
-                label = TextFieldsDefaults.labelText(text = stringResource(R.string.password)),
-                visualTransformation = TextFieldsDefaults.passwordVisualTransform(state = passwordVisible)
+                placeholder = TextFields.placeholderText(text = stringResource(R.string.password)),
+                label = TextFields.labelText(text = stringResource(R.string.password)),
+                visualTransformation = TextFields.passwordVisualTransform(state = passwordVisible)
             )
             if (isHintVisible) OutlinedButton(onClick = onShowHint) {
                 Text(text = stringResource(id = R.string.hint))
