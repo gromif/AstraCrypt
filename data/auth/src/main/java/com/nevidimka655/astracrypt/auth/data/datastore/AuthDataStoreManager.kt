@@ -60,12 +60,12 @@ class AuthDataStoreManager(
 
 
     private suspend fun hashKey(key: String) = getEncryptionTemplate()?.let {
-        val aead = keysetManager.getKeyset(
+        val prf = keysetManager.getKeyset(
             tag = KEYSET_TAG_KEY,
             associatedData = KEYSET_TAG_KEY_AD,
             keyParams = KeysetTemplates.PRF.HKDF_SHA256.params
         ).prfPrimitive()
-        val prfBytes = aead.compute(key.toByteArray(), 32)
+        val prfBytes = prf.computePrimary(key.toByteArray(), 32)
         base64Util.encode(bytes = prfBytes)
     } ?: key
 

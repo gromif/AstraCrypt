@@ -32,7 +32,7 @@ class RepositoryImpl(
             associatedData = KEYSET_TAG_HASH_AD,
             keyParams = KeysetTemplates.PRF.HMAC_SHA512_PRF.params
         ).prfPrimitive()
-        return prf.compute(string.toByteArray(), outputLength)
+        return prf.computePrimary(string.toByteArray(), outputLength)
     }
 
     private suspend fun saveInfo(authDto: AuthDto) {
