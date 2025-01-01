@@ -118,7 +118,7 @@ fun AstraCryptApp(
                 onActionPressed = {
                     coroutineScope.launch { onToolbarActions.send(it) }
                 },
-                scrollBehavior = topBarScroll
+                scrollBehavior = if (!vm.userIsAuthenticated) null else topBarScroll
             )
         },
         floatingActionButton = {
@@ -151,13 +151,10 @@ fun AstraCryptApp(
                             fab = UiState.Fab(icon = Icons.Default.Key)
                         )
                         PasswordLoginScreen(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .verticalScroll(rememberScrollState()),
+                            modifier = Modifier.fillMaxSize(),
+                            auth = it,
                             onFabClick = onFabClick.receiveAsFlow(),
-                            onAuthenticated = {
-                                vm.userIsAuthenticated = true
-                            }
+                            onAuthenticated = { vm.userIsAuthenticated = true }
                         )
                     }
 
