@@ -25,7 +25,7 @@ fun ToolbarImpl(
     actions: List<ToolbarActions.Action>?,
     onNavigateUp: () -> Unit,
     onActionPressed: (ToolbarActions.Action) -> Unit,
-    scrollBehavior: TopAppBarScrollBehavior
+    scrollBehavior: TopAppBarScrollBehavior?
 ) {
     val context = LocalContext.current
     CenterAlignedTopAppBar(
