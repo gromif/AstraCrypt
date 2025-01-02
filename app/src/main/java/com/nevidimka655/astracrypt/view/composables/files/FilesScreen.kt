@@ -76,24 +76,23 @@ import androidx.paging.compose.LazyPagingItems
 import coil.ImageLoader
 import coil.compose.AsyncImage
 import coil.compose.AsyncImagePainter
-import com.nevidimka655.astracrypt.resources.R
-import com.nevidimka655.astracrypt.data.model.CoilTinkModel
-import com.nevidimka655.astracrypt.view.models.NavigatorDirectory
-import com.nevidimka655.astracrypt.domain.model.db.FileState
 import com.nevidimka655.astracrypt.data.database.FileTypes
+import com.nevidimka655.astracrypt.data.model.CoilTinkModel
 import com.nevidimka655.astracrypt.domain.model.db.FileItem
+import com.nevidimka655.astracrypt.domain.model.db.FileState
+import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.astracrypt.view.MainVM
-import com.nevidimka655.astracrypt.view.composables.files.sheets.filesCreateNewSheet
-import com.nevidimka655.astracrypt.view.composables.files.sheets.filesOptionsSheet
-import com.nevidimka655.ui.compose_core.NoItemsPage
 import com.nevidimka655.astracrypt.view.composables.components.dialogs.DeleteFile
 import com.nevidimka655.astracrypt.view.composables.components.dialogs.DeleteOriginalFiles
 import com.nevidimka655.astracrypt.view.composables.components.dialogs.Dialogs
 import com.nevidimka655.astracrypt.view.composables.components.dialogs.newFolder
 import com.nevidimka655.astracrypt.view.composables.components.dialogs.rename
+import com.nevidimka655.astracrypt.view.composables.files.sheets.filesCreateNewSheet
+import com.nevidimka655.astracrypt.view.composables.files.sheets.filesOptionsSheet
+import com.nevidimka655.astracrypt.view.models.NavigatorDirectory
 import com.nevidimka655.astracrypt.view.models.ViewMode
 import com.nevidimka655.haptic.Haptic
-import com.nevidimka655.haptic.hapticLongClick
+import com.nevidimka655.ui.compose_core.NoItemsPage
 import com.nevidimka655.ui.compose_core.ext.LocalWindowWidth
 import com.nevidimka655.ui.compose_core.ext.cellsCount
 import com.nevidimka655.ui.compose_core.theme.spaces
@@ -369,7 +368,7 @@ fun FilesList(
                     },
                     onClick = { onClick.invoke(it) },
                     onLongPress = {
-                        view.hapticLongClick()
+                        Haptic.clickHeavy()
                         onLongPress.invoke(it)
                     })
             }
@@ -384,7 +383,7 @@ fun FilesList(
                     state = it.state,
                     isChecked = listCheckedState.getOrElse(it.id) { false },
                     onLongClick = {
-                        view.hapticLongClick()
+                        Haptic.clickHeavy()
                         onOptions.invoke(it)
                     },
                     onClick = { onClick.invoke(it) })
