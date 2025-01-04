@@ -5,6 +5,7 @@ import androidx.annotation.RequiresApi
 import com.nevidimka655.astracrypt.core.di.IoDispatcher
 import com.nevidimka655.astracrypt.data.db.AppDatabase
 import com.nevidimka655.astracrypt.utils.io.FilesUtil
+import com.nevidimka655.crypto.tink.data.AssociatedDataManager
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import com.nevidimka655.tiles_with_coroutines.TileServiceCoroutine
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,11 +22,13 @@ class WipeTile @Inject constructor() : TileServiceCoroutine() {
     @Inject lateinit var defaultDispatcher: CoroutineDispatcher
     @Inject lateinit var database: AppDatabase
     @Inject lateinit var filesUtil: FilesUtil
-    @Inject lateinit var keysetManager: KeysetManager
+    @Inject lateinit var associatedDataManager: AssociatedDataManager
 
     override fun onClick() {
         super.onClick()
         launch(defaultDispatcher) {
+            associatedDataManager.erase()
+
             val keyStore = KeyStore.getInstance("AndroidKeyStore")
             keyStore.load(null)
             val aliases = keyStore.aliases()
@@ -34,16 +37,12 @@ class WipeTile @Inject constructor() : TileServiceCoroutine() {
                 keyStore.deleteEntry(alias)
             }
 
-            RandomAccessFile(keysetManager.dataFile, "rws").use {
-                it.write(ByteArray(96))
-            }
+            database.clearAllTables()
 
             with(filesUtil) {
                 dataDir.deleteRecursively()
                 cacheDir.deleteRecursively()
             }
-
-            database.clearAllTables()
         }
     }
 }

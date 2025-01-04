@@ -39,6 +39,7 @@ import com.nevidimka655.astracrypt.utils.io.Randomizer
 import com.nevidimka655.astracrypt.data.model.AeadInfo
 import com.nevidimka655.astracrypt.domain.model.db.FileFlags
 import com.nevidimka655.astracrypt.domain.repository.Repository
+import com.nevidimka655.crypto.tink.data.AssociatedDataManager
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import com.nevidimka655.crypto.tink.data.TinkConfig
 import com.nevidimka655.crypto.tink.extensions.fromBase64
@@ -66,6 +67,7 @@ class ImportFilesWorker @AssistedInject constructor(
     private val defaultDispatcher: CoroutineDispatcher,
     private val repository: Repository,
     private val keysetManager: KeysetManager,
+    private val associatedDataManager: AssociatedDataManager,
     private val filesUtil: FilesUtil,
     private val randomizer: Randomizer,
     private val imageLoader: ImageLoader,
@@ -132,7 +134,7 @@ class ImportFilesWorker @AssistedInject constructor(
                 encryptionMode = false,
                 authenticationTag = Args.TAG_ASSOCIATED_DATA_TRANSPORT
             )
-            keysetManager.setAssociatedDataExplicitly(decodedData)
+            associatedDataManager.setExplicitly(decodedData)
         }
     }
 

@@ -18,6 +18,7 @@ import com.nevidimka655.astracrypt.core.di.IoDispatcher
 import com.nevidimka655.astracrypt.utils.Api
 import com.nevidimka655.astracrypt.data.database.RepositoryEncryption
 import com.nevidimka655.astracrypt.data.model.AeadInfo
+import com.nevidimka655.crypto.tink.data.AssociatedDataManager
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import com.nevidimka655.crypto.tink.data.TinkConfig
 import com.nevidimka655.crypto.tink.extensions.aead
@@ -37,6 +38,7 @@ class TransformNotesWorker @AssistedInject constructor(
     private val defaultDispatcher: CoroutineDispatcher,
     private val repositoryEncryption: RepositoryEncryption,
     private val keysetManager: KeysetManager,
+    private val associatedDataManager: AssociatedDataManager
 ) : CoroutineWorker(appContext, params) {
 
     object Args {
@@ -93,7 +95,7 @@ class TransformNotesWorker @AssistedInject constructor(
                 encryptionMode = false,
                 authenticationTag = Args.TAG_ASSOCIATED_DATA_TRANSPORT
             )
-            keysetManager.setAssociatedDataExplicitly(decodedData)
+            associatedDataManager.setExplicitly(decodedData)
         }
     }
 

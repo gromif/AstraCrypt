@@ -35,9 +35,7 @@ internal class AuthSettingsViewModel @Inject constructor(
     private val setBindTinkAdUseCase: SetBindTinkAdUseCase,
     getAuthFlowUseCase: GetAuthFlowUseCase
 ) : ViewModel() {
-    val authState = getAuthFlowUseCase().stateIn(
-        viewModelScope, SharingStarted.Lazily, Auth()
-    )
+    val authState = getAuthFlowUseCase().stateIn(viewModelScope, SharingStarted.Lazily, Auth())
 
     fun disable() = viewModelScope.launch(defaultDispatcher) {
         disableAuthUseCase(authState.value)
@@ -65,11 +63,11 @@ internal class AuthSettingsViewModel @Inject constructor(
     fun setBindAssociatedData(
         state: Boolean, password: String
     ) = viewModelScope.launch(defaultDispatcher) {
-        launch { setBindTinkAdUseCase(auth = authState.value, bind = state) }
-        /*launch {
-            if (state) keysetManager.encryptAssociatedData(password)
-            else keysetManager.decryptAssociatedData()
-        }*/
+        setBindTinkAdUseCase(
+            auth = authState.value,
+            bind = state,
+            password = password
+        )
     }
 
     fun setPassword(password: String) = viewModelScope.launch(defaultDispatcher) {
