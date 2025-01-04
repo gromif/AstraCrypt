@@ -1,6 +1,7 @@
 package com.nevidimka655.astracrypt.auth.di
 
 import com.nevidimka655.astracrypt.auth.domain.Repository
+import com.nevidimka655.astracrypt.auth.domain.TinkRepository
 import com.nevidimka655.astracrypt.auth.domain.usecase.DisableAuthUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.GetAuthFlowUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.SetBindTinkAdUseCase
@@ -58,7 +59,8 @@ internal object UseCaseModule {
     @Provides
     fun provideVerifyCalculatorCombinationUseCase(
         repository: Repository
-    ): VerifyCalculatorCombinationUseCase = VerifyCalculatorCombinationUseCase(repository = repository)
+    ): VerifyCalculatorCombinationUseCase =
+        VerifyCalculatorCombinationUseCase(repository = repository)
 
     @Provides
     fun provideVerifyPasswordUseCase(
@@ -67,7 +69,9 @@ internal object UseCaseModule {
 
     @Provides
     fun provideSetBindTinkAdUseCase(
-        repository: Repository
-    ): SetBindTinkAdUseCase = SetBindTinkAdUseCase(repository = repository)
+        repository: Repository,
+        tinkRepository: TinkRepository
+    ): SetBindTinkAdUseCase =
+        SetBindTinkAdUseCase(repository = repository, tinkRepository = tinkRepository)
 
 }

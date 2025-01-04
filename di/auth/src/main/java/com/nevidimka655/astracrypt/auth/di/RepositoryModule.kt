@@ -1,12 +1,16 @@
 package com.nevidimka655.astracrypt.auth.di
 
 import com.nevidimka655.astracrypt.auth.data.RepositoryImpl
+import com.nevidimka655.astracrypt.auth.data.TinkRepositoryImpl
 import com.nevidimka655.astracrypt.auth.data.datastore.AuthDataStoreManager
 import com.nevidimka655.astracrypt.auth.data.dto.AuthDto
 import com.nevidimka655.astracrypt.auth.domain.Auth
 import com.nevidimka655.astracrypt.auth.domain.Repository
+import com.nevidimka655.astracrypt.auth.domain.TinkRepository
 import com.nevidimka655.astracrypt.utils.Mapper
+import com.nevidimka655.crypto.tink.core.GetGlobalAssociatedDataPrf
 import com.nevidimka655.crypto.tink.core.encoders.Base64Util
+import com.nevidimka655.crypto.tink.data.AssociatedDataManager
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import dagger.Module
 import dagger.Provides
@@ -30,6 +34,15 @@ internal object RepositoryModule {
         authToAuthDtoMapper = authToAuthDtoMapper,
         authDtoToAuthMapper = authDtoToAuthMapper,
         base64Util = base64Util
+    )
+
+    @Provides
+    fun provideTinkRepository(
+        associatedDataManager: AssociatedDataManager,
+        getGlobalAssociatedDataPrf: GetGlobalAssociatedDataPrf
+    ): TinkRepository = TinkRepositoryImpl(
+        associatedDataManager = associatedDataManager,
+        getGlobalAssociatedDataPrf = getGlobalAssociatedDataPrf
     )
 
 }
