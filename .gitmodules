@@ -1,30 +1,30 @@
 [submodule "modules/ui/compose-core"]
 	path = ui/compose-core
-	url = git@github.com:Nevidimka655/ui_compose_core.git
+	url = git@github.com:gromif/ui_compose_core.git
 [submodule "ui/compose-calculator"]
 	path = ui/compose-calculator
-	url = git@github.com:Nevidimka655/ui_compose_calculator.git
+	url = git@github.com:gromif/ui_compose_calculator.git
 [submodule "ui/compose-color-schemes"]
 	path = ui/compose-color-schemes
-	url = git@github.com:Nevidimka655/ui_compose_color_schemes.git
+	url = git@github.com:gromif/ui_compose_color_schemes.git
 [submodule "ui/compose-details"]
 	path = ui/compose-details
-	url = git@github.com:Nevidimka655/ui_compose_details.git
+	url = git@github.com:gromif/ui_compose_details.git
 [submodule "crypto/tink"]
 	path = core/tink
-	url = git@github.com:Nevidimka655/crypto_tink.git
+	url = git@github.com:gromif/crypto_tink.git
 [submodule "core/haptic"]
 	path = core/haptic
-	url = git@github.com:Nevidimka655/core_haptic.git
+	url = git@github.com:gromif/core_haptic.git
 [submodule "core/tiles-with-coroutines"]
 	path = core/tiles-with-coroutines
-	url = git@github.com:Nevidimka655/core_tiles_with_coroutines.git
+	url = git@github.com:gromif/core_tiles_with_coroutines.git
 [submodule "ui/compose-help"]
 	path = features/help
-	url = git@github.com:Nevidimka655/ui_compose_help.git
+	url = git@github.com:gromif/ui_compose_help.git
 [submodule "ui/compose-notes"]
 	path = features/compose-notes
-	url = git@github.com:Nevidimka655/ui_compose_notes.git
+	url = git@github.com:gromif/ui_compose_notes.git
 [submodule "crypto/tink-lab"]
 	path = features/tink-lab
-	url = git@github.com:Nevidimka655/crypto_tink_lab.git
+	url = git@github.com:gromif/crypto_tink_lab.git
