@@ -3,6 +3,7 @@ package com.nevidimka655.astracrypt.auth.di
 import com.nevidimka655.astracrypt.auth.domain.Repository
 import com.nevidimka655.astracrypt.auth.domain.usecase.DisableAuthUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.GetAuthFlowUseCase
+import com.nevidimka655.astracrypt.auth.domain.usecase.SetBindTinkAdUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.SetHintTextUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.SetHintVisibilityUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.SetPasswordUseCase
@@ -63,5 +64,10 @@ internal object UseCaseModule {
     fun provideVerifyPasswordUseCase(
         repository: Repository
     ): VerifyPasswordUseCase = VerifyPasswordUseCase(repository = repository)
+
+    @Provides
+    fun provideSetBindTinkAdUseCase(
+        repository: Repository
+    ): SetBindTinkAdUseCase = SetBindTinkAdUseCase(repository = repository)
 
 }

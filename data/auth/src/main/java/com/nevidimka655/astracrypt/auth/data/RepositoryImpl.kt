@@ -1,5 +1,6 @@
 package com.nevidimka655.astracrypt.auth.data
 
+import android.R.attr.text
 import com.nevidimka655.astracrypt.auth.data.datastore.AuthDataStoreManager
 import com.nevidimka655.astracrypt.auth.data.dto.AuthDto
 import com.nevidimka655.astracrypt.auth.data.dto.SkinDto
@@ -53,7 +54,6 @@ class RepositoryImpl(
         saveInfo(authDto = authDto)
     }
 
-
     override suspend fun setPassword(auth: Auth, password: String?): Unit = coroutineScope {
         launch {
             val hash = if (password != null) {
@@ -65,6 +65,11 @@ class RepositoryImpl(
             val authDto = authToAuthDtoMapper(auth.copy(type = AuthType.PASSWORD))
             saveInfo(authDto = authDto)
         }
+    }
+
+    override suspend fun setBindTinkAd(auth: Auth, bind: Boolean) {
+        val authDto = authToAuthDtoMapper(auth).copy(bindTinkAd = bind)
+        saveInfo(authDto = authDto)
     }
 
     override suspend fun verifyPassword(password: String): Boolean = coroutineScope {

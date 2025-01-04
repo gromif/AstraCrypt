@@ -6,7 +6,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.nevidimka655.astracrypt.auth.domain.Skin
 import com.nevidimka655.astracrypt.resources.R
 
@@ -26,7 +25,7 @@ fun AuthSettingsScreen() {
     }
     SettingsAuthScreen(
         isAuthEnabled = auth.type != null,
-        isAssociatedDataEncrypted = /*aeadInfo.bindAssociatedData*/ false,
+        isAssociatedDataEncrypted = auth.bindTinkAd,
         hintState = auth.hintState,
         hintText = auth.hintText ?: stringResource(R.string.none),
         skinIndex = skinIndex,

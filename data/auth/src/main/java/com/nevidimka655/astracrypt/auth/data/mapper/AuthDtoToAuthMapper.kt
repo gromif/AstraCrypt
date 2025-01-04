@@ -17,7 +17,8 @@ class AuthDtoToAuthMapper: Mapper<AuthDto, Auth> {
                 }
             },
             hintState = item.hintState,
-            hintText = item.hintText
+            hintText = item.hintText,
+            bindTinkAd = item.bindTinkAd
         )
     }
 }

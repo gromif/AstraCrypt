@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.nevidimka655.astracrypt.auth.domain.Auth
 import com.nevidimka655.astracrypt.auth.domain.usecase.DisableAuthUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.GetAuthFlowUseCase
+import com.nevidimka655.astracrypt.auth.domain.usecase.SetBindTinkAdUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.SetHintTextUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.SetHintVisibilityUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.SetPasswordUseCase
@@ -31,6 +32,7 @@ internal class AuthSettingsViewModel @Inject constructor(
     private val verifyPasswordUseCase: VerifyPasswordUseCase,
     private val setHintVisibilityUseCase: SetHintVisibilityUseCase,
     private val setHintTextUseCase: SetHintTextUseCase,
+    private val setBindTinkAdUseCase: SetBindTinkAdUseCase,
     getAuthFlowUseCase: GetAuthFlowUseCase
 ) : ViewModel() {
     val authState = getAuthFlowUseCase().stateIn(
@@ -63,8 +65,8 @@ internal class AuthSettingsViewModel @Inject constructor(
     fun setBindAssociatedData(
         state: Boolean, password: String
     ) = viewModelScope.launch(defaultDispatcher) {
-        /*launch { aeadManager.setBindAssociatedData(state = state) }
-        launch {
+        launch { setBindTinkAdUseCase(auth = authState.value, bind = state) }
+        /*launch {
             if (state) keysetManager.encryptAssociatedData(password)
             else keysetManager.decryptAssociatedData()
         }*/

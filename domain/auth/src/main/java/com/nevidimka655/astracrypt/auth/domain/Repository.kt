@@ -12,6 +12,8 @@ interface Repository {
 
     suspend fun setPassword(auth: Auth, password: String?)
 
+    suspend fun setBindTinkAd(auth: Auth, bind: Boolean)
+
     suspend fun verifyPassword(password: String): Boolean
 
     suspend fun disable(auth: Auth)
