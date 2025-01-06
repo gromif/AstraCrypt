@@ -11,12 +11,13 @@ val coreModules = listOf(
 )
 val featuresModules = listOf(
     "auth:login", "auth:settings",
+    "calculator",
     "compose-notes",
     "tink-lab",
     "help",
     "lab-zip"
 )
-val uiModules = listOf("compose-core", "compose-calculator", "compose-color-schemes", "compose-details")
+val uiModules = listOf("compose-core", "compose-color-schemes", "compose-details")
 val domainModules = listOf("auth", "calculator", "notes", "tink-lab", "lab-zip")
 val dataModules = listOf("auth", "notes", "tink-lab", "lab-zip")
 val diModules = listOf("auth", "notes", "tink-lab", "lab-zip", "utils")

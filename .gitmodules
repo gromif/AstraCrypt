@@ -2,7 +2,7 @@
 	path = ui/compose-core
 	url = git@github.com:gromif/ui_compose_core.git
 [submodule "ui/compose-calculator"]
-	path = ui/compose-calculator
+	path = features/calculator
 	url = git@github.com:gromif/ui_compose_calculator.git
 [submodule "ui/compose-color-schemes"]
 	path = ui/compose-color-schemes

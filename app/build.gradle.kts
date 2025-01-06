@@ -65,14 +65,16 @@ dependencies {
     implementation(projects.core.database.files)
 
     implementation(projects.core.tink)
+
     implementation(projects.features.auth.login)
+    implementation(projects.features.calculator)
+
+    implementation(projects.domain.auth)
+    implementation(projects.domain.calculator)
+    implementation(projects.di.auth)
 
     implementation(projects.di.utils)
 
-    implementation(projects.domain.auth)
-    implementation(projects.di.auth)
-
-    implementation(project(":ui:compose-calculator"))
     implementation(project(":ui:compose-color-schemes"))
     implementation(project(":ui:compose-details"))
 
