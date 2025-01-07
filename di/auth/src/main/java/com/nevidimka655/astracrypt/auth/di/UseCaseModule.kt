@@ -8,9 +8,9 @@ import com.nevidimka655.astracrypt.auth.domain.usecase.SetBindTinkAdUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.SetHintTextUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.SetHintVisibilityUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.SetPasswordUseCase
-import com.nevidimka655.astracrypt.auth.domain.usecase.SetSkinCalculatorUseCase
+import com.nevidimka655.astracrypt.auth.domain.usecase.SetSkinUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.SetSkinDefaultUseCase
-import com.nevidimka655.astracrypt.auth.domain.usecase.VerifyCalculatorCombinationUseCase
+import com.nevidimka655.astracrypt.auth.domain.usecase.VerifySkinUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.VerifyAuthUseCase
 import dagger.Module
 import dagger.Provides
@@ -50,8 +50,9 @@ internal object UseCaseModule {
 
     @Provides
     fun provideSetSkinCalculatorUseCase(
-        repository: Repository
-    ): SetSkinCalculatorUseCase = SetSkinCalculatorUseCase(repository = repository)
+        repository: Repository,
+        tinkRepository: TinkRepository
+    ): SetSkinUseCase = SetSkinUseCase(repository = repository, tinkRepository = tinkRepository)
 
     @Provides
     fun provideSetSkinDefaultUseCase(
@@ -60,9 +61,10 @@ internal object UseCaseModule {
 
     @Provides
     fun provideVerifyCalculatorCombinationUseCase(
-        repository: Repository
-    ): VerifyCalculatorCombinationUseCase =
-        VerifyCalculatorCombinationUseCase(repository = repository)
+        repository: Repository,
+        tinkRepository: TinkRepository
+    ): VerifySkinUseCase =
+        VerifySkinUseCase(repository = repository, tinkRepository = tinkRepository)
 
     @Provides
     fun provideVerifyPasswordUseCase(

@@ -30,16 +30,30 @@ class AuthDataStoreManager(
 
 
 
-    private suspend fun passwordHashKey() = stringPreferencesKey(hashKey("password_hash"))
-    val passwordHashFlow = dataStore.data.map {
-        val hash = it[passwordHashKey()]
+    private suspend fun authHashKey() = stringPreferencesKey(hashKey("auth_hash"))
+    private val authHashFlow = dataStore.data.map {
+        val hash = it[authHashKey()]
         if (!hash.isNullOrEmpty()) hash.fromBase64()
         else ByteArray(0)
     }
-    suspend fun getPasswordHash() = passwordHashFlow.first()
+    suspend fun getAuthHash() = authHashFlow.first()
 
-    suspend fun setPasswordHash(hash: ByteArray?) = dataStore.edit { preferences ->
-        preferences[passwordHashKey()] = if (hash != null) base64Util.encode(hash) else ""
+    suspend fun setAuthHash(hash: ByteArray?) = dataStore.edit { preferences ->
+        preferences[authHashKey()] = if (hash != null) base64Util.encode(hash) else ""
+    }
+
+
+
+    private suspend fun skinHashKey() = stringPreferencesKey(hashKey("skin_hash"))
+    private val skinHashFlow = dataStore.data.map {
+        val hash = it[skinHashKey()]
+        if (!hash.isNullOrEmpty()) hash.fromBase64()
+        else ByteArray(0)
+    }
+    suspend fun getSkinHash() = skinHashFlow.first()
+
+    suspend fun setSkinHash(hash: ByteArray?) = dataStore.edit { preferences ->
+        preferences[skinHashKey()] = if (hash != null) base64Util.encode(hash) else ""
     }
 
 

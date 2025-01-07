@@ -3,7 +3,6 @@ package com.nevidimka655.astracrypt.auth.data
 import com.nevidimka655.astracrypt.auth.data.datastore.AuthDataStoreManager
 import com.nevidimka655.astracrypt.auth.data.dto.AuthDto
 import com.nevidimka655.astracrypt.auth.domain.Auth
-import com.nevidimka655.astracrypt.auth.domain.AuthType
 import com.nevidimka655.astracrypt.auth.domain.Repository
 import com.nevidimka655.astracrypt.utils.Mapper
 import kotlinx.coroutines.coroutineScope
@@ -46,28 +45,28 @@ class RepositoryImpl(
     }
 
     override suspend fun disable(auth: Auth): Unit = coroutineScope {
-        launch { authDataStoreManager.setPasswordHash(hash = null) }
+        launch { authDataStoreManager.setAuthHash(hash = null) }
         launch { saveInfo(authDto = authToAuthDtoMapper(auth).copy(type = -1)) }
     }
 
     override suspend fun setAuthHash(hash: ByteArray?) {
-        authDataStoreManager.setPasswordHash(hash)
+        authDataStoreManager.setAuthHash(hash)
     }
 
     override suspend fun getAuthHash(): ByteArray {
-        return authDataStoreManager.getPasswordHash()
+        return authDataStoreManager.getAuthHash()
     }
 
     override suspend fun setSkinHash(hash: ByteArray?) {
-        TODO("Not yet implemented")
+        authDataStoreManager.setSkinHash(hash = hash)
     }
 
     override suspend fun getSkinHash(): ByteArray {
-        TODO("Not yet implemented")
+        return authDataStoreManager.getSkinHash()
     }
 
     override suspend fun setSkinDefault(auth: Auth) {
-        val authDto = authToAuthDtoMapper(auth.copy(skin = null))
+        val authDto = authToAuthDtoMapper(auth.copy(skinType = null))
         saveInfo(authDto = authDto)
     }
 

@@ -3,13 +3,14 @@ package com.nevidimka655.astracrypt.auth.settings
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nevidimka655.astracrypt.auth.domain.Auth
+import com.nevidimka655.astracrypt.auth.domain.SkinType
 import com.nevidimka655.astracrypt.auth.domain.usecase.DisableAuthUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.GetAuthFlowUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.SetBindTinkAdUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.SetHintTextUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.SetHintVisibilityUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.SetPasswordUseCase
-import com.nevidimka655.astracrypt.auth.domain.usecase.SetSkinCalculatorUseCase
+import com.nevidimka655.astracrypt.auth.domain.usecase.SetSkinUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.SetSkinDefaultUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.VerifyAuthUseCase
 import com.nevidimka655.astracrypt.core.di.IoDispatcher
@@ -27,7 +28,7 @@ internal class AuthSettingsViewModel @Inject constructor(
     private val defaultDispatcher: CoroutineDispatcher,
     private val disableAuthUseCase: DisableAuthUseCase,
     private val setSkinDefaultUseCase: SetSkinDefaultUseCase,
-    private val setSkinCalculatorUseCase: SetSkinCalculatorUseCase,
+    private val setSkinUseCase: SetSkinUseCase,
     private val setPasswordUseCase: SetPasswordUseCase,
     private val verifyAuthUseCase: VerifyAuthUseCase,
     private val setHintVisibilityUseCase: SetHintVisibilityUseCase,
@@ -50,9 +51,10 @@ internal class AuthSettingsViewModel @Inject constructor(
     }
 
     fun setCalculatorSkin(combination: String) = viewModelScope.launch(defaultDispatcher) {
-        setSkinCalculatorUseCase(
+        setSkinUseCase(
             auth = authState.value,
-            combination = combination
+            skinType = SkinType.Calculator,
+            data = combination
         )
         /*with(appComponentService) {
             calculator = true
