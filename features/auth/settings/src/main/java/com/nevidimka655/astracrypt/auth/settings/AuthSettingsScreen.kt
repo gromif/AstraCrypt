@@ -27,10 +27,7 @@ fun AuthSettingsScreen() {
         hintText = auth.hintText ?: stringResource(R.string.none),
         skinIndex = skinTypeIndex,
         typeIndex = typeIndex,
-        onDisableAuth = {
-            vm.setBindAssociatedData(state = false, password = it)
-            vm.disable()
-        },
+        onDisableAuth = { vm.disable() },
         onChangePassword = { vm.setPassword(password = it) },
         onVerifyPassword = { vm.verifyPassword(password = it) },
         onSetBindPassword = { state, password -> vm.setBindAssociatedData(state, password) },
