@@ -22,6 +22,4 @@ interface Repository {
     suspend fun setSkinHash(hash: ByteArray?)
     suspend fun getSkinHash(): ByteArray
 
-    suspend fun setSkinDefault(auth: Auth)
-
 }

@@ -65,9 +65,4 @@ class RepositoryImpl(
         return authDataStoreManager.getSkinHash()
     }
 
-    override suspend fun setSkinDefault(auth: Auth) {
-        val authDto = authToAuthDtoMapper(auth.copy(skinType = null))
-        saveInfo(authDto = authDto)
-    }
-
 }
