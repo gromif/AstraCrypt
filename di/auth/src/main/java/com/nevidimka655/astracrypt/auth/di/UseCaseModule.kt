@@ -2,12 +2,11 @@ package com.nevidimka655.astracrypt.auth.di
 
 import com.nevidimka655.astracrypt.auth.domain.Repository
 import com.nevidimka655.astracrypt.auth.domain.TinkRepository
-import com.nevidimka655.astracrypt.auth.domain.usecase.DisableAuthUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.GetAuthFlowUseCase
+import com.nevidimka655.astracrypt.auth.domain.usecase.SetAuthUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.SetBindTinkAdUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.SetHintTextUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.SetHintVisibilityUseCase
-import com.nevidimka655.astracrypt.auth.domain.usecase.SetPasswordUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.SetSkinUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.VerifyAuthUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.VerifySkinUseCase
@@ -19,11 +18,6 @@ import dagger.hilt.android.components.ViewModelComponent
 @Module
 @InstallIn(ViewModelComponent::class)
 internal object UseCaseModule {
-
-    @Provides
-    fun provideDisableAuthUseCase(
-        repository: Repository
-    ): DisableAuthUseCase = DisableAuthUseCase(repository = repository)
 
     @Provides
     fun provideGetAuthFlowUseCase(
@@ -44,8 +38,8 @@ internal object UseCaseModule {
     fun provideSetPasswordUseCase(
         repository: Repository,
         tinkRepository: TinkRepository
-    ): SetPasswordUseCase =
-        SetPasswordUseCase(repository = repository, tinkRepository = tinkRepository)
+    ): SetAuthUseCase =
+        SetAuthUseCase(repository = repository, tinkRepository = tinkRepository)
 
     @Provides
     fun provideSetSkinCalculatorUseCase(

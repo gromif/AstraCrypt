@@ -3,13 +3,13 @@ package com.nevidimka655.astracrypt.auth.settings
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nevidimka655.astracrypt.auth.domain.Auth
+import com.nevidimka655.astracrypt.auth.domain.AuthType
 import com.nevidimka655.astracrypt.auth.domain.SkinType
-import com.nevidimka655.astracrypt.auth.domain.usecase.DisableAuthUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.GetAuthFlowUseCase
+import com.nevidimka655.astracrypt.auth.domain.usecase.SetAuthUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.SetBindTinkAdUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.SetHintTextUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.SetHintVisibilityUseCase
-import com.nevidimka655.astracrypt.auth.domain.usecase.SetPasswordUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.SetSkinUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.VerifyAuthUseCase
 import com.nevidimka655.astracrypt.core.di.IoDispatcher
@@ -25,9 +25,8 @@ import javax.inject.Inject
 internal class AuthSettingsViewModel @Inject constructor(
     @IoDispatcher
     private val defaultDispatcher: CoroutineDispatcher,
-    private val disableAuthUseCase: DisableAuthUseCase,
     private val setSkinUseCase: SetSkinUseCase,
-    private val setPasswordUseCase: SetPasswordUseCase,
+    private val setAuthUseCase: SetAuthUseCase,
     private val verifyAuthUseCase: VerifyAuthUseCase,
     private val setHintVisibilityUseCase: SetHintVisibilityUseCase,
     private val setHintTextUseCase: SetHintTextUseCase,
@@ -37,7 +36,7 @@ internal class AuthSettingsViewModel @Inject constructor(
     val authState = getAuthFlowUseCase().stateIn(viewModelScope, SharingStarted.Lazily, Auth())
 
     fun disable() = viewModelScope.launch(defaultDispatcher) {
-        disableAuthUseCase(authState.value)
+        setAuthUseCase(auth = authState.value, authType = null, data = null)
     }
 
     fun disableSkin() = viewModelScope.launch(defaultDispatcher) {
@@ -67,7 +66,7 @@ internal class AuthSettingsViewModel @Inject constructor(
     }
 
     fun setPassword(password: String) = viewModelScope.launch(defaultDispatcher) {
-        setPasswordUseCase(auth = authState.value, data = password)
+        setAuthUseCase(auth = authState.value, authType = AuthType.PASSWORD, data = password)
     }
 
     suspend fun verifyPassword(password: String): Boolean = withContext(defaultDispatcher) {
