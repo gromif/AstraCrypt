@@ -11,7 +11,6 @@ import com.nevidimka655.astracrypt.auth.domain.usecase.SetHintTextUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.SetHintVisibilityUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.SetPasswordUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.SetSkinUseCase
-import com.nevidimka655.astracrypt.auth.domain.usecase.SetSkinDefaultUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.VerifyAuthUseCase
 import com.nevidimka655.astracrypt.core.di.IoDispatcher
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -27,7 +26,6 @@ internal class AuthSettingsViewModel @Inject constructor(
     @IoDispatcher
     private val defaultDispatcher: CoroutineDispatcher,
     private val disableAuthUseCase: DisableAuthUseCase,
-    private val setSkinDefaultUseCase: SetSkinDefaultUseCase,
     private val setSkinUseCase: SetSkinUseCase,
     private val setPasswordUseCase: SetPasswordUseCase,
     private val verifyAuthUseCase: VerifyAuthUseCase,
@@ -43,7 +41,7 @@ internal class AuthSettingsViewModel @Inject constructor(
     }
 
     fun disableSkin() = viewModelScope.launch(defaultDispatcher) {
-        setSkinDefaultUseCase(auth = authState.value)
+        setSkinUseCase(auth = authState.value, skinType = null, data = null)
         /*with(appComponentService) {
             main = true
             calculator = false
@@ -51,11 +49,7 @@ internal class AuthSettingsViewModel @Inject constructor(
     }
 
     fun setCalculatorSkin(combination: String) = viewModelScope.launch(defaultDispatcher) {
-        setSkinUseCase(
-            auth = authState.value,
-            skinType = SkinType.Calculator,
-            data = combination
-        )
+        setSkinUseCase(auth = authState.value, skinType = SkinType.Calculator, data = combination)
         /*with(appComponentService) {
             calculator = true
             main = false

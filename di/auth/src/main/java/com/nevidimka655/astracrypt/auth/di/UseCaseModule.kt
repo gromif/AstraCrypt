@@ -9,9 +9,8 @@ import com.nevidimka655.astracrypt.auth.domain.usecase.SetHintTextUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.SetHintVisibilityUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.SetPasswordUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.SetSkinUseCase
-import com.nevidimka655.astracrypt.auth.domain.usecase.SetSkinDefaultUseCase
-import com.nevidimka655.astracrypt.auth.domain.usecase.VerifySkinUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.VerifyAuthUseCase
+import com.nevidimka655.astracrypt.auth.domain.usecase.VerifySkinUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -53,11 +52,6 @@ internal object UseCaseModule {
         repository: Repository,
         tinkRepository: TinkRepository
     ): SetSkinUseCase = SetSkinUseCase(repository = repository, tinkRepository = tinkRepository)
-
-    @Provides
-    fun provideSetSkinDefaultUseCase(
-        repository: Repository
-    ): SetSkinDefaultUseCase = SetSkinDefaultUseCase(repository = repository)
 
     @Provides
     fun provideVerifyCalculatorCombinationUseCase(
