@@ -9,8 +9,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Key
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -34,6 +32,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.nevidimka655.astracrypt.auth.domain.AuthType
+import com.nevidimka655.astracrypt.auth.domain.SkinType
 import com.nevidimka655.astracrypt.auth.login.PasswordLoginScreen
 import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.astracrypt.utils.Api
@@ -49,6 +48,7 @@ import com.nevidimka655.astracrypt.view.navigation.root
 import com.nevidimka655.atracrypt.core.design_system.AstraCryptTheme
 import com.nevidimka655.haptic.Haptic
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
+import io.gromif.calculator.CalculatorScreen
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
@@ -58,7 +58,7 @@ import kotlinx.coroutines.launch
 fun AstraCryptApp(
     modifier: Modifier = Modifier,
     vm: MainVM = viewModel<MainVM>(),
-    navController: NavHostController = rememberNavController()
+    navController: NavHostController = rememberNavController(),
 ) = AstraCryptTheme(
     isDynamicThemeSupported = Api.atLeast12(),
     dynamicThemeFlow = vm.appearanceManager.dynamicThemeFlow
@@ -83,7 +83,11 @@ fun AstraCryptApp(
                     vm.setSearchIsEnabled(false)
                 }
             }
-            if (searchBar) Box(modifier = Modifier.fillMaxWidth().statusBarsPadding()) {
+            if (searchBar) Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .statusBarsPadding()
+            ) {
                 BackHandler(enabled = vm.isSearching) {
                     vm.isSearching = false
                     vm.searchQuery.value = null
@@ -107,7 +111,7 @@ fun AstraCryptApp(
                     },
                     backButtonEnabled = searchBarExpanded || vm.isSearching
                 )
-            } else ToolbarImpl(
+            } else if (vm.skinIsAuthenticated) ToolbarImpl(
                 title = toolbar.title,
                 backButton = vm.userIsAuthenticated && bottomBarTab == null,
                 actions = toolbar.actions,
@@ -144,6 +148,19 @@ fun AstraCryptApp(
         if (!vm.userIsAuthenticated) {
             val auth by vm.authState.collectAsState()
             auth?.let {
+                if (!vm.skinIsAuthenticated) when (it.skinType) {
+                    SkinType.Calculator -> {
+                        uiState = UiState(
+                            toolbar = UiState.Toolbar(title = TextWrap.Resource(id = R.string.settings_camouflageType_calculator))
+                        )
+                        CalculatorScreen(modifier = Modifier.fillMaxSize()) { data ->
+                            vm.verifySkin(data = data)
+                        }
+                        return@let
+                    }
+
+                    null -> vm.skinIsAuthenticated = true
+                }
                 when (it.type) {
                     AuthType.PASSWORD -> {
                         uiState = UiState(
@@ -158,7 +175,7 @@ fun AstraCryptApp(
                         )
                     }
 
-                    null -> { vm.userIsAuthenticated = true }
+                    null -> vm.userIsAuthenticated = true
                 }
             }
         } else NavHost(

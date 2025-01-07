@@ -15,5 +15,6 @@ dependencies {
     implementation(projects.di.auth)
 
     implementation(projects.di.utils)
+    implementation(projects.core.utils)
     implementation(projects.core.resources)
 }

@@ -13,6 +13,7 @@ import com.nevidimka655.astracrypt.auth.domain.usecase.SetHintVisibilityUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.SetSkinUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.VerifyAuthUseCase
 import com.nevidimka655.astracrypt.core.di.IoDispatcher
+import com.nevidimka655.astracrypt.utils.app.AppComponentService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.SharingStarted
@@ -25,6 +26,7 @@ import javax.inject.Inject
 internal class AuthSettingsViewModel @Inject constructor(
     @IoDispatcher
     private val defaultDispatcher: CoroutineDispatcher,
+    private val appComponentService: AppComponentService,
     private val setSkinUseCase: SetSkinUseCase,
     private val setAuthUseCase: SetAuthUseCase,
     private val verifyAuthUseCase: VerifyAuthUseCase,
@@ -41,18 +43,18 @@ internal class AuthSettingsViewModel @Inject constructor(
 
     fun disableSkin() = viewModelScope.launch(defaultDispatcher) {
         setSkinUseCase(auth = authState.value, skinType = null, data = null)
-        /*with(appComponentService) {
+        with(appComponentService) {
             main = true
             calculator = false
-        }*/
+        }
     }
 
     fun setCalculatorSkin(combination: String) = viewModelScope.launch(defaultDispatcher) {
         setSkinUseCase(auth = authState.value, skinType = SkinType.Calculator, data = combination)
-        /*with(appComponentService) {
+        with(appComponentService) {
             calculator = true
             main = false
-        }*/
+        }
     }
 
     fun setBindAssociatedData(

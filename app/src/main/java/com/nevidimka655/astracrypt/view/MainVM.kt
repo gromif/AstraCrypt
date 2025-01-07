@@ -14,6 +14,7 @@ import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.astracrypt.core.di.IoDispatcher
 import com.nevidimka655.astracrypt.app.utils.FileSystemSetupManager
 import com.nevidimka655.astracrypt.auth.domain.usecase.GetAuthFlowUseCase
+import com.nevidimka655.astracrypt.auth.domain.usecase.VerifySkinUseCase
 import com.nevidimka655.astracrypt.data.files.db.tuples.FilesMinimalTuple
 import com.nevidimka655.astracrypt.data.datastore.AppearanceManager
 import com.nevidimka655.astracrypt.utils.io.FilesUtil
@@ -47,17 +48,23 @@ class MainVM @Inject constructor(
     private val filesUtil: FilesUtil,
     private val filesPagingProvider: FilesPagingProvider,
     private val starredPagingProvider: StarredPagingProvider,
+    private val verifySkinUseCase: VerifySkinUseCase,
     getAuthFlowUseCase: GetAuthFlowUseCase,
     val appearanceManager: AppearanceManager
 ) : ViewModel() {
     var uiState = mutableStateOf(UiState())
 
     var userIsAuthenticated by mutableStateOf(false)
+    var skinIsAuthenticated by mutableStateOf(false)
     val authState = getAuthFlowUseCase().stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(),
         initialValue = null
     )
+
+    fun verifySkin(data: String) = viewModelScope.launch {
+        skinIsAuthenticated = verifySkinUseCase(data)
+    }
 
     val filesViewModeState = appearanceManager.filesViewModeFlow.stateIn(
         viewModelScope, SharingStarted.Lazily, initialValue = ViewMode.Grid

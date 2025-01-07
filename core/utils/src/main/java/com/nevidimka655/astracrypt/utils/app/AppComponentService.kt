@@ -1,14 +1,9 @@
-package com.nevidimka655.astracrypt.app.utils
+package com.nevidimka655.astracrypt.utils.app
 
 import android.annotation.SuppressLint
 import android.content.ComponentName
 import android.content.Context
 import android.content.pm.PackageManager
-import com.nevidimka655.astracrypt.app.services.tiles.WipeTile
-import com.nevidimka655.astracrypt.utils.Api
-import com.nevidimka655.astracrypt.view.MainActivity
-import dagger.hilt.android.qualifiers.ApplicationContext
-import javax.inject.Inject
 
 private const val ENABLED = PackageManager.COMPONENT_ENABLED_STATE_ENABLED
 private const val DISABLED = PackageManager.COMPONENT_ENABLED_STATE_DISABLED
@@ -16,13 +11,11 @@ private const val DISABLED = PackageManager.COMPONENT_ENABLED_STATE_DISABLED
 private typealias Component = ComponentName
 
 @SuppressLint("NewApi")
-class AppComponentService @Inject constructor(
-    @ApplicationContext context: Context
-) {
+class AppComponentService(context: Context) {
     private val packageManager = context.packageManager
 
 
-    private val _main = Component(context, MainActivity::class.java)
+    private val _main = Component(context, "${context.packageName}.view.MainActivity")
     var main
         get() = getState(comp = _main) == ENABLED
         set(value) = setState(comp = _main, state = value)
@@ -32,12 +25,6 @@ class AppComponentService @Inject constructor(
     var calculator
         get() = getState(comp = _calculator) == ENABLED
         set(value) = setState(comp = _calculator, state = value)
-
-
-    private val _wipeTile = Component(context, WipeTile::class.java)
-    var quickDataDeletion
-        get() = getState(comp = _wipeTile) == ENABLED
-        set(value) = setState(comp = _wipeTile, state = value)
 
 
     private fun getState(comp: Component) = packageManager.getComponentEnabledSetting(comp)
