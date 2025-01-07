@@ -4,13 +4,13 @@ import kotlinx.coroutines.flow.Flow
 
 interface Repository {
 
+    suspend fun setAuth(auth: Auth)
+
     fun getAuthFlow(): Flow<Auth>
 
     suspend fun setHintVisibility(auth: Auth, visible: Boolean)
 
     suspend fun setHintText(auth: Auth, text: String)
-
-    suspend fun setAuth(auth: Auth)
 
     suspend fun setBindTinkAd(auth: Auth, bind: Boolean)
 
