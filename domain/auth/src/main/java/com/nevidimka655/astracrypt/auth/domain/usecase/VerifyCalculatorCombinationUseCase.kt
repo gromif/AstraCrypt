@@ -11,10 +11,7 @@ class VerifyCalculatorCombinationUseCase(
         calculator: Skin.Calculator,
         combination: String
     ): Boolean {
-        return repository.verifyCalculatorCombination(
-            calculator = calculator,
-            combination = combination
-        )
+        TODO()
     }
 
 }

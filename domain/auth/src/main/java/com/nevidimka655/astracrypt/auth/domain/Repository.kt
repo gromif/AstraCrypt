@@ -10,20 +10,17 @@ interface Repository {
 
     suspend fun setHintText(auth: Auth, text: String)
 
-    suspend fun setPassword(auth: Auth, password: String?)
+    suspend fun setAuth(auth: Auth)
 
     suspend fun setBindTinkAd(auth: Auth, bind: Boolean)
 
-    suspend fun verifyPassword(password: String): Boolean
-
     suspend fun disable(auth: Auth)
 
-    suspend fun verifyCalculatorCombination(
-        calculator: Skin.Calculator,
-        combination: String
-    ): Boolean
+    suspend fun setAuthHash(hash: ByteArray?)
+    suspend fun getAuthHash(): ByteArray
 
-    suspend fun setSkinCalculator(auth: Auth, combination: String)
+    suspend fun setSkinHash(hash: ByteArray?)
+    suspend fun getSkinHash(): ByteArray
 
     suspend fun setSkinDefault(auth: Auth)
 

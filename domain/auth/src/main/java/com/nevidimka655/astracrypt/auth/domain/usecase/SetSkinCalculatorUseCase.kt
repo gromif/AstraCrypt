@@ -8,10 +8,7 @@ class SetSkinCalculatorUseCase(
 ) {
 
     suspend operator fun invoke(auth: Auth, combination: String) {
-        repository.setSkinCalculator(
-            auth = auth,
-            combination = combination
-        )
+        TODO()
     }
 
 }

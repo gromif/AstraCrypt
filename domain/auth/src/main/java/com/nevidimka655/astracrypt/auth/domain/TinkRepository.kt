@@ -6,4 +6,8 @@ interface TinkRepository {
 
     suspend fun disableAssociatedDataBind()
 
+    suspend fun computeAuthHash(data: String): ByteArray
+
+    suspend fun computeSkinHash(data: String): ByteArray
+
 }

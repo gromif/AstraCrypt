@@ -23,24 +23,22 @@ internal object RepositoryModule {
 
     @Provides
     fun provideRepository(
-        keysetManager: KeysetManager,
         authDataStoreManager: AuthDataStoreManager,
         authToAuthDtoMapper: Mapper<Auth, AuthDto>,
-        authDtoToAuthMapper: Mapper<AuthDto, Auth>,
-        base64Util: Base64Util
+        authDtoToAuthMapper: Mapper<AuthDto, Auth>
     ): Repository = RepositoryImpl(
-        keysetManager = keysetManager,
         authDataStoreManager = authDataStoreManager,
         authToAuthDtoMapper = authToAuthDtoMapper,
-        authDtoToAuthMapper = authDtoToAuthMapper,
-        base64Util = base64Util
+        authDtoToAuthMapper = authDtoToAuthMapper
     )
 
     @Provides
     fun provideTinkRepository(
+        keysetManager: KeysetManager,
         associatedDataManager: AssociatedDataManager,
         getGlobalAssociatedDataPrf: GetGlobalAssociatedDataPrf
     ): TinkRepository = TinkRepositoryImpl(
+        keysetManager = keysetManager,
         associatedDataManager = associatedDataManager,
         getGlobalAssociatedDataPrf = getGlobalAssociatedDataPrf
     )

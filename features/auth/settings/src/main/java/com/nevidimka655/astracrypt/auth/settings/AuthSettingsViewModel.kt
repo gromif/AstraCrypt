@@ -11,7 +11,7 @@ import com.nevidimka655.astracrypt.auth.domain.usecase.SetHintVisibilityUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.SetPasswordUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.SetSkinCalculatorUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.SetSkinDefaultUseCase
-import com.nevidimka655.astracrypt.auth.domain.usecase.VerifyPasswordUseCase
+import com.nevidimka655.astracrypt.auth.domain.usecase.VerifyAuthUseCase
 import com.nevidimka655.astracrypt.core.di.IoDispatcher
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
@@ -29,7 +29,7 @@ internal class AuthSettingsViewModel @Inject constructor(
     private val setSkinDefaultUseCase: SetSkinDefaultUseCase,
     private val setSkinCalculatorUseCase: SetSkinCalculatorUseCase,
     private val setPasswordUseCase: SetPasswordUseCase,
-    private val verifyPasswordUseCase: VerifyPasswordUseCase,
+    private val verifyAuthUseCase: VerifyAuthUseCase,
     private val setHintVisibilityUseCase: SetHintVisibilityUseCase,
     private val setHintTextUseCase: SetHintTextUseCase,
     private val setBindTinkAdUseCase: SetBindTinkAdUseCase,
@@ -71,11 +71,11 @@ internal class AuthSettingsViewModel @Inject constructor(
     }
 
     fun setPassword(password: String) = viewModelScope.launch(defaultDispatcher) {
-        setPasswordUseCase(auth = authState.value, password = password)
+        setPasswordUseCase(auth = authState.value, data = password)
     }
 
     suspend fun verifyPassword(password: String): Boolean = withContext(defaultDispatcher) {
-        verifyPasswordUseCase(password = password)
+        verifyAuthUseCase(password = password)
     }
 
     fun setHintState(state: Boolean) = viewModelScope.launch(defaultDispatcher) {
