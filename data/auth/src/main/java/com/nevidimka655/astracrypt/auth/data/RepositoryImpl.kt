@@ -44,11 +44,6 @@ class RepositoryImpl(
         saveInfo(authDto = authDto)
     }
 
-    override suspend fun disable(auth: Auth): Unit = coroutineScope {
-        launch { authDataStoreManager.setAuthHash(hash = null) }
-        launch { saveInfo(authDto = authToAuthDtoMapper(auth).copy(type = -1)) }
-    }
-
     override suspend fun setAuthHash(hash: ByteArray?) {
         authDataStoreManager.setAuthHash(hash)
     }

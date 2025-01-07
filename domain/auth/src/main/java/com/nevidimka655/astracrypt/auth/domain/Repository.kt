@@ -14,8 +14,6 @@ interface Repository {
 
     suspend fun setBindTinkAd(auth: Auth, bind: Boolean)
 
-    suspend fun disable(auth: Auth)
-
     suspend fun setAuthHash(hash: ByteArray?)
     suspend fun getAuthHash(): ByteArray
 
