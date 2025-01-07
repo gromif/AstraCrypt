@@ -16,7 +16,8 @@ class RepositoryImpl(
     private val authDtoToAuthMapper: Mapper<AuthDto, Auth>
 ) : Repository {
 
-    private suspend fun saveInfo(authDto: AuthDto) {
+    override suspend fun setAuth(auth: Auth) {
+        val authDto = authToAuthDtoMapper(auth)
         authDataStoreManager.setAuthInfo(authDto = authDto)
     }
 
@@ -25,23 +26,15 @@ class RepositoryImpl(
     }
 
     override suspend fun setHintVisibility(auth: Auth, visible: Boolean) {
-        val authDto = authToAuthDtoMapper(auth).copy(hintState = visible)
-        saveInfo(authDto = authDto)
+        setAuth(auth.copy(hintState = visible))
     }
 
     override suspend fun setHintText(auth: Auth, text: String) {
-        val authDto = authToAuthDtoMapper(auth).copy(hintText = text)
-        saveInfo(authDto = authDto)
-    }
-
-    override suspend fun setAuth(auth: Auth) {
-        val authDto = authToAuthDtoMapper(auth)
-        authDataStoreManager.setAuthInfo(authDto = authDto)
+        setAuth(auth.copy(hintText = text))
     }
 
     override suspend fun setBindTinkAd(auth: Auth, bind: Boolean) {
-        val authDto = authToAuthDtoMapper(auth).copy(bindTinkAd = bind)
-        saveInfo(authDto = authDto)
+        setAuth(auth.copy(bindTinkAd = bind))
     }
 
     override suspend fun setAuthHash(hash: ByteArray?) {
