@@ -45,8 +45,10 @@ fun PasswordLoginScreen(
 
     LaunchedEffect(Unit) {
         onFabClick.collectLatest {
-            if (vm.verifyPassword(password = password)) onAuthenticated()
-            else Toast.makeText(context, R.string.t_invalidPass, Toast.LENGTH_SHORT).show()
+            if (vm.verifyPassword(password = password)) {
+                if (vm.isTinkAdTiedToAuth()) vm.decryptTinkAd(password = password)
+                onAuthenticated()
+            } else Toast.makeText(context, R.string.t_invalidPass, Toast.LENGTH_SHORT).show()
         }
     }
 

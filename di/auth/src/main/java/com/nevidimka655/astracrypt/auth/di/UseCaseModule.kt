@@ -2,6 +2,7 @@ package com.nevidimka655.astracrypt.auth.di
 
 import com.nevidimka655.astracrypt.auth.domain.Repository
 import com.nevidimka655.astracrypt.auth.domain.TinkRepository
+import com.nevidimka655.astracrypt.auth.domain.usecase.DecryptTinkAdUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.GetAuthFlowUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.SetAuthUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.SetBindTinkAdUseCase
@@ -67,5 +68,9 @@ internal object UseCaseModule {
         tinkRepository: TinkRepository
     ): SetBindTinkAdUseCase =
         SetBindTinkAdUseCase(repository = repository, tinkRepository = tinkRepository)
+
+    @Provides
+    fun provideDecryptTinkAdUseCase(tinkRepository: TinkRepository): DecryptTinkAdUseCase =
+        DecryptTinkAdUseCase(tinkRepository = tinkRepository)
 
 }
