@@ -75,7 +75,6 @@ dependencies {
 
     implementation(projects.di.utils)
 
-    implementation(project(":ui:compose-color-schemes"))
     implementation(project(":ui:compose-details"))
 
     // Compose
