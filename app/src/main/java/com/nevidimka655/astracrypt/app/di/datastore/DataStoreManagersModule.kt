@@ -35,12 +35,10 @@ object DataStoreManagersModule {
     fun provideSettingsDataStoreManager(
         @SettingsDataStore dataStore: DataStore<Preferences>,
         keysetManager: KeysetManager,
-        sha256Util: Sha256Util,
         base64Util: Base64Util
     ) = SettingsDataStoreManager(
         dataStore = dataStore,
         keysetManager = keysetManager,
-        sha256Util = sha256Util,
         base64Util = base64Util
     )
 
