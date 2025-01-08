@@ -39,6 +39,13 @@ class TinkRepositoryImpl(
         associatedDataManager.decrypt()
     }
 
+    override suspend fun decryptAssociatedData(password: String) {
+        associatedDataManager.decryptWithPassword(
+            password = password,
+            prfSet = getPrfSet()
+        )
+    }
+
     override suspend fun computeAuthHash(data: String): ByteArray {
         return calculateHash(string = data, outputLength = 29)
     }
