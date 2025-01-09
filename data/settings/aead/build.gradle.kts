@@ -11,5 +11,7 @@ android {
 dependencies {
     implementation(projects.domain.settings.aead)
 
+    implementation(projects.domain.notes)
+
     implementation(projects.core.tink)
 }
