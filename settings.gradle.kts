@@ -15,7 +15,8 @@ val featuresModules = listOf(
     "compose-notes",
     "tink-lab",
     "help",
-    "lab-zip"
+    "lab-zip",
+    "settings:aead"
 )
 val uiModules = listOf("compose-core", "compose-details")
 val domainModules = listOf("auth", "calculator", "notes", "tink-lab", "lab-zip")
