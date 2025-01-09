@@ -13,4 +13,6 @@ android {
 dependencies {
     implementation(projects.domain.settings.aead)
     implementation(projects.di.settings.aead)
+
+    implementation(projects.core.resources)
 }
