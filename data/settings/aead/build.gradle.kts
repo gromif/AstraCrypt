@@ -3,10 +3,10 @@ plugins {
 }
 
 android {
-    namespace = "io.gromif.astracrypt.settings.aead.di"
+    namespace = "io.gromif.astracrypt.settings.aead.data"
+
 }
 
 dependencies {
     implementation(projects.domain.settings.aead)
-    implementation(projects.data.settings.aead)
 }

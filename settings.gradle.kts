@@ -23,7 +23,10 @@ val domainModules = listOf(
     "auth", "calculator", "notes", "tink-lab", "lab-zip",
     "settings:aead"
 )
-val dataModules = listOf("auth", "notes", "tink-lab", "lab-zip")
+val dataModules = listOf(
+    "auth", "notes", "tink-lab", "lab-zip",
+    "settings:aead"
+)
 val diModules = listOf(
     "auth", "notes", "tink-lab", "lab-zip", "utils",
     "settings:aead"
