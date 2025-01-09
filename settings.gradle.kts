@@ -24,7 +24,10 @@ val domainModules = listOf(
     "settings:aead"
 )
 val dataModules = listOf("auth", "notes", "tink-lab", "lab-zip")
-val diModules = listOf("auth", "notes", "tink-lab", "lab-zip", "utils")
+val diModules = listOf(
+    "auth", "notes", "tink-lab", "lab-zip", "utils",
+    "settings:aead"
+)
 
 // Include all modules
 include(":app")
