@@ -8,5 +8,5 @@ android {
 }
 
 dependencies {
-
+    implementation(projects.domain.settings.aead)
 }
