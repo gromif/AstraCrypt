@@ -13,7 +13,7 @@ class SettingsRepositoryImpl(
     private val dataStore: DataStore<Preferences>
 ): SettingsRepository {
     private val aeadKey = intPreferencesKey("aead")
-    override suspend fun getAeadTemplateIndexFlow(): Flow<Int> {
+    override fun getAeadTemplateIndexFlow(): Flow<Int> {
         return dataStore.data.map { it[aeadKey] ?: -1 }
     }
 

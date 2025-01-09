@@ -11,7 +11,7 @@ class RepositoryImpl(
     private val notesSettingsRepository: NotesSettingsRepository
 ): Repository {
 
-    override suspend fun getNotesAeadTemplateFlow(): Flow<AeadTemplate> {
+    override fun getNotesAeadTemplateFlow(): Flow<AeadTemplate> {
         return notesSettingsRepository.getAeadTemplateIndexFlow().map {
             AeadTemplate(id = it, name = KeysetTemplates.AEAD.entries[it].name)
         }

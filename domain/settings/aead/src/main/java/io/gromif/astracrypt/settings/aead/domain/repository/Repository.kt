@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface Repository {
 
-    suspend fun getNotesAeadTemplateFlow(): Flow<AeadTemplate>
+    fun getNotesAeadTemplateFlow(): Flow<AeadTemplate>
 
     fun getAeadTemplateList(): List<AeadTemplate>
 

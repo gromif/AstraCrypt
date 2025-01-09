@@ -4,7 +4,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface SettingsRepository {
 
-    suspend fun getAeadTemplateIndexFlow(): Flow<Int>
+    fun getAeadTemplateIndexFlow(): Flow<Int>
 
     suspend fun getAeadTemplateIndex(): Int
 
