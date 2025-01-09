@@ -6,6 +6,7 @@ import androidx.paging.PagingData
 import androidx.paging.map
 import com.nevidimka655.astracrypt.notes.db.NoteItemEntity
 import com.nevidimka655.astracrypt.notes.db.NotesDao
+import com.nevidimka655.astracrypt.utils.Mapper
 import com.nevidimka655.notes.data.mappers.DataToDomainMapper
 import com.nevidimka655.domain.notes.model.Note
 import com.nevidimka655.domain.notes.repository.Repository
@@ -14,7 +15,7 @@ import kotlinx.coroutines.flow.map
 
 class RepositoryImpl(
     private val dao: NotesDao,
-    private val dataToDomainMapper: DataToDomainMapper
+    private val dataToDomainMapper: Mapper<NoteItemEntity, Note>
 ) : Repository {
     override suspend fun deleteById(id: Long) {
         dao.deleteById(id = id)

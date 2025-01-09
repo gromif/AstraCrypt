@@ -5,7 +5,10 @@ import androidx.datastore.core.handlers.ReplaceFileCorruptionHandler
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.preferencesDataStoreFile
+import com.nevidimka655.astracrypt.notes.db.NoteItemEntity
 import com.nevidimka655.astracrypt.notes.db.NotesDao
+import com.nevidimka655.astracrypt.utils.Mapper
+import com.nevidimka655.domain.notes.model.Note
 import com.nevidimka655.domain.notes.paging.PagingProvider
 import com.nevidimka655.domain.notes.repository.Repository
 import com.nevidimka655.domain.notes.repository.SettingsRepository
@@ -36,7 +39,7 @@ internal object RepositoryModule {
     @Provides
     fun provideRepositoryImpl(
         dao: NotesDao,
-        dataToDomainMapper: DataToDomainMapper
+        dataToDomainMapper: Mapper<NoteItemEntity, Note>
     ): Repository = RepositoryImpl(
         dao = dao,
         dataToDomainMapper = dataToDomainMapper
@@ -61,6 +64,6 @@ internal object RepositoryModule {
     )
 
     @Provides
-    fun provideDataToDomainMapper(): DataToDomainMapper = DataToDomainMapper()
+    fun provideDataToDomainMapper(): Mapper<NoteItemEntity, Note> = DataToDomainMapper()
 
 }
