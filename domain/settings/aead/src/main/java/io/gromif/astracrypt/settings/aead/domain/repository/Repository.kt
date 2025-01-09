@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface Repository {
 
-    fun getNotesAeadTemplateFlow(): Flow<AeadTemplate>
+    fun getNotesAeadNameFlow(): Flow<String?>
 
     fun getAeadTemplateList(): List<AeadTemplate>
 
