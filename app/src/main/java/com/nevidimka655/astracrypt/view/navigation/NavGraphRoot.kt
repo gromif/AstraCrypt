@@ -19,6 +19,7 @@ import com.nevidimka655.astracrypt.view.composables.tabs
 import com.nevidimka655.astracrypt.view.navigation.models.UiState
 import com.nevidimka655.astracrypt.view.navigation.models.actions.ToolbarActions
 import com.nevidimka655.astracrypt.view.navigation.help.help
+import com.nevidimka655.astracrypt.view.navigation.settings.settingsSecurityAead
 import kotlinx.coroutines.flow.Flow
 
 fun root(
@@ -60,13 +61,14 @@ fun root(
     settingsUiFiles(onUiStateChange = onUiStateChange)
     settingsSecurity(
         onUiStateChange = onUiStateChange,
-        navigateToEncryption = {},
+        navigateToAead = { navController.navigate(Route.SettingsSecurityAead) },
         navigateToAuth = { navController.navigate(Route.SettingsSecurityAuth) },
         navigateToDeviceAdmin = { navController.navigate(Route.SettingsSecurityAdmin) },
         navigateToQuickActions = { navController.navigate(Route.SettingsSecurityQuickActions) }
     )
     settingsSecurityAdmin(onUiStateChange = onUiStateChange)
     settingsSecurityAuth(onUiStateChange = onUiStateChange)
+    settingsSecurityAead(onUiStateChange = onUiStateChange)
     settingsSecurityQuickActions(onUiStateChange = onUiStateChange)
     aboutGraph(onUiStateChange = onUiStateChange, navController = navController)
 

@@ -48,6 +48,7 @@ object Route {
     @Serializable object SettingsUi
     @Serializable object SettingsUiFiles
     @Serializable object SettingsSecurity
+    @Serializable object SettingsSecurityAead
     @Serializable object SettingsSecurityAdmin
     @Serializable object SettingsSecurityAuth
     @Serializable object SettingsSecurityQuickActions

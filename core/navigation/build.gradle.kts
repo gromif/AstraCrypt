@@ -18,6 +18,7 @@ dependencies {
     implementation(projects.features.help)
 
     implementation(projects.features.auth.settings)
+    implementation(projects.features.settings.aead)
 
     implementation(libs.androidx.annotation.jvm)
     implementation(libs.compose.navigation)

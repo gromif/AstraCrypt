@@ -16,7 +16,7 @@ private val SettingsSecurityUiState = UiState(
 
 fun NavGraphBuilder.settingsSecurity(
     onUiStateChange: (UiState) -> Unit,
-    navigateToEncryption: () -> Unit,
+    navigateToAead: () -> Unit,
     navigateToAuth: () -> Unit,
     navigateToDeviceAdmin: () -> Unit,
     navigateToQuickActions: () -> Unit
@@ -24,7 +24,7 @@ fun NavGraphBuilder.settingsSecurity(
     onUiStateChange(SettingsSecurityUiState)
     SettingsSecurityScreen(
         isActionsSupported = Api.atLeast7(),
-        navigateToEncryption = navigateToEncryption,
+        navigateToEncryption = navigateToAead,
         navigateToAuth = navigateToAuth,
         navigateToDeviceAdmin = navigateToDeviceAdmin,
         navigateToQuickActions = navigateToQuickActions
