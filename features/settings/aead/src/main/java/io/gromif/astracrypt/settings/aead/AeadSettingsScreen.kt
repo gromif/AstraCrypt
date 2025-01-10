@@ -31,7 +31,11 @@ fun AeadSettingsScreen() {
         aeadLargeStreamTemplateList = aeadLargeStreamTemplateList,
         aeadSmallStreamTemplateList = aeadSmallStreamTemplateList,
         notesAeadName = notesAeadNameState,
-        onNotesAeadChange = {},
+        onNotesAeadChange = {
+            val aeadIndex = it - 1
+            val aeadId =  vm.aeadTemplateList[aeadIndex].id
+            vm.setNotesAead(id = aeadId)
+        },
         filesAeadName = "files",
         onFilesAeadChange = {},
         previewAeadName = "preview",

@@ -9,6 +9,7 @@ import io.gromif.astracrypt.settings.aead.domain.usecase.GetAeadLargeStreamTempl
 import io.gromif.astracrypt.settings.aead.domain.usecase.GetAeadSmallStreamTemplateListUseCase
 import io.gromif.astracrypt.settings.aead.domain.usecase.GetAeadTemplateListUseCase
 import io.gromif.astracrypt.settings.aead.domain.usecase.GetNotesAeadTemplateUseCase
+import io.gromif.astracrypt.settings.aead.domain.usecase.SetNotesAeadUseCase
 
 @Module
 @InstallIn(ViewModelComponent::class)
@@ -41,5 +42,9 @@ internal object UsecaseModule {
     ): GetNotesAeadTemplateUseCase = GetNotesAeadTemplateUseCase(
         repository = repository
     )
+
+    @Provides
+    fun provideSetNotesAeadUseCase(repository: Repository): SetNotesAeadUseCase =
+        SetNotesAeadUseCase(repository = repository)
 
 }
