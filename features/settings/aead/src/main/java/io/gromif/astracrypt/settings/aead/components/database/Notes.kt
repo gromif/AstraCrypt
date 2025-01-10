@@ -18,7 +18,6 @@ internal fun Notes(
     notesAeadName: String? = "Test Notes Aead",
     onNotesAeadChange: (Int) -> Unit = {}
 ) {
-
     var aeadIndexToConfirm by rememberSaveable { mutableIntStateOf(0) }
     var dialogConfirmAead by DialogsCore.simple(
         title = stringResource(id = R.string.dialog_applyNewSettings),
