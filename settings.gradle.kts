@@ -11,6 +11,7 @@ val coreModules = listOf(
 )
 val featuresModules = listOf(
     "auth:login", "auth:settings",
+    "files",
     "calculator",
     "compose-notes",
     "tink-lab",
