@@ -15,11 +15,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         Haptic.init(context = applicationContext)
         setContent { AstraCryptApp() }
-        /*savedInstanceState ?: shouldShowAuthScreen(navController)
-        navController.addOnDestinationChangedListener { _, dest, _ ->
-            setUiStateOnFragment(dest.id)
-        }
-        with(binding) {
+        /*with(binding) {
             movePanel.setBackgroundColor(ColorManager.navigationBarColor)
             move.setOnClickListener {
                 vm.move(
@@ -43,39 +39,5 @@ class MainActivity : ComponentActivity() {
             }
         }*/
     }
-
-    /*private fun shouldShowAuthScreen(navController: NavController) {
-        var startDestination = when (vm.authManager.info.authType) {
-            AuthType.NO_AUTH -> R.id.homeFragment
-            AuthType.PASSWORD -> R.id.authFragment
-        }
-        val camouflage = vm.authManager.info.camouflage
-        if (camouflage != Camouflage.None) {
-            if (camouflage is Camouflage.Calculator) {
-                startDestination = R.id.calculatorFragment
-                vm.toolsManager.calculatorManager.camouflage = camouflage
-            }
-        }
-        if (startDestination != R.id.homeFragment) {
-            val options = NavOptions.Builder()
-                .setPopUpTo(R.id.homeFragment, true)
-                .build()
-            navController.navigate(startDestination, null, options)
-        }
-    }*/
-
-    /*@SuppressLint("PrivateResource")
-    private fun setUiStateOnFragment(fragmentDest: Int) {
-        uiState = when (fragmentDest) {
-
-            R.id.aeadFragment, R.id.notesViewFragment, R.id.archiveFragment -> {
-                fabLarge.setImageResource(R.drawable.ic_done)
-            }
-
-            R.id.notesFragment -> {
-                fabLarge.setImageResource(com.google.android.material.R.drawable.material_ic_edit_black_24dp)
-            }
-        }
-    }*/
 
 }
