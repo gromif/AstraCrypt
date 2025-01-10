@@ -49,6 +49,10 @@ gradlePlugin {
             id = "astracrypt.android.paging"
             implementationClass = "AndroidPagingConventionPlugin"
         }
+        register("androidCoil") {
+            id = "astracrypt.android.coil"
+            implementationClass = "AndroidCoilConventionPlugin"
+        }
         register("androidWork") {
             id = "astracrypt.android.work"
             implementationClass = "AndroidWorkConventionPlugin"

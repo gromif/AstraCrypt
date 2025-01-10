@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.astracrypt.kotlin.coroutines)
     alias(libs.plugins.astracrypt.android.paging)
     alias(libs.plugins.astracrypt.android.work)
+    alias(libs.plugins.astracrypt.android.coil)
 }
 
 android {

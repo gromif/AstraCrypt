@@ -51,8 +51,8 @@ compose-material3-icons-extended = { group = "androidx.compose.material", name =
 compose-material3-windowSizeClass = { group = "androidx.compose.material3", name = "material3-window-size-class" }
 
 # MEDIA LIBRARIES --------------------------------------------------------------------------------------------------------------------------------
-media-coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
-media-coil-video = { group = "io.coil-kt", name = "coil-video", version.ref = "coil" }
+coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
+coil-video = { group = "io.coil-kt", name = "coil-video", version.ref = "coil" }
 media-exifinterface = { group = "androidx.exifinterface", name = "exifinterface", version.ref = "exif-interface" }
 
 # ROOM LIBRARIES --------------------------------------------------------------------------------------------------------------------------------
@@ -109,6 +109,7 @@ hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 # Plugins defined by this project
 astracrypt-android-application = { id = "astracrypt.android.application" }
 astracrypt-android-application-compose = { id = "astracrypt.android.application.compose" }
+astracrypt-android-coil = { id = "astracrypt.android.coil" }
 astracrypt-android-library = { id = "astracrypt.android.library" }
 astracrypt-android-library-compose = { id = "astracrypt.android.compose" }
 astracrypt-android-room = { id = "astracrypt.android.room" }

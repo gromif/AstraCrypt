@@ -11,6 +11,7 @@ plugins {
     alias(libs.plugins.astracrypt.android.room)
     alias(libs.plugins.astracrypt.android.paging)
     alias(libs.plugins.astracrypt.android.work)
+    alias(libs.plugins.astracrypt.android.coil)
 }
 
 val keystorePropertiesFile = rootProject.file("keystore.properties")
@@ -91,8 +92,6 @@ dependencies {
     debugImplementation(libs.compose.ui.test.manifest)
 
     // Media
-    implementation(libs.media.coil.compose)
-    implementation(libs.media.coil.video)
     implementation(libs.media.exifinterface)
 
     // Other
