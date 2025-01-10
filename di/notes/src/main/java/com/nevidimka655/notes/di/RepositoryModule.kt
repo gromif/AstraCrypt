@@ -1,10 +1,7 @@
 package com.nevidimka655.notes.di
 
-import android.content.Context
-import androidx.datastore.core.handlers.ReplaceFileCorruptionHandler
-import androidx.datastore.preferences.core.PreferenceDataStoreFactory
-import androidx.datastore.preferences.core.emptyPreferences
-import androidx.datastore.preferences.preferencesDataStoreFile
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 import com.nevidimka655.astracrypt.notes.db.NoteItemEntity
 import com.nevidimka655.astracrypt.notes.db.NotesDao
 import com.nevidimka655.astracrypt.utils.Mapper
@@ -21,7 +18,6 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
-import dagger.hilt.android.qualifiers.ApplicationContext
 
 @Module
 @InstallIn(ViewModelComponent::class)
@@ -47,15 +43,9 @@ internal object RepositoryModule {
 
     @Provides
     fun provideSettingsRepository(
-        @ApplicationContext context: Context
-    ): SettingsRepository = SettingsRepositoryImpl(
-        dataStore = PreferenceDataStoreFactory.create(
-            corruptionHandler = ReplaceFileCorruptionHandler(
-                produceNewData = { emptyPreferences() }
-            ),
-            produceFile = { context.preferencesDataStoreFile("notes") }
-        )
-    )
+        @NotesDataStore dataStore: DataStore<Preferences>
+    ): SettingsRepository = SettingsRepositoryImpl(dataStore = dataStore)
+
     @Provides
     fun providePagingProvider(
         repositoryProviderImpl: RepositoryProviderImpl
