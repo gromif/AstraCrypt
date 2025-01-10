@@ -7,6 +7,8 @@ interface Repository {
 
     fun getNotesAeadNameFlow(): Flow<String?>
 
+    suspend fun setNotesAeadTemplateIndex(aead: Int)
+
     fun getAeadTemplateList(): List<AeadTemplate>
 
     fun getAeadLargeStreamTemplateList(): List<AeadTemplate>

@@ -17,6 +17,10 @@ class RepositoryImpl(
         }
     }
 
+    override suspend fun setNotesAeadTemplateIndex(aead: Int) {
+        notesSettingsRepository.setAeadTemplateIndex(aead = aead)
+    }
+
     override fun getAeadTemplateList(): List<AeadTemplate> {
         val aeadEntries = KeysetTemplates.AEAD.entries
         return aeadEntries.map {
