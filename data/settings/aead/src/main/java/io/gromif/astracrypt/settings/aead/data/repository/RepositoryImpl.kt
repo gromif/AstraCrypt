@@ -26,7 +26,7 @@ class RepositoryImpl(
 
     override fun getAeadLargeStreamTemplateList(): List<AeadTemplate> {
         val streamEntries = KeysetTemplates.Stream.entries
-        val suffix = "1MB"
+        val suffix = "_1MB"
         return streamEntries.filter { it.name.endsWith(suffix) }.map {
             AeadTemplate(id = it.ordinal, name = it.name.removeSuffix(suffix).lowercase())
         }
@@ -34,7 +34,7 @@ class RepositoryImpl(
 
     override fun getAeadSmallStreamTemplateList(): List<AeadTemplate> {
         val streamEntries = KeysetTemplates.Stream.entries
-        val suffix = "4KB"
+        val suffix = "_4KB"
         return streamEntries.filter { it.name.endsWith(suffix) }.map {
             AeadTemplate(id = it.ordinal, name = it.name.removeSuffix(suffix).lowercase())
         }
