@@ -18,7 +18,9 @@ internal fun Screen(
     filesAeadName: String? = "Test Files SAead",
     onFilesAeadChange: (Int) -> Unit = {},
     previewAeadName: String? = "Test Preview SAead",
-    onPreviewAeadChange: (Int) -> Unit = {}
+    onPreviewAeadChange: (Int) -> Unit = {},
+    settingsAeadName: String? = "Test Settings Aead",
+    onSettingsAeadChange: (Int) -> Unit = {}
 ) {
     PreferencesScreen {
         FilesGroup(
@@ -34,6 +36,10 @@ internal fun Screen(
             notesAeadName = notesAeadName,
             onNotesAeadChange = onNotesAeadChange
         )
-        SettingsGroup()
+        SettingsGroup(
+            aeadTemplatesList = aeadTemplatesList,
+            settingsAeadName = settingsAeadName,
+            onSettingsAeadChange = onSettingsAeadChange
+        )
     }
 }

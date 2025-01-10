@@ -25,6 +25,7 @@ fun AeadSettingsScreen() {
     }
 
     val notesAeadNameState by vm.notesAeadNameState.collectAsStateWithLifecycle()
+    val settingsAeadNameState by vm.settingsAeadNameState.collectAsStateWithLifecycle()
 
     Screen(
         aeadTemplatesList = aeadTemplatesList,
@@ -33,12 +34,18 @@ fun AeadSettingsScreen() {
         notesAeadName = notesAeadNameState,
         onNotesAeadChange = {
             val aeadIndex = it - 1
-            val aeadId =  vm.aeadTemplateList[aeadIndex].id
+            val aeadId = vm.aeadTemplateList[aeadIndex].id
             vm.setNotesAead(id = aeadId)
         },
         filesAeadName = "files",
         onFilesAeadChange = {},
         previewAeadName = "preview",
-        onPreviewAeadChange = {}
+        onPreviewAeadChange = {},
+        settingsAeadName = settingsAeadNameState,
+        onSettingsAeadChange = {
+            val aeadIndex = it - 1
+            val aeadId = vm.aeadTemplateList[aeadIndex].id
+            vm.setSettingsAead(id = aeadId)
+        }
     )
 }
