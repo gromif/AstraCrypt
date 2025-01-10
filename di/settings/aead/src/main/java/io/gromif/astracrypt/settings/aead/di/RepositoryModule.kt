@@ -5,6 +5,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.android.scopes.ViewModelScoped
 import io.gromif.astracrypt.settings.aead.data.repository.RepositoryImpl
 import io.gromif.astracrypt.settings.aead.domain.repository.Repository
 
@@ -13,6 +14,7 @@ import io.gromif.astracrypt.settings.aead.domain.repository.Repository
 internal object RepositoryModule {
 
     @Provides
+    @ViewModelScoped
     fun provideRepository(
         notesSettingsRepository: NotesSettingsRepository
     ): Repository = RepositoryImpl(
