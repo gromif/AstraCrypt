@@ -5,11 +5,14 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import io.gromif.astracrypt.settings.aead.domain.repository.Repository
+import io.gromif.astracrypt.settings.aead.domain.repository.SettingsRepository
 import io.gromif.astracrypt.settings.aead.domain.usecase.GetAeadLargeStreamTemplateListUseCase
 import io.gromif.astracrypt.settings.aead.domain.usecase.GetAeadSmallStreamTemplateListUseCase
 import io.gromif.astracrypt.settings.aead.domain.usecase.GetAeadTemplateListUseCase
 import io.gromif.astracrypt.settings.aead.domain.usecase.GetNotesAeadTemplateUseCase
+import io.gromif.astracrypt.settings.aead.domain.usecase.GetSettingsAeadUseCase
 import io.gromif.astracrypt.settings.aead.domain.usecase.SetNotesAeadUseCase
+import io.gromif.astracrypt.settings.aead.domain.usecase.SetSettingsAeadUseCase
 
 @Module
 @InstallIn(ViewModelComponent::class)
@@ -46,5 +49,15 @@ internal object UsecaseModule {
     @Provides
     fun provideSetNotesAeadUseCase(repository: Repository): SetNotesAeadUseCase =
         SetNotesAeadUseCase(repository = repository)
+
+    @Provides
+    fun provideSetSettingsAeadUseCase(
+        settingsRepository: SettingsRepository
+    ): SetSettingsAeadUseCase = SetSettingsAeadUseCase(settingsRepository = settingsRepository)
+
+    @Provides
+    fun provideGetSettingsAeadUseCase(
+        settingsRepository: SettingsRepository
+    ): GetSettingsAeadUseCase = GetSettingsAeadUseCase(settingsRepository = settingsRepository)
 
 }

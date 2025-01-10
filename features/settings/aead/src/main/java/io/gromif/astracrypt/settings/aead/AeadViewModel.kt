@@ -8,7 +8,9 @@ import io.gromif.astracrypt.settings.aead.domain.usecase.GetAeadLargeStreamTempl
 import io.gromif.astracrypt.settings.aead.domain.usecase.GetAeadSmallStreamTemplateListUseCase
 import io.gromif.astracrypt.settings.aead.domain.usecase.GetAeadTemplateListUseCase
 import io.gromif.astracrypt.settings.aead.domain.usecase.GetNotesAeadTemplateUseCase
+import io.gromif.astracrypt.settings.aead.domain.usecase.GetSettingsAeadUseCase
 import io.gromif.astracrypt.settings.aead.domain.usecase.SetNotesAeadUseCase
+import io.gromif.astracrypt.settings.aead.domain.usecase.SetSettingsAeadUseCase
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
@@ -20,7 +22,9 @@ internal class AeadViewModel @Inject constructor(
     @IoDispatcher
     private val defaultDispatcher: CoroutineDispatcher,
     private val setNotesAeadUseCase: SetNotesAeadUseCase,
+    private val setSettingsAeadUseCase: SetSettingsAeadUseCase,
     getNotesAeadNameUseCase: GetNotesAeadTemplateUseCase,
+    getSettingsAeadUseCase: GetSettingsAeadUseCase,
     getAeadTemplateListUseCase: GetAeadTemplateListUseCase,
     getAeadLargeStreamTemplateListUseCase: GetAeadLargeStreamTemplateListUseCase,
     getAeadSmallStreamTemplateListUseCase: GetAeadSmallStreamTemplateListUseCase
@@ -30,11 +34,18 @@ internal class AeadViewModel @Inject constructor(
     val aeadSmallStreamTemplateList = getAeadSmallStreamTemplateListUseCase()
 
     val notesAeadNameState = getNotesAeadNameUseCase().stateIn(
-        viewModelScope, SharingStarted.WhileSubscribed(), null
+        viewModelScope, SharingStarted.Eagerly, null
+    )
+    val settingsAeadNameState = getSettingsAeadUseCase().stateIn(
+        viewModelScope, SharingStarted.Eagerly, null
     )
 
     fun setNotesAead(id: Int) = viewModelScope.launch(defaultDispatcher) {
         setNotesAeadUseCase(aead = id)
+    }
+
+    fun setSettingsAead(id: Int) = viewModelScope.launch(defaultDispatcher) {
+        setSettingsAeadUseCase(aead = id)
     }
 
 }
