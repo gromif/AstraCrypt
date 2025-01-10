@@ -32,7 +32,9 @@ val dataModules = listOf(
     "settings:aead"
 )
 val diModules = listOf(
-    "auth", "notes", "tink-lab", "lab-zip", "utils",
+    "auth",
+    "files",
+    "notes", "tink-lab", "lab-zip", "utils",
     "settings:aead"
 )
 
