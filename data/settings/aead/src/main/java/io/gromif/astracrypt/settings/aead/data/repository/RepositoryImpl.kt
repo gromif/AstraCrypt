@@ -1,13 +1,14 @@
 package io.gromif.astracrypt.settings.aead.data.repository
 
 import com.nevidimka655.crypto.tink.domain.KeysetTemplates
-import com.nevidimka655.domain.notes.repository.SettingsRepository
 import io.gromif.astracrypt.settings.aead.domain.model.AeadTemplate
 import io.gromif.astracrypt.settings.aead.domain.repository.Repository
+import io.gromif.astracrypt.settings.aead.domain.repository.SettingsRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class RepositoryImpl(
+    private val settingsRepository: SettingsRepository,
     private val notesSettingsRepository: NotesSettingsRepository
 ): Repository {
 
@@ -46,4 +47,4 @@ class RepositoryImpl(
 
 }
 
-typealias NotesSettingsRepository = SettingsRepository
+typealias NotesSettingsRepository = com.nevidimka655.domain.notes.repository.SettingsRepository
