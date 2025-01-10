@@ -15,4 +15,5 @@ dependencies {
     implementation(projects.di.settings.aead)
 
     implementation(projects.core.resources)
+    implementation(projects.di.utils)
 }
