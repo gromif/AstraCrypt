@@ -14,4 +14,6 @@ dependencies {
     implementation(projects.domain.notes)
 
     implementation(projects.core.tink)
+
+    implementation(libs.androidx.datastore.preferences)
 }

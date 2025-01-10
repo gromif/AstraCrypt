@@ -13,4 +13,6 @@ dependencies {
 
     implementation(projects.domain.notes)
     implementation(projects.di.notes)
+
+    implementation(libs.androidx.datastore.preferences)
 }
