@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.astracrypt.android.hilt)
     alias(libs.plugins.astracrypt.android.hilt.compose)
     alias(libs.plugins.astracrypt.kotlin.coroutines)
+    alias(libs.plugins.astracrypt.kotlin.parcelize)
     alias(libs.plugins.astracrypt.android.paging)
     alias(libs.plugins.astracrypt.android.work)
     alias(libs.plugins.astracrypt.android.coil)

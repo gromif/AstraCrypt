@@ -119,3 +119,4 @@ astracrypt-android-hilt = { id = "astracrypt.android.hilt" }
 astracrypt-android-hilt-compose = { id = "astracrypt.android.hilt.compose" }
 astracrypt-kotlin-coroutines = { id = "astracrypt.kotlin.coroutines" }
 astracrypt-kotlin-serialization = { id = "astracrypt.kotlin.serialization" }
+astracrypt-kotlin-parcelize = { id = "astracrypt.kotlin.parcelize" }
