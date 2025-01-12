@@ -18,6 +18,7 @@ dependencies {
     implementation(projects.domain.files)
     implementation(projects.di.files)
 
+    implementation(projects.core.designSystem)
     implementation(projects.core.resources)
     implementation(projects.core.utils)
     implementation(projects.di.utils)
