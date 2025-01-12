@@ -5,8 +5,5 @@ plugins {
 }
 
 android {
-    namespace = "com.nevidimka655.astracrypt.data.files.db"
-}
-
-dependencies {
+    namespace = "io.gromif.astracrypt.files.data.db"
 }
