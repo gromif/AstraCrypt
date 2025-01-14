@@ -15,6 +15,7 @@ dependencies {
 
     implementation(projects.core.database.files)
     implementation(projects.core.tink)
+    implementation(projects.core.utils)
 
     implementation(libs.androidx.datastore.preferences)
 }

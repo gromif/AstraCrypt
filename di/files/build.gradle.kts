@@ -12,4 +12,6 @@ android {
 dependencies {
     implementation(projects.domain.files)
     implementation(projects.data.files)
+
+    implementation(projects.core.utils)
 }
