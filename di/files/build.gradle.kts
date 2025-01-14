@@ -14,4 +14,5 @@ dependencies {
     implementation(projects.data.files)
 
     implementation(projects.core.utils)
+    implementation(projects.core.tink)
 }
