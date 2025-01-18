@@ -18,4 +18,5 @@ dependencies {
     implementation(projects.core.utils)
 
     implementation(libs.androidx.datastore.preferences)
+    implementation(libs.media.exifinterface)
 }
