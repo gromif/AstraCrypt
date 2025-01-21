@@ -91,10 +91,6 @@ dependencies {
     debugImplementation(libs.compose.ui.tooling.preview)
     debugImplementation(libs.compose.ui.test.manifest)
 
-    // Media
-    implementation(libs.media.exifinterface)
-
     // Other
-    implementation(libs.androidx.documentfile)
     implementation(libs.androidx.datastore.preferences)
 }
