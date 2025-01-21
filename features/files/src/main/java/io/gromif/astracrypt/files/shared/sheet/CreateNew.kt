@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.view.composables.files.sheets
+package io.gromif.astracrypt.files.shared.sheet
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -21,6 +21,7 @@ import androidx.compose.material3.SheetState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -40,13 +41,10 @@ import kotlinx.coroutines.launch
 fun filesCreateNewSheet(
     state: MutableState<Boolean>,
     sheetState: SheetState = SheetDefaults.state(),
-    scope: CoroutineScope,
+    scope: CoroutineScope = rememberCoroutineScope(),
     onCreateFolder: () -> Unit,
-    onAdd: () -> Unit,
+    onAdd: (type: String) -> Unit,
     onScan: () -> Unit,
-    onAddPhoto: () -> Unit,
-    onAddVideo: () -> Unit,
-    onAddMusic: () -> Unit,
 ) = SheetDefaults.default(
     state = state,
     sheetState = sheetState,
@@ -95,7 +93,7 @@ fun filesCreateNewSheet(
             GridItem(
                 imageVector = Icons.Outlined.Add,
                 text = stringResource(id = R.string.add),
-                onClick = onAdd
+                onClick = { onAdd("*") }
             )
         }
         item {
@@ -109,21 +107,21 @@ fun filesCreateNewSheet(
             GridItem(
                 imageVector = Icons.Outlined.Photo,
                 text = stringResource(id = R.string.photo),
-                onClick = onAddPhoto
+                onClick = { onAdd("image") }
             )
         }
         item {
             GridItem(
                 imageVector = Icons.Outlined.Videocam,
                 text = stringResource(id = R.string.video),
-                onClick = onAddVideo
+                onClick = { onAdd("video") }
             )
         }
         item {
             GridItem(
                 imageVector = Icons.Outlined.MusicNote,
                 text = stringResource(id = R.string.music),
-                onClick = onAddMusic
+                onClick = { onAdd("audio") }
             )
         }
     }
