@@ -1,6 +1,6 @@
 package com.nevidimka655.astracrypt.utils
 
-interface Mapper<T, R> {
+fun interface Mapper<T : Any, R : Any> {
 
     operator fun invoke(item: T): R
 
