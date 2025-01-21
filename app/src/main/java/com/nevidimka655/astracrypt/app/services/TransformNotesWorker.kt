@@ -1,35 +1,6 @@
 package com.nevidimka655.astracrypt.app.services
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.content.Context
-import android.content.pm.ServiceInfo
-import android.os.Build
-import androidx.annotation.RequiresApi
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
-import androidx.hilt.work.HiltWorker
-import androidx.work.CoroutineWorker
-import androidx.work.ForegroundInfo
-import androidx.work.WorkerParameters
-import com.google.crypto.tink.Aead
-import com.nevidimka655.astracrypt.resources.R
-import com.nevidimka655.astracrypt.core.di.IoDispatcher
-import com.nevidimka655.astracrypt.utils.Api
-import com.nevidimka655.astracrypt.data.database.RepositoryEncryption
-import com.nevidimka655.astracrypt.data.model.AeadInfo
-import com.nevidimka655.crypto.tink.data.AssociatedDataManager
-import com.nevidimka655.crypto.tink.data.KeysetManager
-import com.nevidimka655.crypto.tink.data.TinkConfig
-import com.nevidimka655.crypto.tink.extensions.aead
-import com.nevidimka655.crypto.tink.extensions.fromBase64
-import dagger.assisted.Assisted
-import dagger.assisted.AssistedInject
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.withContext
-import kotlinx.serialization.json.Json
-
+/*
 @HiltWorker
 class TransformNotesWorker @AssistedInject constructor(
     @Assisted appContext: Context,
@@ -68,7 +39,8 @@ class TransformNotesWorker @AssistedInject constructor(
         shouldDecodeAssociatedData()
         var pageIndex = 0
         val pageSize = 20
-        /*var itemsList = repository.getTransformNotesItems(pageSize, pageIndex)
+        */
+/*var itemsList = repository.getTransformNotesItems(pageSize, pageIndex)
         while (itemsList.isNotEmpty()) {
             val encrypt = toPrimitive != null
             val isEncrypted = fromPrimitive != null
@@ -82,7 +54,8 @@ class TransformNotesWorker @AssistedInject constructor(
             }
             pageIndex++
             itemsList = repository.getTransformNotesItems(pageSize, pageIndex)
-        }*/
+        }*//*
+
         delay(500)
         Result.success()
     }
@@ -169,4 +142,4 @@ class TransformNotesWorker @AssistedInject constructor(
         NotificationManagerCompat.from(applicationContext).createNotificationChannel(channel)
     }
 
-}
+}*/

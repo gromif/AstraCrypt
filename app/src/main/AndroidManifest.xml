@@ -63,7 +63,7 @@
             android:foregroundServiceType="dataSync" />
 
         <service
-            android:name=".app.services.ImportFilesWorker"
+              android:name="io.gromif.astracrypt.files.work.ImportFilesWorker"
             android:foregroundServiceType="dataSync" />
 
         <service

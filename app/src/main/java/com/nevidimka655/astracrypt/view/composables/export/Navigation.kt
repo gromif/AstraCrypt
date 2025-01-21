@@ -6,8 +6,8 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import com.nevidimka655.astracrypt.resources.R
-import com.nevidimka655.astracrypt.view.navigation.models.UiState
 import com.nevidimka655.astracrypt.view.navigation.Route
+import com.nevidimka655.astracrypt.view.navigation.models.UiState
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 
 private val ExportUiState = UiState(
@@ -23,7 +23,7 @@ fun NavGraphBuilder.export(
     onUiStateChange(ExportUiState)
     val vm: ExportScreenViewModel = hiltViewModel()
     val context = LocalContext.current
-    ExportScreen(
+    /*ExportScreen(
         state = vm.uiState,
         isExternalExport = export.outUri != null,
         onStart = {
@@ -38,5 +38,5 @@ fun NavGraphBuilder.export(
         onOpenExportedFile = { vm.openExportedFile(context = context) },
         onCancelExport = { vm.cancelExport() },
         onDispose = { vm.onDispose() }
-    )
+    )*/
 }

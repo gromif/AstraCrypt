@@ -1,37 +1,21 @@
 package com.nevidimka655.astracrypt.view.composables.settings.profile
 
-import android.content.Context
-import android.graphics.Bitmap
-import android.net.Uri
-import android.util.Size
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.core.graphics.drawable.toBitmap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import coil.ImageLoader
-import coil.request.CachePolicy
-import coil.request.ImageRequest
-import coil.size.Scale
-import com.nevidimka655.astracrypt.app.AppConfig
 import com.nevidimka655.astracrypt.core.di.IoDispatcher
-import com.nevidimka655.astracrypt.utils.Api
-import com.nevidimka655.astracrypt.view.models.CenterCropTransformation
-import com.nevidimka655.astracrypt.utils.io.FilesUtil
-import com.nevidimka655.astracrypt.data.crypto.AeadManager
 import com.nevidimka655.astracrypt.data.datastore.SettingsDataStoreManager
-import com.nevidimka655.astracrypt.data.model.CoilTinkModel
 import com.nevidimka655.astracrypt.domain.model.profile.Avatars
 import com.nevidimka655.astracrypt.domain.model.profile.ProfileInfo
+import com.nevidimka655.astracrypt.utils.io.FilesUtil
 import com.nevidimka655.crypto.tink.data.KeysetManager
-import com.nevidimka655.crypto.tink.extensions.streamingAead
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.io.ByteArrayOutputStream
 import javax.inject.Inject
 
 @HiltViewModel
@@ -40,13 +24,12 @@ class EditProfileViewModel @Inject constructor(
     private val defaultDispatcher: CoroutineDispatcher,
     private val keysetManager: KeysetManager,
     private val settingsDataStoreManager: SettingsDataStoreManager,
-    private val aeadManager: AeadManager,
-    val imageLoader: ImageLoader,
+    //val imageLoader: ImageLoader,
     filesUtil: FilesUtil
 ): ViewModel() {
     private val iconFile = filesUtil.getProfileIconFile()
     val profileInfoFlow get() = settingsDataStoreManager.profileInfoFlow
-    val coilAvatarModel = CoilTinkModel(absolutePath = iconFile.toString())
+    //val coilAvatarModel = CoilTinkModel(absolutePath = iconFile.toString())
     var isImageProcessing by mutableStateOf(false)
 
     private suspend fun updateProfile(
@@ -64,7 +47,7 @@ class EditProfileViewModel @Inject constructor(
         updateProfile { it.copy(defaultAvatar = avatar) }
     }
 
-    fun setGalleryAvatar(context: Context, uri: Uri) = viewModelScope.launch(defaultDispatcher) {
+    /*fun setGalleryAvatar(context: Context, uri: Uri) = viewModelScope.launch(defaultDispatcher) {
         isImageProcessing = true
         val bitmap = if (Api.atLeast10()) {
             context.contentResolver.loadThumbnail(
@@ -96,6 +79,6 @@ class EditProfileViewModel @Inject constructor(
 
         setDefaultAvatar(avatar = null)
         isImageProcessing = false
-    }
+    }*/
 
 }

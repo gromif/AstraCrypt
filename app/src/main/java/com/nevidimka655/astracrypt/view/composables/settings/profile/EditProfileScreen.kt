@@ -1,39 +1,6 @@
 package com.nevidimka655.astracrypt.view.composables.settings.profile
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
-import coil.ImageLoader
-import com.nevidimka655.astracrypt.resources.R
-import com.nevidimka655.astracrypt.app.AppConfig
-import com.nevidimka655.astracrypt.data.model.CoilTinkModel
-import com.nevidimka655.astracrypt.domain.model.profile.Avatars
-import com.nevidimka655.astracrypt.view.composables.components.profile.ProfileIcon
-import com.nevidimka655.astracrypt.view.composables.components.profile.defaultProfileAvatar
-import com.nevidimka655.ui.compose_core.Compose
-import com.nevidimka655.ui.compose_core.Preference
-import com.nevidimka655.ui.compose_core.PreferencesGroup
-import com.nevidimka655.ui.compose_core.PreferencesScreen
-import com.nevidimka655.ui.compose_core.dialogs.Dialog
-import com.nevidimka655.ui.compose_core.dialogs.DialogDefaults
-import com.nevidimka655.ui.compose_core.dialogs.DialogsCore
-import com.nevidimka655.ui.compose_core.dialogs.default
-import com.nevidimka655.ui.compose_core.theme.spaces
-
+/*
 @Composable
 fun EditProfileScreen(
     imageLoader: ImageLoader,
@@ -127,4 +94,4 @@ private fun DialogChangeAvatar(
             }
         }
     )
-}
+}*/

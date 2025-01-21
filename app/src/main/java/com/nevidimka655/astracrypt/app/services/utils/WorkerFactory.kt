@@ -1,18 +1,9 @@
 package com.nevidimka655.astracrypt.app.services.utils
 
 import androidx.lifecycle.LiveData
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.OutOfQuotaPolicy
 import androidx.work.WorkInfo
 import androidx.work.WorkManager
-import androidx.work.workDataOf
-import com.nevidimka655.astracrypt.app.services.TransformDatabaseWorker
-import com.nevidimka655.astracrypt.app.services.TransformNotesWorker
-import com.nevidimka655.astracrypt.data.model.AeadInfo
 import com.nevidimka655.crypto.tink.data.KeysetManager
-import com.nevidimka655.crypto.tink.extensions.toBase64
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 
 class WorkerFactory(
     private val workManager: WorkManager,
@@ -20,7 +11,7 @@ class WorkerFactory(
 ) {
     var transformWorkLiveData: LiveData<WorkInfo?>? = null
 
-    suspend fun startTransformDatabase(oldInfo: AeadInfo, newInfo: AeadInfo) {
+    /*suspend fun startTransformDatabase(oldInfo: AeadInfo, newInfo: AeadInfo) {
         val associatedData = if (newInfo.bindAssociatedData)
             keysetManager.transformAssociatedDataToWorkInstance(
                 bytesIn = keysetManager.associatedData,
@@ -60,6 +51,6 @@ class WorkerFactory(
             .build()
         workManager.enqueue(workerRequest)
         transformWorkLiveData = workManager.getWorkInfoByIdLiveData(workerRequest.id)
-    }
+    }*/
 
 }

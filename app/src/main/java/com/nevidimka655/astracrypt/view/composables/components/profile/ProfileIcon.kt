@@ -1,30 +1,11 @@
 package com.nevidimka655.astracrypt.view.composables.components.profile
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
-import coil.ImageLoader
-import coil.compose.AsyncImage
-import coil.request.ImageRequest
-import com.nevidimka655.astracrypt.resources.R
-import com.nevidimka655.astracrypt.data.model.CoilTinkModel
 import com.nevidimka655.astracrypt.domain.model.profile.Avatars
+import com.nevidimka655.astracrypt.resources.R
 
-@Composable
+/*@Composable
 fun ProfileIcon(
     imageLoader: ImageLoader,
     coilAvatarModel: CoilTinkModel?,
@@ -55,7 +36,7 @@ fun ProfileIcon(
         imageLoader = imageLoader,
         contentScale = ContentScale.Crop
     )
-}
+}*/
 
 @Composable
 fun defaultProfileAvatar(defaultAvatar: Avatars = Avatars.AVATAR_1) = painterResource(

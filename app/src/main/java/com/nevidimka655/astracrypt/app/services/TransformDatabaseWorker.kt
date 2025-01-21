@@ -1,39 +1,6 @@
 package com.nevidimka655.astracrypt.app.services
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.content.Context
-import android.content.pm.ServiceInfo
-import android.os.Build
-import androidx.annotation.RequiresApi
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
-import androidx.hilt.work.HiltWorker
-import androidx.work.CoroutineWorker
-import androidx.work.ForegroundInfo
-import androidx.work.WorkerParameters
-import com.google.crypto.tink.Aead
-import com.nevidimka655.astracrypt.core.di.IoDispatcher
-import com.nevidimka655.astracrypt.data.database.RepositoryEncryption
-import com.nevidimka655.astracrypt.data.files.db.tuples.DatabaseTransformTuple
-import com.nevidimka655.astracrypt.data.model.AeadInfo
-import com.nevidimka655.astracrypt.domain.repository.Repository
-import com.nevidimka655.astracrypt.resources.R
-import com.nevidimka655.astracrypt.utils.Api
-import com.nevidimka655.crypto.tink.data.AssociatedDataManager
-import com.nevidimka655.crypto.tink.data.KeysetManager
-import com.nevidimka655.crypto.tink.data.TinkConfig
-import com.nevidimka655.crypto.tink.extensions.aead
-import com.nevidimka655.crypto.tink.extensions.fromBase64
-import dagger.assisted.Assisted
-import dagger.assisted.AssistedInject
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.withContext
-import kotlinx.serialization.json.Json
-import kotlin.collections.isNotEmpty
-import kotlin.random.Random
-
+/*
 @HiltWorker
 class TransformDatabaseWorker @AssistedInject constructor(
     @Assisted appContext: Context,
@@ -196,4 +163,4 @@ class TransformDatabaseWorker @AssistedInject constructor(
         NotificationManagerCompat.from(applicationContext).createNotificationChannel(channel)
     }
 
-}
+}*/

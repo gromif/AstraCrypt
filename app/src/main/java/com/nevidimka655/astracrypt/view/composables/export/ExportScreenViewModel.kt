@@ -1,52 +1,26 @@
 package com.nevidimka655.astracrypt.view.composables.export
 
-import android.content.ContentResolver
-import android.content.Context
-import android.content.Intent
-import android.net.Uri
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.OutOfQuotaPolicy
 import androidx.work.WorkManager
-import androidx.work.workDataOf
 import com.nevidimka655.astracrypt.core.di.IoDispatcher
-import com.nevidimka655.astracrypt.data.crypto.AeadManager
 import com.nevidimka655.astracrypt.utils.io.FilesUtil
-import com.nevidimka655.astracrypt.app.services.ExportFilesWorker
-import com.nevidimka655.astracrypt.view.models.ExportUiState
-import com.nevidimka655.astracrypt.domain.repository.Repository
 import com.nevidimka655.crypto.tink.data.KeysetManager
-import com.nevidimka655.crypto.tink.extensions.toBase64
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.isActive
-import kotlinx.coroutines.launch
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
-import java.util.UUID
 import javax.inject.Inject
 
-private typealias Args = ExportFilesWorker.Args
+//private typealias Args = ExportFilesWorker.Args
 
 @HiltViewModel
 class ExportScreenViewModel @Inject constructor(
     @IoDispatcher
     private val defaultDispatcher: CoroutineDispatcher,
-    private val aeadManager: AeadManager,
-    private val repository: Repository,
+    //private val repository: Repository,
     private val keysetManager: KeysetManager,
     val filesUtil: FilesUtil,
     val workManager: WorkManager
 ) : ViewModel() {
-    private val workUUID = UUID.randomUUID()
+    /*private val workUUID = UUID.randomUUID()
     private var internalExportUri = ""
     var uiState by mutableStateOf(ExportUiState())
 
@@ -61,12 +35,12 @@ class ExportScreenViewModel @Inject constructor(
         val outStream = contentResolver.openOutputStream(outputUri)
         val inStream = filesUtil.getLocalFile(exportTuple.path).run {
             inputStream()
-            /*if (exportTuple.encryptionType == -1) inputStream()
+            *//*if (exportTuple.encryptionType == -1) inputStream()
             else {
                 val aeadTemplate = KeysetTemplates.Stream.entries[exportTuple.encryptionType]
                 keysetFactory.stream(aeadTemplate).streamingAeadPrimitive()
                     .newDecryptingStream(inputStream(), keysetFactory.associatedData)
-            }*/
+            }*//*
         }
         inStream.use { ins ->
             outStream?.use { ous ->
@@ -135,6 +109,6 @@ class ExportScreenViewModel @Inject constructor(
 
     fun cancelExport() = workManager.cancelWorkById(id = workUUID)
 
-    fun onDispose() = filesUtil.clearExportedCache()
+    fun onDispose() = filesUtil.clearExportedCache()*/
 
 }

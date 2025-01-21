@@ -1,19 +1,6 @@
 package com.nevidimka655.astracrypt.view.composables.settings.ui.files
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.res.stringResource
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.nevidimka655.astracrypt.resources.R
-import com.nevidimka655.astracrypt.view.models.ViewMode
-import com.nevidimka655.ui.compose_core.Preference
-import com.nevidimka655.ui.compose_core.PreferencesGroup
-import com.nevidimka655.ui.compose_core.PreferencesScreen
-import com.nevidimka655.ui.compose_core.dialogs.DialogsCore
-import com.nevidimka655.ui.compose_core.dialogs.radio
-import kotlinx.coroutines.flow.Flow
-
+/*
 @Composable
 fun SettingUiFilesScreen(
     filesViewModeFlow: Flow<ViewMode>,
@@ -36,4 +23,4 @@ fun SettingUiFilesScreen(
             dialogViewModeState = true
         }
     }
-}
+}*/

@@ -1,38 +1,6 @@
-package com.nevidimka655.astracrypt.app.services
+package io.gromif.astracrypt.files.work
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.content.Context
-import android.content.pm.ServiceInfo
-import android.net.Uri
-import android.os.Build
-import androidx.annotation.RequiresApi
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
-import androidx.core.net.toUri
-import androidx.documentfile.provider.DocumentFile
-import androidx.hilt.work.HiltWorker
-import androidx.work.CoroutineWorker
-import androidx.work.ForegroundInfo
-import androidx.work.WorkManager
-import androidx.work.WorkerParameters
-import com.nevidimka655.astracrypt.core.di.IoDispatcher
-import com.nevidimka655.astracrypt.data.files.db.tuples.ExportTuple
-import com.nevidimka655.astracrypt.data.model.AeadInfo
-import com.nevidimka655.astracrypt.domain.repository.Repository
-import com.nevidimka655.astracrypt.resources.R
-import com.nevidimka655.astracrypt.utils.Api
-import com.nevidimka655.astracrypt.utils.io.FilesUtil
-import com.nevidimka655.crypto.tink.data.AssociatedDataManager
-import com.nevidimka655.crypto.tink.data.KeysetManager
-import com.nevidimka655.crypto.tink.data.TinkConfig
-import com.nevidimka655.crypto.tink.extensions.fromBase64
-import dagger.assisted.Assisted
-import dagger.assisted.AssistedInject
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.withContext
-import kotlinx.serialization.json.Json
-
+/*
 @HiltWorker
 class ExportFilesWorker @AssistedInject constructor(
     @Assisted context: Context,
@@ -99,7 +67,8 @@ class ExportFilesWorker @AssistedInject constructor(
     }
 
     private fun fileIterator(exportTuple: ExportTuple, parentDir: DocumentFile) {
-        /*val (_, name, encryptionType, path) = exportTuple
+        */
+/*val (_, name, encryptionType, path) = exportTuple
         val file = parentDir.createFile("text/binary", name)
         if (file != null) {
             val fileEncodedInputStream = io.getLocalFile(path).inputStream()
@@ -119,7 +88,8 @@ class ExportFilesWorker @AssistedInject constructor(
                 }
             }
             if (isStopped) file.delete()
-        }*/
+        }*//*
+
     }
 
     private suspend fun shouldDecodeAssociatedData() {
@@ -176,4 +146,4 @@ class ExportFilesWorker @AssistedInject constructor(
         NotificationManagerCompat.from(applicationContext).createNotificationChannel(channel)
     }
 
-}
+}*/

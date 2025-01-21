@@ -1,39 +1,21 @@
 package com.nevidimka655.astracrypt.view.composables.files.details
 
-import android.content.Context
-import android.text.format.DateFormat
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.AccessTime
-import androidx.compose.material.icons.outlined.Folder
-import androidx.compose.material.icons.outlined.FolderOpen
-import androidx.compose.material.icons.outlined.Headphones
-import androidx.compose.material.icons.outlined.PhotoSizeSelectLarge
-import androidx.compose.material.icons.outlined.SdCard
 import androidx.lifecycle.ViewModel
-import coil.ImageLoader
-import com.nevidimka655.astracrypt.resources.R
-import com.nevidimka655.astracrypt.utils.io.FilesUtil
-import com.nevidimka655.astracrypt.domain.model.db.FileFlags
-import com.nevidimka655.astracrypt.data.database.FileTypes
-import com.nevidimka655.astracrypt.domain.repository.Repository
 import com.nevidimka655.astracrypt.domain.usecase.BytesToHumanReadableUseCase
+import com.nevidimka655.astracrypt.utils.io.FilesUtil
 import com.nevidimka655.compose_details.DetailsManager
-import com.nevidimka655.compose_details.addItem
-import com.nevidimka655.compose_details.entities.DetailsItem
-import com.nevidimka655.ui.compose_core.wrappers.IconWrap
-import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class DetailsScreenViewModel @Inject constructor(
-    private val repository: Repository,
+    //private val repository: Repository,
     private val filesUtil: FilesUtil,
     private val bytesToHumanReadableUseCase: BytesToHumanReadableUseCase,
     val detailsManager: DetailsManager,
-    val imageLoader: ImageLoader
+    //val imageLoader: ImageLoader
 ): ViewModel() {
-    var preview: String? = ""
+    /*var preview: String? = ""
     var type: FileTypes = FileTypes.Other
 
     suspend fun submitDetailsQuery(context: Context, itemId: Long) = detailsManager.run {
@@ -48,11 +30,11 @@ class DetailsScreenViewModel @Inject constructor(
         title = item.name
 
         addGroup(name = TextWrap.Resource(id = R.string.files_options_details)) {
-            /*addItem(
+            *//*addItem(
                 icon = IconWrap(imageVector = Icons.AutoMirrored.Outlined.InsertDriveFile),
                 title = TextWrap.Resource(id = R.string.itemType),
                 summary = TextWrap.Resource(id = item.type.title)
-            )*/
+            )*//*
             addItem(
                 icon = IconWrap(imageVector = Icons.Outlined.FolderOpen),
                 title = TextWrap.Resource(id = R.string.path),
@@ -77,17 +59,17 @@ class DetailsScreenViewModel @Inject constructor(
                 title = TextWrap.Resource(id = R.string.creationTime),
                 summary = TextWrap.Text(text = creationTime)
             )
-            /*if (item.modificationTime.toInt() != 0) {
+            *//*if (item.modificationTime.toInt() != 0) {
                 val modificationTime = DateFormat.format(pattern, item.modificationTime).toString()
                 addItem(
                     icon = IconWrap(imageVector = Icons.Outlined.ChangeCircle),
                     title = TextWrap.Resource(id = R.string.modificationTime),
                     summary = TextWrap.Text(text = modificationTime)
                 )
-            }*/
+            }*//*
         }
         if (isFile) {
-            /*if (item.flags.isNotEmpty()) {
+            *//*if (item.flags.isNotEmpty()) {
                 addGroup(name = TextWrap.Resource(id = item.type.title)) {
                     when (val flags = Json.decodeFromString<StorageFlags>(item.flags)) {
                         is StorageFlags.App -> flags.toString()
@@ -96,9 +78,9 @@ class DetailsScreenViewModel @Inject constructor(
                         is StorageFlags.Video -> addVideoFlags(flags)
                     }
                 }
-            }*/
+            }*//*
             addGroup(name = TextWrap.Resource(id = R.string.settings_encryption)) {
-                /*addItem(
+                *//*addItem(
                     icon = IconWrap(imageVector = Icons.Outlined.Lock),
                     title = TextWrap.Resource(id = R.string.encryption_type),
                     summary = if (item.encryptionType == -1) {
@@ -111,7 +93,7 @@ class DetailsScreenViewModel @Inject constructor(
                     summary = if (item.thumbnailEncryptionType == -1) {
                         TextWrap.Resource(id = R.string.withoutEncryption)
                     } else TextWrap.Text(text = KeysetTemplates.Stream.entries[item.thumbnailEncryptionType].name)
-                )*/
+                )*//*
             }
         } else {
             val content = repository.getFolderContent(item.id)
@@ -179,6 +161,6 @@ class DetailsScreenViewModel @Inject constructor(
             title = TextWrap.Resource(id = R.string.videoResolution),
             summary = TextWrap.Text(text = flags.resolution)
         )
-    }
+    }*/
 
 }

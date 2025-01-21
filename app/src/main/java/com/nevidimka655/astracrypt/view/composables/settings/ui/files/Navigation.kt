@@ -1,11 +1,10 @@
 package com.nevidimka655.astracrypt.view.composables.settings.ui.files
 
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.nevidimka655.astracrypt.resources.R
-import com.nevidimka655.astracrypt.view.navigation.models.UiState
 import com.nevidimka655.astracrypt.view.navigation.Route
+import com.nevidimka655.astracrypt.view.navigation.models.UiState
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 
 private val SettingsUiFilesUiState = UiState(
@@ -18,10 +17,10 @@ fun NavGraphBuilder.settingsUiFiles(
     onUiStateChange: (UiState) -> Unit
 ) = composable<Route.SettingsUiFiles> {
     onUiStateChange(SettingsUiFilesUiState)
-    val vm: SettingsUiFilesViewModel = hiltViewModel()
+    //val vm: SettingsUiFilesViewModel = hiltViewModel()
 
-    SettingUiFilesScreen(
+    /*SettingUiFilesScreen(
         filesViewModeFlow = vm.filesViewModeFlow,
         onChangeViewMode = { vm.setFilesViewMode(viewMode = it) }
-    )
+    )*/
 }

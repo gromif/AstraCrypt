@@ -6,8 +6,8 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import com.nevidimka655.astracrypt.resources.R
-import com.nevidimka655.astracrypt.view.navigation.models.UiState
 import com.nevidimka655.astracrypt.view.navigation.Route
+import com.nevidimka655.astracrypt.view.navigation.models.UiState
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 
 val DetailsUiState = UiState(
@@ -23,7 +23,7 @@ fun NavGraphBuilder.details(
     onUiStateChange(DetailsUiState)
     val context = LocalContext.current
     val vm: DetailsScreenViewModel = hiltViewModel()
-    DetailsScreen(
+    /*DetailsScreen(
         detailsManager = vm.detailsManager,
         preview = vm.preview,
         imageLoader = vm.imageLoader,
@@ -33,5 +33,5 @@ fun NavGraphBuilder.details(
                 vm.submitDetailsQuery(context = context, itemId = details.itemId)
             }
         }
-    )
+    )*/
 }

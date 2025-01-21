@@ -6,7 +6,6 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.google.crypto.tink.KeysetHandle
-import com.nevidimka655.astracrypt.data.model.AeadInfo
 import com.nevidimka655.astracrypt.domain.model.profile.Avatars
 import com.nevidimka655.astracrypt.domain.model.profile.ProfileInfo
 import com.nevidimka655.crypto.tink.core.TinkDataStore
@@ -38,19 +37,6 @@ class SettingsDataStoreManager(
     }
 
 
-
-    private suspend fun aeadInfoKey() = stringPreferencesKey(hashKey("b1"))
-    val aeadInfoFlow = dataStore.data.map { prefs ->
-        val key = aeadInfoKey()
-        prefs[key]?.let {
-            val aeadInfoJson = decrypt(key = key.name, value = it)
-            Json.decodeFromString<AeadInfo>(aeadInfoJson)
-        } ?: AeadInfo()
-    }
-    suspend fun setAeadInfo(aeadInfo: AeadInfo) = dataStore.edit {
-        val key = aeadInfoKey()
-        it[key] = encrypt(key = key.name, value = Json.encodeToString(aeadInfo))
-    }
 
     private val aeadKey = intPreferencesKey("aead")
     override suspend fun getAeadTemplate(): KeysetTemplates.AEAD? {
