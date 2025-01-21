@@ -2,8 +2,8 @@ package com.nevidimka655.astracrypt.data.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.nevidimka655.astracrypt.data.files.db.FilesDao
-import com.nevidimka655.astracrypt.data.files.db.FilesEntity
+import io.gromif.astracrypt.files.data.db.FilesDao
+import io.gromif.astracrypt.files.data.db.FilesEntity
 import com.nevidimka655.astracrypt.notes.db.NoteItemEntity
 import com.nevidimka655.astracrypt.notes.db.NotesDao
 

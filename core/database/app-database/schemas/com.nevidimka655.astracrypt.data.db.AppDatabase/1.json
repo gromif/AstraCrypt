@@ -2,15 +2,21 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "edef42e5e3f8e52d2c07d12b4a160a75",
+    "identityHash": "e2925c4c76fbaf8cefe0c653ac8cc9b1",
     "entities": [
       {
         "tableName": "store_items",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `item_type` INTEGER NOT NULL, `dir_id` INTEGER NOT NULL, `size` INTEGER NOT NULL, `state` INTEGER NOT NULL, `preview` TEXT, `path` TEXT NOT NULL, `flags` TEXT NOT NULL, `time` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `parent` INTEGER NOT NULL, `name` TEXT NOT NULL, `state` INTEGER NOT NULL, `type` INTEGER NOT NULL, `file` TEXT, `file-aead` INTEGER NOT NULL, `preview` TEXT, `preview-aead` INTEGER NOT NULL, `flags` TEXT, `time` INTEGER NOT NULL, `size` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
             "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "parent",
+            "columnName": "parent",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -21,26 +27,26 @@
             "notNull": true
           },
           {
-            "fieldPath": "type",
-            "columnName": "item_type",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "dirId",
-            "columnName": "dir_id",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "size",
-            "columnName": "size",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
             "fieldPath": "state",
             "columnName": "state",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "file",
+            "columnName": "file",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "fileAead",
+            "columnName": "file-aead",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -51,20 +57,26 @@
             "notNull": false
           },
           {
-            "fieldPath": "path",
-            "columnName": "path",
-            "affinity": "TEXT",
+            "fieldPath": "previewAead",
+            "columnName": "preview-aead",
+            "affinity": "INTEGER",
             "notNull": true
           },
           {
             "fieldPath": "flags",
             "columnName": "flags",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "creationTime",
             "columnName": "time",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "size",
+            "columnName": "size",
             "affinity": "INTEGER",
             "notNull": true
           }
@@ -138,7 +150,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'edef42e5e3f8e52d2c07d12b4a160a75')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e2925c4c76fbaf8cefe0c653ac8cc9b1')"
     ]
   }
 }
