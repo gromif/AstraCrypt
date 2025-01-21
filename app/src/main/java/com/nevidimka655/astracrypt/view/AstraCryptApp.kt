@@ -1,16 +1,13 @@
 package com.nevidimka655.astracrypt.view
 
-import androidx.activity.compose.BackHandler
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Key
+import androidx.compose.material3.BottomAppBarDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
@@ -23,10 +20,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -71,47 +68,36 @@ fun AstraCryptApp(
 
     val coroutineScope = rememberCoroutineScope()
     val topBarScroll = TopAppBarDefaults.enterAlwaysScrollBehavior()
-    val barCollapsedFraction = topBarScroll.state.collapsedFraction
-    val toolbarIsCollapsing = remember(barCollapsedFraction) { barCollapsedFraction > 0f }
+    val bottomBarScroll = BottomAppBarDefaults.exitAlwaysScrollBehavior()
+    val toolbarIsCollapsing = remember(topBarScroll.state.collapsedFraction) {
+        topBarScroll.state.collapsedFraction > 0f
+    }
+    val bottomBarIsCollapsing = remember(bottomBarScroll.state.collapsedFraction) {
+        bottomBarScroll.state.collapsedFraction > 0f
+    }
+    val searchQueryState by vm.searchQueryState.collectAsStateWithLifecycle()
+    val isSearching = remember(searchQueryState) { searchQueryState.isNotEmpty() }
     Scaffold(
-        modifier = modifier.nestedScroll(topBarScroll.nestedScrollConnection),
+        modifier = modifier.nestedScroll(
+            if (searchBar) bottomBarScroll.nestedScrollConnection else {
+                topBarScroll.nestedScrollConnection
+            }
+        ),
         topBar = {
             LaunchedEffect(searchBar) {
-                if (!searchBar) {
-                    vm.isSearching = false
-                    vm.searchQuery.value = null
-                    vm.setSearchIsEnabled(false)
-                }
+                if (!searchBar) vm.setSearchQuery("")
             }
-            if (searchBar) Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .statusBarsPadding()
-            ) {
-                BackHandler(enabled = vm.isSearching) {
-                    vm.isSearching = false
-                    vm.searchQuery.value = null
-                    vm.setSearchIsEnabled(false)
-                }
-                SearchBarImpl(
-                    modifier = Modifier.align(Alignment.TopCenter),
-                    visible = !toolbarIsCollapsing,
-                    query = vm.searchQuery.value ?: "",
-                    onSearch = {
-                        searchBarExpanded = false
-                        vm.searchQuerySubmit(it)
-                    },
-                    onQueryChange = {
-                        vm.searchQuery.value = it
-                    },
-                    expanded = searchBarExpanded,
-                    onExpandedChange = {
-                        vm.setSearchIsEnabled(it)
-                        searchBarExpanded = it
-                    },
-                    backButtonEnabled = searchBarExpanded || vm.isSearching
-                )
-            } else if (vm.skinIsAuthenticated) ToolbarImpl(
+            if (searchBar) SearchBarImpl(
+                query = searchQueryState,
+                onSearch = {
+                    vm.setSearchQuery(query = it)
+                    searchBarExpanded = false
+                },
+                onQueryChange = { vm.setSearchQuery(query = it) },
+                expanded = searchBarExpanded,
+                onExpandedChange = { searchBarExpanded = it },
+                backButtonEnabled = searchBarExpanded || isSearching
+            ) else if (vm.skinIsAuthenticated) ToolbarImpl(
                 title = toolbar.title,
                 backButton = vm.userIsAuthenticated && bottomBarTab == null,
                 actions = toolbar.actions,
@@ -126,21 +112,27 @@ fun AstraCryptApp(
             )
         },
         floatingActionButton = {
-            val context = LocalContext.current
             FloatingActionButtonImpl(
-                visible = !toolbarIsCollapsing && (fab != null) && !vm.isSearching && !searchBarExpanded,
+                visible = (fab != null) &&
+                        !toolbarIsCollapsing && !bottomBarIsCollapsing &&
+                        !isSearching && !searchBarExpanded,
                 imageVector = fab?.icon,
-                contentDescription = fab?.contentDescription?.resolve(context)
+                contentDescription = fab?.contentDescription?.resolve(LocalContext.current)
             ) { coroutineScope.launch { onFabClick.send(0) } }
         },
         bottomBar = {
             BottomBarImpl(
-                visible = !toolbarIsCollapsing && !vm.isSearching && !searchBarExpanded && bottomBarTab != null,
+                visible = !toolbarIsCollapsing && !isSearching && !searchBarExpanded && bottomBarTab != null,
+                bottomBarScroll = bottomBarScroll,
                 selected = bottomBarTab
             ) {
                 navController.navigate(route = it.route) {
+                    restoreState = true
                     launchSingleTop = true
-                    popUpTo(Route.Tabs.Home) { inclusive = false }
+                    popUpTo(Route.Tabs.Home) {
+                        inclusive = false
+                        saveState = true
+                    }
                 }
             }
         }
@@ -186,10 +178,10 @@ fun AstraCryptApp(
             modifier = Modifier.padding(padding),
             builder = root(
                 onUiStateChange = { uiState = it },
-                vm = vm,
                 navController = navController,
                 onFabClick = onFabClick.receiveAsFlow(),
-                onToolbarActions = onToolbarActions.receiveAsFlow()
+                onToolbarActions = onToolbarActions.receiveAsFlow(),
+                searchQueryState = vm.searchQueryState
             )
         )
     }

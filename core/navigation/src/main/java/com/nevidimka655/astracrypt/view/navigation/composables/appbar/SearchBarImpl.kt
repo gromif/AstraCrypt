@@ -1,11 +1,10 @@
 package com.nevidimka655.astracrypt.view.navigation.composables.appbar
 
-import android.R
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.expandVertically
-import androidx.compose.animation.shrinkVertically
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Search
@@ -16,31 +15,34 @@ import androidx.compose.material3.SearchBar
 import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.isTraversalGroup
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.traversalIndex
+import androidx.compose.ui.tooling.preview.Preview
 
+@Preview(showBackground = true, backgroundColor = 0xFF000000)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchBarImpl(
-    modifier: Modifier = Modifier,
-    visible: Boolean,
-    query: String,
-    onSearch: (String) -> Unit,
-    onQueryChange: (String) -> Unit,
-    expanded: Boolean,
-    onExpandedChange: (Boolean) -> Unit,
-    backButtonEnabled: Boolean
-) = AnimatedVisibility(
-    visible = visible,
-    enter = expandVertically(
-        animationSpec = tween(durationMillis = 120)
-    ),
-    exit = shrinkVertically(
-        animationSpec = tween(durationMillis = 120)
-    ),
-    modifier = modifier
+    query: String = "Search",
+    onSearch: (String) -> Unit = {},
+    onQueryChange: (String) -> Unit = {},
+    expanded: Boolean = false,
+    onExpandedChange: (Boolean) -> Unit = {},
+    backButtonEnabled: Boolean = true,
+) = Box(Modifier
+    .fillMaxWidth()
+    .statusBarsPadding()
+    .semantics { isTraversalGroup = true }
 ) {
+    BackHandler(enabled = query.isNotEmpty()) { onQueryChange("") }
     SearchBar(
+        modifier = Modifier
+            .align(Alignment.TopCenter)
+            .semantics { traversalIndex = 0f },
         inputField = {
             SearchBarDefaults.InputField(
                 query = query,
@@ -49,7 +51,10 @@ fun SearchBarImpl(
                 expanded = expanded,
                 onExpandedChange = onExpandedChange,
                 placeholder = {
-                    Text(text = stringResource(id = R.string.search_go))
+                    Text(
+                        modifier = Modifier,
+                        text = stringResource(id = android.R.string.search_go)
+                    )
                 },
                 leadingIcon = {
                     val localBackDispatcher = LocalOnBackPressedDispatcherOwner.current
