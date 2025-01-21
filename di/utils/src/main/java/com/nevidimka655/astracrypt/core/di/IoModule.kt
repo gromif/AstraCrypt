@@ -2,6 +2,7 @@ package com.nevidimka655.astracrypt.core.di
 
 import android.content.Context
 import com.nevidimka655.astracrypt.utils.io.FilesUtil
+import com.nevidimka655.astracrypt.utils.io.MediaMetadataRetrieverCompat
 import com.nevidimka655.astracrypt.utils.io.Randomizer
 import com.nevidimka655.astracrypt.utils.io.WorkerSerializer
 import dagger.Module
@@ -17,7 +18,11 @@ internal object IoModule {
 
     @Singleton
     @Provides
-    fun provideWorkerSerializer(filesUtil: FilesUtil) = WorkerSerializer(filesUtil = filesUtil)
+    fun provideMediaMetadataRetrieverCompat() = MediaMetadataRetrieverCompat()
+
+    @Singleton
+    @Provides
+    fun provideWorkerSerializer() = WorkerSerializer()
 
     @Singleton
     @Provides
