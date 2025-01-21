@@ -16,7 +16,8 @@ class VideoFlagsFactory(
     fun create(path: String): FileFlagsDto.Video? {
         val uri = uriMapper(path)
         val defaultVideoFlags = FileFlagsDto.Video()
-        mediaMetadataRetrieverCompat.setDataSource(context, uri)
+        val fd = context.contentResolver.openFileDescriptor(uri, "r") ?: return null
+        mediaMetadataRetrieverCompat.setDataSource(fd.fileDescriptor)
 
         var resolution = defaultVideoFlags.resolution
         mediaMetadataRetrieverCompat.use {
@@ -24,6 +25,7 @@ class VideoFlagsFactory(
             val height = it.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_HEIGHT)
             resolution = "${width}x$height"
         }
+        fd.close()
         val videoFlags = FileFlagsDto.Video(resolution = resolution)
         return videoFlags.takeIf { it != defaultVideoFlags }
     }
