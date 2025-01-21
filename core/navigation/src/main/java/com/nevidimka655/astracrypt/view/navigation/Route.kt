@@ -11,7 +11,8 @@ object Route {
 
     object Tabs {
         @Serializable object Home
-        @Serializable data class Files(val isStarred: Boolean = false)
+        @Serializable object Files
+        @Serializable object Starred
         @Serializable object Settings
     }
 
