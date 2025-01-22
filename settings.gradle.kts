@@ -9,9 +9,8 @@ val coreModules = listOf(
     "resources", "utils", "design-system",
     "navigation"
 )
-val featuresModules = listOf("calculator", "help",)
+val featuresModules = listOf("help",)
 val uiModules = listOf("compose-core", "compose-details")
-val domainModules = listOf("calculator")
 
 val features = listOf(
     "auth",
@@ -29,7 +28,6 @@ include("core", coreModules)
 include("features", featuresModules)
 includeFeatures()
 include("ui", uiModules)
-include("domain", domainModules)
 
 fun include(group: String, modules: List<String>) = modules.forEach { include(":$group:$it") }
 fun includeFeatures() = features.forEach {
@@ -55,6 +53,5 @@ dependencyResolutionManagement {
     }
 }
 include(":core:utils:dispatchers")
-
-include(":features:calculator:presentation")
 include(":features:calculator:domain")
+include(":features:calculator:presentation")
