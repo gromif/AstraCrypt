@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.core.di
+package com.nevidimka655.astracrypt.utils.di
 
 import android.net.Uri
 import com.nevidimka655.astracrypt.utils.Mapper
