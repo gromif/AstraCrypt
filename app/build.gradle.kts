@@ -76,17 +76,8 @@ dependencies {
     implementation(project(":ui:compose-details"))
 
     // Compose
-    implementation(platform(libs.compose.bom))
     implementation(libs.compose.activity)
     implementation(libs.compose.navigation)
-    implementation(libs.compose.material3.icons.core)
-    implementation(libs.compose.material3.icons.extended)
-    implementation(libs.compose.material3)
-    implementation(libs.compose.material3.windowSizeClass)
-    debugImplementation(libs.compose.ui)
-    debugImplementation(libs.compose.ui.tooling)
-    debugImplementation(libs.compose.ui.tooling.preview)
-    debugImplementation(libs.compose.ui.test.manifest)
 
     // Other
     implementation(libs.androidx.datastore.preferences)
