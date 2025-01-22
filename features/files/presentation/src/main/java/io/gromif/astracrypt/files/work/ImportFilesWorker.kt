@@ -12,12 +12,12 @@ import androidx.work.CoroutineWorker
 import androidx.work.ForegroundInfo
 import androidx.work.WorkManager
 import androidx.work.WorkerParameters
-import com.nevidimka655.astracrypt.core.di.IoDispatcher
 import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.astracrypt.utils.Api
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import io.gromif.astracrypt.files.domain.usecase.ImportUseCase
+import io.gromif.astracrypt.utils.dispatchers.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import java.io.File

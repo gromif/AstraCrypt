@@ -9,6 +9,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.net.toUri
 import androidx.documentfile.provider.DocumentFile
 import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
@@ -16,13 +17,13 @@ import androidx.work.ForegroundInfo
 import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import com.google.crypto.tink.integration.android.AndroidKeystore
-import com.nevidimka655.astracrypt.core.di.IoDispatcher
 import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.astracrypt.utils.Api
 import com.nevidimka655.astracrypt.utils.Mapper
 import com.nevidimka655.crypto.tink.core.encoders.Base64Util
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
+import io.gromif.astracrypt.utils.dispatchers.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import java.io.File
@@ -37,7 +38,7 @@ internal class CombinedZipWorker @AssistedInject constructor(
     private val defaultDispatcher: CoroutineDispatcher,
     private val workManager: WorkManager,
     private val base64Util: Base64Util,
-    private val stringToUriMapper: Mapper<String, Uri>
+    private val stringToUriMapper: Mapper<String, Uri>,
 ) : CoroutineWorker(context, params) {
     private val notificationId = 203
 
@@ -69,7 +70,7 @@ internal class CombinedZipWorker @AssistedInject constructor(
                     ?.use { it.copyTo(out) }
                 ZipOutputStream(out).use { zipOut ->
                     zipFileContentUrisFile.forEachLine { line ->
-                        val documentUri = Uri.parse(line)
+                        val documentUri = line.toUri()
                         val currentDocument = DocumentFile
                             .fromSingleUri(applicationContext, documentUri)!!
                         val zipEntry = ZipEntry(currentDocument.name!!)

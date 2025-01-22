@@ -21,5 +21,4 @@ dependencies {
     implementation(projects.core.designSystem)
     implementation(projects.core.resources)
     implementation(projects.core.utils)
-    implementation(projects.di.utils)
 }

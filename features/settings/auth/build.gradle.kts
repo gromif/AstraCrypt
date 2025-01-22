@@ -14,7 +14,6 @@ dependencies {
     implementation(projects.features.auth.domain)
     implementation(projects.features.auth.di)
 
-    implementation(projects.di.utils)
     implementation(projects.core.utils)
     implementation(projects.core.resources)
 }

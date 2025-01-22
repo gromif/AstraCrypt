@@ -2,10 +2,10 @@ package com.nevidimka655.astracrypt.view.composables.export
 
 import androidx.lifecycle.ViewModel
 import androidx.work.WorkManager
-import com.nevidimka655.astracrypt.core.di.IoDispatcher
 import com.nevidimka655.astracrypt.utils.io.FilesUtil
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.gromif.astracrypt.utils.dispatchers.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Inject
 

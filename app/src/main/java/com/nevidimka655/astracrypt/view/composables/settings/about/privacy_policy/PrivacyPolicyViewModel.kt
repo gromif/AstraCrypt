@@ -6,8 +6,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nevidimka655.astracrypt.core.di.IoDispatcher
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.gromif.astracrypt.utils.dispatchers.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import javax.inject.Inject

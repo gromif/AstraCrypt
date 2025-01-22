@@ -12,7 +12,6 @@ val coreModules = listOf(
 val featuresModules = listOf("calculator", "help",)
 val uiModules = listOf("compose-core", "compose-details")
 val domainModules = listOf("calculator")
-val diModules = listOf("utils",)
 
 val features = listOf(
     "auth",
@@ -31,7 +30,6 @@ include("features", featuresModules)
 includeFeatures()
 include("ui", uiModules)
 include("domain", domainModules)
-include("di", diModules)
 
 fun include(group: String, modules: List<String>) = modules.forEach { include(":$group:$it") }
 fun includeFeatures() = features.forEach {

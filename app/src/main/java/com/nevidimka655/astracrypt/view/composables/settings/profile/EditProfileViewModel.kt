@@ -5,13 +5,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nevidimka655.astracrypt.core.di.IoDispatcher
 import com.nevidimka655.astracrypt.data.datastore.SettingsDataStoreManager
 import com.nevidimka655.astracrypt.domain.model.profile.Avatars
 import com.nevidimka655.astracrypt.domain.model.profile.ProfileInfo
 import com.nevidimka655.astracrypt.utils.io.FilesUtil
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.gromif.astracrypt.utils.dispatchers.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch

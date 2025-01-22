@@ -9,10 +9,10 @@ import androidx.lifecycle.viewModelScope
 import com.nevidimka655.astracrypt.app.utils.FileSystemSetupManager
 import com.nevidimka655.astracrypt.auth.domain.usecase.GetAuthFlowUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.VerifySkinUseCase
-import com.nevidimka655.astracrypt.core.di.IoDispatcher
 import com.nevidimka655.astracrypt.data.datastore.AppearanceManager
 import com.nevidimka655.astracrypt.view.navigation.models.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.gromif.astracrypt.utils.dispatchers.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn

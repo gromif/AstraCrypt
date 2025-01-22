@@ -12,9 +12,9 @@ import com.nevidimka655.astracrypt.auth.domain.usecase.SetHintTextUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.SetHintVisibilityUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.SetSkinUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.VerifyAuthUseCase
-import com.nevidimka655.astracrypt.core.di.IoDispatcher
 import com.nevidimka655.astracrypt.utils.app.AppComponentService
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.gromif.astracrypt.utils.dispatchers.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn

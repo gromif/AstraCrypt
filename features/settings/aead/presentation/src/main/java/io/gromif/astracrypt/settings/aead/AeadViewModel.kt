@@ -2,7 +2,6 @@ package io.gromif.astracrypt.settings.aead
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nevidimka655.astracrypt.core.di.IoDispatcher
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.gromif.astracrypt.settings.aead.domain.usecase.GetAeadLargeStreamTemplateListUseCase
 import io.gromif.astracrypt.settings.aead.domain.usecase.GetAeadSmallStreamTemplateListUseCase
@@ -11,6 +10,7 @@ import io.gromif.astracrypt.settings.aead.domain.usecase.GetNotesAeadTemplateUse
 import io.gromif.astracrypt.settings.aead.domain.usecase.GetSettingsAeadUseCase
 import io.gromif.astracrypt.settings.aead.domain.usecase.SetNotesAeadUseCase
 import io.gromif.astracrypt.settings.aead.domain.usecase.SetSettingsAeadUseCase
+import io.gromif.astracrypt.utils.dispatchers.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
