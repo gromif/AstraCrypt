@@ -1,10 +1,10 @@
 package com.nevidimka655.astracrypt.app.di.crypto
 
+import android.content.Context
 import com.nevidimka655.astracrypt.data.crypto.KeysetFactoryImpl
 import com.nevidimka655.astracrypt.data.datastore.KeysetDataStoreManager
 import com.nevidimka655.astracrypt.domain.usecase.crypto.MasterKeyNameUseCase
 import com.nevidimka655.astracrypt.domain.usecase.crypto.PrefsKeyNameUseCase
-import com.nevidimka655.astracrypt.utils.io.FilesUtil
 import com.nevidimka655.crypto.tink.core.GetGlobalAssociatedDataPrf
 import com.nevidimka655.crypto.tink.core.encoders.HexUtil
 import com.nevidimka655.crypto.tink.core.hash.Sha256Util
@@ -16,6 +16,7 @@ import com.nevidimka655.crypto.tink.data.KeysetManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import java.io.File
 import javax.inject.Singleton
@@ -37,9 +38,9 @@ object KeysetManagerModule {
     @Singleton
     @Provides
     fun provideAssociatedDataManager(
-        filesUtil: FilesUtil
+        @ApplicationContext context: Context
     ): AssociatedDataManager = AssociatedDataManager(
-        associatedDataFile = File("${filesUtil.dataDir}/grapefruit.ss0")
+        associatedDataFile = File("${context.filesDir}/grapefruit.ss0")
     )
 
     @Singleton
