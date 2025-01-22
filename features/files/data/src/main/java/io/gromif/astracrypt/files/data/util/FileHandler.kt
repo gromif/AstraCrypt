@@ -22,7 +22,8 @@ class FileHandler(
     private val newRelativePath get() = "${getRandomFolderName()}/${getRandomFileName()}"
 
     suspend fun writeFile(input: InputStream): String? = coroutineScope {
-        val file = getFilePath(relativePath = newRelativePath)
+        val fileRelativePath = newRelativePath
+        val file = getFilePath(relativePath = fileRelativePath)
         val aead = getFileStreamingAead()
         val outputStream = getConditionalOutputStream(
             aead = aead,
@@ -37,11 +38,12 @@ class FileHandler(
         }
         outputStream.close()
 
-        if (!isActive && file.delete()) null else file.toString()
+        if (!isActive && file.delete()) null else fileRelativePath
     }
 
     suspend fun writePreview(bytes: ByteArray): String? = coroutineScope {
-        val file = getFilePath(relativePath = newRelativePath)
+        val fileRelativePath = newRelativePath
+        val file = getFilePath(relativePath = fileRelativePath)
         val aead = getPreviewStreamingAead()
         val outputStream = getConditionalOutputStream(
             aead = aead,
@@ -51,7 +53,7 @@ class FileHandler(
             file.delete()
             return@coroutineScope null
         }
-        file.toString()
+        fileRelativePath
     }
 
     private fun getConditionalOutputStream(

@@ -7,25 +7,26 @@ import coil.fetch.FetchResult
 import coil.fetch.Fetcher
 import coil.fetch.SourceResult
 import coil.request.Options
-import com.nevidimka655.astracrypt.utils.io.FilesUtil
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import com.nevidimka655.crypto.tink.domain.KeysetTemplates
 import com.nevidimka655.crypto.tink.extensions.streamingAead
+import io.gromif.astracrypt.files.data.util.FileHandler
 import io.gromif.astracrypt.files.domain.model.FileSource
 import okio.buffer
 import okio.source
 import java.io.File
 
 class TinkCoilFetcherFactory(
+    private val fileHandler: FileHandler,
     private val keysetManager: KeysetManager,
-    private val filesUtil: FilesUtil
+    private val cacheDir: File
 ) : Fetcher.Factory<FileSource> {
     override fun create(data: FileSource, options: Options, imageLoader: ImageLoader) =
         TinkCoilFetcher(data)
 
     inner class TinkCoilFetcher(private val data: FileSource) : Fetcher {
         override suspend fun fetch(): FetchResult {
-            val file = File(data.path)
+            val file = fileHandler.getFilePath(relativePath = data.path)
             val aead = KeysetTemplates.Stream.entries.getOrNull(index = data.aeadIndex)
             val sourceInputChannel = aead?.let {
                 keysetManager.stream(it).streamingAead()
@@ -33,7 +34,7 @@ class TinkCoilFetcherFactory(
             } ?: file.inputStream()
             return SourceResult(
                 source = ImageSource(
-                    source = sourceInputChannel.source().buffer(), filesUtil.cacheDir
+                    source = sourceInputChannel.source().buffer(), cacheDir
                 ),
                 mimeType = null,
                 dataSource = DataSource.DISK
