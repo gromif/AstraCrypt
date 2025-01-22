@@ -14,7 +14,6 @@ android {
 dependencies {
     implementation(projects.domain.files)
 
-    implementation(projects.core.database.files)
     implementation(projects.core.tink)
     implementation(projects.core.utils)
 

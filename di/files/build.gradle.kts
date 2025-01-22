@@ -10,7 +10,6 @@ android {
 }
 
 dependencies {
-    implementation(projects.core.database.files)
     implementation(projects.domain.files)
     implementation(projects.data.files)
 
