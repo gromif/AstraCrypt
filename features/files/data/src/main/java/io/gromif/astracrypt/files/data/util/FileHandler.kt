@@ -2,6 +2,7 @@ package io.gromif.astracrypt.files.data.util
 
 import com.google.crypto.tink.StreamingAead
 import com.nevidimka655.astracrypt.utils.io.Randomizer
+import com.nevidimka655.crypto.tink.data.AssociatedDataManager
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import com.nevidimka655.crypto.tink.domain.KeysetTemplates
 import com.nevidimka655.crypto.tink.extensions.streamingAead
@@ -14,6 +15,7 @@ import java.io.OutputStream
 
 class FileHandler(
     private val keysetManager: KeysetManager,
+    private val associatedDataManager: AssociatedDataManager,
     private val settingsRepository: SettingsRepository,
     private val randomizer: Randomizer,
     filesDir: File
@@ -56,11 +58,11 @@ class FileHandler(
         fileRelativePath
     }
 
-    private fun getConditionalOutputStream(
+    private suspend fun getConditionalOutputStream(
         aead: StreamingAead?,
         outputStream: OutputStream
     ): OutputStream = if (aead != null) {
-        aead.newEncryptingStream(outputStream, keysetManager.associatedData)
+        aead.newEncryptingStream(outputStream, associatedDataManager.getAssociatedData())
     } else outputStream
 
     private var cachedFileStreamingAead: StreamingAead? = null

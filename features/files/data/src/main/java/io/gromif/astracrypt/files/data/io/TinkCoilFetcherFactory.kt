@@ -7,6 +7,7 @@ import coil.fetch.FetchResult
 import coil.fetch.Fetcher
 import coil.fetch.SourceResult
 import coil.request.Options
+import com.nevidimka655.crypto.tink.data.AssociatedDataManager
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import com.nevidimka655.crypto.tink.domain.KeysetTemplates
 import com.nevidimka655.crypto.tink.extensions.streamingAead
@@ -19,6 +20,7 @@ import java.io.File
 class TinkCoilFetcherFactory(
     private val fileHandler: FileHandler,
     private val keysetManager: KeysetManager,
+    private val associatedDataManager: AssociatedDataManager,
     private val cacheDir: File
 ) : Fetcher.Factory<FileSource> {
     override fun create(data: FileSource, options: Options, imageLoader: ImageLoader) =
@@ -29,8 +31,10 @@ class TinkCoilFetcherFactory(
             val file = fileHandler.getFilePath(relativePath = data.path)
             val aead = KeysetTemplates.Stream.entries.getOrNull(index = data.aeadIndex)
             val sourceInputChannel = aead?.let {
-                keysetManager.stream(it).streamingAead()
-                    .newDecryptingStream(file.inputStream(), keysetManager.associatedData)
+                keysetManager.stream(it).streamingAead().newDecryptingStream(
+                    /* ciphertextSource = */ file.inputStream(),
+                    /* associatedData = */ associatedDataManager.getAssociatedData()
+                )
             } ?: file.inputStream()
             return SourceResult(
                 source = ImageSource(

@@ -1,6 +1,7 @@
 package io.gromif.astracrypt.files.di
 
 import com.nevidimka655.crypto.tink.core.encoders.Base64Util
+import com.nevidimka655.crypto.tink.data.AssociatedDataManager
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import dagger.Module
 import dagger.Provides
@@ -18,9 +19,11 @@ internal object UtilModule {
     @Provides
     fun provideAeadUtil(
         keysetManager: KeysetManager,
+        associatedDataManager: AssociatedDataManager,
         base64Util: Base64Util
     ): AeadUtil = AeadUtilImpl(
         keysetManager = keysetManager,
+        associatedDataManager = associatedDataManager,
         base64Util = base64Util
     )
 

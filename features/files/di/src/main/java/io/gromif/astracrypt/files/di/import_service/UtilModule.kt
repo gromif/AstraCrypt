@@ -9,6 +9,7 @@ import com.nevidimka655.astracrypt.utils.Api
 import com.nevidimka655.astracrypt.utils.Mapper
 import com.nevidimka655.astracrypt.utils.io.MediaMetadataRetrieverCompat
 import com.nevidimka655.astracrypt.utils.io.Randomizer
+import com.nevidimka655.crypto.tink.data.AssociatedDataManager
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import dagger.Module
 import dagger.Provides
@@ -39,10 +40,12 @@ internal object UtilModule {
     fun provideFileHandler(
         @ApplicationContext context: Context,
         keysetManager: KeysetManager,
+        associatedDataManager: AssociatedDataManager,
         settingsRepository: SettingsRepository,
         randomizer: Randomizer
     ): FileHandler = FileHandler(
         keysetManager = keysetManager,
+        associatedDataManager = associatedDataManager,
         settingsRepository = settingsRepository,
         randomizer = randomizer,
         filesDir = context.filesDir

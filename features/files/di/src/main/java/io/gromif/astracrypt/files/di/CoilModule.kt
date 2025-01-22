@@ -5,6 +5,7 @@ import coil.ImageLoader
 import coil.decode.VideoFrameDecoder
 import coil.request.CachePolicy
 import coil.transition.CrossfadeTransition
+import com.nevidimka655.crypto.tink.data.AssociatedDataManager
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import dagger.Module
 import dagger.Provides
@@ -41,9 +42,11 @@ internal object CoilModule {
         @ApplicationContext context: Context,
         fileHandler: FileHandler,
         keysetManager: KeysetManager,
+        associatedDataManager: AssociatedDataManager,
     ): TinkCoilFetcherFactory = TinkCoilFetcherFactory(
         fileHandler = fileHandler,
         keysetManager = keysetManager,
+        associatedDataManager = associatedDataManager,
         cacheDir = context.cacheDir
     )
 
