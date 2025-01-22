@@ -40,7 +40,7 @@ class MainVM @Inject constructor(
         initialValue = null
     )
 
-    fun verifySkin(data: String) = viewModelScope.launch {
+    fun verifySkin(data: String) = viewModelScope.launch(defaultDispatcher) {
         skinIsAuthenticated = verifySkinUseCase(data)
     }
 
