@@ -67,10 +67,10 @@ dependencies {
     implementation(projects.core.tink)
 
     implementation(projects.features.auth.presentation)
-    implementation(projects.features.calculator)
+    implementation(projects.features.calculator.presentation)
 
     implementation(projects.features.auth.domain)
-    implementation(projects.domain.calculator)
+    implementation(projects.features.calculator.domain)
     implementation(projects.features.auth.di)
 
     implementation(project(":ui:compose-details"))

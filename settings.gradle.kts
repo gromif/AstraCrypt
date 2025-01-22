@@ -55,3 +55,6 @@ dependencyResolutionManagement {
     }
 }
 include(":core:utils:dispatchers")
+
+include(":features:calculator:presentation")
+include(":features:calculator:domain")
