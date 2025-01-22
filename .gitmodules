@@ -26,5 +26,5 @@
 	path = features/notes/presentation
 	url = git@github.com:gromif/ui_compose_notes.git
 [submodule "crypto/tink-lab"]
-	path = features/tink-lab/presentation
+	path = features/tink-lab
 	url = git@github.com:gromif/crypto_tink_lab.git
