@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.core.di
+package io.gromif.astracrypt.utils.dispatchers
 
 import dagger.Module
 import dagger.Provides
