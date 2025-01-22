@@ -9,46 +9,37 @@ val coreModules = listOf(
     "resources", "utils", "design-system",
     "navigation"
 )
-val featuresModules = listOf(
-    "auth:login", "auth:settings",
-    "files",
-    "calculator",
-    "compose-notes",
-    "tink-lab",
-    "help",
-    "lab-zip",
-    "settings:aead"
-)
+val featuresModules = listOf("calculator", "help",)
 val uiModules = listOf("compose-core", "compose-details")
-val domainModules = listOf(
+val domainModules = listOf("calculator")
+val diModules = listOf("utils",)
+
+val features = listOf(
     "auth",
     "files",
-    "calculator", "notes", "tink-lab", "lab-zip",
-    "settings:aead"
-)
-val dataModules = listOf(
-    "auth",
-    "files",
-    "notes", "tink-lab", "lab-zip",
-    "settings:aead"
-)
-val diModules = listOf(
-    "auth",
-    "files",
-    "notes", "tink-lab", "lab-zip", "utils",
+    "notes",
+    "lab-zip",
+    "tink-lab",
     "settings:aead"
 )
 
 // Include all modules
 include(":app")
+include(":features:settings:auth")
 include("core", coreModules)
 include("features", featuresModules)
+includeFeatures()
 include("ui", uiModules)
 include("domain", domainModules)
-include("data", dataModules)
 include("di", diModules)
 
 fun include(group: String, modules: List<String>) = modules.forEach { include(":$group:$it") }
+fun includeFeatures() = features.forEach {
+    include(":features:$it:domain")
+    include(":features:$it:data")
+    include(":features:$it:presentation")
+    include(":features:$it:di")
+}
 
 pluginManagement {
     includeBuild("build-logic")
@@ -65,3 +56,4 @@ dependencyResolutionManagement {
         gradlePluginPortal()
     }
 }
+include(":core:utils:dispatchers")

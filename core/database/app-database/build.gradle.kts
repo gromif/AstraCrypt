@@ -16,5 +16,5 @@ android {
 
 dependencies {
     implementation(projects.core.database.notes)
-    implementation(projects.data.files)
+    implementation(projects.features.files.data)
 }

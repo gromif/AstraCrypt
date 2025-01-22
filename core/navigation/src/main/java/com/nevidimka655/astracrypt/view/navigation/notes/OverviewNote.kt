@@ -16,7 +16,7 @@ import com.nevidimka655.astracrypt.view.navigation.models.actions.ToolbarActions
 import com.nevidimka655.astracrypt.view.navigation.models.actions.delete
 import com.nevidimka655.astracrypt.view.navigation.Route
 import com.nevidimka655.notes.Notes
-import com.nevidimka655.notes.ui.overview.OverviewScreen
+import com.nevidimka655.notes.overview.OverviewScreen
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow

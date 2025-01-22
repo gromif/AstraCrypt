@@ -12,14 +12,14 @@ android {
 dependencies {
     implementation(projects.core.resources)
 
-    implementation(projects.features.files)
-    implementation(projects.features.tinkLab)
-    implementation(projects.features.labZip)
-    implementation(projects.features.composeNotes)
+    implementation(projects.features.files.presentation)
+    implementation(projects.features.tinkLab.presentation)
+    implementation(projects.features.labZip.presentation)
+    implementation(projects.features.notes.presentation)
     implementation(projects.features.help)
 
-    implementation(projects.features.auth.settings)
-    implementation(projects.features.settings.aead)
+    implementation(projects.features.settings.auth)
+    implementation(projects.features.settings.aead.presentation)
 
     implementation(libs.androidx.annotation.jvm)
     implementation(libs.compose.navigation)

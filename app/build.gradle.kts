@@ -66,12 +66,12 @@ dependencies {
 
     implementation(projects.core.tink)
 
-    implementation(projects.features.auth.login)
+    implementation(projects.features.auth.presentation)
     implementation(projects.features.calculator)
 
-    implementation(projects.domain.auth)
+    implementation(projects.features.auth.domain)
     implementation(projects.domain.calculator)
-    implementation(projects.di.auth)
+    implementation(projects.features.auth.di)
 
     implementation(projects.di.utils)
 

@@ -12,7 +12,7 @@ import com.nevidimka655.ui.compose_core.NoItemsPage
 import com.nevidimka655.astracrypt.view.navigation.models.UiState
 import com.nevidimka655.astracrypt.view.navigation.Route
 import com.nevidimka655.notes.Notes
-import com.nevidimka655.notes.ui.NotesListScreen
+import com.nevidimka655.notes.NotesListScreen
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
