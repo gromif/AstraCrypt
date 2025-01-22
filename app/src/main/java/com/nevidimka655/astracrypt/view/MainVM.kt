@@ -6,7 +6,6 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nevidimka655.astracrypt.app.utils.FileSystemSetupManager
 import com.nevidimka655.astracrypt.auth.domain.usecase.GetAuthFlowUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.VerifySkinUseCase
 import com.nevidimka655.astracrypt.data.datastore.AppearanceManager
@@ -26,7 +25,6 @@ class MainVM @Inject constructor(
     @IoDispatcher
     private val defaultDispatcher: CoroutineDispatcher,
     private val state: SavedStateHandle,
-    private val fileSystemSetupManager: FileSystemSetupManager,
     private val verifySkinUseCase: VerifySkinUseCase,
     getAuthFlowUseCase: GetAuthFlowUseCase,
     val appearanceManager: AppearanceManager
@@ -48,11 +46,6 @@ class MainVM @Inject constructor(
 
     fun setSearchQuery(query: String) {
         state[SEARCH_QUERY] = query
-    }
-
-    init {
-        if (!fileSystemSetupManager.isDatabaseCreated())
-            viewModelScope.launch(defaultDispatcher) { fileSystemSetupManager.setup() }
     }
 
 }
