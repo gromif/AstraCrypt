@@ -4,6 +4,7 @@ import com.nevidimka655.astracrypt.utils.Mapper
 import io.gromif.astracrypt.files.data.db.FilesDao
 import io.gromif.astracrypt.files.data.db.FilesEntity
 import io.gromif.astracrypt.files.data.db.tuples.MinimalTuple
+import io.gromif.astracrypt.files.data.util.FileHandler
 import io.gromif.astracrypt.files.domain.model.AeadInfo
 import io.gromif.astracrypt.files.domain.model.ExportData
 import io.gromif.astracrypt.files.domain.model.FileItem
@@ -21,6 +22,7 @@ class RepositoryImpl(
     private val filesDao: FilesDao,
     private val aeadUtil: AeadUtil,
     private val settingsRepository: SettingsRepository,
+    private val fileHandler: FileHandler,
     private val fileItemMapper: Mapper<FilesEntity, FileItem>,
 ) : Repository {
     private suspend fun encrypt(aeadInfo: AeadInfo, data: String): String =
@@ -139,9 +141,9 @@ class RepositoryImpl(
                 launch {
                     val (id, _, file, preview) = getMinimalData(currentId)
                     filesDao.delete(id)
-                    if (file != null) {
-                        //filesUtil.getLocalFile(file).delete()
-                        //if (preview != null) filesUtil.getLocalFile(preview).delete()
+                    if (file != null) with(fileHandler) {
+                        getFilePath(relativePath = file).delete()
+                        if (preview != null) getFilePath(relativePath = preview).delete()
                     } else delete(ids = filesDao.getFolderIds(parent = id))
                 }
             }.joinAll()
