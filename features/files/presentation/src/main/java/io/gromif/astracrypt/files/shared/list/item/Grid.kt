@@ -65,7 +65,7 @@ internal fun FilesListGridItem(
 ) = ElevatedCard(
     modifier = modifier.aspectRatio(1f),
     colors = if (isChecked) CardDefaults.elevatedCardColors(
-        containerColor = MaterialTheme.colorScheme.surfaceVariant
+        containerColor = MaterialTheme.colorScheme.surfaceContainerHigh
     ) else CardDefaults.elevatedCardColors(),
     shape = ShapeDefaults.Large
 ) {
