@@ -13,15 +13,18 @@ import androidx.compose.runtime.setValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.gromif.astracrypt.files.contracts.scanContract
+import io.gromif.astracrypt.files.model.ContextualAction
 import io.gromif.astracrypt.files.model.Mode
 import io.gromif.astracrypt.files.saver.rememberMultiselectStateList
 import io.gromif.astracrypt.files.shared.Screen
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FilesScreen(
     isStarred: Boolean,
+    onContextualAction: Flow<ContextualAction>,
     searchQueryState: StateFlow<String>,
     onModeChange: (Mode) -> Unit = {},
     toExport: (id: Long, output: Uri) -> Unit = { _, _ -> },
@@ -65,6 +68,7 @@ fun FilesScreen(
         isStarred = isStarred,
         isSearching = isSearching,
         multiselectStateList = multiselectStateList,
+        onContextualAction = onContextualAction,
         viewMode = viewMode,
         imageLoader = vm.imageLoader,
 
@@ -91,8 +95,8 @@ fun FilesScreen(
         onOpen = {},
         onCreateFolder = { vm.createFolder(name = it) },
         onRename = { id, name -> vm.rename(id = id, newName = name) },
-        onStar = { id, state -> vm.setStarred(state, listOf(id)) },
-        onDelete = { vm.delete(ids = listOf(it)) },
+        onStar = { idList, state -> vm.setStarred(state, idList) },
+        onDelete = { vm.delete(ids = it) },
 
         sheetCreateState = sheetCreateState,
 

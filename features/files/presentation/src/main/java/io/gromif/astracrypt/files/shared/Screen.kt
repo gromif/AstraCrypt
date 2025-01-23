@@ -7,6 +7,7 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
@@ -32,6 +33,7 @@ import io.gromif.astracrypt.files.domain.model.FileItem
 import io.gromif.astracrypt.files.domain.model.FileState
 import io.gromif.astracrypt.files.domain.model.FileType
 import io.gromif.astracrypt.files.domain.model.ViewMode
+import io.gromif.astracrypt.files.model.ContextualAction
 import io.gromif.astracrypt.files.model.Option
 import io.gromif.astracrypt.files.model.OptionsItem
 import io.gromif.astracrypt.files.model.RootInfo
@@ -42,6 +44,8 @@ import io.gromif.astracrypt.files.shared.sheet.filesCreateNewSheet
 import io.gromif.astracrypt.files.shared.sheet.filesOptionsSheet
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.emptyFlow
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview(showBackground = true)
@@ -50,6 +54,7 @@ internal fun Screen(
     isStarred: Boolean = false,
     isSearching: Boolean = false,
     multiselectStateList: SnapshotStateList<Long> = rememberMultiselectStateList(),
+    onContextualAction: Flow<ContextualAction> = emptyFlow(),
     viewMode: ViewMode = ViewMode.Grid,
     imageLoader: ImageLoader = ImageLoader(LocalContext.current),
 
@@ -65,9 +70,9 @@ internal fun Screen(
     onScan: () -> Unit = {},
     onOpen: () -> Unit = {},
     onCreateFolder: (String) -> Unit = {},
-    onStar: (id: Long, state: Boolean) -> Unit = { _, _ -> },
+    onStar: (idList: List<Long>, state: Boolean) -> Unit = { _, _ -> },
     onRename: (id: Long, name: String) -> Unit = { _, _ -> },
-    onDelete: (Long) -> Unit = {},
+    onDelete: (idList: List<Long>) -> Unit = {},
 
     sheetCreateState: MutableState<Boolean> = mutableStateOf(false),
 
@@ -116,10 +121,30 @@ internal fun Screen(
 
     var dialogNewFolder by newFolderDialog(onCreate = onCreateFolder)
     var dialogRenameState by renameDialog(optionsItem.name) { onRename(optionsItem.id, it) }
-    var dialogDeleteState by deleteDialog(optionsItem.name) { onDelete(optionsItem.id) }
+    var dialogDeleteState by deleteDialog(optionsItem.name) { onDelete(listOf(optionsItem.id)) }
     var dialogDeleteSourceState by deleteSourceDialog { saveSource ->
         saveSourceState = saveSource
         pickFileContract.launch(arrayOf(importMimeTypeState))
+    }
+
+    LaunchedEffect(Unit) {
+        onContextualAction.collectLatest {
+            when (it) {
+                ContextualAction.CreateFolder -> dialogNewFolder = true
+                ContextualAction.Star -> {
+                    onStar(multiselectStateList.toList(), true)
+                    multiselectStateList.clear()
+                }
+                ContextualAction.Unstar -> {
+                    onStar(multiselectStateList.toList(), false)
+                    multiselectStateList.clear()
+                }
+                ContextualAction.Delete -> {
+                    onDelete(multiselectStateList.toList())
+                    multiselectStateList.clear()
+                }
+            }
+        }
     }
 
     filesCreateNewSheet(
@@ -145,7 +170,7 @@ internal fun Screen(
                 Option.Export -> exportContract.launch(null)
                 Option.Rename -> dialogRenameState = true
                 Option.Delete -> dialogDeleteState = true
-                Option.Star -> onStar(optionsItem.id, optionsItem.isStarred.not())
+                Option.Star -> onStar(listOf(optionsItem.id), optionsItem.isStarred.not())
                 Option.Select -> TODO()
                 Option.Details -> toDetails(optionsItem.id)
             }
