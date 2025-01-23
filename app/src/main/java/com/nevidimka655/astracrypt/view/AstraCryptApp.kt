@@ -123,7 +123,7 @@ fun AstraCryptApp(
         },
         bottomBar = {
             BottomBarImpl(
-                visible = !toolbarIsCollapsing && !isSearching && !searchBarExpanded && bottomBarTab != null,
+                visible = !isSearching && !searchBarExpanded && bottomBarTab != null,
                 bottomBarScroll = bottomBarScroll,
                 selected = bottomBarTab
             ) {
