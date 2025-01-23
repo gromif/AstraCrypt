@@ -13,6 +13,7 @@ import androidx.compose.runtime.setValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.gromif.astracrypt.files.contracts.scanContract
+import io.gromif.astracrypt.files.saver.rememberMultiselectStateList
 import io.gromif.astracrypt.files.shared.Screen
 import kotlinx.coroutines.flow.StateFlow
 
@@ -45,9 +46,15 @@ fun FilesScreen(
         vm.pagingStarredFlow
     } else vm.pagingFlow
 
+    val multiselectStateList = rememberMultiselectStateList()
+    fun selectItem(id: Long) = with(multiselectStateList) {
+        if (contains(id)) remove(id) else add(id)
+    }
+
     Screen(
         isStarred = isStarred,
         isSearching = isSearching,
+        multiselectStateList = multiselectStateList,
         viewMode = viewMode,
         imageLoader = vm.imageLoader,
 
@@ -58,8 +65,12 @@ fun FilesScreen(
         pagingFlow = pagingFlow,
 
         onClick = {
-            if (it.isFolder) vm.openDirectory(id = it.id, name = it.name)
+            when {
+                multiselectStateList.isNotEmpty() -> selectItem(id = it.id)
+                it.isFolder -> vm.openDirectory(id = it.id, name = it.name)
+            }
         },
+        onLongPress = { selectItem(id = it.id) },
         onImport = { sourceUris, saveSource ->
             vm.import(uriList = sourceUris.toTypedArray(), saveSource = saveSource)
         },

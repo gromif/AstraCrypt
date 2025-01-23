@@ -10,11 +10,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.paging.LoadState
@@ -35,6 +35,7 @@ import io.gromif.astracrypt.files.domain.model.ViewMode
 import io.gromif.astracrypt.files.model.Option
 import io.gromif.astracrypt.files.model.OptionsItem
 import io.gromif.astracrypt.files.model.RootInfo
+import io.gromif.astracrypt.files.saver.rememberMultiselectStateList
 import io.gromif.astracrypt.files.shared.list.EmptyList
 import io.gromif.astracrypt.files.shared.list.FilesList
 import io.gromif.astracrypt.files.shared.sheet.filesCreateNewSheet
@@ -48,6 +49,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 internal fun Screen(
     isStarred: Boolean = false,
     isSearching: Boolean = false,
+    multiselectStateList: SnapshotStateList<Long> = rememberMultiselectStateList(),
     viewMode: ViewMode = ViewMode.Grid,
     imageLoader: ImageLoader = ImageLoader(LocalContext.current),
 
@@ -58,6 +60,7 @@ internal fun Screen(
     pagingFlow: Flow<PagingData<FileItem>> = pagingFakeData(),
 
     onClick: (FileItem) -> Unit = {},
+    onLongPress: (FileItem) -> Unit = {},
     onImport: (List<Uri>, Boolean) -> Unit = { _, _ -> },
     onScan: () -> Unit = {},
     onOpen: () -> Unit = {},
@@ -85,7 +88,7 @@ internal fun Screen(
         FilesList(
             viewMode = viewMode,
             pagingItems = items,
-            listCheckedState = mutableStateMapOf()/*vm.selectorManager.itemsMapState*/,
+            multiselectStateList = multiselectStateList,
             imageLoader = imageLoader,
             onOptions = {
                 optionsItem = OptionsItem(
@@ -98,7 +101,7 @@ internal fun Screen(
                 sheetOptionsState.value = true
             },
             onClick = onClick,
-            onLongPress = {}
+            onLongPress = onLongPress
         )
     }
     AnimatedVisibility(visible = isEmpty.value, enter = fadeIn(), exit = ExitTransition.None) {

@@ -7,7 +7,7 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.snapshots.SnapshotStateMap
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
 import androidx.paging.compose.LazyPagingItems
 import coil.ImageLoader
@@ -24,7 +24,7 @@ import io.gromif.astracrypt.files.shared.list.item.FilesListItem
 internal fun FilesList(
     viewMode: ViewMode = ViewMode.Grid,
     pagingItems: LazyPagingItems<FileItem>,
-    listCheckedState: SnapshotStateMap<Long, Boolean>,
+    multiselectStateList: SnapshotStateList<Long>,
     imageLoader: ImageLoader,
     onOptions: (item: FileItem) -> Unit,
     onClick: (item: FileItem) -> Unit,
@@ -58,6 +58,7 @@ internal fun FilesList(
             key = { pagingItems[it]?.id ?: it }
         ) { index ->
             val item = pagingItems[index] ?: return@items
+            val isItemSelected = multiselectStateList.contains(item.id)
             when (viewMode) {
                 ViewMode.Grid -> FilesListGridItem(
                     modifier = Modifier.animateItem(),
@@ -67,7 +68,7 @@ internal fun FilesList(
                     itemType = item.type,
                     isFile = item.isFile,
                     state = item.state,
-                    isChecked = listCheckedState.getOrElse(item.id) { false },
+                    isChecked = isItemSelected,
                     onOptions = {
                         Haptic.rise()
                         onOptions.invoke(item)
@@ -85,7 +86,7 @@ internal fun FilesList(
                     preview = item.preview,
                     itemType = item.type,
                     state = item.state,
-                    isChecked = listCheckedState.getOrElse(item.id) { false },
+                    isChecked = isItemSelected,
                     onLongClick = {
                         Haptic.clickHeavy()
                         onOptions.invoke(item)
