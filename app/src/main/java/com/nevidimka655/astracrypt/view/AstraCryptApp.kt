@@ -85,7 +85,7 @@ fun AstraCryptApp(
         ),
         topBar = {
             LaunchedEffect(searchBar) {
-                if (!searchBar) vm.setSearchQuery("")
+                if (!searchBar && !toolbar.isContextual) vm.setSearchQuery("")
             }
             if (searchBar) SearchBarImpl(
                 query = searchQueryState,
@@ -100,6 +100,7 @@ fun AstraCryptApp(
             ) else if (vm.skinIsAuthenticated) ToolbarImpl(
                 title = toolbar.title,
                 backButton = vm.userIsAuthenticated && bottomBarTab == null,
+                isContextual = toolbar.isContextual,
                 actions = toolbar.actions,
                 onNavigateUp = {
                     Haptic.click()

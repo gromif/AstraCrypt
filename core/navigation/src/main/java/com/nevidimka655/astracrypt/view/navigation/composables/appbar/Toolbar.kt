@@ -4,6 +4,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
@@ -22,6 +23,7 @@ fun ToolbarImpl(
     modifier: Modifier = Modifier,
     title: TextWrap,
     backButton: Boolean,
+    isContextual: Boolean,
     actions: List<ToolbarActions.Action>?,
     onNavigateUp: () -> Unit,
     onActionPressed: (ToolbarActions.Action) -> Unit,
@@ -47,7 +49,14 @@ fun ToolbarImpl(
             }
         },
         scrollBehavior = scrollBehavior,
-        colors = TopAppBarDefaults.centerAlignedTopAppBarColors(),
+        colors = TopAppBarDefaults.centerAlignedTopAppBarColors().run {
+            if (isContextual) copy(
+                containerColor = MaterialTheme.colorScheme.surfaceContainerHighest,
+                navigationIconContentColor = MaterialTheme.colorScheme.onSurface,
+                titleContentColor = MaterialTheme.colorScheme.onSurface,
+                actionIconContentColor = MaterialTheme.colorScheme.onSurface
+            ) else this
+        },
         modifier = modifier
     )
 }
