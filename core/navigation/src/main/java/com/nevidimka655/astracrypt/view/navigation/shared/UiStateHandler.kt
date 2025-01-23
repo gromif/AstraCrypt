@@ -7,7 +7,7 @@ import androidx.compose.runtime.LaunchedEffect
 import kotlinx.coroutines.CoroutineScope
 
 @Composable
-fun AnimatedContentScope.UiStateWhenVisible(
+fun AnimatedContentScope.UiStateHandler(
     vararg keys: Any,
     block: suspend CoroutineScope.() -> Unit
 ) {
