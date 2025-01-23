@@ -17,6 +17,7 @@ import com.nevidimka655.astracrypt.view.navigation.models.UiState
 import com.nevidimka655.astracrypt.view.navigation.models.actions.ToolbarActions
 import com.nevidimka655.astracrypt.view.navigation.models.actions.lab
 import com.nevidimka655.astracrypt.view.navigation.models.actions.notes
+import com.nevidimka655.astracrypt.view.navigation.shared.UiStateHandler
 import com.nevidimka655.astracrypt.view.navigation.tabs.tabFiles
 import com.nevidimka655.astracrypt.view.navigation.tabs.tabStarred
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
@@ -33,6 +34,7 @@ fun NavGraphBuilder.tabsGraph(
 ) {
     tabFiles(
         onUiStateChange = onUiStateChange,
+        onToolbarActions = onToolbarActions,
         onFabClick = onFabClick,
         searchQueryState = searchQueryState
     )
@@ -41,7 +43,7 @@ fun NavGraphBuilder.tabsGraph(
         searchQueryState = searchQueryState
     )
     composable<Route.Tabs.Home> {
-        onUiStateChange(HomeUiState)
+        UiStateHandler { onUiStateChange(HomeUiState) }
         val homeVm: HomeViewModel = hiltViewModel()
         val profileInfo by homeVm.profileInfoFlow.collectAsStateWithLifecycle(
             initialValue = ProfileInfo()
@@ -75,7 +77,7 @@ fun NavGraphBuilder.tabsGraph(
         )*/
     }
     composable<Route.Tabs.Settings> {
-        onUiStateChange(SettingsUiState)
+        UiStateHandler { onUiStateChange(SettingsUiState) }
         SettingsScreen(
             navigateToEditProfile = { navController.navigate(Route.EditProfile) },
             navigateToUi = { navController.navigate(Route.SettingsUi) },

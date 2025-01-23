@@ -13,6 +13,7 @@ import androidx.compose.runtime.setValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.gromif.astracrypt.files.contracts.scanContract
+import io.gromif.astracrypt.files.model.Mode
 import io.gromif.astracrypt.files.saver.rememberMultiselectStateList
 import io.gromif.astracrypt.files.shared.Screen
 import kotlinx.coroutines.flow.StateFlow
@@ -22,6 +23,7 @@ import kotlinx.coroutines.flow.StateFlow
 fun FilesScreen(
     isStarred: Boolean,
     searchQueryState: StateFlow<String>,
+    onModeChange: (Mode) -> Unit = {},
     toExport: (id: Long, output: Uri) -> Unit = { _, _ -> },
     toDetails: (id: Long) -> Unit = {},
     sheetCreateState: MutableState<Boolean>,
@@ -49,6 +51,14 @@ fun FilesScreen(
     val multiselectStateList = rememberMultiselectStateList()
     fun selectItem(id: Long) = with(multiselectStateList) {
         if (contains(id)) remove(id) else add(id)
+    }
+
+    LaunchedEffect(multiselectStateList.size) {
+        val newMode = when {
+            multiselectStateList.isNotEmpty() -> Mode.Multiselect(count = multiselectStateList.size)
+            else -> Mode.Default
+        }
+        onModeChange(newMode)
     }
 
     Screen(
