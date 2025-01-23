@@ -40,6 +40,8 @@ fun NavGraphBuilder.tabsGraph(
     )
     tabStarred(
         onUiStateChange = onUiStateChange,
+        onToolbarActions = onToolbarActions,
+        onFabClick = onFabClick,
         searchQueryState = searchQueryState
     )
     composable<Route.Tabs.Home> {
