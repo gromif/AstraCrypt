@@ -6,6 +6,7 @@ import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
@@ -28,35 +29,51 @@ fun ToolbarImpl(
     onNavigateUp: () -> Unit,
     onActionPressed: (ToolbarActions.Action) -> Unit,
     scrollBehavior: TopAppBarScrollBehavior?
-) {
+) = if (isContextual) TopAppBar(
+    title = { Title(title) },
+    navigationIcon = { if (backButton) ActionBack(onNavigateUp) },
+    actions = {
+        if (actions != null) Actions(actions, onActionPressed)
+    },
+    scrollBehavior = scrollBehavior,
+    colors = TopAppBarDefaults.topAppBarColors().copy(
+        containerColor = MaterialTheme.colorScheme.surfaceContainerHighest,
+        navigationIconContentColor = MaterialTheme.colorScheme.onSurface,
+        titleContentColor = MaterialTheme.colorScheme.onSurface,
+        actionIconContentColor = MaterialTheme.colorScheme.onSurface
+    ),
+    modifier = modifier
+) else CenterAlignedTopAppBar(
+    title = { Title(title) },
+    navigationIcon = { if (backButton) ActionBack(onNavigateUp) },
+    actions = {
+        if (actions != null) Actions(actions, onActionPressed)
+    },
+    scrollBehavior = scrollBehavior,
+    modifier = modifier
+)
+
+@Composable
+private fun Title(title: TextWrap) {
     val context = LocalContext.current
-    CenterAlignedTopAppBar(
-        title = { Text(text = title.resolve(context)) },
-        navigationIcon = {
-            if (backButton) IconButton(
-                icon = Icons.AutoMirrored.Default.ArrowBack,
-                contentDescription = stringResource(id = R.string.back),
-                onClick = onNavigateUp
-            )
-        },
-        actions = {
-            actions?.forEach {
-                IconButton(
-                    icon = it.icon,
-                    contentDescription = stringResource(id = it.contentDescription),
-                    onClick = { onActionPressed(it) }
-                )
-            }
-        },
-        scrollBehavior = scrollBehavior,
-        colors = TopAppBarDefaults.centerAlignedTopAppBarColors().run {
-            if (isContextual) copy(
-                containerColor = MaterialTheme.colorScheme.surfaceContainerHighest,
-                navigationIconContentColor = MaterialTheme.colorScheme.onSurface,
-                titleContentColor = MaterialTheme.colorScheme.onSurface,
-                actionIconContentColor = MaterialTheme.colorScheme.onSurface
-            ) else this
-        },
-        modifier = modifier
+    Text(text = title.resolve(context))
+}
+
+@Composable
+private fun ActionBack(onNavigateUp: () -> Unit) = IconButton(
+    icon = Icons.AutoMirrored.Default.ArrowBack,
+    contentDescription = stringResource(id = R.string.back),
+    onClick = onNavigateUp
+)
+
+@Composable
+private fun Actions(
+    actions: List<ToolbarActions.Action>,
+    onActionPressed: (ToolbarActions.Action) -> Unit
+) = actions.forEach {
+    IconButton(
+        icon = it.icon,
+        contentDescription = stringResource(id = it.contentDescription),
+        onClick = { onActionPressed(it) }
     )
 }
