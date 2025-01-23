@@ -4,7 +4,6 @@ import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -22,6 +21,8 @@ import com.nevidimka655.astracrypt.view.navigation.models.actions.createFolder
 import com.nevidimka655.astracrypt.view.navigation.models.actions.delete
 import com.nevidimka655.astracrypt.view.navigation.models.actions.star
 import com.nevidimka655.astracrypt.view.navigation.models.actions.unStar
+import com.nevidimka655.astracrypt.view.navigation.shared.FabClickHandler
+import com.nevidimka655.astracrypt.view.navigation.shared.ToolbarActionsHandler
 import com.nevidimka655.astracrypt.view.navigation.shared.UiStateHandler
 import com.nevidimka655.haptic.Haptic
 import com.nevidimka655.ui.compose_core.Compose
@@ -32,7 +33,6 @@ import io.gromif.astracrypt.files.model.Mode
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.receiveAsFlow
 
 private typealias FilesRoute = Route.Tabs.Files
@@ -54,11 +54,9 @@ private fun AnimatedContentScope.FilesSharedNavigation(
         val newUiState = when (mode) {
             Mode.Default -> if (isStarred) StarredUiState else FilesUiState
             is Mode.Multiselect -> {
-                val baseUiState = if (isStarred) {
-                    StarredContextualUiState
-                } else FilesContextualUiState
-                baseUiState.copy(
-                    toolbar = baseUiState.toolbar.copy(
+                val state = if (isStarred) StarredContextualUiState else FilesContextualUiState
+                state.copy(
+                    toolbar = state.toolbar.copy(
                         title = TextWrap.Text(
                             text = context.getString(R.string.toolbar_selected, mode.count)
                         )
@@ -69,33 +67,25 @@ private fun AnimatedContentScope.FilesSharedNavigation(
         onUiStateChange(newUiState)
     }
 
-    val contextualActionChannel = remember { Channel<ContextualAction>() }
-    LaunchedEffect(Unit) {
-        onToolbarActions.collectLatest {
-            when {
-                it === ToolbarActions.createFolder ->
-                    contextualActionChannel.send(ContextualAction.CreateFolder)
-                it === ToolbarActions.star ->
-                    contextualActionChannel.send(ContextualAction.Star)
-                it === ToolbarActions.unStar ->
-                    contextualActionChannel.send(ContextualAction.Unstar)
-                it === ToolbarActions.delete ->
-                    contextualActionChannel.send(ContextualAction.Delete)
-            }
+    val contextChannel = remember { Channel<ContextualAction>() }
+    ToolbarActionsHandler(onToolbarActions) {
+        when {
+            it === ToolbarActions.createFolder -> contextChannel.send(ContextualAction.CreateFolder)
+            it === ToolbarActions.star -> contextChannel.send(ContextualAction.Star)
+            it === ToolbarActions.unStar -> contextChannel.send(ContextualAction.Unstar)
+            it === ToolbarActions.delete -> contextChannel.send(ContextualAction.Delete)
         }
     }
 
     val sheetCreateState = Compose.state()
-    LaunchedEffect(Unit) {
-        onFabClick.collectLatest {
-            Haptic.rise()
-            sheetCreateState.value = true
-        }
+    if (!isStarred) FabClickHandler(onFabClick) {
+        Haptic.rise()
+        sheetCreateState.value = true
     }
 
     FilesScreen(
         isStarred = isStarred,
-        onContextualAction = contextualActionChannel.receiveAsFlow(),
+        onContextualAction = contextChannel.receiveAsFlow(),
         searchQueryState = searchQueryState,
         onModeChange = { modeState = it },
         toExport = { id, exportUri ->
@@ -144,9 +134,8 @@ private val StarredUiState = UiState(
 
 private val StarredContextualUiState = UiState(
     toolbar = UiState.Toolbar(
-        title = TextWrap.Text(""),
         isContextual = true,
-        actions = listOf(ToolbarActions.unStar, ToolbarActions.delete,)
+        actions = listOf(ToolbarActions.unStar, ToolbarActions.delete)
     )
 )
 
@@ -161,7 +150,6 @@ private val FilesUiState = UiState(
 
 private val FilesContextualUiState = UiState(
     toolbar = UiState.Toolbar(
-        title = TextWrap.Text(""),
         isContextual = true,
         actions = listOf(
             ToolbarActions.createFolder,

@@ -9,8 +9,9 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import com.nevidimka655.astracrypt.resources.R
-import com.nevidimka655.astracrypt.view.navigation.models.UiState
 import com.nevidimka655.astracrypt.view.navigation.Route
+import com.nevidimka655.astracrypt.view.navigation.models.UiState
+import com.nevidimka655.astracrypt.view.navigation.shared.UiStateHandler
 import com.nevidimka655.compose_help.HelpItem
 import com.nevidimka655.compose_help.HelpScreen
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
@@ -27,7 +28,7 @@ private val ScreenUiState = UiState(
 fun NavGraphBuilder.help(
     onUiStateChange: (UiState) -> Unit
 ) = composable<ComposableRoute> {
-    onUiStateChange(ScreenUiState)
+    UiStateHandler { onUiStateChange(ScreenUiState) }
     val help: ComposableRoute = it.toRoute()
     val helpList: List<HelpItem> = remember { Json.decodeFromString(help.helpList) }
 

@@ -8,6 +8,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -15,6 +16,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.gromif.astracrypt.files.contracts.scanContract
 import io.gromif.astracrypt.files.model.ContextualAction
 import io.gromif.astracrypt.files.model.Mode
+import io.gromif.astracrypt.files.model.StateHolder
 import io.gromif.astracrypt.files.saver.rememberMultiselectStateList
 import io.gromif.astracrypt.files.shared.Screen
 import kotlinx.coroutines.flow.Flow
@@ -46,11 +48,6 @@ fun FilesScreen(
     var cameraScanUri by rememberSaveable { mutableStateOf(Uri.EMPTY) }
     val scanContract = scanContract { vm.import(cameraScanUri) }
 
-    val backStackList = vm.parentBackStack
-    val pagingFlow = if (isStarred && backStackList.isEmpty()) {
-        vm.pagingStarredFlow
-    } else vm.pagingFlow
-
     val multiselectStateList = rememberMultiselectStateList()
     fun selectItem(id: Long) = with(multiselectStateList) {
         if (contains(id)) remove(id) else add(id)
@@ -64,39 +61,42 @@ fun FilesScreen(
         onModeChange(newMode)
     }
 
+    val backStackList = vm.parentBackStack
+    val stateHolder = remember(isSearching, multiselectStateList, backStackList) {
+        StateHolder(
+            isStarred = isStarred,
+            isSearching = isSearching,
+            viewMode = viewMode,
+            pagingFlow = run {
+                if (isStarred && backStackList.isEmpty()) vm.pagingStarredFlow else vm.pagingFlow
+            },
+            multiselectStateList = multiselectStateList,
+            backStackList = backStackList,
+        )
+    }
     Screen(
-        isStarred = isStarred,
-        isSearching = isSearching,
-        multiselectStateList = multiselectStateList,
+        stateHolder = stateHolder,
         onContextualAction = onContextualAction,
-        viewMode = viewMode,
         imageLoader = vm.imageLoader,
 
-        backStackList = backStackList,
-        onBackStackClick = {
-            vm.openDirectoryFromBackStack(index = it)
-        },
-        pagingFlow = pagingFlow,
-
+        onBackStackClick = vm::openDirectoryFromBackStack,
         onClick = {
             when {
                 multiselectStateList.isNotEmpty() -> selectItem(id = it.id)
                 it.isFolder -> vm.openDirectory(id = it.id, name = it.name)
             }
         },
-        onLongPress = { selectItem(id = it.id) },
-        onImport = { sourceUris, saveSource ->
-            vm.import(uriList = sourceUris.toTypedArray(), saveSource = saveSource)
-        },
+        onLongPress = ::selectItem,
+        onImport = vm::import,
         onScan = {
             cameraScanUri = vm.getCameraScanOutputUri()
             scanContract.launch(cameraScanUri)
         },
         onOpen = {},
-        onCreateFolder = { vm.createFolder(name = it) },
-        onRename = { id, name -> vm.rename(id = id, newName = name) },
-        onStar = { idList, state -> vm.setStarred(state, idList) },
-        onDelete = { vm.delete(ids = it) },
+        onCreateFolder = vm::createFolder,
+        onRename = vm::rename,
+        onStar = vm::setStarred,
+        onDelete = vm::delete,
 
         sheetCreateState = sheetCreateState,
 

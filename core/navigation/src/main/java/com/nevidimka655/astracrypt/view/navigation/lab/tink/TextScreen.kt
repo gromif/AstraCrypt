@@ -8,8 +8,9 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import com.nevidimka655.astracrypt.resources.R
-import com.nevidimka655.astracrypt.view.navigation.models.UiState
 import com.nevidimka655.astracrypt.view.navigation.Route
+import com.nevidimka655.astracrypt.view.navigation.models.UiState
+import com.nevidimka655.astracrypt.view.navigation.shared.UiStateHandler
 import com.nevidimka655.tink_lab.TinkLab
 import com.nevidimka655.tink_lab.text.TextScreen
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
@@ -21,7 +22,7 @@ private val ScreenUiState = UiState(
 internal fun NavGraphBuilder.tinkText(
     onUiStateChange: (UiState) -> Unit
 ) = composable<Route.LabGraph.TinkGraph.Text> {
-    onUiStateChange(ScreenUiState)
+    UiStateHandler { onUiStateChange(ScreenUiState) }
     val route: Route.LabGraph.TinkGraph.Text = it.toRoute()
 
     TinkLab.TextScreen(

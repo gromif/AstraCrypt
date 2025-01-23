@@ -28,7 +28,7 @@ internal fun FilesList(
     imageLoader: ImageLoader,
     onOptions: (item: FileItem) -> Unit,
     onClick: (item: FileItem) -> Unit,
-    onLongPress: (item: FileItem) -> Unit,
+    onLongPress: (id: Long) -> Unit,
 ) {
     val cells = when (viewMode) {
         ViewMode.Grid -> LocalWindowWidth.current.cellsCount(2, 3, 5)
@@ -71,12 +71,12 @@ internal fun FilesList(
                     isChecked = isItemSelected,
                     onOptions = {
                         Haptic.rise()
-                        onOptions.invoke(item)
+                        onOptions(item)
                     },
                     onClick = { onClick.invoke(item) },
                     onLongPress = {
                         Haptic.clickHeavy()
-                        onLongPress.invoke(item)
+                        onLongPress(item.id)
                     }
                 )
                 ViewMode.ListDefault -> FilesListItem(
@@ -89,7 +89,7 @@ internal fun FilesList(
                     isChecked = isItemSelected,
                     onLongClick = {
                         Haptic.clickHeavy()
-                        onOptions.invoke(item)
+                        onOptions(item)
                     },
                     onClick = { onClick.invoke(item) }
                 )

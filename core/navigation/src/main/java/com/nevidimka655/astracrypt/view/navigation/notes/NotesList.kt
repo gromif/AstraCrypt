@@ -3,23 +3,23 @@ package com.nevidimka655.astracrypt.view.navigation.notes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.NoteAdd
 import androidx.compose.material.icons.filled.Description
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.nevidimka655.astracrypt.resources.R
-import com.nevidimka655.ui.compose_core.NoItemsPage
-import com.nevidimka655.astracrypt.view.navigation.models.UiState
 import com.nevidimka655.astracrypt.view.navigation.Route
+import com.nevidimka655.astracrypt.view.navigation.models.UiState
+import com.nevidimka655.astracrypt.view.navigation.shared.FabClickHandler
+import com.nevidimka655.astracrypt.view.navigation.shared.UiStateHandler
 import com.nevidimka655.notes.Notes
 import com.nevidimka655.notes.NotesListScreen
+import com.nevidimka655.ui.compose_core.NoItemsPage
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collectLatest
 
 private typealias ComposableRoute = Route.NotesGraph.List
 
-private val ScreenUiState = UiState(
+private val NotesUiState = UiState(
     toolbar = UiState.Toolbar(
         title = TextWrap.Resource(id = R.string.notes)
     ),
@@ -32,11 +32,9 @@ internal fun NavGraphBuilder.notesList(
     navigateToCreate: () -> Unit,
     navigateToView: (id: Long) -> Unit
 ) = composable<ComposableRoute> {
-    onUiStateChange(ScreenUiState)
+    UiStateHandler { onUiStateChange(NotesUiState) }
 
-    LaunchedEffect(Unit) {
-        onFabClick.collectLatest { navigateToCreate() }
-    }
+    FabClickHandler(onFabClick) { navigateToCreate() }
 
     Notes.NotesListScreen(
         onEmptyList = {

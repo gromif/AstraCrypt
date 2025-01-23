@@ -5,25 +5,26 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FolderZip
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.nevidimka655.astracrypt.resources.R
-import com.nevidimka655.ui.compose_core.BaseNoItemsPage
-import com.nevidimka655.ui.compose_core.NoItemsPageSize
+import com.nevidimka655.astracrypt.view.navigation.Route
 import com.nevidimka655.astracrypt.view.navigation.models.UiState
 import com.nevidimka655.astracrypt.view.navigation.models.actions.ToolbarActions
 import com.nevidimka655.astracrypt.view.navigation.models.actions.help
-import com.nevidimka655.astracrypt.view.navigation.Route
+import com.nevidimka655.astracrypt.view.navigation.shared.FabClickHandler
+import com.nevidimka655.astracrypt.view.navigation.shared.ToolbarActionsHandler
+import com.nevidimka655.astracrypt.view.navigation.shared.UiStateHandler
 import com.nevidimka655.compose_help.HelpItem
 import com.nevidimka655.features.lab_zip.CombineZipScreen
+import com.nevidimka655.ui.compose_core.BaseNoItemsPage
+import com.nevidimka655.ui.compose_core.NoItemsPageSize
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.receiveAsFlow
 
 private typealias ComposableRoute = Route.LabGraph.CombinedZip
@@ -42,18 +43,14 @@ internal fun NavGraphBuilder.labCombinedZip(
     onFabClick: Flow<Any>,
     navigateToHelp: (List<HelpItem>) -> Unit
 ) = composable<ComposableRoute> {
-    onUiStateChange(ScreenUiState)
-
-    val onRequestCombiningChannel = remember { Channel<Unit>() }
-
-    LaunchedEffect(Unit) {
-        onToolbarActions.collectLatest {
-            if (it == ToolbarActions.help) navigateToHelp(HelpList)
-        }
+    UiStateHandler { onUiStateChange(ScreenUiState) }
+    ToolbarActionsHandler(onToolbarActions) {
+        if (it == ToolbarActions.help) navigateToHelp(HelpList)
     }
 
-    LaunchedEffect(Unit) {
-        onFabClick.collectLatest { onRequestCombiningChannel.send(Unit) }
+    val onRequestCombiningChannel = remember { Channel<Unit>() }
+    FabClickHandler(onFabClick) {
+        onRequestCombiningChannel.send(Unit)
     }
 
     CombineZipScreen(

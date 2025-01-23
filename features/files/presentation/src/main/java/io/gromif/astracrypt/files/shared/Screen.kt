@@ -15,7 +15,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.paging.LoadState
@@ -32,12 +31,10 @@ import io.gromif.astracrypt.files.dialogs.renameDialog
 import io.gromif.astracrypt.files.domain.model.FileItem
 import io.gromif.astracrypt.files.domain.model.FileState
 import io.gromif.astracrypt.files.domain.model.FileType
-import io.gromif.astracrypt.files.domain.model.ViewMode
 import io.gromif.astracrypt.files.model.ContextualAction
 import io.gromif.astracrypt.files.model.Option
 import io.gromif.astracrypt.files.model.OptionsItem
-import io.gromif.astracrypt.files.model.RootInfo
-import io.gromif.astracrypt.files.saver.rememberMultiselectStateList
+import io.gromif.astracrypt.files.model.StateHolder
 import io.gromif.astracrypt.files.shared.list.EmptyList
 import io.gromif.astracrypt.files.shared.list.FilesList
 import io.gromif.astracrypt.files.shared.sheet.filesCreateNewSheet
@@ -51,26 +48,18 @@ import kotlinx.coroutines.flow.emptyFlow
 @Preview(showBackground = true)
 @Composable
 internal fun Screen(
-    isStarred: Boolean = false,
-    isSearching: Boolean = false,
-    multiselectStateList: SnapshotStateList<Long> = rememberMultiselectStateList(),
+    stateHolder: StateHolder = StateHolder(pagingFlow = pagingFakeData()),
     onContextualAction: Flow<ContextualAction> = emptyFlow(),
-    viewMode: ViewMode = ViewMode.Grid,
     imageLoader: ImageLoader = ImageLoader(LocalContext.current),
 
-    backStackList: List<RootInfo> = listOf(
-        RootInfo(name = "Root1"), RootInfo(name = "Root2"), RootInfo(name = "Root3")
-    ),
     onBackStackClick: (index: Int?) -> Unit = {},
-    pagingFlow: Flow<PagingData<FileItem>> = pagingFakeData(),
-
     onClick: (FileItem) -> Unit = {},
-    onLongPress: (FileItem) -> Unit = {},
-    onImport: (List<Uri>, Boolean) -> Unit = { _, _ -> },
+    onLongPress: (Long) -> Unit = {},
+    onImport: (Array<Uri>, Boolean) -> Unit = { _, _ -> },
     onScan: () -> Unit = {},
     onOpen: () -> Unit = {},
     onCreateFolder: (String) -> Unit = {},
-    onStar: (idList: List<Long>, state: Boolean) -> Unit = { _, _ -> },
+    onStar: (state: Boolean, idList: List<Long>) -> Unit = { _, _ -> },
     onRename: (id: Long, name: String) -> Unit = { _, _ -> },
     onDelete: (idList: List<Long>) -> Unit = {},
 
@@ -81,19 +70,19 @@ internal fun Screen(
 ) = Column {
     val sheetOptionsState = Compose.state()
     var optionsItem by rememberSaveable { mutableStateOf(OptionsItem()) }
-    val items = pagingFlow.collectAsLazyPagingItems()
+    val items = stateHolder.pagingFlow.collectAsLazyPagingItems()
 
-    if (!isSearching) AnimatedVisibility(visible = backStackList.isNotEmpty()) {
-        FilesBackStackList(rootBackStack = backStackList, onClick = onBackStackClick)
+    if (!stateHolder.isSearching) AnimatedVisibility(stateHolder.backStackList.isNotEmpty()) {
+        FilesBackStackList(rootBackStack = stateHolder.backStackList, onClick = onBackStackClick)
     }
     val isEmpty = remember {
         derivedStateOf { items.itemCount == 0 && items.loadState.refresh is LoadState.NotLoading }
     }
     AnimatedVisibility(visible = !isEmpty.value, enter = fadeIn(), exit = ExitTransition.None) {
         FilesList(
-            viewMode = viewMode,
+            viewMode = stateHolder.viewMode,
             pagingItems = items,
-            multiselectStateList = multiselectStateList,
+            multiselectStateList = stateHolder.multiselectStateList,
             imageLoader = imageLoader,
             onOptions = {
                 optionsItem = OptionsItem(
@@ -110,13 +99,13 @@ internal fun Screen(
         )
     }
     AnimatedVisibility(visible = isEmpty.value, enter = fadeIn(), exit = ExitTransition.None) {
-        EmptyList(isStarredScreen = isStarred, isSearching = isSearching)
+        EmptyList(stateHolder.isStarred, stateHolder.isSearching)
     }
 
     var saveSourceState by rememberSaveable { mutableStateOf(true) }
     var importMimeTypeState by rememberSaveable { mutableStateOf("") }
 
-    val pickFileContract = pickFileContract { onImport(it, saveSourceState) }
+    val pickFileContract = pickFileContract { onImport(it.toTypedArray(), saveSourceState) }
     val exportContract = exportContract { toExport(optionsItem.id, it) }
 
     var dialogNewFolder by newFolderDialog(onCreate = onCreateFolder)
@@ -132,16 +121,16 @@ internal fun Screen(
             when (it) {
                 ContextualAction.CreateFolder -> dialogNewFolder = true
                 ContextualAction.Star -> {
-                    onStar(multiselectStateList.toList(), true)
-                    multiselectStateList.clear()
+                    onStar(true, stateHolder.multiselectStateList.toList())
+                    stateHolder.multiselectStateList.clear()
                 }
                 ContextualAction.Unstar -> {
-                    onStar(multiselectStateList.toList(), false)
-                    multiselectStateList.clear()
+                    onStar(false, stateHolder.multiselectStateList.toList())
+                    stateHolder.multiselectStateList.clear()
                 }
                 ContextualAction.Delete -> {
-                    onDelete(multiselectStateList.toList())
-                    multiselectStateList.clear()
+                    onDelete(stateHolder.multiselectStateList.toList())
+                    stateHolder.multiselectStateList.clear()
                 }
             }
         }
@@ -170,7 +159,7 @@ internal fun Screen(
                 Option.Export -> exportContract.launch(null)
                 Option.Rename -> dialogRenameState = true
                 Option.Delete -> dialogDeleteState = true
-                Option.Star -> onStar(listOf(optionsItem.id), optionsItem.isStarred.not())
+                Option.Star -> onStar(optionsItem.isStarred.not(), listOf(optionsItem.id))
                 Option.Select -> TODO()
                 Option.Details -> toDetails(optionsItem.id)
             }

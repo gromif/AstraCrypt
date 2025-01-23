@@ -2,7 +2,6 @@ package com.nevidimka655.astracrypt.view.navigation.notes
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.SaveAs
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -11,16 +10,18 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import com.nevidimka655.astracrypt.resources.R
+import com.nevidimka655.astracrypt.view.navigation.Route
 import com.nevidimka655.astracrypt.view.navigation.models.UiState
 import com.nevidimka655.astracrypt.view.navigation.models.actions.ToolbarActions
 import com.nevidimka655.astracrypt.view.navigation.models.actions.delete
-import com.nevidimka655.astracrypt.view.navigation.Route
+import com.nevidimka655.astracrypt.view.navigation.shared.FabClickHandler
+import com.nevidimka655.astracrypt.view.navigation.shared.ToolbarActionsHandler
+import com.nevidimka655.astracrypt.view.navigation.shared.UiStateHandler
 import com.nevidimka655.notes.Notes
 import com.nevidimka655.notes.overview.OverviewScreen
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collectLatest
 
 private val SaveFabUiState = UiState.Fab(icon = Icons.Default.SaveAs)
 
@@ -35,15 +36,11 @@ internal fun NavGraphBuilder.overviewNote(
     val onSaveRequestChannel = remember { Channel<Unit>(0) }
     val onDeleteRequestChannel = remember { Channel<Unit>(0) }
 
-    if (editMode) LaunchedEffect(Unit) {
-        onToolbarActions.collectLatest {
-            if (it == ToolbarActions.delete) onDeleteRequestChannel.send(Unit)
-        }
+    if (editMode) ToolbarActionsHandler(onToolbarActions) {
+        if (it == ToolbarActions.delete) onDeleteRequestChannel.send(Unit)
     }
-    LaunchedEffect(Unit) {
-        onFabClick.collectLatest {
-            onSaveRequestChannel.send(Unit)
-        }
+    FabClickHandler(onFabClick) {
+        onSaveRequestChannel.send(Unit)
     }
 
     var name by remember { mutableStateOf("") }
@@ -53,8 +50,8 @@ internal fun NavGraphBuilder.overviewNote(
     val fabState = remember(name, text) {
         if (name.isNotBlank() || text.isNotBlank()) SaveFabUiState else null
     }
-    onUiStateChange(
-        UiState(
+    UiStateHandler {
+        val newState = UiState(
             toolbar = UiState.Toolbar(
                 title = if (newName.isBlank() && !editMode) {
                     TextWrap.Resource(id = R.string.createNew)
@@ -63,7 +60,8 @@ internal fun NavGraphBuilder.overviewNote(
             ),
             fab = fabState
         )
-    )
+        onUiStateChange(newState)
+    }
 
     Notes.OverviewScreen(
         noteId = overview.noteId,
