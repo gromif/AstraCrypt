@@ -16,7 +16,7 @@ import com.nevidimka655.astracrypt.view.navigation.models.UiState
 import com.nevidimka655.astracrypt.view.navigation.models.actions.ToolbarActions
 import com.nevidimka655.astracrypt.view.navigation.models.actions.help
 import com.nevidimka655.astracrypt.view.navigation.shared.FabClickObserver
-import com.nevidimka655.astracrypt.view.navigation.shared.ToolbarActionsHandler
+import com.nevidimka655.astracrypt.view.navigation.shared.ToolbarActionsObserver
 import com.nevidimka655.astracrypt.view.navigation.shared.UiStateHandler
 import com.nevidimka655.compose_help.HelpItem
 import com.nevidimka655.features.lab_zip.CombineZipScreen
@@ -44,7 +44,7 @@ internal fun NavGraphBuilder.labCombinedZip(
     navigateToHelp: (List<HelpItem>) -> Unit
 ) = composable<ComposableRoute> {
     UiStateHandler { onUiStateChange(ScreenUiState) }
-    ToolbarActionsHandler(onToolbarActions) {
+    ToolbarActionsObserver(onToolbarActions) {
         if (it == ToolbarActions.help) navigateToHelp(HelpList)
     }
 

@@ -6,7 +6,7 @@ import com.nevidimka655.ui.compose_core.ext.FlowObserver
 import kotlinx.coroutines.flow.Flow
 
 @Composable
-internal fun ToolbarActionsHandler(
+internal fun ToolbarActionsObserver(
     onToolbarActions: Flow<ToolbarActions.Action>,
     action: suspend (ToolbarActions.Action) -> Unit
 ) = FlowObserver(onToolbarActions, action)

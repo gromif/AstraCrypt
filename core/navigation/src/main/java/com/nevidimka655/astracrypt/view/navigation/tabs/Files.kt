@@ -27,7 +27,7 @@ import com.nevidimka655.astracrypt.view.navigation.models.actions.move
 import com.nevidimka655.astracrypt.view.navigation.models.actions.star
 import com.nevidimka655.astracrypt.view.navigation.models.actions.unStar
 import com.nevidimka655.astracrypt.view.navigation.shared.FabClickObserver
-import com.nevidimka655.astracrypt.view.navigation.shared.ToolbarActionsHandler
+import com.nevidimka655.astracrypt.view.navigation.shared.ToolbarActionsObserver
 import com.nevidimka655.astracrypt.view.navigation.shared.UiStateHandler
 import com.nevidimka655.haptic.Haptic
 import com.nevidimka655.ui.compose_core.Compose
@@ -79,7 +79,7 @@ private fun AnimatedContentScope.FilesSharedNavigation(
     }
 
     val contextChannel = remember { Channel<ContextualAction>() }
-    ToolbarActionsHandler(onToolbarActions) {
+    ToolbarActionsObserver(onToolbarActions) {
         when {
             it === ToolbarActions.close -> contextChannel.send(ContextualAction.Close)
             it === ToolbarActions.createFolder -> contextChannel.send(ContextualAction.CreateFolder)
