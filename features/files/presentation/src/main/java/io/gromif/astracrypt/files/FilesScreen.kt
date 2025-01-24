@@ -27,6 +27,7 @@ import kotlinx.coroutines.flow.StateFlow
 fun FilesScreen(
     startParentId: Long? = null,
     startParentName: String = "",
+    mode: Mode,
     isStarred: Boolean,
     onContextualAction: Flow<ContextualAction>,
     searchQueryState: StateFlow<String>,
@@ -62,11 +63,8 @@ fun FilesScreen(
     val multiselectStateList = rememberMultiselectStateList()
     fun selectItem(id: Long) = with(multiselectStateList) {
         if (contains(id)) remove(id) else add(id)
-    }
-
-    LaunchedEffect(multiselectStateList.size) {
         val newMode = when {
-            multiselectStateList.isNotEmpty() -> Mode.Multiselect(count = multiselectStateList.size)
+            isNotEmpty() -> Mode.Multiselect(count = size)
             else -> Mode.Default
         }
         onModeChange(newMode)
@@ -77,6 +75,7 @@ fun FilesScreen(
         StateHolder(
             isStarred = isStarred,
             isSearching = isSearching,
+            mode = mode,
             viewMode = viewMode,
             pagingFlow = run {
                 if (isStarred && backStackList.isEmpty()) vm.pagingStarredFlow else vm.pagingFlow
@@ -91,21 +90,36 @@ fun FilesScreen(
         imageLoader = vm.imageLoader,
 
         onBackStackClick = vm::openDirectoryFromBackStack,
-        onClick = {
+        onClick = onClick@ {
             when {
-                multiselectStateList.isNotEmpty() -> selectItem(id = it.id)
+                mode is Mode.Multiselect && multiselectStateList.isNotEmpty() -> selectItem(it.id)
                 it.isFolder -> {
-                    if (isStarred) toFiles(it.id, it.name) else vm.openDirectory(it.id, it.name)
+                    if (isStarred) toFiles(it.id, it.name) else {
+                        if (mode === Mode.Move && multiselectStateList.contains(it.id)) {
+                            return@onClick
+                        }
+                        vm.openDirectory(it.id, it.name)
+                    }
                 }
             }
         },
-        onLongPress = ::selectItem,
+        onLongPress = {
+            if (mode !== Mode.Move) selectItem(it)
+        },
         onImport = vm::import,
         onScan = {
             cameraScanUri = vm.getCameraScanOutputUri()
             scanContract.launch(cameraScanUri)
         },
         onOpen = {},
+        onMoveStart = {
+            onModeChange(Mode.Move)
+        },
+        onMove = {
+            vm.move(ids = multiselectStateList.toList())
+            multiselectStateList.clear()
+            onModeChange(Mode.Default)
+        },
         onSelect = multiselectStateList::add,
         onCreateFolder = vm::createFolder,
         onRename = vm::rename,

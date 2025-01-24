@@ -32,6 +32,7 @@ import io.gromif.astracrypt.files.domain.model.FileItem
 import io.gromif.astracrypt.files.domain.model.FileState
 import io.gromif.astracrypt.files.domain.model.FileType
 import io.gromif.astracrypt.files.model.ContextualAction
+import io.gromif.astracrypt.files.model.Mode
 import io.gromif.astracrypt.files.model.Option
 import io.gromif.astracrypt.files.model.OptionsItem
 import io.gromif.astracrypt.files.model.StateHolder
@@ -58,6 +59,8 @@ internal fun Screen(
     onImport: (Array<Uri>, Boolean) -> Unit = { _, _ -> },
     onScan: () -> Unit = {},
     onOpen: () -> Unit = {},
+    onMoveStart: () -> Unit = {},
+    onMove: () -> Unit = {},
     onSelect: (id: Long) -> Unit = {},
     onCreateFolder: (String) -> Unit = {},
     onStar: (state: Boolean, idList: List<Long>) -> Unit = { _, _ -> },
@@ -85,7 +88,8 @@ internal fun Screen(
             pagingItems = items,
             multiselectStateList = stateHolder.multiselectStateList,
             imageLoader = imageLoader,
-            onOptions = {
+            onOptions = onOptions@ {
+                if (stateHolder.mode is Mode.Move) return@onOptions
                 optionsItem = OptionsItem(
                     id = it.id,
                     name = it.name,
@@ -121,6 +125,7 @@ internal fun Screen(
         onContextualAction.collectLatest {
             when (it) {
                 ContextualAction.CreateFolder -> dialogNewFolder = true
+                ContextualAction.MoveNavigation -> onMoveStart()
                 ContextualAction.Star -> {
                     onStar(true, stateHolder.multiselectStateList.toList())
                     stateHolder.multiselectStateList.clear()
@@ -134,7 +139,7 @@ internal fun Screen(
                     stateHolder.multiselectStateList.clear()
                 }
 
-                ContextualAction.Move -> {}
+                ContextualAction.Move -> onMove()
             }
         }
     }

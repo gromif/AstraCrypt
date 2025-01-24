@@ -2,6 +2,7 @@ package com.nevidimka655.astracrypt.view.navigation.tabs
 
 import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.DriveFileMove
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -29,6 +30,7 @@ import com.nevidimka655.astracrypt.view.navigation.shared.UiStateHandler
 import com.nevidimka655.haptic.Haptic
 import com.nevidimka655.ui.compose_core.Compose
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
+import com.nevidimka655.ui.compose_core.wrappers.TextWrap.Text
 import io.gromif.astracrypt.files.FilesScreen
 import io.gromif.astracrypt.files.model.ContextualAction
 import io.gromif.astracrypt.files.model.Mode
@@ -58,11 +60,12 @@ private fun AnimatedContentScope.FilesSharedNavigation(
         val mode = modeState
         val newUiState = when (mode) {
             Mode.Default -> if (isStarred) StarredUiState else FilesUiState
+            Mode.Move -> FilesMoveContextualUiState
             is Mode.Multiselect -> {
                 val state = if (isStarred) StarredContextualUiState else FilesContextualUiState
                 state.copy(
                     toolbar = state.toolbar.copy(
-                        title = TextWrap.Text(
+                        title = Text(
                             text = context.getString(R.string.toolbar_selected, mode.count)
                         )
                     )
@@ -79,19 +82,25 @@ private fun AnimatedContentScope.FilesSharedNavigation(
             it === ToolbarActions.star -> contextChannel.send(ContextualAction.Star)
             it === ToolbarActions.unStar -> contextChannel.send(ContextualAction.Unstar)
             it === ToolbarActions.delete -> contextChannel.send(ContextualAction.Delete)
-            it === ToolbarActions.move -> contextChannel.send(ContextualAction.Delete)
+            it === ToolbarActions.move -> contextChannel.send(ContextualAction.MoveNavigation)
         }
     }
 
     val sheetCreateState = Compose.state()
     if (!isStarred) FabClickHandler(onFabClick) {
-        Haptic.rise()
-        sheetCreateState.value = true
+        when {
+            modeState === Mode.Default -> {
+                Haptic.rise()
+                sheetCreateState.value = true
+            }
+            modeState === Mode.Move -> contextChannel.send(ContextualAction.Move)
+        }
     }
 
     FilesScreen(
         startParentId = startParentId,
         startParentName = startParentName,
+        mode = modeState,
         isStarred = isStarred,
         onContextualAction = contextChannel.receiveAsFlow(),
         searchQueryState = searchQueryState,
@@ -172,4 +181,12 @@ private val FilesContextualUiState = UiState(
             ToolbarActions.move,
         )
     )
+)
+
+private val FilesMoveContextualUiState = UiState(
+    toolbar = UiState.Toolbar(
+        isContextual = true,
+        title = TextWrap.Resource(id = R.string.files_options_move)
+    ),
+    fab = UiState.Fab(icon = Icons.AutoMirrored.Default.DriveFileMove),
 )

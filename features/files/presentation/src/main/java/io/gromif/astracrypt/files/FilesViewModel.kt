@@ -153,8 +153,8 @@ class FilesViewModel @Inject constructor(
         )*/
     }
 
-    fun move(ids: List<Long>, parentId: Long?) = viewModelScope.launch(defaultDispatcher) {
-        moveUseCase(ids = ids, parentId = parentId ?: 0)
+    fun move(ids: List<Long>) = viewModelScope.launch(defaultDispatcher) {
+        moveUseCase(ids = ids, parentId = parentIdState.value)
         //showSnackbar(R.string.snack_itemsMoved)
     }
 

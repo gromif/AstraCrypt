@@ -6,6 +6,7 @@ enum class ContextualAction {
     Star,
     Unstar,
     Delete,
+    MoveNavigation,
     Move,
 
 }

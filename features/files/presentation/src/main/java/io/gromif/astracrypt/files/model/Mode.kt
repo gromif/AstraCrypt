@@ -12,4 +12,7 @@ sealed class Mode: Parcelable {
     @Parcelize
     data class Multiselect(val count: Int): Mode()
 
+    @Parcelize
+    data object Move: Mode()
+
 }

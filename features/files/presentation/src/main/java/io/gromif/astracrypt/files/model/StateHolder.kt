@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.emptyFlow
 data class StateHolder(
     val isStarred: Boolean = false,
     val isSearching: Boolean = false,
+    val mode: Mode = Mode.Default,
     val viewMode: ViewMode = ViewMode.Grid,
     val pagingFlow: Flow<PagingData<FileItem>> = emptyFlow(),
     val multiselectStateList: SnapshotStateList<Long> = mutableStateListOf(),
