@@ -6,7 +6,7 @@ interface FilesNavActions {
 
     companion object {
 
-        internal val Empty = object : FilesNavActions {
+        internal val Default = object : FilesNavActions {
             override fun toFiles(id: Long, name: String) {}
             override fun toExport(id: Long, output: Uri) {}
             override fun toDetails(id: Long) {}
