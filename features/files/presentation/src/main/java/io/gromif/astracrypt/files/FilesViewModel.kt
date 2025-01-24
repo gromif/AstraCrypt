@@ -30,9 +30,7 @@ import io.gromif.astracrypt.files.model.RootInfo
 import io.gromif.astracrypt.files.work.ImportFilesWorker
 import io.gromif.astracrypt.utils.dispatchers.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.collectLatest
@@ -67,11 +65,11 @@ class FilesViewModel @Inject constructor(
     private val parentIdState = MutableStateFlow(0L)
     private val parentBackStackMutable = mutableStateListOf<RootInfo>()
     val parentBackStack: List<RootInfo> = parentBackStackMutable
+    private var parentId
+        get() = parentIdState.value
+        set(value) = parentIdState.update { value }
 
-    val pagingFlow = pagingProvider.provide(
-        parentIdState = parentIdState
-    ).cachedIn(viewModelScope)
-
+    val pagingFlow = pagingProvider.provide(parentIdState).cachedIn(viewModelScope)
     val pagingStarredFlow = pagingProvider.provide(
         parentIdState = parentIdState,
         isStarredMode = true
@@ -80,52 +78,26 @@ class FilesViewModel @Inject constructor(
     val viewModeState = getListViewModeUseCase()
         .stateIn(viewModelScope, SharingStarted.Eagerly, ViewMode.Grid)
 
-    fun setParentId(id: Long) = parentIdState.update { id }
+    suspend fun setSearchQuery(query: String) = pagingProvider.setSearchQuery(parentId, query)
 
-    suspend fun setSearchQuery(query: String) = with(pagingProvider) {
-        setSearchQuery(parentId = parentIdState.value, query = query)
-    }
-
-    init {
-        val savedRootBackStack: List<RootInfo>? = state[ROOT_BACK_STACK]
-        if (savedRootBackStack != null) {
-            parentBackStackMutable.addAll(savedRootBackStack)
-        }
-        val savedCurrentRoot: Long? = state[ROOT_CURRENT]
-        if (savedCurrentRoot != null) setParentId(id = savedCurrentRoot)
-    }
-
-    private var searchSetupJob: Job? = null
-    private var searchDirsIndexesList = mutableStateListOf<Long>()
-
-    private var _searchChannel: Channel<String>? = null
-
-    fun openDirectory(
-        id: Long,
-        name: String,
-        popBackStack: Boolean = false,
-    ) = viewModelScope.launch(defaultDispatcher) {
+    fun openDirectory(id: Long, name: String) = viewModelScope.launch(defaultDispatcher) {
         val newName = if (name.length > 20) "${name.take(20)}.." else name
         val rootInfo = RootInfo(id, newName)
-        with(parentBackStackMutable) {
-            if (popBackStack) clear()
-            add(rootInfo)
-        }
-        setParentId(id = id)
+        parentBackStackMutable.add(rootInfo)
+        parentId = id
         pagingProvider.invalidate()
     }
 
     fun openDirectoryFromBackStack(index: Int?) = viewModelScope.launch(defaultDispatcher) {
         if (index == null) {
             parentBackStackMutable.clear()
-            setParentId(id = 0)
+            parentId = 0
             pagingProvider.invalidate()
-            return@launch
         } else {
             val selectedNavigatorDir = parentBackStackMutable[index]
-            if (parentIdState.value != selectedNavigatorDir.id) {
+            if (parentId != selectedNavigatorDir.id) {
                 parentBackStackMutable.removeRange(index + 1, parentBackStackMutable.size)
-                setParentId(id = parentBackStackMutable.last().id)
+                parentId = parentBackStackMutable.last().id
                 pagingProvider.invalidate()
             }
         }
@@ -133,15 +105,12 @@ class FilesViewModel @Inject constructor(
 
     fun closeDirectory() {
         parentBackStackMutable.removeAt(parentBackStackMutable.lastIndex)
-        setParentId(id = parentBackStack.lastOrNull()?.id ?: 0L)
+        parentId = parentBackStack.lastOrNull()?.id ?: 0L
         pagingProvider.invalidate()
     }
 
     fun createFolder(name: String) = viewModelScope.launch(defaultDispatcher) {
-        createFolderUseCase(
-            name = name,
-            parentId = parentIdState.value
-        )
+        createFolderUseCase(name = name, parentId = parentId)
         //showSnackbar(R.string.snack_folderCreated)
     }
 
@@ -154,17 +123,14 @@ class FilesViewModel @Inject constructor(
     }
 
     fun move(ids: List<Long>) = viewModelScope.launch(defaultDispatcher) {
-        moveUseCase(ids = ids, parentId = parentIdState.value)
+        moveUseCase(ids = ids, parentId = parentId)
         //showSnackbar(R.string.snack_itemsMoved)
     }
 
     fun getCameraScanOutputUri(): Uri =
         filesUtil.getExportedCacheFileUri(file = filesUtil.getExportedCacheCameraFile())
 
-    fun setStarred(
-        state: Boolean,
-        ids: List<Long>,
-    ) = viewModelScope.launch(defaultDispatcher) {
+    fun setStarred(state: Boolean, ids: List<Long>) = viewModelScope.launch(defaultDispatcher) {
         setStarredUseCase(ids = ids, state = state)
         /*showSnackbar(
             if (state) R.string.snack_starred else R.string.snack_unstarred
@@ -177,10 +143,9 @@ class FilesViewModel @Inject constructor(
     ) = viewModelScope.launch(defaultDispatcher) {
         val listToSave = uriList.map { it.toString() }
         val fileWithUris = workerSerializer.saveStringListToFile(listToSave)
-        val rootId = parentIdState.value
         val data = workDataOf(
             Args.URI_FILE to fileWithUris.toString(),
-            Args.PARENT_ID to rootId,
+            Args.PARENT_ID to parentId,
             Args.SAVE_SOURCE to saveSource
         )
         val workerRequest = OneTimeWorkRequestBuilder<ImportFilesWorker>().apply {
@@ -210,7 +175,16 @@ class FilesViewModel @Inject constructor(
     }
 
     override fun onCleared() {
-        state[ROOT_CURRENT] = parentIdState.value
+        state[ROOT_CURRENT] = parentId
         state[ROOT_BACK_STACK] = parentBackStack.toList()
+    }
+
+    init {
+        val savedRootBackStack: List<RootInfo>? = state[ROOT_BACK_STACK]
+        if (savedRootBackStack != null) {
+            parentBackStackMutable.addAll(savedRootBackStack)
+        }
+        val savedCurrentRoot: Long? = state[ROOT_CURRENT]
+        if (savedCurrentRoot != null) parentId = savedCurrentRoot
     }
 }
