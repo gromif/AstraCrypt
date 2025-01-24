@@ -1,6 +1,5 @@
 package io.gromif.astracrypt.files.shared
 
-import android.net.Uri
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.fadeIn
@@ -36,6 +35,7 @@ import io.gromif.astracrypt.files.model.Mode
 import io.gromif.astracrypt.files.model.Option
 import io.gromif.astracrypt.files.model.OptionsItem
 import io.gromif.astracrypt.files.model.StateHolder
+import io.gromif.astracrypt.files.model.action.Actions
 import io.gromif.astracrypt.files.model.action.FilesNavActions
 import io.gromif.astracrypt.files.shared.list.EmptyList
 import io.gromif.astracrypt.files.shared.list.FilesList
@@ -54,21 +54,7 @@ internal fun Screen(
     onContextualAction: Flow<ContextualAction> = emptyFlow(),
     imageLoader: ImageLoader = ImageLoader(LocalContext.current),
     navActions: FilesNavActions = FilesNavActions.Empty,
-
-    onBackStackClick: (index: Int?) -> Unit = {},
-    onClick: (FileItem) -> Unit = {},
-    onLongPress: (Long) -> Unit = {},
-    onCloseContextualToolbar: () -> Unit = {},
-    onImport: (Array<Uri>, Boolean) -> Unit = { _, _ -> },
-    onScan: () -> Unit = {},
-    onOpen: () -> Unit = {},
-    onMoveStart: () -> Unit = {},
-    onMove: () -> Unit = {},
-    onCreateFolder: (String) -> Unit = {},
-    onStar: (state: Boolean, idList: List<Long>) -> Unit = { _, _ -> },
-    onRename: (id: Long, name: String) -> Unit = { _, _ -> },
-    onDelete: (idList: List<Long>) -> Unit = {},
-
+    actions: Actions = Actions.Default,
     sheetCreateState: MutableState<Boolean> = mutableStateOf(false),
 ) = Column {
     val sheetOptionsState = Compose.state()
@@ -76,7 +62,7 @@ internal fun Screen(
     val items = stateHolder.pagingFlow.collectAsLazyPagingItems()
 
     if (!stateHolder.isSearching) AnimatedVisibility(stateHolder.backStackList.isNotEmpty()) {
-        FilesBackStackList(rootBackStack = stateHolder.backStackList, onClick = onBackStackClick)
+        FilesBackStackList(stateHolder.backStackList, actions::backStackClick)
     }
     val isEmpty = remember {
         derivedStateOf { items.itemCount == 0 && items.loadState.refresh is LoadState.NotLoading }
@@ -98,8 +84,8 @@ internal fun Screen(
                 )
                 sheetOptionsState.value = true
             },
-            onClick = onClick,
-            onLongPress = onLongPress
+            onClick = actions::click,
+            onLongPress = actions::longClick
         )
     }
     AnimatedVisibility(visible = isEmpty.value, enter = fadeIn(), exit = ExitTransition.None) {
@@ -109,12 +95,12 @@ internal fun Screen(
     var saveSourceState by rememberSaveable { mutableStateOf(true) }
     var importMimeTypeState by rememberSaveable { mutableStateOf("") }
 
-    val pickFileContract = pickFileContract { onImport(it.toTypedArray(), saveSourceState) }
+    val pickFileContract = pickFileContract { actions.import(it.toTypedArray(), saveSourceState) }
     val exportContract = exportContract { navActions.toExport(optionsItem.id, it) }
 
-    var dialogNewFolder by newFolderDialog(onCreate = onCreateFolder)
-    var dialogRenameState by renameDialog(optionsItem.name) { onRename(optionsItem.id, it) }
-    var dialogDeleteState by deleteDialog(optionsItem.name) { onDelete(listOf(optionsItem.id)) }
+    var dialogNewFolder by newFolderDialog(onCreate = actions::createFolder)
+    var dialogRenameState by renameDialog(optionsItem.name) { actions.rename(optionsItem.id, it) }
+    var dialogDeleteState by deleteDialog(optionsItem.name) { actions.delete(listOf(optionsItem.id)) }
     var dialogDeleteSourceState by deleteSourceDialog { saveSource ->
         saveSourceState = saveSource
         pickFileContract.launch(arrayOf(importMimeTypeState))
@@ -124,22 +110,25 @@ internal fun Screen(
         onContextualAction.collectLatest {
             when (it) {
                 ContextualAction.CreateFolder -> dialogNewFolder = true
-                ContextualAction.MoveNavigation -> onMoveStart()
-                ContextualAction.Move -> onMove()
-                ContextualAction.Close -> onCloseContextualToolbar()
+                ContextualAction.MoveNavigation -> actions.setMoveMode()
+                ContextualAction.Move -> {
+                    actions.move()
+                    actions.closeContextualToolbar()
+                }
+                ContextualAction.Close -> actions.closeContextualToolbar()
                 ContextualAction.Star -> {
-                    onStar(true, stateHolder.multiselectStateList.toList())
-                    onCloseContextualToolbar()
+                    actions.star(true, stateHolder.multiselectStateList.toList())
+                    actions.closeContextualToolbar()
                 }
 
                 ContextualAction.Unstar -> {
-                    onStar(false, stateHolder.multiselectStateList.toList())
-                    onCloseContextualToolbar()
+                    actions.star(false, stateHolder.multiselectStateList.toList())
+                    actions.closeContextualToolbar()
                 }
 
                 ContextualAction.Delete -> {
-                    onDelete(stateHolder.multiselectStateList.toList())
-                    onCloseContextualToolbar()
+                    actions.delete(stateHolder.multiselectStateList.toList())
+                    actions.closeContextualToolbar()
                 }
             }
         }
@@ -152,7 +141,7 @@ internal fun Screen(
             importMimeTypeState = "$it/*"
             dialogDeleteSourceState = true
         },
-        onScan = onScan,
+        onScan = actions::scan,
     )
 
     filesOptionsSheet(
@@ -161,19 +150,19 @@ internal fun Screen(
         itemIcon = optionsItem.fileType.icon,
         isFolder = optionsItem.isFolder,
         isStarred = optionsItem.isStarred,
-        onOptionClick = {
-            sheetOptionsState.value = false
-            when (it) {
-                Option.Open -> onOpen()
-                Option.Export -> exportContract.launch(null)
-                Option.Rename -> dialogRenameState = true
-                Option.Delete -> dialogDeleteState = true
-                Option.Star -> onStar(optionsItem.isStarred.not(), listOf(optionsItem.id))
-                Option.Select -> onLongPress(optionsItem.id)
-                Option.Details -> navActions.toDetails(optionsItem.id)
-            }
+    ) {
+        sheetOptionsState.value = false
+        val (id, _, isStarred) = optionsItem
+        when (it) {
+            Option.Open -> actions.open()
+            Option.Export -> exportContract.launch(null)
+            Option.Rename -> dialogRenameState = true
+            Option.Delete -> dialogDeleteState = true
+            Option.Star -> actions.star(state = !isStarred, idList = listOf(id))
+            Option.Select -> actions.longClick(id)
+            Option.Details -> navActions.toDetails(id)
         }
-    )
+    }
 }
 
 private fun pagingFakeData(): Flow<PagingData<FileItem>> {

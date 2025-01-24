@@ -14,9 +14,11 @@ import androidx.compose.runtime.setValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.gromif.astracrypt.files.contracts.scanContract
+import io.gromif.astracrypt.files.domain.model.FileItem
 import io.gromif.astracrypt.files.model.ContextualAction
 import io.gromif.astracrypt.files.model.Mode
 import io.gromif.astracrypt.files.model.StateHolder
+import io.gromif.astracrypt.files.model.action.Actions
 import io.gromif.astracrypt.files.model.action.FilesNavActions
 import io.gromif.astracrypt.files.saver.rememberMultiselectStateList
 import io.gromif.astracrypt.files.shared.Screen
@@ -62,10 +64,7 @@ fun FilesScreen(
     val multiselectStateList = rememberMultiselectStateList()
     fun selectItem(id: Long) = with(multiselectStateList) {
         if (contains(id)) remove(id) else add(id)
-        val newMode = when {
-            isNotEmpty() -> Mode.Multiselect(count = size)
-            else -> Mode.Default
-        }
+        val newMode = if (isNotEmpty()) Mode.Multiselect(count = size) else Mode.Default
         onModeChange(newMode)
     }
 
@@ -95,43 +94,62 @@ fun FilesScreen(
         imageLoader = vm.imageLoader,
         navActions = navActions,
 
-        onBackStackClick = vm::openDirectoryFromBackStack,
-        onClick = onClick@ {
-            when {
-                mode is Mode.Multiselect && multiselectStateList.isNotEmpty() -> selectItem(it.id)
-                it.isFolder -> {
-                    if (isStarred) navActions.toFiles(it.id, it.name) else {
-                        if (mode === Mode.Move && multiselectStateList.contains(it.id)) {
-                            return@onClick
-                        }
-                        vm.openDirectory(it.id, it.name)
+        actions = object : Actions {
+            override fun backStackClick(index: Int?) {
+                vm.openDirectoryFromBackStack(index)
+            }
+
+            override fun click(item: FileItem) {
+                val (id, _, name) = item
+                when {
+                    mode is Mode.Multiselect && multiselectStateList.isNotEmpty() -> selectItem(id)
+                    item.isFolder -> if (isStarred) navActions.toFiles(id, name) else {
+                        if (mode === Mode.Move && multiselectStateList.contains(id)) return
+                        vm.openDirectory(id, name)
                     }
                 }
             }
-        },
-        onLongPress = {
-            if (mode !== Mode.Move) selectItem(it)
-        },
-        onCloseContextualToolbar = ::closeContextualToolbar,
-        onImport = vm::import,
-        onScan = {
-            cameraScanUri = vm.getCameraScanOutputUri()
-            scanContract.launch(cameraScanUri)
-        },
-        onOpen = {},
-        onMoveStart = {
-            onModeChange(Mode.Move)
-        },
-        onMove = {
-            vm.move(ids = multiselectStateList.toList())
-            multiselectStateList.clear()
-            onModeChange(Mode.Default)
-        },
-        onCreateFolder = vm::createFolder,
-        onRename = vm::rename,
-        onStar = vm::setStarred,
-        onDelete = vm::delete,
 
+            override fun longClick(id: Long) {
+                if (mode !== Mode.Move) selectItem(id)
+            }
+
+            override fun setMoveMode() = onModeChange(Mode.Move)
+            override fun closeContextualToolbar() = closeContextualToolbar()
+
+            override fun open() {
+                TODO("Not yet implemented")
+            }
+
+            override fun createFolder(name: String) {
+                vm.createFolder(name)
+            }
+
+            override fun import(uriList: Array<Uri>, saveSource: Boolean, ) {
+                vm.import(*uriList, saveSource = saveSource)
+            }
+
+            override fun scan() {
+                cameraScanUri = vm.getCameraScanOutputUri()
+                scanContract.launch(cameraScanUri)
+            }
+
+            override fun move() {
+                vm.move(ids = multiselectStateList.toList())
+            }
+
+            override fun star(state: Boolean, idList: List<Long>) {
+                vm.setStarred(state, idList)
+            }
+
+            override fun rename(id: Long, name: String) {
+                vm.rename(id, name)
+            }
+
+            override fun delete(idList: List<Long>) {
+                vm.delete(idList)
+            }
+        },
         sheetCreateState = sheetCreateState,
     )
 }
