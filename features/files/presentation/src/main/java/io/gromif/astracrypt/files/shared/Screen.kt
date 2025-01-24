@@ -17,7 +17,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.paging.LoadState
-import androidx.paging.PagingData
 import androidx.paging.compose.collectAsLazyPagingItems
 import coil.ImageLoader
 import com.nevidimka655.ui.compose_core.Compose
@@ -27,9 +26,7 @@ import io.gromif.astracrypt.files.dialogs.deleteDialog
 import io.gromif.astracrypt.files.dialogs.deleteSourceDialog
 import io.gromif.astracrypt.files.dialogs.newFolderDialog
 import io.gromif.astracrypt.files.dialogs.renameDialog
-import io.gromif.astracrypt.files.domain.model.FileItem
 import io.gromif.astracrypt.files.domain.model.FileState
-import io.gromif.astracrypt.files.domain.model.FileType
 import io.gromif.astracrypt.files.model.ContextualAction
 import io.gromif.astracrypt.files.model.Mode
 import io.gromif.astracrypt.files.model.Option
@@ -42,7 +39,6 @@ import io.gromif.astracrypt.files.shared.list.FilesList
 import io.gromif.astracrypt.files.shared.sheet.filesCreateNewSheet
 import io.gromif.astracrypt.files.shared.sheet.filesOptionsSheet
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.emptyFlow
 
@@ -50,10 +46,10 @@ import kotlinx.coroutines.flow.emptyFlow
 @Preview(showBackground = true)
 @Composable
 internal fun Screen(
-    stateHolder: StateHolder = StateHolder(pagingFlow = pagingFakeData()),
+    stateHolder: StateHolder = StateHolder(pagingFlow = FakeData.paging()),
     onContextualAction: Flow<ContextualAction> = emptyFlow(),
     imageLoader: ImageLoader = ImageLoader(LocalContext.current),
-    navActions: FilesNavActions = FilesNavActions.Empty,
+    navActions: FilesNavActions = FilesNavActions.Default,
     actions: Actions = Actions.Default,
     sheetCreateState: MutableState<Boolean> = mutableStateOf(false),
 ) = Column {
@@ -163,22 +159,4 @@ internal fun Screen(
             Option.Details -> navActions.toDetails(id)
         }
     }
-}
-
-private fun pagingFakeData(): Flow<PagingData<FileItem>> {
-    // create list of fake data for preview
-    val fakeData = List(10) {
-        var isFolder = it <= 4
-        FileItem(
-            id = it.toLong(),
-            name = "Item $it",
-            type = if (isFolder) FileType.Folder else FileType.entries.random(),
-            isFolder = isFolder,
-            isFile = isFolder.not()
-        )
-    }
-    // create pagingData from a list of fake data
-    val pagingData = PagingData.from(fakeData)
-    // pass pagingData containing fake data to a MutableStateFlow
-    return MutableStateFlow(pagingData)
 }
