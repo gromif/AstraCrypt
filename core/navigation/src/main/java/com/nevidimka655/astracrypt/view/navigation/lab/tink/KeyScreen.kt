@@ -8,7 +8,7 @@ import androidx.navigation.compose.composable
 import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.astracrypt.view.navigation.Route
 import com.nevidimka655.astracrypt.view.navigation.models.UiState
-import com.nevidimka655.astracrypt.view.navigation.shared.FabClickHandler
+import com.nevidimka655.astracrypt.view.navigation.shared.FabClickObserver
 import com.nevidimka655.astracrypt.view.navigation.shared.UiStateHandler
 import com.nevidimka655.tink_lab.TinkLab
 import com.nevidimka655.tink_lab.key.KeyScreen
@@ -33,7 +33,7 @@ internal fun NavGraphBuilder.tinkKey(
     UiStateHandler { onUiStateChange(ScreenUiState) }
 
     val onRequestKeysetChannel = remember { Channel<Unit>() }
-    FabClickHandler(onFabClick) { onRequestKeysetChannel.send(Unit) }
+    FabClickObserver(onFabClick) { onRequestKeysetChannel.send(Unit) }
 
     TinkLab.KeyScreen(
         onRequestKeysetChannel = onRequestKeysetChannel.receiveAsFlow(),

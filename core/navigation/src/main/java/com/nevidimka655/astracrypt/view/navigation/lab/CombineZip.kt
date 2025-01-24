@@ -15,7 +15,7 @@ import com.nevidimka655.astracrypt.view.navigation.Route
 import com.nevidimka655.astracrypt.view.navigation.models.UiState
 import com.nevidimka655.astracrypt.view.navigation.models.actions.ToolbarActions
 import com.nevidimka655.astracrypt.view.navigation.models.actions.help
-import com.nevidimka655.astracrypt.view.navigation.shared.FabClickHandler
+import com.nevidimka655.astracrypt.view.navigation.shared.FabClickObserver
 import com.nevidimka655.astracrypt.view.navigation.shared.ToolbarActionsHandler
 import com.nevidimka655.astracrypt.view.navigation.shared.UiStateHandler
 import com.nevidimka655.compose_help.HelpItem
@@ -49,7 +49,7 @@ internal fun NavGraphBuilder.labCombinedZip(
     }
 
     val onRequestCombiningChannel = remember { Channel<Unit>() }
-    FabClickHandler(onFabClick) {
+    FabClickObserver(onFabClick) {
         onRequestCombiningChannel.send(Unit)
     }
 

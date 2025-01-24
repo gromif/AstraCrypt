@@ -26,7 +26,7 @@ import com.nevidimka655.astracrypt.view.navigation.models.actions.delete
 import com.nevidimka655.astracrypt.view.navigation.models.actions.move
 import com.nevidimka655.astracrypt.view.navigation.models.actions.star
 import com.nevidimka655.astracrypt.view.navigation.models.actions.unStar
-import com.nevidimka655.astracrypt.view.navigation.shared.FabClickHandler
+import com.nevidimka655.astracrypt.view.navigation.shared.FabClickObserver
 import com.nevidimka655.astracrypt.view.navigation.shared.ToolbarActionsHandler
 import com.nevidimka655.astracrypt.view.navigation.shared.UiStateHandler
 import com.nevidimka655.haptic.Haptic
@@ -91,7 +91,7 @@ private fun AnimatedContentScope.FilesSharedNavigation(
     }
 
     val sheetCreateState = Compose.state()
-    if (!isStarred) FabClickHandler(onFabClick) {
+    if (!isStarred) FabClickObserver(onFabClick) {
         when {
             modeState === Mode.Default -> {
                 Haptic.rise()

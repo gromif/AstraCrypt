@@ -14,7 +14,7 @@ import com.nevidimka655.astracrypt.view.navigation.Route
 import com.nevidimka655.astracrypt.view.navigation.models.UiState
 import com.nevidimka655.astracrypt.view.navigation.models.actions.ToolbarActions
 import com.nevidimka655.astracrypt.view.navigation.models.actions.delete
-import com.nevidimka655.astracrypt.view.navigation.shared.FabClickHandler
+import com.nevidimka655.astracrypt.view.navigation.shared.FabClickObserver
 import com.nevidimka655.astracrypt.view.navigation.shared.ToolbarActionsHandler
 import com.nevidimka655.astracrypt.view.navigation.shared.UiStateHandler
 import com.nevidimka655.notes.Notes
@@ -39,7 +39,7 @@ internal fun NavGraphBuilder.overviewNote(
     if (editMode) ToolbarActionsHandler(onToolbarActions) {
         if (it == ToolbarActions.delete) onDeleteRequestChannel.send(Unit)
     }
-    FabClickHandler(onFabClick) {
+    FabClickObserver(onFabClick) {
         onSaveRequestChannel.send(Unit)
     }
 

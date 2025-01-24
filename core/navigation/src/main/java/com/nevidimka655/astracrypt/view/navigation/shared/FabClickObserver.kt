@@ -5,7 +5,7 @@ import com.nevidimka655.ui.compose_core.ext.FlowObserver
 import kotlinx.coroutines.flow.Flow
 
 @Composable
-internal fun FabClickHandler(
+internal fun FabClickObserver(
     onFabClick: Flow<Any>,
     action: suspend (Any) -> Unit
 ) = FlowObserver(onFabClick, action)
