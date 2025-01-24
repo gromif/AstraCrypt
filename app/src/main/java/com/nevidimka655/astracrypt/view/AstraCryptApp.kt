@@ -43,7 +43,6 @@ import com.nevidimka655.astracrypt.view.navigation.models.UiState
 import com.nevidimka655.astracrypt.view.navigation.models.actions.ToolbarActions
 import com.nevidimka655.astracrypt.view.navigation.root
 import com.nevidimka655.atracrypt.core.design_system.AstraCryptTheme
-import com.nevidimka655.haptic.Haptic
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 import io.gromif.calculator.CalculatorScreen
 import kotlinx.coroutines.channels.Channel
@@ -103,7 +102,6 @@ fun AstraCryptApp(
                 isContextual = toolbar.isContextual,
                 actions = toolbar.actions,
                 onNavigateUp = {
-                    Haptic.click()
                     navController.navigateUp()
                 },
                 onActionPressed = {

@@ -22,6 +22,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.astracrypt.view.navigation.models.actions.ToolbarActions
+import com.nevidimka655.haptic.Haptic
 import com.nevidimka655.ui.compose_core.IconButton
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 
@@ -44,7 +45,10 @@ fun ToolbarImpl(
         if (backButton) IconButton(
             icon = Icons.AutoMirrored.Default.ArrowBack,
             contentDescription = stringResource(id = R.string.back),
-            onClick = onNavigateUp
+            onClick = {
+                Haptic.click()
+                onNavigateUp()
+            }
         )
     },
     actions = @Composable {
