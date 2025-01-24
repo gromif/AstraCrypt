@@ -36,6 +36,7 @@ import io.gromif.astracrypt.files.model.Mode
 import io.gromif.astracrypt.files.model.Option
 import io.gromif.astracrypt.files.model.OptionsItem
 import io.gromif.astracrypt.files.model.StateHolder
+import io.gromif.astracrypt.files.model.action.FilesNavActions
 import io.gromif.astracrypt.files.shared.list.EmptyList
 import io.gromif.astracrypt.files.shared.list.FilesList
 import io.gromif.astracrypt.files.shared.sheet.filesCreateNewSheet
@@ -52,6 +53,7 @@ internal fun Screen(
     stateHolder: StateHolder = StateHolder(pagingFlow = pagingFakeData()),
     onContextualAction: Flow<ContextualAction> = emptyFlow(),
     imageLoader: ImageLoader = ImageLoader(LocalContext.current),
+    navActions: FilesNavActions = FilesNavActions.Empty,
 
     onBackStackClick: (index: Int?) -> Unit = {},
     onClick: (FileItem) -> Unit = {},
@@ -68,9 +70,6 @@ internal fun Screen(
     onDelete: (idList: List<Long>) -> Unit = {},
 
     sheetCreateState: MutableState<Boolean> = mutableStateOf(false),
-
-    toExport: (id: Long, output: Uri) -> Unit = { _, _ -> },
-    toDetails: (id: Long) -> Unit = {},
 ) = Column {
     val sheetOptionsState = Compose.state()
     var optionsItem by rememberSaveable { mutableStateOf(OptionsItem()) }
@@ -111,7 +110,7 @@ internal fun Screen(
     var importMimeTypeState by rememberSaveable { mutableStateOf("") }
 
     val pickFileContract = pickFileContract { onImport(it.toTypedArray(), saveSourceState) }
-    val exportContract = exportContract { toExport(optionsItem.id, it) }
+    val exportContract = exportContract { navActions.toExport(optionsItem.id, it) }
 
     var dialogNewFolder by newFolderDialog(onCreate = onCreateFolder)
     var dialogRenameState by renameDialog(optionsItem.name) { onRename(optionsItem.id, it) }
@@ -171,7 +170,7 @@ internal fun Screen(
                 Option.Delete -> dialogDeleteState = true
                 Option.Star -> onStar(optionsItem.isStarred.not(), listOf(optionsItem.id))
                 Option.Select -> onLongPress(optionsItem.id)
-                Option.Details -> toDetails(optionsItem.id)
+                Option.Details -> navActions.toDetails(optionsItem.id)
             }
         }
     )

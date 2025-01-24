@@ -17,6 +17,7 @@ import io.gromif.astracrypt.files.contracts.scanContract
 import io.gromif.astracrypt.files.model.ContextualAction
 import io.gromif.astracrypt.files.model.Mode
 import io.gromif.astracrypt.files.model.StateHolder
+import io.gromif.astracrypt.files.model.action.FilesNavActions
 import io.gromif.astracrypt.files.saver.rememberMultiselectStateList
 import io.gromif.astracrypt.files.shared.Screen
 import kotlinx.coroutines.flow.Flow
@@ -32,9 +33,7 @@ fun FilesScreen(
     onContextualAction: Flow<ContextualAction>,
     searchQueryState: StateFlow<String>,
     onModeChange: (Mode) -> Unit = {},
-    toFiles: (id: Long, name: String) -> Unit = { _, _ -> },
-    toExport: (id: Long, output: Uri) -> Unit = { _, _ -> },
-    toDetails: (id: Long) -> Unit = {},
+    navActions: FilesNavActions,
     sheetCreateState: MutableState<Boolean>,
 ) {
     val vm: FilesViewModel = hiltViewModel()
@@ -94,13 +93,14 @@ fun FilesScreen(
         stateHolder = stateHolder,
         onContextualAction = onContextualAction,
         imageLoader = vm.imageLoader,
+        navActions = navActions,
 
         onBackStackClick = vm::openDirectoryFromBackStack,
         onClick = onClick@ {
             when {
                 mode is Mode.Multiselect && multiselectStateList.isNotEmpty() -> selectItem(it.id)
                 it.isFolder -> {
-                    if (isStarred) toFiles(it.id, it.name) else {
+                    if (isStarred) navActions.toFiles(it.id, it.name) else {
                         if (mode === Mode.Move && multiselectStateList.contains(it.id)) {
                             return@onClick
                         }
@@ -133,8 +133,5 @@ fun FilesScreen(
         onDelete = vm::delete,
 
         sheetCreateState = sheetCreateState,
-
-        toExport = toExport,
-        toDetails = toDetails
     )
 }

@@ -1,5 +1,6 @@
 package com.nevidimka655.astracrypt.view.navigation.tabs
 
+import android.net.Uri
 import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.DriveFileMove
@@ -35,6 +36,7 @@ import com.nevidimka655.ui.compose_core.wrappers.TextWrap.Text
 import io.gromif.astracrypt.files.FilesScreen
 import io.gromif.astracrypt.files.model.ContextualAction
 import io.gromif.astracrypt.files.model.Mode
+import io.gromif.astracrypt.files.model.action.FilesNavActions
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow
@@ -107,11 +109,20 @@ private fun AnimatedContentScope.FilesSharedNavigation(
         onContextualAction = contextChannel.receiveAsFlow(),
         searchQueryState = searchQueryState,
         onModeChange = { modeState = it },
-        toFiles = toFiles,
-        toExport = { id, exportUri ->
+        navActions = object : FilesNavActions {
+            override fun toFiles(id: Long, name: String) {
+                toFiles(id, name)
+            }
+
+            override fun toExport(id: Long, output: Uri) {
+                TODO("Not yet implemented")
+            }
+
+            override fun toDetails(id: Long) {
+                TODO("Not yet implemented")
+            }
 
         },
-        toDetails = {},
         sheetCreateState = sheetCreateState
     )
 }
