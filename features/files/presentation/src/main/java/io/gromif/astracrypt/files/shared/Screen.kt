@@ -6,7 +6,6 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
@@ -20,6 +19,7 @@ import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import coil.ImageLoader
 import com.nevidimka655.ui.compose_core.Compose
+import com.nevidimka655.ui.compose_core.ext.FlowObserver
 import io.gromif.astracrypt.files.contracts.exportContract
 import io.gromif.astracrypt.files.contracts.pickFileContract
 import io.gromif.astracrypt.files.dialogs.deleteDialog
@@ -39,7 +39,6 @@ import io.gromif.astracrypt.files.shared.list.FilesList
 import io.gromif.astracrypt.files.shared.sheet.filesCreateNewSheet
 import io.gromif.astracrypt.files.shared.sheet.filesOptionsSheet
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.emptyFlow
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -102,30 +101,28 @@ internal fun Screen(
         pickFileContract.launch(arrayOf(importMimeTypeState))
     }
 
-    LaunchedEffect(Unit) {
-        onContextualAction.collectLatest {
-            when (it) {
-                ContextualAction.CreateFolder -> dialogNewFolder = true
-                ContextualAction.MoveNavigation -> actions.setMoveMode()
-                ContextualAction.Move -> {
-                    actions.move()
-                    actions.closeContextualToolbar()
-                }
-                ContextualAction.Close -> actions.closeContextualToolbar()
-                ContextualAction.Star -> {
-                    actions.star(true, stateHolder.multiselectStateList.toList())
-                    actions.closeContextualToolbar()
-                }
+    FlowObserver(onContextualAction) {
+        when (it) {
+            ContextualAction.CreateFolder -> dialogNewFolder = true
+            ContextualAction.MoveNavigation -> actions.setMoveMode()
+            ContextualAction.Move -> {
+                actions.move()
+                actions.closeContextualToolbar()
+            }
+            ContextualAction.Close -> actions.closeContextualToolbar()
+            ContextualAction.Star -> {
+                actions.star(true, stateHolder.multiselectStateList.toList())
+                actions.closeContextualToolbar()
+            }
 
-                ContextualAction.Unstar -> {
-                    actions.star(false, stateHolder.multiselectStateList.toList())
-                    actions.closeContextualToolbar()
-                }
+            ContextualAction.Unstar -> {
+                actions.star(false, stateHolder.multiselectStateList.toList())
+                actions.closeContextualToolbar()
+            }
 
-                ContextualAction.Delete -> {
-                    actions.delete(stateHolder.multiselectStateList.toList())
-                    actions.closeContextualToolbar()
-                }
+            ContextualAction.Delete -> {
+                actions.delete(stateHolder.multiselectStateList.toList())
+                actions.closeContextualToolbar()
             }
         }
     }
