@@ -62,7 +62,6 @@ internal fun Screen(
     onOpen: () -> Unit = {},
     onMoveStart: () -> Unit = {},
     onMove: () -> Unit = {},
-    onSelect: (id: Long) -> Unit = {},
     onCreateFolder: (String) -> Unit = {},
     onStar: (state: Boolean, idList: List<Long>) -> Unit = { _, _ -> },
     onRename: (id: Long, name: String) -> Unit = { _, _ -> },
@@ -171,7 +170,7 @@ internal fun Screen(
                 Option.Rename -> dialogRenameState = true
                 Option.Delete -> dialogDeleteState = true
                 Option.Star -> onStar(optionsItem.isStarred.not(), listOf(optionsItem.id))
-                Option.Select -> onSelect(optionsItem.id)
+                Option.Select -> onLongPress(optionsItem.id)
                 Option.Details -> toDetails(optionsItem.id)
             }
         }

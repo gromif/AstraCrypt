@@ -127,7 +127,6 @@ fun FilesScreen(
             multiselectStateList.clear()
             onModeChange(Mode.Default)
         },
-        onSelect = multiselectStateList::add,
         onCreateFolder = vm::createFolder,
         onRename = vm::rename,
         onStar = vm::setStarred,
