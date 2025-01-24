@@ -39,14 +39,19 @@ class PagingProviderImpl(
         return Pager(
             config = pagingConfig,
             pagingSourceFactory = {
-                filesDao.listOrderDescAsc(
-                    rootId = parentIdState.value,
-                    isStarredMode = isStarredMode,
-                    query = searchQueryState.value,
-                    rootIdsToSearch = searchFolderIdState.value,
-                    sortingItemType = FileType.Folder.ordinal,
-                    sortingSecondType = 1
-                ).also { pagingSource = it }
+                with(filesDao) {
+                    if (isStarredMode) listStarred(
+                        query = searchQueryState.value,
+                        sortingItemType = FileType.Folder.ordinal,
+                        sortingSecondType = 1
+                    ) else listDefault(
+                        rootId = parentIdState.value,
+                        query = searchQueryState.value,
+                        rootIdsToSearch = searchFolderIdState.value,
+                        sortingItemType = FileType.Folder.ordinal,
+                        sortingSecondType = 1
+                    )
+                }.also { pagingSource = it }
             }
         ).flow.map { pd ->
             val aeadInfo = settingsRepository.getAeadInfo()
@@ -84,6 +89,7 @@ class PagingProviderImpl(
         searchFolderIdState.update {
             if (searchQuery != null) repository.getFolderIds(parentId) else emptyList()
         }
+        pagingSource?.invalidate()
     }
 
     override fun invalidate() {

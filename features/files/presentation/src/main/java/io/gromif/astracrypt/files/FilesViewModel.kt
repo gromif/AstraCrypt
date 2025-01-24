@@ -84,7 +84,6 @@ class FilesViewModel @Inject constructor(
 
     suspend fun setSearchQuery(query: String) = with(pagingProvider) {
         setSearchQuery(parentId = parentIdState.value, query = query)
-        invalidate()
     }
 
     init {

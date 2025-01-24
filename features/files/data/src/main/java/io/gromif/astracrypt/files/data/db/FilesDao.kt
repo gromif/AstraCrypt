@@ -88,28 +88,40 @@ interface FilesDao {
     @RewriteQueriesToDropUnusedColumns
     @Query(
         "select * from store_items where " +
-        "case " +
-        "   when :isStarredMode = 0 then " +
-        "       case " +
-        "           when :rootId = -1 then parent in (:rootIdsToSearch) " +
-        "           when (:query is null) then parent = :rootId " +
-        "           else parent > -1" +
-        "       end " +
-        "       and (state = 0 or state = 2) " +
-        "       and (:query is null or name like '%' || :query || '%') " +
-        "   else state = 2 and (:query is null or name like '%' || :query || '%') " +
-        "end " +
+        "(" +
+            "(:query is null and parent = :rootId) " +
+            "or " +
+            "(:query is not null and parent in (:rootIdsToSearch))" +
+        ") " +
+        "and (state = 0 or state = 2) " +
+        "and (:query is null or name like '%' || :query || '%') " +
         "order by type = :sortingItemType desc, " +
-        "case " +
-        "   when :sortingSecondType = 6 then id " +
-        "   when :sortingSecondType = 1 then name " +
+        "case :sortingSecondType " +
+        "   when 6 then id " +
+        "   when 1 then name " +
         "end"
     )
-    fun listOrderDescAsc(
+    fun listDefault(
         rootId: Long = 0,
-        isStarredMode: Boolean = false,
         query: String? = null,
         rootIdsToSearch: List<Long> = emptyList(),
+        sortingItemType: Int,
+        sortingSecondType: Int
+    ): PagingSource<Int, PagerTuple>
+
+    // Note glob (instead of like) for case sens (replace % with *)
+    @RewriteQueriesToDropUnusedColumns
+    @Query(
+        "select * from store_items where state = 2 " +
+        "and (:query is null or name like '%' || :query || '%') " +
+        "order by type = :sortingItemType desc, " +
+        "case :sortingSecondType " +
+        "   when 6 then id " +
+        "   when 1 then name " +
+        "end"
+    )
+    fun listStarred(
+        query: String? = null,
         sortingItemType: Int,
         sortingSecondType: Int
     ): PagingSource<Int, PagerTuple>
