@@ -20,6 +20,7 @@ import com.nevidimka655.astracrypt.view.navigation.models.UiState
 import com.nevidimka655.astracrypt.view.navigation.models.actions.ToolbarActions
 import com.nevidimka655.astracrypt.view.navigation.models.actions.createFolder
 import com.nevidimka655.astracrypt.view.navigation.models.actions.delete
+import com.nevidimka655.astracrypt.view.navigation.models.actions.move
 import com.nevidimka655.astracrypt.view.navigation.models.actions.star
 import com.nevidimka655.astracrypt.view.navigation.models.actions.unStar
 import com.nevidimka655.astracrypt.view.navigation.shared.FabClickHandler
@@ -78,6 +79,7 @@ private fun AnimatedContentScope.FilesSharedNavigation(
             it === ToolbarActions.star -> contextChannel.send(ContextualAction.Star)
             it === ToolbarActions.unStar -> contextChannel.send(ContextualAction.Unstar)
             it === ToolbarActions.delete -> contextChannel.send(ContextualAction.Delete)
+            it === ToolbarActions.move -> contextChannel.send(ContextualAction.Delete)
         }
     }
 
@@ -167,6 +169,7 @@ private val FilesContextualUiState = UiState(
             ToolbarActions.createFolder,
             ToolbarActions.star,
             ToolbarActions.delete,
+            ToolbarActions.move,
         )
     )
 )

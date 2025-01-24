@@ -5,6 +5,7 @@ enum class ContextualAction {
     CreateFolder,
     Star,
     Unstar,
-    Delete
+    Delete,
+    Move,
 
 }

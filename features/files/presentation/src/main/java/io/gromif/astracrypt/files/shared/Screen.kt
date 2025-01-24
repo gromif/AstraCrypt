@@ -133,6 +133,8 @@ internal fun Screen(
                     onDelete(stateHolder.multiselectStateList.toList())
                     stateHolder.multiselectStateList.clear()
                 }
+
+                ContextualAction.Move -> {}
             }
         }
     }
