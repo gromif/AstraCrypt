@@ -56,6 +56,7 @@ internal fun Screen(
     onBackStackClick: (index: Int?) -> Unit = {},
     onClick: (FileItem) -> Unit = {},
     onLongPress: (Long) -> Unit = {},
+    onCloseContextualToolbar: () -> Unit = {},
     onImport: (Array<Uri>, Boolean) -> Unit = { _, _ -> },
     onScan: () -> Unit = {},
     onOpen: () -> Unit = {},
@@ -88,7 +89,7 @@ internal fun Screen(
             pagingItems = items,
             multiselectStateList = stateHolder.multiselectStateList,
             imageLoader = imageLoader,
-            onOptions = onOptions@ {
+            onOptions = onOptions@{
                 if (stateHolder.mode is Mode.Move) return@onOptions
                 optionsItem = OptionsItem(
                     id = it.id,
@@ -126,20 +127,22 @@ internal fun Screen(
             when (it) {
                 ContextualAction.CreateFolder -> dialogNewFolder = true
                 ContextualAction.MoveNavigation -> onMoveStart()
+                ContextualAction.Move -> onMove()
+                ContextualAction.Close -> onCloseContextualToolbar()
                 ContextualAction.Star -> {
                     onStar(true, stateHolder.multiselectStateList.toList())
-                    stateHolder.multiselectStateList.clear()
-                }
-                ContextualAction.Unstar -> {
-                    onStar(false, stateHolder.multiselectStateList.toList())
-                    stateHolder.multiselectStateList.clear()
-                }
-                ContextualAction.Delete -> {
-                    onDelete(stateHolder.multiselectStateList.toList())
-                    stateHolder.multiselectStateList.clear()
+                    onCloseContextualToolbar()
                 }
 
-                ContextualAction.Move -> onMove()
+                ContextualAction.Unstar -> {
+                    onStar(false, stateHolder.multiselectStateList.toList())
+                    onCloseContextualToolbar()
+                }
+
+                ContextualAction.Delete -> {
+                    onDelete(stateHolder.multiselectStateList.toList())
+                    onCloseContextualToolbar()
+                }
             }
         }
     }

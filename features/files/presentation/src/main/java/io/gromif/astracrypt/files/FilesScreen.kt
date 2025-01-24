@@ -70,6 +70,12 @@ fun FilesScreen(
         onModeChange(newMode)
     }
 
+    fun closeContextualToolbar() {
+        multiselectStateList.clear()
+        onModeChange(Mode.Default)
+    }
+    BackHandler(enabled = mode is Mode.Multiselect, onBack = ::closeContextualToolbar)
+
     val backStackList = vm.parentBackStack
     val stateHolder = remember(isSearching, multiselectStateList, backStackList) {
         StateHolder(
@@ -106,6 +112,7 @@ fun FilesScreen(
         onLongPress = {
             if (mode !== Mode.Move) selectItem(it)
         },
+        onCloseContextualToolbar = ::closeContextualToolbar,
         onImport = vm::import,
         onScan = {
             cameraScanUri = vm.getCameraScanOutputUri()

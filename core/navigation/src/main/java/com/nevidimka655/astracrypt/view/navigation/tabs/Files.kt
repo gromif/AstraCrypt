@@ -19,6 +19,7 @@ import com.nevidimka655.astracrypt.view.navigation.BottomBarItems
 import com.nevidimka655.astracrypt.view.navigation.Route
 import com.nevidimka655.astracrypt.view.navigation.models.UiState
 import com.nevidimka655.astracrypt.view.navigation.models.actions.ToolbarActions
+import com.nevidimka655.astracrypt.view.navigation.models.actions.close
 import com.nevidimka655.astracrypt.view.navigation.models.actions.createFolder
 import com.nevidimka655.astracrypt.view.navigation.models.actions.delete
 import com.nevidimka655.astracrypt.view.navigation.models.actions.move
@@ -78,6 +79,7 @@ private fun AnimatedContentScope.FilesSharedNavigation(
     val contextChannel = remember { Channel<ContextualAction>() }
     ToolbarActionsHandler(onToolbarActions) {
         when {
+            it === ToolbarActions.close -> contextChannel.send(ContextualAction.Close)
             it === ToolbarActions.createFolder -> contextChannel.send(ContextualAction.CreateFolder)
             it === ToolbarActions.star -> contextChannel.send(ContextualAction.Star)
             it === ToolbarActions.unStar -> contextChannel.send(ContextualAction.Unstar)

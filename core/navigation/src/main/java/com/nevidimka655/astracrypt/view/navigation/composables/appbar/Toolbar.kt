@@ -22,6 +22,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.astracrypt.view.navigation.models.actions.ToolbarActions
+import com.nevidimka655.astracrypt.view.navigation.models.actions.close
 import com.nevidimka655.haptic.Haptic
 import com.nevidimka655.ui.compose_core.IconButton
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
@@ -42,14 +43,23 @@ fun ToolbarImpl(
         Text(text = title.resolve(context))
     },
     navigationIcon = @Composable {
-        if (backButton) IconButton(
-            icon = Icons.AutoMirrored.Default.ArrowBack,
-            contentDescription = stringResource(id = R.string.back),
-            onClick = {
-                Haptic.click()
-                onNavigateUp()
-            }
-        )
+        if (backButton) {
+            if (!isContextual) IconButton(
+                icon = Icons.AutoMirrored.Default.ArrowBack,
+                contentDescription = stringResource(id = R.string.back),
+                onClick = {
+                    Haptic.click()
+                    onNavigateUp()
+                }
+            ) else IconButton(
+                icon = ToolbarActions.close.icon,
+                contentDescription = stringResource(id = ToolbarActions.close.contentDescription),
+                onClick = {
+                    Haptic.click()
+                    onActionPressed(ToolbarActions.close)
+                }
+            )
+        }
     },
     actions = @Composable {
         if (actions != null) {
@@ -58,7 +68,10 @@ fun ToolbarImpl(
                 IconButton(
                     icon = it.icon,
                     contentDescription = stringResource(id = it.contentDescription),
-                ) { onActionPressed(it) }
+                ) {
+                    Haptic.click()
+                    onActionPressed(it)
+                }
             }
             if (actions.size > 2) {
                 val actionsInDropdownMenu = remember { actions.drop(2) }
