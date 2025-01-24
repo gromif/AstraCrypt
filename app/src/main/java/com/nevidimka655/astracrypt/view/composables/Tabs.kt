@@ -42,7 +42,17 @@ fun NavGraphBuilder.tabsGraph(
         onUiStateChange = onUiStateChange,
         onToolbarActions = onToolbarActions,
         onFabClick = onFabClick,
-        searchQueryState = searchQueryState
+        searchQueryState = searchQueryState,
+        toFiles = { id, name ->
+            navController.clearBackStack(Route.Tabs.Files())
+            navController.navigate(Route.Tabs.Files(startParentId = id, startParentName = name)) {
+                launchSingleTop = true
+                popUpTo(Route.Tabs.Home) {
+                    inclusive = false
+                    saveState = true
+                }
+            }
+        },
     )
     composable<Route.Tabs.Home> {
         UiStateHandler { onUiStateChange(HomeUiState) }

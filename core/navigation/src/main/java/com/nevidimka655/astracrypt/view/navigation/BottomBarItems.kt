@@ -29,7 +29,7 @@ enum class BottomBarItems(
         titleId = R.string.files,
         icon = Icons.Default.Folder,
         iconOutline = Icons.Outlined.Folder,
-        route = Route.Tabs.Files
+        route = Route.Tabs.Files()
     ),
     Starred(
         titleId = R.string.starred,

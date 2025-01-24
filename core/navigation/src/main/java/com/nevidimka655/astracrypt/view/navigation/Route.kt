@@ -11,7 +11,10 @@ object Route {
 
     object Tabs {
         @Serializable object Home
-        @Serializable object Files
+        @Serializable data class Files(
+            val startParentId: Long? = null,
+            val startParentName: String = ""
+        )
         @Serializable object Starred
         @Serializable object Settings
     }

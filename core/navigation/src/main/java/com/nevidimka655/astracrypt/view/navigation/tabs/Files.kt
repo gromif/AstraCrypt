@@ -12,6 +12,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import androidx.navigation.toRoute
 import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.astracrypt.view.navigation.BottomBarItems
 import com.nevidimka655.astracrypt.view.navigation.Route
@@ -40,11 +41,14 @@ private typealias StarredRoute = Route.Tabs.Starred
 
 @Composable
 private fun AnimatedContentScope.FilesSharedNavigation(
+    startParentId: Long? = null,
+    startParentName: String = "",
     isStarred: Boolean = false,
     onUiStateChange: (UiState) -> Unit,
     onToolbarActions: Flow<ToolbarActions.Action>,
     onFabClick: Flow<Any>,
     searchQueryState: StateFlow<String>,
+    toFiles: (id: Long, name: String) -> Unit = { _, _ -> },
 ) {
     val context = LocalContext.current
     var modeState by rememberSaveable { mutableStateOf<Mode>(Mode.Default) }
@@ -84,10 +88,13 @@ private fun AnimatedContentScope.FilesSharedNavigation(
     }
 
     FilesScreen(
+        startParentId = startParentId,
+        startParentName = startParentName,
         isStarred = isStarred,
         onContextualAction = contextChannel.receiveAsFlow(),
         searchQueryState = searchQueryState,
         onModeChange = { modeState = it },
+        toFiles = toFiles,
         toExport = { id, exportUri ->
 
         },
@@ -101,13 +108,15 @@ fun NavGraphBuilder.tabStarred(
     onToolbarActions: Flow<ToolbarActions.Action>,
     onFabClick: Flow<Any>,
     searchQueryState: StateFlow<String>,
+    toFiles: (id: Long, name: String) -> Unit,
 ) = composable<StarredRoute> {
     FilesSharedNavigation(
         isStarred = true,
         onUiStateChange = onUiStateChange,
         onToolbarActions = onToolbarActions,
         onFabClick = onFabClick,
-        searchQueryState = searchQueryState
+        searchQueryState = searchQueryState,
+        toFiles = toFiles,
     )
 }
 
@@ -117,7 +126,10 @@ fun NavGraphBuilder.tabFiles(
     onFabClick: Flow<Any>,
     searchQueryState: StateFlow<String>,
 ) = composable<FilesRoute> {
+    val route: FilesRoute = it.toRoute()
     FilesSharedNavigation(
+        startParentId = route.startParentId,
+        startParentName = route.startParentName,
         onUiStateChange = onUiStateChange,
         onToolbarActions = onToolbarActions,
         onFabClick = onFabClick,

@@ -25,10 +25,13 @@ import kotlinx.coroutines.flow.StateFlow
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FilesScreen(
+    startParentId: Long? = null,
+    startParentName: String = "",
     isStarred: Boolean,
     onContextualAction: Flow<ContextualAction>,
     searchQueryState: StateFlow<String>,
     onModeChange: (Mode) -> Unit = {},
+    toFiles: (id: Long, name: String) -> Unit = { _, _ -> },
     toExport: (id: Long, output: Uri) -> Unit = { _, _ -> },
     toDetails: (id: Long) -> Unit = {},
     sheetCreateState: MutableState<Boolean>,
@@ -43,6 +46,14 @@ fun FilesScreen(
     }
     BackHandler(enabled = !isSearching && vm.parentBackStack.isNotEmpty()) {
         vm.closeDirectory()
+    }
+
+    if (startParentId != null) {
+        var recycled by rememberSaveable { mutableStateOf(false) }
+        if (!recycled) LaunchedEffect(Unit) {
+            vm.openDirectory(startParentId, startParentName)
+            recycled = true
+        }
     }
 
     var cameraScanUri by rememberSaveable { mutableStateOf(Uri.EMPTY) }
@@ -83,7 +94,9 @@ fun FilesScreen(
         onClick = {
             when {
                 multiselectStateList.isNotEmpty() -> selectItem(id = it.id)
-                it.isFolder -> vm.openDirectory(id = it.id, name = it.name)
+                it.isFolder -> {
+                    if (isStarred) toFiles(it.id, it.name) else vm.openDirectory(it.id, it.name)
+                }
             }
         },
         onLongPress = ::selectItem,
