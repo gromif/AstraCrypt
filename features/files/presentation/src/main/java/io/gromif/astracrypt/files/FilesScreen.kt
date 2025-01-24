@@ -106,6 +106,7 @@ fun FilesScreen(
             scanContract.launch(cameraScanUri)
         },
         onOpen = {},
+        onSelect = multiselectStateList::add,
         onCreateFolder = vm::createFolder,
         onRename = vm::rename,
         onStar = vm::setStarred,
