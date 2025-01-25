@@ -6,6 +6,8 @@ sealed class ContextualAction(
 
     data object Close : ContextualAction()
 
+    data object Add : ContextualAction()
+
     data object CreateFolder : ContextualAction()
 
     data object MoveNavigation : ContextualAction()

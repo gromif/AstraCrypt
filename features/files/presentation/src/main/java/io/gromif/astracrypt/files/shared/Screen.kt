@@ -6,7 +6,6 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -50,7 +49,6 @@ internal fun Screen(
     imageLoader: ImageLoader = ImageLoader(LocalContext.current),
     navActions: FilesNavActions = FilesNavActions.Default,
     actions: Actions = Actions.Default,
-    sheetCreateState: MutableState<Boolean> = mutableStateOf(false),
 ) = Column {
     val sheetOptionsState = Compose.state()
     var optionsItem by rememberSaveable { mutableStateOf(OptionsItem()) }
@@ -101,10 +99,12 @@ internal fun Screen(
         pickFileContract.launch(arrayOf(importMimeTypeState))
     }
 
+    val sheetCreateState = Compose.state()
     FlowObserver(onContextualAction) {
         val multiselectList = stateHolder.multiselectStateList.toList()
         when (it) {
             ContextualAction.Close -> actions.closeContextualToolbar()
+            ContextualAction.Add -> sheetCreateState.value = true
             ContextualAction.CreateFolder -> dialogNewFolder = true
             ContextualAction.Delete -> actions.delete(multiselectList)
             ContextualAction.Move -> actions.move()

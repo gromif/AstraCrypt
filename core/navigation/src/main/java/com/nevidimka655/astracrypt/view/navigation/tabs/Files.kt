@@ -29,7 +29,6 @@ import com.nevidimka655.astracrypt.view.navigation.shared.FabClickObserver
 import com.nevidimka655.astracrypt.view.navigation.shared.ToolbarActionsObserver
 import com.nevidimka655.astracrypt.view.navigation.shared.UiStateHandler
 import com.nevidimka655.haptic.Haptic
-import com.nevidimka655.ui.compose_core.Compose
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap.Text
 import io.gromif.astracrypt.files.FilesScreen
@@ -90,12 +89,11 @@ private fun AnimatedContentScope.FilesSharedNavigation(
         contextChannel.send(contextualAction)
     }
 
-    val sheetCreateState = Compose.state()
     if (!isStarred) FabClickObserver(onFabClick) {
         when {
             modeState === Mode.Default -> {
                 Haptic.rise()
-                sheetCreateState.value = true
+                contextChannel.send(ContextualAction.Add)
             }
             modeState === Mode.Move -> contextChannel.send(ContextualAction.Move)
         }
@@ -121,9 +119,7 @@ private fun AnimatedContentScope.FilesSharedNavigation(
             override fun toDetails(id: Long) {
                 TODO("Not yet implemented")
             }
-
         },
-        sheetCreateState = sheetCreateState
     )
 }
 

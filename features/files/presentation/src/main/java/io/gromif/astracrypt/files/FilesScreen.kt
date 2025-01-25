@@ -5,7 +5,6 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -36,7 +35,6 @@ fun FilesScreen(
     searchQueryState: StateFlow<String>,
     onModeChange: (Mode) -> Unit = {},
     navActions: FilesNavActions,
-    sheetCreateState: MutableState<Boolean>,
 ) {
     val vm: FilesViewModel = hiltViewModel()
     val viewMode by vm.viewModeState.collectAsStateWithLifecycle()
@@ -150,6 +148,5 @@ fun FilesScreen(
                 vm.delete(idList)
             }
         },
-        sheetCreateState = sheetCreateState,
     )
 }
