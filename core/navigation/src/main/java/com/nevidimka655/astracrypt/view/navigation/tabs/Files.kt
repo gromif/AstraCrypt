@@ -5,6 +5,7 @@ import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.DriveFileMove
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -51,6 +52,7 @@ private fun AnimatedContentScope.FilesSharedNavigation(
     onUiStateChange: (UiState) -> Unit,
     onToolbarActions: Flow<ToolbarActions.Action>,
     onFabClick: Flow<Any>,
+    snackbarHostState: SnackbarHostState,
     searchQueryState: StateFlow<String>,
     toFiles: (id: Long, name: String) -> Unit = { _, _ -> },
 ) {
@@ -105,6 +107,7 @@ private fun AnimatedContentScope.FilesSharedNavigation(
         mode = modeState,
         isStarred = isStarred,
         onContextualAction = contextChannel.receiveAsFlow(),
+        snackbarHostState = snackbarHostState,
         searchQueryState = searchQueryState,
         onModeChange = { modeState = it },
         navActions = object : FilesNavActions {
@@ -127,6 +130,7 @@ fun NavGraphBuilder.tabStarred(
     onUiStateChange: (UiState) -> Unit,
     onToolbarActions: Flow<ToolbarActions.Action>,
     onFabClick: Flow<Any>,
+    snackbarHostState: SnackbarHostState,
     searchQueryState: StateFlow<String>,
     toFiles: (id: Long, name: String) -> Unit,
 ) = composable<StarredRoute> {
@@ -135,6 +139,7 @@ fun NavGraphBuilder.tabStarred(
         onUiStateChange = onUiStateChange,
         onToolbarActions = onToolbarActions,
         onFabClick = onFabClick,
+        snackbarHostState = snackbarHostState,
         searchQueryState = searchQueryState,
         toFiles = toFiles,
     )
@@ -144,6 +149,7 @@ fun NavGraphBuilder.tabFiles(
     onUiStateChange: (UiState) -> Unit,
     onToolbarActions: Flow<ToolbarActions.Action>,
     onFabClick: Flow<Any>,
+    snackbarHostState: SnackbarHostState,
     searchQueryState: StateFlow<String>,
 ) = composable<FilesRoute> {
     val route: FilesRoute = it.toRoute()
@@ -153,6 +159,7 @@ fun NavGraphBuilder.tabFiles(
         onUiStateChange = onUiStateChange,
         onToolbarActions = onToolbarActions,
         onFabClick = onFabClick,
+        snackbarHostState = snackbarHostState,
         searchQueryState = searchQueryState
     )
 }

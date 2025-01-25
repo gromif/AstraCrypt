@@ -111,20 +111,14 @@ class FilesViewModel @Inject constructor(
 
     fun createFolder(name: String) = viewModelScope.launch(defaultDispatcher) {
         createFolderUseCase(name = name, parentId = parentId)
-        //showSnackbar(R.string.snack_folderCreated)
     }
 
     fun delete(ids: List<Long>) = viewModelScope.launch(defaultDispatcher) {
         deleteUseCase(ids)
-        /*showSnackbar(
-            if (itemToDelete.path.isEmpty()) R.string.snack_folderDeleted
-            else R.string.snack_itemsDeleted
-        )*/
     }
 
     fun move(ids: List<Long>) = viewModelScope.launch(defaultDispatcher) {
         moveUseCase(ids = ids, parentId = parentId)
-        //showSnackbar(R.string.snack_itemsMoved)
     }
 
     fun getCameraScanOutputUri(): Uri =
@@ -132,14 +126,13 @@ class FilesViewModel @Inject constructor(
 
     fun setStarred(state: Boolean, ids: List<Long>) = viewModelScope.launch(defaultDispatcher) {
         setStarredUseCase(ids = ids, state = state)
-        /*showSnackbar(
-            if (state) R.string.snack_starred else R.string.snack_unstarred
-        )*/ // TODO: Snackbar
     }
 
     fun import(
         vararg uriList: Uri,
         saveSource: Boolean = false,
+        onSuccess: () -> Unit = {},
+        onError: () -> Unit = {}
     ) = viewModelScope.launch(defaultDispatcher) {
         val listToSave = uriList.map { it.toString() }
         val fileWithUris = workerSerializer.saveStringListToFile(listToSave)
@@ -156,11 +149,12 @@ class FilesViewModel @Inject constructor(
         workManager.getWorkInfoByIdFlow(workerRequest.id).collectLatest {
             when (it?.state) {
                 WorkInfo.State.SUCCEEDED -> {
-//                    showSnackbar(R.string.snack_imported) TODO: Snackbar
+                    onSuccess()
                     cancel()
                 }
 
                 WorkInfo.State.FAILED -> {
+                    onError()
                     cancel()
                 }
 
@@ -171,7 +165,6 @@ class FilesViewModel @Inject constructor(
 
     fun rename(id: Long, newName: String) = viewModelScope.launch(defaultDispatcher) {
         renameUseCase(id = id, newName = newName)
-        //showSnackbar(R.string.snack_itemRenamed) TODO: Snackbar
     }
 
     override fun onCleared() {

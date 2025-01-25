@@ -1,5 +1,6 @@
 package com.nevidimka655.astracrypt.view.navigation
 
+import androidx.compose.material3.SnackbarHostState
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import com.nevidimka655.astracrypt.view.composables.export.export
@@ -27,6 +28,7 @@ fun root(
     navController: NavController,
     onFabClick: Flow<Any>,
     onToolbarActions: Flow<ToolbarActions.Action>,
+    snackbarHostState: SnackbarHostState,
     searchQueryState: StateFlow<String>
 ): NavGraphBuilder.() -> Unit = {
     tabsGraph(
@@ -34,6 +36,7 @@ fun root(
         navController = navController,
         onToolbarActions = onToolbarActions,
         onFabClick = onFabClick,
+        snackbarHostState = snackbarHostState,
         searchQueryState = searchQueryState
     )
     notesGraph(

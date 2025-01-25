@@ -184,6 +184,7 @@ fun AstraCryptApp(
                 navController = navController,
                 onFabClick = onFabClick.receiveAsFlow(),
                 onToolbarActions = onToolbarActions.receiveAsFlow(),
+                snackbarHostState = snackbarHostState,
                 searchQueryState = vm.searchQueryState
             )
         )

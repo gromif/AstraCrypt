@@ -1,5 +1,6 @@
 package com.nevidimka655.astracrypt.view.composables
 
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -30,18 +31,21 @@ fun NavGraphBuilder.tabsGraph(
     navController: NavController,
     onToolbarActions: Flow<ToolbarActions.Action>,
     onFabClick: Flow<Any>,
+    snackbarHostState: SnackbarHostState,
     searchQueryState: StateFlow<String>,
 ) {
     tabFiles(
         onUiStateChange = onUiStateChange,
         onToolbarActions = onToolbarActions,
         onFabClick = onFabClick,
+        snackbarHostState = snackbarHostState,
         searchQueryState = searchQueryState
     )
     tabStarred(
         onUiStateChange = onUiStateChange,
         onToolbarActions = onToolbarActions,
         onFabClick = onFabClick,
+        snackbarHostState = snackbarHostState,
         searchQueryState = searchQueryState,
         toFiles = { id, name ->
             navController.clearBackStack(Route.Tabs.Files())
