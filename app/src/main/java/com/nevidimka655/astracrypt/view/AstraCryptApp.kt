@@ -10,6 +10,8 @@ import androidx.compose.material.icons.filled.Key
 import androidx.compose.material3.BottomAppBarDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -76,6 +78,7 @@ fun AstraCryptApp(
     }
     val searchQueryState by vm.searchQueryState.collectAsStateWithLifecycle()
     val isSearching = remember(searchQueryState) { searchQueryState.isNotEmpty() }
+    val snackbarHostState = remember { SnackbarHostState() }
     Scaffold(
         modifier = modifier.nestedScroll(
             if (searchBar) bottomBarScroll.nestedScrollConnection else {
@@ -119,6 +122,7 @@ fun AstraCryptApp(
                 contentDescription = fab?.contentDescription?.resolve(LocalContext.current)
             ) { coroutineScope.launch { onFabClick.send(0) } }
         },
+        snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
         bottomBar = {
             BottomBarImpl(
                 visible = !isSearching && !searchBarExpanded && bottomBarTab != null,
