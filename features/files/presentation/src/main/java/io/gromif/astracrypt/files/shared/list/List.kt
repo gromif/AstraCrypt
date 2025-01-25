@@ -53,14 +53,14 @@ internal fun FilesList(
         verticalArrangement = arrangement,
         horizontalArrangement = arrangement
     ) {
-        items(
-            count = pagingItems.itemSnapshotList.size,
-            key = { pagingItems[it]?.id ?: it }
-        ) { index ->
-            val item = pagingItems[index] ?: return@items
-            val isItemSelected = multiselectStateList.contains(item.id)
-            when (viewMode) {
-                ViewMode.Grid -> FilesListGridItem(
+        when (viewMode) {
+            ViewMode.Grid -> items(
+                count = pagingItems.itemSnapshotList.size,
+                key = { pagingItems[it]?.id ?: it }
+            ) { index ->
+                val item = pagingItems[index] ?: return@items
+                val isItemSelected = multiselectStateList.contains(item.id)
+                FilesListGridItem(
                     modifier = Modifier.animateItem(),
                     imageLoader = imageLoader,
                     name = item.name,
@@ -77,9 +77,15 @@ internal fun FilesList(
                     onLongPress = {
                         Haptic.clickHeavy()
                         onLongPress(item.id)
-                    }
-                )
-                ViewMode.ListDefault -> FilesListItem(
+                    })
+            }
+            ViewMode.ListDefault -> items(
+                count = pagingItems.itemSnapshotList.size,
+                key = { pagingItems[it]?.id ?: it }
+            ) { index ->
+                val item = pagingItems[index] ?: return@items
+                val isItemSelected = multiselectStateList.contains(item.id)
+                FilesListItem(
                     modifier = Modifier.animateItem(),
                     imageLoader = imageLoader,
                     name = item.name,
@@ -91,8 +97,7 @@ internal fun FilesList(
                         Haptic.clickHeavy()
                         onOptions(item)
                     },
-                    onClick = { onClick.invoke(item) }
-                )
+                    onClick = { onClick.invoke(item) })
             }
         }
     }
