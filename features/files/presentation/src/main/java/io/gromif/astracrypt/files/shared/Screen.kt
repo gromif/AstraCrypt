@@ -102,29 +102,16 @@ internal fun Screen(
     }
 
     FlowObserver(onContextualAction) {
+        val multiselectList = stateHolder.multiselectStateList.toList()
         when (it) {
-            ContextualAction.CreateFolder -> dialogNewFolder = true
-            ContextualAction.MoveNavigation -> actions.setMoveMode()
-            ContextualAction.Move -> {
-                actions.move()
-                actions.closeContextualToolbar()
-            }
             ContextualAction.Close -> actions.closeContextualToolbar()
-            ContextualAction.Star -> {
-                actions.star(true, stateHolder.multiselectStateList.toList())
-                actions.closeContextualToolbar()
-            }
-
-            ContextualAction.Unstar -> {
-                actions.star(false, stateHolder.multiselectStateList.toList())
-                actions.closeContextualToolbar()
-            }
-
-            ContextualAction.Delete -> {
-                actions.delete(stateHolder.multiselectStateList.toList())
-                actions.closeContextualToolbar()
-            }
+            ContextualAction.CreateFolder -> dialogNewFolder = true
+            ContextualAction.Delete -> actions.delete(multiselectList)
+            ContextualAction.Move -> actions.move()
+            ContextualAction.MoveNavigation -> actions.setMoveMode()
+            is ContextualAction.Star -> actions.star(it.state, multiselectList)
         }
+        if (it.resetMode) actions.closeContextualToolbar()
     }
 
     filesCreateNewSheet(

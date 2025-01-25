@@ -20,7 +20,6 @@ import com.nevidimka655.astracrypt.view.navigation.BottomBarItems
 import com.nevidimka655.astracrypt.view.navigation.Route
 import com.nevidimka655.astracrypt.view.navigation.models.UiState
 import com.nevidimka655.astracrypt.view.navigation.models.actions.ToolbarActions
-import com.nevidimka655.astracrypt.view.navigation.models.actions.close
 import com.nevidimka655.astracrypt.view.navigation.models.actions.createFolder
 import com.nevidimka655.astracrypt.view.navigation.models.actions.delete
 import com.nevidimka655.astracrypt.view.navigation.models.actions.move
@@ -80,14 +79,15 @@ private fun AnimatedContentScope.FilesSharedNavigation(
 
     val contextChannel = remember { Channel<ContextualAction>() }
     ToolbarActionsObserver(onToolbarActions) {
-        when {
-            it === ToolbarActions.close -> contextChannel.send(ContextualAction.Close)
-            it === ToolbarActions.createFolder -> contextChannel.send(ContextualAction.CreateFolder)
-            it === ToolbarActions.star -> contextChannel.send(ContextualAction.Star)
-            it === ToolbarActions.unStar -> contextChannel.send(ContextualAction.Unstar)
-            it === ToolbarActions.delete -> contextChannel.send(ContextualAction.Delete)
-            it === ToolbarActions.move -> contextChannel.send(ContextualAction.MoveNavigation)
+        val contextualAction = when {
+            it === ToolbarActions.createFolder -> ContextualAction.CreateFolder
+            it === ToolbarActions.star -> ContextualAction.Star(state = true)
+            it === ToolbarActions.unStar -> ContextualAction.Star(state = false)
+            it === ToolbarActions.delete -> ContextualAction.Delete
+            it === ToolbarActions.move -> ContextualAction.MoveNavigation
+            else -> ContextualAction.Close
         }
+        contextChannel.send(contextualAction)
     }
 
     val sheetCreateState = Compose.state()

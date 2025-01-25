@@ -1,13 +1,19 @@
 package io.gromif.astracrypt.files.model
 
-enum class ContextualAction {
+sealed class ContextualAction(
+    val resetMode: Boolean = false
+) {
 
-    Close,
-    CreateFolder,
-    Star,
-    Unstar,
-    Delete,
-    MoveNavigation,
-    Move,
+    data object Close : ContextualAction()
+
+    data object CreateFolder : ContextualAction()
+
+    data object MoveNavigation : ContextualAction()
+
+    data object Move : ContextualAction(resetMode = true)
+
+    data object Delete : ContextualAction(resetMode = true)
+
+    data class Star(val state: Boolean): ContextualAction(resetMode = true)
 
 }
