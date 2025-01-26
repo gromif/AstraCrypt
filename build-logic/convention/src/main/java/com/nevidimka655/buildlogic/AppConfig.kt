@@ -23,4 +23,8 @@ internal object AppConfig {
         const val BUILD_TOOLS = "35.0.0"
     }
 
+    object Compose {
+        const val METRICS = false
+    }
+
 }

@@ -1,4 +1,6 @@
+
 import com.android.build.api.dsl.LibraryExtension
+import com.nevidimka655.buildlogic.configureComposeMetrics
 import com.nevidimka655.buildlogic.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -11,7 +13,7 @@ class AndroidLibraryComposeConventionPlugin: Plugin<Project> {
             apply("com.android.library")
             apply("org.jetbrains.kotlin.plugin.compose")
         }
-
+        configureComposeMetrics()
         extensions.configure<LibraryExtension> {
             with(defaultConfig) {
                 buildFeatures.compose = true
