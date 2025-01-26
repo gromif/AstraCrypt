@@ -16,5 +16,6 @@ android {
 
 dependencies {
     implementation(projects.core.database.notes)
+    implementation(projects.features.files.domain)
     implementation(projects.features.files.data)
 }
