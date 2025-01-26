@@ -111,7 +111,7 @@ class RepositoryImpl(
             parent = parent,
             name = nameTemp,
             state = fileState.ordinal,
-            type = fileType.ordinal,
+            type = fileType,
             file = fileTemp,
             fileAead = aeadInfo.fileAeadIndex,
             preview = previewTemp,
@@ -129,7 +129,7 @@ class RepositoryImpl(
         val filesEntity = FilesEntity(
             name = nameTemp,
             parent = parentId,
-            type = FileType.Folder.ordinal,
+            type = FileType.Folder,
             creationTime = System.currentTimeMillis()
         )
         filesDao.insert(filesEntity)

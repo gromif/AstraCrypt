@@ -9,7 +9,6 @@ import io.gromif.astracrypt.files.domain.model.FileType
 
 class FileItemMapper: Mapper<FilesEntity, FileItem> {
     override fun invoke(item: FilesEntity): FileItem {
-        val type = FileType.entries[item.type]
         return FileItem(
             id = item.id,
             parent = item.parent,
@@ -21,9 +20,9 @@ class FileItemMapper: Mapper<FilesEntity, FileItem> {
                 FileSource(path = it, aeadIndex = item.fileAead)
             },
             size = item.size,
-            type = type,
-            isFolder = type == FileType.Folder,
-            isFile = type != FileType.Folder,
+            type = item.type,
+            isFolder = item.type == FileType.Folder,
+            isFile = item.type != FileType.Folder,
             state = FileState.entries[item.state],
         )
     }

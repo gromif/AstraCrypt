@@ -3,6 +3,7 @@ package io.gromif.astracrypt.files.data.db
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import io.gromif.astracrypt.files.domain.model.FileType
 
 @Entity(tableName = "store_items")
 data class FilesEntity(
@@ -18,7 +19,7 @@ data class FilesEntity(
     val state: Int = 0,
 
     @ColumnInfo(name = "type")
-    val type: Int = 0,
+    val type: FileType = FileType.Folder,
 
     @ColumnInfo(name = "file")
     val file: String? = null,
