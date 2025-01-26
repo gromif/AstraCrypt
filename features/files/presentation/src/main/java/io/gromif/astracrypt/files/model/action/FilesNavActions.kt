@@ -1,7 +1,9 @@
 package io.gromif.astracrypt.files.model.action
 
 import android.net.Uri
+import androidx.compose.runtime.Stable
 
+@Stable
 interface FilesNavActions {
 
     companion object {
