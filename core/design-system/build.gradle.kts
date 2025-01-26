@@ -7,3 +7,7 @@ plugins {
 android {
     namespace = "com.nevidimka655.atracrypt.core.design_system"
 }
+
+dependencies {
+    implementation(libs.androidx.core.ktx)
+}
