@@ -110,7 +110,7 @@ class RepositoryImpl(
         val filesEntity = FilesEntity(
             parent = parent,
             name = nameTemp,
-            state = fileState.ordinal,
+            state = fileState,
             type = fileType,
             file = fileTemp,
             fileAead = aeadInfo.fileAeadIndex,

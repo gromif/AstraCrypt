@@ -4,7 +4,6 @@ import com.nevidimka655.astracrypt.utils.Mapper
 import io.gromif.astracrypt.files.data.db.FilesEntity
 import io.gromif.astracrypt.files.domain.model.FileItem
 import io.gromif.astracrypt.files.domain.model.FileSource
-import io.gromif.astracrypt.files.domain.model.FileState
 import io.gromif.astracrypt.files.domain.model.FileType
 
 class FileItemMapper: Mapper<FilesEntity, FileItem> {
@@ -23,7 +22,7 @@ class FileItemMapper: Mapper<FilesEntity, FileItem> {
             type = item.type,
             isFolder = item.type == FileType.Folder,
             isFile = item.type != FileType.Folder,
-            state = FileState.entries[item.state],
+            state = item.state,
         )
     }
 }
