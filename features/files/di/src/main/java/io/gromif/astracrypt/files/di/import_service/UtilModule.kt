@@ -22,7 +22,7 @@ import io.gromif.astracrypt.files.data.factory.preview.AudioPreviewFactory
 import io.gromif.astracrypt.files.data.factory.preview.DefaultPreviewFactory
 import io.gromif.astracrypt.files.data.util.BitmapCompressor
 import io.gromif.astracrypt.files.data.util.FileHandler
-import io.gromif.astracrypt.files.data.util.FileUtilImpl
+import io.gromif.astracrypt.files.data.util.FileUtilFactoryImpl
 import io.gromif.astracrypt.files.data.util.FlagsUtilImpl
 import io.gromif.astracrypt.files.data.util.PreviewUtilImpl
 import io.gromif.astracrypt.files.di.FilesImageLoader
@@ -51,11 +51,11 @@ internal object UtilModule {
     )
 
     @Provides
-    fun provideFileUtil(
+    fun provideFileUtilFactory(
         @ApplicationContext context: Context,
         uriMapper: Mapper<String, Uri>,
         fileHandler: FileHandler,
-    ): FileUtil = FileUtilImpl(
+    ): FileUtil.Factory = FileUtilFactoryImpl(
         context = context,
         fileHandler = fileHandler,
         uriMapper = uriMapper

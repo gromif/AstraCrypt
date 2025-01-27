@@ -4,6 +4,10 @@ import io.gromif.astracrypt.files.domain.model.FileType
 
 interface FileUtil {
 
+    interface Factory {
+        suspend fun create(): FileUtil
+    }
+
     fun open(path: String): Boolean
 
     suspend fun write(): String?

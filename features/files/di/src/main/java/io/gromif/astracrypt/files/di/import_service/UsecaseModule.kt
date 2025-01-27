@@ -19,13 +19,13 @@ internal object UsecaseModule {
     fun provideImportUseCase(
         repository: Repository,
         settingsRepository: SettingsRepository,
-        fileUtil: FileUtil,
+        fileUtilFactory: FileUtil.Factory,
         previewUtil: PreviewUtil,
         flagsUtil: FlagsUtil
     ): ImportUseCase = ImportUseCase(
         repository = repository,
         settingsRepository = settingsRepository,
-        fileUtil = fileUtil,
+        fileUtilFactory = fileUtilFactory,
         previewUtil = previewUtil,
         flagsUtil = flagsUtil
     )

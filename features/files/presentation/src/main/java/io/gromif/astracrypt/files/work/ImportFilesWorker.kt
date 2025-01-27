@@ -43,7 +43,7 @@ class ImportFilesWorker @AssistedInject constructor(
         val saveSource = inputData.getBoolean(Args.SAVE_SOURCE, false)
         val uriFile = File(inputData.getString(Args.URI_FILE)!!)
         setForeground(getForegroundInfo())
-        withContext(defaultDispatcher) {
+        withContext(defaultDispatcher.limitedParallelism(4)) {
             val pathList = uriFile.readLines()
             importUseCase(
                 pathList = pathList,
