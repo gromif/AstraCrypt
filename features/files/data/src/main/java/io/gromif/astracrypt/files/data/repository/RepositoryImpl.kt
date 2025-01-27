@@ -1,9 +1,11 @@
 package io.gromif.astracrypt.files.data.repository
 
+import android.net.Uri
 import com.nevidimka655.astracrypt.utils.Mapper
 import io.gromif.astracrypt.files.data.db.FilesDao
 import io.gromif.astracrypt.files.data.db.FilesEntity
 import io.gromif.astracrypt.files.data.db.tuples.MinimalTuple
+import io.gromif.astracrypt.files.data.util.ExportUtil
 import io.gromif.astracrypt.files.data.util.FileHandler
 import io.gromif.astracrypt.files.domain.model.AeadInfo
 import io.gromif.astracrypt.files.domain.model.ExportData
@@ -23,7 +25,9 @@ class RepositoryImpl(
     private val aeadUtil: AeadUtil,
     private val settingsRepository: SettingsRepository,
     private val fileHandler: FileHandler,
+    private val exportUtil: ExportUtil,
     private val fileItemMapper: Mapper<FilesEntity, FileItem>,
+    private val uriMapper: Mapper<String, Uri>
 ) : Repository {
     private suspend fun encrypt(aeadInfo: AeadInfo, data: String): String =
         aeadUtil.encrypt(aeadIndex = aeadInfo.databaseAeadIndex, data = data)
@@ -166,6 +170,19 @@ class RepositoryImpl(
             chunk.map { currentId ->
                 launch { filesDao.setStarred(id = currentId, state = fileState.ordinal) }
             }.joinAll()
+        }
+    }
+
+    override suspend fun export(idList: List<Long>, outputPath: String) {
+        val uri = uriMapper(outputPath)
+        if (exportUtil.createDocumentFile(uri)) exportUtil.use {
+            it.startExternally(idList = idList)
+        }
+    }
+
+    override suspend fun exportPrivately(id: Long): String? {
+        return exportUtil.use {
+            it.startPrivately(id)
         }
     }
 

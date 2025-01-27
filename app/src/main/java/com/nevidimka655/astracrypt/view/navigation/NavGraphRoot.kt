@@ -3,7 +3,6 @@ package com.nevidimka655.astracrypt.view.navigation
 import androidx.compose.material3.SnackbarHostState
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
-import com.nevidimka655.astracrypt.view.composables.export.export
 import com.nevidimka655.astracrypt.view.composables.files.details.details
 import com.nevidimka655.astracrypt.view.composables.settings.about.navigation.aboutGraph
 import com.nevidimka655.astracrypt.view.composables.settings.profile.editProfile
@@ -20,6 +19,7 @@ import com.nevidimka655.astracrypt.view.navigation.models.UiState
 import com.nevidimka655.astracrypt.view.navigation.models.actions.ToolbarActions
 import com.nevidimka655.astracrypt.view.navigation.notes.notesGraph
 import com.nevidimka655.astracrypt.view.navigation.settings.settingsSecurityAead
+import com.nevidimka655.astracrypt.view.navigation.tabs.files.export
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow
 

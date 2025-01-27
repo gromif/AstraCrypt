@@ -4,6 +4,7 @@ import androidx.compose.runtime.Immutable
 
 @Immutable
 data class Params(
+    val isExternalExport: Boolean = true,
     val idList: List<Long>,
-    val outputPath: String,
+    val outputPath: String?,
 )

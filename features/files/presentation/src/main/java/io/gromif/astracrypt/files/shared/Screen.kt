@@ -134,7 +134,7 @@ internal fun Screen(
         sheetOptionsState.value = false
         val (id, _, isStarred) = optionsItem
         when (it) {
-            Option.Open -> actions.open()
+            Option.Open -> actions.open(id)
             Option.Export -> exportContract.launch(null)
             Option.Rename -> dialogRenameState = true
             Option.Delete -> dialogDeleteState = true

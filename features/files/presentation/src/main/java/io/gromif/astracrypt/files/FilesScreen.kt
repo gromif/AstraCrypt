@@ -119,6 +119,7 @@ fun FilesScreen(
                         if (mode === Mode.Move && multiselectStateList.contains(id)) return
                         vm.openDirectory(id, name)
                     }
+                    else -> open(id)
                 }
             }
 
@@ -129,8 +130,8 @@ fun FilesScreen(
             override fun setMoveMode() = onModeChange(Mode.Move)
             override fun closeContextualToolbar() = closeContextualToolbar()
 
-            override fun open() {
-                TODO("Not yet implemented")
+            override fun open(id: Long) {
+                navActions.toExportPrivately(id)
             }
 
             override fun createFolder(name: String) {

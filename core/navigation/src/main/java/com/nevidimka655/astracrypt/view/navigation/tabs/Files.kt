@@ -55,6 +55,8 @@ private fun AnimatedContentScope.FilesSharedNavigation(
     snackbarHostState: SnackbarHostState,
     searchQueryState: StateFlow<String>,
     toFiles: (id: Long, name: String) -> Unit = { _, _ -> },
+    toExport: (id: Long, output: Uri) -> Unit = { _, _ -> },
+    toExportPrivately: (id: Long) -> Unit = {},
 ) {
     val context = LocalContext.current
     var modeState by rememberSaveable { mutableStateOf<Mode>(Mode.Default) }
@@ -116,7 +118,11 @@ private fun AnimatedContentScope.FilesSharedNavigation(
             }
 
             override fun toExport(id: Long, output: Uri) {
-                TODO("Not yet implemented")
+                toExport(id, output)
+            }
+
+            override fun toExportPrivately(id: Long) {
+                toExportPrivately(id)
             }
 
             override fun toDetails(id: Long) {
@@ -151,6 +157,8 @@ fun NavGraphBuilder.tabFiles(
     onFabClick: Flow<Any>,
     snackbarHostState: SnackbarHostState,
     searchQueryState: StateFlow<String>,
+    toExport: (id: Long, output: Uri) -> Unit,
+    toExportPrivately: (id: Long) -> Unit = {},
 ) = composable<FilesRoute> {
     val route: FilesRoute = it.toRoute()
     FilesSharedNavigation(
@@ -160,7 +168,9 @@ fun NavGraphBuilder.tabFiles(
         onToolbarActions = onToolbarActions,
         onFabClick = onFabClick,
         snackbarHostState = snackbarHostState,
-        searchQueryState = searchQueryState
+        searchQueryState = searchQueryState,
+        toExport = toExport,
+        toExportPrivately = toExportPrivately,
     )
 }
 

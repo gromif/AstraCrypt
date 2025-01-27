@@ -22,6 +22,19 @@ class FileHandler(
 ) {
     private val dataFolder = "$filesDir/data"
     private val newRelativePath get() = "${getRandomFolderName()}/${getRandomFileName()}"
+    private val defaultBuffer get() = ByteArray(8 * 1024)
+
+    suspend fun exportFile(
+        outputStream: OutputStream,
+        relativePath: String,
+        aeadIndex: Int
+    ): Boolean = coroutineScope {
+        val file = getFilePath(relativePath = relativePath)
+        val aead = getFileStreamingAead(aeadIndex = aeadIndex)
+        val inputStream = getConditionalInputStream(aead = aead, inputStream = file.inputStream())
+        copyInputToOutput(input = inputStream, output = outputStream)
+        isActive
+    }
 
     suspend fun writeFile(input: InputStream): String? = coroutineScope {
         val fileRelativePath = newRelativePath
@@ -31,15 +44,7 @@ class FileHandler(
             aead = aead,
             outputStream = file.outputStream()
         )
-
-        val buffer = ByteArray(8 * 1024)
-        var loadedSize = input.read(buffer)
-        while (isActive && loadedSize != -1) {
-            outputStream.write(buffer, 0, loadedSize)
-            loadedSize = input.read(buffer)
-        }
-        outputStream.close()
-
+        copyInputToOutput(input = input, output = outputStream)
         if (!isActive && file.delete()) null else fileRelativePath
     }
 
@@ -58,6 +63,19 @@ class FileHandler(
         fileRelativePath
     }
 
+    private suspend fun copyInputToOutput(
+        input: InputStream,
+        output: OutputStream
+    ) = coroutineScope {
+        val buffer = defaultBuffer
+        var loadedSize = input.read(buffer)
+        while (isActive && loadedSize != -1) {
+            output.write(buffer, 0, loadedSize)
+            loadedSize = input.read(buffer)
+        }
+        output.close()
+    }
+
     private suspend fun getConditionalOutputStream(
         aead: StreamingAead?,
         outputStream: OutputStream
@@ -65,10 +83,17 @@ class FileHandler(
         aead.newEncryptingStream(outputStream, associatedDataManager.getAssociatedData())
     } else outputStream
 
+    private suspend fun getConditionalInputStream(
+        aead: StreamingAead?,
+        inputStream: InputStream
+    ): InputStream = if (aead != null) {
+        aead.newDecryptingStream(inputStream, associatedDataManager.getAssociatedData())
+    } else inputStream
+
     private var cachedFileStreamingAead: StreamingAead? = null
-    suspend fun getFileStreamingAead(): StreamingAead? {
+    suspend fun getFileStreamingAead(aeadIndex: Int? = null): StreamingAead? {
         return cachedFileStreamingAead ?: run {
-            val aeadIndex = settingsRepository.getAeadInfo().fileAeadIndex
+            val aeadIndex = aeadIndex ?: settingsRepository.getAeadInfo().fileAeadIndex
             KeysetTemplates.Stream.entries.getOrNull(aeadIndex)?.let {
                 keysetManager.getKeyset(tag = "import_file", keyParams = it.params)
                     .streamingAead()

@@ -11,6 +11,7 @@ interface FilesNavActions {
         internal val Default = object : FilesNavActions {
             override fun toFiles(id: Long, name: String) {}
             override fun toExport(id: Long, output: Uri) {}
+            override fun toExportPrivately(id: Long) {}
             override fun toDetails(id: Long) {}
         }
 
@@ -19,6 +20,8 @@ interface FilesNavActions {
     fun toFiles(id: Long, name: String)
 
     fun toExport(id: Long, output: Uri)
+
+    fun toExportPrivately(id: Long)
 
     fun toDetails(id: Long)
 

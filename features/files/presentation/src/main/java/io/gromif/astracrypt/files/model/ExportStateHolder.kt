@@ -1,6 +1,6 @@
-package io.gromif.astracrypt.files.domain.model
+package io.gromif.astracrypt.files.model
 
-data class ExportUiState(
+internal data class ExportStateHolder(
     val isDone: Boolean = false,
     val itemsCount: Int = 1,
     val progress: Int = 0,

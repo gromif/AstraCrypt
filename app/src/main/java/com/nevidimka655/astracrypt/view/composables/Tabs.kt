@@ -39,7 +39,20 @@ fun NavGraphBuilder.tabsGraph(
         onToolbarActions = onToolbarActions,
         onFabClick = onFabClick,
         snackbarHostState = snackbarHostState,
-        searchQueryState = searchQueryState
+        searchQueryState = searchQueryState,
+        toExport = { id, output ->
+            navController.navigate(Route.Export(
+                isExternalExport = true,
+                itemId = id,
+                outUri = output.toString()
+            ))
+        },
+        toExportPrivately = { id ->
+            navController.navigate(Route.Export(
+                isExternalExport = false,
+                itemId = id
+            ))
+        }
     )
     tabStarred(
         onUiStateChange = onUiStateChange,

@@ -12,6 +12,7 @@ import io.gromif.astracrypt.files.data.db.tuples.FilesDirMinimalTuple
 import io.gromif.astracrypt.files.data.db.tuples.MinimalTuple
 import io.gromif.astracrypt.files.data.db.tuples.OpenTuple
 import io.gromif.astracrypt.files.data.db.tuples.PagerTuple
+import io.gromif.astracrypt.files.domain.model.FileType
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -22,6 +23,11 @@ interface FilesDao {
 
     @Query("select id from store_items where parent = :parent and type = 0")
     suspend fun getFolderIds(parent: Long): List<Long>
+
+    @Query("select id from store_items " +
+            "where parent = :parent " +
+            "and (:typeFilter is null or type = :typeFilter)")
+    suspend fun getIdList(parent: Long, typeFilter: FileType? = null): List<Long>
 
     @RewriteQueriesToDropUnusedColumns
     @Query("select * from store_items where id = :id")
@@ -64,11 +70,11 @@ interface FilesDao {
 
     @RewriteQueriesToDropUnusedColumns
     @Query("select * from store_items where parent = :parent")
-    suspend fun getListDataToExport(parent: Long): List<ExportTuple>
+    suspend fun getExportDataList(parent: Long): List<ExportTuple>
 
     @RewriteQueriesToDropUnusedColumns
     @Query("select * from store_items where id = :id")
-    suspend fun getDataToExport(id: Long): ExportTuple
+    suspend fun getExportData(id: Long): ExportTuple
 
     @RewriteQueriesToDropUnusedColumns
     @Query("select * from store_items limit :pageSize offset :pageIndex * :pageSize")

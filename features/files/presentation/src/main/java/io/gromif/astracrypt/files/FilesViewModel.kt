@@ -81,7 +81,7 @@ class FilesViewModel @Inject constructor(
     suspend fun setSearchQuery(query: String) = pagingProvider.setSearchQuery(parentId, query)
 
     fun openDirectory(id: Long, name: String) = viewModelScope.launch(defaultDispatcher) {
-        val newName = if (name.length > 20) "${name.take(20)}.." else name
+        val newName = if (name.length > 200) "${name.take(20)}.." else name
         val rootInfo = RootInfo(id, newName)
         parentBackStackMutable.add(rootInfo)
         parentId = id

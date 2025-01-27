@@ -12,7 +12,7 @@ internal interface Actions {
     fun setMoveMode()
     fun closeContextualToolbar()
 
-    fun open()
+    fun open(id: Long)
     fun createFolder(name: String)
     fun import(uriList: Array<Uri>, saveSource: Boolean)
     fun scan()
@@ -29,7 +29,7 @@ internal interface Actions {
             override fun longClick(id: Long) {}
             override fun setMoveMode() {}
             override fun closeContextualToolbar() {}
-            override fun open() {}
+            override fun open(id: Long) {}
             override fun createFolder(name: String) {}
             override fun import(uriList: Array<Uri>, saveSource: Boolean) {}
             override fun scan() {}

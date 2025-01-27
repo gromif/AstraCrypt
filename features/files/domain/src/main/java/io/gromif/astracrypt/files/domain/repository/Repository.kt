@@ -43,6 +43,10 @@ interface Repository {
 
     suspend fun setStarred(ids: List<Long>, state: Boolean)
 
+    suspend fun export(ids: List<Long>, outputPath: String)
+
+    suspend fun exportPrivately(id: Long): String?
+
     suspend fun getFilesCountFlow(dirId: Long): Int
 
     suspend fun getListDataToExportFromDir(dirId: Long): List<ExportData>

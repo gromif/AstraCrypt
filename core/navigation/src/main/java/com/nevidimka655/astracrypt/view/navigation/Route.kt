@@ -46,7 +46,11 @@ object Route {
         val itemId: Long
     )
 
-    @Serializable data class Export(val itemId: Long, val outUri: String? = null)
+    @Serializable data class Export(
+        val isExternalExport: Boolean,
+        val itemId: Long,
+        val outUri: String? = null
+    )
 
     @Serializable object EditProfile
     @Serializable object SettingsUi

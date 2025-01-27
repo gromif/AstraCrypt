@@ -2,7 +2,6 @@ package io.gromif.astracrypt.files.data.repository
 
 import io.gromif.astracrypt.files.data.db.FilesDao
 import io.gromif.astracrypt.files.data.db.tuples.DatabaseTransformTuple
-import io.gromif.astracrypt.files.data.db.tuples.ExportTuple
 import io.gromif.astracrypt.files.data.db.tuples.FilesDirMinimalTuple
 import io.gromif.astracrypt.files.data.db.tuples.OpenTuple
 import io.gromif.astracrypt.files.data.db.tuples.PagerTuple
@@ -17,14 +16,6 @@ class RepositoryImplOld(private val dao: FilesDao) {
 
     suspend fun getFilesCountFlow(dirId: Long): Int {
         return dao.getFilesCountFlow(dirId)
-    }
-
-    suspend fun getListDataToExportFromDir(dirId: Long): List<ExportTuple> {
-        return dao.getListDataToExport(dirId)
-    }
-
-    suspend fun getDataToExport(itemId: Long): ExportTuple {
-        return dao.getDataToExport(itemId)
     }
 
     suspend fun getDataForOpening(id: Long): OpenTuple {

@@ -1,114 +1,56 @@
 package io.gromif.astracrypt.files.work
 
-/*
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
+import android.content.pm.ServiceInfo
+import android.os.Build
+import androidx.annotation.RequiresApi
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+import androidx.hilt.work.HiltWorker
+import androidx.work.CoroutineWorker
+import androidx.work.ForegroundInfo
+import androidx.work.WorkManager
+import androidx.work.WorkerParameters
+import com.nevidimka655.astracrypt.resources.R
+import com.nevidimka655.astracrypt.utils.Api
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedInject
+import io.gromif.astracrypt.files.domain.usecase.ExportUseCase
+import io.gromif.astracrypt.utils.dispatchers.IoDispatcher
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.withContext
+import kotlin.random.Random
+
 @HiltWorker
 class ExportFilesWorker @AssistedInject constructor(
     @Assisted context: Context,
     @Assisted params: WorkerParameters,
     @IoDispatcher
     private val defaultDispatcher: CoroutineDispatcher,
-    private val repository: Repository,
-    private val keysetManager: KeysetManager,
-    private val associatedDataManager: AssociatedDataManager,
-    private val filesUtil: FilesUtil,
     private val workManager: WorkManager,
+    private val exportUseCase: ExportUseCase
 ) : CoroutineWorker(context, params) {
 
     object Args {
-        const val uriDirOutput = "yellow"
-        const val itemId = "green"
-        const val aeadInfo = "blue"
-        const val associatedData = "red"
-        const val TAG_ASSOCIATED_DATA_TRANSPORT = "orange"
-    }
-
-    private val notificationId = 201
-
-    private val aeadInfo: AeadInfo by lazy {
-        Json.decodeFromString(
-            inputData.getString(Args.aeadInfo)!!
-        )
+        const val URI_TARGET = "uri_target"
+        const val ID_LIST = "item_id"
     }
 
     override suspend fun doWork() = withContext(defaultDispatcher) {
         setForeground(getForegroundInfo())
-        TinkConfig.initStream()
-        shouldDecodeAssociatedData()
-        val outputDirUri = inputData.getString(Args.uriDirOutput)!!
-        val itemId = inputData.getLong(Args.itemId, 0)
-        val startDir = createStartDocumentFile(outputDirUri.toUri())
-        val itemIsFile = repository.getTypeById(id = itemId).isFile
-        if (startDir != null) {
-            if (itemIsFile) fileIterator(
-                exportTuple = repository.getDataToExport(itemId),
-                parentDir = startDir
-            ) else directoryIterator(
-                dirId = itemId,
-                parentDir = startDir
-            )
-        }
+        val uriTarget = inputData.getString(Args.URI_TARGET)!!
+        val itemId = inputData.getLongArray(Args.ID_LIST)!!
+        exportUseCase(
+            idList = itemId.toList(),
+            outputPath = uriTarget
+        )
         Result.success()
     }
 
-    private fun createStartDocumentFile(startUri: Uri) =
-        DocumentFile.fromTreeUri(applicationContext, startUri)
-
-    private suspend fun directoryIterator(dirId: Long, parentDir: DocumentFile?) {
-        val dirName = repository.getDataToExport(dirId).name
-        val newDirectory = parentDir?.createDirectory(dirName)
-        if (newDirectory != null) {
-            repository.getListDataToExportFromDir(dirId).forEach {
-                if (!isStopped) {
-                    if (it.path.isNotEmpty()) fileIterator(it, newDirectory)
-                    else directoryIterator(it.id, newDirectory)
-                }
-            }
-        }
-    }
-
-    private fun fileIterator(exportTuple: ExportTuple, parentDir: DocumentFile) {
-        */
-/*val (_, name, encryptionType, path) = exportTuple
-        val file = parentDir.createFile("text/binary", name)
-        if (file != null) {
-            val fileEncodedInputStream = io.getLocalFile(path).inputStream()
-            val fileInputStream = if (encryptionType != -1) {
-                keysetFactory.stream(KeysetTemplates.Stream.entries[encryptionType])
-                    .streamingAeadPrimitive()
-                    .newDecryptingStream(fileEncodedInputStream, keysetFactory.associatedData)
-            } else fileEncodedInputStream
-            contentResolver.openOutputStream(file.uri)?.use { output ->
-                fileInputStream.use { input ->
-                    val buffer = ByteArray(8192)
-                    var bytes = input.read(buffer)
-                    while (bytes >= 0 && !isStopped) {
-                        output.write(buffer, 0, bytes)
-                        bytes = input.read(buffer)
-                    }
-                }
-            }
-            if (isStopped) file.delete()
-        }*//*
-
-    }
-
-    private suspend fun shouldDecodeAssociatedData() {
-        if (aeadInfo.bindAssociatedData) {
-            val bytes = inputData.getString(Args.associatedData)!!.fromBase64()
-            TinkConfig.initAead()
-            val decodedData = keysetManager.transformAssociatedDataToWorkInstance(
-                bytesIn = bytes,
-                encryptionMode = false,
-                authenticationTag = Args.TAG_ASSOCIATED_DATA_TRANSPORT
-            )
-            associatedDataManager.setExplicitly(decodedData)
-        }
-    }
-
     override suspend fun getForegroundInfo(): ForegroundInfo {
-        val channelId = applicationContext.getString(
-            R.string.notification_channel_fileOperations_id
-        )
+        val channelId = NOTIFICATION_CHANNEL_ID
         val title = applicationContext.getString(R.string.dialog_exporting)
         val cancelText = applicationContext.getString(android.R.string.cancel)
         // This PendingIntent can be used to cancel the worker
@@ -124,7 +66,12 @@ class ExportFilesWorker @AssistedInject constructor(
             setOngoing(true)
             addAction(R.drawable.ic_close, cancelText, workerStopPendingIntent)
         }.build()
-        return ForegroundInfo(notificationId, notification, ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC)
+        val notificationId = Random.nextInt()
+        return if (Api.atLeast10()) ForegroundInfo(
+            notificationId,
+            notification,
+            ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC
+        ) else ForegroundInfo(notificationId, notification)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -136,14 +83,13 @@ class ExportFilesWorker @AssistedInject constructor(
             R.string.notification_channel_fileOperations_desc
         )
         val importance = NotificationManager.IMPORTANCE_DEFAULT
-        val channelId = applicationContext.getString(
-            R.string.notification_channel_fileOperations_id
-        )
-        val channel = NotificationChannel(channelId, name, importance).apply {
+        val channel = NotificationChannel(NOTIFICATION_CHANNEL_ID, name, importance).apply {
             description = descriptionText
         }
         // Register the channel with the system
         NotificationManagerCompat.from(applicationContext).createNotificationChannel(channel)
     }
 
-}*/
+}
+
+private const val NOTIFICATION_CHANNEL_ID = "file_operations_channel"
