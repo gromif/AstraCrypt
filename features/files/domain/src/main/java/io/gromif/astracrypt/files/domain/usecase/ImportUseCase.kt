@@ -7,31 +7,27 @@ import io.gromif.astracrypt.files.domain.repository.SettingsRepository
 import io.gromif.astracrypt.files.domain.util.FileUtil
 import io.gromif.astracrypt.files.domain.util.FlagsUtil
 import io.gromif.astracrypt.files.domain.util.PreviewUtil
+import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.ensureActive
-import kotlinx.coroutines.joinAll
-import kotlinx.coroutines.launch
 
 class ImportUseCase(
     private val repository: Repository,
     private val settingsRepository: SettingsRepository,
     private val fileUtil: FileUtil,
     private val previewUtil: PreviewUtil,
-    private val flagsUtil: FlagsUtil
+    private val flagsUtil: FlagsUtil,
 ) {
 
     suspend operator fun invoke(
         pathList: List<String>,
         parentId: Long,
-        saveSource: Boolean
+        saveSource: Boolean,
     ) = coroutineScope {
         val aeadInfo = settingsRepository.getAeadInfo()
-        pathList.chunked(4).forEach { chunk ->
-            chunk.map { path ->
-                launch {
-                    processFile(aeadInfo, path, parentId, saveSource)
-                }
-            }.joinAll()
+        pathList.forEach {
+            ensureActive()
+            processFile(aeadInfo, it, parentId, saveSource)
         }
     }
 
@@ -39,36 +35,35 @@ class ImportUseCase(
         aeadInfo: AeadInfo,
         path: String,
         parentId: Long,
-        saveSource: Boolean
+        saveSource: Boolean,
     ) = coroutineScope {
-        ensureActive()
         fileUtil.open(path)
         val name = fileUtil.getName() ?: return@coroutineScope
-        val size = fileUtil.length() ?: return@coroutineScope
-        val creationTime = fileUtil.creationTime()
         val type = fileUtil.parseType()
-        ensureActive()
-        val flags = flagsUtil.getFlags(type, path)
-        ensureActive()
-        val filePath = fileUtil.write()
-        filePath ?: return@coroutineScope
-        val previewFilePath = previewUtil.getPreviewPath(
-            type = type,
-            path = path
-        )
-        if (!saveSource) fileUtil.delete()
+
+        val filePath = async {
+            fileUtil.write().also {
+                if (!saveSource) fileUtil.delete()
+            }
+        }
+        val previewFilePath = async { previewUtil.getPreviewPath(type, path) }
+        val flags = async { flagsUtil.getFlags(type, path) }
+
+        val size = async { fileUtil.length() ?: 0 }
+        val creationTime = async { fileUtil.creationTime() }
+
         repository.insert(
             parent = parentId,
             name = name,
             fileState = FileState.Default,
             fileType = type,
-            file = filePath,
+            file = filePath.await() ?: return@coroutineScope,
             fileAead = aeadInfo.fileAeadIndex,
-            preview = previewFilePath,
+            preview = previewFilePath.await(),
             previewAead = aeadInfo.previewAeadIndex,
-            flags = flags,
-            creationTime = creationTime,
-            size = size
+            flags = flags.await(),
+            creationTime = creationTime.await(),
+            size = size.await()
         )
     }
 
