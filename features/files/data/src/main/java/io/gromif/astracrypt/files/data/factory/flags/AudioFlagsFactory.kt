@@ -17,10 +17,16 @@ class AudioFlagsFactory(
         val defaultAudioFlags = FileFlagsDto.Audio()
 
         var sampleRate = defaultAudioFlags.sampleRate
-        contentResolver.openFileDescriptor(uri, "r")?.use {
-            val mediaExtractor = MediaExtractor().apply { setDataSource(it.fileDescriptor) }
-            val track = mediaExtractor.getTrackFormat(0)
-            sampleRate = track.getInteger(MediaFormat.KEY_SAMPLE_RATE)
+        contentResolver.openFileDescriptor(uri, "r")?.use { fd ->
+            val audio = MediaExtractor()
+            try {
+                audio.setDataSource(fd.fileDescriptor)
+
+                val track = audio.getTrackFormat(0)
+                sampleRate = track.getInteger(MediaFormat.KEY_SAMPLE_RATE)
+            } finally {
+                audio.release()
+            }
         }
         val audioFlags = FileFlagsDto.Audio(sampleRate = sampleRate)
         return audioFlags.takeIf { it != defaultAudioFlags }

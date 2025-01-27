@@ -7,7 +7,6 @@ import coil.ImageLoader
 import coil.request.ImageRequest
 import com.nevidimka655.astracrypt.utils.Api
 import com.nevidimka655.astracrypt.utils.Mapper
-import com.nevidimka655.astracrypt.utils.io.MediaMetadataRetrieverCompat
 import com.nevidimka655.astracrypt.utils.io.Randomizer
 import com.nevidimka655.crypto.tink.data.AssociatedDataManager
 import com.nevidimka655.crypto.tink.data.KeysetManager
@@ -66,7 +65,6 @@ internal object UtilModule {
     fun provideFlagsUtil(
         @ApplicationContext context: Context,
         uriMapper: Mapper<String, Uri>,
-        mediaMetadataRetrieverCompat: MediaMetadataRetrieverCompat,
     ): FlagsUtil = FlagsUtilImpl(
         audioFlagsFactory = AudioFlagsFactory(
             contentResolver = context.contentResolver,
@@ -78,7 +76,6 @@ internal object UtilModule {
         ),
         videoFlagsFactory = VideoFlagsFactory(
             context = context,
-            mediaMetadataRetrieverCompat = mediaMetadataRetrieverCompat,
             uriMapper = uriMapper
         )
     )
@@ -90,7 +87,6 @@ internal object UtilModule {
         @ImportImageRequestBuilder imageRequestBuilder: ImageRequest.Builder,
 
         fileHandler: FileHandler,
-        mediaMetadataRetrieverCompat: MediaMetadataRetrieverCompat,
         bitmapCompressor: BitmapCompressor,
         uriMapper: Mapper<String, Uri>,
     ): PreviewUtil = PreviewUtilImpl(
@@ -104,7 +100,6 @@ internal object UtilModule {
         audioPreviewFactory = AudioPreviewFactory(
             uriMapper = uriMapper,
             contentResolver = context.contentResolver,
-            mediaMetadataRetrieverCompat = mediaMetadataRetrieverCompat,
             imageRequestBuilder = imageRequestBuilder,
             imageLoader = imageLoader,
             bitmapCompressor = bitmapCompressor
