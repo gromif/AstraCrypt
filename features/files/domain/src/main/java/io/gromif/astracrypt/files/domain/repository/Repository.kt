@@ -5,6 +5,7 @@ import io.gromif.astracrypt.files.domain.model.ExportData
 import io.gromif.astracrypt.files.domain.model.FileItem
 import io.gromif.astracrypt.files.domain.model.FileState
 import io.gromif.astracrypt.files.domain.model.FileType
+import kotlinx.coroutines.flow.Flow
 
 interface Repository {
 
@@ -46,6 +47,8 @@ interface Repository {
     suspend fun export(ids: List<Long>, outputPath: String)
 
     suspend fun exportPrivately(id: Long): String?
+
+    fun getRecentFilesList(): Flow<List<FileItem>>
 
     suspend fun getFilesCountFlow(dirId: Long): Int
 

@@ -17,6 +17,8 @@ import io.gromif.astracrypt.files.domain.repository.SettingsRepository
 import io.gromif.astracrypt.files.domain.util.AeadUtil
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.ensureActive
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.joinAll
 import kotlinx.coroutines.launch
 
@@ -183,6 +185,12 @@ class RepositoryImpl(
     override suspend fun exportPrivately(id: Long): String? {
         return exportUtil.use {
             it.startPrivately(id)
+        }
+    }
+
+    override fun getRecentFilesList(): Flow<List<FileItem>> {
+        return filesDao.getRecentFilesFlow().map { list ->
+            list.map { fileItemMapper(it) }
         }
     }
 

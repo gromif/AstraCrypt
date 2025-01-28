@@ -10,6 +10,7 @@ import io.gromif.astracrypt.files.domain.repository.SettingsRepository
 import io.gromif.astracrypt.files.domain.usecase.CreateFolderUseCase
 import io.gromif.astracrypt.files.domain.usecase.DeleteUseCase
 import io.gromif.astracrypt.files.domain.usecase.GetListViewModeUseCase
+import io.gromif.astracrypt.files.domain.usecase.GetRecentItemsUseCase
 import io.gromif.astracrypt.files.domain.usecase.MoveUseCase
 import io.gromif.astracrypt.files.domain.usecase.RenameUseCase
 import io.gromif.astracrypt.files.domain.usecase.SetStarredUseCase
@@ -47,5 +48,10 @@ internal object UsecaseModule {
     @Provides
     fun provideSetStarredUseCase(repository: Repository): SetStarredUseCase =
         SetStarredUseCase(repository = repository)
+
+    @ViewModelScoped
+    @Provides
+    fun provideGetRecentItemsUseCase(repository: Repository): GetRecentItemsUseCase =
+        GetRecentItemsUseCase(repository = repository)
 
 }

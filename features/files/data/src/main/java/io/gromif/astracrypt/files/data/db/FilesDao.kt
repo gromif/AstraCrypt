@@ -85,7 +85,7 @@ interface FilesDao {
 
     @RewriteQueriesToDropUnusedColumns
     @Query("select * from store_items order by id desc limit 10")
-    fun getRecentFilesFlow(): Flow<List<PagerTuple>>
+    fun getRecentFilesFlow(): Flow<List<FilesEntity>>
 
     @Query("select count(id) from store_items where type > 0")
     suspend fun getFilesCount(): Int
