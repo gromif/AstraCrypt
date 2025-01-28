@@ -17,6 +17,7 @@ val features = listOf(
     "files",
     "home",
     "notes",
+    "profile",
     "lab-zip",
     "tink-lab",
     "settings:aead"
