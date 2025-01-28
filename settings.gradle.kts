@@ -15,7 +15,6 @@ val uiModules = listOf("compose-core", "compose-details")
 val features = listOf(
     "auth",
     "files",
-    "home",
     "notes",
     "profile",
     "lab-zip",
