@@ -9,7 +9,7 @@ val coreModules = listOf(
     "resources", "utils", "design-system",
     "navigation"
 )
-val featuresModules = listOf("help",)
+val featuresModules = listOf("help", "home")
 val uiModules = listOf("compose-core", "compose-details")
 
 val features = listOf(
