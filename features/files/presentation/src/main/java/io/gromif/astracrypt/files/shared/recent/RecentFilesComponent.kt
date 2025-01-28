@@ -14,7 +14,7 @@ fun RecentFilesComponent(
     val vm: RecentFilesViewModel = hiltViewModel()
 
     val list by vm.recentFilesStateFlow.collectAsStateWithLifecycle()
-    RecentFilesList(
+    if (list.isNotEmpty()) RecentFilesList(
         list = list,
         imageLoader = vm.imageLoader,
         actions = actions
