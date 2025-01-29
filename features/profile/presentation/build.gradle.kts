@@ -15,7 +15,5 @@ dependencies {
     implementation(projects.features.profile.domain)
     implementation(projects.features.profile.di)
 
-    implementation(projects.core.designSystem)
     implementation(projects.core.resources)
-    implementation(projects.core.utils)
 }
