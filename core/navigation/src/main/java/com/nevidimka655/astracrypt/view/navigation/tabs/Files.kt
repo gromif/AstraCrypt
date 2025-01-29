@@ -1,6 +1,5 @@
 package com.nevidimka655.astracrypt.view.navigation.tabs
 
-import android.net.Uri
 import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.DriveFileMove
@@ -54,9 +53,7 @@ private fun AnimatedContentScope.FilesSharedNavigation(
     onFabClick: Flow<Any>,
     snackbarHostState: SnackbarHostState,
     searchQueryState: StateFlow<String>,
-    toFiles: (id: Long, name: String) -> Unit = { _, _ -> },
-    toExport: (id: Long, output: Uri) -> Unit = { _, _ -> },
-    toExportPrivately: (id: Long) -> Unit = {},
+    navActions: FilesNavActions,
 ) {
     val context = LocalContext.current
     var modeState by rememberSaveable { mutableStateOf<Mode>(Mode.Default) }
@@ -112,33 +109,17 @@ private fun AnimatedContentScope.FilesSharedNavigation(
         snackbarHostState = snackbarHostState,
         searchQueryState = searchQueryState,
         onModeChange = { modeState = it },
-        navActions = object : FilesNavActions {
-            override fun toFiles(id: Long, name: String) {
-                toFiles(id, name)
-            }
-
-            override fun toExport(id: Long, output: Uri) {
-                toExport(id, output)
-            }
-
-            override fun toExportPrivately(id: Long) {
-                toExportPrivately(id)
-            }
-
-            override fun toDetails(id: Long) {
-                TODO("Not yet implemented")
-            }
-        },
+        navActions = navActions,
     )
 }
 
-fun NavGraphBuilder.tabStarred(
+internal fun NavGraphBuilder.tabStarred(
     onUiStateChange: (UiState) -> Unit,
     onToolbarActions: Flow<ToolbarActions.Action>,
     onFabClick: Flow<Any>,
     snackbarHostState: SnackbarHostState,
     searchQueryState: StateFlow<String>,
-    toFiles: (id: Long, name: String) -> Unit,
+    navActions: FilesNavActions,
 ) = composable<StarredRoute> {
     FilesSharedNavigation(
         isStarred = true,
@@ -147,18 +128,17 @@ fun NavGraphBuilder.tabStarred(
         onFabClick = onFabClick,
         snackbarHostState = snackbarHostState,
         searchQueryState = searchQueryState,
-        toFiles = toFiles,
+        navActions = navActions,
     )
 }
 
-fun NavGraphBuilder.tabFiles(
+internal fun NavGraphBuilder.tabFiles(
     onUiStateChange: (UiState) -> Unit,
     onToolbarActions: Flow<ToolbarActions.Action>,
     onFabClick: Flow<Any>,
     snackbarHostState: SnackbarHostState,
     searchQueryState: StateFlow<String>,
-    toExport: (id: Long, output: Uri) -> Unit,
-    toExportPrivately: (id: Long) -> Unit = {},
+    navActions: FilesNavActions,
 ) = composable<FilesRoute> {
     val route: FilesRoute = it.toRoute()
     FilesSharedNavigation(
@@ -169,8 +149,7 @@ fun NavGraphBuilder.tabFiles(
         onFabClick = onFabClick,
         snackbarHostState = snackbarHostState,
         searchQueryState = searchQueryState,
-        toExport = toExport,
-        toExportPrivately = toExportPrivately,
+        navActions = navActions,
     )
 }
 

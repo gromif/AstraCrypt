@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.view.composables.settings
+package com.nevidimka655.astracrypt.view.navigation.tabs.settings
 
 import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
@@ -6,7 +6,6 @@ import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Palette
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.Security
-import androidx.compose.material.icons.outlined.Storefront
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.nevidimka655.astracrypt.resources.R
 
