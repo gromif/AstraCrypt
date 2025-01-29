@@ -7,6 +7,7 @@ import coil.ImageLoader
 import coil.request.ImageRequest
 import com.nevidimka655.astracrypt.utils.Api
 import com.nevidimka655.astracrypt.utils.Mapper
+import com.nevidimka655.astracrypt.utils.io.BitmapCompressor
 import com.nevidimka655.astracrypt.utils.io.Randomizer
 import com.nevidimka655.crypto.tink.data.AssociatedDataManager
 import com.nevidimka655.crypto.tink.data.KeysetManager
@@ -20,7 +21,6 @@ import io.gromif.astracrypt.files.data.factory.flags.ImageFlagsFactory
 import io.gromif.astracrypt.files.data.factory.flags.VideoFlagsFactory
 import io.gromif.astracrypt.files.data.factory.preview.AudioPreviewFactory
 import io.gromif.astracrypt.files.data.factory.preview.DefaultPreviewFactory
-import io.gromif.astracrypt.files.data.util.BitmapCompressor
 import io.gromif.astracrypt.files.data.util.FileHandler
 import io.gromif.astracrypt.files.data.util.FileUtilFactoryImpl
 import io.gromif.astracrypt.files.data.util.FlagsUtilImpl
@@ -30,6 +30,7 @@ import io.gromif.astracrypt.files.domain.repository.SettingsRepository
 import io.gromif.astracrypt.files.domain.util.FileUtil
 import io.gromif.astracrypt.files.domain.util.FlagsUtil
 import io.gromif.astracrypt.files.domain.util.PreviewUtil
+import javax.inject.Qualifier
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -85,9 +86,9 @@ internal object UtilModule {
         @ApplicationContext context: Context,
         @FilesImageLoader imageLoader: ImageLoader,
         @ImportImageRequestBuilder imageRequestBuilder: ImageRequest.Builder,
+        @FilesBitmapCompressor bitmapCompressor: BitmapCompressor,
 
         fileHandler: FileHandler,
-        bitmapCompressor: BitmapCompressor,
         uriMapper: Mapper<String, Uri>,
     ): PreviewUtil = PreviewUtilImpl(
         fileHandler = fileHandler,
@@ -106,11 +107,16 @@ internal object UtilModule {
         )
     )
 
+    @FilesBitmapCompressor
     @Provides
     fun provideBitmapCompressor(): BitmapCompressor = BitmapCompressor(
         compressFormat = if (Api.atLeast11()) Bitmap.CompressFormat.WEBP_LOSSY else {
             Bitmap.CompressFormat.WEBP
         }
     )
+
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class FilesBitmapCompressor
 
 }

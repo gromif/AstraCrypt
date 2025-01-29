@@ -1,4 +1,4 @@
-package io.gromif.astracrypt.files.data.util
+package com.nevidimka655.astracrypt.utils.io
 
 import android.graphics.Bitmap
 import java.io.ByteArrayOutputStream
