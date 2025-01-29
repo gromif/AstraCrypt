@@ -2,6 +2,7 @@ package io.gromif.astracrypt.profile.presentation.widget
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -13,6 +14,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.ImageLoader
@@ -49,6 +51,7 @@ internal fun Widget(
     ) {
         Text(
             modifier = Modifier
+                .defaultMinSize(minWidth = 180.dp)
                 .clip(MaterialTheme.shapes.small)
                 .run {
                 if (profile == null) shimmerEffect() else this
@@ -56,6 +59,7 @@ internal fun Widget(
             text = if (profile == null) "" else stringResource(
                 id = R.string.hello, profile.name ?: stringResource(R.string.user)
             ),
+            textAlign = TextAlign.Center,
             style = MaterialTheme.typography.titleLarge,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.onSurface
