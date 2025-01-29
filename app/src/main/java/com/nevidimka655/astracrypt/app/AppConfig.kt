@@ -9,9 +9,6 @@ object AppConfig {
 
     const val ITEM_NAME_MAX_SIZE = 90
 
-    const val PROFILE_NAME_MAX_SIZE = 30
-    const val PROFILE_IMAGE_SIZE = 300
-
     const val PAGING_PAGE_SIZE = 30
     const val PAGING_INITIAL_LOAD = PAGING_PAGE_SIZE
     const val PAGING_ENABLE_PLACEHOLDERS = false

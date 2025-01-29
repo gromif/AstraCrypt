@@ -39,8 +39,4 @@ class FilesUtil (
         it.deleteRecursively()
     }
 
-    fun getLocalFile(relativePath: String?) = File("$dataDir/$relativePath")
-
-    fun getProfileIconFile() = File("$filesDir/icon")
-
 }

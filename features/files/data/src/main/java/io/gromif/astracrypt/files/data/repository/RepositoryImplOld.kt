@@ -3,24 +3,8 @@ package io.gromif.astracrypt.files.data.repository
 import io.gromif.astracrypt.files.data.db.FilesDao
 import io.gromif.astracrypt.files.data.db.tuples.DatabaseTransformTuple
 import io.gromif.astracrypt.files.data.db.tuples.FilesDirMinimalTuple
-import io.gromif.astracrypt.files.data.db.tuples.OpenTuple
-import io.gromif.astracrypt.files.data.db.tuples.PagerTuple
-import io.gromif.astracrypt.files.domain.model.FileType
-import kotlinx.coroutines.flow.Flow
 
 class RepositoryImplOld(private val dao: FilesDao) {
-
-    suspend fun getTypeById(id: Long): FileType {
-        return FileType.entries[dao.getTypeById(id)]
-    }
-
-    suspend fun getFilesCountFlow(dirId: Long): Int {
-        return dao.getFilesCountFlow(dirId)
-    }
-
-    suspend fun getDataForOpening(id: Long): OpenTuple {
-        return dao.getDataToOpen(id)
-    }
 
     suspend fun getParentDirInfo(dirId: Long): FilesDirMinimalTuple? {
         return dao.getParentDirInfo(dirId)
@@ -63,8 +47,4 @@ class RepositoryImplOld(private val dao: FilesDao) {
         dirIterator(id)
         return DetailsFolderContent(foldersCount, filesCount)
     }*/
-
-    fun getRecentFilesFlow(): Flow<List<PagerTuple>> {
-        return dao.getRecentFilesFlow()
-    }
 }
