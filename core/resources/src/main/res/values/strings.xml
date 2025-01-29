@@ -30,7 +30,7 @@
     <string name="signIn">Sign in</string>
     <string name="hint">Hint</string>
     <string name="t_noInternet">No internet</string>
-    <string name="hello">Hello %1$s</string>
+    <string name="hello">Hello, %1$s</string>
     <string name="welcome_1">Welcome back!</string>
     <string name="recentlyAdded">Recently added</string>
     <string name="open">Open</string>
