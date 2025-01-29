@@ -12,4 +12,6 @@ android {
 dependencies {
     implementation(projects.features.profile.presentation)
     implementation(projects.features.files.presentation)
+
+    implementation(projects.core.resources)
 }
