@@ -9,8 +9,6 @@ import com.nevidimka655.astracrypt.utils.Api
 import com.nevidimka655.astracrypt.utils.Mapper
 import com.nevidimka655.astracrypt.utils.io.BitmapCompressor
 import com.nevidimka655.astracrypt.utils.io.Randomizer
-import com.nevidimka655.crypto.tink.data.AssociatedDataManager
-import com.nevidimka655.crypto.tink.data.KeysetManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,6 +28,8 @@ import io.gromif.astracrypt.files.domain.repository.SettingsRepository
 import io.gromif.astracrypt.files.domain.util.FileUtil
 import io.gromif.astracrypt.files.domain.util.FlagsUtil
 import io.gromif.astracrypt.files.domain.util.PreviewUtil
+import io.gromif.crypto.tink.data.AssociatedDataManager
+import io.gromif.crypto.tink.data.KeysetManager
 import javax.inject.Qualifier
 
 @Module

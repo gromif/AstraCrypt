@@ -1,9 +1,9 @@
 package io.gromif.astracrypt.settings.aead.data.repository
 
-import com.nevidimka655.crypto.tink.domain.KeysetTemplates
 import io.gromif.astracrypt.settings.aead.domain.model.AeadTemplate
 import io.gromif.astracrypt.settings.aead.domain.repository.Repository
 import io.gromif.astracrypt.settings.aead.domain.repository.SettingsRepository
+import io.gromif.crypto.tink.domain.KeysetTemplates
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 

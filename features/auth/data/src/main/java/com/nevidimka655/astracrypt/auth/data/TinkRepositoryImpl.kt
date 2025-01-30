@@ -2,11 +2,11 @@ package com.nevidimka655.astracrypt.auth.data
 
 import com.google.crypto.tink.prf.PrfSet
 import com.nevidimka655.astracrypt.auth.domain.TinkRepository
-import com.nevidimka655.crypto.tink.core.GetGlobalAssociatedDataPrf
-import com.nevidimka655.crypto.tink.data.AssociatedDataManager
-import com.nevidimka655.crypto.tink.data.KeysetManager
-import com.nevidimka655.crypto.tink.domain.KeysetTemplates
-import com.nevidimka655.crypto.tink.extensions.prf
+import io.gromif.crypto.tink.core.GetGlobalAssociatedDataPrf
+import io.gromif.crypto.tink.data.AssociatedDataManager
+import io.gromif.crypto.tink.data.KeysetManager
+import io.gromif.crypto.tink.domain.KeysetTemplates
+import io.gromif.crypto.tink.extensions.prf
 
 class TinkRepositoryImpl(
     private val keysetManager: KeysetManager,

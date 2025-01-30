@@ -5,12 +5,12 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import com.nevidimka655.astracrypt.utils.Mapper
-import com.nevidimka655.crypto.tink.core.encoders.Base64Util
-import com.nevidimka655.crypto.tink.data.KeysetManager
-import com.nevidimka655.crypto.tink.domain.KeysetTemplates
 import io.gromif.astracrypt.profile.data.dto.ProfileDto
 import io.gromif.astracrypt.profile.domain.model.Profile
 import io.gromif.astracrypt.profile.domain.repository.SettingsRepository
+import io.gromif.crypto.tink.core.encoders.Base64Util
+import io.gromif.crypto.tink.data.KeysetManager
+import io.gromif.crypto.tink.domain.KeysetTemplates
 import io.gromif.tink_datastore.TinkDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first

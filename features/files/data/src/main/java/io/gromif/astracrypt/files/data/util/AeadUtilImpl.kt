@@ -1,12 +1,12 @@
 package io.gromif.astracrypt.files.data.util
 
 import com.google.crypto.tink.Aead
-import com.nevidimka655.crypto.tink.core.encoders.Base64Util
-import com.nevidimka655.crypto.tink.data.AssociatedDataManager
-import com.nevidimka655.crypto.tink.data.KeysetManager
-import com.nevidimka655.crypto.tink.domain.KeysetTemplates
-import com.nevidimka655.crypto.tink.extensions.aead
 import io.gromif.astracrypt.files.domain.util.AeadUtil
+import io.gromif.crypto.tink.core.encoders.Base64Util
+import io.gromif.crypto.tink.data.AssociatedDataManager
+import io.gromif.crypto.tink.data.KeysetManager
+import io.gromif.crypto.tink.domain.KeysetTemplates
+import io.gromif.crypto.tink.extensions.aead
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 

@@ -2,11 +2,11 @@ package io.gromif.astracrypt.files.data.util
 
 import com.google.crypto.tink.StreamingAead
 import com.nevidimka655.astracrypt.utils.io.Randomizer
-import com.nevidimka655.crypto.tink.data.AssociatedDataManager
-import com.nevidimka655.crypto.tink.data.KeysetManager
-import com.nevidimka655.crypto.tink.domain.KeysetTemplates
-import com.nevidimka655.crypto.tink.extensions.streamingAead
 import io.gromif.astracrypt.files.domain.repository.SettingsRepository
+import io.gromif.crypto.tink.data.AssociatedDataManager
+import io.gromif.crypto.tink.data.KeysetManager
+import io.gromif.crypto.tink.domain.KeysetTemplates
+import io.gromif.crypto.tink.extensions.streamingAead
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.isActive
 import java.io.File

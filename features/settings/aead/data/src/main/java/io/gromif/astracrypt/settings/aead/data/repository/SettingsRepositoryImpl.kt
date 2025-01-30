@@ -4,8 +4,8 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
-import com.nevidimka655.crypto.tink.domain.KeysetTemplates
 import io.gromif.astracrypt.settings.aead.domain.repository.SettingsRepository
+import io.gromif.crypto.tink.domain.KeysetTemplates
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map

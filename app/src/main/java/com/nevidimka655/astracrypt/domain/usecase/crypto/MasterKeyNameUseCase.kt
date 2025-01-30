@@ -1,8 +1,8 @@
 package com.nevidimka655.astracrypt.domain.usecase.crypto
 
-import com.nevidimka655.crypto.tink.domain.keyset.MasterKeyName
-import com.nevidimka655.crypto.tink.core.encoders.HexUtil
-import com.nevidimka655.crypto.tink.core.hash.Sha256Util
+import io.gromif.crypto.tink.core.encoders.HexUtil
+import io.gromif.crypto.tink.core.hash.Sha256Util
+import io.gromif.crypto.tink.domain.keyset.MasterKeyName
 
 class MasterKeyNameUseCase(
     private val hexUtil: HexUtil,

@@ -6,13 +6,13 @@ import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.preferencesDataStoreFile
 import com.nevidimka655.astracrypt.auth.data.datastore.AuthDataStoreManager
-import com.nevidimka655.crypto.tink.core.encoders.Base64Util
-import com.nevidimka655.crypto.tink.data.KeysetManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import io.gromif.crypto.tink.core.encoders.Base64Util
+import io.gromif.crypto.tink.data.KeysetManager
 import io.gromif.tink_datastore.TinkDataStore
 import javax.inject.Singleton
 

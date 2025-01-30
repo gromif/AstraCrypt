@@ -5,19 +5,19 @@ import com.nevidimka655.astracrypt.data.crypto.KeysetFactoryImpl
 import com.nevidimka655.astracrypt.data.datastore.KeysetDataStoreManager
 import com.nevidimka655.astracrypt.domain.usecase.crypto.MasterKeyNameUseCase
 import com.nevidimka655.astracrypt.domain.usecase.crypto.PrefsKeyNameUseCase
-import com.nevidimka655.crypto.tink.core.GetGlobalAssociatedDataPrf
-import com.nevidimka655.crypto.tink.core.encoders.HexUtil
-import com.nevidimka655.crypto.tink.core.hash.Sha256Util
-import com.nevidimka655.crypto.tink.core.hash.Sha384Util
-import com.nevidimka655.crypto.tink.core.parsers.KeysetParserWithAead
-import com.nevidimka655.crypto.tink.core.serializers.KeysetSerializerWithAead
-import com.nevidimka655.crypto.tink.data.AssociatedDataManager
-import com.nevidimka655.crypto.tink.data.KeysetManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import io.gromif.crypto.tink.core.GetGlobalAssociatedDataPrf
+import io.gromif.crypto.tink.core.encoders.HexUtil
+import io.gromif.crypto.tink.core.hash.Sha256Util
+import io.gromif.crypto.tink.core.hash.Sha384Util
+import io.gromif.crypto.tink.core.parsers.KeysetParserWithAead
+import io.gromif.crypto.tink.core.serializers.KeysetSerializerWithAead
+import io.gromif.crypto.tink.data.AssociatedDataManager
+import io.gromif.crypto.tink.data.KeysetManager
 import java.io.File
 import javax.inject.Singleton
 

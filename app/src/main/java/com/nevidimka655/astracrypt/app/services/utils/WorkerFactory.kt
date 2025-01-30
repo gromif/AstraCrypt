@@ -3,7 +3,7 @@ package com.nevidimka655.astracrypt.app.services.utils
 import androidx.lifecycle.LiveData
 import androidx.work.WorkInfo
 import androidx.work.WorkManager
-import com.nevidimka655.crypto.tink.data.KeysetManager
+import io.gromif.crypto.tink.data.KeysetManager
 
 class WorkerFactory(
     private val workManager: WorkManager,

@@ -6,9 +6,9 @@ import com.google.crypto.tink.integration.android.AndroidKeystore
 import com.nevidimka655.astracrypt.data.datastore.KeysetDataStoreManager
 import com.nevidimka655.astracrypt.domain.usecase.crypto.MasterKeyNameUseCase
 import com.nevidimka655.astracrypt.domain.usecase.crypto.PrefsKeyNameUseCase
-import com.nevidimka655.crypto.tink.core.parsers.KeysetParserWithAead
-import com.nevidimka655.crypto.tink.core.serializers.KeysetSerializerWithAead
-import com.nevidimka655.crypto.tink.domain.keyset.KeysetFactory
+import io.gromif.crypto.tink.core.parsers.KeysetParserWithAead
+import io.gromif.crypto.tink.core.serializers.KeysetSerializerWithAead
+import io.gromif.crypto.tink.domain.keyset.KeysetFactory
 
 class KeysetFactoryImpl(
     private val keysetDataStoreManager: KeysetDataStoreManager,

@@ -5,8 +5,6 @@ import coil.ImageLoader
 import coil.decode.VideoFrameDecoder
 import coil.request.CachePolicy
 import coil.transition.CrossfadeTransition
-import com.nevidimka655.crypto.tink.data.AssociatedDataManager
-import com.nevidimka655.crypto.tink.data.KeysetManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,6 +12,8 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import io.gromif.astracrypt.files.data.io.TinkCoilFetcherFactory
 import io.gromif.astracrypt.files.data.util.FileHandler
+import io.gromif.crypto.tink.data.AssociatedDataManager
+import io.gromif.crypto.tink.data.KeysetManager
 import javax.inject.Qualifier
 import javax.inject.Singleton
 

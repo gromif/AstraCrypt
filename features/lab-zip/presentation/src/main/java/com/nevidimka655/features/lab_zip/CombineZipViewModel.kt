@@ -14,13 +14,13 @@ import androidx.work.workDataOf
 import com.google.crypto.tink.integration.android.AndroidKeystore
 import com.nevidimka655.astracrypt.utils.Mapper
 import com.nevidimka655.astracrypt.utils.io.WorkerSerializer
-import com.nevidimka655.crypto.tink.core.encoders.Base64Util
 import com.nevidimka655.domain.lab_zip.FileInfo
 import com.nevidimka655.domain.lab_zip.usecase.GetFileInfosUseCase
 import com.nevidimka655.domain.lab_zip.usecase.GetSourceFileInfoUseCase
 import com.nevidimka655.features.lab_zip.work.CombinedZipWorker
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.gromif.astracrypt.utils.dispatchers.IoDispatcher
+import io.gromif.crypto.tink.core.encoders.Base64Util
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import javax.inject.Inject
