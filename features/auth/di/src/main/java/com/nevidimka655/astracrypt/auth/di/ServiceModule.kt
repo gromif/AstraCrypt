@@ -6,6 +6,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.android.scopes.ViewModelScoped
 import io.gromif.crypto.tink.core.GetGlobalAssociatedDataPrf
 import io.gromif.crypto.tink.data.AssociatedDataManager
 import io.gromif.crypto.tink.data.KeysetManager
@@ -14,6 +15,7 @@ import io.gromif.crypto.tink.data.KeysetManager
 @InstallIn(ViewModelComponent::class)
 internal object ServiceModule {
 
+    @ViewModelScoped
     @Provides
     fun provideTinkService(
         keysetManager: KeysetManager,
