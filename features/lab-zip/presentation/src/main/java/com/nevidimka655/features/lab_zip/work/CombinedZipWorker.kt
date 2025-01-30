@@ -23,7 +23,7 @@ import com.nevidimka655.astracrypt.utils.Mapper
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import io.gromif.astracrypt.utils.dispatchers.IoDispatcher
-import io.gromif.crypto.tink.encoders.Base64Util
+import io.gromif.crypto.tink.encoders.Base64Encoder
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import java.io.File
@@ -37,7 +37,7 @@ internal class CombinedZipWorker @AssistedInject constructor(
     @IoDispatcher
     private val defaultDispatcher: CoroutineDispatcher,
     private val workManager: WorkManager,
-    private val base64Util: Base64Util,
+    private val base64Encoder: Base64Encoder,
     private val stringToUriMapper: Mapper<String, Uri>,
 ) : CoroutineWorker(context, params) {
     private val notificationId = 203
@@ -49,13 +49,13 @@ internal class CombinedZipWorker @AssistedInject constructor(
         val dataAead = AndroidKeystore.getAead(ANDROID_KEYSET_ALIAS)
         val dataAD = ASSOCIATED_DATA.toByteArray()
         val destinationUriString = dataAead.decrypt(
-            base64Util.decode(inputData.getString(Args.TARGET_URI)!!), dataAD
+            base64Encoder.decode(inputData.getString(Args.TARGET_URI)!!), dataAD
         ).decodeToString()
         val sourceUriString = dataAead.decrypt(
-            base64Util.decode(inputData.getString(Args.SOURCE_URI)!!), dataAD
+            base64Encoder.decode(inputData.getString(Args.SOURCE_URI)!!), dataAD
         ).decodeToString()
         val contentUrisFile = dataAead.decrypt(
-            base64Util.decode(inputData.getString(Args.ZIP_FILE_URI)!!), dataAD
+            base64Encoder.decode(inputData.getString(Args.ZIP_FILE_URI)!!), dataAD
         ).decodeToString()
         AndroidKeystore.deleteKey(ANDROID_KEYSET_ALIAS)
 

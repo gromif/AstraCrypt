@@ -10,7 +10,7 @@ import io.gromif.crypto.tink.core.serializers.KeysetSerializerWithAead
 import io.gromif.crypto.tink.core.serializers.KeysetSerializerWithKey
 import io.gromif.crypto.tink.data.keyset.KeysetAeadFactory
 import io.gromif.crypto.tink.data.keyset.KeysetKeyFactory
-import io.gromif.crypto.tink.encoders.HexUtil
+import io.gromif.crypto.tink.encoders.HexEncoder
 import javax.inject.Singleton
 
 @Module
@@ -30,14 +30,14 @@ object SerializeKeysetModule {
     @Singleton
     @Provides
     fun provideSerializeKeysetByAeadService(
-        hexUtil: HexUtil
-    ) = KeysetSerializerWithAead(hexUtil = hexUtil)
+        hexEncoder: HexEncoder
+    ) = KeysetSerializerWithAead(hexEncoder = hexEncoder)
 
     @Singleton
     @Provides
     fun provideKeysetSerializer(
-        hexUtil: HexUtil
-    ) = KeysetSerializer(hexUtil = hexUtil)
+        hexEncoder: HexEncoder
+    ) = KeysetSerializer(hexEncoder = hexEncoder)
 
     @Singleton
     @Provides

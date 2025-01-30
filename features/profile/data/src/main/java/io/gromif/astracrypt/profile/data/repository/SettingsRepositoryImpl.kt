@@ -10,7 +10,7 @@ import io.gromif.astracrypt.profile.domain.model.Profile
 import io.gromif.astracrypt.profile.domain.repository.SettingsRepository
 import io.gromif.crypto.tink.data.KeysetManager
 import io.gromif.crypto.tink.domain.KeysetTemplates
-import io.gromif.crypto.tink.encoders.Base64Util
+import io.gromif.crypto.tink.encoders.Base64Encoder
 import io.gromif.tink_datastore.TinkDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
@@ -24,11 +24,11 @@ class SettingsRepositoryImpl(
     private val profileDtoMapper: Mapper<Profile, ProfileDto>,
     keysetManager: KeysetManager,
     tinkDataStoreParams: Params,
-    base64Util: Base64Util,
+    base64Encoder: Base64Encoder,
 ) : SettingsRepository, TinkDataStore(
     dataStore = dataStore,
     keysetManager = keysetManager,
-    base64Util = base64Util,
+    base64Encoder = base64Encoder,
     params = tinkDataStoreParams
 ) {
     override val encryptedKeys: List<String> = listOf(KEY_PROFILE_INFO)

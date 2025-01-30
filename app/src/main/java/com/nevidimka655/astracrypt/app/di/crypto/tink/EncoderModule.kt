@@ -4,16 +4,16 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import io.gromif.crypto.tink.encoders.Base64Util
-import io.gromif.crypto.tink.encoders.HexUtil
+import io.gromif.crypto.tink.encoders.Base64Encoder
+import io.gromif.crypto.tink.encoders.HexEncoder
 
 @Module
 @InstallIn(SingletonComponent::class)
 object EncoderModule {
 
     @Provides
-    fun provideHexService() = HexUtil()
+    fun provideHexService() = HexEncoder()
 
     @Provides
-    fun provideBase64Service() = Base64Util()
+    fun provideBase64Service() = Base64Encoder()
 }

@@ -20,7 +20,7 @@ import com.nevidimka655.domain.lab_zip.usecase.GetSourceFileInfoUseCase
 import com.nevidimka655.features.lab_zip.work.CombinedZipWorker
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.gromif.astracrypt.utils.dispatchers.IoDispatcher
-import io.gromif.crypto.tink.encoders.Base64Util
+import io.gromif.crypto.tink.encoders.Base64Encoder
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -33,7 +33,7 @@ internal class CombineZipViewModel @Inject constructor(
     private val getFileInfosUseCase: GetFileInfosUseCase,
     private val workManager: WorkManager,
     private val workerSerializer: WorkerSerializer,
-    private val base64Util: Base64Util,
+    private val base64Encoder: Base64Encoder,
     private val uriToStringMapper: Mapper<Uri, String>
 ) : ViewModel() {
     val filesListState = mutableStateListOf<FileInfo>()
@@ -44,14 +44,14 @@ internal class CombineZipViewModel @Inject constructor(
         val dataAead = AndroidKeystore.getAead(CombinedZipWorker.ANDROID_KEYSET_ALIAS)
         val dataAD = CombinedZipWorker.ASSOCIATED_DATA.toByteArray()
         val contentUrisFile = workerSerializer.saveStringListToFile(filesListState.map { it.path })
-        val contentUrisFileEncrypted = base64Util.encode(
+        val contentUrisFileEncrypted = base64Encoder.encode(
             dataAead.encrypt(contentUrisFile.toString().toByteArray(), dataAD)
         )
-        val zipFileUri = base64Util.encode(
+        val zipFileUri = base64Encoder.encode(
             dataAead.encrypt(sourceState!!.path.toByteArray(), dataAD)
         )
         val targetUriString = uriToStringMapper(targetUri)
-        val targetUri = base64Util.encode(dataAead.encrypt(targetUriString.toByteArray(), dataAD))
+        val targetUri = base64Encoder.encode(dataAead.encrypt(targetUriString.toByteArray(), dataAD))
         val data = workDataOf(
             CombinedZipWorker.Args.ZIP_FILE_URI to contentUrisFileEncrypted,
             CombinedZipWorker.Args.SOURCE_URI to zipFileUri,

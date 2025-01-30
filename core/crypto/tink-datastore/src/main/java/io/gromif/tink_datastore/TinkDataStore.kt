@@ -10,7 +10,7 @@ import com.google.crypto.tink.Aead
 import com.google.crypto.tink.prf.PrfSet
 import io.gromif.crypto.tink.data.KeysetManager
 import io.gromif.crypto.tink.domain.KeysetTemplates
-import io.gromif.crypto.tink.encoders.Base64Util
+import io.gromif.crypto.tink.encoders.Base64Encoder
 import io.gromif.crypto.tink.extensions.aead
 import io.gromif.crypto.tink.extensions.prf
 import kotlinx.coroutines.flow.first
@@ -20,7 +20,7 @@ import kotlinx.coroutines.sync.withLock
 abstract class TinkDataStore(
     private val dataStore: DataStore<Preferences>,
     private val keysetManager: KeysetManager,
-    private val base64Util: Base64Util,
+    private val base64Encoder: Base64Encoder,
     private val params: Params,
 ) {
 
@@ -97,11 +97,11 @@ abstract class TinkDataStore(
 
     private fun Aead.encryptWithBase64(value: String, associatedData: ByteArray): String {
         val encryptedBytes = encrypt(value.toByteArray(), associatedData)
-        return base64Util.encode(bytes = encryptedBytes)
+        return base64Encoder.encode(bytes = encryptedBytes)
     }
 
     private fun Aead.decryptWithBase64(value: String, associatedData: ByteArray): String {
-        val encryptedBytes = base64Util.decode(value = value)
+        val encryptedBytes = base64Encoder.decode(value = value)
         return decrypt(encryptedBytes, associatedData).decodeToString()
     }
 
@@ -111,7 +111,7 @@ abstract class TinkDataStore(
         return preferencesKeyHashMap[key] ?: run {
             val keyPrfInterface = getKeyPrf()
             val prfBytes = keyPrfInterface.computePrimary(key.toByteArray(), params.keyPrfHashSize)
-            base64Util.encode(prfBytes).also { preferencesKeyHashMap[key] = it }
+            base64Encoder.encode(prfBytes).also { preferencesKeyHashMap[key] = it }
         }
     }
 

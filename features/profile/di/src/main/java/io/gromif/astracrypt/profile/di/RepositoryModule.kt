@@ -17,7 +17,7 @@ import io.gromif.astracrypt.profile.domain.model.Profile
 import io.gromif.astracrypt.profile.domain.repository.Repository
 import io.gromif.astracrypt.profile.domain.repository.SettingsRepository
 import io.gromif.crypto.tink.data.KeysetManager
-import io.gromif.crypto.tink.encoders.Base64Util
+import io.gromif.crypto.tink.encoders.Base64Encoder
 import io.gromif.tink_datastore.TinkDataStore
 
 @Module
@@ -39,7 +39,7 @@ internal object RepositoryModule {
     fun provideSettingsRepository(
         dataStore: DataStore<Preferences>,
         keysetManager: KeysetManager,
-        base64Util: Base64Util,
+        base64Encoder: Base64Encoder,
         profileMapper: Mapper<ProfileDto, Profile>,
         profileDtoMapper: Mapper<Profile, ProfileDto>,
     ): SettingsRepository = SettingsRepositoryImpl(
@@ -52,7 +52,7 @@ internal object RepositoryModule {
             keyAD = null,
             valueAD = null
         ),
-        base64Util = base64Util,
+        base64Encoder = base64Encoder,
     )
 
 }

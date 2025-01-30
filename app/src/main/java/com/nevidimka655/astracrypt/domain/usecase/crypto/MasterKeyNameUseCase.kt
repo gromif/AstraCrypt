@@ -2,10 +2,10 @@ package com.nevidimka655.astracrypt.domain.usecase.crypto
 
 import io.gromif.crypto.tink.core.hash.Sha256Util
 import io.gromif.crypto.tink.domain.keyset.MasterKeyName
-import io.gromif.crypto.tink.encoders.HexUtil
+import io.gromif.crypto.tink.encoders.HexEncoder
 
 class MasterKeyNameUseCase(
-    private val hexUtil: HexUtil,
+    private val hexEncoder: HexEncoder,
     private val sha256Util: Sha256Util
 ): MasterKeyName {
 
@@ -16,7 +16,7 @@ class MasterKeyNameUseCase(
         val tagBytes = tag.toByteArray()
         val masterAliasBytes = byteArrayOf(*tagBytes, *associatedData)
         val masterAliasHashBytes = sha256Util.compute(value = masterAliasBytes)
-        return hexUtil.encode(bytes = masterAliasHashBytes)
+        return hexEncoder.encode(bytes = masterAliasHashBytes)
     }
 
 }

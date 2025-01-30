@@ -12,7 +12,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import io.gromif.crypto.tink.data.KeysetManager
-import io.gromif.crypto.tink.encoders.Base64Util
+import io.gromif.crypto.tink.encoders.Base64Encoder
 import io.gromif.tink_datastore.TinkDataStore
 import javax.inject.Singleton
 
@@ -27,7 +27,7 @@ internal object DatastoreModule {
     fun provideAuthDataStoreManager(
         @ApplicationContext context: Context,
         keysetManager: KeysetManager,
-        base64Util: Base64Util
+        base64Encoder: Base64Encoder
     ): AuthDataStoreManager = AuthDataStoreManager(
         dataStore = PreferenceDataStoreFactory.create(
             corruptionHandler = ReplaceFileCorruptionHandler(
@@ -36,7 +36,7 @@ internal object DatastoreModule {
             produceFile = { context.preferencesDataStoreFile(AUTH) }
         ),
         keysetManager = keysetManager,
-        base64Util = base64Util,
+        base64Encoder = base64Encoder,
         tinkDataStoreParams = TinkDataStore.Params(purpose = "auth")
     )
 

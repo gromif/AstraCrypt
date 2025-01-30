@@ -8,7 +8,7 @@ import io.gromif.astracrypt.files.data.util.AeadUtilImpl
 import io.gromif.astracrypt.files.domain.util.AeadUtil
 import io.gromif.crypto.tink.data.AssociatedDataManager
 import io.gromif.crypto.tink.data.KeysetManager
-import io.gromif.crypto.tink.encoders.Base64Util
+import io.gromif.crypto.tink.encoders.Base64Encoder
 import javax.inject.Singleton
 
 @Module
@@ -20,11 +20,11 @@ internal object UtilModule {
     fun provideAeadUtil(
         keysetManager: KeysetManager,
         associatedDataManager: AssociatedDataManager,
-        base64Util: Base64Util
+        base64Encoder: Base64Encoder
     ): AeadUtil = AeadUtilImpl(
         keysetManager = keysetManager,
         associatedDataManager = associatedDataManager,
-        base64Util = base64Util
+        base64Encoder = base64Encoder
     )
 
 }

@@ -8,7 +8,7 @@ import io.gromif.crypto.tink.core.parsers.KeysetParser
 import io.gromif.crypto.tink.core.parsers.KeysetParserWithAead
 import io.gromif.crypto.tink.core.parsers.KeysetParserWithKey
 import io.gromif.crypto.tink.data.keyset.KeysetAeadFactory
-import io.gromif.crypto.tink.encoders.HexUtil
+import io.gromif.crypto.tink.encoders.HexEncoder
 import javax.inject.Singleton
 
 @Module
@@ -18,14 +18,14 @@ object ParseKeysetModule {
     @Singleton
     @Provides
     fun provideKeysetParser(
-        hexUtil: HexUtil
-    ) = KeysetParser(hexUtil = hexUtil)
+        hexEncoder: HexEncoder
+    ) = KeysetParser(hexEncoder = hexEncoder)
 
     @Singleton
     @Provides
     fun provideParseKeysetByAead(
-        hexUtil: HexUtil
-    ) = KeysetParserWithAead(hexUtil = hexUtil)
+        hexEncoder: HexEncoder
+    ) = KeysetParserWithAead(hexEncoder = hexEncoder)
 
     @Singleton
     @Provides

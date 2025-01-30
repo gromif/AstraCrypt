@@ -17,7 +17,7 @@ import io.gromif.crypto.tink.core.parsers.KeysetParserWithAead
 import io.gromif.crypto.tink.core.serializers.KeysetSerializerWithAead
 import io.gromif.crypto.tink.data.AssociatedDataManager
 import io.gromif.crypto.tink.data.KeysetManager
-import io.gromif.crypto.tink.encoders.HexUtil
+import io.gromif.crypto.tink.encoders.HexEncoder
 import java.io.File
 import javax.inject.Singleton
 
@@ -71,15 +71,15 @@ object KeysetManagerModule {
     @Singleton
     @Provides
     fun provideMasterKeyNameUseCase(
-        hexUtil: HexUtil,
+        hexEncoder: HexEncoder,
         sha256Util: Sha256Util
-    ) = MasterKeyNameUseCase(hexUtil = hexUtil, sha256Util = sha256Util)
+    ) = MasterKeyNameUseCase(hexEncoder = hexEncoder, sha256Util = sha256Util)
 
     @Singleton
     @Provides
     fun providePrefsKeyNameUseCase(
-        hexUtil: HexUtil,
+        hexEncoder: HexEncoder,
         sha384Util: Sha384Util
-    ) = PrefsKeyNameUseCase(hexUtil = hexUtil, sha384Util = sha384Util)
+    ) = PrefsKeyNameUseCase(hexEncoder = hexEncoder, sha384Util = sha384Util)
 
 }

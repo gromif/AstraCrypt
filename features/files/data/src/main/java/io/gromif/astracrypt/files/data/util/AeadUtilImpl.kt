@@ -5,7 +5,7 @@ import io.gromif.astracrypt.files.domain.util.AeadUtil
 import io.gromif.crypto.tink.data.AssociatedDataManager
 import io.gromif.crypto.tink.data.KeysetManager
 import io.gromif.crypto.tink.domain.KeysetTemplates
-import io.gromif.crypto.tink.encoders.Base64Util
+import io.gromif.crypto.tink.encoders.Base64Encoder
 import io.gromif.crypto.tink.extensions.aead
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
@@ -13,12 +13,12 @@ import kotlinx.coroutines.sync.withLock
 class AeadUtilImpl(
     private val keysetManager: KeysetManager,
     private val associatedDataManager: AssociatedDataManager,
-    private val base64Util: Base64Util
+    private val base64Encoder: Base64Encoder
 ): AeadUtil {
     private val mutex = Mutex()
 
     override suspend fun decrypt(aeadIndex: Int, data: String): String {
-        val encryptedBytes = base64Util.decode(data)
+        val encryptedBytes = base64Encoder.decode(data)
         val aead = getDecryptionAead(aeadIndex = aeadIndex)
         val decryptedBytes = aead.decrypt(
             /* ciphertext = */ encryptedBytes,
@@ -33,7 +33,7 @@ class AeadUtilImpl(
             /* plaintext = */ data.toByteArray(),
             /* associatedData = */ associatedDataManager.getAssociatedData()
         )
-        return base64Util.encode(encryptedBytes)
+        return base64Encoder.encode(encryptedBytes)
     }
 
     private var cachedEncryptionAeadIndex: Int? = null
