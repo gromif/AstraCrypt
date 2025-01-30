@@ -11,8 +11,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import io.gromif.crypto.tink.core.encoders.Base64Util
 import io.gromif.crypto.tink.data.KeysetManager
+import io.gromif.crypto.tink.encoders.Base64Util
 import io.gromif.tink_datastore.TinkDataStore
 import javax.inject.Singleton
 

@@ -16,8 +16,8 @@ import io.gromif.astracrypt.profile.data.util.ExternalIconUtil
 import io.gromif.astracrypt.profile.domain.model.Profile
 import io.gromif.astracrypt.profile.domain.repository.Repository
 import io.gromif.astracrypt.profile.domain.repository.SettingsRepository
-import io.gromif.crypto.tink.core.encoders.Base64Util
 import io.gromif.crypto.tink.data.KeysetManager
+import io.gromif.crypto.tink.encoders.Base64Util
 import io.gromif.tink_datastore.TinkDataStore
 
 @Module

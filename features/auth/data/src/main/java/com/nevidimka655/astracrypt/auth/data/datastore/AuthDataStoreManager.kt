@@ -4,8 +4,8 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import com.nevidimka655.astracrypt.auth.data.dto.AuthDto
-import io.gromif.crypto.tink.core.encoders.Base64Util
 import io.gromif.crypto.tink.data.KeysetManager
+import io.gromif.crypto.tink.encoders.Base64Util
 import io.gromif.crypto.tink.extensions.fromBase64
 import io.gromif.tink_datastore.TinkDataStore
 import kotlinx.coroutines.flow.first

@@ -8,9 +8,9 @@ import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.google.crypto.tink.Aead
 import com.google.crypto.tink.prf.PrfSet
-import io.gromif.crypto.tink.core.encoders.Base64Util
 import io.gromif.crypto.tink.data.KeysetManager
 import io.gromif.crypto.tink.domain.KeysetTemplates
+import io.gromif.crypto.tink.encoders.Base64Util
 import io.gromif.crypto.tink.extensions.aead
 import io.gromif.crypto.tink.extensions.prf
 import kotlinx.coroutines.flow.first

@@ -20,7 +20,7 @@ import com.nevidimka655.domain.lab_zip.usecase.GetSourceFileInfoUseCase
 import com.nevidimka655.features.lab_zip.work.CombinedZipWorker
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.gromif.astracrypt.utils.dispatchers.IoDispatcher
-import io.gromif.crypto.tink.core.encoders.Base64Util
+import io.gromif.crypto.tink.encoders.Base64Util
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import javax.inject.Inject

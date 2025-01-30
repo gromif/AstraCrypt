@@ -4,11 +4,11 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import io.gromif.crypto.tink.core.encoders.HexUtil
 import io.gromif.crypto.tink.core.parsers.KeysetParser
 import io.gromif.crypto.tink.core.parsers.KeysetParserWithAead
 import io.gromif.crypto.tink.core.parsers.KeysetParserWithKey
 import io.gromif.crypto.tink.data.keyset.KeysetAeadFactory
+import io.gromif.crypto.tink.encoders.HexUtil
 import javax.inject.Singleton
 
 @Module
