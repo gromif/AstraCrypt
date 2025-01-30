@@ -23,7 +23,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.nevidimka655.astracrypt.auth.domain.Auth
+import com.nevidimka655.astracrypt.auth.domain.model.Auth
 import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.ui.compose_core.TextFields
 import com.nevidimka655.ui.compose_core.text_fields.Password

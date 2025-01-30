@@ -1,8 +1,7 @@
 package com.nevidimka655.astracrypt.auth.domain.usecase
 
-import com.nevidimka655.astracrypt.auth.domain.Repository
-import com.nevidimka655.astracrypt.auth.domain.SkinType
-import com.nevidimka655.astracrypt.auth.domain.TinkRepository
+import com.nevidimka655.astracrypt.auth.domain.repository.Repository
+import com.nevidimka655.astracrypt.auth.domain.repository.TinkRepository
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 

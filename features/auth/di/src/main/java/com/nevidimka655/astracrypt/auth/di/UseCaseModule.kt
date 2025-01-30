@@ -1,7 +1,7 @@
 package com.nevidimka655.astracrypt.auth.di
 
-import com.nevidimka655.astracrypt.auth.domain.Repository
-import com.nevidimka655.astracrypt.auth.domain.TinkRepository
+import com.nevidimka655.astracrypt.auth.domain.repository.Repository
+import com.nevidimka655.astracrypt.auth.domain.repository.TinkRepository
 import com.nevidimka655.astracrypt.auth.domain.usecase.DecryptTinkAdUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.GetAuthFlowUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.SetAuthUseCase

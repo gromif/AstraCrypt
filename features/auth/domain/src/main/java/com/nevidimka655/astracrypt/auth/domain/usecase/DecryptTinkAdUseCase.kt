@@ -1,6 +1,6 @@
 package com.nevidimka655.astracrypt.auth.domain.usecase
 
-import com.nevidimka655.astracrypt.auth.domain.TinkRepository
+import com.nevidimka655.astracrypt.auth.domain.repository.TinkRepository
 
 class DecryptTinkAdUseCase(
     private val tinkRepository: TinkRepository

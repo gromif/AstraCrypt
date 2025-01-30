@@ -6,7 +6,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.nevidimka655.astracrypt.auth.domain.SkinType
 import com.nevidimka655.astracrypt.resources.R
 
 @Composable

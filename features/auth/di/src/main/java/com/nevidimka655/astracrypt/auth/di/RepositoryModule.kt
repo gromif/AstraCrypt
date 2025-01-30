@@ -4,9 +4,9 @@ import com.nevidimka655.astracrypt.auth.data.RepositoryImpl
 import com.nevidimka655.astracrypt.auth.data.TinkRepositoryImpl
 import com.nevidimka655.astracrypt.auth.data.datastore.AuthDataStoreManager
 import com.nevidimka655.astracrypt.auth.data.dto.AuthDto
-import com.nevidimka655.astracrypt.auth.domain.Auth
-import com.nevidimka655.astracrypt.auth.domain.Repository
-import com.nevidimka655.astracrypt.auth.domain.TinkRepository
+import com.nevidimka655.astracrypt.auth.domain.model.Auth
+import com.nevidimka655.astracrypt.auth.domain.repository.Repository
+import com.nevidimka655.astracrypt.auth.domain.repository.TinkRepository
 import com.nevidimka655.astracrypt.utils.Mapper
 import dagger.Module
 import dagger.Provides

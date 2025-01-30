@@ -2,8 +2,8 @@ package com.nevidimka655.astracrypt.auth.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nevidimka655.astracrypt.auth.domain.Auth
-import com.nevidimka655.astracrypt.auth.domain.Repository
+import com.nevidimka655.astracrypt.auth.domain.model.Auth
+import com.nevidimka655.astracrypt.auth.domain.repository.Repository
 import com.nevidimka655.astracrypt.auth.domain.usecase.DecryptTinkAdUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.VerifyAuthUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel

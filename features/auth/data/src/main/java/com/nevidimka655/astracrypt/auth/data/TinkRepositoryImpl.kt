@@ -1,7 +1,7 @@
 package com.nevidimka655.astracrypt.auth.data
 
 import com.google.crypto.tink.prf.PrfSet
-import com.nevidimka655.astracrypt.auth.domain.TinkRepository
+import com.nevidimka655.astracrypt.auth.domain.repository.TinkRepository
 import io.gromif.crypto.tink.core.GetGlobalAssociatedDataPrf
 import io.gromif.crypto.tink.data.AssociatedDataManager
 import io.gromif.crypto.tink.data.KeysetManager

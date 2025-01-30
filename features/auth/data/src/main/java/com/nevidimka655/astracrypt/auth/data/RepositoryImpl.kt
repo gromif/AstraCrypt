@@ -2,13 +2,11 @@ package com.nevidimka655.astracrypt.auth.data
 
 import com.nevidimka655.astracrypt.auth.data.datastore.AuthDataStoreManager
 import com.nevidimka655.astracrypt.auth.data.dto.AuthDto
-import com.nevidimka655.astracrypt.auth.domain.Auth
-import com.nevidimka655.astracrypt.auth.domain.Repository
+import com.nevidimka655.astracrypt.auth.domain.model.Auth
+import com.nevidimka655.astracrypt.auth.domain.repository.Repository
 import com.nevidimka655.astracrypt.utils.Mapper
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.launch
 
 class RepositoryImpl(
     private val authDataStoreManager: AuthDataStoreManager,

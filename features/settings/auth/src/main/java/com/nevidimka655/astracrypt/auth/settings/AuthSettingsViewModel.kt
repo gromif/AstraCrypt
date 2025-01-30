@@ -2,9 +2,9 @@ package com.nevidimka655.astracrypt.auth.settings
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nevidimka655.astracrypt.auth.domain.Auth
-import com.nevidimka655.astracrypt.auth.domain.AuthType
-import com.nevidimka655.astracrypt.auth.domain.SkinType
+import com.nevidimka655.astracrypt.auth.domain.model.Auth
+import com.nevidimka655.astracrypt.auth.domain.model.AuthType
+import com.nevidimka655.astracrypt.auth.domain.model.SkinType
 import com.nevidimka655.astracrypt.auth.domain.usecase.GetAuthFlowUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.SetAuthUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.SetBindTinkAdUseCase

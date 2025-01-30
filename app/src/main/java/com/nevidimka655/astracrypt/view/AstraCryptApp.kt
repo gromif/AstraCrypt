@@ -30,8 +30,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.nevidimka655.astracrypt.auth.domain.AuthType
-import com.nevidimka655.astracrypt.auth.domain.SkinType
+import com.nevidimka655.astracrypt.auth.domain.model.AuthType
+import com.nevidimka655.astracrypt.auth.domain.model.SkinType
 import com.nevidimka655.astracrypt.auth.login.PasswordLoginScreen
 import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.astracrypt.utils.Api

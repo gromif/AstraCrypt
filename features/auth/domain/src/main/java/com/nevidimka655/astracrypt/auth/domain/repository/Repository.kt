@@ -1,5 +1,6 @@
-package com.nevidimka655.astracrypt.auth.domain
+package com.nevidimka655.astracrypt.auth.domain.repository
 
+import com.nevidimka655.astracrypt.auth.domain.model.Auth
 import kotlinx.coroutines.flow.Flow
 
 interface Repository {

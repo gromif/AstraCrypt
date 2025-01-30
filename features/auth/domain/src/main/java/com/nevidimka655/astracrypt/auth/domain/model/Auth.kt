@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.auth.domain
+package com.nevidimka655.astracrypt.auth.domain.model
 
 data class Auth(
     val type: AuthType? = null,

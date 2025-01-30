@@ -3,7 +3,7 @@ package com.nevidimka655.astracrypt.auth.di
 import com.nevidimka655.astracrypt.auth.data.dto.AuthDto
 import com.nevidimka655.astracrypt.auth.data.mapper.AuthDtoToAuthMapper
 import com.nevidimka655.astracrypt.auth.data.mapper.AuthToAuthDtoMapper
-import com.nevidimka655.astracrypt.auth.domain.Auth
+import com.nevidimka655.astracrypt.auth.domain.model.Auth
 import com.nevidimka655.astracrypt.utils.Mapper
 import dagger.Module
 import dagger.Provides

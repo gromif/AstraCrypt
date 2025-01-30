@@ -1,9 +1,9 @@
 package com.nevidimka655.astracrypt.auth.domain.usecase
 
-import com.nevidimka655.astracrypt.auth.domain.Auth
-import com.nevidimka655.astracrypt.auth.domain.AuthType
-import com.nevidimka655.astracrypt.auth.domain.Repository
-import com.nevidimka655.astracrypt.auth.domain.TinkRepository
+import com.nevidimka655.astracrypt.auth.domain.model.Auth
+import com.nevidimka655.astracrypt.auth.domain.model.AuthType
+import com.nevidimka655.astracrypt.auth.domain.repository.Repository
+import com.nevidimka655.astracrypt.auth.domain.repository.TinkRepository
 
 class SetAuthUseCase(
     private val repository: Repository,
