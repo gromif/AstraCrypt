@@ -24,7 +24,6 @@ class AuthDataStoreManager(
     encoder = encoder,
     params = tinkDataStoreParams
 ) {
-    override val encryptedKeys: List<String> = listOf(KEY_AUTH_HASH, KEY_SKIN_HASH, KEY_AUTH_INFO)
 
     suspend fun getAuthHash(): ByteArray = with(dataStore.data.first()) {
         getData(KEY_AUTH_HASH)?.fromBase64() ?: ByteArray(0)

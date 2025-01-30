@@ -66,8 +66,8 @@ abstract class TinkDataStore(
     private val mutex = Mutex()
     private var cachedKeyPrf: PrfSet? = null
     private var cachedValueAead: Aead? = null
+    private val preferencesKeyList = mutableListOf<String>()
     private val preferencesKeyHashMap = hashMapOf<String, String>()
-    protected abstract val encryptedKeys: List<String>
 
 
     private val aeadKey = intPreferencesKey(KEY_AEAD)
@@ -104,6 +104,11 @@ abstract class TinkDataStore(
         }
     }
 
+    protected fun tinkPreference(name: String): Preferences.Key<String> {
+        preferencesKeyList.add(name)
+        return stringPreferencesKey(name)
+    }
+
     protected suspend fun MutablePreferences.setData(key: String, value: String) {
         val aead = getAeadTemplate()
         if (aead != null) {
@@ -132,8 +137,7 @@ abstract class TinkDataStore(
     ): Unit = mutex.withLock {
         val tempPrefsMap = hashMapOf<String, String?>()
         val prefs = dataStore.data.first()
-        val eligibleKeys = encryptedKeys
-        eligibleKeys.forEach { currentKey ->
+        preferencesKeyList.forEach { currentKey ->
             val data = prefs.getData(currentKey)
             tempPrefsMap[currentKey] = data
         }
@@ -141,10 +145,10 @@ abstract class TinkDataStore(
         setAeadTemplate(targetAead)
         resetCachedAead()
 
-        dataStore.edit { mutablePrefs ->
-            eligibleKeys.forEach { currentKey ->
+        dataStore.edit { prefs ->
+            preferencesKeyList.forEach { currentKey ->
                 val data = tempPrefsMap[currentKey] ?: return@forEach
-                mutablePrefs.setData(currentKey, data)
+                prefs.setData(currentKey, data)
             }
         }
     }

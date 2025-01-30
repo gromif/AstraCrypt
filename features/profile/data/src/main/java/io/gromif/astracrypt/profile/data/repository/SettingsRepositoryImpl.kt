@@ -31,11 +31,10 @@ class SettingsRepositoryImpl(
     encoder = encoder,
     params = tinkDataStoreParams
 ) {
-    override val encryptedKeys: List<String> = listOf(KEY_PROFILE_INFO)
-
+    private val profileKey = tinkPreference("profile_info")
     private var cachedProfile: Profile? = null
     override val profileFlow: Flow<Profile> = dataStore.data.map { prefs ->
-        cachedProfile ?: prefs.getData(KEY_PROFILE_INFO)?.let {
+        cachedProfile ?: prefs.getData(profileKey.name)?.let {
             val dto: ProfileDto = Json.Default.decodeFromString(it)
             profileMapper(dto)
         } ?: Profile()
@@ -48,7 +47,7 @@ class SettingsRepositoryImpl(
         val dto = profileDtoMapper(profile)
         val json = Json.Default.encodeToString(dto)
         dataStore.edit {
-            it.setData(key = KEY_PROFILE_INFO, value = json)
+            it.setData(key = profileKey.name, value = json)
         }
     }
 
@@ -68,5 +67,4 @@ class SettingsRepositoryImpl(
     }
 }
 
-private const val KEY_PROFILE_INFO = "profile_info"
 private const val KEY_AVATAR_AEAD = "avatar_aead"
