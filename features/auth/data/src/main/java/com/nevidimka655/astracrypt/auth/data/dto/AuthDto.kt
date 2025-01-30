@@ -5,9 +5,9 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class AuthDto(
-    @SerialName("a") val type: Int = -1,
-    @SerialName("b") val skin: Int = -1,
-    @SerialName("c") val hintState: Boolean = false,
-    @SerialName("d") val hintText: String? = null,
-    @SerialName("e") val bindTinkAd: Boolean = false
+    @SerialName("a") val type: Int,
+    @SerialName("b") val skin: Int,
+    @SerialName("c") val hintState: Boolean,
+    @SerialName("d") val hintText: String?,
+    @SerialName("e") val bindTinkAd: Boolean
 )
