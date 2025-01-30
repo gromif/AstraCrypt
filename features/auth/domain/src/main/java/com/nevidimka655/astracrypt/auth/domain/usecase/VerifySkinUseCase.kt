@@ -1,12 +1,12 @@
 package com.nevidimka655.astracrypt.auth.domain.usecase
 
-import com.nevidimka655.astracrypt.auth.domain.repository.Repository
+import com.nevidimka655.astracrypt.auth.domain.repository.SettingsRepository
 import com.nevidimka655.astracrypt.auth.domain.repository.TinkRepository
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 
 class VerifySkinUseCase(
-    private val repository: Repository,
+    private val settingsRepository: SettingsRepository,
     private val tinkRepository: TinkRepository
 ) {
 
@@ -15,7 +15,7 @@ class VerifySkinUseCase(
             tinkRepository.computeSkinHash(data = data)
         }
         val savedHash = async {
-            repository.getSkinHash()
+            settingsRepository.getSkinHash()
         }
         currentHash.await().contentEquals(savedHash.await())
     }

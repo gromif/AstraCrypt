@@ -1,14 +1,13 @@
 package com.nevidimka655.astracrypt.auth.domain.usecase
 
-import com.nevidimka655.astracrypt.auth.domain.model.Auth
-import com.nevidimka655.astracrypt.auth.domain.repository.Repository
-
 class SetHintTextUseCase(
-    private val repository: Repository
+    private val getAuthUseCase: GetAuthUseCase,
+    private val setAuthUseCase: SetAuthUseCase,
 ) {
 
-    suspend operator fun invoke(auth: Auth, text: String) {
-        repository.setHintText(auth = auth, text = text)
+    suspend operator fun invoke(text: String) {
+        val auth = getAuthUseCase()
+        setAuthUseCase(auth.copy(hintText = text))
     }
 
 }

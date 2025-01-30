@@ -1,12 +1,12 @@
 package com.nevidimka655.astracrypt.auth.domain.usecase
 
-import com.nevidimka655.astracrypt.auth.domain.repository.Repository
+import com.nevidimka655.astracrypt.auth.domain.repository.SettingsRepository
 import com.nevidimka655.astracrypt.auth.domain.repository.TinkRepository
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 
 class VerifyAuthUseCase(
-    private val repository: Repository,
+    private val settingsRepository: SettingsRepository,
     private val tinkRepository: TinkRepository
 ) {
 
@@ -15,7 +15,7 @@ class VerifyAuthUseCase(
             tinkRepository.computeAuthHash(data = password)
         }
         val savedHash = async {
-            repository.getAuthHash()
+            settingsRepository.getAuthHash()
         }
         currentHash.await().contentEquals(savedHash.await())
     }

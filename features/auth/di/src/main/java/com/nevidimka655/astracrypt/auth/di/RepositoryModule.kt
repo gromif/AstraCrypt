@@ -1,11 +1,12 @@
 package com.nevidimka655.astracrypt.auth.di
 
-import com.nevidimka655.astracrypt.auth.data.RepositoryImpl
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 import com.nevidimka655.astracrypt.auth.data.TinkRepositoryImpl
-import com.nevidimka655.astracrypt.auth.data.datastore.AuthDataStoreManager
 import com.nevidimka655.astracrypt.auth.data.dto.AuthDto
+import com.nevidimka655.astracrypt.auth.data.repository.SettingsRepositoryImpl
 import com.nevidimka655.astracrypt.auth.domain.model.Auth
-import com.nevidimka655.astracrypt.auth.domain.repository.Repository
+import com.nevidimka655.astracrypt.auth.domain.repository.SettingsRepository
 import com.nevidimka655.astracrypt.auth.domain.repository.TinkRepository
 import com.nevidimka655.astracrypt.utils.Mapper
 import dagger.Module
@@ -15,6 +16,8 @@ import dagger.hilt.android.components.ViewModelComponent
 import io.gromif.crypto.tink.core.GetGlobalAssociatedDataPrf
 import io.gromif.crypto.tink.data.AssociatedDataManager
 import io.gromif.crypto.tink.data.KeysetManager
+import io.gromif.crypto.tink.encoders.Base64Encoder
+import io.gromif.tink_datastore.TinkDataStore
 
 @Module
 @InstallIn(ViewModelComponent::class)
@@ -22,13 +25,19 @@ internal object RepositoryModule {
 
     @Provides
     fun provideRepository(
-        authDataStoreManager: AuthDataStoreManager,
-        authToAuthDtoMapper: Mapper<Auth, AuthDto>,
-        authDtoToAuthMapper: Mapper<AuthDto, Auth>
-    ): Repository = RepositoryImpl(
-        authDataStoreManager = authDataStoreManager,
-        authToAuthDtoMapper = authToAuthDtoMapper,
-        authDtoToAuthMapper = authDtoToAuthMapper
+        @AuthDataStore
+        dataStore: DataStore<Preferences>,
+        base64Encoder: Base64Encoder,
+        keysetManager: KeysetManager,
+        authDtoMapper: Mapper<Auth, AuthDto>,
+        authMapper: Mapper<AuthDto, Auth>
+    ): SettingsRepository = SettingsRepositoryImpl(
+        dataStore = dataStore,
+        encoder = base64Encoder,
+        keysetManager = keysetManager,
+        tinkDataStoreParams = TinkDataStore.Params(purpose = "auth"),
+        authMapper = authMapper,
+        authDtoMapper = authDtoMapper
     )
 
     @Provides

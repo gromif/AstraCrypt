@@ -1,22 +1,20 @@
 package com.nevidimka655.astracrypt.auth.domain.usecase
 
-import com.nevidimka655.astracrypt.auth.domain.model.Auth
-import com.nevidimka655.astracrypt.auth.domain.repository.Repository
 import com.nevidimka655.astracrypt.auth.domain.repository.TinkRepository
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
 class SetBindTinkAdUseCase(
-    private val repository: Repository,
+    private val getAuthUseCase: GetAuthUseCase,
+    private val setAuthUseCase: SetAuthUseCase,
     private val tinkRepository: TinkRepository
 ) {
 
-    suspend operator fun invoke(
-        auth: Auth,
-        bind: Boolean,
-        password: String
-    ) = coroutineScope {
-        launch { repository.setBindTinkAd(auth = auth, bind = bind) }
+    suspend operator fun invoke(bind: Boolean, password: String) = coroutineScope {
+        launch {
+            val auth = getAuthUseCase()
+            setAuthUseCase(auth.copy(bindTinkAd = bind))
+        }
         launch {
             if (bind) tinkRepository.enableAssociatedDataBind(password = password)
             else tinkRepository.disableAssociatedDataBind()

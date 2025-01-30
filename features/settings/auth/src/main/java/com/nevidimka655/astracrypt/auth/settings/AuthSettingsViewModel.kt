@@ -38,11 +38,11 @@ internal class AuthSettingsViewModel @Inject constructor(
     val authState = getAuthFlowUseCase().stateIn(viewModelScope, SharingStarted.Lazily, Auth())
 
     fun disable() = viewModelScope.launch(defaultDispatcher) {
-        setAuthTypeUseCase(auth = authState.value, authType = null, data = null)
+        setAuthTypeUseCase(authType = null, data = null)
     }
 
     fun disableSkin() = viewModelScope.launch(defaultDispatcher) {
-        setSkinTypeUseCase(auth = authState.value, skinType = null, data = null)
+        setSkinTypeUseCase(skinType = null, data = null)
         with(appComponentService) {
             main = true
             calculator = false
@@ -50,7 +50,7 @@ internal class AuthSettingsViewModel @Inject constructor(
     }
 
     fun setCalculatorSkin(combination: String) = viewModelScope.launch(defaultDispatcher) {
-        setSkinTypeUseCase(auth = authState.value, skinType = SkinType.Calculator, data = combination)
+        setSkinTypeUseCase(skinType = SkinType.Calculator, data = combination)
         with(appComponentService) {
             calculator = true
             main = false
@@ -60,15 +60,11 @@ internal class AuthSettingsViewModel @Inject constructor(
     fun setBindAssociatedData(
         state: Boolean, password: String
     ) = viewModelScope.launch(defaultDispatcher) {
-        setBindTinkAdUseCase(
-            auth = authState.value,
-            bind = state,
-            password = password
-        )
+        setBindTinkAdUseCase(bind = state, password = password)
     }
 
     fun setPassword(password: String) = viewModelScope.launch(defaultDispatcher) {
-        setAuthTypeUseCase(auth = authState.value, authType = AuthType.PASSWORD, data = password)
+        setAuthTypeUseCase(authType = AuthType.PASSWORD, data = password)
     }
 
     suspend fun verifyPassword(password: String): Boolean = withContext(defaultDispatcher) {
@@ -76,11 +72,11 @@ internal class AuthSettingsViewModel @Inject constructor(
     }
 
     fun setHintState(state: Boolean) = viewModelScope.launch(defaultDispatcher) {
-        setHintVisibilityUseCase(auth = authState.value, visible = state)
+        setHintVisibilityUseCase(visible = state)
     }
 
     fun setHintText(text: String) = viewModelScope.launch(defaultDispatcher) {
-        setHintTextUseCase(auth = authState.value, text = text)
+        setHintTextUseCase(text = text)
     }
 
 }
