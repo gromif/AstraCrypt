@@ -15,6 +15,6 @@ dependencies {
     implementation(projects.core.tink)
     implementation(projects.core.utils)
 
-    implementation(libs.androidx.datastore.preferences)
+    implementation(projects.core.crypto.tinkDatastore)
     implementation(libs.androidx.core.ktx)
 }

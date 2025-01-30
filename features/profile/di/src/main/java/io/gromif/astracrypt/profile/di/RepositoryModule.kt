@@ -18,6 +18,7 @@ import io.gromif.astracrypt.profile.data.util.ExternalIconUtil
 import io.gromif.astracrypt.profile.domain.model.Profile
 import io.gromif.astracrypt.profile.domain.repository.Repository
 import io.gromif.astracrypt.profile.domain.repository.SettingsRepository
+import io.gromif.tink_datastore.TinkDataStore
 
 @Module
 @InstallIn(ViewModelComponent::class)
@@ -46,6 +47,7 @@ internal object RepositoryModule {
         keysetManager = keysetManager,
         profileMapper = profileMapper,
         profileDtoMapper = profileDtoMapper,
+        tinkDataStoreParams = TinkDataStore.Params(purpose = "profile"),
         base64Util = base64Util,
     )
 
