@@ -28,7 +28,7 @@ class SettingsRepositoryImpl(
 ) : SettingsRepository, TinkDataStore(
     dataStore = dataStore,
     keysetManager = keysetManager,
-    base64Encoder = base64Encoder,
+    encoder = base64Encoder,
     params = tinkDataStoreParams
 ) {
     override val encryptedKeys: List<String> = listOf(KEY_PROFILE_INFO)

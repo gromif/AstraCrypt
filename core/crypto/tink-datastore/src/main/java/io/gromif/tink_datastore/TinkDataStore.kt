@@ -22,7 +22,7 @@ import kotlinx.coroutines.sync.withLock
 abstract class TinkDataStore(
     private val dataStore: DataStore<Preferences>,
     private val keysetManager: KeysetManager,
-    private val base64Encoder: Base64Encoder,
+    private val encoder: Base64Encoder,
     private val params: Params,
 ) {
 
@@ -98,9 +98,9 @@ abstract class TinkDataStore(
 
     private suspend fun prfHashKeyWithBase64(key: String): String {
         return preferencesKeyHashMap[key] ?: run {
-            val keyPrfInterface = getKeyPrf()
-            val prfBytes = keyPrfInterface.computePrimary(key.toByteArray(), params.keyPrfHashSize)
-            base64Encoder.encode(prfBytes).also { preferencesKeyHashMap[key] = it }
+            val prf = getKeyPrf()
+            val prfBytes = prf.computePrimary(key.toByteArray(), params.keyPrfHashSize)
+            encoder.encode(prfBytes).also { preferencesKeyHashMap[key] = it }
         }
     }
 
@@ -109,8 +109,8 @@ abstract class TinkDataStore(
         if (aead != null) {
             val keyPrfHash = prfHashKeyWithBase64(key)
             val associatedData = "${key}_${keyPrfHash}".toByteArray()
-            val valueAeadInterface = getValueAead(aead)
-            val encryptedData = valueAeadInterface.encryptAndEncode(value, associatedData, base64Encoder)
+            val aead = getValueAead(aead)
+            val encryptedData = aead.encryptAndEncode(value, associatedData, encoder)
             set(stringPreferencesKey(keyPrfHash), encryptedData)
         } else set(stringPreferencesKey(key), value)
     }
@@ -121,8 +121,8 @@ abstract class TinkDataStore(
             val keyPrfHash = prfHashKeyWithBase64(key)
             val data = get(stringPreferencesKey(keyPrfHash)) ?: return null
             val associatedData = "${key}_${keyPrfHash}".toByteArray()
-            val valueAeadInterface = getValueAead(aead)
-            valueAeadInterface.decodeAndDecrypt(data, associatedData, base64Encoder)
+            val aead = getValueAead(aead)
+            aead.decodeAndDecrypt(data, associatedData, encoder)
         } else get(stringPreferencesKey(key))
     }
 

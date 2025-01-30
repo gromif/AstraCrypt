@@ -21,7 +21,7 @@ class AuthDataStoreManager(
 ) : TinkDataStore(
     dataStore = dataStore,
     keysetManager = keysetManager,
-    base64Encoder = base64Encoder,
+    encoder = base64Encoder,
     params = tinkDataStoreParams
 ) {
     override val encryptedKeys: List<String> = listOf(KEY_AUTH_HASH, KEY_SKIN_HASH, KEY_AUTH_INFO)
