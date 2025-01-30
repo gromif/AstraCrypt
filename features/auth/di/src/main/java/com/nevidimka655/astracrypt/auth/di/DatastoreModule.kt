@@ -5,20 +5,15 @@ import androidx.datastore.core.handlers.ReplaceFileCorruptionHandler
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.preferencesDataStoreFile
-import com.nevidimka655.astracrypt.auth.data.RepositoryImpl
 import com.nevidimka655.astracrypt.auth.data.datastore.AuthDataStoreManager
-import com.nevidimka655.astracrypt.auth.data.dto.AuthDto
-import com.nevidimka655.astracrypt.auth.domain.Auth
-import com.nevidimka655.astracrypt.auth.domain.Repository
-import com.nevidimka655.astracrypt.utils.Mapper
 import com.nevidimka655.crypto.tink.core.encoders.Base64Util
-import com.nevidimka655.crypto.tink.core.hash.Sha384Util
 import com.nevidimka655.crypto.tink.data.KeysetManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import io.gromif.tink_datastore.TinkDataStore
 import javax.inject.Singleton
 
 private const val AUTH = "auth"
@@ -41,7 +36,8 @@ internal object DatastoreModule {
             produceFile = { context.preferencesDataStoreFile(AUTH) }
         ),
         keysetManager = keysetManager,
-        base64Util = base64Util
+        base64Util = base64Util,
+        tinkDataStoreParams = TinkDataStore.Params(purpose = "auth")
     )
 
 }
