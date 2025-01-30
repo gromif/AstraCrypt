@@ -26,13 +26,9 @@ class AuthDataStoreManager(
 ) {
     override val encryptedKeys: List<String> = listOf(KEY_AUTH_HASH, KEY_SKIN_HASH, KEY_AUTH_INFO)
 
-    private val authHashFlow = dataStore.data.map {
-        val hash = it.getData(KEY_AUTH_HASH)
-        if (!hash.isNullOrEmpty()) hash.fromBase64()
-        else ByteArray(0)
+    suspend fun getAuthHash(): ByteArray = with(dataStore.data.first()) {
+        getData(KEY_AUTH_HASH)?.fromBase64() ?: ByteArray(0)
     }
-
-    suspend fun getAuthHash() = authHashFlow.first()
 
     suspend fun setAuthHash(hash: ByteArray?) = dataStore.edit { prefs ->
         val value = if (hash != null) base64Util.encode(hash) else ""
@@ -40,13 +36,9 @@ class AuthDataStoreManager(
     }
 
 
-    private val skinHashFlow = dataStore.data.map {
-        val hash = it.getData(KEY_SKIN_HASH)
-        if (!hash.isNullOrEmpty()) hash.fromBase64()
-        else ByteArray(0)
+    suspend fun getSkinHash(): ByteArray = with(dataStore.data.first()) {
+        getData(KEY_SKIN_HASH)?.fromBase64() ?: ByteArray(0)
     }
-
-    suspend fun getSkinHash() = skinHashFlow.first()
 
     suspend fun setSkinHash(hash: ByteArray?) = dataStore.edit { prefs ->
         val value = if (hash != null) base64Util.encode(hash) else ""
@@ -55,9 +47,7 @@ class AuthDataStoreManager(
 
 
     val authFlow = dataStore.data.map { prefs ->
-        prefs.getData(KEY_AUTH_INFO)?.let {
-            Json.decodeFromString<AuthDto>(it)
-        } ?: AuthDto()
+        prefs.getData(KEY_AUTH_INFO)?.let { Json.decodeFromString(it) } ?: AuthDto()
     }
 
     suspend fun setAuthInfo(authDto: AuthDto) = dataStore.edit {
