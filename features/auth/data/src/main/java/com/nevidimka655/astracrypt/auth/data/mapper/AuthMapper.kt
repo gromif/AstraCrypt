@@ -6,7 +6,7 @@ import com.nevidimka655.astracrypt.auth.domain.model.AuthType
 import com.nevidimka655.astracrypt.auth.domain.model.SkinType
 import com.nevidimka655.astracrypt.utils.Mapper
 
-class AuthDtoToAuthMapper: Mapper<AuthDto, Auth> {
+class AuthMapper: Mapper<AuthDto, Auth> {
     override fun invoke(item: AuthDto): Auth {
         return Auth(
             type = AuthType.entries.getOrNull(item.type),
