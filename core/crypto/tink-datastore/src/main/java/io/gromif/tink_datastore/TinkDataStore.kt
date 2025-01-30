@@ -28,9 +28,9 @@ abstract class TinkDataStore(
         val keyPrfTemplate: KeysetTemplates.PRF = KeysetTemplates.PRF.HKDF_SHA256,
         val purpose: String,
         val keyTag: String = "ds_${purpose}_key",
-        val keyAD: ByteArray = "${keyTag}_ad".toByteArray(),
+        val keyAD: ByteArray? = "${keyTag}_ad".toByteArray(),
         val valueTag: String = "ds_${purpose}_value",
-        val valueAD: ByteArray = "${valueTag}_ad".toByteArray(),
+        val valueAD: ByteArray? = "${valueTag}_ad".toByteArray(),
         val keyPrfHashSize: Int = 24,
     ) {
         override fun equals(other: Any?): Boolean {
