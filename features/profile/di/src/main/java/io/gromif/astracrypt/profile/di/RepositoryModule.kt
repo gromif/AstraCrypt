@@ -52,7 +52,7 @@ internal object RepositoryModule {
             keyAD = null,
             valueAD = null
         ),
-        base64Encoder = base64Encoder,
+        encoder = base64Encoder,
     )
 
 }
