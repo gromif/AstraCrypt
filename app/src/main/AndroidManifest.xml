@@ -59,14 +59,6 @@
         </receiver>
 
         <service
-            android:name="androidx.work.impl.foreground.SystemForegroundService"
-            android:foregroundServiceType="dataSync" />
-
-        <service
-              android:name="io.gromif.astracrypt.files.work.ImportFilesWorker"
-            android:foregroundServiceType="dataSync" />
-
-        <service
             android:name=".app.services.tiles.WipeTile"
             android:enabled="false"
             android:exported="true"

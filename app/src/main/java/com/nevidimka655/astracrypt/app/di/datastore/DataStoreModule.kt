@@ -14,7 +14,6 @@ import javax.inject.Qualifier
 import javax.inject.Singleton
 
 private const val DEFAULT = "default"
-private const val SETTINGS = "settings"
 private const val KEYSET = "keyset"
 
 @Module
@@ -31,18 +30,6 @@ object DataStoreModule {
             produceNewData = { emptyPreferences() }
         ),
         produceFile = { context.preferencesDataStoreFile(DEFAULT) }
-    )
-
-    @SettingsDataStore
-    @Singleton
-    @Provides
-    fun provideSettingsDataStore(
-        @ApplicationContext context: Context
-    ) = PreferenceDataStoreFactory.create(
-        corruptionHandler = ReplaceFileCorruptionHandler(
-            produceNewData = { emptyPreferences() }
-        ),
-        produceFile = { context.preferencesDataStoreFile(SETTINGS) }
     )
 
     @KeysetDataStore
@@ -62,10 +49,6 @@ object DataStoreModule {
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
 annotation class DefaultDataStore
-
-@Qualifier
-@Retention(AnnotationRetention.BINARY)
-annotation class SettingsDataStore
 
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
