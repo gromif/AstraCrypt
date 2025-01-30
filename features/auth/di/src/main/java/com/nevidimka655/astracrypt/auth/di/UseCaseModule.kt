@@ -17,26 +17,31 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.android.scopes.ViewModelScoped
 
 @Module
 @InstallIn(ViewModelComponent::class)
 internal object UseCaseModule {
 
+    @ViewModelScoped
     @Provides
     fun provideGetAuthUseCase(
         settingsRepository: SettingsRepository,
     ): GetAuthUseCase = GetAuthUseCase(settingsRepository = settingsRepository)
 
+    @ViewModelScoped
     @Provides
     fun provideSetAuthUseCase(
         settingsRepository: SettingsRepository,
     ): SetAuthUseCase = SetAuthUseCase(settingsRepository = settingsRepository)
 
+    @ViewModelScoped
     @Provides
     fun provideGetAuthFlowUseCase(
         settingsRepository: SettingsRepository,
     ): GetAuthFlowUseCase = GetAuthFlowUseCase(settingsRepository = settingsRepository)
 
+    @ViewModelScoped
     @Provides
     fun provideSetHintTextUseCase(
         getAuthUseCase: GetAuthUseCase,
@@ -46,6 +51,7 @@ internal object UseCaseModule {
         setAuthUseCase = setAuthUseCase
     )
 
+    @ViewModelScoped
     @Provides
     fun provideSetHintVisibilityUseCase(
         getAuthUseCase: GetAuthUseCase,
@@ -55,6 +61,7 @@ internal object UseCaseModule {
         setAuthUseCase = setAuthUseCase
     )
 
+    @ViewModelScoped
     @Provides
     fun provideSetPasswordUseCase(
         getAuthUseCase: GetAuthUseCase,
@@ -68,6 +75,7 @@ internal object UseCaseModule {
         tinkService = tinkService
     )
 
+    @ViewModelScoped
     @Provides
     fun provideSetSkinCalculatorUseCase(
         getAuthUseCase: GetAuthUseCase,
@@ -81,6 +89,7 @@ internal object UseCaseModule {
         tinkService = tinkService
     )
 
+    @ViewModelScoped
     @Provides
     fun provideVerifyCalculatorCombinationUseCase(
         settingsRepository: SettingsRepository,
@@ -88,6 +97,7 @@ internal object UseCaseModule {
     ): VerifySkinUseCase =
         VerifySkinUseCase(settingsRepository = settingsRepository, tinkService = tinkService)
 
+    @ViewModelScoped
     @Provides
     fun provideVerifyPasswordUseCase(
         settingsRepository: SettingsRepository,
@@ -95,6 +105,7 @@ internal object UseCaseModule {
     ): VerifyAuthUseCase =
         VerifyAuthUseCase(settingsRepository = settingsRepository, tinkService = tinkService)
 
+    @ViewModelScoped
     @Provides
     fun provideSetBindTinkAdUseCase(
         getAuthUseCase: GetAuthUseCase,
@@ -106,6 +117,7 @@ internal object UseCaseModule {
         tinkService = tinkService
     )
 
+    @ViewModelScoped
     @Provides
     fun provideDecryptTinkAdUseCase(tinkService: TinkService): DecryptTinkAdUseCase =
         DecryptTinkAdUseCase(tinkService = tinkService)
