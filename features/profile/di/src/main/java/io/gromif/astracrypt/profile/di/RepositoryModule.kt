@@ -47,7 +47,11 @@ internal object RepositoryModule {
         keysetManager = keysetManager,
         profileMapper = profileMapper,
         profileDtoMapper = profileDtoMapper,
-        tinkDataStoreParams = TinkDataStore.Params(purpose = "profile"),
+        tinkDataStoreParams = TinkDataStore.Params(
+            purpose = "profile",
+            keyAD = null,
+            valueAD = null
+        ),
         base64Util = base64Util,
     )
 
