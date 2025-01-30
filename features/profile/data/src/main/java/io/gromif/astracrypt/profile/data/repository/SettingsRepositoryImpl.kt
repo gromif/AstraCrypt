@@ -34,13 +34,12 @@ class SettingsRepositoryImpl(
     override val encryptedKeys: List<String> = listOf(KEY_PROFILE_INFO)
 
     private var cachedProfile: Profile? = null
-    override val profileFlow: Flow<Profile>
-        get() = dataStore.data.map { prefs ->
-            cachedProfile ?: prefs.getData(KEY_PROFILE_INFO)?.let {
-                val dto: ProfileDto = Json.Default.decodeFromString(it)
-                profileMapper(dto)
-            } ?: Profile()
-        }
+    override val profileFlow: Flow<Profile> = dataStore.data.map { prefs ->
+        cachedProfile ?: prefs.getData(KEY_PROFILE_INFO)?.let {
+            val dto: ProfileDto = Json.Default.decodeFromString(it)
+            profileMapper(dto)
+        } ?: Profile()
+    }
 
     override suspend fun getProfile(): Profile = profileFlow.first()
 
@@ -52,7 +51,6 @@ class SettingsRepositoryImpl(
             it.setData(key = KEY_PROFILE_INFO, value = json)
         }
     }
-
 
 
     private val avatarAeadKey = intPreferencesKey(KEY_AVATAR_AEAD)
