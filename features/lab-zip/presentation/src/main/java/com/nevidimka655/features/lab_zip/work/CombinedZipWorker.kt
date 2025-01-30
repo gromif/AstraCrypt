@@ -109,11 +109,11 @@ internal class CombinedZipWorker @AssistedInject constructor(
             setOngoing(true)
             addAction(R.drawable.ic_close, cancelText, workerStopPendingIntent)
         }.build()
-        return ForegroundInfo(
+        return if (Api.atLeast10()) ForegroundInfo(
             notificationId,
             notification,
             ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC
-        )
+        ) else ForegroundInfo(notificationId, notification)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
