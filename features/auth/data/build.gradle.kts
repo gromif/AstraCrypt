@@ -12,6 +12,6 @@ dependencies {
     implementation(projects.features.auth.domain)
 
     implementation(projects.core.utils)
-    implementation(projects.core.tink)
+    implementation(projects.core.crypto.tink)
     implementation(projects.core.crypto.tinkDatastore)
 }

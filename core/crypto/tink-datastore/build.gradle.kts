@@ -8,6 +8,6 @@ android {
 }
 
 dependencies {
-    implementation(projects.core.tink)
+    implementation(projects.core.crypto.tink)
     api(libs.androidx.datastore.preferences)
 }

@@ -13,6 +13,6 @@ dependencies {
     implementation(projects.features.profile.data)
 
     implementation(projects.core.utils)
-    implementation(projects.core.tink)
+    implementation(projects.core.crypto.tink)
     implementation(projects.core.crypto.tinkDatastore)
 }

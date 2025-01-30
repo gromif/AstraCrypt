@@ -5,12 +5,12 @@ include(":app")
 
 val coreModules = listOf(
     "database:app-database", "database:notes",
-    "tink", "haptic", "tiles-with-coroutines",
+    "haptic", "tiles-with-coroutines",
     "resources", "utils", "design-system",
     "navigation"
 )
 
-val cryptoCoreModules = listOf("tink-datastore")
+val cryptoCoreModules = listOf("tink", "tink-datastore")
 
 val featuresModules = listOf("help", "home")
 val uiModules = listOf("compose-core", "compose-details")

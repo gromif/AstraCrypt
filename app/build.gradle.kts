@@ -64,7 +64,7 @@ dependencies {
 
     implementation(projects.core.database.appDatabase)
 
-    implementation(projects.core.tink)
+    implementation(projects.core.crypto.tink)
 
     implementation(projects.features.auth.presentation)
     implementation(projects.features.calculator.presentation)

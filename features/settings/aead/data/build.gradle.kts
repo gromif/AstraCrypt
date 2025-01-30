@@ -13,7 +13,7 @@ dependencies {
 
     implementation(projects.features.notes.domain)
 
-    implementation(projects.core.tink)
+    implementation(projects.core.crypto.tink)
 
     implementation(libs.androidx.datastore.preferences)
 }

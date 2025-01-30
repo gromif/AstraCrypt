@@ -14,7 +14,7 @@ android {
 dependencies {
     implementation(projects.features.files.domain)
 
-    implementation(projects.core.tink)
+    implementation(projects.core.crypto.tink)
     implementation(projects.core.utils)
 
     implementation(libs.androidx.datastore.preferences)

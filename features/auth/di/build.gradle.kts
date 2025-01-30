@@ -13,5 +13,5 @@ dependencies {
 
     implementation(projects.core.crypto.tinkDatastore)
     implementation(projects.core.utils)
-    implementation(projects.core.tink)
+    implementation(projects.core.crypto.tink)
 }
