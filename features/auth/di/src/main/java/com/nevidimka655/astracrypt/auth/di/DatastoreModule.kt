@@ -12,8 +12,6 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import io.gromif.crypto.tink.data.KeysetManager
-import io.gromif.crypto.tink.encoders.Base64Encoder
 import javax.inject.Qualifier
 import javax.inject.Singleton
 
@@ -27,9 +25,7 @@ internal object DatastoreModule {
     @Singleton
     @Provides
     fun provideDataStore(
-        @ApplicationContext context: Context,
-        keysetManager: KeysetManager,
-        base64Encoder: Base64Encoder
+        @ApplicationContext context: Context
     ):  DataStore<Preferences> = PreferenceDataStoreFactory.create(
         corruptionHandler = ReplaceFileCorruptionHandler(
             produceNewData = { emptyPreferences() }
