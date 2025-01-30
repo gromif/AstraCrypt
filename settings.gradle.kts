@@ -9,6 +9,9 @@ val coreModules = listOf(
     "resources", "utils", "design-system",
     "navigation"
 )
+
+val cryptoCoreModules = listOf("tink-datastore")
+
 val featuresModules = listOf("help", "home")
 val uiModules = listOf("compose-core", "compose-details")
 
@@ -26,6 +29,7 @@ val features = listOf(
 include(":app")
 include(":features:settings:auth")
 include("core", coreModules)
+include("core:crypto", cryptoCoreModules)
 include("features", featuresModules)
 includeFeatures()
 include("ui", uiModules)
@@ -56,3 +60,4 @@ dependencyResolutionManagement {
 include(":core:utils:dispatchers")
 include(":features:calculator:domain")
 include(":features:calculator:presentation")
+include(":core:crypto:")
