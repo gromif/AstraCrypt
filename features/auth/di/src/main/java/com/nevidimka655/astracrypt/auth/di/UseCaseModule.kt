@@ -4,11 +4,11 @@ import com.nevidimka655.astracrypt.auth.domain.repository.Repository
 import com.nevidimka655.astracrypt.auth.domain.repository.TinkRepository
 import com.nevidimka655.astracrypt.auth.domain.usecase.DecryptTinkAdUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.GetAuthFlowUseCase
-import com.nevidimka655.astracrypt.auth.domain.usecase.SetAuthUseCase
+import com.nevidimka655.astracrypt.auth.domain.usecase.SetAuthTypeUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.SetBindTinkAdUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.SetHintTextUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.SetHintVisibilityUseCase
-import com.nevidimka655.astracrypt.auth.domain.usecase.SetSkinUseCase
+import com.nevidimka655.astracrypt.auth.domain.usecase.SetSkinTypeUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.VerifyAuthUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.VerifySkinUseCase
 import dagger.Module
@@ -39,14 +39,14 @@ internal object UseCaseModule {
     fun provideSetPasswordUseCase(
         repository: Repository,
         tinkRepository: TinkRepository
-    ): SetAuthUseCase =
-        SetAuthUseCase(repository = repository, tinkRepository = tinkRepository)
+    ): SetAuthTypeUseCase =
+        SetAuthTypeUseCase(repository = repository, tinkRepository = tinkRepository)
 
     @Provides
     fun provideSetSkinCalculatorUseCase(
         repository: Repository,
         tinkRepository: TinkRepository
-    ): SetSkinUseCase = SetSkinUseCase(repository = repository, tinkRepository = tinkRepository)
+    ): SetSkinTypeUseCase = SetSkinTypeUseCase(repository = repository, tinkRepository = tinkRepository)
 
     @Provides
     fun provideVerifyCalculatorCombinationUseCase(

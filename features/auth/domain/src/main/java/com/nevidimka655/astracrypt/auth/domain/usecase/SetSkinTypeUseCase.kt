@@ -5,7 +5,7 @@ import com.nevidimka655.astracrypt.auth.domain.model.SkinType
 import com.nevidimka655.astracrypt.auth.domain.repository.Repository
 import com.nevidimka655.astracrypt.auth.domain.repository.TinkRepository
 
-class SetSkinUseCase(
+class SetSkinTypeUseCase(
     private val repository: Repository,
     private val tinkRepository: TinkRepository
 ) {

@@ -6,11 +6,11 @@ import com.nevidimka655.astracrypt.auth.domain.model.Auth
 import com.nevidimka655.astracrypt.auth.domain.model.AuthType
 import com.nevidimka655.astracrypt.auth.domain.model.SkinType
 import com.nevidimka655.astracrypt.auth.domain.usecase.GetAuthFlowUseCase
-import com.nevidimka655.astracrypt.auth.domain.usecase.SetAuthUseCase
+import com.nevidimka655.astracrypt.auth.domain.usecase.SetAuthTypeUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.SetBindTinkAdUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.SetHintTextUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.SetHintVisibilityUseCase
-import com.nevidimka655.astracrypt.auth.domain.usecase.SetSkinUseCase
+import com.nevidimka655.astracrypt.auth.domain.usecase.SetSkinTypeUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.VerifyAuthUseCase
 import com.nevidimka655.astracrypt.utils.app.AppComponentService
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -27,8 +27,8 @@ internal class AuthSettingsViewModel @Inject constructor(
     @IoDispatcher
     private val defaultDispatcher: CoroutineDispatcher,
     private val appComponentService: AppComponentService,
-    private val setSkinUseCase: SetSkinUseCase,
-    private val setAuthUseCase: SetAuthUseCase,
+    private val setSkinTypeUseCase: SetSkinTypeUseCase,
+    private val setAuthTypeUseCase: SetAuthTypeUseCase,
     private val verifyAuthUseCase: VerifyAuthUseCase,
     private val setHintVisibilityUseCase: SetHintVisibilityUseCase,
     private val setHintTextUseCase: SetHintTextUseCase,
@@ -38,11 +38,11 @@ internal class AuthSettingsViewModel @Inject constructor(
     val authState = getAuthFlowUseCase().stateIn(viewModelScope, SharingStarted.Lazily, Auth())
 
     fun disable() = viewModelScope.launch(defaultDispatcher) {
-        setAuthUseCase(auth = authState.value, authType = null, data = null)
+        setAuthTypeUseCase(auth = authState.value, authType = null, data = null)
     }
 
     fun disableSkin() = viewModelScope.launch(defaultDispatcher) {
-        setSkinUseCase(auth = authState.value, skinType = null, data = null)
+        setSkinTypeUseCase(auth = authState.value, skinType = null, data = null)
         with(appComponentService) {
             main = true
             calculator = false
@@ -50,7 +50,7 @@ internal class AuthSettingsViewModel @Inject constructor(
     }
 
     fun setCalculatorSkin(combination: String) = viewModelScope.launch(defaultDispatcher) {
-        setSkinUseCase(auth = authState.value, skinType = SkinType.Calculator, data = combination)
+        setSkinTypeUseCase(auth = authState.value, skinType = SkinType.Calculator, data = combination)
         with(appComponentService) {
             calculator = true
             main = false
@@ -68,7 +68,7 @@ internal class AuthSettingsViewModel @Inject constructor(
     }
 
     fun setPassword(password: String) = viewModelScope.launch(defaultDispatcher) {
-        setAuthUseCase(auth = authState.value, authType = AuthType.PASSWORD, data = password)
+        setAuthTypeUseCase(auth = authState.value, authType = AuthType.PASSWORD, data = password)
     }
 
     suspend fun verifyPassword(password: String): Boolean = withContext(defaultDispatcher) {
