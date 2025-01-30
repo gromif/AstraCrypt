@@ -5,7 +5,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import com.nevidimka655.astracrypt.auth.data.dto.AuthDto
 import io.gromif.crypto.tink.data.KeysetManager
-import io.gromif.crypto.tink.encoders.Base64Encoder
+import io.gromif.crypto.tink.encoders.Encoder
 import io.gromif.crypto.tink.extensions.fromBase64
 import io.gromif.tink_datastore.TinkDataStore
 import kotlinx.coroutines.flow.first
@@ -15,13 +15,13 @@ import kotlinx.serialization.json.Json
 
 class AuthDataStoreManager(
     private val dataStore: DataStore<Preferences>,
-    private val base64Encoder: Base64Encoder,
+    private val encoder: Encoder,
     keysetManager: KeysetManager,
     tinkDataStoreParams: Params,
 ) : TinkDataStore(
     dataStore = dataStore,
     keysetManager = keysetManager,
-    encoder = base64Encoder,
+    encoder = encoder,
     params = tinkDataStoreParams
 ) {
     override val encryptedKeys: List<String> = listOf(KEY_AUTH_HASH, KEY_SKIN_HASH, KEY_AUTH_INFO)
@@ -31,7 +31,7 @@ class AuthDataStoreManager(
     }
 
     suspend fun setAuthHash(hash: ByteArray?) = dataStore.edit { prefs ->
-        val value = if (hash != null) base64Encoder.encode(hash) else ""
+        val value = if (hash != null) encoder.encode(hash) else ""
         prefs.setData(KEY_AUTH_HASH, value)
     }
 
@@ -41,7 +41,7 @@ class AuthDataStoreManager(
     }
 
     suspend fun setSkinHash(hash: ByteArray?) = dataStore.edit { prefs ->
-        val value = if (hash != null) base64Encoder.encode(hash) else ""
+        val value = if (hash != null) encoder.encode(hash) else ""
         prefs.setData(KEY_SKIN_HASH, value)
     }
 

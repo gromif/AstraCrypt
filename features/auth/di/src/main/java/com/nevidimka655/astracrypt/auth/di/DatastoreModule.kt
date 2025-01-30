@@ -36,7 +36,7 @@ internal object DatastoreModule {
             produceFile = { context.preferencesDataStoreFile(AUTH) }
         ),
         keysetManager = keysetManager,
-        base64Encoder = base64Encoder,
+        encoder = base64Encoder,
         tinkDataStoreParams = TinkDataStore.Params(purpose = "auth")
     )
 
