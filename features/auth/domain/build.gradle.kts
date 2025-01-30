@@ -7,7 +7,3 @@ plugins {
 android {
     namespace = "com.nevidimka655.astracrypt.auth.domain"
 }
-
-dependencies {
-
-}
