@@ -11,6 +11,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.android.scopes.ViewModelScoped
 import io.gromif.crypto.tink.data.KeysetManager
 import io.gromif.crypto.tink.encoders.Base64Encoder
 import io.gromif.tink_datastore.TinkDataStore
@@ -19,8 +20,9 @@ import io.gromif.tink_datastore.TinkDataStore
 @InstallIn(ViewModelComponent::class)
 internal object RepositoryModule {
 
+    @ViewModelScoped
     @Provides
-    fun provideRepository(
+    fun provideSettingsRepository(
         @AuthDataStore
         dataStore: DataStore<Preferences>,
         base64Encoder: Base64Encoder,
