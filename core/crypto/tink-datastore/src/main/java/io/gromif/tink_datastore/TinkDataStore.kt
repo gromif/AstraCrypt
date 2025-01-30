@@ -10,7 +10,7 @@ import com.google.crypto.tink.Aead
 import com.google.crypto.tink.prf.PrfSet
 import io.gromif.crypto.tink.data.KeysetManager
 import io.gromif.crypto.tink.domain.KeysetTemplates
-import io.gromif.crypto.tink.encoders.Base64Encoder
+import io.gromif.crypto.tink.encoders.Encoder
 import io.gromif.crypto.tink.extensions.aead
 import io.gromif.crypto.tink.extensions.decodeAndDecrypt
 import io.gromif.crypto.tink.extensions.encryptAndEncode
@@ -22,7 +22,7 @@ import kotlinx.coroutines.sync.withLock
 abstract class TinkDataStore(
     private val dataStore: DataStore<Preferences>,
     private val keysetManager: KeysetManager,
-    private val encoder: Base64Encoder,
+    private val encoder: Encoder,
     private val params: Params,
 ) {
 
