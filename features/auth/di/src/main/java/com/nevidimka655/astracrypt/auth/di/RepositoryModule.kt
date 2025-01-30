@@ -2,19 +2,15 @@ package com.nevidimka655.astracrypt.auth.di
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
-import com.nevidimka655.astracrypt.auth.data.TinkRepositoryImpl
 import com.nevidimka655.astracrypt.auth.data.dto.AuthDto
 import com.nevidimka655.astracrypt.auth.data.repository.SettingsRepositoryImpl
 import com.nevidimka655.astracrypt.auth.domain.model.Auth
 import com.nevidimka655.astracrypt.auth.domain.repository.SettingsRepository
-import com.nevidimka655.astracrypt.auth.domain.repository.TinkRepository
 import com.nevidimka655.astracrypt.utils.Mapper
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
-import io.gromif.crypto.tink.core.GetGlobalAssociatedDataPrf
-import io.gromif.crypto.tink.data.AssociatedDataManager
 import io.gromif.crypto.tink.data.KeysetManager
 import io.gromif.crypto.tink.encoders.Base64Encoder
 import io.gromif.tink_datastore.TinkDataStore
@@ -38,17 +34,6 @@ internal object RepositoryModule {
         tinkDataStoreParams = TinkDataStore.Params(purpose = "auth"),
         authMapper = authMapper,
         authDtoMapper = authDtoMapper
-    )
-
-    @Provides
-    fun provideTinkRepository(
-        keysetManager: KeysetManager,
-        associatedDataManager: AssociatedDataManager,
-        getGlobalAssociatedDataPrf: GetGlobalAssociatedDataPrf
-    ): TinkRepository = TinkRepositoryImpl(
-        keysetManager = keysetManager,
-        associatedDataManager = associatedDataManager,
-        getGlobalAssociatedDataPrf = getGlobalAssociatedDataPrf
     )
 
 }

@@ -1,18 +1,18 @@
-package com.nevidimka655.astracrypt.auth.data
+package com.nevidimka655.astracrypt.auth.data.service
 
 import com.google.crypto.tink.prf.PrfSet
-import com.nevidimka655.astracrypt.auth.domain.repository.TinkRepository
+import com.nevidimka655.astracrypt.auth.domain.service.TinkService
 import io.gromif.crypto.tink.core.GetGlobalAssociatedDataPrf
 import io.gromif.crypto.tink.data.AssociatedDataManager
 import io.gromif.crypto.tink.data.KeysetManager
 import io.gromif.crypto.tink.domain.KeysetTemplates
 import io.gromif.crypto.tink.extensions.prf
 
-class TinkRepositoryImpl(
+class TinkServiceImpl(
     private val keysetManager: KeysetManager,
     private val associatedDataManager: AssociatedDataManager,
     private val getGlobalAssociatedDataPrf: GetGlobalAssociatedDataPrf
-): TinkRepository {
+): TinkService {
     private var prfSetInterface: PrfSet? = null
     private suspend fun getPrfSet(): PrfSet {
         return prfSetInterface ?: getGlobalAssociatedDataPrf().also { prfSetInterface = it }

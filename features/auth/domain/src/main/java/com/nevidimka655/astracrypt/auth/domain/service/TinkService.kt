@@ -1,6 +1,6 @@
-package com.nevidimka655.astracrypt.auth.domain.repository
+package com.nevidimka655.astracrypt.auth.domain.service
 
-interface TinkRepository {
+interface TinkService {
 
     suspend fun enableAssociatedDataBind(password: String)
 

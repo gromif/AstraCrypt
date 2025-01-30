@@ -1,7 +1,7 @@
 package com.nevidimka655.astracrypt.auth.di
 
 import com.nevidimka655.astracrypt.auth.domain.repository.SettingsRepository
-import com.nevidimka655.astracrypt.auth.domain.repository.TinkRepository
+import com.nevidimka655.astracrypt.auth.domain.service.TinkService
 import com.nevidimka655.astracrypt.auth.domain.usecase.DecryptTinkAdUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.GetAuthFlowUseCase
 import com.nevidimka655.astracrypt.auth.domain.usecase.GetAuthUseCase
@@ -60,12 +60,12 @@ internal object UseCaseModule {
         getAuthUseCase: GetAuthUseCase,
         setAuthUseCase: SetAuthUseCase,
         settingsRepository: SettingsRepository,
-        tinkRepository: TinkRepository,
+        tinkService: TinkService,
     ): SetAuthTypeUseCase = SetAuthTypeUseCase(
         getAuthUseCase = getAuthUseCase,
         setAuthUseCase = setAuthUseCase,
         settingsRepository = settingsRepository,
-        tinkRepository = tinkRepository
+        tinkService = tinkService
     )
 
     @Provides
@@ -73,41 +73,41 @@ internal object UseCaseModule {
         getAuthUseCase: GetAuthUseCase,
         setAuthUseCase: SetAuthUseCase,
         settingsRepository: SettingsRepository,
-        tinkRepository: TinkRepository,
+        tinkService: TinkService,
     ): SetSkinTypeUseCase = SetSkinTypeUseCase(
         getAuthUseCase = getAuthUseCase,
         setAuthUseCase = setAuthUseCase,
         settingsRepository = settingsRepository,
-        tinkRepository = tinkRepository
+        tinkService = tinkService
     )
 
     @Provides
     fun provideVerifyCalculatorCombinationUseCase(
         settingsRepository: SettingsRepository,
-        tinkRepository: TinkRepository,
+        tinkService: TinkService,
     ): VerifySkinUseCase =
-        VerifySkinUseCase(settingsRepository = settingsRepository, tinkRepository = tinkRepository)
+        VerifySkinUseCase(settingsRepository = settingsRepository, tinkService = tinkService)
 
     @Provides
     fun provideVerifyPasswordUseCase(
         settingsRepository: SettingsRepository,
-        tinkRepository: TinkRepository,
+        tinkService: TinkService,
     ): VerifyAuthUseCase =
-        VerifyAuthUseCase(settingsRepository = settingsRepository, tinkRepository = tinkRepository)
+        VerifyAuthUseCase(settingsRepository = settingsRepository, tinkService = tinkService)
 
     @Provides
     fun provideSetBindTinkAdUseCase(
         getAuthUseCase: GetAuthUseCase,
         setAuthUseCase: SetAuthUseCase,
-        tinkRepository: TinkRepository,
+        tinkService: TinkService,
     ): SetBindTinkAdUseCase = SetBindTinkAdUseCase(
         getAuthUseCase = getAuthUseCase,
         setAuthUseCase = setAuthUseCase,
-        tinkRepository = tinkRepository
+        tinkService = tinkService
     )
 
     @Provides
-    fun provideDecryptTinkAdUseCase(tinkRepository: TinkRepository): DecryptTinkAdUseCase =
-        DecryptTinkAdUseCase(tinkRepository = tinkRepository)
+    fun provideDecryptTinkAdUseCase(tinkService: TinkService): DecryptTinkAdUseCase =
+        DecryptTinkAdUseCase(tinkService = tinkService)
 
 }
