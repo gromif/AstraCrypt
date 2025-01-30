@@ -12,6 +12,8 @@ import io.gromif.crypto.tink.data.KeysetManager
 import io.gromif.crypto.tink.domain.KeysetTemplates
 import io.gromif.crypto.tink.encoders.Base64Encoder
 import io.gromif.crypto.tink.extensions.aead
+import io.gromif.crypto.tink.extensions.decodeAndDecrypt
+import io.gromif.crypto.tink.extensions.encryptAndEncode
 import io.gromif.crypto.tink.extensions.prf
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.sync.Mutex
@@ -72,11 +74,11 @@ abstract class TinkDataStore(
     private suspend fun setAeadTemplate(aead: KeysetTemplates.AEAD?) {
         dataStore.edit { it[aeadKey] = aead?.ordinal ?: -1 }
     }
+
     private suspend fun getAeadTemplate(): KeysetTemplates.AEAD? {
         val aeadOrdinal = dataStore.data.first()[aeadKey]
         return aeadOrdinal?.let { KeysetTemplates.AEAD.entries.getOrNull(it) } ?: DEFAULT_AEAD
     }
-
 
 
     private suspend fun getKeyPrf(): PrfSet = cachedKeyPrf ?: keysetManager.getKeyset(
@@ -94,19 +96,6 @@ abstract class TinkDataStore(
     }
 
 
-
-    private fun Aead.encryptWithBase64(value: String, associatedData: ByteArray): String {
-        val encryptedBytes = encrypt(value.toByteArray(), associatedData)
-        return base64Encoder.encode(bytes = encryptedBytes)
-    }
-
-    private fun Aead.decryptWithBase64(value: String, associatedData: ByteArray): String {
-        val encryptedBytes = base64Encoder.decode(value = value)
-        return decrypt(encryptedBytes, associatedData).decodeToString()
-    }
-
-
-
     private suspend fun prfHashKeyWithBase64(key: String): String {
         return preferencesKeyHashMap[key] ?: run {
             val keyPrfInterface = getKeyPrf()
@@ -121,7 +110,7 @@ abstract class TinkDataStore(
             val keyPrfHash = prfHashKeyWithBase64(key)
             val associatedData = "${key}_${keyPrfHash}".toByteArray()
             val valueAeadInterface = getValueAead(aead)
-            val encryptedData = valueAeadInterface.encryptWithBase64(value, associatedData)
+            val encryptedData = valueAeadInterface.encryptAndEncode(value, associatedData, base64Encoder)
             set(stringPreferencesKey(keyPrfHash), encryptedData)
         } else set(stringPreferencesKey(key), value)
     }
@@ -133,14 +122,13 @@ abstract class TinkDataStore(
             val data = get(stringPreferencesKey(keyPrfHash)) ?: return null
             val associatedData = "${key}_${keyPrfHash}".toByteArray()
             val valueAeadInterface = getValueAead(aead)
-            valueAeadInterface.decryptWithBase64(data, associatedData)
+            valueAeadInterface.decodeAndDecrypt(data, associatedData, base64Encoder)
         } else get(stringPreferencesKey(key))
     }
 
 
-
     protected suspend fun setTinkDataStoreAead(
-        targetAead: KeysetTemplates.AEAD?
+        targetAead: KeysetTemplates.AEAD?,
     ): Unit = mutex.withLock {
         val tempPrefsMap = hashMapOf<String, String?>()
         val prefs = dataStore.data.first()
