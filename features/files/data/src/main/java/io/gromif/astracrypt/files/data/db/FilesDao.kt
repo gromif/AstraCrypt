@@ -23,8 +23,13 @@ interface FilesDao {
 
     @Query("select id from store_items " +
             "where parent = :parent " +
+            "and (not :excludeFolders or type > 0)" +
             "and (:typeFilter is null or type = :typeFilter)")
-    suspend fun getIdList(parent: Long, typeFilter: FileType? = null): List<Long>
+    suspend fun getIdList(
+        parent: Long,
+        typeFilter: FileType? = null,
+        excludeFolders: Boolean = false,
+    ): List<Long>
 
     @RewriteQueriesToDropUnusedColumns
     @Query("select * from store_items where id = :id")
