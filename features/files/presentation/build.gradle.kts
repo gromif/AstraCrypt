@@ -18,6 +18,7 @@ dependencies {
     implementation(projects.features.files.domain)
     implementation(projects.features.files.di)
 
+    implementation(projects.core.crypto.tink)
     implementation(projects.core.designSystem)
     implementation(projects.core.resources)
     implementation(projects.core.utils)
