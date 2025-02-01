@@ -7,8 +7,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import io.gromif.astracrypt.files.data.db.FilesEntity
 import io.gromif.astracrypt.files.data.dto.FileFlagsDto
-import io.gromif.astracrypt.files.data.mapper.FileFlagsDtoMapper
 import io.gromif.astracrypt.files.data.mapper.FileItemMapper
+import io.gromif.astracrypt.files.data.mapper.ItemFlagsMapper
 import io.gromif.astracrypt.files.domain.model.FileFlags
 import io.gromif.astracrypt.files.domain.model.FileItem
 
@@ -17,7 +17,7 @@ import io.gromif.astracrypt.files.domain.model.FileItem
 internal object MapperModule {
 
     @Provides
-    fun provideFileFlagsDtoMapper(): Mapper<FileFlags, FileFlagsDto> = FileFlagsDtoMapper()
+    fun provideItemFlagsMapper(): Mapper<FileFlagsDto, FileFlags> = ItemFlagsMapper()
 
     @Provides
     fun provideFileItemMapper(): Mapper<FilesEntity, FileItem> = FileItemMapper()

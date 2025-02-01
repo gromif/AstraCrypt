@@ -4,18 +4,18 @@ import com.nevidimka655.astracrypt.utils.Mapper
 import io.gromif.astracrypt.files.data.dto.FileFlagsDto
 import io.gromif.astracrypt.files.domain.model.FileFlags
 
-class FileFlagsDtoMapper: Mapper<FileFlags, FileFlagsDto> {
-    override fun invoke(item: FileFlags): FileFlagsDto {
+class ItemFlagsMapper: Mapper<FileFlagsDto, FileFlags> {
+    override fun invoke(item: FileFlagsDto): FileFlags {
         return when(item) {
-            is FileFlags.Audio -> FileFlagsDto.Audio(
+            is FileFlagsDto.Audio -> FileFlags.Audio(
                 title = item.title,
                 sampleRate = item.sampleRate,
                 author = item.author
             )
-            is FileFlags.Image -> FileFlagsDto.Image(
+            is FileFlagsDto.Image -> FileFlags.Image(
                 resolution = item.resolution
             )
-            is FileFlags.Video -> FileFlagsDto.Video(
+            is FileFlagsDto.Video -> FileFlags.Video(
                 resolution = item.resolution
             )
         }
