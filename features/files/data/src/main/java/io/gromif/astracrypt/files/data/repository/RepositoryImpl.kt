@@ -68,7 +68,7 @@ class RepositoryImpl(
         while (deque.isNotEmpty()) {
             ensureActive()
             val id = deque.removeFirst()
-            val innerFolderIds = filesDao.getFolderIds(id)
+            val innerFolderIds = filesDao.getIdList(parent = id, typeFilter = FileType.Folder)
             idList.addAll(innerFolderIds)
             deque.addAll(innerFolderIds)
         }
@@ -150,7 +150,9 @@ class RepositoryImpl(
                     if (file != null) with(fileHandler) {
                         getFilePath(relativePath = file).delete()
                         if (preview != null) getFilePath(relativePath = preview).delete()
-                    } else delete(ids = filesDao.getFolderIds(parent = id))
+                    } else delete(
+                        ids = filesDao.getIdList(parent = id, typeFilter = FileType.Folder)
+                    )
                 }
             }.joinAll()
         }

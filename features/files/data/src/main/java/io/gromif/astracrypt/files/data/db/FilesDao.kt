@@ -21,9 +21,6 @@ interface FilesDao {
     @Query("select * from store_items where id = :id")
     suspend fun get(id: Long): FilesEntity
 
-    @Query("select id from store_items where parent = :parent and type = 0")
-    suspend fun getFolderIds(parent: Long): List<Long>
-
     @Query("select id from store_items " +
             "where parent = :parent " +
             "and (:typeFilter is null or type = :typeFilter)")
