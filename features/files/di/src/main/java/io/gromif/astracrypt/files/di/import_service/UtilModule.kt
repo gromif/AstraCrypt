@@ -7,6 +7,7 @@ import coil.ImageLoader
 import coil.request.ImageRequest
 import com.nevidimka655.astracrypt.utils.Api
 import com.nevidimka655.astracrypt.utils.Mapper
+import com.nevidimka655.astracrypt.utils.Serializer
 import com.nevidimka655.astracrypt.utils.io.BitmapCompressor
 import com.nevidimka655.astracrypt.utils.io.Randomizer
 import dagger.Module
@@ -14,6 +15,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import io.gromif.astracrypt.files.data.dto.FileFlagsDto
 import io.gromif.astracrypt.files.data.factory.flags.AudioFlagsFactory
 import io.gromif.astracrypt.files.data.factory.flags.ImageFlagsFactory
 import io.gromif.astracrypt.files.data.factory.flags.VideoFlagsFactory
@@ -66,6 +68,7 @@ internal object UtilModule {
     fun provideFlagsUtil(
         @ApplicationContext context: Context,
         uriMapper: Mapper<String, Uri>,
+        serializer: Serializer<FileFlagsDto, String>,
     ): FlagsUtil = FlagsUtilImpl(
         audioFlagsFactory = AudioFlagsFactory(
             contentResolver = context.contentResolver,
@@ -78,7 +81,8 @@ internal object UtilModule {
         videoFlagsFactory = VideoFlagsFactory(
             context = context,
             uriMapper = uriMapper
-        )
+        ),
+        serializer = serializer,
     )
 
     @Provides

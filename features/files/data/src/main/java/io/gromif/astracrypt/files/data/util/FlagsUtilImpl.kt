@@ -1,17 +1,18 @@
 package io.gromif.astracrypt.files.data.util
 
+import com.nevidimka655.astracrypt.utils.Serializer
+import io.gromif.astracrypt.files.data.dto.FileFlagsDto
 import io.gromif.astracrypt.files.data.factory.flags.AudioFlagsFactory
 import io.gromif.astracrypt.files.data.factory.flags.ImageFlagsFactory
 import io.gromif.astracrypt.files.data.factory.flags.VideoFlagsFactory
 import io.gromif.astracrypt.files.domain.model.FileType
 import io.gromif.astracrypt.files.domain.util.FlagsUtil
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 
 class FlagsUtilImpl(
     private val audioFlagsFactory: AudioFlagsFactory,
     private val imageFlagsFactory: ImageFlagsFactory,
     private val videoFlagsFactory: VideoFlagsFactory,
+    private val serializer: Serializer<FileFlagsDto, String>
 ): FlagsUtil {
 
     override suspend fun getFlags(
@@ -24,7 +25,7 @@ class FlagsUtilImpl(
             FileType.Video -> videoFlagsFactory.create(path)
             else -> null
         }
-        return Json.encodeToString(dto)
+        return dto?.let { serializer(it) }
     }
 
 }
