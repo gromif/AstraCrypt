@@ -8,8 +8,8 @@ import androidx.paging.map
 import io.gromif.astracrypt.files.data.db.FilesDao
 import io.gromif.astracrypt.files.data.db.tuples.PagerTuple
 import io.gromif.astracrypt.files.domain.model.FileSource
-import io.gromif.astracrypt.files.domain.model.FileState
 import io.gromif.astracrypt.files.domain.model.Item
+import io.gromif.astracrypt.files.domain.model.ItemState
 import io.gromif.astracrypt.files.domain.model.ItemType
 import io.gromif.astracrypt.files.domain.provider.PagingProvider
 import io.gromif.astracrypt.files.domain.repository.Repository
@@ -76,7 +76,7 @@ class PagingProviderImpl(
                     preview = pagerTuple.preview?.let { 
                         FileSource(path = it, aeadIndex = pagerTuple.previewAead)
                     },
-                    state = FileState.entries[pagerTuple.state]
+                    state = ItemState.entries[pagerTuple.state]
                 )
             }
         }

@@ -42,7 +42,7 @@ import coil.compose.AsyncImage
 import coil.compose.AsyncImagePainter
 import com.nevidimka655.ui.compose_core.theme.spaces
 import io.gromif.astracrypt.files.domain.model.FileSource
-import io.gromif.astracrypt.files.domain.model.FileState
+import io.gromif.astracrypt.files.domain.model.ItemState
 import io.gromif.astracrypt.files.domain.model.ItemType
 import io.gromif.astracrypt.files.shared.icon
 import io.gromif.astracrypt.files.shared.iconAlt
@@ -57,7 +57,7 @@ internal fun FilesListGridItem(
     preview: FileSource?,
     itemType: ItemType,
     isFile: Boolean,
-    state: FileState,
+    state: ItemState,
     isChecked: Boolean,
     onOptions: () -> Unit,
     onClick: () -> Unit,
@@ -99,7 +99,7 @@ internal fun FilesListGridItem(
                     loadOtherIcons = it is AsyncImagePainter.State.Success
                 })
             this@Column.AnimatedVisibility(
-                visible = state == FileState.Starred,
+                visible = state == ItemState.Starred,
                 enter = fadeIn(),
                 exit = fadeOut(),
                 modifier = Modifier.align(Alignment.BottomEnd)

@@ -10,5 +10,5 @@ data class Item(
     val type: ItemType = ItemType.Other,
     val isFolder: Boolean = type == ItemType.Folder,
     val isFile: Boolean = !isFolder,
-    val state: FileState = FileState.Default
+    val state: ItemState = ItemState.Default
 )

@@ -29,7 +29,7 @@ import coil.ImageLoader
 import coil.compose.AsyncImage
 import com.nevidimka655.ui.compose_core.theme.spaces
 import io.gromif.astracrypt.files.domain.model.FileSource
-import io.gromif.astracrypt.files.domain.model.FileState
+import io.gromif.astracrypt.files.domain.model.ItemState
 import io.gromif.astracrypt.files.domain.model.ItemType
 import io.gromif.astracrypt.files.shared.iconAlt
 import io.gromif.astracrypt.files.shared.iconTint
@@ -41,7 +41,7 @@ internal fun RecentFilesListItem(
     name: String,
     preview: FileSource?,
     itemType: ItemType,
-    state: FileState,
+    state: ItemState,
     onClick: () -> Unit
 ) = Card(modifier = modifier.fillMaxHeight()) {
     Column(
@@ -67,7 +67,7 @@ internal fun RecentFilesListItem(
                 imageLoader = imageLoader,
                 contentScale = ContentScale.Crop
             )
-            if (state == FileState.Starred) Icon(
+            if (state == ItemState.Starred) Icon(
                 modifier = Modifier
                     .align(Alignment.BottomEnd)
                     .padding(MaterialTheme.spaces.spaceAltSmall)

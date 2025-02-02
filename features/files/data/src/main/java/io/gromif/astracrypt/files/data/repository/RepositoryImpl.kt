@@ -10,9 +10,9 @@ import io.gromif.astracrypt.files.data.util.ExportUtil
 import io.gromif.astracrypt.files.data.util.FileHandler
 import io.gromif.astracrypt.files.domain.model.AeadInfo
 import io.gromif.astracrypt.files.domain.model.ExportData
-import io.gromif.astracrypt.files.domain.model.FileState
 import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.domain.model.ItemDetails
+import io.gromif.astracrypt.files.domain.model.ItemState
 import io.gromif.astracrypt.files.domain.model.ItemType
 import io.gromif.astracrypt.files.domain.repository.Repository
 import io.gromif.astracrypt.files.domain.repository.SettingsRepository
@@ -94,7 +94,7 @@ class RepositoryImpl(
         aeadInfo: AeadInfo?,
         parent: Long,
         name: String,
-        fileState: FileState,
+        itemState: ItemState,
         itemType: ItemType,
         file: String?,
         fileAead: Int,
@@ -119,7 +119,7 @@ class RepositoryImpl(
         val filesEntity = FilesEntity(
             parent = parent,
             name = nameTemp,
-            state = fileState,
+            state = itemState,
             type = itemType,
             file = fileTemp,
             fileAead = aeadInfo.fileAeadIndex,
@@ -172,10 +172,10 @@ class RepositoryImpl(
     }
 
     override suspend fun setStarred(ids: List<Long>, state: Boolean) = coroutineScope {
-        val fileState = if (state) FileState.Starred else FileState.Default
+        val itemState = if (state) ItemState.Starred else ItemState.Default
         ids.chunked(10).forEach { chunk ->
             chunk.map { currentId ->
-                launch { filesDao.setStarred(id = currentId, state = fileState.ordinal) }
+                launch { filesDao.setStarred(id = currentId, state = itemState.ordinal) }
             }.joinAll()
         }
     }

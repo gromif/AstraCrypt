@@ -26,7 +26,7 @@ import io.gromif.astracrypt.files.dialogs.deleteDialog
 import io.gromif.astracrypt.files.dialogs.deleteSourceDialog
 import io.gromif.astracrypt.files.dialogs.newFolderDialog
 import io.gromif.astracrypt.files.dialogs.renameDialog
-import io.gromif.astracrypt.files.domain.model.FileState
+import io.gromif.astracrypt.files.domain.model.ItemState
 import io.gromif.astracrypt.files.model.ContextualAction
 import io.gromif.astracrypt.files.model.Mode
 import io.gromif.astracrypt.files.model.Option
@@ -72,7 +72,7 @@ internal fun Screen(
                 optionsItem = OptionsItem(
                     id = it.id,
                     name = it.name,
-                    isStarred = it.state == FileState.Starred,
+                    isStarred = it.state == ItemState.Starred,
                     itemType = it.type,
                     isFolder = it.isFolder
                 )

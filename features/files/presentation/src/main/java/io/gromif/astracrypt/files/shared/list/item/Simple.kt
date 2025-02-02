@@ -39,7 +39,7 @@ import coil.compose.AsyncImage
 import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.ui.compose_core.theme.spaces
 import io.gromif.astracrypt.files.domain.model.FileSource
-import io.gromif.astracrypt.files.domain.model.FileState
+import io.gromif.astracrypt.files.domain.model.ItemState
 import io.gromif.astracrypt.files.domain.model.ItemType
 import io.gromif.astracrypt.files.shared.iconAlt
 import io.gromif.astracrypt.files.shared.iconTint
@@ -53,7 +53,7 @@ internal fun FilesListItem(
     name: String = "TEST_NAME",
     preview: FileSource?,
     itemType: ItemType = ItemType.Document,
-    state: FileState = FileState.Default,
+    state: ItemState = ItemState.Default,
     isChecked: Boolean = false,
     isBackgroundTransparent: Boolean = false,
     onLongClick: () -> Unit = {},
@@ -94,7 +94,7 @@ internal fun FilesListItem(
                     .clip(RoundedCornerShape(16.dp))
             )
             this@Row.AnimatedVisibility(
-                visible = state == FileState.Starred,
+                visible = state == ItemState.Starred,
                 enter = fadeIn(),
                 exit = fadeOut(),
                 modifier = Modifier.align(Alignment.BottomEnd)

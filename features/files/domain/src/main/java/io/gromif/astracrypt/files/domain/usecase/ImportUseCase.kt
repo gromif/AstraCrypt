@@ -1,7 +1,7 @@
 package io.gromif.astracrypt.files.domain.usecase
 
 import io.gromif.astracrypt.files.domain.model.AeadInfo
-import io.gromif.astracrypt.files.domain.model.FileState
+import io.gromif.astracrypt.files.domain.model.ItemState
 import io.gromif.astracrypt.files.domain.repository.Repository
 import io.gromif.astracrypt.files.domain.repository.SettingsRepository
 import io.gromif.astracrypt.files.domain.util.FileUtil
@@ -52,7 +52,7 @@ class ImportUseCase(
         repository.insert(
             parent = parentId,
             name = name,
-            fileState = FileState.Default,
+            itemState = ItemState.Default,
             itemType = type,
             file = filePath ,
             fileAead = aeadInfo.fileAeadIndex,
