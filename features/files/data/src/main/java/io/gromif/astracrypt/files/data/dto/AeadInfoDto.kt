@@ -7,24 +7,24 @@ import kotlinx.serialization.Serializable
 data class AeadInfoDto(
 
     @SerialName("a")
-    val fileAeadIndex: Int = -1,
+    val fileAeadIndex: Int,
 
     @SerialName("b")
-    val previewAeadIndex: Int = -1,
+    val previewAeadIndex: Int,
 
     @SerialName("c")
-    val databaseAeadIndex: Int = -1,
+    val databaseAeadIndex: Int,
 
     @SerialName("d")
-    val isNameColumnEncrypted: Boolean = false,
+    val isNameColumnEncrypted: Boolean,
 
     @SerialName("e")
-    val isPreviewColumnEncrypted: Boolean = false,
+    val isPreviewColumnEncrypted: Boolean,
 
     @SerialName("f")
-    val isPathColumnEncrypted: Boolean = false,
+    val isPathColumnEncrypted: Boolean,
 
     @SerialName("g")
-    val isFlagColumnEncrypted: Boolean = false
+    val isFlagColumnEncrypted: Boolean
 
 )
