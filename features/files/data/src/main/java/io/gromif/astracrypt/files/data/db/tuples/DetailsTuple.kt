@@ -14,6 +14,6 @@ data class DetailsTuple(
     @ColumnInfo(name = "preview-aead") val previewAead: Int,
 
     val flags: String?,
-    @ColumnInfo(name = "time") val creationTime: Long,
+    @ColumnInfo(name = "time") val time: Long,
     val size: Long,
 )

@@ -239,7 +239,7 @@ class RepositoryImpl(
                     name = dto.name,
                     filesCount = filesCount,
                     foldersCount = folderCount,
-                    creationTime = dto.creationTime
+                    creationTime = dto.time
                 )
             }
             else -> itemDetails = itemDetailsMapper(dto)

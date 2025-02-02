@@ -28,7 +28,7 @@ class ItemDetailsMapper(
             preview = preview,
             flags = flags,
             size = item.size,
-            creationTime = item.creationTime
+            creationTime = item.time
         )
     }
 }
