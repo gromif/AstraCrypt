@@ -1,4 +1,4 @@
-package io.gromif.astracrypt.files.data.io
+package io.gromif.astracrypt.files.data.util.coil
 
 import android.graphics.Bitmap
 import android.media.ThumbnailUtils

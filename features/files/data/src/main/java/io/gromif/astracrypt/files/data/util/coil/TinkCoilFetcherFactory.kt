@@ -1,4 +1,4 @@
-package io.gromif.astracrypt.files.data.io
+package io.gromif.astracrypt.files.data.util.coil
 
 import coil.ImageLoader
 import coil.decode.DataSource

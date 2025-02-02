@@ -9,7 +9,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import io.gromif.astracrypt.files.data.io.CenterCropTransformation
+import io.gromif.astracrypt.files.data.util.coil.CenterCropTransformation
 import javax.inject.Qualifier
 import javax.inject.Singleton
 

@@ -10,8 +10,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import io.gromif.astracrypt.files.data.io.TinkCoilFetcherFactory
 import io.gromif.astracrypt.files.data.util.FileHandler
+import io.gromif.astracrypt.files.data.util.coil.TinkCoilFetcherFactory
 import io.gromif.crypto.tink.data.AssociatedDataManager
 import io.gromif.crypto.tink.data.KeysetManager
 import javax.inject.Qualifier
