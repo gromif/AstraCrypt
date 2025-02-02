@@ -126,7 +126,7 @@ class RepositoryImpl(
             preview = previewTemp,
             previewAead = aeadInfo.previewAeadIndex,
             flags = flagsTemp,
-            creationTime = creationTime,
+            time = creationTime,
             size = size
         )
         filesDao.insert(filesEntity)
@@ -139,7 +139,7 @@ class RepositoryImpl(
             name = nameTemp,
             parent = parentId,
             type = FileType.Folder,
-            creationTime = System.currentTimeMillis()
+            time = System.currentTimeMillis()
         )
         filesDao.insert(filesEntity)
     }

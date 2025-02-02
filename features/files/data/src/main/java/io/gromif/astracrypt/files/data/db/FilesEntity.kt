@@ -36,7 +36,7 @@ data class FilesEntity(
     val flags: String? = null,
 
     @ColumnInfo(name = "time")
-    val creationTime: Long = 0,
+    val time: Long = 0,
 
     @ColumnInfo(name = "size")
     val size: Long = 0,
