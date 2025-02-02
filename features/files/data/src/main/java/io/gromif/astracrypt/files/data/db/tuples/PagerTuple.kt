@@ -16,7 +16,7 @@ data class PagerTuple(
     @ColumnInfo(name = "preview")
     val preview: String?,
 
-    @ColumnInfo(name = "preview-aead")
+    @ColumnInfo(name = "previewAead")
     val previewAead: Int,
 
     @ColumnInfo(name = "state")

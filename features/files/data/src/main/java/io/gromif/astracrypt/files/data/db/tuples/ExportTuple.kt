@@ -9,5 +9,5 @@ data class ExportTuple(
     @ColumnInfo(name = "name") val name: String,
     @ColumnInfo(name = "type") val type: FileType,
     @ColumnInfo(name = "file") val file: String?,
-    @ColumnInfo(name = "file-aead") val fileAead: Int,
+    @ColumnInfo(name = "fileAead") val fileAead: Int,
 )

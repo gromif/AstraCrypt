@@ -24,12 +24,12 @@ data class FilesEntity(
 
     @ColumnInfo(name = "file")
     val file: String? = null,
-    @ColumnInfo(name = "file-aead")
+    @ColumnInfo(name = "fileAead")
     val fileAead: Int = -1,
 
     @ColumnInfo(name = "preview")
     val preview: String? = null,
-    @ColumnInfo(name = "preview-aead")
+    @ColumnInfo(name = "previewAead")
     val previewAead: Int = -1,
 
     @ColumnInfo(name = "flags")

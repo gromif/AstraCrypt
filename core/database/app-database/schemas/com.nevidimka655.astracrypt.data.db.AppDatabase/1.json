@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "e2925c4c76fbaf8cefe0c653ac8cc9b1",
+    "identityHash": "996c0729af91abd3ae71b45fb3b8acf8",
     "entities": [
       {
         "tableName": "store_items",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `parent` INTEGER NOT NULL, `name` TEXT NOT NULL, `state` INTEGER NOT NULL, `type` INTEGER NOT NULL, `file` TEXT, `file-aead` INTEGER NOT NULL, `preview` TEXT, `preview-aead` INTEGER NOT NULL, `flags` TEXT, `time` INTEGER NOT NULL, `size` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `parent` INTEGER NOT NULL, `name` TEXT NOT NULL, `state` INTEGER NOT NULL, `type` INTEGER NOT NULL, `file` TEXT, `fileAead` INTEGER NOT NULL, `preview` TEXT, `previewAead` INTEGER NOT NULL, `flags` TEXT, `time` INTEGER NOT NULL, `size` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -46,7 +46,7 @@
           },
           {
             "fieldPath": "fileAead",
-            "columnName": "file-aead",
+            "columnName": "fileAead",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -58,7 +58,7 @@
           },
           {
             "fieldPath": "previewAead",
-            "columnName": "preview-aead",
+            "columnName": "previewAead",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -69,7 +69,7 @@
             "notNull": false
           },
           {
-            "fieldPath": "creationTime",
+            "fieldPath": "time",
             "columnName": "time",
             "affinity": "INTEGER",
             "notNull": true
@@ -150,7 +150,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e2925c4c76fbaf8cefe0c653ac8cc9b1')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '996c0729af91abd3ae71b45fb3b8acf8')"
     ]
   }
 }

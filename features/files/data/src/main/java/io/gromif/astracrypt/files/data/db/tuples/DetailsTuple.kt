@@ -8,10 +8,10 @@ data class DetailsTuple(
     val type: FileType,
 
     val file: String?,
-    @ColumnInfo(name = "file-aead") val fileAead: Int,
+    @ColumnInfo(name = "fileAead") val fileAead: Int,
 
     val preview: String?,
-    @ColumnInfo(name = "preview-aead") val previewAead: Int,
+    @ColumnInfo(name = "previewAead") val previewAead: Int,
 
     val flags: String?,
     @ColumnInfo(name = "time") val time: Long,
