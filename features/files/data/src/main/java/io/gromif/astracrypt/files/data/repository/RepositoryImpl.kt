@@ -11,9 +11,9 @@ import io.gromif.astracrypt.files.data.util.FileHandler
 import io.gromif.astracrypt.files.domain.model.AeadInfo
 import io.gromif.astracrypt.files.domain.model.ExportData
 import io.gromif.astracrypt.files.domain.model.FileState
-import io.gromif.astracrypt.files.domain.model.FileType
 import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.domain.model.ItemDetails
+import io.gromif.astracrypt.files.domain.model.ItemType
 import io.gromif.astracrypt.files.domain.repository.Repository
 import io.gromif.astracrypt.files.domain.repository.SettingsRepository
 import io.gromif.astracrypt.files.domain.util.AeadUtil
@@ -71,7 +71,7 @@ class RepositoryImpl(
         while (deque.isNotEmpty()) {
             ensureActive()
             val id = deque.removeFirst()
-            val innerFolderIds = filesDao.getIdList(parent = id, typeFilter = FileType.Folder)
+            val innerFolderIds = filesDao.getIdList(parent = id, typeFilter = ItemType.Folder)
             idList.addAll(innerFolderIds)
             deque.addAll(innerFolderIds)
         }
@@ -95,7 +95,7 @@ class RepositoryImpl(
         parent: Long,
         name: String,
         fileState: FileState,
-        fileType: FileType,
+        itemType: ItemType,
         file: String?,
         fileAead: Int,
         preview: String?,
@@ -120,7 +120,7 @@ class RepositoryImpl(
             parent = parent,
             name = nameTemp,
             state = fileState,
-            type = fileType,
+            type = itemType,
             file = fileTemp,
             fileAead = aeadInfo.fileAeadIndex,
             preview = previewTemp,
@@ -138,7 +138,7 @@ class RepositoryImpl(
         val filesEntity = FilesEntity(
             name = nameTemp,
             parent = parentId,
-            type = FileType.Folder,
+            type = ItemType.Folder,
             time = System.currentTimeMillis()
         )
         filesDao.insert(filesEntity)
@@ -154,7 +154,7 @@ class RepositoryImpl(
                         getFilePath(relativePath = file).delete()
                         if (preview != null) getFilePath(relativePath = preview).delete()
                     } else delete(
-                        ids = filesDao.getIdList(parent = id, typeFilter = FileType.Folder)
+                        ids = filesDao.getIdList(parent = id, typeFilter = ItemType.Folder)
                     )
                 }
             }.joinAll()
@@ -218,7 +218,7 @@ class RepositoryImpl(
         )
         val itemDetails: ItemDetails
         when (dto.type) {
-            FileType.Folder -> {
+            ItemType.Folder -> {
                 var folderCount = 0
                 var filesCount = 0
 

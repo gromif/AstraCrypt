@@ -14,8 +14,8 @@ import io.gromif.astracrypt.files.details.parser.addDetailsGroup
 import io.gromif.astracrypt.files.details.parser.addFlagsGroup
 import io.gromif.astracrypt.files.details.parser.addFolderGroup
 import io.gromif.astracrypt.files.di.FilesImageLoader
-import io.gromif.astracrypt.files.domain.model.FileType
 import io.gromif.astracrypt.files.domain.model.ItemDetails
+import io.gromif.astracrypt.files.domain.model.ItemType
 import io.gromif.astracrypt.files.domain.usecase.GetItemDetailsUseCase
 import io.gromif.astracrypt.utils.dispatchers.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
@@ -36,7 +36,7 @@ internal class DetailsScreenViewModel @Inject constructor(
     fun loadItemDetails(context: Context, id: Long) = viewModelScope.launch(defaultDispatcher) {
         val details = getItemDetailsUseCase(id)
         itemDetails = details
-        val type = if (details is ItemDetails.File) details.type else FileType.Folder
+        val type = if (details is ItemDetails.File) details.type else ItemType.Folder
 
         detailsStateList.addDetailsGroup(type, details)
         when (details) {

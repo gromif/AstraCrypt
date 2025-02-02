@@ -30,7 +30,7 @@ import coil.compose.AsyncImage
 import com.nevidimka655.ui.compose_core.theme.spaces
 import io.gromif.astracrypt.files.domain.model.FileSource
 import io.gromif.astracrypt.files.domain.model.FileState
-import io.gromif.astracrypt.files.domain.model.FileType
+import io.gromif.astracrypt.files.domain.model.ItemType
 import io.gromif.astracrypt.files.shared.iconAlt
 import io.gromif.astracrypt.files.shared.iconTint
 
@@ -40,7 +40,7 @@ internal fun RecentFilesListItem(
     imageLoader: ImageLoader,
     name: String,
     preview: FileSource?,
-    itemType: FileType,
+    itemType: ItemType,
     state: FileState,
     onClick: () -> Unit
 ) = Card(modifier = modifier.fillMaxHeight()) {

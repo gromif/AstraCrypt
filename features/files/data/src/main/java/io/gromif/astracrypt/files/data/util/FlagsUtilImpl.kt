@@ -5,7 +5,7 @@ import io.gromif.astracrypt.files.data.dto.FileFlagsDto
 import io.gromif.astracrypt.files.data.factory.flags.AudioFlagsFactory
 import io.gromif.astracrypt.files.data.factory.flags.ImageFlagsFactory
 import io.gromif.astracrypt.files.data.factory.flags.VideoFlagsFactory
-import io.gromif.astracrypt.files.domain.model.FileType
+import io.gromif.astracrypt.files.domain.model.ItemType
 import io.gromif.astracrypt.files.domain.util.FlagsUtil
 
 class FlagsUtilImpl(
@@ -16,13 +16,13 @@ class FlagsUtilImpl(
 ): FlagsUtil {
 
     override suspend fun getFlags(
-        type: FileType,
+        type: ItemType,
         path: String,
     ): String? {
         val dto = when(type) {
-            FileType.Photo -> imageFlagsFactory.create(path)
-            FileType.Music -> audioFlagsFactory.create(path)
-            FileType.Video -> videoFlagsFactory.create(path)
+            ItemType.Photo -> imageFlagsFactory.create(path)
+            ItemType.Music -> audioFlagsFactory.create(path)
+            ItemType.Video -> videoFlagsFactory.create(path)
             else -> null
         }
         return dto?.let { serializer(it) }

@@ -3,9 +3,9 @@ package io.gromif.astracrypt.files.domain.repository
 import io.gromif.astracrypt.files.domain.model.AeadInfo
 import io.gromif.astracrypt.files.domain.model.ExportData
 import io.gromif.astracrypt.files.domain.model.FileState
-import io.gromif.astracrypt.files.domain.model.FileType
 import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.domain.model.ItemDetails
+import io.gromif.astracrypt.files.domain.model.ItemType
 import kotlinx.coroutines.flow.Flow
 
 interface Repository {
@@ -25,7 +25,7 @@ interface Repository {
         parent: Long,
         name: String,
         fileState: FileState = FileState.Default,
-        fileType: FileType,
+        itemType: ItemType,
         file: String? = null,
         fileAead: Int = -1,
         preview: String? = null,

@@ -1,6 +1,6 @@
 package io.gromif.astracrypt.files.domain.util
 
-import io.gromif.astracrypt.files.domain.model.FileType
+import io.gromif.astracrypt.files.domain.model.ItemType
 
 interface FileUtil {
 
@@ -20,6 +20,6 @@ interface FileUtil {
 
     fun delete()
 
-    fun parseType(): FileType
+    fun parseType(): ItemType
 
 }

@@ -7,8 +7,8 @@ data class Item(
     val preview: FileSource? = null,
     val file: FileSource? = null,
     val size: Long = 0,
-    val type: FileType = FileType.Other,
-    val isFolder: Boolean = type == FileType.Folder,
+    val type: ItemType = ItemType.Other,
+    val isFolder: Boolean = type == ItemType.Folder,
     val isFile: Boolean = !isFolder,
     val state: FileState = FileState.Default
 )

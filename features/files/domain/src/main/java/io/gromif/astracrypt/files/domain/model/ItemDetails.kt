@@ -6,7 +6,7 @@ sealed class ItemDetails(
 
     data class File(
         val name: String,
-        val type: FileType,
+        val type: ItemType,
         val file: FileSource,
         val preview: FileSource?,
         val flags: FileFlags?,

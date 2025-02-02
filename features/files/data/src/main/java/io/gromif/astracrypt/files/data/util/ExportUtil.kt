@@ -6,7 +6,7 @@ import androidx.documentfile.provider.DocumentFile
 import com.nevidimka655.astracrypt.utils.Mapper
 import com.nevidimka655.astracrypt.utils.io.FilesUtil
 import io.gromif.astracrypt.files.data.db.FilesDao
-import io.gromif.astracrypt.files.domain.model.FileType
+import io.gromif.astracrypt.files.domain.model.ItemType
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.isActive
 
@@ -34,7 +34,7 @@ class ExportUtil(
             val currentId = deque.removeFirst()
             val currentFolder = folderMap.remove(currentId) ?: continue
             val exportData = filesDao.getExportData(id = currentId)
-            if (exportData.type == FileType.Folder) {
+            if (exportData.type == ItemType.Folder) {
                 val newFolder = currentFolder.createDirectory(exportData.name) ?: continue
                 val idList = filesDao.getIdList(parent = currentId)
                 idList.forEach { folderMap[it] = newFolder }

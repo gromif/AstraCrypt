@@ -2,7 +2,7 @@ package io.gromif.astracrypt.files.data.util
 
 import io.gromif.astracrypt.files.data.factory.preview.AudioPreviewFactory
 import io.gromif.astracrypt.files.data.factory.preview.DefaultPreviewFactory
-import io.gromif.astracrypt.files.domain.model.FileType
+import io.gromif.astracrypt.files.domain.model.ItemType
 import io.gromif.astracrypt.files.domain.util.PreviewUtil
 
 class PreviewUtilImpl(
@@ -12,11 +12,11 @@ class PreviewUtilImpl(
 ): PreviewUtil {
 
     override suspend fun getPreviewPath(
-        type: FileType,
+        type: ItemType,
         path: String,
     ): String? {
         val bytes = when(type) {
-            FileType.Music -> audioPreviewFactory.create(path)
+            ItemType.Music -> audioPreviewFactory.create(path)
             else -> defaultPreviewFactory.create(path)
         }
         return bytes?.let {

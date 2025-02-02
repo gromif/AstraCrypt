@@ -5,7 +5,7 @@ import android.net.Uri
 import androidx.core.provider.DocumentsContractCompat
 import androidx.documentfile.provider.DocumentFile
 import com.nevidimka655.astracrypt.utils.Mapper
-import io.gromif.astracrypt.files.domain.model.FileType
+import io.gromif.astracrypt.files.domain.model.ItemType
 import io.gromif.astracrypt.files.domain.util.FileUtil
 
 class FileUtilImpl(
@@ -48,17 +48,17 @@ class FileUtilImpl(
         }
     }
 
-    override fun parseType(): FileType {
+    override fun parseType(): ItemType {
         val mimeType = file?.type ?: context.contentResolver.getType(uri)
         return mimeType?.let {
             when {
-                mimeType.startsWith("image") -> FileType.Photo
-                mimeType.startsWith("audio") -> FileType.Music
-                mimeType.startsWith("video") -> FileType.Video
-                mimeType.startsWith("text") -> FileType.Text
-                else -> FileType.Other
+                mimeType.startsWith("image") -> ItemType.Photo
+                mimeType.startsWith("audio") -> ItemType.Music
+                mimeType.startsWith("video") -> ItemType.Video
+                mimeType.startsWith("text") -> ItemType.Text
+                else -> ItemType.Other
             }
-        } ?: FileType.Other
+        } ?: ItemType.Other
     }
 
 }

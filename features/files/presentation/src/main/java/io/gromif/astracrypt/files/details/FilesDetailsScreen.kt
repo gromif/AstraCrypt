@@ -12,8 +12,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.nevidimka655.compose_details.DetailsScreen
-import io.gromif.astracrypt.files.domain.model.FileType
 import io.gromif.astracrypt.files.domain.model.ItemDetails
+import io.gromif.astracrypt.files.domain.model.ItemType
 import io.gromif.astracrypt.files.shared.icon
 
 @Composable
@@ -45,7 +45,7 @@ fun FilesDetailsScreen(id: Long) {
                 )
             } else Icon(
                 modifier = Modifier.fillMaxSize(0.5f),
-                imageVector = FileType.Folder.icon,
+                imageVector = ItemType.Folder.icon,
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.onSurfaceVariant
             )

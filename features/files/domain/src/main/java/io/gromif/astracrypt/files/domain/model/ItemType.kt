@@ -1,6 +1,6 @@
 package io.gromif.astracrypt.files.domain.model
 
-enum class FileType {
+enum class ItemType {
     Folder,
     Photo,
     Music,

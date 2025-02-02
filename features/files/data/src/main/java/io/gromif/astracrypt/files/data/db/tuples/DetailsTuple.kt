@@ -1,10 +1,10 @@
 package io.gromif.astracrypt.files.data.db.tuples
 
-import io.gromif.astracrypt.files.domain.model.FileType
+import io.gromif.astracrypt.files.domain.model.ItemType
 
 data class DetailsTuple(
     val name: String,
-    val type: FileType,
+    val type: ItemType,
     val file: String?,
     val fileAead: Int,
     val preview: String?,

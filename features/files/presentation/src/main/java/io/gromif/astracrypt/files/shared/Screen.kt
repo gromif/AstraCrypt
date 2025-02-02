@@ -73,7 +73,7 @@ internal fun Screen(
                     id = it.id,
                     name = it.name,
                     isStarred = it.state == FileState.Starred,
-                    fileType = it.type,
+                    itemType = it.type,
                     isFolder = it.isFolder
                 )
                 sheetOptionsState.value = true
@@ -128,7 +128,7 @@ internal fun Screen(
     filesOptionsSheet(
         state = sheetOptionsState,
         name = optionsItem.name,
-        itemIcon = optionsItem.fileType.icon,
+        itemIcon = optionsItem.itemType.icon,
         isFolder = optionsItem.isFolder,
         isStarred = optionsItem.isStarred,
     ) {

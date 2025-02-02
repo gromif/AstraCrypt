@@ -1,8 +1,8 @@
 package io.gromif.astracrypt.files.shared
 
 import androidx.paging.PagingData
-import io.gromif.astracrypt.files.domain.model.FileType
 import io.gromif.astracrypt.files.domain.model.Item
+import io.gromif.astracrypt.files.domain.model.ItemType
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 
@@ -21,7 +21,7 @@ internal object FakeData {
         Item(
             id = it.toLong(),
             name = "Item $it",
-            type = if (isFolder) FileType.Folder else FileType.entries.random(),
+            type = if (isFolder) ItemType.Folder else ItemType.entries.random(),
             isFolder = isFolder,
             isFile = isFolder.not()
         )

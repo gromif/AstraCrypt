@@ -8,11 +8,11 @@ import io.gromif.astracrypt.files.details.parser.flags.addAudioFlags
 import io.gromif.astracrypt.files.details.parser.flags.addImageFlags
 import io.gromif.astracrypt.files.details.parser.flags.addVideoFlags
 import io.gromif.astracrypt.files.domain.model.FileFlags
-import io.gromif.astracrypt.files.domain.model.FileType
+import io.gromif.astracrypt.files.domain.model.ItemType
 import io.gromif.astracrypt.files.shared.title
 
 internal fun SnapshotStateList<DetailsGroup>.addFlagsGroup(
-    type: FileType,
+    type: ItemType,
     flags: FileFlags?
 ) {
     if (flags == null) return

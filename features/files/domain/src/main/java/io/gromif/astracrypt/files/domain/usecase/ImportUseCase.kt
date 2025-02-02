@@ -53,7 +53,7 @@ class ImportUseCase(
             parent = parentId,
             name = name,
             fileState = FileState.Default,
-            fileType = type,
+            itemType = type,
             file = filePath ,
             fileAead = aeadInfo.fileAeadIndex,
             preview = previewFilePath,

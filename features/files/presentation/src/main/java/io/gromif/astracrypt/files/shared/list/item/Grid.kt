@@ -43,7 +43,7 @@ import coil.compose.AsyncImagePainter
 import com.nevidimka655.ui.compose_core.theme.spaces
 import io.gromif.astracrypt.files.domain.model.FileSource
 import io.gromif.astracrypt.files.domain.model.FileState
-import io.gromif.astracrypt.files.domain.model.FileType
+import io.gromif.astracrypt.files.domain.model.ItemType
 import io.gromif.astracrypt.files.shared.icon
 import io.gromif.astracrypt.files.shared.iconAlt
 import io.gromif.astracrypt.files.shared.iconTint
@@ -55,7 +55,7 @@ internal fun FilesListGridItem(
     imageLoader: ImageLoader,
     name: String,
     preview: FileSource?,
-    itemType: FileType,
+    itemType: ItemType,
     isFile: Boolean,
     state: FileState,
     isChecked: Boolean,

@@ -9,8 +9,8 @@ import io.gromif.astracrypt.files.data.db.FilesDao
 import io.gromif.astracrypt.files.data.db.tuples.PagerTuple
 import io.gromif.astracrypt.files.domain.model.FileSource
 import io.gromif.astracrypt.files.domain.model.FileState
-import io.gromif.astracrypt.files.domain.model.FileType
 import io.gromif.astracrypt.files.domain.model.Item
+import io.gromif.astracrypt.files.domain.model.ItemType
 import io.gromif.astracrypt.files.domain.provider.PagingProvider
 import io.gromif.astracrypt.files.domain.repository.Repository
 import io.gromif.astracrypt.files.domain.repository.SettingsRepository
@@ -42,13 +42,13 @@ class PagingProviderImpl(
                 with(filesDao) {
                     if (isStarredMode) listStarred(
                         query = searchQueryState.value,
-                        sortingItemType = FileType.Folder.ordinal,
+                        sortingItemType = ItemType.Folder.ordinal,
                         sortingSecondType = 1
                     ) else listDefault(
                         rootId = parentIdState.value,
                         query = searchQueryState.value,
                         rootIdsToSearch = searchFolderIdState.value,
-                        sortingItemType = FileType.Folder.ordinal,
+                        sortingItemType = ItemType.Folder.ordinal,
                         sortingSecondType = 1
                     )
                 }.also { pagingSource = it }

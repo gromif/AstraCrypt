@@ -11,7 +11,7 @@ import io.gromif.astracrypt.files.data.db.tuples.DetailsTuple
 import io.gromif.astracrypt.files.data.db.tuples.ExportTuple
 import io.gromif.astracrypt.files.data.db.tuples.MinimalTuple
 import io.gromif.astracrypt.files.data.db.tuples.PagerTuple
-import io.gromif.astracrypt.files.domain.model.FileType
+import io.gromif.astracrypt.files.domain.model.ItemType
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -26,7 +26,7 @@ interface FilesDao {
             "and (:typeFilter is null or type = :typeFilter)")
     suspend fun getIdList(
         parent: Long,
-        typeFilter: FileType? = null,
+        typeFilter: ItemType? = null,
         excludeFolders: Boolean = false,
     ): List<Long>
 

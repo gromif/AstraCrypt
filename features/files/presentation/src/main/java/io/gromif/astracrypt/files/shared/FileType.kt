@@ -8,7 +8,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import com.nevidimka655.astracrypt.resources.R
-import io.gromif.astracrypt.files.domain.model.FileType
+import io.gromif.astracrypt.files.domain.model.ItemType
 import io.gromif.astracrypt.files.shared.icons.Audio
 import io.gromif.astracrypt.files.shared.icons.AudioAlt
 import io.gromif.astracrypt.files.shared.icons.File
@@ -24,44 +24,44 @@ internal object _FileType
 
 internal val _FileType.Folder @Composable get() = Icons.Default.Folder
 
-internal val FileType.icon @Composable get() = when (this) {
-    FileType.Folder -> Icons.FileType.Folder
-    FileType.Photo -> Icons.FileType.Photo
-    FileType.Music -> Icons.FileType.Audio
-    FileType.Video -> Icons.FileType.Video
+internal val ItemType.icon @Composable get() = when (this) {
+    ItemType.Folder -> Icons.FileType.Folder
+    ItemType.Photo -> Icons.FileType.Photo
+    ItemType.Music -> Icons.FileType.Audio
+    ItemType.Video -> Icons.FileType.Video
 
-    FileType.Document,
-    FileType.Application,
-    FileType.Other,
-    FileType.Text,
+    ItemType.Document,
+    ItemType.Application,
+    ItemType.Other,
+    ItemType.Text,
         -> Icons.FileType.File
 }
 
-internal val FileType.iconAlt @Composable get() = when (this) {
-    FileType.Folder -> Icons.FileType.Folder
-    FileType.Photo -> Icons.FileType.PhotoAlt
-    FileType.Music -> Icons.FileType.AudioAlt
-    FileType.Video -> Icons.FileType.VideoAlt
+internal val ItemType.iconAlt @Composable get() = when (this) {
+    ItemType.Folder -> Icons.FileType.Folder
+    ItemType.Photo -> Icons.FileType.PhotoAlt
+    ItemType.Music -> Icons.FileType.AudioAlt
+    ItemType.Video -> Icons.FileType.VideoAlt
 
-    FileType.Document,
-    FileType.Application,
-    FileType.Other,
-    FileType.Text,
+    ItemType.Document,
+    ItemType.Application,
+    ItemType.Other,
+    ItemType.Text,
         -> Icons.FileType.FileAlt
 }
 
-internal val FileType.title get() = when (this) {
-    FileType.Folder -> R.string.folder
-    FileType.Photo -> R.string.photo
-    FileType.Music -> R.string.music
-    FileType.Video -> R.string.video
-    FileType.Document -> R.string.document
-    FileType.Application -> R.string.application
-    FileType.Other -> R.string.other
-    FileType.Text -> R.string.text
+internal val ItemType.title get() = when (this) {
+    ItemType.Folder -> R.string.folder
+    ItemType.Photo -> R.string.photo
+    ItemType.Music -> R.string.music
+    ItemType.Video -> R.string.video
+    ItemType.Document -> R.string.document
+    ItemType.Application -> R.string.application
+    ItemType.Other -> R.string.other
+    ItemType.Text -> R.string.text
 }
 
-internal val FileType.iconTint @Composable get() = when (this) {
-    FileType.Folder -> MaterialTheme.colorScheme.onSurfaceVariant
+internal val ItemType.iconTint @Composable get() = when (this) {
+    ItemType.Folder -> MaterialTheme.colorScheme.onSurfaceVariant
     else -> Color.Unspecified
 }

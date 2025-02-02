@@ -40,7 +40,7 @@ import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.ui.compose_core.theme.spaces
 import io.gromif.astracrypt.files.domain.model.FileSource
 import io.gromif.astracrypt.files.domain.model.FileState
-import io.gromif.astracrypt.files.domain.model.FileType
+import io.gromif.astracrypt.files.domain.model.ItemType
 import io.gromif.astracrypt.files.shared.iconAlt
 import io.gromif.astracrypt.files.shared.iconTint
 import io.gromif.astracrypt.files.shared.title
@@ -52,7 +52,7 @@ internal fun FilesListItem(
     imageLoader: ImageLoader,
     name: String = "TEST_NAME",
     preview: FileSource?,
-    itemType: FileType = FileType.Document,
+    itemType: ItemType = ItemType.Document,
     state: FileState = FileState.Default,
     isChecked: Boolean = false,
     isBackgroundTransparent: Boolean = false,
