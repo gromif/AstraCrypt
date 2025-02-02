@@ -17,7 +17,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.nevidimka655.astracrypt.resources.R
-import io.gromif.astracrypt.files.contracts.scanContract
+import io.gromif.astracrypt.files.contracts.Contracts
+import io.gromif.astracrypt.files.contracts.scan
 import io.gromif.astracrypt.files.domain.model.FileItem
 import io.gromif.astracrypt.files.model.ContextualAction
 import io.gromif.astracrypt.files.model.Mode
@@ -66,7 +67,7 @@ fun FilesScreen(
     }
 
     var cameraScanUri by rememberSaveable { mutableStateOf(Uri.EMPTY) }
-    val scanContract = scanContract { vm.import(cameraScanUri) }
+    val scanContract = Contracts.scan { vm.import(cameraScanUri) }
 
     val multiselectStateList = rememberMultiselectStateList()
     fun selectItem(id: Long) = with(multiselectStateList) {

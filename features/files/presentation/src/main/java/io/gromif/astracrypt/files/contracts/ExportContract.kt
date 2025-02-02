@@ -6,7 +6,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
 
 @Composable
-internal fun exportContract(
+internal fun Contracts.export(
     onResult: (Uri) -> Unit
 ) = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocumentTree()) {
     it?.let { onResult(it) }

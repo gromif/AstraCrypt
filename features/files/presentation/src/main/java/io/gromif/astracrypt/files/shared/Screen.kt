@@ -19,8 +19,9 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import coil.ImageLoader
 import com.nevidimka655.ui.compose_core.Compose
 import com.nevidimka655.ui.compose_core.ext.FlowObserver
-import io.gromif.astracrypt.files.contracts.exportContract
-import io.gromif.astracrypt.files.contracts.pickFileContract
+import io.gromif.astracrypt.files.contracts.Contracts
+import io.gromif.astracrypt.files.contracts.export
+import io.gromif.astracrypt.files.contracts.pickFile
 import io.gromif.astracrypt.files.dialogs.deleteDialog
 import io.gromif.astracrypt.files.dialogs.deleteSourceDialog
 import io.gromif.astracrypt.files.dialogs.newFolderDialog
@@ -88,8 +89,8 @@ internal fun Screen(
     var saveSourceState by rememberSaveable { mutableStateOf(true) }
     var importMimeTypeState by rememberSaveable { mutableStateOf("") }
 
-    val pickFileContract = pickFileContract { actions.import(it.toTypedArray(), saveSourceState) }
-    val exportContract = exportContract { navActions.toExport(optionsItem.id, it) }
+    val pickFileContract = Contracts.pickFile { actions.import(it.toTypedArray(), saveSourceState) }
+    val exportContract = Contracts.export { navActions.toExport(optionsItem.id, it) }
 
     var dialogNewFolder by newFolderDialog(onCreate = actions::createFolder)
     var dialogRenameState by renameDialog(optionsItem.name) { actions.rename(optionsItem.id, it) }
