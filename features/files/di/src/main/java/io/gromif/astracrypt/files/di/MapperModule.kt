@@ -9,9 +9,9 @@ import dagger.hilt.components.SingletonComponent
 import io.gromif.astracrypt.files.data.db.FilesEntity
 import io.gromif.astracrypt.files.data.db.tuples.DetailsTuple
 import io.gromif.astracrypt.files.data.dto.FileFlagsDto
-import io.gromif.astracrypt.files.data.mapper.FileItemMapper
-import io.gromif.astracrypt.files.data.mapper.ItemDetailsMapper
-import io.gromif.astracrypt.files.data.mapper.ItemFlagsMapper
+import io.gromif.astracrypt.files.data.util.mapper.FileItemMapper
+import io.gromif.astracrypt.files.data.util.mapper.ItemDetailsMapper
+import io.gromif.astracrypt.files.data.util.mapper.ItemFlagsMapper
 import io.gromif.astracrypt.files.domain.model.FileFlags
 import io.gromif.astracrypt.files.domain.model.FileItem
 import io.gromif.astracrypt.files.domain.model.ItemDetails

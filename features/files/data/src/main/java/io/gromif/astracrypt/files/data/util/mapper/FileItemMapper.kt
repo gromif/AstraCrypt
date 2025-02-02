@@ -1,4 +1,4 @@
-package io.gromif.astracrypt.files.data.mapper
+package io.gromif.astracrypt.files.data.util.mapper
 
 import com.nevidimka655.astracrypt.utils.Mapper
 import io.gromif.astracrypt.files.data.db.FilesEntity

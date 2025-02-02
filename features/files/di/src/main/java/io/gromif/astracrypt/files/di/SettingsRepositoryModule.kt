@@ -8,9 +8,9 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import io.gromif.astracrypt.files.data.dto.AeadInfoDto
-import io.gromif.astracrypt.files.data.mapper.AeadInfoDtoMapper
-import io.gromif.astracrypt.files.data.mapper.AeadInfoMapper
 import io.gromif.astracrypt.files.data.repository.SettingsRepositoryImpl
+import io.gromif.astracrypt.files.data.util.mapper.AeadInfoDtoMapper
+import io.gromif.astracrypt.files.data.util.mapper.AeadInfoMapper
 import io.gromif.astracrypt.files.domain.model.AeadInfo
 import io.gromif.astracrypt.files.domain.repository.SettingsRepository
 import javax.inject.Singleton
