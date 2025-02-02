@@ -9,7 +9,7 @@ import com.nevidimka655.astracrypt.view.navigation.models.UiState
 import com.nevidimka655.astracrypt.view.navigation.shared.UiStateHandler
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 import io.gromif.astracrypt.files.export.FilesExportScreen
-import io.gromif.astracrypt.files.export.Params
+import io.gromif.astracrypt.files.export.model.Params
 
 private val ExportUiState = UiState(
     toolbar = UiState.Toolbar(

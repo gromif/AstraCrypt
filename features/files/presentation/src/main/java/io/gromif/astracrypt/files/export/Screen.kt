@@ -29,7 +29,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.ui.compose_core.theme.spaces
-import io.gromif.astracrypt.files.model.ExportStateHolder
+import io.gromif.astracrypt.files.export.model.ExportStateHolder
 
 @Preview(showBackground = true)
 @Composable

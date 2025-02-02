@@ -31,10 +31,10 @@ import com.nevidimka655.astracrypt.view.navigation.shared.UiStateHandler
 import com.nevidimka655.haptic.Haptic
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap.Text
-import io.gromif.astracrypt.files.FilesScreen
-import io.gromif.astracrypt.files.model.ContextualAction
-import io.gromif.astracrypt.files.model.Mode
-import io.gromif.astracrypt.files.model.action.FilesNavActions
+import io.gromif.astracrypt.files.files.FilesScreen
+import io.gromif.astracrypt.files.files.model.ContextualAction
+import io.gromif.astracrypt.files.files.model.Mode
+import io.gromif.astracrypt.files.files.model.action.FilesNavActions
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow

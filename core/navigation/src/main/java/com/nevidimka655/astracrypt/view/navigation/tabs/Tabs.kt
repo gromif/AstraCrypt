@@ -13,8 +13,8 @@ import com.nevidimka655.astracrypt.view.navigation.models.actions.ToolbarActions
 import com.nevidimka655.astracrypt.view.navigation.shared.UiStateHandler
 import com.nevidimka655.astracrypt.view.navigation.tabs.settings.SettingsScreen
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
-import io.gromif.astracrypt.files.model.action.FilesNavActions
-import io.gromif.astracrypt.files.shared.recent.list.Actions
+import io.gromif.astracrypt.files.files.model.action.FilesNavActions
+import io.gromif.astracrypt.files.recent.list.Actions
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow
 

@@ -13,8 +13,8 @@ import androidx.compose.ui.res.stringResource
 import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.ui.compose_core.CardWithTitle
 import com.nevidimka655.ui.compose_core.theme.spaces
-import io.gromif.astracrypt.files.shared.recent.RecentFilesComponent
-import io.gromif.astracrypt.files.shared.recent.list.Actions
+import io.gromif.astracrypt.files.recent.RecentFilesComponent
+import io.gromif.astracrypt.files.recent.list.Actions
 import io.gromif.astracrypt.profile.presentation.shared.Profile
 import io.gromif.astracrypt.profile.presentation.widget.WidgetComponent
 
