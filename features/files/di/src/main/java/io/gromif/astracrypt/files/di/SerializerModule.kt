@@ -6,7 +6,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import io.gromif.astracrypt.files.data.dto.FileFlagsDto
-import io.gromif.astracrypt.files.data.serializer.ItemFlagsDtoSerializer
+import io.gromif.astracrypt.files.data.util.serializer.ItemFlagsDtoSerializer
 
 @Module
 @InstallIn(SingletonComponent::class)
