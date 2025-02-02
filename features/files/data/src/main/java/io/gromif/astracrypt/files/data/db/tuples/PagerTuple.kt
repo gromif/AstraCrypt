@@ -2,6 +2,7 @@ package io.gromif.astracrypt.files.data.db.tuples
 
 import androidx.room.ColumnInfo
 import androidx.room.PrimaryKey
+import io.gromif.astracrypt.files.domain.model.FileType
 
 data class PagerTuple(
     @PrimaryKey val id: Long,
@@ -10,7 +11,7 @@ data class PagerTuple(
     val name: String,
 
     @ColumnInfo(name = "type")
-    val type: Int,
+    val type: FileType,
 
     @ColumnInfo(name = "preview")
     val preview: String?,

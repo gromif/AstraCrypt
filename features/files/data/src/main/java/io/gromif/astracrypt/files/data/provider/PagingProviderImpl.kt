@@ -72,7 +72,7 @@ class PagingProviderImpl(
                 FileItem(
                     id = pagerTuple.id,
                     name = pagerTuple.name,
-                    type = FileType.entries[pagerTuple.type],
+                    type = pagerTuple.type,
                     preview = pagerTuple.preview?.let { 
                         FileSource(path = it, aeadIndex = pagerTuple.previewAead)
                     },
