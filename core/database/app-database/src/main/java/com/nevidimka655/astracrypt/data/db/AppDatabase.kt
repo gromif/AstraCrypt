@@ -7,8 +7,8 @@ import com.nevidimka655.astracrypt.notes.db.NoteItemEntity
 import com.nevidimka655.astracrypt.notes.db.NotesDao
 import io.gromif.astracrypt.files.data.db.FilesDao
 import io.gromif.astracrypt.files.data.db.FilesEntity
-import io.gromif.astracrypt.files.data.db.converters.FileStateConverter
 import io.gromif.astracrypt.files.data.db.converters.FileTypeConverter
+import io.gromif.astracrypt.files.data.db.converters.ItemStateConverter
 
 @Database(
     entities = [
@@ -18,7 +18,7 @@ import io.gromif.astracrypt.files.data.db.converters.FileTypeConverter
     version = 1
 )
 @TypeConverters(
-    FileStateConverter::class,
+    ItemStateConverter::class,
     FileTypeConverter::class
 )
 abstract class AppDatabase : RoomDatabase() {
