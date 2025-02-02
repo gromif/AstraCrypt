@@ -15,7 +15,7 @@ import com.nevidimka655.haptic.Haptic
 import com.nevidimka655.ui.compose_core.ext.LocalWindowWidth
 import com.nevidimka655.ui.compose_core.ext.cellsCount
 import com.nevidimka655.ui.compose_core.theme.spaces
-import io.gromif.astracrypt.files.domain.model.FileItem
+import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.domain.model.ViewMode
 import io.gromif.astracrypt.files.shared.list.item.FilesListGridItem
 import io.gromif.astracrypt.files.shared.list.item.FilesListItem
@@ -23,11 +23,11 @@ import io.gromif.astracrypt.files.shared.list.item.FilesListItem
 @Composable
 internal fun FilesList(
     viewMode: ViewMode = ViewMode.Grid,
-    pagingItems: LazyPagingItems<FileItem>,
+    pagingItems: LazyPagingItems<Item>,
     multiselectStateList: SnapshotStateList<Long>,
     imageLoader: ImageLoader,
-    onOptions: (item: FileItem) -> Unit,
-    onClick: (item: FileItem) -> Unit,
+    onOptions: (item: Item) -> Unit,
+    onClick: (item: Item) -> Unit,
     onLongPress: (id: Long) -> Unit,
 ) {
     val cells = when (viewMode) {

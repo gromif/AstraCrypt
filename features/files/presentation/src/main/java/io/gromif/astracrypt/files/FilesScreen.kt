@@ -19,7 +19,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.nevidimka655.astracrypt.resources.R
 import io.gromif.astracrypt.files.contracts.Contracts
 import io.gromif.astracrypt.files.contracts.scan
-import io.gromif.astracrypt.files.domain.model.FileItem
+import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.model.ContextualAction
 import io.gromif.astracrypt.files.model.Mode
 import io.gromif.astracrypt.files.model.StateHolder
@@ -112,7 +112,7 @@ fun FilesScreen(
                 vm.openDirectoryFromBackStack(index)
             }
 
-            override fun click(item: FileItem) {
+            override fun click(item: Item) {
                 val (id, _, name) = item
                 when {
                     mode is Mode.Multiselect && multiselectStateList.isNotEmpty() -> selectItem(id)

@@ -17,7 +17,7 @@ import com.nevidimka655.astracrypt.utils.io.FilesUtil
 import com.nevidimka655.astracrypt.utils.io.WorkerSerializer
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.gromif.astracrypt.files.di.FilesImageLoader
-import io.gromif.astracrypt.files.domain.model.FileItem
+import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.domain.model.ViewMode
 import io.gromif.astracrypt.files.domain.provider.PagingProvider
 import io.gromif.astracrypt.files.domain.usecase.CreateFolderUseCase
@@ -49,7 +49,7 @@ class FilesViewModel @Inject constructor(
     @IoDispatcher
     private val defaultDispatcher: CoroutineDispatcher,
     private val state: SavedStateHandle,
-    private val pagingProvider: PagingProvider<PagingData<FileItem>>,
+    private val pagingProvider: PagingProvider<PagingData<Item>>,
     private val createFolderUseCase: CreateFolderUseCase,
     private val deleteUseCase: DeleteUseCase,
     private val moveUseCase: MoveUseCase,

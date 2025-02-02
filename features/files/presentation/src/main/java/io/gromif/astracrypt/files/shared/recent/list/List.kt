@@ -13,14 +13,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.ImageLoader
 import com.nevidimka655.ui.compose_core.theme.spaces
-import io.gromif.astracrypt.files.domain.model.FileItem
+import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.shared.FakeData
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview(showBackground = true)
 @Composable
 internal fun RecentFilesList(
-    list: List<FileItem> = FakeData.fileItems(),
+    list: List<Item> = FakeData.fileItems(),
     imageLoader: ImageLoader = ImageLoader(LocalContext.current),
     actions: Actions = Actions.default,
 ) = HorizontalUncontainedCarousel(

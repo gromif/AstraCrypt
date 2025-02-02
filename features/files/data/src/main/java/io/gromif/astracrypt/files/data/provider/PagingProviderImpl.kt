@@ -7,10 +7,10 @@ import androidx.paging.PagingSource
 import androidx.paging.map
 import io.gromif.astracrypt.files.data.db.FilesDao
 import io.gromif.astracrypt.files.data.db.tuples.PagerTuple
-import io.gromif.astracrypt.files.domain.model.FileItem
 import io.gromif.astracrypt.files.domain.model.FileSource
 import io.gromif.astracrypt.files.domain.model.FileState
 import io.gromif.astracrypt.files.domain.model.FileType
+import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.domain.provider.PagingProvider
 import io.gromif.astracrypt.files.domain.repository.Repository
 import io.gromif.astracrypt.files.domain.repository.SettingsRepository
@@ -27,7 +27,7 @@ class PagingProviderImpl(
     private val aeadUtil: AeadUtil,
     private val repository: Repository,
     private val settingsRepository: SettingsRepository,
-) : PagingProvider<PagingData<FileItem>> {
+) : PagingProvider<PagingData<Item>> {
     private var pagingSource: PagingSource<Int, PagerTuple>? = null
     private val searchQueryState = MutableStateFlow<String?>(null)
     private val searchFolderIdState = MutableStateFlow<List<Long>>(emptyList())
@@ -35,7 +35,7 @@ class PagingProviderImpl(
     override fun provide(
         parentIdState: StateFlow<Long>,
         isStarredMode: Boolean,
-    ): Flow<PagingData<FileItem>> {
+    ): Flow<PagingData<Item>> {
         return Pager(
             config = pagingConfig,
             pagingSourceFactory = {
@@ -69,7 +69,7 @@ class PagingProviderImpl(
                 )
             } else pd
             pagingData.map { pagerTuple ->
-                FileItem(
+                Item(
                     id = pagerTuple.id,
                     name = pagerTuple.name,
                     type = pagerTuple.type,

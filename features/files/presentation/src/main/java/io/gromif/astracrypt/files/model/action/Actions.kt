@@ -1,12 +1,12 @@
 package io.gromif.astracrypt.files.model.action
 
 import android.net.Uri
-import io.gromif.astracrypt.files.domain.model.FileItem
+import io.gromif.astracrypt.files.domain.model.Item
 
 internal interface Actions {
 
     fun backStackClick(index: Int?)
-    fun click(item: FileItem)
+    fun click(item: Item)
     fun longClick(id: Long)
 
     fun setMoveMode()
@@ -25,7 +25,7 @@ internal interface Actions {
     companion object {
         internal val Default = object : Actions {
             override fun backStackClick(index: Int?) {}
-            override fun click(item: FileItem) {}
+            override fun click(item: Item) {}
             override fun longClick(id: Long) {}
             override fun setMoveMode() {}
             override fun closeContextualToolbar() {}

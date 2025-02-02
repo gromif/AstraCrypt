@@ -10,9 +10,9 @@ import io.gromif.astracrypt.files.data.util.ExportUtil
 import io.gromif.astracrypt.files.data.util.FileHandler
 import io.gromif.astracrypt.files.domain.model.AeadInfo
 import io.gromif.astracrypt.files.domain.model.ExportData
-import io.gromif.astracrypt.files.domain.model.FileItem
 import io.gromif.astracrypt.files.domain.model.FileState
 import io.gromif.astracrypt.files.domain.model.FileType
+import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.domain.model.ItemDetails
 import io.gromif.astracrypt.files.domain.repository.Repository
 import io.gromif.astracrypt.files.domain.repository.SettingsRepository
@@ -30,7 +30,7 @@ class RepositoryImpl(
     private val settingsRepository: SettingsRepository,
     private val fileHandler: FileHandler,
     private val exportUtil: ExportUtil,
-    private val fileItemMapper: Mapper<FilesEntity, FileItem>,
+    private val itemMapper: Mapper<FilesEntity, Item>,
     private val itemDetailsMapper: Mapper<DetailsTuple, ItemDetails>,
     private val uriMapper: Mapper<String, Uri>
 ) : Repository {
@@ -40,7 +40,7 @@ class RepositoryImpl(
     private suspend fun decrypt(aeadInfo: AeadInfo, data: String): String =
         aeadUtil.decrypt(aeadIndex = aeadInfo.databaseAeadIndex, data = data)
 
-    override suspend fun get(aeadInfo: AeadInfo?, id: Long): FileItem {
+    override suspend fun get(aeadInfo: AeadInfo?, id: Long): Item {
         val aeadInfo = aeadInfo ?: settingsRepository.getAeadInfo()
         var filesEntity = filesDao.get(id = id)
 
@@ -58,7 +58,7 @@ class RepositoryImpl(
                 if (aeadInfo.flag) decrypt(aeadInfo, it) else it
             }
         )
-        return fileItemMapper(filesEntity)
+        return itemMapper(filesEntity)
     }
 
     override suspend fun getFolderIds(
@@ -193,9 +193,9 @@ class RepositoryImpl(
         }
     }
 
-    override fun getRecentFilesList(): Flow<List<FileItem>> {
+    override fun getRecentFilesList(): Flow<List<Item>> {
         return filesDao.getRecentFilesFlow().map { list ->
-            list.map { fileItemMapper(it) }
+            list.map { itemMapper(it) }
         }
     }
 

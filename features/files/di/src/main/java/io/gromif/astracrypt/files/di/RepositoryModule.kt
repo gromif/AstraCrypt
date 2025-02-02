@@ -12,7 +12,7 @@ import io.gromif.astracrypt.files.data.db.tuples.DetailsTuple
 import io.gromif.astracrypt.files.data.repository.RepositoryImpl
 import io.gromif.astracrypt.files.data.util.ExportUtil
 import io.gromif.astracrypt.files.data.util.FileHandler
-import io.gromif.astracrypt.files.domain.model.FileItem
+import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.domain.model.ItemDetails
 import io.gromif.astracrypt.files.domain.repository.Repository
 import io.gromif.astracrypt.files.domain.repository.SettingsRepository
@@ -31,7 +31,7 @@ internal object RepositoryModule {
         settingsRepository: SettingsRepository,
         fileHandler: FileHandler,
         exportUtil: ExportUtil,
-        fileItemMapper: Mapper<FilesEntity, FileItem>,
+        itemMapper: Mapper<FilesEntity, Item>,
         itemDetailsMapper: Mapper<DetailsTuple, ItemDetails>,
         uriMapper: Mapper<String, Uri>,
     ): Repository = RepositoryImpl(
@@ -39,7 +39,7 @@ internal object RepositoryModule {
         aeadUtil = aeadUtil,
         settingsRepository = settingsRepository,
         fileHandler = fileHandler,
-        fileItemMapper = fileItemMapper,
+        itemMapper = itemMapper,
         exportUtil = exportUtil,
         itemDetailsMapper = itemDetailsMapper,
         uriMapper = uriMapper

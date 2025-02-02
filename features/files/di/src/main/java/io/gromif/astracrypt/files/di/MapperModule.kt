@@ -13,7 +13,7 @@ import io.gromif.astracrypt.files.data.util.mapper.FileItemMapper
 import io.gromif.astracrypt.files.data.util.mapper.ItemDetailsMapper
 import io.gromif.astracrypt.files.data.util.mapper.ItemFlagsMapper
 import io.gromif.astracrypt.files.domain.model.FileFlags
-import io.gromif.astracrypt.files.domain.model.FileItem
+import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.domain.model.ItemDetails
 
 @Module
@@ -33,6 +33,6 @@ internal object MapperModule {
     )
 
     @Provides
-    fun provideFileItemMapper(): Mapper<FilesEntity, FileItem> = FileItemMapper()
+    fun provideFileItemMapper(): Mapper<FilesEntity, Item> = FileItemMapper()
 
 }

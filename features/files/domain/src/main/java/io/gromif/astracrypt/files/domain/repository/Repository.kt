@@ -2,9 +2,9 @@ package io.gromif.astracrypt.files.domain.repository
 
 import io.gromif.astracrypt.files.domain.model.AeadInfo
 import io.gromif.astracrypt.files.domain.model.ExportData
-import io.gromif.astracrypt.files.domain.model.FileItem
 import io.gromif.astracrypt.files.domain.model.FileState
 import io.gromif.astracrypt.files.domain.model.FileType
+import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.domain.model.ItemDetails
 import kotlinx.coroutines.flow.Flow
 
@@ -13,7 +13,7 @@ interface Repository {
     suspend fun get(
         aeadInfo: AeadInfo? = null,
         id: Long,
-    ): FileItem
+    ): Item
 
     suspend fun getFolderIds(
         parentId: Long,
@@ -49,7 +49,7 @@ interface Repository {
 
     suspend fun exportPrivately(id: Long): String?
 
-    fun getRecentFilesList(): Flow<List<FileItem>>
+    fun getRecentFilesList(): Flow<List<Item>>
 
     suspend fun getItemDetails(id: Long): ItemDetails
 

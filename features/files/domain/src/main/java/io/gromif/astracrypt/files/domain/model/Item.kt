@@ -1,6 +1,6 @@
 package io.gromif.astracrypt.files.domain.model
 
-data class FileItem(
+data class Item(
     val id: Long = 0,
     val parent: Long = 0,
     val name: String = "",
