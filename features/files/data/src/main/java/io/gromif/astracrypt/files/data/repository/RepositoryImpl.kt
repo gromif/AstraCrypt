@@ -4,6 +4,7 @@ import android.net.Uri
 import com.nevidimka655.astracrypt.utils.Mapper
 import io.gromif.astracrypt.files.data.db.FilesDao
 import io.gromif.astracrypt.files.data.db.FilesEntity
+import io.gromif.astracrypt.files.data.db.tuples.DetailsTuple
 import io.gromif.astracrypt.files.data.db.tuples.MinimalTuple
 import io.gromif.astracrypt.files.data.util.ExportUtil
 import io.gromif.astracrypt.files.data.util.FileHandler
@@ -12,6 +13,7 @@ import io.gromif.astracrypt.files.domain.model.ExportData
 import io.gromif.astracrypt.files.domain.model.FileItem
 import io.gromif.astracrypt.files.domain.model.FileState
 import io.gromif.astracrypt.files.domain.model.FileType
+import io.gromif.astracrypt.files.domain.model.ItemDetails
 import io.gromif.astracrypt.files.domain.repository.Repository
 import io.gromif.astracrypt.files.domain.repository.SettingsRepository
 import io.gromif.astracrypt.files.domain.util.AeadUtil
@@ -29,6 +31,7 @@ class RepositoryImpl(
     private val fileHandler: FileHandler,
     private val exportUtil: ExportUtil,
     private val fileItemMapper: Mapper<FilesEntity, FileItem>,
+    private val itemDetailsMapper: Mapper<DetailsTuple, ItemDetails>,
     private val uriMapper: Mapper<String, Uri>
 ) : Repository {
     private suspend fun encrypt(aeadInfo: AeadInfo, data: String): String =
@@ -194,6 +197,54 @@ class RepositoryImpl(
         return filesDao.getRecentFilesFlow().map { list ->
             list.map { fileItemMapper(it) }
         }
+    }
+
+    override suspend fun getItemDetails(id: Long): ItemDetails {
+        val aeadInfo = settingsRepository.getAeadInfo()
+        var dto = filesDao.getDetailsById(id)
+        if (aeadInfo.db) dto = dto.copy(
+            name = if (aeadInfo.name) decrypt(aeadInfo, dto.name) else dto.name,
+            file = dto.file?.let {
+                if (aeadInfo.file) decrypt(aeadInfo, it) else it
+            },
+
+            preview = dto.preview?.let {
+                if (aeadInfo.preview) decrypt(aeadInfo, it) else it
+            },
+
+            flags = dto.flags?.let {
+                if (aeadInfo.flag) decrypt(aeadInfo, it) else it
+            }
+        )
+        val itemDetails: ItemDetails
+        when (dto.type) {
+            FileType.Folder -> {
+                var folderCount = 0
+                var filesCount = 0
+
+                val deque = ArrayDeque<Long>()
+                deque.add(id)
+                while (deque.isNotEmpty()) {
+                    val id = deque.removeFirst()
+                    val files = filesDao.getIdList(parent = id, excludeFolders = true)
+                    filesCount += files.size
+
+                    val folders = filesDao.getIdList(parent = id, typeFilter = dto.type)
+                    folderCount += folders.size
+
+                    deque.addAll(folders)
+                }
+
+                itemDetails = ItemDetails.Folder(
+                    name = dto.name,
+                    filesCount = filesCount,
+                    foldersCount = folderCount,
+                    creationTime = dto.creationTime
+                )
+            }
+            else -> itemDetails = itemDetailsMapper(dto)
+        }
+        return itemDetails
     }
 
     override suspend fun getFilesCountFlow(dirId: Long): Int {

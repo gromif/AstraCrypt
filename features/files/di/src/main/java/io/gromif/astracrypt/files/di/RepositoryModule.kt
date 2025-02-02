@@ -8,10 +8,12 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import io.gromif.astracrypt.files.data.db.FilesDao
 import io.gromif.astracrypt.files.data.db.FilesEntity
+import io.gromif.astracrypt.files.data.db.tuples.DetailsTuple
 import io.gromif.astracrypt.files.data.repository.RepositoryImpl
 import io.gromif.astracrypt.files.data.util.ExportUtil
 import io.gromif.astracrypt.files.data.util.FileHandler
 import io.gromif.astracrypt.files.domain.model.FileItem
+import io.gromif.astracrypt.files.domain.model.ItemDetails
 import io.gromif.astracrypt.files.domain.repository.Repository
 import io.gromif.astracrypt.files.domain.repository.SettingsRepository
 import io.gromif.astracrypt.files.domain.util.AeadUtil
@@ -30,6 +32,7 @@ internal object RepositoryModule {
         fileHandler: FileHandler,
         exportUtil: ExportUtil,
         fileItemMapper: Mapper<FilesEntity, FileItem>,
+        itemDetailsMapper: Mapper<DetailsTuple, ItemDetails>,
         uriMapper: Mapper<String, Uri>,
     ): Repository = RepositoryImpl(
         filesDao = filesDao,
@@ -38,6 +41,7 @@ internal object RepositoryModule {
         fileHandler = fileHandler,
         fileItemMapper = fileItemMapper,
         exportUtil = exportUtil,
+        itemDetailsMapper = itemDetailsMapper,
         uriMapper = uriMapper
     )
 

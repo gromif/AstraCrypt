@@ -1,8 +1,6 @@
 package com.nevidimka655.astracrypt.view.navigation
 
 import kotlinx.serialization.Serializable
-import androidx.annotation.StringRes
-import com.nevidimka655.astracrypt.resources.R
 
 object Route {
     object AuthGraph {
@@ -41,10 +39,7 @@ object Route {
     }
 
     @Serializable
-    data class Details(
-        @StringRes val titleId: Int = R.string.files_options_details,
-        val itemId: Long
-    )
+    data class Details(val id: Long)
 
     @Serializable data class Export(
         val isExternalExport: Boolean,

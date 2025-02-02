@@ -56,7 +56,7 @@ fun NavGraphBuilder.tabsGraph(
         }
 
         override fun toDetails(id: Long) {
-            TODO("Not yet implemented")
+            navController.navigate(Route.Details(id = id))
         }
     }
 

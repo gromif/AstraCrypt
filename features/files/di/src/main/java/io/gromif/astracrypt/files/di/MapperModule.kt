@@ -1,16 +1,20 @@
 package io.gromif.astracrypt.files.di
 
 import com.nevidimka655.astracrypt.utils.Mapper
+import com.nevidimka655.astracrypt.utils.Parser
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import io.gromif.astracrypt.files.data.db.FilesEntity
+import io.gromif.astracrypt.files.data.db.tuples.DetailsTuple
 import io.gromif.astracrypt.files.data.dto.FileFlagsDto
 import io.gromif.astracrypt.files.data.mapper.FileItemMapper
+import io.gromif.astracrypt.files.data.mapper.ItemDetailsMapper
 import io.gromif.astracrypt.files.data.mapper.ItemFlagsMapper
 import io.gromif.astracrypt.files.domain.model.FileFlags
 import io.gromif.astracrypt.files.domain.model.FileItem
+import io.gromif.astracrypt.files.domain.model.ItemDetails
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -18,6 +22,15 @@ internal object MapperModule {
 
     @Provides
     fun provideItemFlagsMapper(): Mapper<FileFlagsDto, FileFlags> = ItemFlagsMapper()
+
+    @Provides
+    fun provideItemDetailsMapper(
+        itemFlagsMapper: Mapper<FileFlagsDto, FileFlags>,
+        itemFlagsDtoParser: Parser<String, FileFlagsDto>,
+    ): Mapper<DetailsTuple, ItemDetails> = ItemDetailsMapper(
+        itemFlagsMapper = itemFlagsMapper,
+        itemFlagsDtoParser = itemFlagsDtoParser
+    )
 
     @Provides
     fun provideFileItemMapper(): Mapper<FilesEntity, FileItem> = FileItemMapper()

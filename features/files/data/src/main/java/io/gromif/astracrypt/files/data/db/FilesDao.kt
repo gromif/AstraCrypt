@@ -7,6 +7,7 @@ import androidx.room.Query
 import androidx.room.RewriteQueriesToDropUnusedColumns
 import androidx.room.Update
 import io.gromif.astracrypt.files.data.db.tuples.DatabaseTransformTuple
+import io.gromif.astracrypt.files.data.db.tuples.DetailsTuple
 import io.gromif.astracrypt.files.data.db.tuples.ExportTuple
 import io.gromif.astracrypt.files.data.db.tuples.FilesDirMinimalTuple
 import io.gromif.astracrypt.files.data.db.tuples.MinimalTuple
@@ -34,6 +35,10 @@ interface FilesDao {
     @RewriteQueriesToDropUnusedColumns
     @Query("select * from store_items where id = :id")
     suspend fun getMinimalData(id: Long): MinimalTuple
+
+    @RewriteQueriesToDropUnusedColumns
+    @Query("select * from store_items where id = :id")
+    suspend fun getDetailsById(id: Long): DetailsTuple
 
     @Insert
     suspend fun insert(filesEntity: FilesEntity)
