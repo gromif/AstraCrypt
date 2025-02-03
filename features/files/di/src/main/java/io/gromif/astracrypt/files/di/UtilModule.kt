@@ -4,8 +4,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import io.gromif.astracrypt.files.data.util.AeadUtilImpl
-import io.gromif.astracrypt.files.domain.util.AeadUtil
+import io.gromif.astracrypt.files.data.util.AeadUtil
 import io.gromif.crypto.tink.data.AssociatedDataManager
 import io.gromif.crypto.tink.data.KeysetManager
 import io.gromif.crypto.tink.encoders.Base64Encoder
@@ -21,7 +20,7 @@ internal object UtilModule {
         keysetManager: KeysetManager,
         associatedDataManager: AssociatedDataManager,
         base64Encoder: Base64Encoder
-    ): AeadUtil = AeadUtilImpl(
+    ): AeadUtil = AeadUtil(
         keysetManager = keysetManager,
         associatedDataManager = associatedDataManager,
         base64Encoder = base64Encoder
