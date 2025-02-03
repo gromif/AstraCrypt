@@ -1,5 +1,6 @@
 package io.gromif.astracrypt.files.domain.usecase
 
+import io.gromif.astracrypt.files.domain.model.ItemType
 import io.gromif.astracrypt.files.domain.repository.Repository
 import io.gromif.astracrypt.files.domain.validation.validator.NameValidator
 
@@ -11,9 +12,10 @@ class CreateFolderUseCase(
         val targetName = name.trim()
         NameValidator(targetName)
 
-        repository.createFolder(
+        repository.insert(
             name = targetName,
-            parentId = parentId ?: 0
+            parent = parentId ?: 0,
+            itemType = ItemType.Folder
         )
     }
 
