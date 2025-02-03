@@ -117,7 +117,7 @@ class FilesViewModel @Inject constructor(
         createFolderUseCase(name = name, parentId = parentId)
     }
 
-    fun delete(ids: List<Long>) = viewModelScope.launch(defaultDispatcher) {
+    fun delete(ids: List<Long>) = viewModelScope.launch(defaultDispatcher.limitedParallelism(6)) {
         deleteUseCase(ids)
     }
 
