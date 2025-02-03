@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "996c0729af91abd3ae71b45fb3b8acf8",
+    "identityHash": "421d5f51dc62a1011a7569dc1de76f24",
     "entities": [
       {
         "tableName": "store_items",
@@ -87,7 +87,27 @@
             "id"
           ]
         },
-        "indices": [],
+        "indices": [
+          {
+            "name": "index_store_items_parent_state",
+            "unique": false,
+            "columnNames": [
+              "parent",
+              "state"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_store_items_parent_state` ON `${TABLE_NAME}` (`parent`, `state`)"
+          },
+          {
+            "name": "index_store_items_type",
+            "unique": false,
+            "columnNames": [
+              "type"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_store_items_type` ON `${TABLE_NAME}` (`type`)"
+          }
+        ],
         "foreignKeys": []
       },
       {
@@ -150,7 +170,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '996c0729af91abd3ae71b45fb3b8acf8')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '421d5f51dc62a1011a7569dc1de76f24')"
     ]
   }
 }

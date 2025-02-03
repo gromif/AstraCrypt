@@ -2,11 +2,18 @@ package io.gromif.astracrypt.files.data.db
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import io.gromif.astracrypt.files.domain.model.ItemState
 import io.gromif.astracrypt.files.domain.model.ItemType
 
-@Entity(tableName = "store_items")
+@Entity(
+    tableName = "store_items",
+    indices = [
+        Index(value = ["parent", "state"]),
+        Index(value = ["type"]),
+    ]
+)
 data class FilesEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
