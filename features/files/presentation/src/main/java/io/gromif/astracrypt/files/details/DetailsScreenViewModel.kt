@@ -35,7 +35,6 @@ internal class DetailsScreenViewModel @Inject constructor(
 
     fun loadItemDetails(context: Context, id: Long) = viewModelScope.launch(defaultDispatcher) {
         val details = getItemDetailsUseCase(id)
-        itemDetails = details
         val type = if (details is ItemDetails.File) details.type else ItemType.Folder
 
         detailsStateList.addDetailsGroup(type, details)
@@ -53,6 +52,7 @@ internal class DetailsScreenViewModel @Inject constructor(
                 foldersCount = details.foldersCount,
             )
         }
+        itemDetails = details
     }
 
 }
