@@ -115,6 +115,7 @@ class RepositoryImpl(
             if (preview != null && aeadInfo.preview) previewTemp = encrypt(aeadInfo, preview)
             if (flags != null && aeadInfo.flag) flagsTemp = encrypt(aeadInfo, flagsTemp)
         }
+        val time = if (creationTime == 0L) System.currentTimeMillis() else creationTime
         val filesEntity = FilesEntity(
             parent = parent,
             name = nameTemp,
@@ -125,7 +126,7 @@ class RepositoryImpl(
             preview = previewTemp,
             previewAead = aeadInfo.previewAeadIndex,
             flags = flagsTemp,
-            time = creationTime,
+            time = time,
             size = size
         )
         filesDao.insert(filesEntity)

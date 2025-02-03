@@ -30,7 +30,7 @@ interface Repository {
         preview: String? = null,
         previewAead: Int = -1,
         flags: String? = null,
-        creationTime: Long,
+        creationTime: Long = 0,
         size: Long,
     )
 
