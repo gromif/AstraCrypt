@@ -4,8 +4,8 @@ import android.net.Uri
 import com.nevidimka655.astracrypt.utils.Mapper
 import io.gromif.astracrypt.files.data.db.FilesDao
 import io.gromif.astracrypt.files.data.db.FilesEntity
+import io.gromif.astracrypt.files.data.db.tuples.DeleteTuple
 import io.gromif.astracrypt.files.data.db.tuples.DetailsTuple
-import io.gromif.astracrypt.files.data.db.tuples.MinimalTuple
 import io.gromif.astracrypt.files.data.util.AeadUtil
 import io.gromif.astracrypt.files.data.util.ExportUtil
 import io.gromif.astracrypt.files.data.util.FileHandler
@@ -77,11 +77,10 @@ class RepositoryImpl(
         idList.toList()
     }
 
-    private suspend fun getMinimalData(id: Long): MinimalTuple {
+    private suspend fun getDeleteData(id: Long): DeleteTuple {
         val aeadInfo = settingsRepository.getAeadInfo()
-        val tuple = filesDao.getMinimalData(id = id)
+        val tuple = filesDao.getDeleteData(id = id)
         return if (aeadInfo.db) tuple.copy(
-            name = if (aeadInfo.name) decrypt(aeadInfo, tuple.name) else tuple.name,
             file = tuple.file?.let {
                 if (aeadInfo.file) decrypt(aeadInfo, it) else it
             },
@@ -136,7 +135,7 @@ class RepositoryImpl(
         val deque = ArrayDeque<Long>().also { it.add(id) }
         while (deque.isNotEmpty()) {
             val currentId = deque.removeFirst()
-            val (id, _, file, preview) = getMinimalData(currentId)
+            val (id, file, preview) = getDeleteData(currentId)
             filesDao.delete(id)
             if (file != null) with(fileHandler) {
                 getFilePath(relativePath = file).delete()

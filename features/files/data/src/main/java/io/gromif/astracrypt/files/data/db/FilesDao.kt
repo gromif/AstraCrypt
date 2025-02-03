@@ -7,9 +7,9 @@ import androidx.room.Query
 import androidx.room.RewriteQueriesToDropUnusedColumns
 import androidx.room.Update
 import io.gromif.astracrypt.files.data.db.tuples.DatabaseTransformTuple
+import io.gromif.astracrypt.files.data.db.tuples.DeleteTuple
 import io.gromif.astracrypt.files.data.db.tuples.DetailsTuple
 import io.gromif.astracrypt.files.data.db.tuples.ExportTuple
-import io.gromif.astracrypt.files.data.db.tuples.MinimalTuple
 import io.gromif.astracrypt.files.data.db.tuples.PagerTuple
 import io.gromif.astracrypt.files.domain.model.ItemType
 import kotlinx.coroutines.flow.Flow
@@ -32,7 +32,7 @@ interface FilesDao {
 
     @RewriteQueriesToDropUnusedColumns
     @Query("select * from store_items where id = :id")
-    suspend fun getMinimalData(id: Long): MinimalTuple
+    suspend fun getDeleteData(id: Long): DeleteTuple
 
     @RewriteQueriesToDropUnusedColumns
     @Query("select * from store_items where id = :id")
