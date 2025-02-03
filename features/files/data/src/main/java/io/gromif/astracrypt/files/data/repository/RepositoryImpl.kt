@@ -132,18 +132,6 @@ class RepositoryImpl(
         filesDao.insert(filesEntity)
     }
 
-    override suspend fun createFolder(name: String, parentId: Long) {
-        val aeadInfo = settingsRepository.getAeadInfo()
-        var nameTemp = if (aeadInfo.db && aeadInfo.name) encrypt(aeadInfo, name) else name
-        val filesEntity = FilesEntity(
-            name = nameTemp,
-            parent = parentId,
-            type = ItemType.Folder,
-            time = System.currentTimeMillis()
-        )
-        filesDao.insert(filesEntity)
-    }
-
     override suspend fun delete(ids: List<Long>): Unit = coroutineScope {
         ids.chunked(10).forEach { chunk ->
             chunk.map { currentId ->
