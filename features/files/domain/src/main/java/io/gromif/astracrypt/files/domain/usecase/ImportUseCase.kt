@@ -9,6 +9,7 @@ import io.gromif.astracrypt.files.domain.util.FlagsUtil
 import io.gromif.astracrypt.files.domain.util.PreviewUtil
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.supervisorScope
 
 class ImportUseCase(
     private val repository: Repository,
@@ -22,7 +23,7 @@ class ImportUseCase(
         pathList: List<String>,
         parentId: Long,
         saveSource: Boolean,
-    ) = coroutineScope {
+    ) = supervisorScope {
         val aeadInfo = settingsRepository.getAeadInfo()
         pathList.forEach {
             launch {
