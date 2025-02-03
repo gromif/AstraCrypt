@@ -4,7 +4,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.carousel.HorizontalUncontainedCarousel
+import androidx.compose.material3.carousel.CarouselDefaults
+import androidx.compose.material3.carousel.HorizontalMultiBrowseCarousel
 import androidx.compose.material3.carousel.rememberCarouselState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -23,10 +24,11 @@ internal fun RecentFilesList(
     list: List<Item> = FakeData.fileItems(),
     imageLoader: ImageLoader = ImageLoader(LocalContext.current),
     actions: Actions = Actions.default,
-) = HorizontalUncontainedCarousel(
+) = HorizontalMultiBrowseCarousel(
     state = rememberCarouselState { list.size },
-    itemWidth = 186.dp,
+    preferredItemWidth = 180.dp,
     itemSpacing = MaterialTheme.spaces.spaceMedium,
+    flingBehavior = CarouselDefaults.noSnapFlingBehavior(),
     modifier = Modifier.fillMaxWidth().height(300.dp)
 ) {
     val item = list[it]
