@@ -132,20 +132,19 @@ class RepositoryImpl(
         filesDao.insert(filesEntity)
     }
 
-    override suspend fun delete(ids: List<Long>): Unit = coroutineScope {
-        ids.chunked(10).forEach { chunk ->
-            chunk.map { currentId ->
-                launch {
-                    val (id, _, file, preview) = getMinimalData(currentId)
-                    filesDao.delete(id)
-                    if (file != null) with(fileHandler) {
-                        getFilePath(relativePath = file).delete()
-                        if (preview != null) getFilePath(relativePath = preview).delete()
-                    } else delete(
-                        ids = filesDao.getIdList(parent = id, typeFilter = ItemType.Folder)
-                    )
-                }
-            }.joinAll()
+    override suspend fun delete(id: Long) {
+        val deque = ArrayDeque<Long>().also { it.add(id) }
+        while (deque.isNotEmpty()) {
+            val currentId = deque.removeFirst()
+            val (id, _, file, preview) = getMinimalData(currentId)
+            filesDao.delete(id)
+            if (file != null) with(fileHandler) {
+                getFilePath(relativePath = file).delete()
+                if (preview != null) getFilePath(relativePath = preview).delete()
+            } else {
+                val innerIdList = filesDao.getIdList(parent = id, typeFilter = ItemType.Folder)
+                deque.addAll(innerIdList)
+            }
         }
     }
 

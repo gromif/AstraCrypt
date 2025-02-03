@@ -34,7 +34,7 @@ interface Repository {
         size: Long = 0,
     )
 
-    suspend fun delete(ids: List<Long>)
+    suspend fun delete(id: Long)
 
     suspend fun move(ids: List<Long>, parentId: Long)
 
