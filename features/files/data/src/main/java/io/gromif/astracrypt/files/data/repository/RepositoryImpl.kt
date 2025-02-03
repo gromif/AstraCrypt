@@ -20,8 +20,6 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.joinAll
-import kotlinx.coroutines.launch
 
 class RepositoryImpl(
     private val filesDao: FilesDao,
@@ -157,13 +155,8 @@ class RepositoryImpl(
         filesDao.rename(id, name)
     }
 
-    override suspend fun setStarred(ids: List<Long>, state: Boolean) = coroutineScope {
-        val itemState = if (state) ItemState.Starred else ItemState.Default
-        ids.chunked(10).forEach { chunk ->
-            chunk.map { currentId ->
-                launch { filesDao.setStarred(id = currentId, state = itemState.ordinal) }
-            }.joinAll()
-        }
+    override suspend fun setState(id: Long, state: ItemState) {
+        filesDao.setStarred(id = id, state = state.ordinal)
     }
 
     override suspend fun export(idList: List<Long>, outputPath: String) {

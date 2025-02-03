@@ -15,7 +15,7 @@ import io.gromif.astracrypt.files.domain.usecase.GetRecentItemsUseCase
 import io.gromif.astracrypt.files.domain.usecase.GetValidationRulesUsecase
 import io.gromif.astracrypt.files.domain.usecase.MoveUseCase
 import io.gromif.astracrypt.files.domain.usecase.RenameUseCase
-import io.gromif.astracrypt.files.domain.usecase.SetStarredUseCase
+import io.gromif.astracrypt.files.domain.usecase.SetStateUseCase
 
 @Module
 @InstallIn(ViewModelComponent::class)
@@ -46,8 +46,8 @@ internal object UsecaseModule {
         RenameUseCase(repository = repository)
 
     @Provides
-    fun provideSetStarredUseCase(repository: Repository): SetStarredUseCase =
-        SetStarredUseCase(repository = repository)
+    fun provideSetStarredUseCase(repository: Repository): SetStateUseCase =
+        SetStateUseCase(repository = repository)
 
     @Provides
     fun provideGetRecentItemsUseCase(repository: Repository): GetRecentItemsUseCase =

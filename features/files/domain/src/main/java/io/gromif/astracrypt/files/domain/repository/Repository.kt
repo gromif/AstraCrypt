@@ -40,7 +40,7 @@ interface Repository {
 
     suspend fun rename(id: Long, newName: String)
 
-    suspend fun setStarred(ids: List<Long>, state: Boolean)
+    suspend fun setState(id: Long, state: ItemState)
 
     suspend fun export(ids: List<Long>, outputPath: String)
 

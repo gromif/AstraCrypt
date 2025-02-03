@@ -18,6 +18,7 @@ import com.nevidimka655.astracrypt.utils.io.WorkerSerializer
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.gromif.astracrypt.files.di.FilesImageLoader
 import io.gromif.astracrypt.files.domain.model.Item
+import io.gromif.astracrypt.files.domain.model.ItemState
 import io.gromif.astracrypt.files.domain.model.ViewMode
 import io.gromif.astracrypt.files.domain.provider.PagingProvider
 import io.gromif.astracrypt.files.domain.usecase.CreateFolderUseCase
@@ -26,7 +27,7 @@ import io.gromif.astracrypt.files.domain.usecase.GetListViewModeUseCase
 import io.gromif.astracrypt.files.domain.usecase.GetValidationRulesUsecase
 import io.gromif.astracrypt.files.domain.usecase.MoveUseCase
 import io.gromif.astracrypt.files.domain.usecase.RenameUseCase
-import io.gromif.astracrypt.files.domain.usecase.SetStarredUseCase
+import io.gromif.astracrypt.files.domain.usecase.SetStateUseCase
 import io.gromif.astracrypt.files.files.model.RootInfo
 import io.gromif.astracrypt.files.work.ImportFilesWorker
 import io.gromif.astracrypt.utils.dispatchers.IoDispatcher
@@ -55,7 +56,7 @@ class FilesViewModel @Inject constructor(
     private val deleteUseCase: DeleteUseCase,
     private val moveUseCase: MoveUseCase,
     private val renameUseCase: RenameUseCase,
-    private val setStarredUseCase: SetStarredUseCase,
+    private val setStateUseCase: SetStateUseCase,
     private val workManager: WorkManager,
     private val workerSerializer: WorkerSerializer,
     val filesUtil: FilesUtil,
@@ -128,15 +129,15 @@ class FilesViewModel @Inject constructor(
     fun getCameraScanOutputUri(): Uri =
         filesUtil.getExportedCacheFileUri(file = filesUtil.getExportedCacheCameraFile())
 
-    fun setStarred(state: Boolean, ids: List<Long>) = viewModelScope.launch(defaultDispatcher) {
-        setStarredUseCase(ids = ids, state = state)
-    }
+    fun setStarred(state: Boolean, ids: List<Long>) = viewModelScope.launch(
+        defaultDispatcher.limitedParallelism(6)
+    ) { setStateUseCase(ids, itemState = if (state) ItemState.Starred else ItemState.Default) }
 
     fun import(
         vararg uriList: Uri,
         saveSource: Boolean = false,
         onSuccess: () -> Unit = {},
-        onError: () -> Unit = {}
+        onError: () -> Unit = {},
     ) = viewModelScope.launch(defaultDispatcher) {
         val listToSave = uriList.map { it.toString() }
         val fileWithUris = workerSerializer.saveStringListToFile(listToSave)
