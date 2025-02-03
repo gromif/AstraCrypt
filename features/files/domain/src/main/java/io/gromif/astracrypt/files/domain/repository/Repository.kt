@@ -31,7 +31,7 @@ interface Repository {
         previewAead: Int = -1,
         flags: String? = null,
         creationTime: Long = 0,
-        size: Long,
+        size: Long = 0,
     )
 
     suspend fun createFolder(name: String, parentId: Long)
