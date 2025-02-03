@@ -11,6 +11,7 @@ import com.nevidimka655.ui.compose_core.dialogs.default
 @Composable
 internal fun newFolderDialog(
     state: MutableState<Boolean> = Compose.state(),
+    maxLength: Int,
     onCreate: (String) -> Unit
 ) = DialogsCore.TextFields.default(
     state = state,
@@ -19,7 +20,7 @@ internal fun newFolderDialog(
         text = stringResource(id = R.string.untitledFolder),
         label = stringResource(id = R.string.name),
         singleLine = true,
-        maxLength = 256,
+        maxLength = maxLength,
     ),
     onResult = onCreate
 )

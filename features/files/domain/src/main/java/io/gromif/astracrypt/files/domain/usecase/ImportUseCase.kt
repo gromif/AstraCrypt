@@ -7,6 +7,8 @@ import io.gromif.astracrypt.files.domain.repository.SettingsRepository
 import io.gromif.astracrypt.files.domain.util.FileUtil
 import io.gromif.astracrypt.files.domain.util.FlagsUtil
 import io.gromif.astracrypt.files.domain.util.PreviewUtil
+import io.gromif.astracrypt.files.domain.validation.ValidationException
+import io.gromif.astracrypt.files.domain.validation.validator.NameValidator
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.supervisorScope
@@ -41,9 +43,12 @@ class ImportUseCase(
         val fileUtil = fileUtilFactory.create()
         fileUtil.open(path)
         val name = fileUtil.getName() ?: return@coroutineScope
+        NameValidator(name)
+
         val type = fileUtil.parseType()
         val creationTime = fileUtil.creationTime()
         val size = fileUtil.length() ?: 0
+        require(size > -1) { throw ValidationException.InvalidFileSizeException() }
 
         val filePath = fileUtil.write() ?: return@coroutineScope
         val previewFilePath = previewUtil.getPreviewPath(type, path)
@@ -55,7 +60,7 @@ class ImportUseCase(
             name = name,
             itemState = ItemState.Default,
             itemType = type,
-            file = filePath ,
+            file = filePath,
             fileAead = aeadInfo.fileAeadIndex,
             preview = previewFilePath,
             previewAead = aeadInfo.previewAeadIndex,

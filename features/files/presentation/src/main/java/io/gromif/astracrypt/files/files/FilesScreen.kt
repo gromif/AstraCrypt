@@ -44,6 +44,7 @@ fun FilesScreen(
     navActions: FilesNavActions,
 ) {
     val vm: FilesViewModel = hiltViewModel()
+    val validationRules = vm.validationRules
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     val viewMode by vm.viewModeState.collectAsStateWithLifecycle()
@@ -177,5 +178,6 @@ fun FilesScreen(
                 }
             }
         },
+        maxNameLength = validationRules.maxNameLength
     )
 }

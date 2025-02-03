@@ -11,6 +11,7 @@ import com.nevidimka655.ui.compose_core.dialogs.default
 @Composable
 internal fun renameDialog(
     name: String,
+    maxLength: Int,
     onResult: (String) -> Unit
 ): MutableState<Boolean> {
     val state = Compose.state()
@@ -21,7 +22,7 @@ internal fun renameDialog(
         params = DialogsCore.TextFields.Params(
             text = name,
             label = stringResource(id = R.string.name),
-            maxLength = 256,
+            maxLength = maxLength,
             singleLine = true
         ),
         onResult = onResult

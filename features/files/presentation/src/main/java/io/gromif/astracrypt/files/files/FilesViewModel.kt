@@ -23,6 +23,7 @@ import io.gromif.astracrypt.files.domain.provider.PagingProvider
 import io.gromif.astracrypt.files.domain.usecase.CreateFolderUseCase
 import io.gromif.astracrypt.files.domain.usecase.DeleteUseCase
 import io.gromif.astracrypt.files.domain.usecase.GetListViewModeUseCase
+import io.gromif.astracrypt.files.domain.usecase.GetValidationRulesUsecase
 import io.gromif.astracrypt.files.domain.usecase.MoveUseCase
 import io.gromif.astracrypt.files.domain.usecase.RenameUseCase
 import io.gromif.astracrypt.files.domain.usecase.SetStarredUseCase
@@ -61,6 +62,7 @@ class FilesViewModel @Inject constructor(
     @FilesImageLoader
     val imageLoader: ImageLoader,
     getListViewModeUseCase: GetListViewModeUseCase,
+    getValidationRulesUsecase: GetValidationRulesUsecase,
 ) : ViewModel() {
     private val parentIdState = MutableStateFlow(0L)
     private val parentBackStackMutable = mutableStateListOf<RootInfo>()
@@ -75,13 +77,15 @@ class FilesViewModel @Inject constructor(
         isStarredMode = true
     ).cachedIn(viewModelScope)
 
+    val validationRules = getValidationRulesUsecase()
     val viewModeState = getListViewModeUseCase()
         .stateIn(viewModelScope, SharingStarted.Companion.Eagerly, ViewMode.Grid)
 
     suspend fun setSearchQuery(query: String) = pagingProvider.setSearchQuery(parentId, query)
 
     fun openDirectory(id: Long, name: String) = viewModelScope.launch(defaultDispatcher) {
-        val newName = if (name.length > 200) "${name.take(20)}.." else name
+        val maxLength = validationRules.maxBackstackNameLength
+        val newName = if (name.length > maxLength) "${name.take(20)}.." else name
         val rootInfo = RootInfo(id, newName)
         parentBackStackMutable.add(rootInfo)
         parentId = id

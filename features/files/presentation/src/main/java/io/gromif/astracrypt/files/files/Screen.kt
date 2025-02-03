@@ -53,6 +53,7 @@ internal fun Screen(
     imageLoader: ImageLoader = ImageLoader(LocalContext.current),
     navActions: FilesNavActions = FilesNavActions.Default,
     actions: Actions = Actions.Default,
+    maxNameLength: Int = 128,
 ) = Column {
     val sheetOptionsState = Compose.state()
     var optionsItem by rememberSaveable { mutableStateOf(OptionsItem()) }
@@ -95,8 +96,13 @@ internal fun Screen(
     val pickFileContract = Contracts.pickFile { actions.import(it.toTypedArray(), saveSourceState) }
     val exportContract = Contracts.export { navActions.toExport(optionsItem.id, it) }
 
-    var dialogNewFolder by newFolderDialog(onCreate = actions::createFolder)
-    var dialogRenameState by renameDialog(optionsItem.name) { actions.rename(optionsItem.id, it) }
+    var dialogNewFolder by newFolderDialog(
+        maxLength = maxNameLength,
+        onCreate = actions::createFolder,
+    )
+    var dialogRenameState by renameDialog(
+        maxLength = maxNameLength, name = optionsItem.name
+    ) { actions.rename(optionsItem.id, it) }
     var dialogDeleteState by deleteDialog(optionsItem.name) { actions.delete(listOf(optionsItem.id)) }
     var dialogDeleteSourceState by deleteSourceDialog { saveSource ->
         saveSourceState = saveSource
