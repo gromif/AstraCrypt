@@ -1,4 +1,4 @@
-package io.gromif.astracrypt.files.di.import_service
+package io.gromif.astracrypt.files.di.import_di
 
 import android.content.Context
 import android.graphics.Bitmap

@@ -1,4 +1,4 @@
-package io.gromif.astracrypt.files.di.import_service
+package io.gromif.astracrypt.files.di.import_di
 
 import dagger.Module
 import dagger.Provides
