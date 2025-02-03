@@ -10,7 +10,6 @@ import io.gromif.astracrypt.files.data.util.AeadUtil
 import io.gromif.astracrypt.files.data.util.ExportUtil
 import io.gromif.astracrypt.files.data.util.FileHandler
 import io.gromif.astracrypt.files.domain.model.AeadInfo
-import io.gromif.astracrypt.files.domain.model.ExportData
 import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.domain.model.ItemDetails
 import io.gromif.astracrypt.files.domain.model.ItemState
@@ -247,15 +246,4 @@ class RepositoryImpl(
         return itemDetails
     }
 
-    override suspend fun getFilesCountFlow(dirId: Long): Int {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun getListDataToExportFromDir(dirId: Long): List<ExportData> {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun getDataToExport(itemId: Long): ExportData {
-        TODO("Not yet implemented")
-    }
 }

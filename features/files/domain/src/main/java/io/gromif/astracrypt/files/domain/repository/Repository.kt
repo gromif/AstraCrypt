@@ -1,7 +1,6 @@
 package io.gromif.astracrypt.files.domain.repository
 
 import io.gromif.astracrypt.files.domain.model.AeadInfo
-import io.gromif.astracrypt.files.domain.model.ExportData
 import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.domain.model.ItemDetails
 import io.gromif.astracrypt.files.domain.model.ItemState
@@ -52,11 +51,5 @@ interface Repository {
     fun getRecentFilesList(): Flow<List<Item>>
 
     suspend fun getItemDetails(id: Long): ItemDetails
-
-    suspend fun getFilesCountFlow(dirId: Long): Int
-
-    suspend fun getListDataToExportFromDir(dirId: Long): List<ExportData>
-
-    suspend fun getDataToExport(itemId: Long): ExportData
 
 }
