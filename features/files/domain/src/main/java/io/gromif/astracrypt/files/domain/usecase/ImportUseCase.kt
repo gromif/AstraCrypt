@@ -56,14 +56,13 @@ class ImportUseCase(
 
         if (!saveSource) fileUtil.delete()
         repository.insert(
+            aeadInfo = aeadInfo,
             parent = parentId,
             name = name,
             itemState = ItemState.Default,
             itemType = type,
             file = filePath,
-            fileAead = aeadInfo.fileAeadIndex,
             preview = previewFilePath,
-            previewAead = aeadInfo.previewAeadIndex,
             flags = flags,
             creationTime = creationTime,
             size = size

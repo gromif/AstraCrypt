@@ -9,10 +9,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface Repository {
 
-    suspend fun get(
-        aeadInfo: AeadInfo? = null,
-        id: Long,
-    ): Item
+    suspend fun get(aeadInfo: AeadInfo, id: Long): Item
 
     suspend fun getFolderIds(
         parentId: Long,
@@ -20,25 +17,27 @@ interface Repository {
     ): List<Long>
 
     suspend fun insert(
-        aeadInfo: AeadInfo? = null,
+        aeadInfo: AeadInfo,
         parent: Long,
         name: String,
         itemState: ItemState = ItemState.Default,
         itemType: ItemType,
         file: String? = null,
-        fileAead: Int = -1,
         preview: String? = null,
-        previewAead: Int = -1,
         flags: String? = null,
         creationTime: Long = 0,
         size: Long = 0,
     )
 
-    suspend fun delete(id: Long)
+    suspend fun delete(aeadInfo: AeadInfo, id: Long)
 
     suspend fun move(ids: List<Long>, parentId: Long)
 
-    suspend fun rename(id: Long, newName: String)
+    suspend fun rename(
+        aeadInfo: AeadInfo,
+        id: Long,
+        name: String
+    )
 
     suspend fun setState(id: Long, state: ItemState)
 
@@ -48,6 +47,6 @@ interface Repository {
 
     fun getRecentFilesList(): Flow<List<Item>>
 
-    suspend fun getItemDetails(id: Long): ItemDetails
+    suspend fun getItemDetails(aeadInfo: AeadInfo, id: Long): ItemDetails
 
 }

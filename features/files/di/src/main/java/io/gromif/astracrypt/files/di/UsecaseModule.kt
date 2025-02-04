@@ -26,24 +26,30 @@ internal object UsecaseModule {
     fun provideGetValidationRulesUsecase(): GetValidationRulesUsecase = GetValidationRulesUsecase()
 
     @Provides
-    fun provideCreateFolderUseCase(repository: Repository): CreateFolderUseCase =
-        CreateFolderUseCase(repository = repository)
+    fun provideCreateFolderUseCase(
+        repository: Repository,
+        settingsRepository: SettingsRepository
+    ): CreateFolderUseCase = CreateFolderUseCase(repository, settingsRepository)
 
     @Provides
-    fun provideDeleteUseCase(repository: Repository): DeleteUseCase =
-        DeleteUseCase(repository = repository)
+    fun provideDeleteUseCase(
+        repository: Repository,
+        settingsRepository: SettingsRepository
+    ): DeleteUseCase =
+        DeleteUseCase(repository, settingsRepository)
 
     @Provides
     fun provideGetListViewModeUseCase(settingsRepository: SettingsRepository): GetListViewModeUseCase =
         GetListViewModeUseCase(settingsRepository = settingsRepository)
 
     @Provides
-    fun provideMoveUseCase(repository: Repository): MoveUseCase =
-        MoveUseCase(repository = repository)
+    fun provideMoveUseCase(repository: Repository): MoveUseCase = MoveUseCase(repository)
 
     @Provides
-    fun provideRenameUseCase(repository: Repository): RenameUseCase =
-        RenameUseCase(repository = repository)
+    fun provideRenameUseCase(
+        repository: Repository,
+        settingsRepository: SettingsRepository
+    ): RenameUseCase = RenameUseCase(repository, settingsRepository)
 
     @Provides
     fun provideSetStarredUseCase(repository: Repository): SetStateUseCase =
@@ -54,7 +60,9 @@ internal object UsecaseModule {
         GetRecentItemsUseCase(repository = repository)
 
     @Provides
-    fun provideGetItemDetailsUseCase(repository: Repository): GetItemDetailsUseCase =
-        GetItemDetailsUseCase(repository = repository)
+    fun provideGetItemDetailsUseCase(
+        repository: Repository,
+        settingsRepository: SettingsRepository
+    ): GetItemDetailsUseCase = GetItemDetailsUseCase(repository, settingsRepository)
 
 }
