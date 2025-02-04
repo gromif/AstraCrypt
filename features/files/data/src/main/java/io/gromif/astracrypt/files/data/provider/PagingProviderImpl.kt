@@ -7,7 +7,7 @@ import androidx.paging.PagingSource
 import androidx.paging.map
 import io.gromif.astracrypt.files.data.db.FilesDao
 import io.gromif.astracrypt.files.data.db.tuples.PagerTuple
-import io.gromif.astracrypt.files.data.util.AeadUtil
+import io.gromif.astracrypt.files.data.util.AeadHandler
 import io.gromif.astracrypt.files.domain.model.FileSource
 import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.domain.model.ItemState
@@ -24,7 +24,7 @@ import kotlinx.coroutines.flow.update
 class PagingProviderImpl(
     private val filesDao: FilesDao,
     private val pagingConfig: PagingConfig,
-    private val aeadUtil: AeadUtil,
+    private val aeadHandler: AeadHandler,
     private val repository: Repository,
     private val settingsRepository: SettingsRepository,
 ) : PagingProvider<PagingData<Item>> {
@@ -55,20 +55,10 @@ class PagingProviderImpl(
             }
         ).flow.map { pd ->
             val aeadInfo = settingsRepository.getAeadInfo()
-            val isEncryptionEnabled = aeadInfo.databaseAeadIndex != -1
-
-            suspend fun decrypt(data: String): String =
-                aeadUtil.decrypt(aeadInfo.databaseAeadIndex, data)
-
-            val pagingData = if (isEncryptionEnabled) pd.map {
-                it.copy(
-                    name = if (aeadInfo.name) decrypt(it.name) else it.name,
-                    preview = it.preview?.let {
-                        if (aeadInfo.preview) decrypt(it) else it
-                    }
-                )
-            } else pd
-            pagingData.map { pagerTuple ->
+            pd.map { pagerTuple ->
+                val pagerTuple = if (aeadInfo.db) {
+                    aeadHandler.decryptPagerTuple(aeadInfo, pagerTuple)
+                } else pagerTuple
                 Item(
                     id = pagerTuple.id,
                     name = pagerTuple.name,

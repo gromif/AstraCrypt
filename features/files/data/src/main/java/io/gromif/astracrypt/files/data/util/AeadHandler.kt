@@ -3,6 +3,7 @@ package io.gromif.astracrypt.files.data.util
 import io.gromif.astracrypt.files.data.db.FilesEntity
 import io.gromif.astracrypt.files.data.db.tuples.DeleteTuple
 import io.gromif.astracrypt.files.data.db.tuples.DetailsTuple
+import io.gromif.astracrypt.files.data.db.tuples.PagerTuple
 import io.gromif.astracrypt.files.domain.model.AeadInfo
 
 class AeadHandler(
@@ -21,6 +22,11 @@ class AeadHandler(
         file = info.decryptIfNeeded(info.file, data.file),
         preview = info.decryptIfNeeded(info.preview, data.preview),
         flags = info.decryptIfNeeded(info.flag, data.flags),
+    )
+
+    suspend fun decryptPagerTuple(info: AeadInfo, data: PagerTuple) = data.copy(
+        name = info.decryptIfNeeded(info.name, data.name)!!,
+        preview = info.decryptIfNeeded(info.preview, data.preview),
     )
 
     suspend fun decryptDeleteTuple(info: AeadInfo, data: DeleteTuple) = data.copy(

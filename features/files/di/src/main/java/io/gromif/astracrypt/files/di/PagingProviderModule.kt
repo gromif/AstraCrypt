@@ -9,7 +9,7 @@ import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.scopes.ViewModelScoped
 import io.gromif.astracrypt.files.data.db.FilesDao
 import io.gromif.astracrypt.files.data.provider.PagingProviderImpl
-import io.gromif.astracrypt.files.data.util.AeadUtil
+import io.gromif.astracrypt.files.data.util.AeadHandler
 import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.domain.provider.PagingProvider
 import io.gromif.astracrypt.files.domain.repository.Repository
@@ -23,7 +23,7 @@ internal object PagingProviderModule {
     @Provides
     fun providePagingProvider(
         filesDao: FilesDao,
-        aeadUtil: AeadUtil,
+        aeadHandler: AeadHandler,
         repository: Repository,
         settingsRepository: SettingsRepository
     ): PagingProvider<PagingData<Item>> = PagingProviderImpl(
@@ -32,7 +32,7 @@ internal object PagingProviderModule {
             pageSize = 10,
             enablePlaceholders = false
         ),
-        aeadUtil = aeadUtil,
+        aeadHandler = aeadHandler,
         repository = repository,
         settingsRepository = settingsRepository
     )
