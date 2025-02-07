@@ -2,11 +2,11 @@ package com.nevidimka655.astracrypt.app.utils
 
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
+import androidx.core.net.toUri
 
 object NetworkUtils {
     fun openUri(context: Context, url: String) =
-        context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+        context.startActivity(Intent(Intent.ACTION_VIEW, url.toUri()))
 
     fun openAppGooglePlayPage(context: Context) = openUri(
         context = context,
