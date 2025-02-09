@@ -3,8 +3,9 @@ package com.nevidimka655.astracrypt.view.navigation.lab
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.nevidimka655.astracrypt.resources.R
-import com.nevidimka655.astracrypt.view.navigation.models.UiState
 import com.nevidimka655.astracrypt.view.navigation.Route
+import com.nevidimka655.astracrypt.view.navigation.models.UiState
+import com.nevidimka655.astracrypt.view.navigation.shared.UiStateHandler
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 
 private val ScreenUiState = UiState(
@@ -18,7 +19,7 @@ internal fun NavGraphBuilder.labList(
     navigateToAeadEncryption: () -> Unit = {},
     navigateToCombinedZip: () -> Unit = {}
 ) = composable<Route.LabGraph.List> {
-    onUiStateChange(ScreenUiState)
+    UiStateHandler { onUiStateChange(ScreenUiState) }
 
     LabScreen(
         navigateToAeadEncryption = navigateToAeadEncryption,
