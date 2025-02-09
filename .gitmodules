@@ -14,7 +14,7 @@
 	path = core/crypto/tink
 	url = git@github.com:gromif/crypto_tink.git
 [submodule "core/haptic"]
-	path = core/haptic
+	path = ui/haptic
 	url = git@github.com:gromif/core_haptic.git
 [submodule "core/tiles-with-coroutines"]
 	path = core/tiles-with-coroutines
