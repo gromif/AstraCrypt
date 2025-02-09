@@ -2,8 +2,6 @@ package io.gromif.astracrypt.files.di.export
 
 import android.content.Context
 import android.net.Uri
-import com.nevidimka655.astracrypt.utils.Mapper
-import com.nevidimka655.astracrypt.utils.io.FilesUtil
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -12,6 +10,8 @@ import dagger.hilt.components.SingletonComponent
 import io.gromif.astracrypt.files.data.db.FilesDao
 import io.gromif.astracrypt.files.data.util.ExportUtil
 import io.gromif.astracrypt.files.data.util.FileHandler
+import io.gromif.astracrypt.utils.Mapper
+import io.gromif.astracrypt.utils.io.FilesUtil
 
 @Module
 @InstallIn(SingletonComponent::class)

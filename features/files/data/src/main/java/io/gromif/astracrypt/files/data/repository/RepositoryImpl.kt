@@ -1,7 +1,6 @@
 package io.gromif.astracrypt.files.data.repository
 
 import android.net.Uri
-import com.nevidimka655.astracrypt.utils.Mapper
 import io.gromif.astracrypt.files.data.db.FilesDao
 import io.gromif.astracrypt.files.data.db.FilesEntity
 import io.gromif.astracrypt.files.data.db.tuples.DetailsTuple
@@ -14,6 +13,7 @@ import io.gromif.astracrypt.files.domain.model.ItemDetails
 import io.gromif.astracrypt.files.domain.model.ItemState
 import io.gromif.astracrypt.files.domain.model.ItemType
 import io.gromif.astracrypt.files.domain.repository.Repository
+import io.gromif.astracrypt.utils.Mapper
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.flow.Flow

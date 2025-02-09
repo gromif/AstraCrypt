@@ -13,8 +13,6 @@ import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import androidx.work.workDataOf
 import coil.ImageLoader
-import com.nevidimka655.astracrypt.utils.io.FilesUtil
-import com.nevidimka655.astracrypt.utils.io.WorkerSerializer
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.gromif.astracrypt.files.di.FilesImageLoader
 import io.gromif.astracrypt.files.domain.model.Item
@@ -31,6 +29,8 @@ import io.gromif.astracrypt.files.domain.usecase.SetStateUseCase
 import io.gromif.astracrypt.files.files.model.RootInfo
 import io.gromif.astracrypt.files.work.ImportFilesWorker
 import io.gromif.astracrypt.utils.dispatchers.IoDispatcher
+import io.gromif.astracrypt.utils.io.FilesUtil
+import io.gromif.astracrypt.utils.io.WorkerSerializer
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow

@@ -3,9 +3,9 @@ package com.nevidimka655.data.lab_zip.repository
 import android.content.Context
 import android.net.Uri
 import androidx.documentfile.provider.DocumentFile
-import com.nevidimka655.astracrypt.utils.Mapper
 import com.nevidimka655.domain.lab_zip.FileInfo
 import com.nevidimka655.domain.lab_zip.Repository
+import io.gromif.astracrypt.utils.Mapper
 
 class RepositoryImpl(
     private val context: Context,

@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.utils.app
+package io.gromif.astracrypt.utils.app
 
 import android.annotation.SuppressLint
 import android.content.ComponentName

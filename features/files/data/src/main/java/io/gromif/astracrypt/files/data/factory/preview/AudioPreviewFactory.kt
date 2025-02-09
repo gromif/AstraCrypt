@@ -7,8 +7,8 @@ import android.media.MediaMetadataRetriever
 import android.net.Uri
 import coil.ImageLoader
 import coil.request.ImageRequest
-import com.nevidimka655.astracrypt.utils.Mapper
-import com.nevidimka655.astracrypt.utils.io.BitmapCompressor
+import io.gromif.astracrypt.utils.Mapper
+import io.gromif.astracrypt.utils.io.BitmapCompressor
 
 class AudioPreviewFactory(
     private val uriMapper: Mapper<String, Uri>,

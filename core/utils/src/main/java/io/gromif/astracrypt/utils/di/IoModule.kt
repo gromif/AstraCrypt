@@ -1,14 +1,14 @@
-package com.nevidimka655.astracrypt.utils.di
+package io.gromif.astracrypt.utils.di
 
 import android.content.Context
-import com.nevidimka655.astracrypt.utils.io.FilesUtil
-import com.nevidimka655.astracrypt.utils.io.Randomizer
-import com.nevidimka655.astracrypt.utils.io.WorkerSerializer
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import io.gromif.astracrypt.utils.io.FilesUtil
+import io.gromif.astracrypt.utils.io.Randomizer
+import io.gromif.astracrypt.utils.io.WorkerSerializer
 import javax.inject.Singleton
 
 @Module

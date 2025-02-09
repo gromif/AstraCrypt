@@ -1,7 +1,7 @@
 package io.gromif.astracrypt.files.data.util.parser
 
-import com.nevidimka655.astracrypt.utils.Parser
 import io.gromif.astracrypt.files.data.dto.FileFlagsDto
+import io.gromif.astracrypt.utils.Parser
 import kotlinx.serialization.json.Json
 
 class ItemFlagsDtoParser : Parser<String, FileFlagsDto> {

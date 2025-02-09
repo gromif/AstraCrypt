@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.utils.io
+package io.gromif.astracrypt.utils.io
 
 import android.content.Context
 import android.text.format.DateFormat

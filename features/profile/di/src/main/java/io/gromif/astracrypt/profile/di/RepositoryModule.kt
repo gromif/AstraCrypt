@@ -3,7 +3,6 @@ package io.gromif.astracrypt.profile.di
 import android.net.Uri
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
-import com.nevidimka655.astracrypt.utils.Mapper
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,6 +15,7 @@ import io.gromif.astracrypt.profile.data.util.ExternalIconUtil
 import io.gromif.astracrypt.profile.domain.model.Profile
 import io.gromif.astracrypt.profile.domain.repository.Repository
 import io.gromif.astracrypt.profile.domain.repository.SettingsRepository
+import io.gromif.astracrypt.utils.Mapper
 import io.gromif.crypto.tink.data.KeysetManager
 import io.gromif.crypto.tink.encoders.Base64Encoder
 import io.gromif.tink_datastore.TinkDataStore

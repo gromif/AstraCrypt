@@ -4,10 +4,10 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
-import com.nevidimka655.astracrypt.utils.Mapper
 import io.gromif.astracrypt.profile.data.dto.ProfileDto
 import io.gromif.astracrypt.profile.domain.model.Profile
 import io.gromif.astracrypt.profile.domain.repository.SettingsRepository
+import io.gromif.astracrypt.utils.Mapper
 import io.gromif.crypto.tink.data.KeysetManager
 import io.gromif.crypto.tink.domain.KeysetTemplates
 import io.gromif.crypto.tink.encoders.Encoder

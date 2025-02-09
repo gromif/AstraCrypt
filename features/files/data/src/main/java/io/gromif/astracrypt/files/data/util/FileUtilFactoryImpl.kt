@@ -2,8 +2,8 @@ package io.gromif.astracrypt.files.data.util
 
 import android.content.Context
 import android.net.Uri
-import com.nevidimka655.astracrypt.utils.Mapper
 import io.gromif.astracrypt.files.domain.util.FileUtil
+import io.gromif.astracrypt.utils.Mapper
 
 class FileUtilFactoryImpl(
     private val context: Context,

@@ -4,7 +4,7 @@ import com.nevidimka655.astracrypt.auth.data.dto.AuthDto
 import com.nevidimka655.astracrypt.auth.domain.model.Auth
 import com.nevidimka655.astracrypt.auth.domain.model.AuthType
 import com.nevidimka655.astracrypt.auth.domain.model.SkinType
-import com.nevidimka655.astracrypt.utils.Mapper
+import io.gromif.astracrypt.utils.Mapper
 
 class AuthMapper: Mapper<AuthDto, Auth> {
     override fun invoke(item: AuthDto): Auth {

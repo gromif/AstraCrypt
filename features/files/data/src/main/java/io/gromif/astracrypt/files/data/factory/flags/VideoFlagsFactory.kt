@@ -3,8 +3,8 @@ package io.gromif.astracrypt.files.data.factory.flags
 import android.content.Context
 import android.media.MediaMetadataRetriever
 import android.net.Uri
-import com.nevidimka655.astracrypt.utils.Mapper
 import io.gromif.astracrypt.files.data.dto.FileFlagsDto
+import io.gromif.astracrypt.utils.Mapper
 
 private const val METADATA_KEY_VIDEO_WIDTH = MediaMetadataRetriever.METADATA_KEY_VIDEO_WIDTH
 private const val METADATA_KEY_VIDEO_HEIGHT = MediaMetadataRetriever.METADATA_KEY_VIDEO_HEIGHT

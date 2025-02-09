@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.utils
+package io.gromif.astracrypt.utils
 
 fun interface Parser<T, R> {
 

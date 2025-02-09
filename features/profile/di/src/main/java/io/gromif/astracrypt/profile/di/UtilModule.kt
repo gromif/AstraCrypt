@@ -3,7 +3,6 @@ package io.gromif.astracrypt.profile.di
 import android.content.Context
 import android.graphics.Bitmap
 import coil.ImageLoader
-import com.nevidimka655.astracrypt.utils.io.BitmapCompressor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,6 +14,7 @@ import io.gromif.astracrypt.profile.data.util.FileUtil
 import io.gromif.astracrypt.profile.data.util.PreviewUtil
 import io.gromif.astracrypt.profile.data.util.preview.CoilPreviewUtil
 import io.gromif.astracrypt.profile.data.util.preview.NativePreviewUtil
+import io.gromif.astracrypt.utils.io.BitmapCompressor
 import io.gromif.crypto.tink.data.AssociatedDataManager
 import io.gromif.crypto.tink.data.KeysetManager
 import javax.inject.Qualifier

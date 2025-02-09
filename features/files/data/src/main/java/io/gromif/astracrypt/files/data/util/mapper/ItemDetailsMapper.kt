@@ -1,12 +1,12 @@
 package io.gromif.astracrypt.files.data.util.mapper
 
-import com.nevidimka655.astracrypt.utils.Mapper
-import com.nevidimka655.astracrypt.utils.Parser
 import io.gromif.astracrypt.files.data.db.tuples.DetailsTuple
 import io.gromif.astracrypt.files.data.dto.FileFlagsDto
 import io.gromif.astracrypt.files.domain.model.FileFlags
 import io.gromif.astracrypt.files.domain.model.FileSource
 import io.gromif.astracrypt.files.domain.model.ItemDetails
+import io.gromif.astracrypt.utils.Mapper
+import io.gromif.astracrypt.utils.Parser
 
 class ItemDetailsMapper(
     private val itemFlagsMapper: Mapper<FileFlagsDto, FileFlags>,

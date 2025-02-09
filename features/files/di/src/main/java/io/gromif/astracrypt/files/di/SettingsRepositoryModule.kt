@@ -2,7 +2,6 @@ package io.gromif.astracrypt.files.di
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
-import com.nevidimka655.astracrypt.utils.Mapper
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,6 +12,7 @@ import io.gromif.astracrypt.files.data.util.mapper.AeadInfoDtoMapper
 import io.gromif.astracrypt.files.data.util.mapper.AeadInfoMapper
 import io.gromif.astracrypt.files.domain.model.AeadInfo
 import io.gromif.astracrypt.files.domain.repository.SettingsRepository
+import io.gromif.astracrypt.utils.Mapper
 import javax.inject.Singleton
 
 @Module

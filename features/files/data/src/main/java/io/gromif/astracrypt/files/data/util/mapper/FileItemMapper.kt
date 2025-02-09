@@ -1,10 +1,10 @@
 package io.gromif.astracrypt.files.data.util.mapper
 
-import com.nevidimka655.astracrypt.utils.Mapper
 import io.gromif.astracrypt.files.data.db.FilesEntity
 import io.gromif.astracrypt.files.domain.model.FileSource
 import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.domain.model.ItemType
+import io.gromif.astracrypt.utils.Mapper
 
 class FileItemMapper: Mapper<FilesEntity, Item> {
     override fun invoke(item: FilesEntity): Item {

@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.utils.app.ext
+package io.gromif.astracrypt.utils.app.ext
 
 import android.content.Context
 import android.content.Intent

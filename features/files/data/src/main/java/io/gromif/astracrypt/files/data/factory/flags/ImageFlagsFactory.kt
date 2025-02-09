@@ -4,8 +4,8 @@ import android.content.ContentResolver
 import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.exifinterface.media.ExifInterface
-import com.nevidimka655.astracrypt.utils.Mapper
 import io.gromif.astracrypt.files.data.dto.FileFlagsDto
+import io.gromif.astracrypt.utils.Mapper
 
 class ImageFlagsFactory(
     private val contentResolver: ContentResolver,

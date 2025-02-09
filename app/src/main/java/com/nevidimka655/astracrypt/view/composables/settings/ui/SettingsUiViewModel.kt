@@ -2,9 +2,9 @@ package com.nevidimka655.astracrypt.view.composables.settings.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nevidimka655.astracrypt.utils.Api
 import com.nevidimka655.astracrypt.data.datastore.AppearanceManager
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.gromif.astracrypt.utils.Api
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

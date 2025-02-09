@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.utils
+package io.gromif.astracrypt.utils
 
 import android.os.Build
 import androidx.annotation.ChecksSdkIntAtLeast

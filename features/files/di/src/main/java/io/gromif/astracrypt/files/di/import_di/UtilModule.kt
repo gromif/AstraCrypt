@@ -5,11 +5,6 @@ import android.graphics.Bitmap
 import android.net.Uri
 import coil.ImageLoader
 import coil.request.ImageRequest
-import com.nevidimka655.astracrypt.utils.Api
-import com.nevidimka655.astracrypt.utils.Mapper
-import com.nevidimka655.astracrypt.utils.Serializer
-import com.nevidimka655.astracrypt.utils.io.BitmapCompressor
-import com.nevidimka655.astracrypt.utils.io.Randomizer
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,6 +25,11 @@ import io.gromif.astracrypt.files.domain.repository.SettingsRepository
 import io.gromif.astracrypt.files.domain.util.FileUtil
 import io.gromif.astracrypt.files.domain.util.FlagsUtil
 import io.gromif.astracrypt.files.domain.util.PreviewUtil
+import io.gromif.astracrypt.utils.Api
+import io.gromif.astracrypt.utils.Mapper
+import io.gromif.astracrypt.utils.Serializer
+import io.gromif.astracrypt.utils.io.BitmapCompressor
+import io.gromif.astracrypt.utils.io.Randomizer
 import io.gromif.crypto.tink.data.AssociatedDataManager
 import io.gromif.crypto.tink.data.KeysetManager
 import javax.inject.Qualifier

@@ -4,8 +4,8 @@ import android.content.ContentResolver
 import android.media.MediaExtractor
 import android.media.MediaFormat
 import android.net.Uri
-import com.nevidimka655.astracrypt.utils.Mapper
 import io.gromif.astracrypt.files.data.dto.FileFlagsDto
+import io.gromif.astracrypt.utils.Mapper
 
 class AudioFlagsFactory(
     private val contentResolver: ContentResolver,

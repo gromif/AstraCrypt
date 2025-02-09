@@ -1,8 +1,8 @@
 package io.gromif.astracrypt.files.data.util.mapper
 
-import com.nevidimka655.astracrypt.utils.Mapper
 import io.gromif.astracrypt.files.data.dto.AeadInfoDto
 import io.gromif.astracrypt.files.domain.model.AeadInfo
+import io.gromif.astracrypt.utils.Mapper
 
 class AeadInfoDtoMapper: Mapper<AeadInfo, AeadInfoDto> {
     override fun invoke(item: AeadInfo): AeadInfoDto {

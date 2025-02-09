@@ -4,12 +4,12 @@ import com.nevidimka655.astracrypt.auth.data.dto.AuthDto
 import com.nevidimka655.astracrypt.auth.data.mapper.AuthDtoMapper
 import com.nevidimka655.astracrypt.auth.data.mapper.AuthMapper
 import com.nevidimka655.astracrypt.auth.domain.model.Auth
-import com.nevidimka655.astracrypt.utils.Mapper
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.scopes.ViewModelScoped
+import io.gromif.astracrypt.utils.Mapper
 
 @Module
 @InstallIn(ViewModelComponent::class)

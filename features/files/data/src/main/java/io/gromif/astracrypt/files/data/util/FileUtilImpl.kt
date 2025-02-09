@@ -4,9 +4,9 @@ import android.content.Context
 import android.net.Uri
 import androidx.core.provider.DocumentsContractCompat
 import androidx.documentfile.provider.DocumentFile
-import com.nevidimka655.astracrypt.utils.Mapper
 import io.gromif.astracrypt.files.domain.model.ItemType
 import io.gromif.astracrypt.files.domain.util.FileUtil
+import io.gromif.astracrypt.utils.Mapper
 
 class FileUtilImpl(
     private val context: Context,

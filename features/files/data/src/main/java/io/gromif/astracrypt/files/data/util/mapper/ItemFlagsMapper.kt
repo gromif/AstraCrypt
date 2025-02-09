@@ -1,8 +1,8 @@
 package io.gromif.astracrypt.files.data.util.mapper
 
-import com.nevidimka655.astracrypt.utils.Mapper
 import io.gromif.astracrypt.files.data.dto.FileFlagsDto
 import io.gromif.astracrypt.files.domain.model.FileFlags
+import io.gromif.astracrypt.utils.Mapper
 
 class ItemFlagsMapper: Mapper<FileFlagsDto, FileFlags> {
     override fun invoke(item: FileFlagsDto): FileFlags {

@@ -6,12 +6,12 @@ import com.nevidimka655.astracrypt.auth.data.dto.AuthDto
 import com.nevidimka655.astracrypt.auth.data.repository.SettingsRepositoryImpl
 import com.nevidimka655.astracrypt.auth.domain.model.Auth
 import com.nevidimka655.astracrypt.auth.domain.repository.SettingsRepository
-import com.nevidimka655.astracrypt.utils.Mapper
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.scopes.ViewModelScoped
+import io.gromif.astracrypt.utils.Mapper
 import io.gromif.crypto.tink.data.KeysetManager
 import io.gromif.crypto.tink.encoders.Base64Encoder
 import io.gromif.tink_datastore.TinkDataStore

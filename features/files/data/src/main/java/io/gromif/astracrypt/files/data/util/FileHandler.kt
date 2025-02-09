@@ -1,8 +1,8 @@
 package io.gromif.astracrypt.files.data.util
 
 import com.google.crypto.tink.StreamingAead
-import com.nevidimka655.astracrypt.utils.io.Randomizer
 import io.gromif.astracrypt.files.domain.repository.SettingsRepository
+import io.gromif.astracrypt.utils.io.Randomizer
 import io.gromif.crypto.tink.data.AssociatedDataManager
 import io.gromif.crypto.tink.data.KeysetManager
 import io.gromif.crypto.tink.domain.KeysetTemplates

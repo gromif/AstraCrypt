@@ -1,7 +1,7 @@
 package io.gromif.astracrypt.files.data.util.serializer
 
-import com.nevidimka655.astracrypt.utils.Serializer
 import io.gromif.astracrypt.files.data.dto.FileFlagsDto
+import io.gromif.astracrypt.utils.Serializer
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 

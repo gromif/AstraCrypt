@@ -1,8 +1,8 @@
 package com.nevidimka655.astracrypt.view.composables.settings.security.quick_actions
 
 import androidx.lifecycle.ViewModel
-import com.nevidimka655.astracrypt.utils.app.AppComponentService
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.gromif.astracrypt.utils.app.AppComponentService
 import javax.inject.Inject
 
 @HiltViewModel

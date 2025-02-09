@@ -1,7 +1,5 @@
 package io.gromif.astracrypt.files.di
 
-import com.nevidimka655.astracrypt.utils.Mapper
-import com.nevidimka655.astracrypt.utils.Parser
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,6 +13,8 @@ import io.gromif.astracrypt.files.data.util.mapper.ItemFlagsMapper
 import io.gromif.astracrypt.files.domain.model.FileFlags
 import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.domain.model.ItemDetails
+import io.gromif.astracrypt.utils.Mapper
+import io.gromif.astracrypt.utils.Parser
 
 @Module
 @InstallIn(SingletonComponent::class)

@@ -12,14 +12,14 @@ import androidx.work.OutOfQuotaPolicy
 import androidx.work.WorkManager
 import androidx.work.workDataOf
 import com.google.crypto.tink.integration.android.AndroidKeystore
-import com.nevidimka655.astracrypt.utils.Mapper
-import com.nevidimka655.astracrypt.utils.io.WorkerSerializer
 import com.nevidimka655.domain.lab_zip.FileInfo
 import com.nevidimka655.domain.lab_zip.usecase.GetFileInfosUseCase
 import com.nevidimka655.domain.lab_zip.usecase.GetSourceFileInfoUseCase
 import com.nevidimka655.features.lab_zip.work.CombinedZipWorker
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.gromif.astracrypt.utils.Mapper
 import io.gromif.astracrypt.utils.dispatchers.IoDispatcher
+import io.gromif.astracrypt.utils.io.WorkerSerializer
 import io.gromif.crypto.tink.encoders.Base64Encoder
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch

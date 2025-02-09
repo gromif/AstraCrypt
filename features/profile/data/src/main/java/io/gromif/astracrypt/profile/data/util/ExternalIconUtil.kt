@@ -1,7 +1,7 @@
 package io.gromif.astracrypt.profile.data.util
 
 import android.net.Uri
-import com.nevidimka655.astracrypt.utils.io.BitmapCompressor
+import io.gromif.astracrypt.utils.io.BitmapCompressor
 import io.gromif.crypto.tink.domain.KeysetTemplates
 
 class ExternalIconUtil(

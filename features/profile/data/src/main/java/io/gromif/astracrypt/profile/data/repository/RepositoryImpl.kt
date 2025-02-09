@@ -1,9 +1,9 @@
 package io.gromif.astracrypt.profile.data.repository
 
 import android.net.Uri
-import com.nevidimka655.astracrypt.utils.Mapper
 import io.gromif.astracrypt.profile.data.util.ExternalIconUtil
 import io.gromif.astracrypt.profile.domain.repository.Repository
+import io.gromif.astracrypt.utils.Mapper
 import io.gromif.crypto.tink.domain.KeysetTemplates
 
 class RepositoryImpl(

@@ -1,13 +1,13 @@
-package com.nevidimka655.astracrypt.utils.di
+package io.gromif.astracrypt.utils.di
 
 import android.net.Uri
-import com.nevidimka655.astracrypt.utils.Mapper
-import com.nevidimka655.astracrypt.utils.mapper.StringToUriMapper
-import com.nevidimka655.astracrypt.utils.mapper.UriToStringMapper
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import io.gromif.astracrypt.utils.Mapper
+import io.gromif.astracrypt.utils.mapper.StringToUriMapper
+import io.gromif.astracrypt.utils.mapper.UriToStringMapper
 import javax.inject.Singleton
 
 @Module

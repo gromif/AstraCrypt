@@ -1,7 +1,6 @@
 package io.gromif.astracrypt.files.di
 
 import android.net.Uri
-import com.nevidimka655.astracrypt.utils.Mapper
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,6 +15,7 @@ import io.gromif.astracrypt.files.data.util.FileHandler
 import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.domain.model.ItemDetails
 import io.gromif.astracrypt.files.domain.repository.Repository
+import io.gromif.astracrypt.utils.Mapper
 import javax.inject.Singleton
 
 @Module

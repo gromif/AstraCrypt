@@ -1,12 +1,12 @@
 package io.gromif.astracrypt.files.data.util
 
-import com.nevidimka655.astracrypt.utils.Serializer
 import io.gromif.astracrypt.files.data.dto.FileFlagsDto
 import io.gromif.astracrypt.files.data.factory.flags.AudioFlagsFactory
 import io.gromif.astracrypt.files.data.factory.flags.ImageFlagsFactory
 import io.gromif.astracrypt.files.data.factory.flags.VideoFlagsFactory
 import io.gromif.astracrypt.files.domain.model.ItemType
 import io.gromif.astracrypt.files.domain.util.FlagsUtil
+import io.gromif.astracrypt.utils.Serializer
 
 class FlagsUtilImpl(
     private val audioFlagsFactory: AudioFlagsFactory,

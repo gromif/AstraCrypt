@@ -6,7 +6,7 @@ import androidx.datastore.preferences.core.edit
 import com.nevidimka655.astracrypt.auth.data.dto.AuthDto
 import com.nevidimka655.astracrypt.auth.domain.model.Auth
 import com.nevidimka655.astracrypt.auth.domain.repository.SettingsRepository
-import com.nevidimka655.astracrypt.utils.Mapper
+import io.gromif.astracrypt.utils.Mapper
 import io.gromif.crypto.tink.data.KeysetManager
 import io.gromif.crypto.tink.encoders.Encoder
 import io.gromif.crypto.tink.extensions.fromBase64

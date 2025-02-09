@@ -3,10 +3,10 @@ package io.gromif.astracrypt.files.data.util
 import android.content.Context
 import android.net.Uri
 import androidx.documentfile.provider.DocumentFile
-import com.nevidimka655.astracrypt.utils.Mapper
-import com.nevidimka655.astracrypt.utils.io.FilesUtil
 import io.gromif.astracrypt.files.data.db.FilesDao
 import io.gromif.astracrypt.files.domain.model.ItemType
+import io.gromif.astracrypt.utils.Mapper
+import io.gromif.astracrypt.utils.io.FilesUtil
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.isActive
 
