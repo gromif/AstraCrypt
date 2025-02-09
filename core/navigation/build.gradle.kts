@@ -23,6 +23,7 @@ dependencies {
 
     fdroidImplementation(projects.features.settings.about.fdroid)
     playImplementation(projects.features.settings.about.googlePlay)
+    implementation(projects.features.settings.about.privacy)
 
     implementation(projects.features.settings.auth)
     implementation(projects.features.settings.aead.presentation)

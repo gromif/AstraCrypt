@@ -21,5 +21,5 @@ fun NavGraphBuilder.aboutGraph(
         },
         applicationVersion = applicationVersion
     )
-    //privacyPolicy(onUiStateChange = onUiStateChange)
+    privacyPolicy(onUiStateChange = onUiStateChange)
 }
