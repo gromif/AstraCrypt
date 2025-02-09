@@ -1,0 +1,17 @@
+package io.gromif.astracrypt.auth.data.data.mapper
+
+import io.gromif.astracrypt.auth.data.data.dto.AuthDto
+import io.gromif.astracrypt.auth.domain.model.Auth
+import io.gromif.astracrypt.utils.Mapper
+
+class AuthDtoMapper: Mapper<Auth, AuthDto> {
+    override fun invoke(item: Auth): AuthDto {
+        return AuthDto(
+            type = item.type?.ordinal ?: -1,
+            skin = item.skinType?.ordinal ?: -1,
+            hintState = item.hintState,
+            hintText = item.hintText,
+            bindTinkAd = item.bindTinkAd
+        )
+    }
+}

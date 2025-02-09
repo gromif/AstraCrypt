@@ -2,17 +2,17 @@ package com.nevidimka655.astracrypt.auth.settings
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nevidimka655.astracrypt.auth.domain.model.Auth
-import com.nevidimka655.astracrypt.auth.domain.model.AuthType
-import com.nevidimka655.astracrypt.auth.domain.model.SkinType
-import com.nevidimka655.astracrypt.auth.domain.usecase.GetAuthFlowUseCase
-import com.nevidimka655.astracrypt.auth.domain.usecase.SetAuthTypeUseCase
-import com.nevidimka655.astracrypt.auth.domain.usecase.SetBindTinkAdUseCase
-import com.nevidimka655.astracrypt.auth.domain.usecase.SetHintTextUseCase
-import com.nevidimka655.astracrypt.auth.domain.usecase.SetHintVisibilityUseCase
-import com.nevidimka655.astracrypt.auth.domain.usecase.SetSkinTypeUseCase
-import com.nevidimka655.astracrypt.auth.domain.usecase.VerifyAuthUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.gromif.astracrypt.auth.domain.model.Auth
+import io.gromif.astracrypt.auth.domain.model.AuthType
+import io.gromif.astracrypt.auth.domain.model.SkinType
+import io.gromif.astracrypt.auth.domain.usecase.GetAuthFlowUseCase
+import io.gromif.astracrypt.auth.domain.usecase.SetAuthTypeUseCase
+import io.gromif.astracrypt.auth.domain.usecase.SetBindTinkAdUseCase
+import io.gromif.astracrypt.auth.domain.usecase.SetHintTextUseCase
+import io.gromif.astracrypt.auth.domain.usecase.SetHintVisibilityUseCase
+import io.gromif.astracrypt.auth.domain.usecase.SetSkinTypeUseCase
+import io.gromif.astracrypt.auth.domain.usecase.VerifyAuthUseCase
 import io.gromif.astracrypt.utils.app.AppComponentService
 import io.gromif.astracrypt.utils.dispatchers.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher

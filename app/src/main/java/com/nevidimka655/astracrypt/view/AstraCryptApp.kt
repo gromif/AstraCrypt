@@ -30,13 +30,13 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.nevidimka655.astracrypt.auth.domain.model.AuthType
-import com.nevidimka655.astracrypt.auth.domain.model.SkinType
-import com.nevidimka655.astracrypt.auth.login.PasswordLoginScreen
 import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.astracrypt.view.navigation.root
 import com.nevidimka655.atracrypt.core.design_system.AstraCryptTheme
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
+import io.gromif.astracrypt.auth.domain.model.AuthType
+import io.gromif.astracrypt.auth.domain.model.SkinType
+import io.gromif.astracrypt.auth.presentation.PasswordLoginScreen
 import io.gromif.astracrypt.presentation.navigation.BottomBarItems
 import io.gromif.astracrypt.presentation.navigation.Route
 import io.gromif.astracrypt.presentation.navigation.composables.BottomBarImpl

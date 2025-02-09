@@ -6,10 +6,10 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nevidimka655.astracrypt.auth.domain.usecase.GetAuthFlowUseCase
-import com.nevidimka655.astracrypt.auth.domain.usecase.VerifySkinUseCase
 import com.nevidimka655.astracrypt.data.datastore.AppearanceManager
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.gromif.astracrypt.auth.domain.usecase.GetAuthFlowUseCase
+import io.gromif.astracrypt.auth.domain.usecase.VerifySkinUseCase
 import io.gromif.astracrypt.presentation.navigation.models.UiState
 import io.gromif.astracrypt.utils.dispatchers.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher

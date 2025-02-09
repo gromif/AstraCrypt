@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.nevidimka655.astracrypt.auth.data"
+    namespace = "io.gromif.astracrypt.auth.data"
 }
 
 dependencies {

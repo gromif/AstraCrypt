@@ -5,5 +5,5 @@ plugins {
 }
 
 android {
-    namespace = "com.nevidimka655.astracrypt.auth.domain"
+    namespace = "io.gromif.astracrypt.auth.domain"
 }
