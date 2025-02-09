@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.astracrypt.android.library)
+    alias(libs.plugins.astracrypt.android.library.flavor.market)
     alias(libs.plugins.astracrypt.android.library.compose)
     alias(libs.plugins.astracrypt.kotlin.coroutines)
     alias(libs.plugins.astracrypt.kotlin.serialization)
@@ -19,6 +20,9 @@ dependencies {
     implementation(projects.features.help)
     implementation(projects.features.home)
     implementation(projects.features.profile.presentation)
+
+    fdroidImplementation(projects.features.settings.about.fdroid)
+    playImplementation(projects.features.settings.about.googlePlay)
 
     implementation(projects.features.settings.auth)
     implementation(projects.features.settings.aead.presentation)

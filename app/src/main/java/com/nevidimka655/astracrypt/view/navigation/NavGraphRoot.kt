@@ -3,7 +3,7 @@ package com.nevidimka655.astracrypt.view.navigation
 import androidx.compose.material3.SnackbarHostState
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
-import com.nevidimka655.astracrypt.view.composables.settings.about.navigation.aboutGraph
+import com.nevidimka655.astracrypt.BuildConfig
 import com.nevidimka655.astracrypt.view.composables.settings.security.admin.settingsSecurityAdmin
 import com.nevidimka655.astracrypt.view.composables.settings.security.quick_actions.settingsSecurityQuickActions
 import com.nevidimka655.astracrypt.view.composables.settings.security.settingsSecurity
@@ -15,6 +15,7 @@ import com.nevidimka655.astracrypt.view.navigation.lab.labGraph
 import com.nevidimka655.astracrypt.view.navigation.models.UiState
 import com.nevidimka655.astracrypt.view.navigation.models.actions.ToolbarActions
 import com.nevidimka655.astracrypt.view.navigation.notes.notesGraph
+import com.nevidimka655.astracrypt.view.navigation.settings.about.aboutGraph
 import com.nevidimka655.astracrypt.view.navigation.settings.profileSettings
 import com.nevidimka655.astracrypt.view.navigation.settings.settingsSecurityAead
 import com.nevidimka655.astracrypt.view.navigation.tabs.files.details
@@ -73,7 +74,12 @@ fun root(
     settingsSecurityAuth(onUiStateChange = onUiStateChange)
     settingsSecurityAead(onUiStateChange = onUiStateChange)
     settingsSecurityQuickActions(onUiStateChange = onUiStateChange)
-    aboutGraph(onUiStateChange = onUiStateChange, navController = navController)
+    aboutGraph(
+        onUiStateChange = onUiStateChange,
+        snackbarHostState = snackbarHostState,
+        navController = navController,
+        applicationVersion = BuildConfig.VERSION_NAME
+    )
 
     help(onUiStateChange = onUiStateChange)
 }
