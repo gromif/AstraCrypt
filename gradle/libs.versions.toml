@@ -112,6 +112,8 @@ compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 
 # Plugins defined by this project
+astracrypt-android-library-flavor-market = { id = "astracrypt.flavor.market" }
+
 astracrypt-android-application = { id = "astracrypt.android.application" }
 astracrypt-android-application-compose = { id = "astracrypt.android.application.compose" }
 astracrypt-android-coil = { id = "astracrypt.android.coil" }

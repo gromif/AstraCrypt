@@ -1,3 +1,5 @@
+@file:Suppress("NOTHING_TO_INLINE")
+
 plugins {
     `kotlin-dsl`
 }
@@ -18,6 +20,7 @@ dependencies {
 
 gradlePlugin {
     plugins {
+        flavors()
         register("androidLibrary") {
             id = "astracrypt.android.library"
             implementationClass = "AndroidLibraryConventionPlugin"
@@ -70,5 +73,12 @@ gradlePlugin {
             id = "astracrypt.kotlin.coroutines"
             implementationClass = "KotlinCoroutinesConventionPlugin"
         }
+    }
+}
+
+private inline fun NamedDomainObjectContainer<PluginDeclaration>.flavors() {
+    register("flavorMarket") {
+        id = "astracrypt.flavor.market"
+        implementationClass = "com.nevidimka655.buildlogic.flavor.FlavorMarketConventionPlugin"
     }
 }
