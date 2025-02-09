@@ -1,8 +1,8 @@
 package io.gromif.astracrypt.profile.presentation.shared
 
 import androidx.annotation.DrawableRes
-import com.nevidimka655.astracrypt.resources.R
 import io.gromif.astracrypt.profile.domain.model.DefaultAvatar
+import io.gromif.astracrypt.profile.presentation.R
 
 @DrawableRes
 fun DefaultAvatar.resource(): Int = when(this) {
