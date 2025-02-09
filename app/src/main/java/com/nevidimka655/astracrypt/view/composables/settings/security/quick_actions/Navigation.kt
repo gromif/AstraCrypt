@@ -1,16 +1,12 @@
 package com.nevidimka655.astracrypt.view.composables.settings.security.quick_actions
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.nevidimka655.astracrypt.resources.R
-import com.nevidimka655.astracrypt.view.navigation.models.UiState
-import com.nevidimka655.astracrypt.view.navigation.Route
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
+import io.gromif.astracrypt.presentation.navigation.Route
+import io.gromif.astracrypt.presentation.navigation.models.UiState
 
 private val SettingsSecurityQuickActionsUiState = UiState(
     toolbar = UiState.Toolbar(

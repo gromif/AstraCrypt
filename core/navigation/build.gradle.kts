@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.nevidimka655.astracrypt.view.navigation"
+    namespace = "io.gromif.astracrypt.presentation.navigation"
 }
 
 dependencies {
