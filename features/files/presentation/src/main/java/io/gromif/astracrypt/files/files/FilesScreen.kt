@@ -83,7 +83,7 @@ fun FilesScreen(
     BackHandler(enabled = mode is Mode.Multiselect, onBack = ::closeContextualToolbar)
 
     val backStackList = vm.parentBackStack
-    val stateHolder = remember(isSearching, multiselectStateList, backStackList) {
+    val stateHolder = remember(isSearching, multiselectStateList, backStackList, viewMode) {
         StateHolder(
             isStarred = isStarred,
             isSearching = isSearching,
