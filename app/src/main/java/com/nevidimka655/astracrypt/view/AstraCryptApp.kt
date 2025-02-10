@@ -104,9 +104,7 @@ fun AstraCryptApp(
                 backButton = vm.userIsAuthenticated && bottomBarTab == null,
                 isContextual = toolbar.isContextual,
                 actions = toolbar.actions,
-                onNavigateUp = {
-                    navController.navigateUp()
-                },
+                onNavigateUp = navController::navigateUp,
                 onActionPressed = {
                     coroutineScope.launch { onToolbarActions.send(it) }
                 },
