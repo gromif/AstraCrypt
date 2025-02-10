@@ -146,9 +146,10 @@ fun AstraCryptApp(
                         uiState = UiState(
                             toolbar = UiState.Toolbar(title = TextWrap.Resource(id = R.string.settings_camouflageType_calculator))
                         )
-                        CalculatorScreen(modifier = Modifier.fillMaxSize()) { data ->
-                            vm.verifySkin(data = data)
-                        }
+                        CalculatorScreen(
+                            modifier = Modifier.fillMaxSize(),
+                            onCalculate = vm::verifySkin
+                        )
                         return@let
                     }
 
