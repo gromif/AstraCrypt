@@ -15,6 +15,7 @@ import io.gromif.astracrypt.files.domain.usecase.GetRecentItemsUseCase
 import io.gromif.astracrypt.files.domain.usecase.GetValidationRulesUsecase
 import io.gromif.astracrypt.files.domain.usecase.MoveUseCase
 import io.gromif.astracrypt.files.domain.usecase.RenameUseCase
+import io.gromif.astracrypt.files.domain.usecase.SetListViewModeUseCase
 import io.gromif.astracrypt.files.domain.usecase.SetStateUseCase
 
 @Module
@@ -28,13 +29,13 @@ internal object UsecaseModule {
     @Provides
     fun provideCreateFolderUseCase(
         repository: Repository,
-        settingsRepository: SettingsRepository
+        settingsRepository: SettingsRepository,
     ): CreateFolderUseCase = CreateFolderUseCase(repository, settingsRepository)
 
     @Provides
     fun provideDeleteUseCase(
         repository: Repository,
-        settingsRepository: SettingsRepository
+        settingsRepository: SettingsRepository,
     ): DeleteUseCase =
         DeleteUseCase(repository, settingsRepository)
 
@@ -43,12 +44,16 @@ internal object UsecaseModule {
         GetListViewModeUseCase(settingsRepository = settingsRepository)
 
     @Provides
+    fun provideSetListViewModeUseCase(settingsRepository: SettingsRepository): SetListViewModeUseCase =
+        SetListViewModeUseCase(settingsRepository = settingsRepository)
+
+    @Provides
     fun provideMoveUseCase(repository: Repository): MoveUseCase = MoveUseCase(repository)
 
     @Provides
     fun provideRenameUseCase(
         repository: Repository,
-        settingsRepository: SettingsRepository
+        settingsRepository: SettingsRepository,
     ): RenameUseCase = RenameUseCase(repository, settingsRepository)
 
     @Provides
@@ -62,7 +67,7 @@ internal object UsecaseModule {
     @Provides
     fun provideGetItemDetailsUseCase(
         repository: Repository,
-        settingsRepository: SettingsRepository
+        settingsRepository: SettingsRepository,
     ): GetItemDetailsUseCase = GetItemDetailsUseCase(repository, settingsRepository)
 
 }

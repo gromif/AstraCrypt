@@ -7,7 +7,6 @@ import com.nevidimka655.astracrypt.BuildConfig
 import com.nevidimka655.astracrypt.view.composables.settings.security.admin.settingsSecurityAdmin
 import com.nevidimka655.astracrypt.view.composables.settings.security.quick_actions.settingsSecurityQuickActions
 import com.nevidimka655.astracrypt.view.composables.settings.security.settingsSecurity
-import com.nevidimka655.astracrypt.view.composables.settings.ui.files.settingsUiFiles
 import com.nevidimka655.astracrypt.view.composables.settings.ui.settingsUi
 import io.gromif.astracrypt.presentation.navigation.Route
 import io.gromif.astracrypt.presentation.navigation.auth.settingsSecurityAuth
@@ -19,6 +18,7 @@ import io.gromif.astracrypt.presentation.navigation.notes.notesGraph
 import io.gromif.astracrypt.presentation.navigation.settings.about.aboutGraph
 import io.gromif.astracrypt.presentation.navigation.settings.profileSettings
 import io.gromif.astracrypt.presentation.navigation.settings.settingsSecurityAead
+import io.gromif.astracrypt.presentation.navigation.settings.ui.filesUiSettings
 import io.gromif.astracrypt.presentation.navigation.tabs.files.details
 import io.gromif.astracrypt.presentation.navigation.tabs.files.export
 import io.gromif.astracrypt.presentation.navigation.tabs.tabsGraph
@@ -63,7 +63,7 @@ fun root(
         onUiStateChange = onUiStateChange,
         navigateToFilesUiSettings = { navController.navigate(Route.SettingsUiFiles) }
     )
-    settingsUiFiles(onUiStateChange = onUiStateChange)
+    filesUiSettings(onUiStateChange = onUiStateChange)
     settingsSecurity(
         onUiStateChange = onUiStateChange,
         navigateToAead = { navController.navigate(Route.SettingsSecurityAead) },
