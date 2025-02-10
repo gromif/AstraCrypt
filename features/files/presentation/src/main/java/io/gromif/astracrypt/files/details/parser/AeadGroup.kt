@@ -26,8 +26,8 @@ internal fun SnapshotStateList<DetailsGroup>.addAeadGroup(
     addItem(
         icon = Icons.Outlined.Lock,
         title = TextWrap.Resource(id = R.string.thumb_encryption_type),
-        summary = if (previewAead == -1) {
+        summary = if (previewAead == null || previewAead == -1) {
             TextWrap.Resource(id = R.string.withoutEncryption)
-        } else TextWrap.Text(text = KeysetTemplates.Stream.entries[previewAead ?: -1].name)
+        } else TextWrap.Text(text = KeysetTemplates.Stream.entries[previewAead].name)
     )
 }
