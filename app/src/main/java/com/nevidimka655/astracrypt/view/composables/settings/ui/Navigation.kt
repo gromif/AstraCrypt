@@ -9,6 +9,7 @@ import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 import io.gromif.astracrypt.presentation.navigation.Route
 import io.gromif.astracrypt.presentation.navigation.models.UiState
+import io.gromif.astracrypt.presentation.navigation.shared.UiStateHandler
 
 private val SettingsUi_UiState = UiState(
     toolbar = UiState.Toolbar(
@@ -20,7 +21,7 @@ fun NavGraphBuilder.settingsUi(
     onUiStateChange: (UiState) -> Unit,
     navigateToFilesUiSettings: () -> Unit
 ) = composable<Route.SettingsUi> {
-    onUiStateChange(SettingsUi_UiState)
+    UiStateHandler { onUiStateChange(SettingsUi_UiState) }
     val vm: SettingsUiViewModel = hiltViewModel()
 
     val dynamicThemeState by vm.dynamicThemeFlow
