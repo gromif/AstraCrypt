@@ -33,5 +33,14 @@ internal fun Project.configureComposeMetrics() {
     }
 }
 
+internal fun Project.configureComposeStabilityConfig() {
+    extensions.configure<ComposeCompilerGradlePluginExtension> {
+        val config = rootProject.layout.projectDirectory.file(
+            "build-logic/compose-stability-config.conf"
+        ).asFile
+        stabilityConfigurationFiles.add { config }
+    }
+}
+
 internal fun Project.configureKotlinAndroid() =
     kotlinExtension.jvmToolchain(AppConfig.Kotlin.JVM_TOOLCHAIN_VERSION)

@@ -1,6 +1,7 @@
 
 import com.android.build.api.dsl.ApplicationExtension
 import com.nevidimka655.buildlogic.configureComposeMetrics
+import com.nevidimka655.buildlogic.configureComposeStabilityConfig
 import com.nevidimka655.buildlogic.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -13,6 +14,7 @@ class AndroidApplicationComposeConventionPlugin: Plugin<Project> {
             apply("com.android.application")
             apply("org.jetbrains.kotlin.plugin.compose")
         }
+        configureComposeStabilityConfig()
         configureComposeMetrics()
         extensions.configure<ApplicationExtension> {
             with(defaultConfig) {
