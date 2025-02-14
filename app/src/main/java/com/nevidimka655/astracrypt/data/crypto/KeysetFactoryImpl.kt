@@ -3,14 +3,16 @@ package com.nevidimka655.astracrypt.data.crypto
 import com.google.crypto.tink.KeysetHandle
 import com.google.crypto.tink.Parameters
 import com.google.crypto.tink.integration.android.AndroidKeystore
-import com.nevidimka655.astracrypt.data.datastore.KeysetDataStoreManager
 import io.gromif.crypto.tink.core.parsers.KeysetParserWithAead
 import io.gromif.crypto.tink.core.serializers.KeysetSerializerWithAead
 import io.gromif.crypto.tink.model.KeysetFactory
 import io.gromif.crypto.tink.model.KeysetIdUtil
+import io.gromif.crypto.tink.model.KeysetReader
+import io.gromif.crypto.tink.model.KeysetWriter
 
 class KeysetFactoryImpl(
-    private val keysetDataStoreManager: KeysetDataStoreManager,
+    private val keysetReader: KeysetReader,
+    private val keysetWriter: KeysetWriter,
     private val keysetSerializerWithAead: KeysetSerializerWithAead,
     private val keysetParserWithAead: KeysetParserWithAead,
     private val prefsKeysetIdUtil: KeysetIdUtil,
@@ -32,7 +34,7 @@ class KeysetFactoryImpl(
         )
 
 
-        val savedKeyset = keysetDataStoreManager.get(key = prefsKey)
+        val savedKeyset = keysetReader.read(key = prefsKey)
         val isMasterKeyExists = AndroidKeystore.hasKey(masterKey)
         if (savedKeyset != null && !isMasterKeyExists) {
             throw IllegalStateException(
@@ -51,7 +53,7 @@ class KeysetFactoryImpl(
                 aead = keysetAead,
                 associatedData = newAssociatedData
             )
-            keysetDataStoreManager.set(key = prefsKey, serializedKeyset = serializedKeyset)
+            keysetWriter.write(key = prefsKey, keyset = serializedKeyset)
             return keysetHandle
         } else {
             val keysetAead = AndroidKeystore.getAead(masterKey)

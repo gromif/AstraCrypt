@@ -1,8 +1,12 @@
 package com.nevidimka655.astracrypt.app.di.crypto
 
 import android.content.Context
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import com.nevidimka655.astracrypt.app.di.datastore.KeysetDataStore
+import com.nevidimka655.astracrypt.data.crypto.DatastoreKeysetReader
+import com.nevidimka655.astracrypt.data.crypto.DatastoreKeysetWriter
 import com.nevidimka655.astracrypt.data.crypto.KeysetFactoryImpl
-import com.nevidimka655.astracrypt.data.datastore.KeysetDataStoreManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -55,18 +59,32 @@ object KeysetManagerModule {
     @Singleton
     @Provides
     fun provideKeysetFactory(
-        keysetDataStoreManager: KeysetDataStoreManager,
+        datastoreKeysetReader: DatastoreKeysetReader,
+        datastoreKeysetWriter: DatastoreKeysetWriter,
         keysetSerializerWithAead: KeysetSerializerWithAead,
         keysetParserWithAead: KeysetParserWithAead,
         prefsKeysetIdUtil: DefaultKeysetIdUtil,
         masterKeysetIdUtil: DefaultKeystoreKeysetIdUtil,
     ) = KeysetFactoryImpl(
-        keysetDataStoreManager = keysetDataStoreManager,
+        keysetReader = datastoreKeysetReader,
+        keysetWriter = datastoreKeysetWriter,
         keysetSerializerWithAead = keysetSerializerWithAead,
         keysetParserWithAead = keysetParserWithAead,
         prefsKeysetIdUtil = prefsKeysetIdUtil,
         masterKeysetIdUtil = masterKeysetIdUtil
     )
+
+    @Singleton
+    @Provides
+    fun provideDatastoreKeysetReader(
+        @KeysetDataStore dataStore: DataStore<Preferences>
+    ) = DatastoreKeysetReader(dataStore = dataStore)
+
+    @Singleton
+    @Provides
+    fun provideDatastoreKeysetWriter(
+        @KeysetDataStore dataStore: DataStore<Preferences>
+    ) = DatastoreKeysetWriter(dataStore = dataStore)
 
     @Singleton
     @Provides
