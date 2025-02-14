@@ -7,7 +7,7 @@ ksp = "2.1.0-1.0.29"
 
 room = "2.6.1"
 lifecycle = "2.8.7"
-paging = "3.3.5"
+paging = "3.3.6"
 coil = "2.7.0"
 
 core-ktx = "1.15.0"
