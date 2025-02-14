@@ -47,5 +47,5 @@ object SerializeKeysetModule {
     @Singleton
     @Provides
     fun provideKeysetKeyFactory(sha384Util: Sha384Util) =
-        KeysetKeyFactory(sha384Util = sha384Util)
+        KeysetKeyFactory(hashUtil = sha384Util)
 }

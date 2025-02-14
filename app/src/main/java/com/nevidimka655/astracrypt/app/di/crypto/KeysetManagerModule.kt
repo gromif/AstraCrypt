@@ -73,13 +73,13 @@ object KeysetManagerModule {
     fun provideMasterKeyNameUseCase(
         hexEncoder: HexEncoder,
         sha256Util: Sha256Util
-    ) = MasterKeyNameUseCase(hexEncoder = hexEncoder, sha256Util = sha256Util)
+    ) = MasterKeyNameUseCase(hexEncoder = hexEncoder, hashUtil = sha256Util)
 
     @Singleton
     @Provides
     fun providePrefsKeyNameUseCase(
         hexEncoder: HexEncoder,
         sha384Util: Sha384Util
-    ) = PrefsKeyNameUseCase(hexEncoder = hexEncoder, sha384Util = sha384Util)
+    ) = PrefsKeyNameUseCase(hexEncoder = hexEncoder, hashUtil = sha384Util)
 
 }
