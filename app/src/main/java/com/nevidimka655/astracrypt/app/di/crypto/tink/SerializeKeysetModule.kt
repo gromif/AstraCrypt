@@ -31,13 +31,13 @@ object SerializeKeysetModule {
     @Provides
     fun provideSerializeKeysetByAeadService(
         hexEncoder: HexEncoder
-    ) = KeysetSerializerWithAead(hexEncoder = hexEncoder)
+    ) = KeysetSerializerWithAead(encoder = hexEncoder)
 
     @Singleton
     @Provides
     fun provideKeysetSerializer(
         hexEncoder: HexEncoder
-    ) = KeysetSerializer(hexEncoder = hexEncoder)
+    ) = KeysetSerializer(encoder = hexEncoder)
 
     @Singleton
     @Provides
