@@ -4,8 +4,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import io.gromif.crypto.tink.encoders.Base64Encoder
-import io.gromif.crypto.tink.encoders.HexEncoder
+import io.gromif.crypto.tink.core.encoders.Base64Encoder
+import io.gromif.crypto.tink.core.encoders.HexEncoder
 
 @Module
 @InstallIn(SingletonComponent::class)

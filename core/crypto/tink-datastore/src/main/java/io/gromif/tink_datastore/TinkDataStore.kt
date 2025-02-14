@@ -8,8 +8,8 @@ import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.google.crypto.tink.Aead
 import com.google.crypto.tink.prf.PrfSet
+import io.gromif.crypto.tink.core.encoders.Encoder
 import io.gromif.crypto.tink.data.KeysetManager
-import io.gromif.crypto.tink.encoders.Encoder
 import io.gromif.crypto.tink.extensions.aead
 import io.gromif.crypto.tink.extensions.decodeAndDecrypt
 import io.gromif.crypto.tink.extensions.encryptAndEncode

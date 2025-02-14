@@ -20,7 +20,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.gromif.astracrypt.utils.Mapper
 import io.gromif.astracrypt.utils.dispatchers.IoDispatcher
 import io.gromif.astracrypt.utils.io.WorkerSerializer
-import io.gromif.crypto.tink.encoders.Base64Encoder
+import io.gromif.crypto.tink.core.encoders.Base64Encoder
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import javax.inject.Inject

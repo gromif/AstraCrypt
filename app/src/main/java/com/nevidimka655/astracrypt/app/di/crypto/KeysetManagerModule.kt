@@ -9,6 +9,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import io.gromif.crypto.tink.core.GetGlobalAssociatedDataPrf
+import io.gromif.crypto.tink.core.encoders.HexEncoder
 import io.gromif.crypto.tink.core.hash.Sha256Util
 import io.gromif.crypto.tink.core.hash.Sha384Util
 import io.gromif.crypto.tink.core.parsers.KeysetParserWithAead
@@ -17,7 +18,6 @@ import io.gromif.crypto.tink.core.utils.DefaultKeysetIdUtil
 import io.gromif.crypto.tink.core.utils.DefaultKeystoreKeysetIdUtil
 import io.gromif.crypto.tink.data.AssociatedDataManager
 import io.gromif.crypto.tink.data.KeysetManager
-import io.gromif.crypto.tink.encoders.HexEncoder
 import java.io.File
 import javax.inject.Singleton
 

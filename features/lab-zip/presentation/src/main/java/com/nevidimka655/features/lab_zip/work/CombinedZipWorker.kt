@@ -23,7 +23,7 @@ import dagger.assisted.AssistedInject
 import io.gromif.astracrypt.utils.Api
 import io.gromif.astracrypt.utils.Mapper
 import io.gromif.astracrypt.utils.dispatchers.IoDispatcher
-import io.gromif.crypto.tink.encoders.Base64Encoder
+import io.gromif.crypto.tink.core.encoders.Base64Encoder
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import java.io.File
