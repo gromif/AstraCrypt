@@ -19,7 +19,7 @@ object ParseKeysetModule {
     @Provides
     fun provideKeysetParser(
         hexEncoder: HexEncoder
-    ) = KeysetParser(hexEncoder = hexEncoder)
+    ) = KeysetParser(encoder = hexEncoder)
 
     @Singleton
     @Provides
