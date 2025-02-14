@@ -2,7 +2,7 @@
 kotlin = "2.1.0"
 kotlin-coroutines = "1.9.0"
 kotlin-serialization = "1.7.3"
-agp = "8.8.0"
+agp = "8.8.1"
 ksp = "2.1.0-1.0.29"
 
 room = "2.6.1"
