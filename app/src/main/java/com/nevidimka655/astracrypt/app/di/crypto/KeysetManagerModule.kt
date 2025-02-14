@@ -3,8 +3,6 @@ package com.nevidimka655.astracrypt.app.di.crypto
 import android.content.Context
 import com.nevidimka655.astracrypt.data.crypto.KeysetFactoryImpl
 import com.nevidimka655.astracrypt.data.datastore.KeysetDataStoreManager
-import com.nevidimka655.astracrypt.domain.usecase.crypto.MasterKeyNameUseCase
-import com.nevidimka655.astracrypt.domain.usecase.crypto.PrefsKeyNameUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,6 +13,8 @@ import io.gromif.crypto.tink.core.hash.Sha256Util
 import io.gromif.crypto.tink.core.hash.Sha384Util
 import io.gromif.crypto.tink.core.parsers.KeysetParserWithAead
 import io.gromif.crypto.tink.core.serializers.KeysetSerializerWithAead
+import io.gromif.crypto.tink.core.utils.DefaultKeysetIdUtil
+import io.gromif.crypto.tink.core.utils.DefaultKeystoreKeysetIdUtil
 import io.gromif.crypto.tink.data.AssociatedDataManager
 import io.gromif.crypto.tink.data.KeysetManager
 import io.gromif.crypto.tink.encoders.HexEncoder
@@ -58,28 +58,28 @@ object KeysetManagerModule {
         keysetDataStoreManager: KeysetDataStoreManager,
         keysetSerializerWithAead: KeysetSerializerWithAead,
         keysetParserWithAead: KeysetParserWithAead,
-        prefsKeyNameUseCase: PrefsKeyNameUseCase,
-        masterKeyNameUseCase: MasterKeyNameUseCase
+        prefsKeysetIdUtil: DefaultKeysetIdUtil,
+        masterKeysetIdUtil: DefaultKeystoreKeysetIdUtil,
     ) = KeysetFactoryImpl(
         keysetDataStoreManager = keysetDataStoreManager,
         keysetSerializerWithAead = keysetSerializerWithAead,
         keysetParserWithAead = keysetParserWithAead,
-        prefsKeyNameUseCase = prefsKeyNameUseCase,
-        masterKeyNameUseCase = masterKeyNameUseCase
+        prefsKeysetIdUtil = prefsKeysetIdUtil,
+        masterKeysetIdUtil = masterKeysetIdUtil
     )
 
     @Singleton
     @Provides
-    fun provideMasterKeyNameUseCase(
+    fun provideDefaultKeystoreKeysetIdUtil(
         hexEncoder: HexEncoder,
         sha256Util: Sha256Util
-    ) = MasterKeyNameUseCase(hexEncoder = hexEncoder, hashUtil = sha256Util)
+    ) = DefaultKeystoreKeysetIdUtil(encoder = hexEncoder, hashUtil = sha256Util)
 
     @Singleton
     @Provides
-    fun providePrefsKeyNameUseCase(
+    fun provideDefaultKeysetIdUtil(
         hexEncoder: HexEncoder,
         sha384Util: Sha384Util
-    ) = PrefsKeyNameUseCase(hexEncoder = hexEncoder, hashUtil = sha384Util)
+    ) = DefaultKeysetIdUtil(encoder = hexEncoder, hashUtil = sha384Util)
 
 }

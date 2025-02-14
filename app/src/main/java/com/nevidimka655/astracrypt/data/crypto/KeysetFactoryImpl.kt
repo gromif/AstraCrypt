@@ -4,18 +4,17 @@ import com.google.crypto.tink.KeysetHandle
 import com.google.crypto.tink.Parameters
 import com.google.crypto.tink.integration.android.AndroidKeystore
 import com.nevidimka655.astracrypt.data.datastore.KeysetDataStoreManager
-import com.nevidimka655.astracrypt.domain.usecase.crypto.MasterKeyNameUseCase
-import com.nevidimka655.astracrypt.domain.usecase.crypto.PrefsKeyNameUseCase
 import io.gromif.crypto.tink.core.parsers.KeysetParserWithAead
 import io.gromif.crypto.tink.core.serializers.KeysetSerializerWithAead
 import io.gromif.crypto.tink.domain.keyset.KeysetFactory
+import io.gromif.crypto.tink.model.KeysetIdUtil
 
 class KeysetFactoryImpl(
     private val keysetDataStoreManager: KeysetDataStoreManager,
     private val keysetSerializerWithAead: KeysetSerializerWithAead,
     private val keysetParserWithAead: KeysetParserWithAead,
-    private val prefsKeyNameUseCase: PrefsKeyNameUseCase,
-    private val masterKeyNameUseCase: MasterKeyNameUseCase
+    private val prefsKeysetIdUtil: KeysetIdUtil,
+    private val masterKeysetIdUtil: KeysetIdUtil,
 ) : KeysetFactory {
 
     override suspend fun create(
@@ -23,11 +22,11 @@ class KeysetFactoryImpl(
         keyParams: Parameters,
         associatedData: ByteArray
     ): KeysetHandle {
-        val prefsKey = prefsKeyNameUseCase.get(
+        val prefsKey = prefsKeysetIdUtil.compute(
             tag = tag,
             associatedData = associatedData
         )
-        val masterKey = masterKeyNameUseCase.get(
+        val masterKey = masterKeysetIdUtil.compute(
             tag = tag,
             associatedData = associatedData
         )
