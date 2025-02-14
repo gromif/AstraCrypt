@@ -4,7 +4,7 @@ import android.net.Uri
 import io.gromif.astracrypt.profile.data.util.ExternalIconUtil
 import io.gromif.astracrypt.profile.domain.repository.Repository
 import io.gromif.astracrypt.utils.Mapper
-import io.gromif.crypto.tink.domain.KeysetTemplates
+import io.gromif.crypto.tink.model.KeysetTemplates
 
 class RepositoryImpl(
     private val externalIconUtil: ExternalIconUtil,

@@ -2,7 +2,7 @@ package io.gromif.astracrypt.profile.data.util
 
 import android.net.Uri
 import io.gromif.astracrypt.utils.io.BitmapCompressor
-import io.gromif.crypto.tink.domain.KeysetTemplates
+import io.gromif.crypto.tink.model.KeysetTemplates
 
 class ExternalIconUtil(
     private val previewUtil: PreviewUtil,

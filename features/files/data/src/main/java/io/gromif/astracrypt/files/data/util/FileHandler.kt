@@ -5,8 +5,8 @@ import io.gromif.astracrypt.files.domain.repository.SettingsRepository
 import io.gromif.astracrypt.utils.io.Randomizer
 import io.gromif.crypto.tink.data.AssociatedDataManager
 import io.gromif.crypto.tink.data.KeysetManager
-import io.gromif.crypto.tink.domain.KeysetTemplates
 import io.gromif.crypto.tink.extensions.streamingAead
+import io.gromif.crypto.tink.model.KeysetTemplates
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.isActive
 import java.io.File

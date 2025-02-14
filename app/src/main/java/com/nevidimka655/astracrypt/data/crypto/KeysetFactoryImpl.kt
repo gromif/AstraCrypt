@@ -6,7 +6,7 @@ import com.google.crypto.tink.integration.android.AndroidKeystore
 import com.nevidimka655.astracrypt.data.datastore.KeysetDataStoreManager
 import io.gromif.crypto.tink.core.parsers.KeysetParserWithAead
 import io.gromif.crypto.tink.core.serializers.KeysetSerializerWithAead
-import io.gromif.crypto.tink.domain.keyset.KeysetFactory
+import io.gromif.crypto.tink.model.KeysetFactory
 import io.gromif.crypto.tink.model.KeysetIdUtil
 
 class KeysetFactoryImpl(

@@ -3,9 +3,9 @@ package io.gromif.astracrypt.files.data.util
 import com.google.crypto.tink.Aead
 import io.gromif.crypto.tink.data.AssociatedDataManager
 import io.gromif.crypto.tink.data.KeysetManager
-import io.gromif.crypto.tink.domain.KeysetTemplates
 import io.gromif.crypto.tink.encoders.Base64Encoder
 import io.gromif.crypto.tink.extensions.aead
+import io.gromif.crypto.tink.model.KeysetTemplates
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 

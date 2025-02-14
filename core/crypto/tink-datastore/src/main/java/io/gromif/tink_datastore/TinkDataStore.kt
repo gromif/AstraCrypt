@@ -9,12 +9,12 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import com.google.crypto.tink.Aead
 import com.google.crypto.tink.prf.PrfSet
 import io.gromif.crypto.tink.data.KeysetManager
-import io.gromif.crypto.tink.domain.KeysetTemplates
 import io.gromif.crypto.tink.encoders.Encoder
 import io.gromif.crypto.tink.extensions.aead
 import io.gromif.crypto.tink.extensions.decodeAndDecrypt
 import io.gromif.crypto.tink.extensions.encryptAndEncode
 import io.gromif.crypto.tink.extensions.prf
+import io.gromif.crypto.tink.model.KeysetTemplates
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock

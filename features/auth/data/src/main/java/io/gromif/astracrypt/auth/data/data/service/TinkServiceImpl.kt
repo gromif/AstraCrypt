@@ -5,8 +5,8 @@ import io.gromif.astracrypt.auth.domain.service.TinkService
 import io.gromif.crypto.tink.core.GetGlobalAssociatedDataPrf
 import io.gromif.crypto.tink.data.AssociatedDataManager
 import io.gromif.crypto.tink.data.KeysetManager
-import io.gromif.crypto.tink.domain.KeysetTemplates
 import io.gromif.crypto.tink.extensions.prf
+import io.gromif.crypto.tink.model.KeysetTemplates
 
 class TinkServiceImpl(
     private val keysetManager: KeysetManager,
