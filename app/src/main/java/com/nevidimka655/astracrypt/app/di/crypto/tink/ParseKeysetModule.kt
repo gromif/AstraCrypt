@@ -25,7 +25,7 @@ object ParseKeysetModule {
     @Provides
     fun provideParseKeysetByAead(
         hexEncoder: HexEncoder
-    ) = KeysetParserWithAead(hexEncoder = hexEncoder)
+    ) = KeysetParserWithAead(encoder = hexEncoder)
 
     @Singleton
     @Provides
