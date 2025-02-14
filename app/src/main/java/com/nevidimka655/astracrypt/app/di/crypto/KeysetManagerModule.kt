@@ -6,7 +6,6 @@ import androidx.datastore.preferences.core.Preferences
 import com.nevidimka655.astracrypt.app.di.datastore.KeysetDataStore
 import com.nevidimka655.astracrypt.data.crypto.DatastoreKeysetReader
 import com.nevidimka655.astracrypt.data.crypto.DatastoreKeysetWriter
-import com.nevidimka655.astracrypt.data.crypto.KeysetFactoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,6 +20,7 @@ import io.gromif.crypto.tink.core.serializers.KeysetSerializerWithAead
 import io.gromif.crypto.tink.core.utils.DefaultKeysetIdUtil
 import io.gromif.crypto.tink.core.utils.DefaultKeystoreKeysetIdUtil
 import io.gromif.crypto.tink.data.AssociatedDataManager
+import io.gromif.crypto.tink.data.DefaultKeysetFactory
 import io.gromif.crypto.tink.data.KeysetManager
 import java.io.File
 import javax.inject.Singleton
@@ -32,10 +32,10 @@ object KeysetManagerModule {
     @Singleton
     @Provides
     fun provideKeysetManager(
-        keysetFactoryImpl: KeysetFactoryImpl,
+        defaultKeysetFactory: DefaultKeysetFactory,
         associatedDataManager: AssociatedDataManager
     ) = KeysetManager(
-        keysetFactory = keysetFactoryImpl,
+        keysetFactory = defaultKeysetFactory,
         associatedDataManager = associatedDataManager
     )
 
@@ -65,7 +65,7 @@ object KeysetManagerModule {
         keysetParserWithAead: KeysetParserWithAead,
         prefsKeysetIdUtil: DefaultKeysetIdUtil,
         masterKeysetIdUtil: DefaultKeystoreKeysetIdUtil,
-    ) = KeysetFactoryImpl(
+    ) = DefaultKeysetFactory(
         keysetReader = datastoreKeysetReader,
         keysetWriter = datastoreKeysetWriter,
         keysetSerializerWithAead = keysetSerializerWithAead,
