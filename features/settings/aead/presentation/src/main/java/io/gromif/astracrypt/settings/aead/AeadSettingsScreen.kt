@@ -14,20 +14,10 @@ fun AeadSettingsScreen() {
     val noEncryptionOptionText = stringResource(R.string.withoutEncryption)
     val baseOptionsList = remember { listOf(noEncryptionOptionText) }
 
-    val aeadTemplatesList = remember {
-        baseOptionsList + vm.aeadTemplateList.map { it.name }
-    }
-    val aeadLargeStreamTemplateList = remember {
-        baseOptionsList + vm.aeadLargeStreamTemplateList.map { it.name }
-    }
-    val aeadSmallStreamTemplateList = remember {
-        baseOptionsList + vm.aeadSmallStreamTemplateList.map { it.name }
-    }
 
-    val notesAeadNameState by vm.notesAeadNameState.collectAsStateWithLifecycle()
     val settingsAeadNameState by vm.settingsAeadNameState.collectAsStateWithLifecycle()
 
-    Screen(
+    /*Screen(
         aeadTemplatesList = aeadTemplatesList,
         aeadLargeStreamTemplateList = aeadLargeStreamTemplateList,
         aeadSmallStreamTemplateList = aeadSmallStreamTemplateList,
@@ -47,5 +37,5 @@ fun AeadSettingsScreen() {
             val aeadId = vm.aeadTemplateList[aeadIndex].id
             vm.setSettingsAead(id = aeadId)
         }
-    )
+    )*/
 }

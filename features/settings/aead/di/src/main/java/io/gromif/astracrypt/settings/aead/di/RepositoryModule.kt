@@ -20,10 +20,8 @@ internal object RepositoryModule {
     @ViewModelScoped
     fun provideRepository(
         settingsRepository: SettingsRepository,
-        notesSettingsRepository: NotesSettingsRepository
     ): Repository = RepositoryImpl(
         settingsRepository = settingsRepository,
-        notesSettingsRepository = notesSettingsRepository
     )
 
     @Provides
@@ -33,5 +31,3 @@ internal object RepositoryModule {
     ): SettingsRepository = SettingsRepositoryImpl(dataStore = dataStore)
 
 }
-
-typealias NotesSettingsRepository = com.nevidimka655.domain.notes.repository.SettingsRepository

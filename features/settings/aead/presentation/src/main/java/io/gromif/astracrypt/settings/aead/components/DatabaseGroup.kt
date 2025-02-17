@@ -4,7 +4,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.ui.compose_core.PreferencesGroup
-import io.gromif.astracrypt.settings.aead.components.database.Notes
 
 @Composable
 internal fun DatabaseGroup(
@@ -65,9 +64,4 @@ internal fun DatabaseGroup(
     ) {
         findNavController().navigate(R.id.action_encryptionFragment_to_databaseColumnsFragment)
     }*/
-    Notes(
-        aeadTemplatesList = aeadTemplatesList,
-        notesAeadName = notesAeadName,
-        onNotesAeadChange = onNotesAeadChange
-    )
 }
