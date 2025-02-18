@@ -47,13 +47,13 @@ class AeadHandler(
 
     private suspend fun AeadInfo.decryptIfNeeded(state: Boolean, data: String?): String? {
         return data?.let {
-            if (state) aeadUtil.decrypt(aeadIndex = databaseAeadIndex, data) else data
+            if (state) aeadUtil.decrypt(aeadIndex = databaseMode, data) else data
         }
     }
 
     private suspend fun AeadInfo.encryptIfNeeded(state: Boolean, data: String?): String? {
         return data?.let {
-            if (state) aeadUtil.encrypt(aeadIndex = databaseAeadIndex, data) else data
+            if (state) aeadUtil.encrypt(aeadIndex = databaseMode, data) else data
         }
     }
 

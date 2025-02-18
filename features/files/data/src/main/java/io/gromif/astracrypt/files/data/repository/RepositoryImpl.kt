@@ -72,9 +72,9 @@ class RepositoryImpl(
             state = itemState,
             type = itemType,
             file = file,
-            fileAead = aeadInfo.fileAeadIndex,
+            fileAead = aeadInfo.fileMode,
             preview = preview,
-            previewAead = aeadInfo.previewAeadIndex,
+            previewAead = aeadInfo.previewMode,
             flags = flags,
             time = time,
             size = size

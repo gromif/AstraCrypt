@@ -7,9 +7,9 @@ import io.gromif.astracrypt.utils.Mapper
 class AeadInfoDtoMapper: Mapper<AeadInfo, AeadInfoDto> {
     override fun invoke(item: AeadInfo): AeadInfoDto {
         return AeadInfoDto(
-            fileAeadIndex = item.fileAeadIndex,
-            previewAeadIndex = item.previewAeadIndex,
-            databaseAeadIndex = item.databaseAeadIndex,
+            fileAeadIndex = item.fileMode,
+            previewAeadIndex = item.previewMode,
+            databaseAeadIndex = item.databaseMode,
             isNameColumnEncrypted = item.name,
             isPreviewColumnEncrypted = item.preview,
             isPathColumnEncrypted = item.file,
@@ -21,9 +21,9 @@ class AeadInfoDtoMapper: Mapper<AeadInfo, AeadInfoDto> {
 class AeadInfoMapper: Mapper<AeadInfoDto, AeadInfo> {
     override fun invoke(item: AeadInfoDto): AeadInfo {
         return AeadInfo(
-            fileAeadIndex = item.fileAeadIndex,
-            previewAeadIndex = item.previewAeadIndex,
-            databaseAeadIndex = item.databaseAeadIndex,
+            fileMode = item.fileAeadIndex,
+            previewMode = item.previewAeadIndex,
+            databaseMode = item.databaseAeadIndex,
             db = item.databaseAeadIndex != -1,
             name = item.isNameColumnEncrypted,
             preview = item.isPreviewColumnEncrypted,
