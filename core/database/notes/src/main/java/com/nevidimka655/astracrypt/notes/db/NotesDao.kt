@@ -27,8 +27,8 @@ interface NotesDao {
     suspend fun updateTransform(transformTuple: TransformNotesTuple)
 
     @RewriteQueriesToDropUnusedColumns
-    @Query("select * from notes limit :pageSize offset :pageIndex * :pageSize")
-    suspend fun getTransformItems(pageSize: Int, pageIndex: Int): List<TransformNotesTuple>
+    @Query("select * from notes limit :pageSize offset (:pageOffset * :pageSize)")
+    suspend fun getTransformItems(pageSize: Int, pageOffset: Int): List<TransformNotesTuple>
 
     @Query("select * from notes order by id desc")
     fun listOrderDescAsc(): PagingSource<Int, NoteItemEntity>
