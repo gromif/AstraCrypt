@@ -54,7 +54,7 @@ interface FilesDao {
     suspend fun setStarred(id: Long, state: Int)
 
     @Update(entity = FilesEntity::class)
-    suspend fun updateDbEntry(updateAeadTuple: UpdateAeadTuple)
+    suspend fun updateAead(updateAeadTuple: UpdateAeadTuple)
 
     @RewriteQueriesToDropUnusedColumns
     @Query("select * from store_items where id = :id")
@@ -62,7 +62,7 @@ interface FilesDao {
 
     @RewriteQueriesToDropUnusedColumns
     @Query("select * from store_items limit :pageSize offset :pageIndex * :pageSize")
-    suspend fun getDatabaseTransformItems(
+    suspend fun getUpdateAeadTupleList(
         pageSize: Int,
         pageIndex: Int
     ): List<UpdateAeadTuple>
