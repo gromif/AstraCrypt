@@ -6,11 +6,11 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.RewriteQueriesToDropUnusedColumns
 import androidx.room.Update
-import io.gromif.astracrypt.files.data.db.tuples.DatabaseTransformTuple
 import io.gromif.astracrypt.files.data.db.tuples.DeleteTuple
 import io.gromif.astracrypt.files.data.db.tuples.DetailsTuple
 import io.gromif.astracrypt.files.data.db.tuples.ExportTuple
 import io.gromif.astracrypt.files.data.db.tuples.PagerTuple
+import io.gromif.astracrypt.files.data.db.tuples.UpdateAeadTuple
 import io.gromif.astracrypt.files.domain.model.ItemType
 import kotlinx.coroutines.flow.Flow
 
@@ -54,7 +54,7 @@ interface FilesDao {
     suspend fun setStarred(id: Long, state: Int)
 
     @Update(entity = FilesEntity::class)
-    suspend fun updateDbEntry(databaseTransformTuple: DatabaseTransformTuple)
+    suspend fun updateDbEntry(updateAeadTuple: UpdateAeadTuple)
 
     @RewriteQueriesToDropUnusedColumns
     @Query("select * from store_items where id = :id")
@@ -65,7 +65,7 @@ interface FilesDao {
     suspend fun getDatabaseTransformItems(
         pageSize: Int,
         pageIndex: Int
-    ): List<DatabaseTransformTuple>
+    ): List<UpdateAeadTuple>
 
     @RewriteQueriesToDropUnusedColumns
     @Query("select * from store_items order by id desc limit 10")
