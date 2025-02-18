@@ -8,6 +8,7 @@ import androidx.paging.map
 import io.gromif.astracrypt.files.data.db.FilesDao
 import io.gromif.astracrypt.files.data.db.tuples.PagerTuple
 import io.gromif.astracrypt.files.data.util.AeadHandler
+import io.gromif.astracrypt.files.domain.model.AeadMode
 import io.gromif.astracrypt.files.domain.model.FileSource
 import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.domain.model.ItemState
@@ -56,8 +57,9 @@ class PagingProviderImpl(
         ).flow.map { pd ->
             val aeadInfo = settingsRepository.getAeadInfo()
             pd.map { pagerTuple ->
-                val pagerTuple = if (aeadInfo.db) {
-                    aeadHandler.decryptPagerTuple(aeadInfo, pagerTuple)
+                val databaseMode = aeadInfo.databaseMode
+                if (databaseMode is AeadMode.Template) {
+                    aeadHandler.decryptPagerTuple(aeadInfo, databaseMode, pagerTuple)
                 } else pagerTuple
                 Item(
                     id = pagerTuple.id,

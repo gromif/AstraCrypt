@@ -8,6 +8,7 @@ import io.gromif.astracrypt.files.data.util.AeadHandler
 import io.gromif.astracrypt.files.data.util.ExportUtil
 import io.gromif.astracrypt.files.data.util.FileHandler
 import io.gromif.astracrypt.files.domain.model.AeadInfo
+import io.gromif.astracrypt.files.domain.model.AeadMode
 import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.domain.model.ItemDetails
 import io.gromif.astracrypt.files.domain.model.ItemState
@@ -31,7 +32,10 @@ class RepositoryImpl(
 
     override suspend fun get(aeadInfo: AeadInfo, id: Long): Item {
         var filesEntity = filesDao.get(id).let {
-            if (aeadInfo.db) aeadHandler.decryptFilesEntity(aeadInfo, it) else it
+            val databaseMode = aeadInfo.databaseMode
+            if (databaseMode is AeadMode.Template) {
+                aeadHandler.decryptFilesEntity(aeadInfo, databaseMode, it)
+            } else it
         }
         return itemMapper(filesEntity)
     }
@@ -72,24 +76,30 @@ class RepositoryImpl(
             state = itemState,
             type = itemType,
             file = file,
-            fileAead = aeadInfo.fileMode,
+            fileAead = aeadInfo.fileMode.id,
             preview = preview,
-            previewAead = aeadInfo.previewMode,
+            previewAead = aeadInfo.previewMode.id,
             flags = flags,
             time = time,
             size = size
         ).let {
-            if (aeadInfo.db) aeadHandler.encryptFilesEntity(aeadInfo, it) else it
+            val databaseMode = aeadInfo.databaseMode
+            if (databaseMode is AeadMode.Template) {
+                aeadHandler.encryptFilesEntity(aeadInfo, databaseMode, it)
+            } else it
         }
         filesDao.insert(filesEntity)
     }
 
     override suspend fun delete(aeadInfo: AeadInfo, id: Long) {
+        val databaseMode = aeadInfo.databaseMode
         val deque = ArrayDeque<Long>().also { it.add(id) }
         while (deque.isNotEmpty()) {
             val currentId = deque.removeFirst()
             val (id, file, preview) = filesDao.getDeleteData(currentId).let {
-                if (aeadInfo.db) aeadHandler.decryptDeleteTuple(aeadInfo, it) else it
+                if (databaseMode is AeadMode.Template) {
+                    aeadHandler.decryptDeleteTuple(aeadInfo, databaseMode, it)
+                } else it
             }
             filesDao.delete(id)
             if (file != null) with(fileHandler) {
@@ -109,7 +119,11 @@ class RepositoryImpl(
         id: Long,
         name: String
     ) {
-        val name = if (aeadInfo.db) aeadHandler.encryptNameIfNeeded(aeadInfo, name) else name
+        val databaseMode = aeadInfo.databaseMode
+
+        val name = if (databaseMode is AeadMode.Template) {
+            aeadHandler.encryptNameIfNeeded(aeadInfo, databaseMode, name)
+        } else name
         filesDao.rename(id, name)
     }
 
@@ -137,8 +151,13 @@ class RepositoryImpl(
     }
 
     override suspend fun getItemDetails(aeadInfo: AeadInfo, id: Long): ItemDetails {
-        var dto = filesDao.getDetailsById(id).let {
-            if (aeadInfo.db) aeadHandler.decryptDetailsTuple(aeadInfo, it) else it
+        val databaseMode = aeadInfo.databaseMode
+
+        val dto = filesDao.getDetailsById(id).let {
+            when (databaseMode) {
+                AeadMode.None -> it
+                is AeadMode.Template -> aeadHandler.decryptDetailsTuple(aeadInfo, databaseMode, it)
+            }
         }
         val itemDetails: ItemDetails
         when (dto.type) {

@@ -93,7 +93,7 @@ class FileHandler(
     private var cachedFileStreamingAead: StreamingAead? = null
     suspend fun getFileStreamingAead(aeadIndex: Int? = null): StreamingAead? {
         return cachedFileStreamingAead ?: run {
-            val aeadIndex = aeadIndex ?: settingsRepository.getAeadInfo().fileMode
+            val aeadIndex = aeadIndex ?: settingsRepository.getAeadInfo().fileMode.id
             KeysetTemplates.Stream.entries.getOrNull(aeadIndex)?.let {
                 keysetManager.getKeyset(tag = "import_file", keyParams = it.params)
                     .streamingAead()
@@ -104,7 +104,7 @@ class FileHandler(
     private var cachedPreviewStreamingAead: StreamingAead? = null
     suspend fun getPreviewStreamingAead(): StreamingAead? {
         return cachedPreviewStreamingAead ?: run {
-            val aeadIndex = settingsRepository.getAeadInfo().previewMode
+            val aeadIndex = settingsRepository.getAeadInfo().previewMode.id
             KeysetTemplates.Stream.entries.getOrNull(aeadIndex)?.let {
                 keysetManager.getKeyset(tag = "import_preview", keyParams = it.params)
                     .streamingAead()
