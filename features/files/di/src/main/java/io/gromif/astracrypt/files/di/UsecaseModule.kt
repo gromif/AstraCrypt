@@ -9,6 +9,7 @@ import io.gromif.astracrypt.files.domain.repository.Repository
 import io.gromif.astracrypt.files.domain.repository.SettingsRepository
 import io.gromif.astracrypt.files.domain.usecase.CreateFolderUseCase
 import io.gromif.astracrypt.files.domain.usecase.DeleteUseCase
+import io.gromif.astracrypt.files.domain.usecase.GetAeadInfoFlowUseCase
 import io.gromif.astracrypt.files.domain.usecase.GetItemDetailsUseCase
 import io.gromif.astracrypt.files.domain.usecase.GetListViewModeUseCase
 import io.gromif.astracrypt.files.domain.usecase.GetRecentItemsUseCase
@@ -69,5 +70,11 @@ internal object UsecaseModule {
         repository: Repository,
         settingsRepository: SettingsRepository,
     ): GetItemDetailsUseCase = GetItemDetailsUseCase(repository, settingsRepository)
+
+
+    @Provides
+    fun provideGetAeadInfoFlowUseCase(
+        settingsRepository: SettingsRepository
+    ): GetAeadInfoFlowUseCase = GetAeadInfoFlowUseCase(settingsRepository)
 
 }
