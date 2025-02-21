@@ -38,7 +38,6 @@ class AeadInfoMapper: Mapper<AeadInfoDto, AeadInfo> {
             fileMode = fileMode,
             previewMode = previewMode,
             databaseMode = databaseMode,
-            db = databaseMode is AeadMode.Template,
             name = item.isNameColumnEncrypted,
             preview = item.isPreviewColumnEncrypted,
             file = item.isPathColumnEncrypted,
