@@ -8,9 +8,9 @@ import io.gromif.crypto.tink.model.KeysetTemplates
 
 class AeadInfoDtoMapper: Mapper<AeadInfo, AeadInfoDto> {
     override fun invoke(item: AeadInfo): AeadInfoDto {
-        val fileAeadIndex = parseAeadIndex(item.fileMode)
-        val previewAeadIndex = parseAeadIndex(item.previewMode)
-        val databaseAeadIndex = parseAeadIndex(item.databaseMode)
+        val fileAeadIndex = item.fileMode.id
+        val previewAeadIndex = item.previewMode.id
+        val databaseAeadIndex = item.databaseMode.id
         return AeadInfoDto(
             fileAeadIndex = fileAeadIndex,
             previewAeadIndex = previewAeadIndex,
@@ -21,12 +21,6 @@ class AeadInfoDtoMapper: Mapper<AeadInfo, AeadInfoDto> {
             isFlagColumnEncrypted = item.flag
         )
     }
-
-    private fun parseAeadIndex(aeadMode: AeadMode): Int = when(aeadMode) {
-        AeadMode.None -> -1
-        is AeadMode.Template -> aeadMode.id
-    }
-
 }
 
 class AeadInfoMapper: Mapper<AeadInfoDto, AeadInfo> {
