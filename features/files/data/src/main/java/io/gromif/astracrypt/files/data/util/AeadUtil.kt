@@ -4,6 +4,8 @@ import com.google.crypto.tink.Aead
 import io.gromif.crypto.tink.core.encoders.Base64Encoder
 import io.gromif.crypto.tink.data.AeadManager
 import io.gromif.crypto.tink.data.AssociatedDataManager
+import io.gromif.crypto.tink.extensions.decodeAndDecrypt
+import io.gromif.crypto.tink.extensions.encryptAndEncode
 import io.gromif.crypto.tink.model.KeysetTemplates
 
 class AeadUtil(
@@ -14,22 +16,21 @@ class AeadUtil(
     private var cachedAead: Pair<Int, Aead>? = null
 
     suspend fun decrypt(aeadIndex: Int, data: String): String {
-        val encryptedBytes = base64Encoder.decode(data)
         val aead = getAead(aeadIndex = aeadIndex)
-        val decryptedBytes = aead.decrypt(
-            /* ciphertext = */ encryptedBytes,
-            /* associatedData = */ associatedDataManager.getAssociatedData()
+        return aead.decodeAndDecrypt(
+            value = data,
+            associatedData = associatedDataManager.getAssociatedData(),
+            encoder = base64Encoder
         )
-        return decryptedBytes.decodeToString()
     }
 
     suspend fun encrypt(aeadIndex: Int, data: String): String {
         val aead = getAead(aeadIndex = aeadIndex)
-        val encryptedBytes = aead.encrypt(
-            /* plaintext = */ data.toByteArray(),
-            /* associatedData = */ associatedDataManager.getAssociatedData()
+        return aead.encryptAndEncode(
+            value = data,
+            associatedData = associatedDataManager.getAssociatedData(),
+            encoder = base64Encoder
         )
-        return base64Encoder.encode(encryptedBytes)
     }
 
     private suspend fun getAead(aeadIndex: Int): Aead {
