@@ -19,7 +19,7 @@ class ItemDetailsMapper(
         }
         val file = FileSource(item.file!!, item.fileAead)
         val preview = item.preview?.let {
-            FileSource(it, item.fileAead)
+            FileSource(it, item.previewAead)
         }
         return ItemDetails.File(
             name = item.name,
