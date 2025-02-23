@@ -1,11 +1,11 @@
 package io.gromif.astracrypt.files.data.util
 
 import com.google.crypto.tink.StreamingAead
+import com.google.crypto.tink.streamingaead.StreamingAeadParameters
 import io.gromif.astracrypt.files.domain.repository.SettingsRepository
 import io.gromif.astracrypt.utils.io.Randomizer
+import io.gromif.crypto.tink.data.AeadManager
 import io.gromif.crypto.tink.data.AssociatedDataManager
-import io.gromif.crypto.tink.data.KeysetManager
-import io.gromif.crypto.tink.extensions.streamingAead
 import io.gromif.crypto.tink.model.KeysetTemplates
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.isActive
@@ -14,7 +14,7 @@ import java.io.InputStream
 import java.io.OutputStream
 
 class FileHandler(
-    private val keysetManager: KeysetManager,
+    private val aeadManager: AeadManager,
     private val associatedDataManager: AssociatedDataManager,
     private val settingsRepository: SettingsRepository,
     private val randomizer: Randomizer,
@@ -90,26 +90,21 @@ class FileHandler(
         aead.newDecryptingStream(inputStream, associatedDataManager.getAssociatedData())
     } else inputStream
 
-    private var cachedFileStreamingAead: StreamingAead? = null
-    suspend fun getFileStreamingAead(aeadIndex: Int? = null): StreamingAead? {
-        return cachedFileStreamingAead ?: run {
-            val aeadIndex = aeadIndex ?: settingsRepository.getAeadInfo().fileMode.id
-            KeysetTemplates.Stream.entries.getOrNull(aeadIndex)?.let {
-                keysetManager.getKeyset(tag = "import_file", keyParams = it.params)
-                    .streamingAead()
-            }.also { cachedFileStreamingAead = it }
+    private suspend fun getFileStreamingAead(aeadIndex: Int? = null): StreamingAead? {
+        val aeadIndex = aeadIndex ?: settingsRepository.getAeadInfo().fileMode.id
+        return KeysetTemplates.Stream.entries.getOrNull(aeadIndex)?.let {
+            aeadManager.streamingAead(tag = TAG_KEYSET_FILE, keyParams = it.params)
         }
     }
 
-    private var cachedPreviewStreamingAead: StreamingAead? = null
-    suspend fun getPreviewStreamingAead(): StreamingAead? {
-        return cachedPreviewStreamingAead ?: run {
-            val aeadIndex = settingsRepository.getAeadInfo().previewMode.id
-            KeysetTemplates.Stream.entries.getOrNull(aeadIndex)?.let {
-                keysetManager.getKeyset(tag = "import_preview", keyParams = it.params)
-                    .streamingAead()
-            }.also { cachedPreviewStreamingAead = it }
+    private suspend fun getPreviewStreamingAead(): StreamingAead? {
+        val aeadIndex = settingsRepository.getAeadInfo().previewMode.id
+        return KeysetTemplates.Stream.entries.getOrNull(aeadIndex)?.let {
+            getPreviewStreamingAead(parameters = it.params)
         }
+    }
+    suspend fun getPreviewStreamingAead(parameters: StreamingAeadParameters): StreamingAead {
+        return aeadManager.streamingAead(tag = TAG_KEYSET_PREVIEW, keyParams = parameters)
     }
 
     private fun getRandomFileName(): String = randomizer.generateUrlSafeString(6)
@@ -123,3 +118,6 @@ class FileHandler(
     }
 
 }
+
+private const val TAG_KEYSET_FILE = "import_file"
+private const val TAG_KEYSET_PREVIEW = "import_preview"

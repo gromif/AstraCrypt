@@ -30,8 +30,8 @@ import io.gromif.astracrypt.utils.Mapper
 import io.gromif.astracrypt.utils.Serializer
 import io.gromif.astracrypt.utils.io.BitmapCompressor
 import io.gromif.astracrypt.utils.io.Randomizer
+import io.gromif.crypto.tink.data.AeadManager
 import io.gromif.crypto.tink.data.AssociatedDataManager
-import io.gromif.crypto.tink.data.KeysetManager
 import javax.inject.Qualifier
 
 @Module
@@ -41,12 +41,12 @@ internal object UtilModule {
     @Provides
     fun provideFileHandler(
         @ApplicationContext context: Context,
-        keysetManager: KeysetManager,
+        aeadManager: AeadManager,
         associatedDataManager: AssociatedDataManager,
         settingsRepository: SettingsRepository,
         randomizer: Randomizer
     ): FileHandler = FileHandler(
-        keysetManager = keysetManager,
+        aeadManager = aeadManager,
         associatedDataManager = associatedDataManager,
         settingsRepository = settingsRepository,
         randomizer = randomizer,
