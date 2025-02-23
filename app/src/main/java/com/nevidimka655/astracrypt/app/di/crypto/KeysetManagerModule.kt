@@ -19,6 +19,7 @@ import io.gromif.crypto.tink.core.parsers.KeysetParserWithAead
 import io.gromif.crypto.tink.core.serializers.KeysetSerializerWithAead
 import io.gromif.crypto.tink.core.utils.DefaultKeysetIdUtil
 import io.gromif.crypto.tink.core.utils.DefaultKeystoreKeysetIdUtil
+import io.gromif.crypto.tink.data.AeadManager
 import io.gromif.crypto.tink.data.AssociatedDataManager
 import io.gromif.crypto.tink.data.DefaultKeysetFactory
 import io.gromif.crypto.tink.data.KeysetManager
@@ -31,9 +32,14 @@ object KeysetManagerModule {
 
     @Singleton
     @Provides
+    fun provideAeadManager(keysetManager: KeysetManager) =
+        AeadManager(keysetManager = keysetManager)
+
+    @Singleton
+    @Provides
     fun provideKeysetManager(
         defaultKeysetFactory: DefaultKeysetFactory,
-        associatedDataManager: AssociatedDataManager
+        associatedDataManager: AssociatedDataManager,
     ) = KeysetManager(
         keysetFactory = defaultKeysetFactory,
         associatedDataManager = associatedDataManager
@@ -42,7 +48,7 @@ object KeysetManagerModule {
     @Singleton
     @Provides
     fun provideAssociatedDataManager(
-        @ApplicationContext context: Context
+        @ApplicationContext context: Context,
     ): AssociatedDataManager = AssociatedDataManager(
         associatedDataFile = File("${context.filesDir}/grapefruit.ss0")
     )
@@ -50,7 +56,7 @@ object KeysetManagerModule {
     @Singleton
     @Provides
     fun provideGetGlobalAssociatedDataPrf(
-        keysetManager: KeysetManager
+        keysetManager: KeysetManager,
     ): GetGlobalAssociatedDataPrf = GetGlobalAssociatedDataPrf(
         keysetManager = keysetManager
     )
@@ -77,27 +83,27 @@ object KeysetManagerModule {
     @Singleton
     @Provides
     fun provideDatastoreKeysetReader(
-        @KeysetDataStore dataStore: DataStore<Preferences>
+        @KeysetDataStore dataStore: DataStore<Preferences>,
     ) = DatastoreKeysetReader(dataStore = dataStore)
 
     @Singleton
     @Provides
     fun provideDatastoreKeysetWriter(
-        @KeysetDataStore dataStore: DataStore<Preferences>
+        @KeysetDataStore dataStore: DataStore<Preferences>,
     ) = DatastoreKeysetWriter(dataStore = dataStore)
 
     @Singleton
     @Provides
     fun provideDefaultKeystoreKeysetIdUtil(
         hexEncoder: HexEncoder,
-        sha256Util: Sha256Util
+        sha256Util: Sha256Util,
     ) = DefaultKeystoreKeysetIdUtil(encoder = hexEncoder, hashUtil = sha256Util)
 
     @Singleton
     @Provides
     fun provideDefaultKeysetIdUtil(
         hexEncoder: HexEncoder,
-        sha384Util: Sha384Util
+        sha384Util: Sha384Util,
     ) = DefaultKeysetIdUtil(encoder = hexEncoder, hashUtil = sha384Util)
 
 }
