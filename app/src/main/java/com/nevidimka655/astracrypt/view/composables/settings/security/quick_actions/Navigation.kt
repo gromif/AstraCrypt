@@ -7,6 +7,7 @@ import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 import io.gromif.astracrypt.presentation.navigation.Route
 import io.gromif.astracrypt.presentation.navigation.models.UiState
+import io.gromif.astracrypt.presentation.navigation.shared.UiStateHandler
 
 private val SettingsSecurityQuickActionsUiState = UiState(
     toolbar = UiState.Toolbar(
@@ -17,7 +18,7 @@ private val SettingsSecurityQuickActionsUiState = UiState(
 fun NavGraphBuilder.settingsSecurityQuickActions(
     onUiStateChange: (UiState) -> Unit
 ) = composable<Route.SettingsSecurityQuickActions> {
-    onUiStateChange(SettingsSecurityQuickActionsUiState)
+    UiStateHandler { onUiStateChange(SettingsSecurityQuickActionsUiState) }
     val vm: SettingsQuickActionsViewModel = hiltViewModel()
     /*var quickDataDeletion by remember { mutableStateOf(vm.quickDataDeletion) }
 

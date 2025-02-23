@@ -6,6 +6,7 @@ import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 import io.gromif.astracrypt.presentation.navigation.Route
 import io.gromif.astracrypt.presentation.navigation.models.UiState
+import io.gromif.astracrypt.presentation.navigation.shared.UiStateHandler
 import io.gromif.astracrypt.utils.Api
 
 private val SettingsSecurityUiState = UiState(
@@ -21,7 +22,7 @@ fun NavGraphBuilder.settingsSecurity(
     navigateToDeviceAdmin: () -> Unit,
     navigateToQuickActions: () -> Unit
 ) = composable<Route.SettingsSecurity> {
-    onUiStateChange(SettingsSecurityUiState)
+    UiStateHandler { onUiStateChange(SettingsSecurityUiState) }
     SettingsSecurityScreen(
         isActionsSupported = Api.atLeast7(),
         navigateToEncryption = navigateToAead,
