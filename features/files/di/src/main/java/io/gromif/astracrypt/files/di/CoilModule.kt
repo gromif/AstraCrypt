@@ -13,7 +13,6 @@ import dagger.hilt.components.SingletonComponent
 import io.gromif.astracrypt.files.data.util.FileHandler
 import io.gromif.astracrypt.files.data.util.coil.TinkCoilFetcherFactory
 import io.gromif.crypto.tink.data.AssociatedDataManager
-import io.gromif.crypto.tink.data.KeysetManager
 import javax.inject.Qualifier
 import javax.inject.Singleton
 
@@ -41,11 +40,9 @@ internal object CoilModule {
     fun provideTinkCoilFetcherFactory(
         @ApplicationContext context: Context,
         fileHandler: FileHandler,
-        keysetManager: KeysetManager,
         associatedDataManager: AssociatedDataManager,
     ): TinkCoilFetcherFactory = TinkCoilFetcherFactory(
         fileHandler = fileHandler,
-        keysetManager = keysetManager,
         associatedDataManager = associatedDataManager,
         cacheDir = context.cacheDir
     )
