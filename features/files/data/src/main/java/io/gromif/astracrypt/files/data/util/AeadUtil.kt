@@ -2,13 +2,12 @@ package io.gromif.astracrypt.files.data.util
 
 import com.google.crypto.tink.Aead
 import io.gromif.crypto.tink.core.encoders.Base64Encoder
+import io.gromif.crypto.tink.data.AeadManager
 import io.gromif.crypto.tink.data.AssociatedDataManager
-import io.gromif.crypto.tink.data.KeysetManager
-import io.gromif.crypto.tink.extensions.aead
 import io.gromif.crypto.tink.model.KeysetTemplates
 
 class AeadUtil(
-    private val keysetManager: KeysetManager,
+    private val aeadManager: AeadManager,
     private val associatedDataManager: AssociatedDataManager,
     private val base64Encoder: Base64Encoder
 ) {
@@ -38,10 +37,10 @@ class AeadUtil(
 
         return if (currentCachedAead != null && currentCachedAead.first == aeadIndex) {
             currentCachedAead.second
-        } else keysetManager.getKeyset(
+        } else aeadManager.aead(
             tag = TAG_KEYSET,
             keyParams = KeysetTemplates.AEAD.entries[aeadIndex].params
-        ).aead().also {
+        ).also {
             cachedAead = Pair(aeadIndex, it)
         }
     }
