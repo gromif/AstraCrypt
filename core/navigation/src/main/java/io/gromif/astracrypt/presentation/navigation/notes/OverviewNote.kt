@@ -47,10 +47,7 @@ internal fun NavGraphBuilder.overviewNote(
     var text by remember { mutableStateOf("") }
 
     val newName = remember(name) { if (name.length > 16) name.take(16) + "…" else name }
-    val fabState = remember(name, text) {
-        if (name.isNotBlank() || text.isNotBlank()) SaveFabUiState else null
-    }
-    UiStateHandler {
+    UiStateHandler(name, text) {
         val newState = UiState(
             toolbar = UiState.Toolbar(
                 title = if (newName.isBlank() && !editMode) {
@@ -58,7 +55,7 @@ internal fun NavGraphBuilder.overviewNote(
                 } else TextWrap.Text(text = newName),
                 actions = if (editMode) listOf(ToolbarActions.delete) else null
             ),
-            fab = fabState
+            fab = if (name.isNotBlank() || text.isNotBlank()) SaveFabUiState else null
         )
         onUiStateChange(newState)
     }
