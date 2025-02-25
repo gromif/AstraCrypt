@@ -4,7 +4,7 @@ plugins {
     `kotlin-dsl`
 }
 
-group = "com.nevidimka655.buildlogic"
+group = "io.gromif.buildlogic"
 
 kotlin {
     jvmToolchain(21)
@@ -79,6 +79,6 @@ gradlePlugin {
 private inline fun NamedDomainObjectContainer<PluginDeclaration>.flavors() {
     register("flavorMarket") {
         id = "astracrypt.flavor.market"
-        implementationClass = "com.nevidimka655.buildlogic.flavor.FlavorMarketConventionPlugin"
+        implementationClass = "io.gromif.buildlogic.flavor.FlavorMarketConventionPlugin"
     }
 }

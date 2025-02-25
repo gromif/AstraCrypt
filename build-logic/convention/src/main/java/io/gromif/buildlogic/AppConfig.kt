@@ -1,4 +1,4 @@
-package com.nevidimka655.buildlogic
+package io.gromif.buildlogic
 
 internal object AppConfig {
 

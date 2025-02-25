@@ -1,10 +1,10 @@
 @file:Suppress("ClassName", "SpellCheckingInspection")
 
-package com.nevidimka655.buildlogic.flavor
+package io.gromif.buildlogic.flavor
 
 import com.android.build.api.dsl.CommonExtension
 import com.android.build.api.dsl.LibraryExtension
-import com.nevidimka655.buildlogic.Flavor
+import io.gromif.buildlogic.Flavor
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure

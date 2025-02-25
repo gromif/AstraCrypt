@@ -1,7 +1,7 @@
 import com.android.build.gradle.LibraryExtension
-import com.nevidimka655.buildlogic.AppConfig
-import com.nevidimka655.buildlogic.configureDefaultConfig
-import com.nevidimka655.buildlogic.configureKotlinAndroid
+import io.gromif.buildlogic.AppConfig
+import io.gromif.buildlogic.configureDefaultConfig
+import io.gromif.buildlogic.configureKotlinAndroid
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure

@@ -1,4 +1,4 @@
-import com.nevidimka655.buildlogic.libs
+import io.gromif.buildlogic.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies

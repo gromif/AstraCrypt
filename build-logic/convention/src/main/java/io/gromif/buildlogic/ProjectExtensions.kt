@@ -1,8 +1,8 @@
-package com.nevidimka655.buildlogic
+package io.gromif.buildlogic
 
 import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.dsl.CommonExtension
-import com.nevidimka655.buildlogic.flavor.createMarket
+import io.gromif.buildlogic.flavor.createMarket
 import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalog
 import org.gradle.api.artifacts.VersionCatalogsExtension

@@ -1,8 +1,8 @@
 
 import com.android.build.api.dsl.LibraryExtension
-import com.nevidimka655.buildlogic.configureComposeMetrics
-import com.nevidimka655.buildlogic.configureComposeStabilityConfig
-import com.nevidimka655.buildlogic.libs
+import io.gromif.buildlogic.configureComposeMetrics
+import io.gromif.buildlogic.configureComposeStabilityConfig
+import io.gromif.buildlogic.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
