@@ -108,7 +108,7 @@ class RepositoryImpl(
                 getFilePath(relativePath = file).delete()
                 if (preview != null) getFilePath(relativePath = preview).delete()
             } else {
-                val innerIdList = filesDao.getIdList(parent = id, typeFilter = ItemType.Folder)
+                val innerIdList = filesDao.getIdList(parent = id)
                 deque.addAll(innerIdList)
             }
         }
