@@ -45,7 +45,7 @@ interface Repository {
 
     suspend fun exportPrivately(id: Long): String?
 
-    fun getRecentFilesList(): Flow<List<Item>>
+    suspend fun getRecentFilesList(aeadInfo: AeadInfo): Flow<List<Item>>
 
     suspend fun getItemDetails(aeadInfo: AeadInfo, id: Long): ItemDetails
 

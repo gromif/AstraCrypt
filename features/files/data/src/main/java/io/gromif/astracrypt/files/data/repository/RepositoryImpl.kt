@@ -146,9 +146,13 @@ class RepositoryImpl(
         }
     }
 
-    override fun getRecentFilesList(): Flow<List<Item>> {
+    override suspend fun getRecentFilesList(aeadInfo: AeadInfo): Flow<List<Item>> {
         return filesDao.getRecentFilesFlow().map { list ->
-            list.map { itemMapper(it) }
+            val databaseMode = aeadInfo.databaseMode
+            if (databaseMode is AeadMode.Template) list.map {
+                val decryptedItem = aeadHandler.decryptFilesEntity(aeadInfo, databaseMode, it)
+                itemMapper(decryptedItem)
+            } else list.map { itemMapper(it) }
         }
     }
 

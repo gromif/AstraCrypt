@@ -63,8 +63,13 @@ internal object UsecaseModule {
         SetStateUseCase(repository = repository)
 
     @Provides
-    fun provideGetRecentItemsUseCase(repository: Repository): GetRecentItemsUseCase =
-        GetRecentItemsUseCase(repository = repository)
+    fun provideGetRecentItemsUseCase(
+        repository: Repository,
+        settingsRepository: SettingsRepository,
+    ) = GetRecentItemsUseCase(
+        repository = repository,
+        settingsRepository = settingsRepository
+    )
 
     @Provides
     fun provideGetItemDetailsUseCase(
