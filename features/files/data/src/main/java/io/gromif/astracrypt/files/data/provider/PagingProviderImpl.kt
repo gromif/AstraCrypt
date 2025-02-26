@@ -20,6 +20,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 
 class PagingProviderImpl(
@@ -32,12 +33,16 @@ class PagingProviderImpl(
     private var pagingSource: PagingSource<Int, PagerTuple>? = null
     private val searchQueryState = MutableStateFlow<String?>(null)
     private val searchFolderIdState = MutableStateFlow<List<Long>>(emptyList())
+    private var sortingSecondType = MutableStateFlow(1)
 
     override fun provide(
         parentIdState: StateFlow<Long>,
         isStarredMode: Boolean,
     ): Flow<PagingData<Item>> {
-        val aeadInfoFlow = settingsRepository.getAeadInfoFlow()
+        val aeadInfoFlow = settingsRepository.getAeadInfoFlow().onEach {
+            sortingSecondType.emit(if (it.name) 6 else 1)
+            invalidate()
+        }
         return Pager(
             config = pagingConfig,
             pagingSourceFactory = {
@@ -45,13 +50,13 @@ class PagingProviderImpl(
                     if (isStarredMode) listStarred(
                         query = searchQueryState.value,
                         sortingItemType = ItemType.Folder.ordinal,
-                        sortingSecondType = 1
+                        sortingSecondType = sortingSecondType.value
                     ) else listDefault(
                         rootId = parentIdState.value,
                         query = searchQueryState.value,
                         rootIdsToSearch = searchFolderIdState.value,
                         sortingItemType = ItemType.Folder.ordinal,
-                        sortingSecondType = 1
+                        sortingSecondType = sortingSecondType.value
                     )
                 }.also { pagingSource = it }
             }
