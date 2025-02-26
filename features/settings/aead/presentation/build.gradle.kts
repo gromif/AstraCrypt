@@ -14,6 +14,9 @@ android {
 dependencies {
     implementation(projects.features.settings.aead.domain)
     implementation(projects.features.settings.aead.di)
+    implementation(projects.features.files.presentation)
+    implementation(projects.features.notes.presentation)
 
     implementation(projects.core.resources)
+    implementation(projects.core.crypto.tink)
 }
