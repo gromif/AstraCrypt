@@ -4,6 +4,7 @@ import io.gromif.astracrypt.files.data.db.FilesEntity
 import io.gromif.astracrypt.files.data.db.tuples.DeleteTuple
 import io.gromif.astracrypt.files.data.db.tuples.DetailsTuple
 import io.gromif.astracrypt.files.data.db.tuples.PagerTuple
+import io.gromif.astracrypt.files.data.db.tuples.UpdateAeadTuple
 import io.gromif.astracrypt.files.domain.model.AeadInfo
 import io.gromif.astracrypt.files.domain.model.AeadMode
 
@@ -32,6 +33,30 @@ class AeadHandler(
         preview = mode.decryptIfNeeded(info.preview, data.preview),
         flags = mode.decryptIfNeeded(info.flag, data.flags),
     )
+
+
+    suspend fun encryptUpdateAeadTuple(
+        info: AeadInfo,
+        mode: AeadMode.Template,
+        data: UpdateAeadTuple,
+    ): UpdateAeadTuple = data.copy(
+        name = encryptNameIfNeeded(info, mode, data.name),
+        file = mode.encryptIfNeeded(info.file, data.file),
+        preview = mode.encryptIfNeeded(info.preview, data.preview),
+        flags = mode.encryptIfNeeded(info.flag, data.flags),
+    )
+
+    suspend fun decryptUpdateAeadTuple(
+        info: AeadInfo,
+        mode: AeadMode.Template,
+        data: UpdateAeadTuple,
+    ): UpdateAeadTuple = data.copy(
+        name = mode.decryptIfNeeded(info.name, data.name)!!,
+        file = mode.decryptIfNeeded(info.file, data.file),
+        preview = mode.decryptIfNeeded(info.preview, data.preview),
+        flags = mode.decryptIfNeeded(info.flag, data.flags),
+    )
+
 
     suspend fun decryptPagerTuple(
         info: AeadInfo,

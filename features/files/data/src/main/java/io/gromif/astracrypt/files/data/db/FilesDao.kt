@@ -61,10 +61,10 @@ interface FilesDao {
     suspend fun getExportData(id: Long): ExportTuple
 
     @RewriteQueriesToDropUnusedColumns
-    @Query("select * from store_items limit :pageSize offset :pageIndex * :pageSize")
+    @Query("select * from store_items limit :pageSize offset :pageOffset")
     suspend fun getUpdateAeadTupleList(
         pageSize: Int,
-        pageIndex: Int
+        pageOffset: Int
     ): List<UpdateAeadTuple>
 
     @RewriteQueriesToDropUnusedColumns

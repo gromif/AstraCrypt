@@ -49,4 +49,9 @@ interface Repository {
 
     suspend fun getItemDetails(aeadInfo: AeadInfo, id: Long): ItemDetails
 
+    suspend fun changeAead(
+        oldAeadInfo: AeadInfo,
+        targetAeadInfo: AeadInfo
+    )
+
 }

@@ -1,8 +1,7 @@
-package io.gromif.astracrypt.settings.aead.components.files
+package io.gromif.astracrypt.files.settings.aead.files
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
 import com.nevidimka655.astracrypt.resources.R
@@ -11,28 +10,21 @@ import com.nevidimka655.ui.compose_core.dialogs.DialogsCore
 import com.nevidimka655.ui.compose_core.dialogs.radio
 
 @Composable
-internal fun Files(
-    aeadLargeStreamTemplateList: List<String> = listOf(),
-    filesAeadName: String? = "Test Files SAead",
-    onFilesAeadChange: (Int) -> Unit = {}
+internal fun FileRadioPreference(
+    options: List<String> = listOf(),
+    selectedIndex: Int = 0,
+    onSelect: (Int) -> Unit = {}
 ) {
-
-    val selectedIndex = remember(filesAeadName) {
-        if (filesAeadName == null) 0 else {
-            aeadLargeStreamTemplateList.indexOfFirst { it == filesAeadName }
-        }
-    }
-
     var dialogFilesState by DialogsCore.Selectable.radio(
-        onSelected = onFilesAeadChange,
+        onSelected = onSelect,
         title = stringResource(id = R.string.files),
-        items = aeadLargeStreamTemplateList,
+        items = options,
         selectedItemIndex = selectedIndex
     )
 
     Preference(
         titleText = stringResource(id = R.string.files),
-        summaryText = filesAeadName ?: stringResource(R.string.withoutEncryption)
+        summaryText = options[selectedIndex]
     ) {
         dialogFilesState = true
     }

@@ -4,6 +4,7 @@ import android.net.Uri
 import io.gromif.astracrypt.files.data.db.FilesDao
 import io.gromif.astracrypt.files.data.db.FilesEntity
 import io.gromif.astracrypt.files.data.db.tuples.DetailsTuple
+import io.gromif.astracrypt.files.data.db.tuples.UpdateAeadTuple
 import io.gromif.astracrypt.files.data.util.AeadHandler
 import io.gromif.astracrypt.files.data.util.ExportUtil
 import io.gromif.astracrypt.files.data.util.FileHandler
@@ -19,6 +20,7 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 
 class RepositoryImpl(
     private val filesDao: FilesDao,
@@ -188,6 +190,44 @@ class RepositoryImpl(
             else -> itemDetails = itemDetailsMapper(dto)
         }
         return itemDetails
+    }
+
+    override suspend fun changeAead(
+        currentAeadInfo: AeadInfo,
+        targetAeadInfo: AeadInfo
+    ) = coroutineScope {
+        val currentAeadMode = currentAeadInfo.databaseMode
+        val targetAeadMode = targetAeadInfo.databaseMode
+
+        val pageSize = 10
+        var offset = 0
+        var page: List<UpdateAeadTuple> = listOf()
+
+        suspend fun nextItemsPage(): Boolean {
+            page = filesDao.getUpdateAeadTupleList(pageSize, offset)
+            offset += page.size
+            return page.isNotEmpty()
+        }
+
+        while (nextItemsPage()) page.forEach {
+            launch {
+                var updateTuple = it
+
+                if (currentAeadMode is AeadMode.Template) aeadHandler.decryptUpdateAeadTuple(
+                    info = currentAeadInfo,
+                    mode = currentAeadMode,
+                    data = updateTuple
+                ).also { updateTuple = it }
+
+                if (targetAeadMode is AeadMode.Template) aeadHandler.encryptUpdateAeadTuple(
+                    info = targetAeadInfo,
+                    mode = targetAeadMode,
+                    data = updateTuple
+                ).also { updateTuple = it }
+
+                filesDao.updateAead(updateTuple)
+            }
+        }
     }
 
 }

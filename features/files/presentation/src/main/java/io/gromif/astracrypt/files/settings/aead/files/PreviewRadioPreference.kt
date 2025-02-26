@@ -1,8 +1,7 @@
-package io.gromif.astracrypt.settings.aead.components.files
+package io.gromif.astracrypt.files.settings.aead.files
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
 import com.nevidimka655.astracrypt.resources.R
@@ -11,27 +10,21 @@ import com.nevidimka655.ui.compose_core.dialogs.DialogsCore
 import com.nevidimka655.ui.compose_core.dialogs.radio
 
 @Composable
-internal fun Preview(
-    aeadSmallStreamTemplateList: List<String> = listOf(),
-    previewAeadName: String? = "Test Preview SAead",
-    onPreviewAeadChange: (Int) -> Unit = {}
+internal fun PreviewRadioPreference(
+    options: List<String> = listOf(),
+    selectedIndex: Int,
+    onSelect: (Int) -> Unit = {}
 ) {
-    val selectedIndex = remember(previewAeadName) {
-        if (previewAeadName == null) 0 else {
-            aeadSmallStreamTemplateList.indexOfFirst { it == previewAeadName }
-        }
-    }
-
     var dialogThumbsState by DialogsCore.Selectable.radio(
-        onSelected = onPreviewAeadChange,
+        onSelected = onSelect,
         title = stringResource(id = R.string.thumbnail),
-        items = aeadSmallStreamTemplateList,
+        items = options,
         selectedItemIndex = selectedIndex
     )
 
     Preference(
         titleText = stringResource(id = R.string.thumbnail),
-        summaryText = previewAeadName ?: stringResource(R.string.withoutEncryption)
+        summaryText = options[selectedIndex]
     ) {
         dialogThumbsState = true
     }
