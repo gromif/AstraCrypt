@@ -16,8 +16,9 @@ import io.gromif.astracrypt.presentation.navigation.models.UiState
 import io.gromif.astracrypt.presentation.navigation.models.actions.ToolbarActions
 import io.gromif.astracrypt.presentation.navigation.notes.notesGraph
 import io.gromif.astracrypt.presentation.navigation.settings.about.aboutGraph
+import io.gromif.astracrypt.presentation.navigation.settings.aead.settingsSecurityAead
+import io.gromif.astracrypt.presentation.navigation.settings.aead.settingsSecurityColumnsAead
 import io.gromif.astracrypt.presentation.navigation.settings.profileSettings
-import io.gromif.astracrypt.presentation.navigation.settings.settingsSecurityAead
 import io.gromif.astracrypt.presentation.navigation.settings.ui.filesUiSettings
 import io.gromif.astracrypt.presentation.navigation.tabs.files.details
 import io.gromif.astracrypt.presentation.navigation.tabs.files.export
@@ -31,7 +32,7 @@ fun root(
     onFabClick: Flow<Any>,
     onToolbarActions: Flow<ToolbarActions.Action>,
     snackbarHostState: SnackbarHostState,
-    searchQueryState: StateFlow<String>
+    searchQueryState: StateFlow<String>,
 ): NavGraphBuilder.() -> Unit = {
     tabsGraph(
         onUiStateChange = onUiStateChange,
@@ -73,7 +74,14 @@ fun root(
     )
     settingsSecurityAdmin(onUiStateChange = onUiStateChange)
     settingsSecurityAuth(onUiStateChange = onUiStateChange)
-    settingsSecurityAead(onUiStateChange = onUiStateChange)
+    settingsSecurityAead(
+        navController = navController,
+        onUiStateChange = onUiStateChange
+    )
+    settingsSecurityColumnsAead(
+        onUiStateChange = onUiStateChange,
+        onToolbarActions = onToolbarActions
+    )
     settingsSecurityQuickActions(onUiStateChange = onUiStateChange)
     aboutGraph(
         onUiStateChange = onUiStateChange,

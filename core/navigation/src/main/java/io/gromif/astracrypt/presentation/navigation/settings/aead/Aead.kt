@@ -1,5 +1,6 @@
-package io.gromif.astracrypt.presentation.navigation.settings
+package io.gromif.astracrypt.presentation.navigation.settings.aead
 
+import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.nevidimka655.astracrypt.resources.R
@@ -16,8 +17,13 @@ private val ScreenUiState = UiState(
 )
 
 fun NavGraphBuilder.settingsSecurityAead(
+    navController: NavController,
     onUiStateChange: (UiState) -> Unit
 ) = composable<Route.SettingsSecurityAead> {
     UiStateHandler { onUiStateChange(ScreenUiState) }
-    AeadSettingsScreen()
+    AeadSettingsScreen(
+        toDatabaseColumnsAeadSettings = {
+            navController.navigate(Route.SettingsSecurityColumnsAead)
+        }
+    )
 }
