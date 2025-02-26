@@ -58,17 +58,17 @@ class PagingProviderImpl(
         ).flow.combine(aeadInfoFlow) { pd, aeadInfo ->
             pd.map { pagerTuple ->
                 val databaseMode = aeadInfo.databaseMode
-                if (databaseMode is AeadMode.Template) {
+                val data = if (databaseMode is AeadMode.Template) {
                     aeadHandler.decryptPagerTuple(aeadInfo, databaseMode, pagerTuple)
                 } else pagerTuple
                 Item(
-                    id = pagerTuple.id,
-                    name = pagerTuple.name,
-                    type = pagerTuple.type,
-                    preview = pagerTuple.preview?.let {
-                        FileSource(path = it, aeadIndex = pagerTuple.previewAead)
+                    id = data.id,
+                    name = data.name,
+                    type = data.type,
+                    preview = data.preview?.let {
+                        FileSource(path = it, aeadIndex = data.previewAead)
                     },
-                    state = ItemState.entries[pagerTuple.state]
+                    state = ItemState.entries[data.state]
                 )
             }
         }
