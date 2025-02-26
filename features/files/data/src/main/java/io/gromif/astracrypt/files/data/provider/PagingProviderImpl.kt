@@ -19,7 +19,7 @@ import io.gromif.astracrypt.files.domain.repository.SettingsRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.update
 
 class PagingProviderImpl(
@@ -37,6 +37,7 @@ class PagingProviderImpl(
         parentIdState: StateFlow<Long>,
         isStarredMode: Boolean,
     ): Flow<PagingData<Item>> {
+        val aeadInfoFlow = settingsRepository.getAeadInfoFlow()
         return Pager(
             config = pagingConfig,
             pagingSourceFactory = {
@@ -54,8 +55,7 @@ class PagingProviderImpl(
                     )
                 }.also { pagingSource = it }
             }
-        ).flow.map { pd ->
-            val aeadInfo = settingsRepository.getAeadInfo()
+        ).flow.combine(aeadInfoFlow) { pd, aeadInfo ->
             pd.map { pagerTuple ->
                 val databaseMode = aeadInfo.databaseMode
                 if (databaseMode is AeadMode.Template) {
@@ -65,7 +65,7 @@ class PagingProviderImpl(
                     id = pagerTuple.id,
                     name = pagerTuple.name,
                     type = pagerTuple.type,
-                    preview = pagerTuple.preview?.let { 
+                    preview = pagerTuple.preview?.let {
                         FileSource(path = it, aeadIndex = pagerTuple.previewAead)
                     },
                     state = ItemState.entries[pagerTuple.state]
