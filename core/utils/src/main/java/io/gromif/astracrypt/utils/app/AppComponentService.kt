@@ -29,6 +29,12 @@ class AppComponentService(context: Context) {
         set(value) = setState(comp = _calculator, state = value)
 
 
+    private val _wipeTile = Component(context, "$rootPackage.app.services.WipeTile")
+    var wipeTile
+        get() = getState(comp = _wipeTile) == ENABLED
+        set(value) = setState(comp = _wipeTile, state = value)
+
+
     private fun getState(comp: Component) = packageManager.getComponentEnabledSetting(comp)
 
     private fun setState(

@@ -20,13 +20,9 @@ fun NavGraphBuilder.settingsSecurityQuickActions(
 ) = composable<Route.SettingsSecurityQuickActions> {
     UiStateHandler { onUiStateChange(SettingsSecurityQuickActionsUiState) }
     val vm: SettingsQuickActionsViewModel = hiltViewModel()
-    /*var quickDataDeletion by remember { mutableStateOf(vm.quickDataDeletion) }
 
     SettingsQuickActionsScreen(
-        quickDataDeletion = quickDataDeletion,
-        onSetQuickDataDeletion = {
-            vm.quickDataDeletion = it
-            quickDataDeletion = it
-        }
-    )*/
+        quickDataDeletion = vm.wipeTile,
+        onSetQuickDataDeletion = vm::setWipeTileState
+    )
 }
