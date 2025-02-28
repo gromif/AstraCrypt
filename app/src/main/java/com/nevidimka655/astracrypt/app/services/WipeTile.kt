@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.app.services.tiles
+package com.nevidimka655.astracrypt.app.services
 
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -17,10 +17,14 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class WipeTile @Inject constructor() : TileServiceCoroutine() {
     @IoDispatcher
-    @Inject lateinit var defaultDispatcher: CoroutineDispatcher
-    @Inject lateinit var database: AppDatabase
-    @Inject lateinit var filesUtil: FilesUtil
-    @Inject lateinit var associatedDataManager: AssociatedDataManager
+    @Inject
+    lateinit var defaultDispatcher: CoroutineDispatcher
+    @Inject
+    lateinit var database: AppDatabase
+    @Inject
+    lateinit var filesUtil: FilesUtil
+    @Inject
+    lateinit var associatedDataManager: AssociatedDataManager
 
     override fun onClick() {
         super.onClick()
