@@ -8,6 +8,8 @@ import android.content.pm.PackageManager
 private const val ENABLED = PackageManager.COMPONENT_ENABLED_STATE_ENABLED
 private const val DISABLED = PackageManager.COMPONENT_ENABLED_STATE_DISABLED
 
+private const val rootPackage = "io.gromif.astracrypt"
+
 private typealias Component = ComponentName
 
 @SuppressLint("NewApi")
@@ -15,13 +17,13 @@ class AppComponentService(context: Context) {
     private val packageManager = context.packageManager
 
 
-    private val _main = Component(context, "${context.packageName}.view.MainActivity")
+    private val _main = Component(context, "$rootPackage.view.MainActivity")
     var main
         get() = getState(comp = _main) == ENABLED
         set(value) = setState(comp = _main, state = value)
 
 
-    private val _calculator = Component(context, "${context.packageName}.MainActivityCalculator")
+    private val _calculator = Component(context, "$rootPackage.MainActivityCalculator")
     var calculator
         get() = getState(comp = _calculator) == ENABLED
         set(value) = setState(comp = _calculator, state = value)

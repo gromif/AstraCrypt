@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
-        android:name=".app.ApplicationBootloader"
+        android:name="io.gromif.astracrypt.app.ApplicationBootloader"
         android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:enableOnBackInvokedCallback="true"
@@ -18,7 +18,7 @@
         android:theme="@style/Theme.AstraCrypt"
         tools:targetApi="tiramisu">
         <activity
-            android:name=".view.MainActivity"
+            android:name="io.gromif.astracrypt.view.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.AstraCrypt">
             <intent-filter>
@@ -35,7 +35,7 @@
             android:icon="@mipmap/ic_launcher_calculator"
             android:label="@string/settings_camouflageType_calculator"
             android:roundIcon="@mipmap/ic_launcher_calculator_round"
-            android:targetActivity=".view.MainActivity">
+            android:targetActivity="io.gromif.astracrypt.view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -44,7 +44,7 @@
         </activity-alias>
 
         <receiver
-            android:name=".app.device_admin.DeviceAdminReceiverImpl"
+            android:name="io.gromif.astracrypt.app.device_admin.DeviceAdminReceiverImpl"
             android:description="@string/settings_deviceAdminRights_device_summary"
             android:exported="false"
             android:label="@string/app_name"
@@ -59,7 +59,7 @@
         </receiver>
 
         <service
-            android:name=".app.services.WipeTile"
+            android:name="io.gromif.astracrypt.app.services.WipeTile"
             android:enabled="false"
             android:exported="true"
             android:icon="@drawable/ic_notification_app_icon"
@@ -77,7 +77,7 @@
             tools:node="remove" />
 
         <provider
-            android:name=".app.utils.AppFileProvider"
+            android:name="io.gromif.astracrypt.app.utils.AppFileProvider"
             android:authorities="com.nevidimka655.astracrypt"
             android:exported="false"
             android:grantUriPermissions="true">
