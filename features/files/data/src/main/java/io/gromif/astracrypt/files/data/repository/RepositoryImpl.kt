@@ -2,14 +2,13 @@ package io.gromif.astracrypt.files.data.repository
 
 import android.net.Uri
 import io.gromif.astracrypt.files.data.db.FilesDao
+import io.gromif.astracrypt.files.data.db.FilesDaoAeadAdapter
 import io.gromif.astracrypt.files.data.db.FilesEntity
 import io.gromif.astracrypt.files.data.db.tuples.DetailsTuple
 import io.gromif.astracrypt.files.data.db.tuples.UpdateAeadTuple
-import io.gromif.astracrypt.files.data.util.AeadHandler
 import io.gromif.astracrypt.files.data.util.ExportUtil
 import io.gromif.astracrypt.files.data.util.FileHandler
 import io.gromif.astracrypt.files.domain.model.AeadInfo
-import io.gromif.astracrypt.files.domain.model.AeadMode
 import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.domain.model.ItemDetails
 import io.gromif.astracrypt.files.domain.model.ItemState
@@ -21,24 +20,32 @@ import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 
 class RepositoryImpl(
     private val filesDao: FilesDao,
-    private val aeadHandler: AeadHandler,
+    private val filesDaoAeadAdapterFactory: FilesDaoAeadAdapter.Factory,
     private val fileHandler: FileHandler,
     private val exportUtil: ExportUtil,
     private val itemMapper: Mapper<FilesEntity, Item>,
     private val itemDetailsMapper: Mapper<DetailsTuple, ItemDetails>,
     private val uriMapper: Mapper<String, Uri>
 ) : Repository {
+    private val mutex = Mutex()
+    private var cachedFilesDaoAeadAdapter: FilesDaoAeadAdapter? = null
+
+    private suspend fun getFilesDaoAead(aeadInfo: AeadInfo): FilesDao = mutex.withLock {
+        val cached = cachedFilesDaoAeadAdapter
+        if (cached != null && cached.compareAeadInfo(aeadInfo)) return cached
+
+        val filesDaoAeadAdapter = filesDaoAeadAdapterFactory.create(aeadInfo)
+        cachedFilesDaoAeadAdapter = filesDaoAeadAdapter
+        return filesDaoAeadAdapter
+    }
 
     override suspend fun get(aeadInfo: AeadInfo, id: Long): Item {
-        var filesEntity = filesDao.get(id).let {
-            val databaseMode = aeadInfo.databaseMode
-            if (databaseMode is AeadMode.Template) {
-                aeadHandler.decryptFilesEntity(aeadInfo, databaseMode, it)
-            } else it
-        }
+        val filesEntity = getFilesDaoAead(aeadInfo).get(id)
         return itemMapper(filesEntity)
     }
 
@@ -84,31 +91,22 @@ class RepositoryImpl(
             flags = flags,
             time = time,
             size = size
-        ).let {
-            val databaseMode = aeadInfo.databaseMode
-            if (databaseMode is AeadMode.Template) {
-                aeadHandler.encryptFilesEntity(aeadInfo, databaseMode, it)
-            } else it
-        }
-        filesDao.insert(filesEntity)
+        )
+        getFilesDaoAead(aeadInfo).insert(filesEntity)
     }
 
     override suspend fun delete(aeadInfo: AeadInfo, id: Long) {
-        val databaseMode = aeadInfo.databaseMode
+        val filesDaoAead = getFilesDaoAead(aeadInfo)
         val deque = ArrayDeque<Long>().also { it.add(id) }
         while (deque.isNotEmpty()) {
             val currentId = deque.removeFirst()
-            val (id, file, preview) = filesDao.getDeleteData(currentId).let {
-                if (databaseMode is AeadMode.Template) {
-                    aeadHandler.decryptDeleteTuple(aeadInfo, databaseMode, it)
-                } else it
-            }
-            filesDao.delete(id)
+            val (id, file, preview) = filesDaoAead.getDeleteData(currentId)
+            filesDaoAead.delete(id)
             if (file != null) with(fileHandler) {
                 getFilePath(relativePath = file).delete()
                 if (preview != null) getFilePath(relativePath = preview).delete()
             } else {
-                val innerIdList = filesDao.getIdList(parent = id)
+                val innerIdList = filesDaoAead.getIdList(parent = id)
                 deque.addAll(innerIdList)
             }
         }
@@ -120,14 +118,7 @@ class RepositoryImpl(
         aeadInfo: AeadInfo,
         id: Long,
         name: String
-    ) {
-        val databaseMode = aeadInfo.databaseMode
-
-        val name = if (databaseMode is AeadMode.Template) {
-            aeadHandler.encryptNameIfNeeded(aeadInfo, databaseMode, name)
-        } else name
-        filesDao.rename(id, name)
-    }
+    ) = getFilesDaoAead(aeadInfo).rename(id, name)
 
     override suspend fun setState(id: Long, state: ItemState) {
         filesDao.setStarred(id = id, state = state.ordinal)
@@ -147,24 +138,15 @@ class RepositoryImpl(
     }
 
     override suspend fun getRecentFilesList(aeadInfo: AeadInfo): Flow<List<Item>> {
-        return filesDao.getRecentFilesFlow().map { list ->
-            val databaseMode = aeadInfo.databaseMode
-            if (databaseMode is AeadMode.Template) list.map {
-                val decryptedItem = aeadHandler.decryptFilesEntity(aeadInfo, databaseMode, it)
-                itemMapper(decryptedItem)
-            } else list.map { itemMapper(it) }
+        return getFilesDaoAead(aeadInfo).getRecentFilesFlow().map { list ->
+            list.map { itemMapper(it) }
         }
     }
 
     override suspend fun getItemDetails(aeadInfo: AeadInfo, id: Long): ItemDetails {
-        val databaseMode = aeadInfo.databaseMode
+        val filesDaoAead = getFilesDaoAead(aeadInfo)
 
-        val dto = filesDao.getDetailsById(id).let {
-            when (databaseMode) {
-                AeadMode.None -> it
-                is AeadMode.Template -> aeadHandler.decryptDetailsTuple(aeadInfo, databaseMode, it)
-            }
-        }
+        val dto = filesDaoAead.getDetailsById(id)
         val itemDetails: ItemDetails
         when (dto.type) {
             ItemType.Folder -> {
@@ -175,10 +157,10 @@ class RepositoryImpl(
                 deque.add(id)
                 while (deque.isNotEmpty()) {
                     val id = deque.removeFirst()
-                    val files = filesDao.getIdList(parent = id, excludeFolders = true)
+                    val files = filesDaoAead.getIdList(parent = id, excludeFolders = true)
                     filesCount += files.size
 
-                    val folders = filesDao.getIdList(parent = id, typeFilter = dto.type)
+                    val folders = filesDaoAead.getIdList(parent = id, typeFilter = dto.type)
                     folderCount += folders.size
 
                     deque.addAll(folders)
@@ -200,36 +182,22 @@ class RepositoryImpl(
         currentAeadInfo: AeadInfo,
         targetAeadInfo: AeadInfo
     ) = coroutineScope {
-        val currentAeadMode = currentAeadInfo.databaseMode
-        val targetAeadMode = targetAeadInfo.databaseMode
+        val currentFilesDaoAead = getFilesDaoAead(aeadInfo = currentAeadInfo)
+        val targetFilesDaoAead = filesDaoAeadAdapterFactory.create(aeadInfo = targetAeadInfo)
 
         val pageSize = 10
         var offset = 0
         var page: List<UpdateAeadTuple> = listOf()
 
         suspend fun nextItemsPage(): Boolean {
-            page = filesDao.getUpdateAeadTupleList(pageSize, offset)
+            page = currentFilesDaoAead.getUpdateAeadTupleList(pageSize, offset)
             offset += page.size
             return page.isNotEmpty()
         }
 
         while (nextItemsPage()) page.forEach {
             launch {
-                var updateTuple = it
-
-                if (currentAeadMode is AeadMode.Template) aeadHandler.decryptUpdateAeadTuple(
-                    info = currentAeadInfo,
-                    mode = currentAeadMode,
-                    data = updateTuple
-                ).also { updateTuple = it }
-
-                if (targetAeadMode is AeadMode.Template) aeadHandler.encryptUpdateAeadTuple(
-                    info = targetAeadInfo,
-                    mode = targetAeadMode,
-                    data = updateTuple
-                ).also { updateTuple = it }
-
-                filesDao.updateAead(updateTuple)
+                targetFilesDaoAead.updateAead(it)
             }
         }
     }

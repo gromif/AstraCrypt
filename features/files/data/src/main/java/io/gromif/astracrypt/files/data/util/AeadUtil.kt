@@ -11,9 +11,9 @@ import io.gromif.crypto.tink.model.KeysetTemplates
 class AeadUtil(
     private val aeadManager: AeadManager,
     private val associatedDataManager: AssociatedDataManager,
-    private val base64Encoder: Base64Encoder
+    private val base64Encoder: Base64Encoder,
 ) {
-    private var cachedAead: Pair<Int, Aead>? = null
+    private var cachedAeadMap: HashMap<Int, Aead> = hashMapOf()
 
     suspend fun decrypt(aeadIndex: Int, data: String): String {
         val aead = getAead(aeadIndex = aeadIndex)
@@ -34,15 +34,13 @@ class AeadUtil(
     }
 
     private suspend fun getAead(aeadIndex: Int): Aead {
-        val currentCachedAead = cachedAead
+        val currentCachedAead = cachedAeadMap[aeadIndex]
 
-        return if (currentCachedAead != null && currentCachedAead.first == aeadIndex) {
-            currentCachedAead.second
-        } else aeadManager.aead(
+        return currentCachedAead ?: aeadManager.aead(
             tag = TAG_KEYSET,
             keyParams = KeysetTemplates.AEAD.entries[aeadIndex].params
         ).also {
-            cachedAead = Pair(aeadIndex, it)
+            cachedAeadMap[aeadIndex] = it
         }
     }
 
