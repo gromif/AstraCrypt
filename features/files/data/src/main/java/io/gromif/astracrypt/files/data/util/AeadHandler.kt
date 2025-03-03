@@ -3,6 +3,7 @@ package io.gromif.astracrypt.files.data.util
 import io.gromif.astracrypt.files.data.db.FilesEntity
 import io.gromif.astracrypt.files.data.db.tuples.DeleteTuple
 import io.gromif.astracrypt.files.data.db.tuples.DetailsTuple
+import io.gromif.astracrypt.files.data.db.tuples.ExportTuple
 import io.gromif.astracrypt.files.data.db.tuples.PagerTuple
 import io.gromif.astracrypt.files.data.db.tuples.UpdateAeadTuple
 import io.gromif.astracrypt.files.domain.model.AeadInfo
@@ -65,6 +66,15 @@ class AeadHandler(
     ) = data.copy(
         name = mode.decryptIfNeeded(info.name, data.name)!!,
         preview = mode.decryptIfNeeded(info.preview, data.preview),
+    )
+
+    suspend fun decryptExportTuple(
+        info: AeadInfo,
+        mode: AeadMode.Template,
+        data: ExportTuple,
+    ) = data.copy(
+        name = mode.decryptIfNeeded(info.name, data.name)!!,
+        file = mode.decryptIfNeeded(info.file, data.file)
     )
 
     suspend fun decryptDeleteTuple(
