@@ -3,7 +3,6 @@ package io.gromif.astracrypt.files.domain.usecase
 import io.gromif.astracrypt.files.domain.model.AeadInfo
 import io.gromif.astracrypt.files.domain.model.ItemState
 import io.gromif.astracrypt.files.domain.repository.Repository
-import io.gromif.astracrypt.files.domain.repository.SettingsRepository
 import io.gromif.astracrypt.files.domain.util.FileUtil
 import io.gromif.astracrypt.files.domain.util.FlagsUtil
 import io.gromif.astracrypt.files.domain.util.PreviewUtil
@@ -14,8 +13,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.supervisorScope
 
 class ImportUseCase(
+    private val getAeadInfoUseCase: GetAeadInfoUseCase,
     private val repository: Repository,
-    private val settingsRepository: SettingsRepository,
     private val fileUtilFactory: FileUtil.Factory,
     private val previewUtil: PreviewUtil,
     private val flagsUtil: FlagsUtil,
@@ -26,7 +25,7 @@ class ImportUseCase(
         parentId: Long,
         saveSource: Boolean,
     ) = supervisorScope {
-        val aeadInfo = settingsRepository.getAeadInfo()
+        val aeadInfo = getAeadInfoUseCase()
         pathList.forEach {
             launch {
                 processFile(aeadInfo, it, parentId, saveSource)

@@ -30,16 +30,15 @@ internal object UsecaseModule {
 
     @Provides
     fun provideCreateFolderUseCase(
+        getAeadInfoUseCase: GetAeadInfoUseCase,
         repository: Repository,
-        settingsRepository: SettingsRepository,
-    ): CreateFolderUseCase = CreateFolderUseCase(repository, settingsRepository)
+    ): CreateFolderUseCase = CreateFolderUseCase(getAeadInfoUseCase, repository)
 
     @Provides
     fun provideDeleteUseCase(
+        getAeadInfoUseCase: GetAeadInfoUseCase,
         repository: Repository,
-        settingsRepository: SettingsRepository,
-    ): DeleteUseCase =
-        DeleteUseCase(repository, settingsRepository)
+    ) = DeleteUseCase(getAeadInfoUseCase, repository)
 
     @Provides
     fun provideGetListViewModeUseCase(settingsRepository: SettingsRepository): GetListViewModeUseCase =
@@ -50,13 +49,13 @@ internal object UsecaseModule {
         SetListViewModeUseCase(settingsRepository = settingsRepository)
 
     @Provides
-    fun provideMoveUseCase(repository: Repository): MoveUseCase = MoveUseCase(repository)
+    fun provideMoveUseCase(repository: Repository) = MoveUseCase(repository)
 
     @Provides
     fun provideRenameUseCase(
+        getAeadInfoUseCase: GetAeadInfoUseCase,
         repository: Repository,
-        settingsRepository: SettingsRepository,
-    ): RenameUseCase = RenameUseCase(repository, settingsRepository)
+    ) = RenameUseCase(getAeadInfoUseCase, repository)
 
     @Provides
     fun provideSetStarredUseCase(repository: Repository): SetStateUseCase =
@@ -64,18 +63,18 @@ internal object UsecaseModule {
 
     @Provides
     fun provideGetRecentItemsUseCase(
+        getAeadInfoFlowUseCase: GetAeadInfoFlowUseCase,
         repository: Repository,
-        settingsRepository: SettingsRepository,
     ) = GetRecentItemsUseCase(
+        getAeadInfoFlowUseCase = getAeadInfoFlowUseCase,
         repository = repository,
-        settingsRepository = settingsRepository
     )
 
     @Provides
     fun provideGetItemDetailsUseCase(
+        getAeadInfoUseCase: GetAeadInfoUseCase,
         repository: Repository,
-        settingsRepository: SettingsRepository,
-    ): GetItemDetailsUseCase = GetItemDetailsUseCase(repository, settingsRepository)
+    ): GetItemDetailsUseCase = GetItemDetailsUseCase(getAeadInfoUseCase, repository)
 
     @Provides
     fun provideSetDatabaseAeadUseCase(
