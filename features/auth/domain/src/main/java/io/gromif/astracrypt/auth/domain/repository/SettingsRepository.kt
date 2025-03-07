@@ -1,5 +1,6 @@
 package io.gromif.astracrypt.auth.domain.repository
 
+import io.gromif.astracrypt.auth.domain.model.AeadMode
 import io.gromif.astracrypt.auth.domain.model.Auth
 import kotlinx.coroutines.flow.Flow
 
@@ -15,5 +16,8 @@ interface SettingsRepository {
 
     suspend fun getSkinHash(): ByteArray
     suspend fun setSkinHash(hash: ByteArray?)
+
+    suspend fun setAead(aeadMode: AeadMode)
+    fun getAeadFlow(): Flow<AeadMode>
 
 }

@@ -8,8 +8,10 @@ import dagger.hilt.android.scopes.ViewModelScoped
 import io.gromif.astracrypt.auth.domain.repository.SettingsRepository
 import io.gromif.astracrypt.auth.domain.service.TinkService
 import io.gromif.astracrypt.auth.domain.usecase.DecryptTinkAdUseCase
+import io.gromif.astracrypt.auth.domain.usecase.GetAeadModeFlowUseCase
 import io.gromif.astracrypt.auth.domain.usecase.GetAuthFlowUseCase
 import io.gromif.astracrypt.auth.domain.usecase.GetAuthUseCase
+import io.gromif.astracrypt.auth.domain.usecase.SetAeadModeUseCase
 import io.gromif.astracrypt.auth.domain.usecase.SetAuthTypeUseCase
 import io.gromif.astracrypt.auth.domain.usecase.SetAuthUseCase
 import io.gromif.astracrypt.auth.domain.usecase.SetBindTinkAdUseCase
@@ -121,5 +123,17 @@ internal object UseCaseModule {
     @Provides
     fun provideDecryptTinkAdUseCase(tinkService: TinkService): DecryptTinkAdUseCase =
         DecryptTinkAdUseCase(tinkService = tinkService)
+
+    @ViewModelScoped
+    @Provides
+    fun provideGetAeadModeFlowUseCase(
+        settingsRepository: SettingsRepository,
+    ): GetAeadModeFlowUseCase = GetAeadModeFlowUseCase(settingsRepository = settingsRepository)
+
+    @ViewModelScoped
+    @Provides
+    fun provideSetAeadModeUseCase(
+        settingsRepository: SettingsRepository,
+    ): SetAeadModeUseCase = SetAeadModeUseCase(settingsRepository = settingsRepository)
 
 }

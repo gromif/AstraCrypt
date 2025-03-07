@@ -4,11 +4,13 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import io.gromif.astracrypt.auth.data.data.dto.AuthDto
+import io.gromif.astracrypt.auth.domain.model.AeadMode
 import io.gromif.astracrypt.auth.domain.model.Auth
 import io.gromif.astracrypt.auth.domain.repository.SettingsRepository
 import io.gromif.astracrypt.utils.Mapper
 import io.gromif.crypto.tink.core.encoders.Encoder
 import io.gromif.crypto.tink.data.KeysetManager
+import io.gromif.crypto.tink.model.KeysetTemplates
 import io.gromif.tink_datastore.TinkDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
@@ -79,6 +81,19 @@ class SettingsRepositoryImpl(
         dataStore.edit { prefs ->
             val value = hash?.let { encoder.encode(it) } ?: ""
             prefs.setData(skinHashKey.name, value)
+        }
+    }
+
+    override suspend fun setAead(aeadMode: AeadMode) {
+        val aead = KeysetTemplates.AEAD.entries.getOrNull(aeadMode.id)
+        setTinkDataStoreAead(aead)
+    }
+
+    override fun getAeadFlow(): Flow<AeadMode> {
+        return getTinkDataStoreAeadFlow().map { aead ->
+            aead?.let {
+                AeadMode.Template(id = it.ordinal)
+            } ?: AeadMode.None
         }
     }
 }
