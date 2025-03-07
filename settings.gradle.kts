@@ -28,7 +28,6 @@ val features = listOf(
 
 // Include all modules
 include(":app")
-include(":features:settings:auth")
 include("core", coreModules)
 include("core:crypto", cryptoCoreModules)
 include("features", featuresModules)
