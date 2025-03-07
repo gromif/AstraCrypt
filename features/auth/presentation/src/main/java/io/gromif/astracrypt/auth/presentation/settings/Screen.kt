@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.auth.settings
+package io.gromif.astracrypt.auth.presentation.settings
 
 import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility

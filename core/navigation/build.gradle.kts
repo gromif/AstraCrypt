@@ -17,6 +17,7 @@ dependencies {
     implementation(projects.features.tinkLab.presentation)
     implementation(projects.features.labZip.presentation)
     implementation(projects.features.notes.presentation)
+    implementation(projects.features.auth.presentation)
     implementation(projects.features.help)
     implementation(projects.features.home)
     implementation(projects.features.profile.presentation)
@@ -25,7 +26,6 @@ dependencies {
     playImplementation(projects.features.settings.about.googlePlay)
     implementation(projects.features.settings.about.privacy)
 
-    implementation(projects.features.settings.auth)
     implementation(projects.features.settings.aead.presentation)
 
     implementation(libs.compose.navigation)

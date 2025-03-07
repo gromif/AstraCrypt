@@ -2,9 +2,9 @@ package io.gromif.astracrypt.presentation.navigation.auth
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.nevidimka655.astracrypt.auth.settings.AuthSettingsScreen
 import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
+import io.gromif.astracrypt.auth.presentation.settings.AuthSettingsScreen
 import io.gromif.astracrypt.presentation.navigation.Route
 import io.gromif.astracrypt.presentation.navigation.models.UiState
 import io.gromif.astracrypt.presentation.navigation.shared.UiStateHandler

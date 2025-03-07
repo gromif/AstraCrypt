@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.auth.settings
+package io.gromif.astracrypt.auth.presentation.settings
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
