@@ -15,7 +15,9 @@ import io.gromif.crypto.tink.extensions.decodeAndDecrypt
 import io.gromif.crypto.tink.extensions.encryptAndEncode
 import io.gromif.crypto.tink.extensions.prf
 import io.gromif.crypto.tink.model.KeysetTemplates
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
@@ -71,13 +73,22 @@ abstract class TinkDataStore(
 
 
     private val aeadKey = intPreferencesKey(KEY_AEAD)
+    private val aeadFlow = dataStore.data.map {
+        val savedValue = it[aeadKey]
+        if (savedValue == null) DEFAULT_AEAD else {
+            KeysetTemplates.AEAD.entries.getOrNull(savedValue)
+        }
+    }
     private suspend fun setAeadTemplate(aead: KeysetTemplates.AEAD?) {
         dataStore.edit { it[aeadKey] = aead?.ordinal ?: -1 }
     }
 
-    private suspend fun getAeadTemplate(): KeysetTemplates.AEAD? {
-        val aeadOrdinal = dataStore.data.first()[aeadKey]
-        return aeadOrdinal?.let { KeysetTemplates.AEAD.entries.getOrNull(it) } ?: DEFAULT_AEAD
+    protected fun getAeadTemplateFlow(): Flow<KeysetTemplates.AEAD?> {
+        return aeadFlow
+    }
+
+    protected suspend fun getAeadTemplate(): KeysetTemplates.AEAD? {
+        return aeadFlow.first()
     }
 
 
