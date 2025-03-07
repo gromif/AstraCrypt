@@ -147,10 +147,12 @@ abstract class TinkDataStore(
         targetAead: KeysetTemplates.AEAD?,
     ): Unit = mutex.withLock {
         val tempPrefsMap = hashMapOf<String, String?>()
-        val prefs = dataStore.data.first()
-        preferencesKeyList.forEach { currentKey ->
-            val data = prefs.getData(currentKey)
-            tempPrefsMap[currentKey] = data
+        dataStore.edit { prefs ->
+            preferencesKeyList.forEach { currentKey ->
+                val data = prefs.getData(currentKey)
+                tempPrefsMap[currentKey] = data
+                prefs.remove(stringPreferencesKey(currentKey))
+            }
         }
 
         setAeadTemplate(targetAead)
