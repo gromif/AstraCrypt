@@ -83,11 +83,11 @@ abstract class TinkDataStore(
         dataStore.edit { it[aeadKey] = aead?.ordinal ?: -1 }
     }
 
-    protected fun getAeadTemplateFlow(): Flow<KeysetTemplates.AEAD?> {
+    protected fun getTinkDataStoreAeadFlow(): Flow<KeysetTemplates.AEAD?> {
         return aeadFlow
     }
 
-    protected suspend fun getAeadTemplate(): KeysetTemplates.AEAD? {
+    protected suspend fun getTinkDataStoreAead(): KeysetTemplates.AEAD? {
         return aeadFlow.first()
     }
 
@@ -121,7 +121,7 @@ abstract class TinkDataStore(
     }
 
     protected suspend fun MutablePreferences.setData(key: String, value: String) {
-        val aead = getAeadTemplate()
+        val aead = getTinkDataStoreAead()
         if (aead != null) {
             val keyPrfHash = prfHashKeyWithBase64(key)
             val associatedData = "${key}_${keyPrfHash}".toByteArray()
@@ -132,7 +132,7 @@ abstract class TinkDataStore(
     }
 
     protected suspend fun Preferences.getData(key: String): String? {
-        val aead = getAeadTemplate()
+        val aead = getTinkDataStoreAead()
         return if (aead != null) {
             val keyPrfHash = prfHashKeyWithBase64(key)
             val data = get(stringPreferencesKey(keyPrfHash)) ?: return null
