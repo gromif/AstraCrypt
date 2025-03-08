@@ -23,9 +23,9 @@ dependencies {
     implementation(projects.features.quickActions)
     implementation(projects.features.deviceAdmin)
 
-    fdroidImplementation(projects.features.settings.about.fdroid)
-    playImplementation(projects.features.settings.about.googlePlay)
-    implementation(projects.features.settings.about.privacy)
+    fdroidImplementation(projects.features.about.fdroid)
+    playImplementation(projects.features.about.googlePlay)
+    implementation(projects.features.about.privacy)
 
     implementation(libs.compose.navigation)
 }

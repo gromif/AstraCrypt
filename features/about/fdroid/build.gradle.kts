@@ -8,7 +8,7 @@ android {
 }
 
 dependencies {
-    implementation(projects.features.settings.about)
+    implementation(projects.features.about)
     implementation(projects.core.resources)
 
     testImplementation(libs.junit)
