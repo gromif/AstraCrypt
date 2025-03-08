@@ -37,7 +37,7 @@ class SettingsRepositoryImpl(
     override val profileFlow: Flow<Profile> = dataStore.data.map { prefs ->
         cachedProfile ?: prefs.getData(profileKey.name)?.let {
             val dto: ProfileDto = Json.Default.decodeFromString(it)
-            profileMapper(dto)
+            profileMapper(dto).also { cachedProfile = it }
         } ?: Profile()
     }
 
