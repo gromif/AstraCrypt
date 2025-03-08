@@ -2,8 +2,8 @@ package io.gromif.astracrypt.quick_actions.services
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import com.nevidimka655.astracrypt.data.db.AppDatabase
 import dagger.hilt.android.AndroidEntryPoint
+import io.gromif.astracrypt.db.AppDatabase
 import io.gromif.astracrypt.utils.dispatchers.IoDispatcher
 import io.gromif.astracrypt.utils.io.FilesUtil
 import io.gromif.crypto.tink.data.AssociatedDataManager

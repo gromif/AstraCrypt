@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.nevidimka655.astracrypt.data.db"
+    namespace = "io.gromif.astracrypt.db"
 
     defaultConfig {
         ksp {

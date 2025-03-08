@@ -1,4 +1,4 @@
-package com.nevidimka655.astracrypt.data.db
+package io.gromif.astracrypt.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
