@@ -21,7 +21,8 @@ dependencies {
 
     implementation(projects.ui.composeDetails)
     implementation(projects.core.crypto.tink)
-    implementation(projects.core.designSystem)
     implementation(projects.core.resources)
     implementation(projects.core.utils)
+
+    implementation(projects.ui.designSystem)
 }
