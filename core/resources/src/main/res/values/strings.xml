@@ -100,6 +100,7 @@
     <string name="notification_dbTransform_title">Transformation of the database…</string>
     <string name="notification_channel_fileOperations">File operations</string>
     <string name="notification_channel_fileOperations_desc">Notifications on operations of adding and moving files</string>
+    <string name="settings_profile">Profile</string>
     <string name="settings_editProfile">Edit profile</string>
     <string name="settings_security">Security</string>
     <string name="settings_interface">Interface</string>

@@ -7,8 +7,10 @@ import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.scopes.ViewModelScoped
 import io.gromif.astracrypt.profile.domain.repository.Repository
 import io.gromif.astracrypt.profile.domain.repository.SettingsRepository
+import io.gromif.astracrypt.profile.domain.usecase.GetAeadModeFlowUseCase
 import io.gromif.astracrypt.profile.domain.usecase.GetProfileUsecase
 import io.gromif.astracrypt.profile.domain.usecase.GetValidationRulesUsecase
+import io.gromif.astracrypt.profile.domain.usecase.SetAeadModeUseCase
 import io.gromif.astracrypt.profile.domain.usecase.SetAvatarUsecase
 import io.gromif.astracrypt.profile.domain.usecase.SetExternalAvatarUsecase
 import io.gromif.astracrypt.profile.domain.usecase.SetNameUsecase
@@ -42,5 +44,17 @@ internal object UsecaseModule {
     @ViewModelScoped
     @Provides
     fun provideGetValidationRulesUsecase(): GetValidationRulesUsecase = GetValidationRulesUsecase()
+
+    @ViewModelScoped
+    @Provides
+    fun provideGetAeadModeFlowUseCase(
+        settingsRepository: SettingsRepository
+    ) = GetAeadModeFlowUseCase(settingsRepository)
+
+    @ViewModelScoped
+    @Provides
+    fun provideSetAeadModeUseCase(
+        settingsRepository: SettingsRepository
+    ) = SetAeadModeUseCase(settingsRepository)
 
 }

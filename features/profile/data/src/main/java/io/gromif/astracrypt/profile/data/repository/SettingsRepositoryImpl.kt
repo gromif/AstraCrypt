@@ -5,6 +5,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import io.gromif.astracrypt.profile.data.dto.ProfileDto
+import io.gromif.astracrypt.profile.domain.model.AeadMode
 import io.gromif.astracrypt.profile.domain.model.Profile
 import io.gromif.astracrypt.profile.domain.repository.SettingsRepository
 import io.gromif.astracrypt.utils.Mapper
@@ -61,9 +62,15 @@ class SettingsRepositoryImpl(
         dataStore.edit { it[avatarAeadKey] = aead }
     }
 
-    override suspend fun setAead(aead: Int) {
-        val targetAead = KeysetTemplates.AEAD.entries.getOrNull(aead)
+    override suspend fun setAead(aeadMode: AeadMode) {
+        val targetAead = KeysetTemplates.AEAD.entries.getOrNull(aeadMode.id)
         setTinkDataStoreAead(targetAead = targetAead)
+    }
+
+    override fun getAeadFlow(): Flow<AeadMode> {
+        return getTinkDataStoreAeadFlow().map {
+            it?.let { AeadMode.Template(id = it.ordinal) } ?: AeadMode.None
+        }
     }
 }
 
