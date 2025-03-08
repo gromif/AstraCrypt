@@ -23,7 +23,6 @@ val features = listOf(
     "profile",
     "lab-zip",
     "tink-lab",
-    "settings:aead"
 )
 
 // Include all modules

@@ -28,7 +28,5 @@ dependencies {
     playImplementation(projects.features.settings.about.googlePlay)
     implementation(projects.features.settings.about.privacy)
 
-    implementation(projects.features.settings.aead.presentation)
-
     implementation(libs.compose.navigation)
 }
