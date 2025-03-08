@@ -4,7 +4,7 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 include(":app")
 
 val coreModules = listOf(
-    "database:app-database", "database:notes", "tiles-with-coroutines",
+    "database:app-database", "tiles-with-coroutines",
     "resources", "utils", "design-system",
     "navigation"
 )
