@@ -16,11 +16,11 @@ import io.gromif.astracrypt.presentation.navigation.settings.aead.settingsSecuri
 import io.gromif.astracrypt.presentation.navigation.settings.aead.settingsSecurityColumnsAead
 import io.gromif.astracrypt.presentation.navigation.settings.profileSettings
 import io.gromif.astracrypt.presentation.navigation.settings.quickActionsSettings
+import io.gromif.astracrypt.presentation.navigation.settings.settingsSecurityAdmin
 import io.gromif.astracrypt.presentation.navigation.settings.ui.filesUiSettings
 import io.gromif.astracrypt.presentation.navigation.tabs.files.details
 import io.gromif.astracrypt.presentation.navigation.tabs.files.export
 import io.gromif.astracrypt.presentation.navigation.tabs.tabsGraph
-import io.gromif.astracrypt.view.security.admin.settingsSecurityAdmin
 import io.gromif.astracrypt.view.security.settingsSecurity
 import io.gromif.astracrypt.view.ui.settingsUi
 import kotlinx.coroutines.flow.Flow

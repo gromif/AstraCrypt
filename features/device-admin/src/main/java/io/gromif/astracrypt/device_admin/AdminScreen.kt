@@ -1,4 +1,4 @@
-package io.gromif.astracrypt.view.security.admin
+package io.gromif.astracrypt.device_admin
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
@@ -10,7 +10,7 @@ import com.nevidimka655.ui.compose_core.banners.Banner
 import com.nevidimka655.ui.compose_core.banners.Warning
 
 @Composable
-fun SettingsAdminScreen(
+internal fun AdminScreen(
     adminRightsGranted: Boolean = true,
     requestAdminRights: () -> Unit = {},
     disableAdminRights: () -> Unit = {}

@@ -1,4 +1,4 @@
-package io.gromif.astracrypt.app.di
+package io.gromif.astracrypt.device_admin.di
 
 import android.app.admin.DevicePolicyManager
 import android.content.ComponentName
@@ -8,13 +8,13 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
-import io.gromif.astracrypt.app.device_admin.DeviceAdminManager
-import io.gromif.astracrypt.app.device_admin.DeviceAdminReceiverImpl
-import io.gromif.astracrypt.app.device_admin.RequestDeviceAdminContract
+import io.gromif.astracrypt.device_admin.utils.DeviceAdminManager
+import io.gromif.astracrypt.device_admin.utils.DeviceAdminReceiverImpl
+import io.gromif.astracrypt.device_admin.utils.RequestDeviceAdminContract
 
 @Module
 @InstallIn(ViewModelComponent::class)
-object DevicePolicyModule {
+internal object DevicePolicyModule {
 
     @Provides
     fun provideAdminComponentImpl(@ApplicationContext context: Context) =
