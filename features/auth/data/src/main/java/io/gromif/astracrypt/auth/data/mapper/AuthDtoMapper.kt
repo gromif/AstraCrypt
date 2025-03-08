@@ -1,6 +1,6 @@
-package io.gromif.astracrypt.auth.data.data.mapper
+package io.gromif.astracrypt.auth.data.mapper
 
-import io.gromif.astracrypt.auth.data.data.dto.AuthDto
+import io.gromif.astracrypt.auth.data.dto.AuthDto
 import io.gromif.astracrypt.auth.domain.model.Auth
 import io.gromif.astracrypt.utils.Mapper
 

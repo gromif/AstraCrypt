@@ -7,8 +7,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.scopes.ViewModelScoped
-import io.gromif.astracrypt.auth.data.data.dto.AuthDto
-import io.gromif.astracrypt.auth.data.data.repository.SettingsRepositoryImpl
+import io.gromif.astracrypt.auth.data.dto.AuthDto
+import io.gromif.astracrypt.auth.data.repository.SettingsRepositoryImpl
 import io.gromif.astracrypt.auth.domain.model.Auth
 import io.gromif.astracrypt.auth.domain.repository.SettingsRepository
 import io.gromif.astracrypt.utils.Mapper

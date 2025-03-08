@@ -1,4 +1,4 @@
-package io.gromif.astracrypt.auth.data.data.service
+package io.gromif.astracrypt.auth.data.service
 
 import com.google.crypto.tink.prf.PrfSet
 import io.gromif.astracrypt.auth.domain.service.TinkService

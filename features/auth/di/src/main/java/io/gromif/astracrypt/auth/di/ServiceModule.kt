@@ -5,7 +5,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.scopes.ViewModelScoped
-import io.gromif.astracrypt.auth.data.data.service.TinkServiceImpl
+import io.gromif.astracrypt.auth.data.service.TinkServiceImpl
 import io.gromif.astracrypt.auth.domain.service.TinkService
 import io.gromif.crypto.tink.core.GetGlobalAssociatedDataPrf
 import io.gromif.crypto.tink.data.AssociatedDataManager

@@ -1,4 +1,4 @@
-package io.gromif.astracrypt.auth.data.data.dto
+package io.gromif.astracrypt.auth.data.dto
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

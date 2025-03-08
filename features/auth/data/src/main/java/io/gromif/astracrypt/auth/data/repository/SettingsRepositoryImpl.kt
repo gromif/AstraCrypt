@@ -1,9 +1,9 @@
-package io.gromif.astracrypt.auth.data.data.repository
+package io.gromif.astracrypt.auth.data.repository
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
-import io.gromif.astracrypt.auth.data.data.dto.AuthDto
+import io.gromif.astracrypt.auth.data.dto.AuthDto
 import io.gromif.astracrypt.auth.domain.model.AeadMode
 import io.gromif.astracrypt.auth.domain.model.Auth
 import io.gromif.astracrypt.auth.domain.repository.SettingsRepository
