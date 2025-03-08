@@ -9,6 +9,7 @@ import io.gromif.astracrypt.presentation.navigation.Route
 import io.gromif.astracrypt.presentation.navigation.models.UiState
 import io.gromif.astracrypt.presentation.navigation.shared.LocalHostEvents
 import io.gromif.astracrypt.presentation.navigation.shared.UiStateHandler
+import io.gromif.astracrypt.presentation.navigation.tabs.home.tabHome
 import io.gromif.astracrypt.presentation.navigation.tabs.settings.SettingsScreen
 
 internal fun NavGraphBuilder.tabsGraph() {
