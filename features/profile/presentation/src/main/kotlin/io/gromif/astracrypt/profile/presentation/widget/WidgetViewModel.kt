@@ -17,7 +17,7 @@ internal class WidgetViewModel @Inject constructor(
     getProfileUsecase: GetProfileUsecase
 ): ViewModel() {
     val profileState = getProfileUsecase().stateIn(
-        viewModelScope, SharingStarted.Eagerly, null
+        viewModelScope, SharingStarted.WhileSubscribed(), null
     )
 
 }

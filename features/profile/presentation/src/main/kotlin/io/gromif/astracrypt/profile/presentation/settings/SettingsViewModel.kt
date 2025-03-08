@@ -33,7 +33,7 @@ internal class SettingsViewModel @Inject constructor(
 ): ViewModel() {
     val validationRules = getValidationRulesUsecase()
     val profileState = getProfileUsecase().stateIn(
-        viewModelScope, SharingStarted.Eagerly, Profile()
+        viewModelScope, SharingStarted.WhileSubscribed(), Profile()
     )
 
     fun setName(name: String) = viewModelScope.launch(defaultDispatcher) {
