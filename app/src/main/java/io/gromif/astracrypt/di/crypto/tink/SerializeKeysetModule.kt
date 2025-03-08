@@ -1,4 +1,4 @@
-package io.gromif.astracrypt.app.di.crypto.tink
+package io.gromif.astracrypt.di.crypto.tink
 
 import dagger.Module
 import dagger.Provides

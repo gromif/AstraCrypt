@@ -1,4 +1,4 @@
-package io.gromif.astracrypt.data.crypto
+package io.gromif.astracrypt.utils.crypto
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences

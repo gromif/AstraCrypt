@@ -1,4 +1,4 @@
-package io.gromif.astracrypt.app
+package io.gromif.astracrypt
 
 import android.app.Application
 import androidx.hilt.work.HiltWorkerFactory
@@ -7,7 +7,7 @@ import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject
 
 @HiltAndroidApp
-class ApplicationBootloader : Application(), Configuration.Provider {
+class ApplicationLoader : Application(), Configuration.Provider {
 
     @Inject
     lateinit var workerFactory: HiltWorkerFactory

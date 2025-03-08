@@ -1,4 +1,4 @@
-package io.gromif.astracrypt.view
+package io.gromif.astracrypt
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

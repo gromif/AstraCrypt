@@ -1,4 +1,4 @@
-package io.gromif.astracrypt.app.di.datastore
+package io.gromif.astracrypt.di.datastore
 
 import android.content.Context
 import androidx.datastore.core.handlers.ReplaceFileCorruptionHandler

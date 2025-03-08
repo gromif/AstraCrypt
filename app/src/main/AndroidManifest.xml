@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
-        android:name="io.gromif.astracrypt.app.ApplicationBootloader"
+        android:name="io.gromif.astracrypt.ApplicationLoader"
         android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:enableOnBackInvokedCallback="true"
@@ -18,7 +18,7 @@
         android:theme="@style/Theme.AstraCrypt"
         tools:targetApi="tiramisu">
         <activity
-            android:name="io.gromif.astracrypt.view.MainActivity"
+            android:name="io.gromif.astracrypt.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.AstraCrypt">
             <intent-filter>
@@ -35,7 +35,7 @@
             android:icon="@mipmap/ic_launcher_calculator"
             android:label="@string/settings_camouflageType_calculator"
             android:roundIcon="@mipmap/ic_launcher_calculator_round"
-            android:targetActivity="io.gromif.astracrypt.view.MainActivity">
+            android:targetActivity="io.gromif.astracrypt.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -50,7 +50,7 @@
             tools:node="remove" />
 
         <provider
-            android:name="io.gromif.astracrypt.app.utils.AppFileProvider"
+            android:name="io.gromif.astracrypt.utils.AppFileProvider"
             android:authorities="com.nevidimka655.astracrypt"
             android:exported="false"
             android:grantUriPermissions="true">

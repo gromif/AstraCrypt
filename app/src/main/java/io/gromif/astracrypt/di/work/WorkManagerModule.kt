@@ -1,4 +1,4 @@
-package io.gromif.astracrypt.app.di.work
+package io.gromif.astracrypt.di.work
 
 import android.content.Context
 import androidx.work.WorkManager

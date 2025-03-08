@@ -1,4 +1,4 @@
-package io.gromif.astracrypt.app.di.crypto
+package io.gromif.astracrypt.di.crypto
 
 import android.content.Context
 import androidx.datastore.core.DataStore
@@ -8,9 +8,9 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import io.gromif.astracrypt.app.di.datastore.KeysetDataStore
-import io.gromif.astracrypt.data.crypto.DatastoreKeysetReader
-import io.gromif.astracrypt.data.crypto.DatastoreKeysetWriter
+import io.gromif.astracrypt.di.datastore.KeysetDataStore
+import io.gromif.astracrypt.utils.crypto.DatastoreKeysetReader
+import io.gromif.astracrypt.utils.crypto.DatastoreKeysetWriter
 import io.gromif.crypto.tink.core.GetGlobalAssociatedDataPrf
 import io.gromif.crypto.tink.core.encoders.HexEncoder
 import io.gromif.crypto.tink.core.hash.Sha256Util

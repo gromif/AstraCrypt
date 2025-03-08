@@ -1,4 +1,4 @@
-package io.gromif.astracrypt.view
+package io.gromif.astracrypt
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding

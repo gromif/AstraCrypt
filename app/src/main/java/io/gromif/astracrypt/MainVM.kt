@@ -1,4 +1,4 @@
-package io.gromif.astracrypt.view
+package io.gromif.astracrypt
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -9,8 +9,8 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.gromif.astracrypt.auth.domain.usecase.GetAuthFlowUseCase
 import io.gromif.astracrypt.auth.domain.usecase.VerifySkinUseCase
-import io.gromif.astracrypt.data.datastore.AppearanceManager
 import io.gromif.astracrypt.presentation.navigation.models.UiState
+import io.gromif.astracrypt.utils.AppearanceManager
 import io.gromif.astracrypt.utils.dispatchers.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.SharingStarted
