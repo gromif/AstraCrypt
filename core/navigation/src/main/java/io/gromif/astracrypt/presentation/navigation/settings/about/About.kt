@@ -18,7 +18,7 @@ private val DefaultUiState = UiState(
     )
 )
 
-fun NavGraphBuilder.about(
+internal fun NavGraphBuilder.about(
     applicationVersion: String,
 ) = composable<Route.AboutGraph.About> {
     val navController = LocalNavController.current

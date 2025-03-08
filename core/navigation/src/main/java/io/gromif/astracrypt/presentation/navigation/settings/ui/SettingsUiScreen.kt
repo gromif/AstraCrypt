@@ -9,7 +9,7 @@ import com.nevidimka655.ui.compose_core.PreferencesScreen
 import com.nevidimka655.ui.compose_core.PreferencesSwitch
 
 @Composable
-fun SettingsUiScreen(
+internal fun SettingsUiScreen(
     dynamicThemeState: Boolean,
     isDynamicColorsSupported: Boolean,
     onDynamicColorsStateChange: (Boolean) -> Unit,

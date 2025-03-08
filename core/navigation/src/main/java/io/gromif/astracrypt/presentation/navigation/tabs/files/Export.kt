@@ -18,7 +18,7 @@ private val ExportUiState = UiState(
     )
 )
 
-fun NavGraphBuilder.export() = composable<Route.Export> {
+internal fun NavGraphBuilder.export() = composable<Route.Export> {
     val hostEvents = LocalHostEvents.current
     UiStateHandler { hostEvents.setUiState(ExportUiState) }
 

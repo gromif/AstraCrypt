@@ -22,7 +22,7 @@ private val DefaultUiState = UiState(
     )
 )
 
-fun NavGraphBuilder.settingsSecurityColumnsAead() = composable<Route.SettingsSecurityColumnsAead> {
+internal fun NavGraphBuilder.settingsSecurityColumnsAead() = composable<Route.SettingsSecurityColumnsAead> {
     val hostEvents = LocalHostEvents.current
     UiStateHandler { hostEvents.setUiState(DefaultUiState) }
 

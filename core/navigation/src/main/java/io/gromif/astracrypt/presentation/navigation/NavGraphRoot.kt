@@ -19,7 +19,7 @@ import io.gromif.astracrypt.presentation.navigation.tabs.files.details
 import io.gromif.astracrypt.presentation.navigation.tabs.files.export
 import io.gromif.astracrypt.presentation.navigation.tabs.tabsGraph
 
-fun root(
+internal fun root(
     navParams: NavParams,
     onDynamicColorsStateChange: (Boolean) -> Unit,
 ): NavGraphBuilder.() -> Unit = {

@@ -5,7 +5,7 @@ import androidx.navigation.navigation
 import io.gromif.astracrypt.presentation.navigation.Route
 import io.gromif.astracrypt.presentation.navigation.lab.tink.labTinkGraph
 
-fun NavGraphBuilder.labGraph() = navigation<Route.LabGraph>(startDestination = Route.LabGraph.List) {
+internal fun NavGraphBuilder.labGraph() = navigation<Route.LabGraph>(startDestination = Route.LabGraph.List) {
     labList()
     labTinkGraph()
     labCombinedZip()

@@ -10,7 +10,7 @@ import com.nevidimka655.ui.compose_core.PreferencesScreen
 
 @Preview
 @Composable
-fun SettingsSecurityScreen(
+internal fun SettingsSecurityScreen(
     isActionsSupported: Boolean = true,
     navigateToEncryption: () -> Unit = {},
     navigateToAuth: () -> Unit = {},

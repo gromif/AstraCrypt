@@ -26,7 +26,7 @@ private val DefaultUiState = UiState(
     )
 )
 
-fun NavGraphBuilder.help() = composable<ComposableRoute> {
+internal fun NavGraphBuilder.help() = composable<ComposableRoute> {
     val hostEvents = LocalHostEvents.current
     UiStateHandler { hostEvents.setUiState(DefaultUiState) }
 

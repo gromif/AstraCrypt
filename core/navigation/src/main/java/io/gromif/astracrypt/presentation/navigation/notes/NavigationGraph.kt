@@ -4,7 +4,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.navigation
 import io.gromif.astracrypt.presentation.navigation.Route
 
-fun NavGraphBuilder.notesGraph() = navigation<Route.NotesGraph>(startDestination = Route.NotesGraph.List) {
+internal fun NavGraphBuilder.notesGraph() = navigation<Route.NotesGraph>(startDestination = Route.NotesGraph.List) {
     notesList()
     overviewNote()
 }

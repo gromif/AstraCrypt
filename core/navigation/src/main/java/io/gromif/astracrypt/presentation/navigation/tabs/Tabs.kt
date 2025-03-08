@@ -11,7 +11,7 @@ import io.gromif.astracrypt.presentation.navigation.shared.LocalHostEvents
 import io.gromif.astracrypt.presentation.navigation.shared.UiStateHandler
 import io.gromif.astracrypt.presentation.navigation.tabs.settings.SettingsScreen
 
-fun NavGraphBuilder.tabsGraph() {
+internal fun NavGraphBuilder.tabsGraph() {
     tabFiles()
     tabStarred()
     tabHome()

@@ -18,7 +18,7 @@ private val DefaultUiState = UiState(
 )
 
 
-fun NavGraphBuilder.profileSettings() = composable<Route.EditProfile> {
+internal fun NavGraphBuilder.profileSettings() = composable<Route.EditProfile> {
     val hostEvents = LocalHostEvents.current
     UiStateHandler { hostEvents.setUiState(DefaultUiState) }
 

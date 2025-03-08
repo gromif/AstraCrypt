@@ -16,7 +16,6 @@ import io.gromif.astracrypt.presentation.navigation.models.UiState
 import io.gromif.astracrypt.presentation.navigation.shared.LocalHostEvents
 import io.gromif.astracrypt.presentation.navigation.shared.LocalNavController
 import io.gromif.astracrypt.presentation.navigation.shared.UiStateHandler
-import io.gromif.astracrypt.presentation.navigation.tabs.files.DefaultUiState
 
 private typealias ComposableRoute = Route.NotesGraph.List
 

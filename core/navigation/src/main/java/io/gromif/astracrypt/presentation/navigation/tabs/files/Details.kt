@@ -11,13 +11,13 @@ import io.gromif.astracrypt.presentation.navigation.models.UiState
 import io.gromif.astracrypt.presentation.navigation.shared.LocalHostEvents
 import io.gromif.astracrypt.presentation.navigation.shared.UiStateHandler
 
-val DefaultUiState = UiState(
+private val DefaultUiState = UiState(
     toolbar = UiState.Toolbar(
         title = TextWrap.Resource(id = R.string.files_options_details)
     )
 )
 
-fun NavGraphBuilder.details() = composable<Route.Details> {
+internal fun NavGraphBuilder.details() = composable<Route.Details> {
     val hostEvents = LocalHostEvents.current
     UiStateHandler { hostEvents.setUiState(DefaultUiState) }
 

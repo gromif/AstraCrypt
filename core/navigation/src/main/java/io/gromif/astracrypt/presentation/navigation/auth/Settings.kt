@@ -16,7 +16,7 @@ private val DefaultUiState = UiState(
     )
 )
 
-fun NavGraphBuilder.settingsSecurityAuth() = composable<Route.SettingsSecurityAuth> {
+internal fun NavGraphBuilder.settingsSecurityAuth() = composable<Route.SettingsSecurityAuth> {
     val hostEvents = LocalHostEvents.current
     UiStateHandler { hostEvents.setUiState(DefaultUiState) }
 

@@ -16,7 +16,7 @@ private val DefaultUiState = UiState(
     )
 )
 
-fun NavGraphBuilder.settingsSecurity(
+internal fun NavGraphBuilder.settingsSecurity(
     isActionsSupported: Boolean,
 ) = composable<Route.SettingsSecurity> {
     val navController = LocalNavController.current

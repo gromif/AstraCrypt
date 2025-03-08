@@ -16,7 +16,7 @@ private val DefaultUiState = UiState(
     )
 )
 
-fun NavGraphBuilder.quickActionsSettings() = composable<Route.SettingsSecurityQuickActions> {
+internal fun NavGraphBuilder.quickActionsSettings() = composable<Route.SettingsSecurityQuickActions> {
     val hostEvents = LocalHostEvents.current
     UiStateHandler { hostEvents.setUiState(DefaultUiState) }
 

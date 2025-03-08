@@ -17,7 +17,7 @@ private val DefaultUiState = UiState(
     )
 )
 
-fun NavGraphBuilder.settingsUi(
+internal fun NavGraphBuilder.settingsUi(
     isDynamicColorsSupported: Boolean,
     onDynamicColorsStateChange: (Boolean) -> Unit,
 ) = composable<Route.SettingsUi> {
