@@ -16,23 +16,27 @@ import io.gromif.astracrypt.presentation.navigation.settings.aead.settingsSecuri
 import io.gromif.astracrypt.presentation.navigation.settings.aead.settingsSecurityColumnsAead
 import io.gromif.astracrypt.presentation.navigation.settings.profileSettings
 import io.gromif.astracrypt.presentation.navigation.settings.quickActionsSettings
+import io.gromif.astracrypt.presentation.navigation.settings.security.settingsSecurity
 import io.gromif.astracrypt.presentation.navigation.settings.settingsSecurityAdmin
 import io.gromif.astracrypt.presentation.navigation.settings.ui.filesUiSettings
+import io.gromif.astracrypt.presentation.navigation.settings.ui.settingsUi
 import io.gromif.astracrypt.presentation.navigation.tabs.files.details
 import io.gromif.astracrypt.presentation.navigation.tabs.files.export
 import io.gromif.astracrypt.presentation.navigation.tabs.tabsGraph
-import io.gromif.astracrypt.view.security.settingsSecurity
-import io.gromif.astracrypt.view.ui.settingsUi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow
 
 fun root(
     onUiStateChange: (UiState) -> Unit,
+    isActionsSupported: Boolean,
     navController: NavController,
     onFabClick: Flow<Any>,
     onToolbarActions: Flow<ToolbarActions.Action>,
     snackbarHostState: SnackbarHostState,
     searchQueryState: StateFlow<String>,
+    dynamicThemeState: Boolean,
+    isDynamicColorsSupported: Boolean,
+    onDynamicColorsStateChange: (Boolean) -> Unit,
 ): NavGraphBuilder.() -> Unit = {
     tabsGraph(
         onUiStateChange = onUiStateChange,
@@ -62,11 +66,15 @@ fun root(
     profileSettings(onUiStateChange = onUiStateChange)
     settingsUi(
         onUiStateChange = onUiStateChange,
-        navigateToFilesUiSettings = { navController.navigate(Route.SettingsUiFiles) }
+        navigateToFilesUiSettings = { navController.navigate(Route.SettingsUiFiles) },
+        dynamicThemeState = dynamicThemeState,
+        isDynamicColorsSupported = isDynamicColorsSupported,
+        onDynamicColorsStateChange = onDynamicColorsStateChange,
     )
     filesUiSettings(onUiStateChange = onUiStateChange)
     settingsSecurity(
         onUiStateChange = onUiStateChange,
+        isActionsSupported = isActionsSupported,
         navigateToAead = { navController.navigate(Route.SettingsSecurityAead) },
         navigateToAuth = { navController.navigate(Route.SettingsSecurityAuth) },
         navigateToDeviceAdmin = { navController.navigate(Route.SettingsSecurityAdmin) },

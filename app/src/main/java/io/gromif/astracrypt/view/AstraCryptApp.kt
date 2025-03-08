@@ -15,6 +15,7 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -57,9 +58,10 @@ fun AstraCryptApp(
     modifier: Modifier = Modifier,
     vm: MainVM = viewModel<MainVM>(),
     navController: NavHostController = rememberNavController(),
+    dynamicThemeState: State<Boolean> = vm.appearanceManager.dynamicThemeFlow.collectAsStateWithLifecycle(true)
 ) = AstraCryptTheme(
     isDynamicThemeSupported = Api.atLeast12(),
-    dynamicThemeFlow = vm.appearanceManager.dynamicThemeFlow
+    dynamicThemeState = dynamicThemeState.value
 ) {
     var uiState by vm.uiState
     val (toolbar, fab, bottomBarTab, searchBar) = uiState
@@ -180,11 +182,15 @@ fun AstraCryptApp(
             modifier = Modifier.padding(padding),
             builder = root(
                 onUiStateChange = { uiState = it },
+                isActionsSupported = Api.atLeast7(),
                 navController = navController,
                 onFabClick = onFabClick.receiveAsFlow(),
                 onToolbarActions = onToolbarActions.receiveAsFlow(),
                 snackbarHostState = snackbarHostState,
-                searchQueryState = vm.searchQueryState
+                searchQueryState = vm.searchQueryState,
+                dynamicThemeState = dynamicThemeState.value,
+                isDynamicColorsSupported = Api.atLeast12(),
+                onDynamicColorsStateChange = vm::setDynamicColorsState,
             )
         )
     }

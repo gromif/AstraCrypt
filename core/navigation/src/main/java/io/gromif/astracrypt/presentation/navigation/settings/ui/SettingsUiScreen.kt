@@ -1,4 +1,4 @@
-package io.gromif.astracrypt.view.ui
+package io.gromif.astracrypt.presentation.navigation.settings.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource

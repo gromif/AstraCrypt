@@ -1,8 +1,5 @@
-package io.gromif.astracrypt.view.ui
+package io.gromif.astracrypt.presentation.navigation.settings.ui
 
-import androidx.compose.runtime.getValue
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.nevidimka655.astracrypt.resources.R
@@ -19,17 +16,17 @@ private val SettingsUi_UiState = UiState(
 
 fun NavGraphBuilder.settingsUi(
     onUiStateChange: (UiState) -> Unit,
-    navigateToFilesUiSettings: () -> Unit
+    navigateToFilesUiSettings: () -> Unit,
+    dynamicThemeState: Boolean,
+    isDynamicColorsSupported: Boolean,
+    onDynamicColorsStateChange: (Boolean) -> Unit,
 ) = composable<Route.SettingsUi> {
     UiStateHandler { onUiStateChange(SettingsUi_UiState) }
-    val vm: SettingsUiViewModel = hiltViewModel()
 
-    val dynamicThemeState by vm.dynamicThemeFlow
-        .collectAsStateWithLifecycle(initialValue = true)
     SettingsUiScreen(
         dynamicThemeState = dynamicThemeState,
-        isDynamicColorsSupported = vm.isDynamicColorsSupported,
-        onDynamicColorsStateChange = { vm.setDynamicColorsState(enabled = it) },
+        isDynamicColorsSupported = isDynamicColorsSupported,
+        onDynamicColorsStateChange = onDynamicColorsStateChange,
         navigateToFilesUiSettings = navigateToFilesUiSettings
     )
 }

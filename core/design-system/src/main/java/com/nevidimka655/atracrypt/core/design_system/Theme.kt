@@ -11,24 +11,19 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.SideEffect
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.nevidimka655.ui.compose_core.ext.windowSizeClassLocalProviders
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.emptyFlow
 
 @SuppressLint("NewApi")
 @Composable
 fun AstraCryptTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     isDynamicThemeSupported: Boolean = true,
-    dynamicThemeFlow: Flow<Boolean> = emptyFlow<Boolean>(),
+    dynamicThemeState: Boolean,
     content: @Composable () -> Unit
 ) {
-    val dynamicThemeState by dynamicThemeFlow.collectAsStateWithLifecycle(initialValue = true)
     val colorScheme = when {
         dynamicThemeState && isDynamicThemeSupported -> {
             val context = LocalContext.current

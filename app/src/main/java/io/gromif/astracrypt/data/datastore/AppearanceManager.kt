@@ -12,8 +12,10 @@ class AppearanceManager(
 
     private val dynamicTheme = booleanPreferencesKey("lime")
     val dynamicThemeFlow = dataStore.data.map { it[dynamicTheme] != false }
-    suspend fun setDynamicTheme(enabled: Boolean) = dataStore.edit { preferences ->
-        preferences[dynamicTheme] = enabled
+    suspend fun setDynamicTheme(enabled: Boolean) {
+        dataStore.edit { preferences ->
+            preferences[dynamicTheme] = enabled
+        }
     }
 
 }

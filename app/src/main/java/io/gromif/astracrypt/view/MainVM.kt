@@ -48,4 +48,8 @@ class MainVM @Inject constructor(
         state[SEARCH_QUERY] = query
     }
 
+    fun setDynamicColorsState(enabled: Boolean) = viewModelScope.launch(defaultDispatcher) {
+        appearanceManager.setDynamicTheme(enabled = enabled)
+    }
+
 }

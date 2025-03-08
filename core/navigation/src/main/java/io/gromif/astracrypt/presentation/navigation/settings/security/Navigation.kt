@@ -1,4 +1,4 @@
-package io.gromif.astracrypt.view.security
+package io.gromif.astracrypt.presentation.navigation.settings.security
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
@@ -7,7 +7,6 @@ import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 import io.gromif.astracrypt.presentation.navigation.Route
 import io.gromif.astracrypt.presentation.navigation.models.UiState
 import io.gromif.astracrypt.presentation.navigation.shared.UiStateHandler
-import io.gromif.astracrypt.utils.Api
 
 private val SettingsSecurityUiState = UiState(
     toolbar = UiState.Toolbar(
@@ -17,6 +16,7 @@ private val SettingsSecurityUiState = UiState(
 
 fun NavGraphBuilder.settingsSecurity(
     onUiStateChange: (UiState) -> Unit,
+    isActionsSupported: Boolean,
     navigateToAead: () -> Unit,
     navigateToAuth: () -> Unit,
     navigateToDeviceAdmin: () -> Unit,
@@ -24,7 +24,7 @@ fun NavGraphBuilder.settingsSecurity(
 ) = composable<Route.SettingsSecurity> {
     UiStateHandler { onUiStateChange(SettingsSecurityUiState) }
     SettingsSecurityScreen(
-        isActionsSupported = Api.atLeast7(),
+        isActionsSupported = isActionsSupported,
         navigateToEncryption = navigateToAead,
         navigateToAuth = navigateToAuth,
         navigateToDeviceAdmin = navigateToDeviceAdmin,
