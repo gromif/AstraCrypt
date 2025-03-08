@@ -19,7 +19,6 @@ dependencies {
     implementation(projects.features.notes.presentation)
     implementation(projects.features.auth.presentation)
     implementation(projects.features.help)
-    implementation(projects.features.home)
     implementation(projects.features.profile.presentation)
     implementation(projects.features.quickActions)
     implementation(projects.features.deviceAdmin)
