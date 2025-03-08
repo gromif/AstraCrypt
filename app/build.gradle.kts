@@ -60,7 +60,6 @@ dependencies {
     implementation(projects.core.utils)
     implementation(projects.core.resources)
     implementation(projects.ui.haptic)
-    implementation(projects.core.tilesWithCoroutines)
 
     implementation(projects.core.database.appDatabase)
 

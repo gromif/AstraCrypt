@@ -21,6 +21,7 @@ dependencies {
     implementation(projects.features.help)
     implementation(projects.features.home)
     implementation(projects.features.profile.presentation)
+    implementation(projects.features.quickActions)
 
     fdroidImplementation(projects.features.settings.about.fdroid)
     playImplementation(projects.features.settings.about.googlePlay)

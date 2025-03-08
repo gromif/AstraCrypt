@@ -1,4 +1,4 @@
-package io.gromif.astracrypt.app.services
+package io.gromif.astracrypt.quick_actions.services
 
 import android.os.Build
 import androidx.annotation.RequiresApi

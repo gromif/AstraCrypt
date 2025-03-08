@@ -1,4 +1,4 @@
-package io.gromif.astracrypt.view.security.quick_actions
+package io.gromif.astracrypt.quick_actions
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -9,7 +9,7 @@ import io.gromif.astracrypt.utils.app.AppComponentService
 import javax.inject.Inject
 
 @HiltViewModel
-class SettingsQuickActionsViewModel @Inject constructor(
+internal class SettingsQuickActionsViewModel @Inject constructor(
     private val appComponentService: AppComponentService,
 ) : ViewModel() {
     var wipeTile by mutableStateOf(false)

@@ -15,12 +15,12 @@ import io.gromif.astracrypt.presentation.navigation.settings.about.aboutGraph
 import io.gromif.astracrypt.presentation.navigation.settings.aead.settingsSecurityAead
 import io.gromif.astracrypt.presentation.navigation.settings.aead.settingsSecurityColumnsAead
 import io.gromif.astracrypt.presentation.navigation.settings.profileSettings
+import io.gromif.astracrypt.presentation.navigation.settings.quickActionsSettings
 import io.gromif.astracrypt.presentation.navigation.settings.ui.filesUiSettings
 import io.gromif.astracrypt.presentation.navigation.tabs.files.details
 import io.gromif.astracrypt.presentation.navigation.tabs.files.export
 import io.gromif.astracrypt.presentation.navigation.tabs.tabsGraph
 import io.gromif.astracrypt.view.security.admin.settingsSecurityAdmin
-import io.gromif.astracrypt.view.security.quick_actions.settingsSecurityQuickActions
 import io.gromif.astracrypt.view.security.settingsSecurity
 import io.gromif.astracrypt.view.ui.settingsUi
 import kotlinx.coroutines.flow.Flow
@@ -82,7 +82,7 @@ fun root(
         onUiStateChange = onUiStateChange,
         onToolbarActions = onToolbarActions
     )
-    settingsSecurityQuickActions(onUiStateChange = onUiStateChange)
+    quickActionsSettings(onUiStateChange = onUiStateChange)
     aboutGraph(
         onUiStateChange = onUiStateChange,
         snackbarHostState = snackbarHostState,

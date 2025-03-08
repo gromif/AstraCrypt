@@ -1,4 +1,4 @@
-package io.gromif.astracrypt.view.security.quick_actions
+package io.gromif.astracrypt.quick_actions
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
@@ -10,9 +10,9 @@ import com.nevidimka655.ui.compose_core.PreferencesSwitch
 
 @Preview
 @Composable
-fun SettingsQuickActionsScreen(
+internal fun QuickActionsScreen(
     quickDataDeletion: Boolean = true,
-    onSetQuickDataDeletion: (Boolean) -> Unit = {}
+    onSetQuickDataDeletion: (Boolean) -> Unit = {},
 ) = PreferencesScreen {
     PreferencesGroup {
         PreferencesSwitch(
