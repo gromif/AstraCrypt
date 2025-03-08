@@ -6,27 +6,32 @@ import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 import io.gromif.astracrypt.presentation.navigation.Route
 import io.gromif.astracrypt.presentation.navigation.models.UiState
+import io.gromif.astracrypt.presentation.navigation.shared.LocalHostEvents
+import io.gromif.astracrypt.presentation.navigation.shared.LocalHostStateHolder
+import io.gromif.astracrypt.presentation.navigation.shared.LocalNavController
 import io.gromif.astracrypt.presentation.navigation.shared.UiStateHandler
 
-private val SettingsUi_UiState = UiState(
+private val DefaultUiState = UiState(
     toolbar = UiState.Toolbar(
         title = TextWrap.Resource(id = R.string.settings_interface)
     )
 )
 
 fun NavGraphBuilder.settingsUi(
-    onUiStateChange: (UiState) -> Unit,
-    navigateToFilesUiSettings: () -> Unit,
-    dynamicThemeState: Boolean,
     isDynamicColorsSupported: Boolean,
     onDynamicColorsStateChange: (Boolean) -> Unit,
 ) = composable<Route.SettingsUi> {
-    UiStateHandler { onUiStateChange(SettingsUi_UiState) }
+    val navController = LocalNavController.current
+    val hostStateHolder = LocalHostStateHolder.current
+    val hostEvents = LocalHostEvents.current
+    UiStateHandler { hostEvents.setUiState(DefaultUiState) }
 
     SettingsUiScreen(
-        dynamicThemeState = dynamicThemeState,
+        dynamicThemeState = hostStateHolder.dynamicThemeState,
         isDynamicColorsSupported = isDynamicColorsSupported,
         onDynamicColorsStateChange = onDynamicColorsStateChange,
-        navigateToFilesUiSettings = navigateToFilesUiSettings
+        navigateToFilesUiSettings = {
+            navController.navigate(Route.SettingsUiFiles)
+        }
     )
 }

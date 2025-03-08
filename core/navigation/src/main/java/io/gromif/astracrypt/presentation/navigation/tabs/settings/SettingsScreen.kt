@@ -26,14 +26,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.nevidimka655.ui.compose_core.ext.LocalWindowWidth
 import com.nevidimka655.ui.compose_core.theme.spaces
+import io.gromif.astracrypt.presentation.navigation.Route
+import io.gromif.astracrypt.presentation.navigation.shared.LocalNavController
 
 @Composable
-fun SettingsScreen(
-    navigateToEditProfile: () -> Unit = {},
-    navigateToUi: () -> Unit = {},
-    navigateToSecurity: () -> Unit = {},
-    navigateToAbout: () -> Unit = {}
-) {
+fun SettingsScreen() {
+    val navController = LocalNavController.current
+
     val cellsCount = when(LocalWindowWidth.current) {
         WindowWidthSizeClass.Compact -> 2
         WindowWidthSizeClass.Medium -> 3
@@ -53,10 +52,10 @@ fun SettingsScreen(
                 imageVector = key.imageVector
             ) {
                 when (key) {
-                    SettingsMainItems.EditProfile -> navigateToEditProfile()
-                    SettingsMainItems.Security -> navigateToSecurity()
-                    SettingsMainItems.Interface -> navigateToUi()
-                    SettingsMainItems.About -> navigateToAbout()
+                    SettingsMainItems.EditProfile -> navController.navigate(Route.EditProfile)
+                    SettingsMainItems.Security -> navController.navigate(Route.SettingsSecurity)
+                    SettingsMainItems.Interface -> navController.navigate(Route.SettingsUi)
+                    SettingsMainItems.About -> navController.navigate(Route.AboutGraph)
                 }
             }
         }

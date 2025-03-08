@@ -7,6 +7,7 @@ import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 import io.gromif.astracrypt.device_admin.AdminSettingsScreen
 import io.gromif.astracrypt.presentation.navigation.Route
 import io.gromif.astracrypt.presentation.navigation.models.UiState
+import io.gromif.astracrypt.presentation.navigation.shared.LocalHostEvents
 import io.gromif.astracrypt.presentation.navigation.shared.UiStateHandler
 
 private val DefaultUiState = UiState(
@@ -15,10 +16,9 @@ private val DefaultUiState = UiState(
     )
 )
 
-fun NavGraphBuilder.settingsSecurityAdmin(
-    onUiStateChange: (UiState) -> Unit
-) = composable<Route.SettingsSecurityAdmin> {
-    UiStateHandler { onUiStateChange(DefaultUiState) }
+fun NavGraphBuilder.settingsSecurityAdmin() = composable<Route.SettingsSecurityAdmin> {
+    val hostEvents = LocalHostEvents.current
+    UiStateHandler { hostEvents.setUiState(DefaultUiState) }
 
     AdminSettingsScreen()
 }

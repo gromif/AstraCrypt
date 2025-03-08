@@ -9,6 +9,7 @@ import io.gromif.astracrypt.files.export.FilesExportScreen
 import io.gromif.astracrypt.files.export.model.Params
 import io.gromif.astracrypt.presentation.navigation.Route
 import io.gromif.astracrypt.presentation.navigation.models.UiState
+import io.gromif.astracrypt.presentation.navigation.shared.LocalHostEvents
 import io.gromif.astracrypt.presentation.navigation.shared.UiStateHandler
 
 private val ExportUiState = UiState(
@@ -17,12 +18,11 @@ private val ExportUiState = UiState(
     )
 )
 
-fun NavGraphBuilder.export(
-    onUiStateChange: (UiState) -> Unit
-) = composable<Route.Export> {
-    val route: Route.Export = it.toRoute()
+fun NavGraphBuilder.export() = composable<Route.Export> {
+    val hostEvents = LocalHostEvents.current
+    UiStateHandler { hostEvents.setUiState(ExportUiState) }
 
-    UiStateHandler { onUiStateChange(ExportUiState) }
+    val route: Route.Export = it.toRoute()
 
     FilesExportScreen(
         params = Params(

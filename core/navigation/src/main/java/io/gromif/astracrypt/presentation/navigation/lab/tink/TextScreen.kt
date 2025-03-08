@@ -13,16 +13,17 @@ import com.nevidimka655.tink_lab.text.TextScreen
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 import io.gromif.astracrypt.presentation.navigation.Route
 import io.gromif.astracrypt.presentation.navigation.models.UiState
+import io.gromif.astracrypt.presentation.navigation.shared.LocalHostEvents
 import io.gromif.astracrypt.presentation.navigation.shared.UiStateHandler
 
-private val ScreenUiState = UiState(
+private val DefaultUiState = UiState(
     toolbar = UiState.Toolbar(title = TextWrap.Resource(id = R.string.text))
 )
 
-internal fun NavGraphBuilder.tinkText(
-    onUiStateChange: (UiState) -> Unit
-) = composable<Route.LabGraph.TinkGraph.Text> {
-    UiStateHandler { onUiStateChange(ScreenUiState) }
+internal fun NavGraphBuilder.tinkText() = composable<Route.LabGraph.TinkGraph.Text> {
+    val hostEvents = LocalHostEvents.current
+    UiStateHandler { hostEvents.setUiState(DefaultUiState) }
+
     val route: Route.LabGraph.TinkGraph.Text = it.toRoute()
 
     TinkLab.TextScreen(

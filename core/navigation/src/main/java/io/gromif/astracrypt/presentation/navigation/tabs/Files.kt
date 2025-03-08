@@ -1,10 +1,10 @@
 package io.gromif.astracrypt.presentation.navigation.tabs
 
+import android.net.Uri
 import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.DriveFileMove
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -32,29 +32,37 @@ import io.gromif.astracrypt.presentation.navigation.models.actions.delete
 import io.gromif.astracrypt.presentation.navigation.models.actions.move
 import io.gromif.astracrypt.presentation.navigation.models.actions.star
 import io.gromif.astracrypt.presentation.navigation.models.actions.unStar
-import io.gromif.astracrypt.presentation.navigation.shared.FabClickObserver
-import io.gromif.astracrypt.presentation.navigation.shared.ToolbarActionsObserver
+import io.gromif.astracrypt.presentation.navigation.shared.LocalHostEvents
+import io.gromif.astracrypt.presentation.navigation.shared.LocalHostStateHolder
+import io.gromif.astracrypt.presentation.navigation.shared.LocalNavController
 import io.gromif.astracrypt.presentation.navigation.shared.UiStateHandler
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 
 private typealias FilesRoute = Route.Tabs.Files
 private typealias StarredRoute = Route.Tabs.Starred
+
+internal fun NavGraphBuilder.tabStarred() = composable<StarredRoute> {
+    FilesSharedNavigation(isStarred = true)
+}
+
+internal fun NavGraphBuilder.tabFiles() = composable<FilesRoute> {
+    val route: FilesRoute = it.toRoute()
+    FilesSharedNavigation(
+        startParentId = route.startParentId,
+        startParentName = route.startParentName,
+    )
+}
 
 @Composable
 private fun AnimatedContentScope.FilesSharedNavigation(
     startParentId: Long? = null,
     startParentName: String = "",
     isStarred: Boolean = false,
-    onUiStateChange: (UiState) -> Unit,
-    onToolbarActions: Flow<ToolbarActions.Action>,
-    onFabClick: Flow<Any>,
-    snackbarHostState: SnackbarHostState,
-    searchQueryState: StateFlow<String>,
-    navActions: FilesNavActions,
 ) {
+    val navController = LocalNavController.current
+    val hostStateHolder = LocalHostStateHolder.current
+    val hostEvents = LocalHostEvents.current
     val context = LocalContext.current
     var modeState by rememberSaveable { mutableStateOf<Mode>(Mode.Default) }
 
@@ -74,11 +82,11 @@ private fun AnimatedContentScope.FilesSharedNavigation(
                 )
             }
         }
-        onUiStateChange(newUiState)
+        hostEvents.setUiState(newUiState)
     }
 
     val contextChannel = remember { Channel<ContextualAction>() }
-    ToolbarActionsObserver(onToolbarActions) {
+    hostEvents.ObserveToolbarActions {
         val contextualAction = when {
             it === ToolbarActions.createFolder -> ContextualAction.CreateFolder
             it === ToolbarActions.star -> ContextualAction.Star(state = true)
@@ -90,7 +98,7 @@ private fun AnimatedContentScope.FilesSharedNavigation(
         contextChannel.send(contextualAction)
     }
 
-    if (!isStarred) FabClickObserver(onFabClick) {
+    if (!isStarred) hostEvents.ObserveFab {
         when {
             modeState === Mode.Default -> {
                 Haptic.rise()
@@ -107,50 +115,39 @@ private fun AnimatedContentScope.FilesSharedNavigation(
         mode = modeState,
         isStarred = isStarred,
         onContextualAction = contextChannel.receiveAsFlow(),
-        snackbarHostState = snackbarHostState,
-        searchQueryState = searchQueryState,
+        snackbarHostState = hostStateHolder.snackbarHostState,
+        searchQueryState = hostStateHolder.searchQueryState,
         onModeChange = { modeState = it },
-        navActions = navActions,
-    )
-}
+        navActions = object : FilesNavActions {
+            override fun toFiles(id: Long, name: String) = with(navController) {
+                clearBackStack(Route.Tabs.Files())
+                navigate(Route.Tabs.Files(startParentId = id, startParentName = name)) {
+                    launchSingleTop = true
+                    popUpTo(Route.Tabs.Home) { saveState = true }
+                }
+            }
 
-internal fun NavGraphBuilder.tabStarred(
-    onUiStateChange: (UiState) -> Unit,
-    onToolbarActions: Flow<ToolbarActions.Action>,
-    onFabClick: Flow<Any>,
-    snackbarHostState: SnackbarHostState,
-    searchQueryState: StateFlow<String>,
-    navActions: FilesNavActions,
-) = composable<StarredRoute> {
-    FilesSharedNavigation(
-        isStarred = true,
-        onUiStateChange = onUiStateChange,
-        onToolbarActions = onToolbarActions,
-        onFabClick = onFabClick,
-        snackbarHostState = snackbarHostState,
-        searchQueryState = searchQueryState,
-        navActions = navActions,
-    )
-}
+            override fun toExport(id: Long, output: Uri) {
+                navController.navigate(
+                    Route.Export(
+                        isExternalExport = true,
+                        itemId = id,
+                        outUri = output.toString()
+                    ))
+            }
 
-internal fun NavGraphBuilder.tabFiles(
-    onUiStateChange: (UiState) -> Unit,
-    onToolbarActions: Flow<ToolbarActions.Action>,
-    onFabClick: Flow<Any>,
-    snackbarHostState: SnackbarHostState,
-    searchQueryState: StateFlow<String>,
-    navActions: FilesNavActions,
-) = composable<FilesRoute> {
-    val route: FilesRoute = it.toRoute()
-    FilesSharedNavigation(
-        startParentId = route.startParentId,
-        startParentName = route.startParentName,
-        onUiStateChange = onUiStateChange,
-        onToolbarActions = onToolbarActions,
-        onFabClick = onFabClick,
-        snackbarHostState = snackbarHostState,
-        searchQueryState = searchQueryState,
-        navActions = navActions,
+            override fun toExportPrivately(id: Long) {
+                navController.navigate(
+                    Route.Export(
+                        isExternalExport = false,
+                        itemId = id
+                    ))
+            }
+
+            override fun toDetails(id: Long) {
+                navController.navigate(Route.Details(id = id))
+            }
+        },
     )
 }
 

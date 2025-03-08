@@ -13,18 +13,19 @@ import com.nevidimka655.tink_lab.files.FilesScreen
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 import io.gromif.astracrypt.presentation.navigation.Route
 import io.gromif.astracrypt.presentation.navigation.models.UiState
+import io.gromif.astracrypt.presentation.navigation.shared.LocalHostEvents
 import io.gromif.astracrypt.presentation.navigation.shared.UiStateHandler
 
 private typealias ComposableRoute = Route.LabGraph.TinkGraph.Files
 
-private val ScreenUiState = UiState(
+private val DefaultUiState = UiState(
     toolbar = UiState.Toolbar(title = TextWrap.Resource(id = R.string.files))
 )
 
-internal fun NavGraphBuilder.tinkFiles(
-    onUiStateChange: (UiState) -> Unit
-) = composable<ComposableRoute> {
-    UiStateHandler { onUiStateChange(ScreenUiState) }
+internal fun NavGraphBuilder.tinkFiles() = composable<ComposableRoute> {
+    val hostEvents = LocalHostEvents.current
+    UiStateHandler { hostEvents.setUiState(DefaultUiState) }
+
     val route: ComposableRoute = it.toRoute()
 
     TinkLab.FilesScreen(

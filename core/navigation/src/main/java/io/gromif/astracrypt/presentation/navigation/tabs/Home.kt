@@ -12,13 +12,13 @@ import io.gromif.astracrypt.presentation.navigation.models.UiState
 import io.gromif.astracrypt.presentation.navigation.models.actions.ToolbarActions
 import io.gromif.astracrypt.presentation.navigation.models.actions.lab
 import io.gromif.astracrypt.presentation.navigation.models.actions.notes
-import io.gromif.astracrypt.presentation.navigation.shared.ToolbarActionsObserver
+import io.gromif.astracrypt.presentation.navigation.shared.LocalHostEvents
+import io.gromif.astracrypt.presentation.navigation.shared.LocalNavController
 import io.gromif.astracrypt.presentation.navigation.shared.UiStateHandler
-import kotlinx.coroutines.flow.Flow
 
 private typealias HomeRoute = Route.Tabs.Home
 
-private val HomeUiState = UiState(
+private val DefaultUiState = UiState(
     toolbar = UiState.Toolbar(
         title = TextWrap.Resource(id = R.string.home),
         actions = listOf(ToolbarActions.notes, ToolbarActions.lab)
@@ -26,21 +26,31 @@ private val HomeUiState = UiState(
     bottomBarTab = BottomBarItems.Home
 )
 
-internal fun NavGraphBuilder.tabHome(
-    onUiStateChange: (UiState) -> Unit,
-    onToolbarActions: Flow<ToolbarActions.Action>,
-    navigateToNotes: () -> Unit,
-    navigateToLab: () -> Unit,
-    actions: Actions,
-) = composable<HomeRoute> {
-    UiStateHandler { onUiStateChange(HomeUiState) }
+internal fun NavGraphBuilder.tabHome() = composable<HomeRoute> {
+    val navController = LocalNavController.current
+    val hostEvents = LocalHostEvents.current
+    UiStateHandler { hostEvents.setUiState(DefaultUiState) }
 
-    ToolbarActionsObserver(onToolbarActions) {
+    hostEvents.ObserveToolbarActions {
         when (it) {
-            ToolbarActions.notes -> navigateToNotes()
-            ToolbarActions.lab -> navigateToLab()
+            ToolbarActions.notes -> navController.navigate(Route.NotesGraph)
+            ToolbarActions.lab -> navController.navigate(Route.LabGraph)
         }
     }
 
-    HomeScreen(recentFilesActions = actions)
+    HomeScreen(
+        recentFilesActions = object : Actions {
+            override fun openFile(id: Long) {
+                navController.navigate(Route.Export(isExternalExport = false, itemId = id))
+            }
+
+            override fun openFolder(id: Long, name: String) = with(navController) {
+                clearBackStack(Route.Tabs.Files())
+                navigate(Route.Tabs.Files(startParentId = id, startParentName = name)) {
+                    launchSingleTop = true
+                    popUpTo(Route.Tabs.Home) { saveState = true }
+                }
+            }
+        }
+    )
 }

@@ -17,29 +17,25 @@ import io.gromif.astracrypt.presentation.navigation.Route
 import io.gromif.astracrypt.presentation.navigation.models.UiState
 import io.gromif.astracrypt.presentation.navigation.models.actions.ToolbarActions
 import io.gromif.astracrypt.presentation.navigation.models.actions.delete
-import io.gromif.astracrypt.presentation.navigation.shared.FabClickObserver
-import io.gromif.astracrypt.presentation.navigation.shared.ToolbarActionsObserver
+import io.gromif.astracrypt.presentation.navigation.shared.LocalHostEvents
 import io.gromif.astracrypt.presentation.navigation.shared.UiStateHandler
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.Flow
 
 private val SaveFabUiState = UiState.Fab(icon = Icons.Default.SaveAs)
 
-internal fun NavGraphBuilder.overviewNote(
-    onUiStateChange: (UiState) -> Unit,
-    onToolbarActions: Flow<ToolbarActions.Action>,
-    onFabClick: Flow<Any>
-) = composable<Route.NotesGraph.Overview> {
+internal fun NavGraphBuilder.overviewNote() = composable<Route.NotesGraph.Overview> {
+    val hostEvents = LocalHostEvents.current
+
     val overview: Route.NotesGraph.Overview = it.toRoute()
     var editMode by remember { mutableStateOf(overview.noteId != -1L) }
 
     val onSaveRequestChannel = remember { Channel<Unit>(0) }
     val onDeleteRequestChannel = remember { Channel<Unit>(0) }
 
-    if (editMode) ToolbarActionsObserver(onToolbarActions) {
+    if (editMode) hostEvents.ObserveToolbarActions {
         if (it == ToolbarActions.delete) onDeleteRequestChannel.send(Unit)
     }
-    FabClickObserver(onFabClick) {
+    hostEvents.ObserveFab {
         onSaveRequestChannel.send(Unit)
     }
 
@@ -57,7 +53,7 @@ internal fun NavGraphBuilder.overviewNote(
             ),
             fab = if (name.isNotBlank() || text.isNotBlank()) SaveFabUiState else null
         )
-        onUiStateChange(newState)
+        hostEvents.setUiState(newState)
     }
 
     Notes.OverviewScreen(

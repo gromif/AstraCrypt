@@ -30,6 +30,7 @@ import androidx.navigation.compose.rememberNavController
 import com.nevidimka655.astracrypt.BuildConfig
 import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.atracrypt.core.design_system.AstraCryptTheme
+import com.nevidimka655.ui.compose_core.ext.FlowObserver
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 import io.gromif.astracrypt.auth.domain.model.AuthType
 import io.gromif.astracrypt.auth.domain.model.SkinType
@@ -40,6 +41,9 @@ import io.gromif.astracrypt.presentation.navigation.composables.BottomBarImpl
 import io.gromif.astracrypt.presentation.navigation.composables.FloatingActionButtonImpl
 import io.gromif.astracrypt.presentation.navigation.composables.appbar.SearchBarImpl
 import io.gromif.astracrypt.presentation.navigation.composables.appbar.ToolbarImpl
+import io.gromif.astracrypt.presentation.navigation.models.HostEvents
+import io.gromif.astracrypt.presentation.navigation.models.HostStateHolder
+import io.gromif.astracrypt.presentation.navigation.models.NavParams
 import io.gromif.astracrypt.presentation.navigation.models.UiState
 import io.gromif.astracrypt.presentation.navigation.models.actions.ToolbarActions
 import io.gromif.astracrypt.utils.Api
@@ -172,17 +176,34 @@ fun AstraCryptApp(
             }
         } else MainNavHost(
             modifier = Modifier.padding(padding),
-            onUiStateChange = { uiState = it },
-            isActionsSupported = Api.atLeast7(),
+            navParams = NavParams(
+                isActionsSupported = Api.atLeast7(),
+                isDynamicColorsSupported = Api.atLeast12(),
+                applicationVersion = BuildConfig.VERSION_NAME
+            ),
+            hostStateHolder = HostStateHolder(
+                dynamicThemeState = dynamicThemeState.value,
+                snackbarHostState = snackbarHostState,
+                searchQueryState = vm.searchQueryState
+            ),
+            hostEvents = object : HostEvents {
+                override fun setUiState(targetState: UiState) {
+                    uiState = targetState
+                }
+
+                @Composable
+                override fun ObserveFab(action: suspend (Any) -> Unit) {
+                    FlowObserver(onFabClick.receiveAsFlow(), action)
+                }
+
+                @Composable
+                override fun ObserveToolbarActions(action: suspend (Any) -> Unit) {
+                    FlowObserver(onToolbarActions.receiveAsFlow(), action)
+                }
+
+            },
             navController = navController,
-            onFabClick = onFabClick.receiveAsFlow(),
-            onToolbarActions = onToolbarActions.receiveAsFlow(),
-            snackbarHostState = snackbarHostState,
-            searchQueryState = vm.searchQueryState,
-            dynamicThemeState = dynamicThemeState.value,
-            isDynamicColorsSupported = Api.atLeast12(),
             onDynamicColorsStateChange = vm::setDynamicColorsState,
-            applicationVersion = BuildConfig.VERSION_NAME
         )
     }
 }

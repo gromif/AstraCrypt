@@ -13,28 +13,28 @@ import com.nevidimka655.ui.compose_core.NoItemsPage
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 import io.gromif.astracrypt.presentation.navigation.Route
 import io.gromif.astracrypt.presentation.navigation.models.UiState
-import io.gromif.astracrypt.presentation.navigation.shared.FabClickObserver
+import io.gromif.astracrypt.presentation.navigation.shared.LocalHostEvents
+import io.gromif.astracrypt.presentation.navigation.shared.LocalNavController
 import io.gromif.astracrypt.presentation.navigation.shared.UiStateHandler
-import kotlinx.coroutines.flow.Flow
+import io.gromif.astracrypt.presentation.navigation.tabs.files.DefaultUiState
 
 private typealias ComposableRoute = Route.NotesGraph.List
 
-private val NotesUiState = UiState(
+private val DefaultUiState = UiState(
     toolbar = UiState.Toolbar(
         title = TextWrap.Resource(id = R.string.notes)
     ),
     fab = UiState.Fab(icon = Icons.AutoMirrored.Default.NoteAdd)
 )
 
-internal fun NavGraphBuilder.notesList(
-    onUiStateChange: (UiState) -> Unit,
-    onFabClick: Flow<Any>,
-    navigateToCreate: () -> Unit,
-    navigateToView: (id: Long) -> Unit
-) = composable<ComposableRoute> {
-    UiStateHandler { onUiStateChange(NotesUiState) }
+internal fun NavGraphBuilder.notesList() = composable<ComposableRoute> {
+    val navController = LocalNavController.current
+    val hostEvents = LocalHostEvents.current
+    UiStateHandler { hostEvents.setUiState(DefaultUiState) }
 
-    FabClickObserver(onFabClick) { navigateToCreate() }
+    hostEvents.ObserveFab {
+        navController.navigate(Route.NotesGraph.Overview())
+    }
 
     Notes.NotesListScreen(
         onEmptyList = {
@@ -45,6 +45,8 @@ internal fun NavGraphBuilder.notesList(
                 summary = stringResource(R.string.noItemsSummary)
             )
         },
-        onClick = navigateToView
+        onClick = {
+            navController.navigate(Route.NotesGraph.Overview(noteId = it))
+        }
     )
 }

@@ -20,16 +20,17 @@ import io.gromif.astracrypt.presentation.navigation.Route
 import io.gromif.astracrypt.presentation.navigation.models.UiState
 import io.gromif.astracrypt.presentation.navigation.models.actions.ToolbarActions
 import io.gromif.astracrypt.presentation.navigation.models.actions.help
-import io.gromif.astracrypt.presentation.navigation.shared.FabClickObserver
-import io.gromif.astracrypt.presentation.navigation.shared.ToolbarActionsObserver
+import io.gromif.astracrypt.presentation.navigation.shared.LocalHostEvents
+import io.gromif.astracrypt.presentation.navigation.shared.LocalNavController
 import io.gromif.astracrypt.presentation.navigation.shared.UiStateHandler
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 private typealias ComposableRoute = Route.LabGraph.CombinedZip
 
-private val ScreenUiState = UiState(
+private val DefaultUiState = UiState(
     toolbar = UiState.Toolbar(
         title = TextWrap.Resource(id = R.string.lab_combinedZip),
         actions = listOf(ToolbarActions.help)
@@ -37,19 +38,19 @@ private val ScreenUiState = UiState(
     fab = UiState.Fab(icon = Icons.Default.FolderZip)
 )
 
-internal fun NavGraphBuilder.labCombinedZip(
-    onUiStateChange: (UiState) -> Unit,
-    onToolbarActions: Flow<ToolbarActions.Action>,
-    onFabClick: Flow<Any>,
-    navigateToHelp: (List<HelpItem>) -> Unit
-) = composable<ComposableRoute> {
-    UiStateHandler { onUiStateChange(ScreenUiState) }
-    ToolbarActionsObserver(onToolbarActions) {
-        if (it == ToolbarActions.help) navigateToHelp(HelpList)
+internal fun NavGraphBuilder.labCombinedZip() = composable<ComposableRoute> {
+    val navController = LocalNavController.current
+    val hostEvents = LocalHostEvents.current
+    UiStateHandler { hostEvents.setUiState(DefaultUiState) }
+
+    hostEvents.ObserveToolbarActions {
+        if (it == ToolbarActions.help) {
+            navController.navigate(Route.Help(helpList = Json.encodeToString(HelpList)))
+        }
     }
 
     val onRequestCombiningChannel = remember { Channel<Unit>() }
-    FabClickObserver(onFabClick) {
+    hostEvents.ObserveFab {
         onRequestCombiningChannel.send(Unit)
     }
 
