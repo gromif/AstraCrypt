@@ -12,7 +12,7 @@ android {
 }
 
 dependencies {
-    implementation(projects.core.database.appDatabase)
+    implementation(projects.core.database)
     implementation(projects.core.crypto.tink)
     implementation(projects.core.tilesWithCoroutines)
     implementation(projects.core.resources)

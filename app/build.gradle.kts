@@ -61,7 +61,7 @@ dependencies {
     implementation(projects.core.resources)
     implementation(projects.ui.haptic)
 
-    implementation(projects.core.database.appDatabase)
+    implementation(projects.core.database)
 
     implementation(projects.core.crypto.tink)
 
