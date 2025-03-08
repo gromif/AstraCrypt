@@ -76,7 +76,6 @@ dependencies {
 
     // Compose
     implementation(libs.compose.activity)
-    implementation(libs.compose.navigation)
 
     // Other
     implementation(libs.androidx.datastore.preferences)

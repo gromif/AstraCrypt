@@ -1,8 +1,5 @@
 package io.gromif.astracrypt.view
 
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -29,15 +26,15 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import com.nevidimka655.astracrypt.BuildConfig
 import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.atracrypt.core.design_system.AstraCryptTheme
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 import io.gromif.astracrypt.auth.domain.model.AuthType
 import io.gromif.astracrypt.auth.domain.model.SkinType
 import io.gromif.astracrypt.auth.presentation.PasswordLoginScreen
-import io.gromif.astracrypt.presentation.navigation.BottomBarItems
+import io.gromif.astracrypt.presentation.navigation.MainNavHost
 import io.gromif.astracrypt.presentation.navigation.Route
 import io.gromif.astracrypt.presentation.navigation.composables.BottomBarImpl
 import io.gromif.astracrypt.presentation.navigation.composables.FloatingActionButtonImpl
@@ -46,7 +43,6 @@ import io.gromif.astracrypt.presentation.navigation.composables.appbar.ToolbarIm
 import io.gromif.astracrypt.presentation.navigation.models.UiState
 import io.gromif.astracrypt.presentation.navigation.models.actions.ToolbarActions
 import io.gromif.astracrypt.utils.Api
-import io.gromif.astracrypt.view.navigation.root
 import io.gromif.calculator.CalculatorScreen
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -174,24 +170,19 @@ fun AstraCryptApp(
                     null -> vm.userIsAuthenticated = true
                 }
             }
-        } else NavHost(
-            navController,
-            startDestination = BottomBarItems.Home.route,
-            enterTransition = { fadeIn(animationSpec = tween(300)) },
-            exitTransition = { fadeOut(animationSpec = tween(300)) },
+        } else MainNavHost(
             modifier = Modifier.padding(padding),
-            builder = root(
-                onUiStateChange = { uiState = it },
-                isActionsSupported = Api.atLeast7(),
-                navController = navController,
-                onFabClick = onFabClick.receiveAsFlow(),
-                onToolbarActions = onToolbarActions.receiveAsFlow(),
-                snackbarHostState = snackbarHostState,
-                searchQueryState = vm.searchQueryState,
-                dynamicThemeState = dynamicThemeState.value,
-                isDynamicColorsSupported = Api.atLeast12(),
-                onDynamicColorsStateChange = vm::setDynamicColorsState,
-            )
+            onUiStateChange = { uiState = it },
+            isActionsSupported = Api.atLeast7(),
+            navController = navController,
+            onFabClick = onFabClick.receiveAsFlow(),
+            onToolbarActions = onToolbarActions.receiveAsFlow(),
+            snackbarHostState = snackbarHostState,
+            searchQueryState = vm.searchQueryState,
+            dynamicThemeState = dynamicThemeState.value,
+            isDynamicColorsSupported = Api.atLeast12(),
+            onDynamicColorsStateChange = vm::setDynamicColorsState,
+            applicationVersion = BuildConfig.VERSION_NAME
         )
     }
 }

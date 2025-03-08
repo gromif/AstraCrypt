@@ -1,10 +1,8 @@
-package io.gromif.astracrypt.view.navigation
+package io.gromif.astracrypt.presentation.navigation
 
 import androidx.compose.material3.SnackbarHostState
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
-import com.nevidimka655.astracrypt.BuildConfig
-import io.gromif.astracrypt.presentation.navigation.Route
 import io.gromif.astracrypt.presentation.navigation.auth.settingsSecurityAuth
 import io.gromif.astracrypt.presentation.navigation.help.help
 import io.gromif.astracrypt.presentation.navigation.lab.labGraph
@@ -37,6 +35,7 @@ fun root(
     dynamicThemeState: Boolean,
     isDynamicColorsSupported: Boolean,
     onDynamicColorsStateChange: (Boolean) -> Unit,
+    applicationVersion: String,
 ): NavGraphBuilder.() -> Unit = {
     tabsGraph(
         onUiStateChange = onUiStateChange,
@@ -95,7 +94,7 @@ fun root(
         onUiStateChange = onUiStateChange,
         snackbarHostState = snackbarHostState,
         navController = navController,
-        applicationVersion = BuildConfig.VERSION_NAME
+        applicationVersion = applicationVersion
     )
 
     help(onUiStateChange = onUiStateChange)
