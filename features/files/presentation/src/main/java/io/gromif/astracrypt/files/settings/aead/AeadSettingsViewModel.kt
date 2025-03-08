@@ -27,7 +27,7 @@ internal class AeadSettingsViewModel @Inject constructor(
     getAeadInfoFlowUseCase: GetAeadInfoFlowUseCase,
 ): ViewModel() {
     val aeadInfoState = getAeadInfoFlowUseCase()
-        .stateIn(viewModelScope, SharingStarted.Eagerly, AeadInfo())
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), AeadInfo())
 
     fun setFileMode(aeadMode: AeadMode) = viewModelScope.launch(defaultDispatcher) {
         val newAeadInfo = aeadInfoState.value.copy(fileMode = aeadMode)

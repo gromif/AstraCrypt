@@ -37,7 +37,7 @@ internal class ColumnsAeadSettingsViewModel @Inject constructor(
         preview = it.preview
         file = it.file
         flag = it.flag
-    }.stateIn(viewModelScope, SharingStarted.Eagerly, AeadInfo())
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), AeadInfo())
 
     fun setColumnsAeadSettings() = viewModelScope.launch(defaultDispatcher) {
         val newAeadInfo = aeadInfoState.value.copy(

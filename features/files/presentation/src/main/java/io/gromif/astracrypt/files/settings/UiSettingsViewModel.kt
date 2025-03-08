@@ -21,7 +21,7 @@ internal class UiSettingsViewModel @Inject constructor(
     getListViewModeUseCase: GetListViewModeUseCase
 ): ViewModel() {
     val viewModeState = getListViewModeUseCase().stateIn(
-        viewModelScope, SharingStarted.Eagerly, ViewMode.Grid
+        viewModelScope, SharingStarted.WhileSubscribed(), ViewMode.Grid
     )
 
     fun setViewMode(viewMode: ViewMode) = viewModelScope.launch(defaultDispatcher) {

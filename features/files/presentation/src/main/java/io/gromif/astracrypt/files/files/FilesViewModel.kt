@@ -80,7 +80,7 @@ class FilesViewModel @Inject constructor(
 
     val validationRules = getValidationRulesUsecase()
     val viewModeState = getListViewModeUseCase()
-        .stateIn(viewModelScope, SharingStarted.Companion.Eagerly, ViewMode.Grid)
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), ViewMode.Grid)
 
     suspend fun setSearchQuery(query: String) = pagingProvider.setSearchQuery(parentId, query)
 
