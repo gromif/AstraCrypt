@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace = "com.nevidimka655.domain.lab_zip"
+    namespace = "io.gromif.lab_zip.domain"
 }
 
 dependencies {

@@ -1,4 +1,4 @@
-package com.nevidimka655.features.lab_zip.work
+package io.gromif.lab_zip.presentation.work
 
 import android.app.NotificationChannel
 import android.app.NotificationManager

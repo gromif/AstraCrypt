@@ -1,4 +1,4 @@
-package com.nevidimka655.features.lab_zip
+package io.gromif.lab_zip.presentation
 
 import android.net.Uri
 import androidx.compose.runtime.getValue
@@ -12,15 +12,15 @@ import androidx.work.OutOfQuotaPolicy
 import androidx.work.WorkManager
 import androidx.work.workDataOf
 import com.google.crypto.tink.integration.android.AndroidKeystore
-import com.nevidimka655.domain.lab_zip.FileInfo
-import com.nevidimka655.domain.lab_zip.usecase.GetFileInfosUseCase
-import com.nevidimka655.domain.lab_zip.usecase.GetSourceFileInfoUseCase
-import com.nevidimka655.features.lab_zip.work.CombinedZipWorker
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.gromif.astracrypt.utils.Mapper
 import io.gromif.astracrypt.utils.dispatchers.IoDispatcher
 import io.gromif.astracrypt.utils.io.WorkerSerializer
 import io.gromif.crypto.tink.core.encoders.Base64Encoder
+import io.gromif.lab_zip.domain.FileInfo
+import io.gromif.lab_zip.domain.usecase.GetFileInfosUseCase
+import io.gromif.lab_zip.domain.usecase.GetSourceFileInfoUseCase
+import io.gromif.lab_zip.presentation.work.CombinedZipWorker
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -40,9 +40,9 @@ internal class CombineZipViewModel @Inject constructor(
     var sourceState by mutableStateOf<FileInfo?>(null)
 
     fun startCombinedZipWorker(targetUri: Uri) = viewModelScope.launch(defaultDispatcher) {
-        AndroidKeystore.generateNewAes256GcmKey(CombinedZipWorker.ANDROID_KEYSET_ALIAS)
-        val dataAead = AndroidKeystore.getAead(CombinedZipWorker.ANDROID_KEYSET_ALIAS)
-        val dataAD = CombinedZipWorker.ASSOCIATED_DATA.toByteArray()
+        AndroidKeystore.generateNewAes256GcmKey(CombinedZipWorker.Companion.ANDROID_KEYSET_ALIAS)
+        val dataAead = AndroidKeystore.getAead(CombinedZipWorker.Companion.ANDROID_KEYSET_ALIAS)
+        val dataAD = CombinedZipWorker.Companion.ASSOCIATED_DATA.toByteArray()
         val contentUrisFile = workerSerializer.saveStringListToFile(filesListState.map { it.path })
         val contentUrisFileEncrypted = base64Encoder.encode(
             dataAead.encrypt(contentUrisFile.toString().toByteArray(), dataAD)

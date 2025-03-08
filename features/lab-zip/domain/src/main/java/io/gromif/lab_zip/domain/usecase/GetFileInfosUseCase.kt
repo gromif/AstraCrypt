@@ -1,7 +1,7 @@
-package com.nevidimka655.domain.lab_zip.usecase
+package io.gromif.lab_zip.domain.usecase
 
-import com.nevidimka655.domain.lab_zip.FileInfo
-import com.nevidimka655.domain.lab_zip.Repository
+import io.gromif.lab_zip.domain.FileInfo
+import io.gromif.lab_zip.domain.Repository
 
 class GetFileInfosUseCase(
     private val repository: Repository

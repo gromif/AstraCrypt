@@ -1,4 +1,4 @@
-package com.nevidimka655.domain.lab_zip
+package io.gromif.lab_zip.domain
 
 interface Repository {
 

@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    namespace = "com.nevidimka655.features.lab_zip"
+    namespace = "io.gromif.lab_zip.presentation"
 }
 
 dependencies {

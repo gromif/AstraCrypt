@@ -1,11 +1,11 @@
-package com.nevidimka655.data.lab_zip.repository
+package io.gromif.lab_zip.data
 
 import android.content.Context
 import android.net.Uri
 import androidx.documentfile.provider.DocumentFile
-import com.nevidimka655.domain.lab_zip.FileInfo
-import com.nevidimka655.domain.lab_zip.Repository
 import io.gromif.astracrypt.utils.Mapper
+import io.gromif.lab_zip.domain.FileInfo
+import io.gromif.lab_zip.domain.Repository
 
 class RepositoryImpl(
     private val context: Context,

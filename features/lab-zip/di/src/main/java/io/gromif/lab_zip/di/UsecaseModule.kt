@@ -1,12 +1,12 @@
-package com.nevidimka655.di.lab_zip
+package io.gromif.lab_zip.di
 
-import com.nevidimka655.domain.lab_zip.Repository
-import com.nevidimka655.domain.lab_zip.usecase.GetFileInfosUseCase
-import com.nevidimka655.domain.lab_zip.usecase.GetSourceFileInfoUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
+import io.gromif.lab_zip.domain.Repository
+import io.gromif.lab_zip.domain.usecase.GetFileInfosUseCase
+import io.gromif.lab_zip.domain.usecase.GetSourceFileInfoUseCase
 
 @Module
 @InstallIn(ViewModelComponent::class)
