@@ -8,7 +8,7 @@ android {
 }
 
 dependencies {
-    implementation(projects.core.resources)
+    implementation(projects.ui.resources)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

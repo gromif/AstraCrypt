@@ -56,7 +56,7 @@ android {
 
 dependencies {
     implementation(projects.core.utils)
-    implementation(projects.core.resources)
+    implementation(projects.ui.resources)
     implementation(projects.core.database)
     implementation(projects.core.crypto.tink)
 

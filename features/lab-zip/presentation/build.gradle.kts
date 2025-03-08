@@ -17,7 +17,7 @@ dependencies {
 
     implementation(libs.androidx.documentfile)
 
-    implementation(projects.core.resources)
+    implementation(projects.ui.resources)
     implementation(projects.core.utils)
     implementation(projects.core.crypto.tink)
 }

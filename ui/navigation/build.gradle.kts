@@ -11,7 +11,7 @@ android {
 }
 
 dependencies {
-    implementation(projects.core.resources)
+    implementation(projects.ui.resources)
 
     implementation(projects.features.files.presentation)
     implementation(projects.features.tinkLab.presentation)

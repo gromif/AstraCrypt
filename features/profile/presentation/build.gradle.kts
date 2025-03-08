@@ -16,5 +16,5 @@ dependencies {
     implementation(projects.features.profile.di)
 
     implementation(projects.core.crypto.tink)
-    implementation(projects.core.resources)
+    implementation(projects.ui.resources)
 }

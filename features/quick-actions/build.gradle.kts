@@ -15,6 +15,6 @@ dependencies {
     implementation(projects.core.database)
     implementation(projects.core.crypto.tink)
     implementation(projects.core.tilesWithCoroutines)
-    implementation(projects.core.resources)
+    implementation(projects.ui.resources)
     implementation(projects.core.utils)
 }
