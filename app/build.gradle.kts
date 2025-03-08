@@ -55,12 +55,12 @@ android {
 }
 
 dependencies {
-    implementation(projects.core.navigation)
     implementation(projects.core.utils)
     implementation(projects.core.resources)
     implementation(projects.core.database)
     implementation(projects.core.crypto.tink)
 
+    implementation(projects.ui.navigation)
     implementation(projects.ui.haptic)
     implementation(projects.ui.designSystem)
 
