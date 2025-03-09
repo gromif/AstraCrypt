@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="App — Navigation" pattern="file[AstraCrypt.ui.navigation]:build.gradle.kts||file[AstraCrypt.ui.navigation*]:*//*" />
+</component>

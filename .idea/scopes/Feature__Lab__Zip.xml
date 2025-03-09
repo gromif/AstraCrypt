@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="Feature — Lab — Zip" pattern="(file[AstraCrypt.features.lab-zip*]:*//*||file[AstraCrypt.features.lab-zip.presentation]:build.gradle.kts||file[AstraCrypt.features.lab-zip.domain]:build.gradle.kts||file[AstraCrypt.features.lab-zip.di]:build.gradle.kts||file[AstraCrypt.features.lab-zip.data]:build.gradle.kts)&amp;&amp;!file[AstraCrypt.features.lab-zip.presentation.main]:java//*||file[AstraCrypt.features.lab-zip.presentation.main]:*/" />
+</component>

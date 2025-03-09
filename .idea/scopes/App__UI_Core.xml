@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="App — UI Core" pattern="file[AstraCrypt.ui.resources]:build.gradle.kts||file[AstraCrypt.ui.resources*]:*//*||file[AstraCrypt.ui.compose-core*]:*//*||file[AstraCrypt.ui.compose-core]:build.gradle.kts||file[AstraCrypt.ui.compose-details*]:*//*||file[AstraCrypt.ui.design-system*]:*//*||file[AstraCrypt.ui.haptic*]:*//*||file[AstraCrypt.ui.haptic]:build.gradle.kts||file[AstraCrypt.ui.design-system]:build.gradle.kts||file[AstraCrypt.ui.compose-details]:build.gradle.kts||file[AstraCrypt.features.help*]:*//*||file[AstraCrypt.features.quick-actions*]:*//*||file[AstraCrypt.features.quick-actions]:build.gradle.kts||file[AstraCrypt.features.help]:build.gradle.kts" />
+</component>

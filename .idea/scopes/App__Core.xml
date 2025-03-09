@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="App — Core" pattern="file[AstraCrypt.core.crypto.tink*]:*//*||file[AstraCrypt.core.crypto.tink-datastore*]:*//*||file[AstraCrypt.core.crypto.tink]:build.gradle.kts||file[AstraCrypt.core.crypto.tink-datastore]:build.gradle.kts||file[AstraCrypt.core.database*]:*//*||file[AstraCrypt.core.tiles-with-coroutines*]:*//*||file[AstraCrypt.core.utils*]:*//*||file[AstraCrypt.core.database]:build.gradle.kts||file[AstraCrypt.core.tiles-with-coroutines]:build.gradle.kts||file[AstraCrypt.core.utils]:build.gradle.kts" />
+</component>

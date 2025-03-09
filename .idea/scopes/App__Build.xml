@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="App — Build" pattern="file[build-logic]:gradle.properties||file[build-logic]:settings.gradle.kts||file[AstraCrypt]:gradle/libs.versions.toml||file[build-logic.convention]:build.gradle.kts||file[build-logic.convention*]:*//*||file[AstraCrypt]:settings.gradle.kts||file[AstraCrypt]:gradle.properties||file[build-logic]:compose-stability-config.conf" />
+</component>

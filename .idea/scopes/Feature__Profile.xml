@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="Feature — Profile" pattern="file[AstraCrypt.features.profile.presentation*]:*//*||file[AstraCrypt.features.profile.domain*]:*//*||file[AstraCrypt.features.profile.di*]:*//*||file[AstraCrypt.features.profile.data*]:*//*||file[AstraCrypt.features.profile.data]:build.gradle.kts||file[AstraCrypt.features.profile.di]:build.gradle.kts||file[AstraCrypt.features.profile.presentation]:build.gradle.kts||file[AstraCrypt.features.profile.domain]:build.gradle.kts" />
+</component>

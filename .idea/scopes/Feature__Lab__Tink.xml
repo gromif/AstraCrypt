@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="Feature — Lab — Tink" pattern="(file[AstraCrypt.features.tink-lab*]:*//*||file[AstraCrypt.features.tink-lab.data]:build.gradle.kts||file[AstraCrypt.features.tink-lab.di]:build.gradle.kts||file[AstraCrypt.features.tink-lab.domain]:build.gradle.kts||file[AstraCrypt.features.tink-lab.presentation]:build.gradle.kts)&amp;&amp;!file[AstraCrypt.features.tink-lab.presentation.main]:java//*||file[AstraCrypt.features.tink-lab.presentation.main]:*/" />
+</component>

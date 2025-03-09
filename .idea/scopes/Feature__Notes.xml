@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="Feature — Notes" pattern="file[AstraCrypt.features.notes*]:*//*||file[AstraCrypt.features.notes.presentation]:build.gradle.kts||file[AstraCrypt.features.notes.domain]:build.gradle.kts||file[AstraCrypt.features.notes.di]:build.gradle.kts||file[AstraCrypt.features.notes.data]:build.gradle.kts" />
+</component>
