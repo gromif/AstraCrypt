@@ -11,12 +11,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.nevidimka655.astracrypt.resources.R
-import com.nevidimka655.ui.compose_core.CardWithTitle
-import com.nevidimka655.ui.compose_core.theme.spaces
 import io.gromif.astracrypt.files.recent.RecentFilesComponent
 import io.gromif.astracrypt.files.recent.list.Actions
 import io.gromif.astracrypt.profile.presentation.shared.Profile
 import io.gromif.astracrypt.profile.presentation.widget.WidgetComponent
+import io.gromif.ui.compose.core.CardWithTitle
+import io.gromif.ui.compose.core.theme.spaces
 
 @Composable
 fun HomeScreen(

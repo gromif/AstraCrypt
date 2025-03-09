@@ -4,8 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.nevidimka655.astracrypt.resources.R
-import com.nevidimka655.ui.compose_core.dialogs.DialogsCore
-import com.nevidimka655.ui.compose_core.dialogs.default
+import io.gromif.ui.compose.core.dialogs.DialogsCore
+import io.gromif.ui.compose.core.dialogs.default
 
 @Preview(showBackground = true)
 @Composable

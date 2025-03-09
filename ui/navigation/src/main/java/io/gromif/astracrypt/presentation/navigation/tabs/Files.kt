@@ -17,8 +17,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.haptic.Haptic
-import com.nevidimka655.ui.compose_core.wrappers.TextWrap
-import com.nevidimka655.ui.compose_core.wrappers.TextWrap.Text
 import io.gromif.astracrypt.files.files.FilesScreen
 import io.gromif.astracrypt.files.files.model.ContextualAction
 import io.gromif.astracrypt.files.files.model.Mode
@@ -36,6 +34,8 @@ import io.gromif.astracrypt.presentation.navigation.shared.LocalHostEvents
 import io.gromif.astracrypt.presentation.navigation.shared.LocalHostStateHolder
 import io.gromif.astracrypt.presentation.navigation.shared.LocalNavController
 import io.gromif.astracrypt.presentation.navigation.shared.UiStateHandler
+import io.gromif.ui.compose.core.wrappers.TextWrap
+import io.gromif.ui.compose.core.wrappers.TextWrap.Text
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 

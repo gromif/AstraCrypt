@@ -35,15 +35,15 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.nevidimka655.astracrypt.resources.R
-import com.nevidimka655.ui.compose_core.Compose
-import com.nevidimka655.ui.compose_core.FilledTonalIconButton
-import com.nevidimka655.ui.compose_core.OneLineListItem
-import com.nevidimka655.ui.compose_core.sheets.SheetDefaults
-import com.nevidimka655.ui.compose_core.sheets.default
-import com.nevidimka655.ui.compose_core.theme.spaces
 import io.gromif.astracrypt.files.files.model.Option
 import io.gromif.astracrypt.files.shared.FileType
 import io.gromif.astracrypt.files.shared.icons.Photo
+import io.gromif.ui.compose.core.Compose
+import io.gromif.ui.compose.core.FilledTonalIconButton
+import io.gromif.ui.compose.core.OneLineListItem
+import io.gromif.ui.compose.core.sheets.SheetDefaults
+import io.gromif.ui.compose.core.sheets.default
+import io.gromif.ui.compose.core.theme.spaces
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview(showBackground = true)

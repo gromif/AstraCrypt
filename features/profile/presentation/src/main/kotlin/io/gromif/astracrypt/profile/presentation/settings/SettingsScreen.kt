@@ -5,11 +5,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.nevidimka655.ui.compose_core.Compose
 import io.gromif.astracrypt.profile.domain.model.DefaultAvatar
 import io.gromif.astracrypt.profile.presentation.settings.contracts.Contracts
 import io.gromif.astracrypt.profile.presentation.settings.contracts.externalAvatar
 import io.gromif.astracrypt.profile.presentation.shared.Profile
+import io.gromif.ui.compose.core.Compose
 
 @Composable
 fun Profile.SettingsScreen() {

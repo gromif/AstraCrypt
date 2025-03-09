@@ -19,11 +19,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.nevidimka655.astracrypt.resources.R
-import com.nevidimka655.ui.compose_core.dialogs.Dialog
-import com.nevidimka655.ui.compose_core.dialogs.DialogDefaults
-import com.nevidimka655.ui.compose_core.theme.spaces
 import io.gromif.astracrypt.profile.domain.model.DefaultAvatar
 import io.gromif.astracrypt.profile.presentation.shared.resource
+import io.gromif.ui.compose.core.dialogs.Dialog
+import io.gromif.ui.compose.core.dialogs.DialogDefaults
+import io.gromif.ui.compose.core.theme.spaces
 
 @Preview(showBackground = true)
 @Composable

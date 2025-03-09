@@ -19,10 +19,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.ImageLoader
 import com.nevidimka655.astracrypt.resources.R
-import com.nevidimka655.ui.compose_core.ext.effects.shimmerEffect
-import com.nevidimka655.ui.compose_core.theme.spaces
 import io.gromif.astracrypt.profile.domain.model.Profile
 import io.gromif.astracrypt.profile.presentation.shared.Avatar
+import io.gromif.ui.compose.core.ext.effects.shimmerEffect
+import io.gromif.ui.compose.core.theme.spaces
 
 @Preview(showBackground = true)
 @Composable

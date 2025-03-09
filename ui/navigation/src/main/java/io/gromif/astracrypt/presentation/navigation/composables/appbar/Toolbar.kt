@@ -22,10 +22,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.nevidimka655.astracrypt.resources.R
 import com.nevidimka655.haptic.Haptic
-import com.nevidimka655.ui.compose_core.IconButton
-import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 import io.gromif.astracrypt.presentation.navigation.models.actions.ToolbarActions
 import io.gromif.astracrypt.presentation.navigation.models.actions.close
+import io.gromif.ui.compose.core.IconButton
+import io.gromif.ui.compose.core.wrappers.TextWrap
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

@@ -17,8 +17,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import coil.ImageLoader
-import com.nevidimka655.ui.compose_core.Compose
-import com.nevidimka655.ui.compose_core.ext.FlowObserver
 import io.gromif.astracrypt.files.domain.model.ItemState
 import io.gromif.astracrypt.files.files.dialogs.deleteDialog
 import io.gromif.astracrypt.files.files.dialogs.deleteSourceDialog
@@ -41,6 +39,8 @@ import io.gromif.astracrypt.files.files.util.contracts.export
 import io.gromif.astracrypt.files.files.util.contracts.pickFile
 import io.gromif.astracrypt.files.shared.FakeData
 import io.gromif.astracrypt.files.shared.icon
+import io.gromif.ui.compose.core.Compose
+import io.gromif.ui.compose.core.ext.FlowObserver
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
 

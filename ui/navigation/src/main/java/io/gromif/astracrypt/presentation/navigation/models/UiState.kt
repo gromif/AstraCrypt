@@ -1,9 +1,9 @@
 package io.gromif.astracrypt.presentation.navigation.models
 
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 import io.gromif.astracrypt.presentation.navigation.BottomBarItems
 import io.gromif.astracrypt.presentation.navigation.models.actions.ToolbarActions
+import io.gromif.ui.compose.core.wrappers.TextWrap
 
 data class UiState(
     val toolbar: Toolbar = Toolbar(),

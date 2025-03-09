@@ -12,13 +12,13 @@ import androidx.compose.ui.Modifier
 import androidx.paging.compose.LazyPagingItems
 import coil.ImageLoader
 import com.nevidimka655.haptic.Haptic
-import com.nevidimka655.ui.compose_core.ext.LocalWindowWidth
-import com.nevidimka655.ui.compose_core.ext.cellsCount
-import com.nevidimka655.ui.compose_core.theme.spaces
 import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.domain.model.ViewMode
 import io.gromif.astracrypt.files.files.list.item.FilesListGridItem
 import io.gromif.astracrypt.files.files.list.item.FilesListItem
+import io.gromif.ui.compose.core.ext.LocalWindowWidth
+import io.gromif.ui.compose.core.ext.cellsCount
+import io.gromif.ui.compose.core.theme.spaces
 
 @Composable
 internal fun FilesList(

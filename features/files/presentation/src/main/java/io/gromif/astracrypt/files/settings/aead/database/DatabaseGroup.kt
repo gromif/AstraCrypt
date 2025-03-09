@@ -11,11 +11,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.nevidimka655.astracrypt.resources.R
-import com.nevidimka655.ui.compose_core.Preference
-import com.nevidimka655.ui.compose_core.PreferencesGroup
-import com.nevidimka655.ui.compose_core.dialogs.DialogsCore
-import com.nevidimka655.ui.compose_core.dialogs.radio
 import io.gromif.astracrypt.files.domain.model.AeadInfo
+import io.gromif.ui.compose.core.Preference
+import io.gromif.ui.compose.core.PreferencesGroup
+import io.gromif.ui.compose.core.dialogs.DialogsCore
+import io.gromif.ui.compose.core.dialogs.radio
 
 @Preview(showBackground = true)
 @Composable

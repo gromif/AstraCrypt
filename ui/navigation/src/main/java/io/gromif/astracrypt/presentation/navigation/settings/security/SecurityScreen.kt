@@ -4,9 +4,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.nevidimka655.astracrypt.resources.R
-import com.nevidimka655.ui.compose_core.Preference
-import com.nevidimka655.ui.compose_core.PreferencesGroup
-import com.nevidimka655.ui.compose_core.PreferencesScreen
+import io.gromif.ui.compose.core.Preference
+import io.gromif.ui.compose.core.PreferencesGroup
+import io.gromif.ui.compose.core.PreferencesScreen
 
 @Preview
 @Composable

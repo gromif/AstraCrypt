@@ -4,7 +4,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.nevidimka655.ui.compose_core.OneLineListItem
+import io.gromif.ui.compose.core.OneLineListItem
 
 @Composable
 internal fun CommunicationOptions(

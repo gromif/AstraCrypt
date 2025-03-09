@@ -29,10 +29,10 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.nevidimka655.astracrypt.resources.R
-import com.nevidimka655.ui.compose_core.IconWithBorder
-import com.nevidimka655.ui.compose_core.sheets.SheetDefaults
-import com.nevidimka655.ui.compose_core.sheets.default
-import com.nevidimka655.ui.compose_core.theme.spaces
+import io.gromif.ui.compose.core.IconWithBorder
+import io.gromif.ui.compose.core.sheets.SheetDefaults
+import io.gromif.ui.compose.core.sheets.default
+import io.gromif.ui.compose.core.theme.spaces
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 

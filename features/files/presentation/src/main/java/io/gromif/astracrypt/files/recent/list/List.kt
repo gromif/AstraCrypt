@@ -13,9 +13,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.ImageLoader
-import com.nevidimka655.ui.compose_core.theme.spaces
 import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.shared.FakeData
+import io.gromif.ui.compose.core.theme.spaces
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview(showBackground = true)

@@ -6,7 +6,7 @@ import androidx.compose.material.icons.outlined.StarOutline
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import com.nevidimka655.astracrypt.resources.R
-import com.nevidimka655.ui.compose_core.NoItemsPage
+import io.gromif.ui.compose.core.NoItemsPage
 
 @Composable
 fun EmptyList(

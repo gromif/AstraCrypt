@@ -8,9 +8,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.res.stringResource
 import com.nevidimka655.astracrypt.resources.R
-import com.nevidimka655.ui.compose_core.Compose
-import com.nevidimka655.ui.compose_core.dialogs.DialogDefaults
-import com.nevidimka655.ui.compose_core.dialogs.DialogWithNewButtonBar
+import io.gromif.ui.compose.core.Compose
+import io.gromif.ui.compose.core.dialogs.DialogDefaults
+import io.gromif.ui.compose.core.dialogs.DialogWithNewButtonBar
 
 @Composable
 internal fun deleteSourceDialog(

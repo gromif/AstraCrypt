@@ -24,10 +24,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.nevidimka655.ui.compose_core.ext.LocalWindowWidth
-import com.nevidimka655.ui.compose_core.theme.spaces
 import io.gromif.astracrypt.presentation.navigation.Route
 import io.gromif.astracrypt.presentation.navigation.shared.LocalNavController
+import io.gromif.ui.compose.core.ext.LocalWindowWidth
+import io.gromif.ui.compose.core.theme.spaces
 
 @Composable
 fun SettingsScreen() {

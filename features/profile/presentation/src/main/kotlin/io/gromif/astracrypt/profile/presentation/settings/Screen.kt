@@ -9,14 +9,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.ImageLoader
 import com.nevidimka655.astracrypt.resources.R
-import com.nevidimka655.ui.compose_core.Compose
-import com.nevidimka655.ui.compose_core.Preference
-import com.nevidimka655.ui.compose_core.PreferencesGroup
-import com.nevidimka655.ui.compose_core.PreferencesScreen
 import io.gromif.astracrypt.profile.domain.model.Profile
 import io.gromif.astracrypt.profile.presentation.settings.dialogs.DialogChangeAvatar
 import io.gromif.astracrypt.profile.presentation.settings.dialogs.dialogChangeName
 import io.gromif.astracrypt.profile.presentation.shared.Avatar
+import io.gromif.ui.compose.core.Compose
+import io.gromif.ui.compose.core.Preference
+import io.gromif.ui.compose.core.PreferencesGroup
+import io.gromif.ui.compose.core.PreferencesScreen
 
 @Preview(showBackground = true)
 @Composable

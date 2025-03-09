@@ -20,8 +20,8 @@ import androidx.compose.ui.unit.dp
 import coil.ImageLoader
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.nevidimka655.ui.compose_core.ext.effects.shimmerEffect
 import io.gromif.astracrypt.profile.domain.model.Avatar
+import io.gromif.ui.compose.core.ext.effects.shimmerEffect
 
 @Composable
 internal fun Avatar(

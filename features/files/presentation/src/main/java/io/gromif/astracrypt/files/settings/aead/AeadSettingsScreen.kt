@@ -6,9 +6,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.nevidimka655.ui.compose_core.theme.spaces
 import io.gromif.astracrypt.files.settings.aead.database.DatabaseGroup
 import io.gromif.astracrypt.files.settings.aead.files.FilesGroup
+import io.gromif.ui.compose.core.theme.spaces
 
 @Preview(showBackground = true)
 @Composable

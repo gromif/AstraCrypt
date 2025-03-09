@@ -6,8 +6,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.nevidimka655.astracrypt.resources.R
-import com.nevidimka655.ui.compose_core.OneLineListItem
-import com.nevidimka655.ui.compose_core.TwoLineListItem
+import io.gromif.ui.compose.core.OneLineListItem
+import io.gromif.ui.compose.core.TwoLineListItem
 
 @Composable
 internal fun CommonOptions(

@@ -2,7 +2,7 @@ package io.gromif.astracrypt.files.settings.aead.columns
 
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.nevidimka655.ui.compose_core.ext.FlowObserver
+import io.gromif.ui.compose.core.ext.FlowObserver
 import kotlinx.coroutines.flow.Flow
 
 @Composable
