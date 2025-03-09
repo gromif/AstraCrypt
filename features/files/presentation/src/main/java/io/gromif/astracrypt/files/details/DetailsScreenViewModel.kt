@@ -7,7 +7,6 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import coil.ImageLoader
-import com.nevidimka655.compose_details.mutableDetailsStateList
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.gromif.astracrypt.files.details.parser.addAeadGroup
 import io.gromif.astracrypt.files.details.parser.addDetailsGroup
@@ -18,6 +17,7 @@ import io.gromif.astracrypt.files.domain.model.ItemDetails
 import io.gromif.astracrypt.files.domain.model.ItemType
 import io.gromif.astracrypt.files.domain.usecase.GetItemDetailsUseCase
 import io.gromif.astracrypt.utils.dispatchers.IoDispatcher
+import io.gromif.compose.details.mutableDetailsStateList
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import javax.inject.Inject

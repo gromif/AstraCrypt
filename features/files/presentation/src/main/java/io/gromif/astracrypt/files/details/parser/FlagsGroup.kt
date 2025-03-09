@@ -1,14 +1,14 @@
 package io.gromif.astracrypt.files.details.parser
 
 import androidx.compose.runtime.snapshots.SnapshotStateList
-import com.nevidimka655.compose_details.addGroup
-import com.nevidimka655.compose_details.model.DetailsGroup
 import io.gromif.astracrypt.files.details.parser.flags.addAudioFlags
 import io.gromif.astracrypt.files.details.parser.flags.addImageFlags
 import io.gromif.astracrypt.files.details.parser.flags.addVideoFlags
 import io.gromif.astracrypt.files.domain.model.FileFlags
 import io.gromif.astracrypt.files.domain.model.ItemType
 import io.gromif.astracrypt.files.shared.title
+import io.gromif.compose.details.addGroup
+import io.gromif.compose.details.model.DetailsGroup
 import io.gromif.ui.compose.core.wrappers.TextWrap
 
 internal fun SnapshotStateList<DetailsGroup>.addFlagsGroup(

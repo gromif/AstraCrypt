@@ -11,10 +11,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
-import com.nevidimka655.compose_details.DetailsScreen
 import io.gromif.astracrypt.files.domain.model.ItemDetails
 import io.gromif.astracrypt.files.domain.model.ItemType
 import io.gromif.astracrypt.files.shared.icon
+import io.gromif.compose.details.DetailsScreen
 
 @Composable
 fun FilesDetailsScreen(id: Long) {

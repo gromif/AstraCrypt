@@ -8,12 +8,12 @@ import androidx.compose.material.icons.outlined.FolderOpen
 import androidx.compose.material.icons.outlined.SdCard
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import com.nevidimka655.astracrypt.resources.R
-import com.nevidimka655.compose_details.addGroup
-import com.nevidimka655.compose_details.addItem
-import com.nevidimka655.compose_details.model.DetailsGroup
 import io.gromif.astracrypt.files.domain.model.ItemDetails
 import io.gromif.astracrypt.files.domain.model.ItemType
 import io.gromif.astracrypt.files.shared.title
+import io.gromif.compose.details.addGroup
+import io.gromif.compose.details.addItem
+import io.gromif.compose.details.model.DetailsGroup
 import io.gromif.ui.compose.core.wrappers.TextWrap
 import java.text.DecimalFormat
 

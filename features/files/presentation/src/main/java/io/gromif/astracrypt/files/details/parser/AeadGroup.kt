@@ -4,9 +4,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import com.nevidimka655.astracrypt.resources.R
-import com.nevidimka655.compose_details.addGroup
-import com.nevidimka655.compose_details.addItem
-import com.nevidimka655.compose_details.model.DetailsGroup
+import io.gromif.compose.details.addGroup
+import io.gromif.compose.details.addItem
+import io.gromif.compose.details.model.DetailsGroup
 import io.gromif.crypto.tink.model.KeysetTemplates
 import io.gromif.ui.compose.core.wrappers.TextWrap
 
