@@ -6,7 +6,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import androidx.activity.result.contract.ActivityResultContract
-import com.nevidimka655.astracrypt.resources.R
+import io.gromif.astracrypt.resources.R
 
 internal class RequestDeviceAdminContract(
     private val adminComponentImpl: ComponentName,

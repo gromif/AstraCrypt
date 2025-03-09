@@ -7,10 +7,10 @@ import androidx.compose.material.icons.outlined.AccessTime
 import androidx.compose.material.icons.outlined.FolderOpen
 import androidx.compose.material.icons.outlined.SdCard
 import androidx.compose.runtime.snapshots.SnapshotStateList
-import com.nevidimka655.astracrypt.resources.R
 import io.gromif.astracrypt.files.domain.model.ItemDetails
 import io.gromif.astracrypt.files.domain.model.ItemType
 import io.gromif.astracrypt.files.shared.title
+import io.gromif.astracrypt.resources.R
 import io.gromif.compose.details.addGroup
 import io.gromif.compose.details.addItem
 import io.gromif.compose.details.model.DetailsGroup

@@ -3,7 +3,7 @@ package io.gromif.astracrypt.settings.about
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.nevidimka655.astracrypt.resources.R
+import io.gromif.astracrypt.resources.R
 import io.gromif.astracrypt.settings.about.shared.CommonOptions
 import io.gromif.astracrypt.settings.about.shared.CommunicationOptions
 import io.gromif.astracrypt.settings.about.shared.Header

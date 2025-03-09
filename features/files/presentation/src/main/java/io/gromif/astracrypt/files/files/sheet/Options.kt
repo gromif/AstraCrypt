@@ -34,10 +34,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.nevidimka655.astracrypt.resources.R
 import io.gromif.astracrypt.files.files.model.Option
 import io.gromif.astracrypt.files.shared.FileType
 import io.gromif.astracrypt.files.shared.icons.Photo
+import io.gromif.astracrypt.resources.R
 import io.gromif.ui.compose.core.Compose
 import io.gromif.ui.compose.core.FilledTonalIconButton
 import io.gromif.ui.compose.core.OneLineListItem

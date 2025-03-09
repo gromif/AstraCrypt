@@ -3,7 +3,6 @@ package io.gromif.astracrypt.presentation.navigation.settings.aead
 import androidx.compose.runtime.remember
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.nevidimka655.astracrypt.resources.R
 import io.gromif.astracrypt.files.settings.aead.columns.FilesColumnsAeadSettingsScreen
 import io.gromif.astracrypt.presentation.navigation.Route
 import io.gromif.astracrypt.presentation.navigation.models.UiState
@@ -11,6 +10,7 @@ import io.gromif.astracrypt.presentation.navigation.models.actions.ToolbarAction
 import io.gromif.astracrypt.presentation.navigation.models.actions.update_database
 import io.gromif.astracrypt.presentation.navigation.shared.LocalHostEvents
 import io.gromif.astracrypt.presentation.navigation.shared.UiStateHandler
+import io.gromif.astracrypt.resources.R
 import io.gromif.ui.compose.core.wrappers.TextWrap
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow

@@ -10,7 +10,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.nevidimka655.astracrypt.resources.R
 import io.gromif.astracrypt.presentation.navigation.Route
 import io.gromif.astracrypt.presentation.navigation.models.UiState
 import io.gromif.astracrypt.presentation.navigation.models.actions.ToolbarActions
@@ -18,6 +17,7 @@ import io.gromif.astracrypt.presentation.navigation.models.actions.help
 import io.gromif.astracrypt.presentation.navigation.shared.LocalHostEvents
 import io.gromif.astracrypt.presentation.navigation.shared.LocalNavController
 import io.gromif.astracrypt.presentation.navigation.shared.UiStateHandler
+import io.gromif.astracrypt.resources.R
 import io.gromif.compose_help.HelpItem
 import io.gromif.lab_zip.presentation.CombineZipScreen
 import io.gromif.ui.compose.core.BaseNoItemsPage

@@ -7,7 +7,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.platform.LocalContext
-import com.nevidimka655.astracrypt.resources.R
+import io.gromif.astracrypt.resources.R
 import io.gromif.ui.compose.core.Compose
 import io.gromif.ui.compose.core.dialogs.DialogDefaults
 import io.gromif.ui.compose.core.dialogs.DialogWithNewButtonBar

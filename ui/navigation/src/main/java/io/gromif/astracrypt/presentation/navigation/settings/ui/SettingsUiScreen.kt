@@ -2,7 +2,7 @@ package io.gromif.astracrypt.presentation.navigation.settings.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
-import com.nevidimka655.astracrypt.resources.R
+import io.gromif.astracrypt.resources.R
 import io.gromif.ui.compose.core.Preference
 import io.gromif.ui.compose.core.PreferencesGroup
 import io.gromif.ui.compose.core.PreferencesScreen

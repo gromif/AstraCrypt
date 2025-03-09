@@ -3,7 +3,7 @@ package io.gromif.astracrypt.profile.presentation.settings.dialogs
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.nevidimka655.astracrypt.resources.R
+import io.gromif.astracrypt.resources.R
 import io.gromif.ui.compose.core.dialogs.DialogsCore
 import io.gromif.ui.compose.core.dialogs.default
 

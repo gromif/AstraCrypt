@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.net.toUri
-import com.nevidimka655.astracrypt.resources.R
+import io.gromif.astracrypt.resources.R
 import kotlinx.coroutines.launch
 
 @Composable

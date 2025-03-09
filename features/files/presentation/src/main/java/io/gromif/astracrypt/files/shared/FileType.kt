@@ -7,7 +7,6 @@ import androidx.compose.material.icons.filled.Folder
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import com.nevidimka655.astracrypt.resources.R
 import io.gromif.astracrypt.files.domain.model.ItemType
 import io.gromif.astracrypt.files.shared.icons.Audio
 import io.gromif.astracrypt.files.shared.icons.AudioAlt
@@ -17,6 +16,7 @@ import io.gromif.astracrypt.files.shared.icons.Photo
 import io.gromif.astracrypt.files.shared.icons.PhotoAlt
 import io.gromif.astracrypt.files.shared.icons.Video
 import io.gromif.astracrypt.files.shared.icons.VideoAlt
+import io.gromif.astracrypt.resources.R
 
 internal val Icons.FileType get() = _FileType
 

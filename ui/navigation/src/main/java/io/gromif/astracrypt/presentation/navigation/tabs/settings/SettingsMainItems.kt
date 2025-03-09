@@ -7,7 +7,7 @@ import androidx.compose.material.icons.outlined.Palette
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.Security
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.nevidimka655.astracrypt.resources.R
+import io.gromif.astracrypt.resources.R
 
 enum class SettingsMainItems(
     val imageVector: ImageVector,

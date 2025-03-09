@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
-import com.nevidimka655.astracrypt.resources.R
+import io.gromif.astracrypt.resources.R
 import io.gromif.ui.compose.core.Preference
 import io.gromif.ui.compose.core.dialogs.DialogsCore
 import io.gromif.ui.compose.core.dialogs.radio

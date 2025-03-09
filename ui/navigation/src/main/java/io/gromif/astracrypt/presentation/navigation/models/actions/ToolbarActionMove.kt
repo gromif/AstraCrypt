@@ -3,7 +3,7 @@ package io.gromif.astracrypt.presentation.navigation.models.actions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.DriveFileMove
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.nevidimka655.astracrypt.resources.R
+import io.gromif.astracrypt.resources.R
 
 val ToolbarActions.move get() = _ToolbarActionMove
 

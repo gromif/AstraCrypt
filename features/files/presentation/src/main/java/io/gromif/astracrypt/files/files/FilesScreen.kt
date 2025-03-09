@@ -16,7 +16,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.nevidimka655.astracrypt.resources.R
 import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.files.model.ContextualAction
 import io.gromif.astracrypt.files.files.model.Mode
@@ -26,6 +25,7 @@ import io.gromif.astracrypt.files.files.model.action.FilesNavActions
 import io.gromif.astracrypt.files.files.util.contracts.Contracts
 import io.gromif.astracrypt.files.files.util.contracts.scan
 import io.gromif.astracrypt.files.files.util.saver.rememberMultiselectStateList
+import io.gromif.astracrypt.resources.R
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch

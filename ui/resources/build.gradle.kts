@@ -3,5 +3,5 @@ plugins {
 }
 
 android {
-    namespace = "com.nevidimka655.astracrypt.resources"
+    namespace = "io.gromif.astracrypt.resources"
 }

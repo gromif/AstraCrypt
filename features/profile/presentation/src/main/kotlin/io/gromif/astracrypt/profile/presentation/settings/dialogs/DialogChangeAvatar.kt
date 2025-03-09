@@ -18,9 +18,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.nevidimka655.astracrypt.resources.R
 import io.gromif.astracrypt.profile.domain.model.DefaultAvatar
 import io.gromif.astracrypt.profile.presentation.shared.resource
+import io.gromif.astracrypt.resources.R
 import io.gromif.ui.compose.core.dialogs.Dialog
 import io.gromif.ui.compose.core.dialogs.DialogDefaults
 import io.gromif.ui.compose.core.theme.spaces

@@ -36,13 +36,13 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.ImageLoader
 import coil.compose.AsyncImage
-import com.nevidimka655.astracrypt.resources.R
 import io.gromif.astracrypt.files.domain.model.FileSource
 import io.gromif.astracrypt.files.domain.model.ItemState
 import io.gromif.astracrypt.files.domain.model.ItemType
 import io.gromif.astracrypt.files.shared.iconAlt
 import io.gromif.astracrypt.files.shared.iconTint
 import io.gromif.astracrypt.files.shared.title
+import io.gromif.astracrypt.resources.R
 import io.gromif.ui.compose.core.theme.spaces
 
 @OptIn(ExperimentalFoundationApi::class)

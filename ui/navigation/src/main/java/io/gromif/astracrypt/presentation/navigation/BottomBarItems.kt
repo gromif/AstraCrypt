@@ -11,7 +11,7 @@ import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material.icons.outlined.StarOutline
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.nevidimka655.astracrypt.resources.R
+import io.gromif.astracrypt.resources.R
 
 enum class BottomBarItems(
     @StringRes val titleId: Int,

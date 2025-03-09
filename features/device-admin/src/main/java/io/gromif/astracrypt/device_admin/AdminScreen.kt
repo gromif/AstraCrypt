@@ -2,7 +2,7 @@ package io.gromif.astracrypt.device_admin
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
-import com.nevidimka655.astracrypt.resources.R
+import io.gromif.astracrypt.resources.R
 import io.gromif.ui.compose.core.PreferencesGroup
 import io.gromif.ui.compose.core.PreferencesScreen
 import io.gromif.ui.compose.core.PreferencesSwitch

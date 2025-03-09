@@ -23,8 +23,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.nevidimka655.astracrypt.resources.R
 import io.gromif.astracrypt.auth.domain.model.Auth
+import io.gromif.astracrypt.resources.R
 import io.gromif.ui.compose.core.TextFields
 import io.gromif.ui.compose.core.text_fields.Password
 import io.gromif.ui.compose.core.text_fields.icons.PasswordToggleIconButton
