@@ -29,7 +29,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.nevidimka655.astracrypt.BuildConfig
 import com.nevidimka655.astracrypt.resources.R
-import com.nevidimka655.atracrypt.core.design_system.AstraCryptTheme
 import io.gromif.astracrypt.auth.domain.model.AuthType
 import io.gromif.astracrypt.auth.domain.model.SkinType
 import io.gromif.astracrypt.auth.presentation.PasswordLoginScreen
@@ -44,6 +43,7 @@ import io.gromif.astracrypt.presentation.navigation.models.HostStateHolder
 import io.gromif.astracrypt.presentation.navigation.models.NavParams
 import io.gromif.astracrypt.presentation.navigation.models.UiState
 import io.gromif.astracrypt.presentation.navigation.models.actions.ToolbarActions
+import io.gromif.astracrypt.ui.design_system.AstraCryptTheme
 import io.gromif.astracrypt.utils.Api
 import io.gromif.calculator.CalculatorScreen
 import io.gromif.ui.compose.core.ext.FlowObserver

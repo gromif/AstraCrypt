@@ -15,9 +15,9 @@ import androidx.compose.ui.graphics.vector.path
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastForEach
-import com.nevidimka655.atracrypt.core.design_system.darkScheme
-import com.nevidimka655.atracrypt.core.design_system.lightScheme
 import io.gromif.astracrypt.files.shared._FileType
+import io.gromif.astracrypt.ui.design_system.darkScheme
+import io.gromif.astracrypt.ui.design_system.lightScheme
 
 internal val _FileType.Audio @Composable get() = default()
 internal val _FileType.AudioAlt @Composable get() = alt()

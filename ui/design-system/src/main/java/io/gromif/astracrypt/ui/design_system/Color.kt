@@ -1,4 +1,4 @@
-package com.nevidimka655.atracrypt.core.design_system
+package io.gromif.astracrypt.ui.design_system
 
 import androidx.compose.ui.graphics.Color
 

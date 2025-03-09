@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.nevidimka655.atracrypt.core.design_system"
+    namespace = "io.gromif.astracrypt.ui.design_system"
 }
 
 dependencies {
