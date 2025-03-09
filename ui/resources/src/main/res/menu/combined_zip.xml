@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<menu>
-    <!--<item
-        android:id="@+id/help"
-        android:icon="@drawable/ic_help_outline"
-        android:title="@string/help"
-        app:showAsAction="ifRoom" />-->
-</menu>

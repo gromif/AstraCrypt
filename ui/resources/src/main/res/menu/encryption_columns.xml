@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<menu>
-    <!--<item
-        android:id="@+id/sync_db"
-        android:icon="@drawable/ic_db_sync"
-        android:title="@string/dialog_dbUpdate"
-        app:showAsAction="ifRoom" />-->
-</menu>
