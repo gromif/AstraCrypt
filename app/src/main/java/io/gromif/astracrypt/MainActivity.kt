@@ -4,8 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.nevidimka655.haptic.Haptic
 import dagger.hilt.android.AndroidEntryPoint
+import io.gromif.ui.haptic.Haptic
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
