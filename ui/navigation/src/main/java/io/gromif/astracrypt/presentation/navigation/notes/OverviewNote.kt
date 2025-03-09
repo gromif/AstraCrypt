@@ -10,8 +10,6 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import com.nevidimka655.astracrypt.resources.R
-import com.nevidimka655.notes.Notes
-import com.nevidimka655.notes.overview.OverviewScreen
 import com.nevidimka655.ui.compose_core.wrappers.TextWrap
 import io.gromif.astracrypt.presentation.navigation.Route
 import io.gromif.astracrypt.presentation.navigation.models.UiState
@@ -19,6 +17,8 @@ import io.gromif.astracrypt.presentation.navigation.models.actions.ToolbarAction
 import io.gromif.astracrypt.presentation.navigation.models.actions.delete
 import io.gromif.astracrypt.presentation.navigation.shared.LocalHostEvents
 import io.gromif.astracrypt.presentation.navigation.shared.UiStateHandler
+import io.gromif.notes.presentation.Notes
+import io.gromif.notes.presentation.overview.OverviewScreen
 import kotlinx.coroutines.channels.Channel
 
 private val SaveFabUiState = UiState.Fab(icon = Icons.Default.SaveAs)
