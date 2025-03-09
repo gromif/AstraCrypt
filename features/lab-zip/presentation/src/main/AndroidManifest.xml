@@ -9,7 +9,7 @@
             android:foregroundServiceType="dataSync" />
 
         <service
-            android:name="com.nevidimka655.features.lab_zip.io.gromif.lab_zip.presentation.work.CombinedZipWorker"
+            android:name="io.gromif.lab_zip.presentation.work.CombinedZipWorker"
             android:foregroundServiceType="dataSync"
             tools:ignore="Instantiatable" />
 
