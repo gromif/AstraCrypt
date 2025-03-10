@@ -29,7 +29,7 @@
         </activity>
 
         <activity-alias
-            android:name=".MainActivityCalculator"
+            android:name="io.gromif.astracrypt.MainActivityCalculator"
             android:enabled="false"
             android:exported="true"
             android:icon="@mipmap/ic_launcher_calculator"
