@@ -15,7 +15,6 @@ import io.gromif.astracrypt.files.settings.aead.work.SetDatabaseAeadWorker
 import io.gromif.astracrypt.utils.dispatchers.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -32,12 +31,8 @@ internal class ColumnsAeadSettingsViewModel @Inject constructor(
     var file by mutableStateOf(false)
     var flag by mutableStateOf(false)
 
-    val aeadInfoState = getAeadInfoFlowUseCase().onEach {
-        name = it.name
-        preview = it.preview
-        file = it.file
-        flag = it.flag
-    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), AeadInfo())
+    val aeadInfoState = getAeadInfoFlowUseCase()
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), AeadInfo())
 
     fun setColumnsAeadSettings() = viewModelScope.launch(defaultDispatcher) {
         val newAeadInfo = aeadInfoState.value.copy(
