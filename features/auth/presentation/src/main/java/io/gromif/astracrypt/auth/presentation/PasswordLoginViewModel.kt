@@ -18,7 +18,7 @@ internal class PasswordLoginViewModel @Inject constructor(
     getAuthFlowUseCase: GetAuthFlowUseCase
 ): ViewModel() {
     private val authState = getAuthFlowUseCase().stateIn(
-        viewModelScope, SharingStarted.WhileSubscribed(), initialValue = Auth()
+        viewModelScope, SharingStarted.Eagerly, initialValue = Auth()
     )
 
     suspend fun verifyPassword(password: String): Boolean {

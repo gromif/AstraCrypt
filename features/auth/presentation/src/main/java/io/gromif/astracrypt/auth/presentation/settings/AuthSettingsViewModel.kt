@@ -35,8 +35,7 @@ internal class AuthSettingsViewModel @Inject constructor(
     private val setBindTinkAdUseCase: SetBindTinkAdUseCase,
     getAuthFlowUseCase: GetAuthFlowUseCase
 ) : ViewModel() {
-    val authState = getAuthFlowUseCase()
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), Auth())
+    val authState = getAuthFlowUseCase().stateIn(viewModelScope, SharingStarted.Lazily, Auth())
 
     fun disable() = viewModelScope.launch(defaultDispatcher) {
         setAuthTypeUseCase(authType = null, data = null)
