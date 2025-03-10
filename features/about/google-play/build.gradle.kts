@@ -11,6 +11,8 @@ dependencies {
     implementation(projects.features.about)
     implementation(projects.ui.resources)
 
+    implementation(libs.androidx.core.ktx)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
