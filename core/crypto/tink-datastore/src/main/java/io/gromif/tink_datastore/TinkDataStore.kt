@@ -21,6 +21,13 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
+/**
+ * Utility class for handling data encryption in DataStore.
+ * @param dataStore The primary DataStore instance.
+ * @param keysetManager The provided KeysetManager instance.
+ * @param encoder The encoder used to process bytes after encryption..
+ * @param params The encryption parameters.
+ */
 abstract class TinkDataStore(
     private val dataStore: DataStore<Preferences>,
     private val keysetManager: KeysetManager,
@@ -28,6 +35,16 @@ abstract class TinkDataStore(
     private val params: Params,
 ) {
 
+    /**
+     * Represents the encryption settings for [TinkDataStore].
+     * @param keyPrfTemplate The desired [KeysetTemplates.PRF] algorithm for hashing a preference key.
+     * @param purpose The unique purpose of this [TinkDataStore].
+     * @param keyTag The unique `key` tag used to retrieve a keyset for hashing a preference key.
+     * @param keyAD The unique `key` keyset associated data.
+     * @param valueTag The unique `value` tag used to retrieve a keyset for hashing a preference value.
+     * @param valueAD The unique `value` keyset associated data.
+     * @param keyPrfHashSize The desired length of `key` PRF output algorithm.
+     */
     data class Params(
         val keyPrfTemplate: KeysetTemplates.PRF = KeysetTemplates.PRF.HKDF_SHA256,
         val purpose: String,
@@ -92,12 +109,21 @@ abstract class TinkDataStore(
     }
 
 
+    /**
+     * Retrieves the [PrfSet] instance used for key hashing.
+     * @return [PrfSet] instance
+     */
     private suspend fun getKeyPrf(): PrfSet = cachedKeyPrf ?: keysetManager.getKeyset(
         tag = params.keyTag,
         associatedData = params.keyAD,
         keyParams = params.keyPrfTemplate.params
     ).prf().also { cachedKeyPrf = it }
 
+
+    /**
+     * Retrieves the [Aead] instance used for value encryption.
+     * @return [Aead] instance
+     */
     private suspend fun getValueAead(aead: KeysetTemplates.AEAD): Aead {
         return cachedValueAead ?: keysetManager.getKeyset(
             tag = params.valueTag,
@@ -107,6 +133,10 @@ abstract class TinkDataStore(
     }
 
 
+    /**
+     * Hashes the specified [key] via PRF function.
+     * @return [key] PRF hash
+     */
     private suspend fun prfHashKeyWithBase64(key: String): String {
         return preferencesKeyHashMap[key] ?: run {
             val prf = getKeyPrf()
@@ -115,11 +145,18 @@ abstract class TinkDataStore(
         }
     }
 
+    /**
+     * Adds the specified [name] to the trackable list used for managing encryption changes in DataStore.
+     */
     protected fun tinkPreference(name: String): Preferences.Key<String> {
         preferencesKeyList.add(name)
         return stringPreferencesKey(name)
     }
 
+    /**
+     * Saves specified [value] to a specified preference [key].
+     * Automatically encrypts the data if encryption is active.
+     */
     protected suspend fun MutablePreferences.setData(key: String, value: String) {
         val aead = getTinkDataStoreAead()
         if (aead != null) {
@@ -131,6 +168,10 @@ abstract class TinkDataStore(
         } else set(stringPreferencesKey(key), value)
     }
 
+    /**
+     * Retrieves preference data by using the specified [key].
+     * Automatically decrypts the content if encryption is active.
+     */
     protected suspend fun Preferences.getData(key: String): String? {
         val aead = getTinkDataStoreAead()
         return if (aead != null) {
@@ -143,6 +184,9 @@ abstract class TinkDataStore(
     }
 
 
+    /**
+     * Updates encryption to the [targetAead] algorithm.
+     */
     protected suspend fun setTinkDataStoreAead(
         targetAead: KeysetTemplates.AEAD?,
     ): Unit = mutex.withLock {
@@ -166,6 +210,9 @@ abstract class TinkDataStore(
         }
     }
 
+    /**
+     * Resets cached AEAD instances.
+     */
     private fun resetCachedAead() {
         cachedKeyPrf = null
         cachedValueAead = null
@@ -173,6 +220,12 @@ abstract class TinkDataStore(
 
 }
 
+/**
+ * The default preference key used for storing the encryption algorithm id.
+ */
 private const val KEY_AEAD = "aead"
 
+/**
+ * The default AEAD encryption algorithm used to encrypt a preference data
+ */
 private val DEFAULT_AEAD = KeysetTemplates.AEAD.AES128_EAX
