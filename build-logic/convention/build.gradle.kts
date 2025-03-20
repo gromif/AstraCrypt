@@ -73,6 +73,10 @@ gradlePlugin {
             id = "astracrypt.kotlin.coroutines"
             implementationClass = "KotlinCoroutinesConventionPlugin"
         }
+        register("testUnit") {
+            id = "astracrypt.test.unit"
+            implementationClass = "TestUnitConventionPlugin"
+        }
     }
 }
 
