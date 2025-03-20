@@ -41,7 +41,8 @@ class ImportUseCase(
     ) = coroutineScope {
         val fileUtil = fileUtilFactory.create()
         fileUtil.open(path)
-        val name = fileUtil.getName() ?: return@coroutineScope
+        val name = fileUtil.getName() ?: throw ValidationException
+            .InvalidNameException("Name can't be null!")
         NameValidator(name)
 
         val type = fileUtil.parseType()
