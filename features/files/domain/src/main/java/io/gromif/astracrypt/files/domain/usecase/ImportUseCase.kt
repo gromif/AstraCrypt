@@ -50,7 +50,8 @@ class ImportUseCase(
         val size = fileUtil.length() ?: 0
         require(size > -1) { throw ValidationException.InvalidFileSizeException() }
 
-        val filePath = fileUtil.write() ?: return@coroutineScope
+        val filePath = fileUtil.write() ?: throw ValidationException
+            .InvalidPathException("File path can't be null!")
         val previewFilePath = previewUtil.getPreviewPath(type, path)
         val flags = flagsUtil.getFlags(type, path)
 
