@@ -8,6 +8,7 @@ import dagger.hilt.android.scopes.ViewModelScoped
 import io.gromif.astracrypt.profile.domain.repository.Repository
 import io.gromif.astracrypt.profile.domain.repository.SettingsRepository
 import io.gromif.astracrypt.profile.domain.usecase.GetAeadModeFlowUseCase
+import io.gromif.astracrypt.profile.domain.usecase.GetAvatarAeadUseCase
 import io.gromif.astracrypt.profile.domain.usecase.GetProfileFlowUseCase
 import io.gromif.astracrypt.profile.domain.usecase.GetProfileUseCase
 import io.gromif.astracrypt.profile.domain.usecase.GetValidationRulesUseCase
@@ -38,6 +39,11 @@ internal object UsecaseModule {
 
     @ViewModelScoped
     @Provides
+    fun provideGetAvatarAeadUseCase(settingsRepository: SettingsRepository) =
+        GetAvatarAeadUseCase(settingsRepository)
+
+    @ViewModelScoped
+    @Provides
     fun provideSetNameUsecase(
         setProfileUsecase: SetProfileUseCase,
         getProfileUsecase: GetProfileUseCase,
@@ -55,9 +61,9 @@ internal object UsecaseModule {
     fun provideSetExternalAvatarUsecase(
         setProfileUsecase: SetProfileUseCase,
         getProfileUsecase: GetProfileUseCase,
+        getAvatarAeadUseCase: GetAvatarAeadUseCase,
         repository: Repository,
-        settingsRepository: SettingsRepository,
-    ) = SetExternalAvatarUseCase(setProfileUsecase, getProfileUsecase, repository, settingsRepository)
+    ) = SetExternalAvatarUseCase(setProfileUsecase, getProfileUsecase, getAvatarAeadUseCase, repository)
 
     @ViewModelScoped
     @Provides
