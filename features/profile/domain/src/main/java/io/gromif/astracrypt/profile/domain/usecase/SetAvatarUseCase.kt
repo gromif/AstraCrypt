@@ -3,9 +3,9 @@ package io.gromif.astracrypt.profile.domain.usecase
 import io.gromif.astracrypt.profile.domain.model.Avatar
 import io.gromif.astracrypt.profile.domain.model.DefaultAvatar
 
-class SetAvatarUsecase(
+class SetAvatarUseCase(
     private val setProfileUsecase: SetProfileUseCase,
-    private val getProfileUsecase: GetProfileUsecase,
+    private val getProfileUsecase: GetProfileUseCase,
 ) {
 
     suspend operator fun invoke(defaultAvatar: DefaultAvatar) {

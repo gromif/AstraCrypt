@@ -5,9 +5,9 @@ import io.gromif.astracrypt.profile.domain.model.Avatar
 import io.gromif.astracrypt.profile.domain.repository.Repository
 import io.gromif.astracrypt.profile.domain.repository.SettingsRepository
 
-class SetExternalAvatarUsecase(
+class SetExternalAvatarUseCase(
     private val setProfileUsecase: SetProfileUseCase,
-    private val getProfileUsecase: GetProfileUsecase,
+    private val getProfileUsecase: GetProfileUseCase,
     private val repository: Repository,
     private val settingsRepository: SettingsRepository,
 ) {

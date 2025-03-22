@@ -3,7 +3,7 @@ package io.gromif.astracrypt.profile.domain.usecase
 import io.gromif.astracrypt.profile.domain.repository.Repository
 import io.gromif.astracrypt.profile.domain.repository.SettingsRepository
 
-class SetAvatarAeadUsecase(
+class SetAvatarAeadUseCase(
     private val repository: Repository,
     private val settingsRepository: SettingsRepository,
 ) {

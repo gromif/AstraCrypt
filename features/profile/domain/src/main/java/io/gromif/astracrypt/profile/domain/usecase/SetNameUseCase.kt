@@ -1,8 +1,8 @@
 package io.gromif.astracrypt.profile.domain.usecase
 
-class SetNameUsecase(
+class SetNameUseCase(
     private val setProfileUsecase: SetProfileUseCase,
-    private val getProfileUsecase: GetProfileUsecase,
+    private val getProfileUsecase: GetProfileUseCase,
 ) {
 
     suspend operator fun invoke(name: String) {

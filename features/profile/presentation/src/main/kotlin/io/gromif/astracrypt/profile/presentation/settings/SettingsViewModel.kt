@@ -7,11 +7,11 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.gromif.astracrypt.profile.di.AvatarImageLoader
 import io.gromif.astracrypt.profile.domain.model.DefaultAvatar
 import io.gromif.astracrypt.profile.domain.model.Profile
-import io.gromif.astracrypt.profile.domain.usecase.GetProfileFlowUsecase
-import io.gromif.astracrypt.profile.domain.usecase.GetValidationRulesUsecase
-import io.gromif.astracrypt.profile.domain.usecase.SetAvatarUsecase
-import io.gromif.astracrypt.profile.domain.usecase.SetExternalAvatarUsecase
-import io.gromif.astracrypt.profile.domain.usecase.SetNameUsecase
+import io.gromif.astracrypt.profile.domain.usecase.GetProfileFlowUseCase
+import io.gromif.astracrypt.profile.domain.usecase.GetValidationRulesUseCase
+import io.gromif.astracrypt.profile.domain.usecase.SetAvatarUseCase
+import io.gromif.astracrypt.profile.domain.usecase.SetExternalAvatarUseCase
+import io.gromif.astracrypt.profile.domain.usecase.SetNameUseCase
 import io.gromif.astracrypt.utils.dispatchers.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.SharingStarted
@@ -23,13 +23,13 @@ import javax.inject.Inject
 internal class SettingsViewModel @Inject constructor(
     @IoDispatcher
     private val defaultDispatcher: CoroutineDispatcher,
-    private val setNameUsecase: SetNameUsecase,
-    private val setAvatarUsecase: SetAvatarUsecase,
-    private val setExternalAvatarUsecase: SetExternalAvatarUsecase,
+    private val setNameUsecase: SetNameUseCase,
+    private val setAvatarUsecase: SetAvatarUseCase,
+    private val setExternalAvatarUsecase: SetExternalAvatarUseCase,
     @AvatarImageLoader
     val imageLoader: ImageLoader,
-    getValidationRulesUsecase: GetValidationRulesUsecase,
-    getProfileFlowUsecase: GetProfileFlowUsecase,
+    getValidationRulesUsecase: GetValidationRulesUseCase,
+    getProfileFlowUsecase: GetProfileFlowUseCase,
 ): ViewModel() {
     val validationRules = getValidationRulesUsecase()
     val profileState = getProfileFlowUsecase().stateIn(

@@ -8,13 +8,13 @@ import dagger.hilt.android.scopes.ViewModelScoped
 import io.gromif.astracrypt.profile.domain.repository.Repository
 import io.gromif.astracrypt.profile.domain.repository.SettingsRepository
 import io.gromif.astracrypt.profile.domain.usecase.GetAeadModeFlowUseCase
-import io.gromif.astracrypt.profile.domain.usecase.GetProfileFlowUsecase
-import io.gromif.astracrypt.profile.domain.usecase.GetProfileUsecase
-import io.gromif.astracrypt.profile.domain.usecase.GetValidationRulesUsecase
+import io.gromif.astracrypt.profile.domain.usecase.GetProfileFlowUseCase
+import io.gromif.astracrypt.profile.domain.usecase.GetProfileUseCase
+import io.gromif.astracrypt.profile.domain.usecase.GetValidationRulesUseCase
 import io.gromif.astracrypt.profile.domain.usecase.SetAeadModeUseCase
-import io.gromif.astracrypt.profile.domain.usecase.SetAvatarUsecase
-import io.gromif.astracrypt.profile.domain.usecase.SetExternalAvatarUsecase
-import io.gromif.astracrypt.profile.domain.usecase.SetNameUsecase
+import io.gromif.astracrypt.profile.domain.usecase.SetAvatarUseCase
+import io.gromif.astracrypt.profile.domain.usecase.SetExternalAvatarUseCase
+import io.gromif.astracrypt.profile.domain.usecase.SetNameUseCase
 import io.gromif.astracrypt.profile.domain.usecase.SetProfileUseCase
 
 @Module
@@ -24,7 +24,7 @@ internal object UsecaseModule {
     @ViewModelScoped
     @Provides
     fun provideGetProfileUsecase(settingsRepository: SettingsRepository) =
-        GetProfileUsecase(settingsRepository)
+        GetProfileUseCase(settingsRepository)
 
     @ViewModelScoped
     @Provides
@@ -34,34 +34,34 @@ internal object UsecaseModule {
     @ViewModelScoped
     @Provides
     fun provideGetProfileFlowUsecase(settingsRepository: SettingsRepository) =
-        GetProfileFlowUsecase(settingsRepository)
+        GetProfileFlowUseCase(settingsRepository)
 
     @ViewModelScoped
     @Provides
     fun provideSetNameUsecase(
         setProfileUsecase: SetProfileUseCase,
-        getProfileUsecase: GetProfileUsecase,
-    ) = SetNameUsecase(setProfileUsecase, getProfileUsecase)
+        getProfileUsecase: GetProfileUseCase,
+    ) = SetNameUseCase(setProfileUsecase, getProfileUsecase)
 
     @ViewModelScoped
     @Provides
     fun provideSetAvatarUsecase(
         setProfileUsecase: SetProfileUseCase,
-        getProfileUsecase: GetProfileUsecase,
-    ) = SetAvatarUsecase(setProfileUsecase, getProfileUsecase)
+        getProfileUsecase: GetProfileUseCase,
+    ) = SetAvatarUseCase(setProfileUsecase, getProfileUsecase)
 
     @ViewModelScoped
     @Provides
     fun provideSetExternalAvatarUsecase(
         setProfileUsecase: SetProfileUseCase,
-        getProfileUsecase: GetProfileUsecase,
+        getProfileUsecase: GetProfileUseCase,
         repository: Repository,
         settingsRepository: SettingsRepository,
-    ) = SetExternalAvatarUsecase(setProfileUsecase, getProfileUsecase, repository, settingsRepository)
+    ) = SetExternalAvatarUseCase(setProfileUsecase, getProfileUsecase, repository, settingsRepository)
 
     @ViewModelScoped
     @Provides
-    fun provideGetValidationRulesUsecase(): GetValidationRulesUsecase = GetValidationRulesUsecase()
+    fun provideGetValidationRulesUsecase(): GetValidationRulesUseCase = GetValidationRulesUseCase()
 
     @ViewModelScoped
     @Provides

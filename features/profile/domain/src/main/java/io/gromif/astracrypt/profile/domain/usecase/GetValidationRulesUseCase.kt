@@ -3,7 +3,7 @@ package io.gromif.astracrypt.profile.domain.usecase
 import io.gromif.astracrypt.profile.domain.ValidationRules
 import io.gromif.astracrypt.profile.domain.model.ValidationRulesDto
 
-class GetValidationRulesUsecase {
+class GetValidationRulesUseCase {
 
     operator fun invoke(): ValidationRulesDto {
         return ValidationRulesDto(
