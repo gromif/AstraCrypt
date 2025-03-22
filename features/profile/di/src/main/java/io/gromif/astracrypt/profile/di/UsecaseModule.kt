@@ -9,6 +9,7 @@ import io.gromif.astracrypt.profile.domain.repository.Repository
 import io.gromif.astracrypt.profile.domain.repository.SettingsRepository
 import io.gromif.astracrypt.profile.domain.usecase.GetAeadModeFlowUseCase
 import io.gromif.astracrypt.profile.domain.usecase.GetProfileFlowUsecase
+import io.gromif.astracrypt.profile.domain.usecase.GetProfileUsecase
 import io.gromif.astracrypt.profile.domain.usecase.GetValidationRulesUsecase
 import io.gromif.astracrypt.profile.domain.usecase.SetAeadModeUseCase
 import io.gromif.astracrypt.profile.domain.usecase.SetAvatarUsecase
@@ -21,25 +22,35 @@ internal object UsecaseModule {
 
     @ViewModelScoped
     @Provides
+    fun provideGetProfileUsecase(settingsRepository: SettingsRepository) =
+        GetProfileUsecase(settingsRepository)
+
+    @ViewModelScoped
+    @Provides
     fun provideGetProfileFlowUsecase(settingsRepository: SettingsRepository) =
         GetProfileFlowUsecase(settingsRepository)
 
     @ViewModelScoped
     @Provides
-    fun provideSetNameUsecase(settingsRepository: SettingsRepository) =
-        SetNameUsecase(settingsRepository)
+    fun provideSetNameUsecase(
+        getProfileUsecase: GetProfileUsecase,
+        settingsRepository: SettingsRepository
+    ) = SetNameUsecase(getProfileUsecase, settingsRepository)
 
     @ViewModelScoped
     @Provides
-    fun provideSetAvatarUsecase(settingsRepository: SettingsRepository): SetAvatarUsecase =
-        SetAvatarUsecase(settingsRepository)
+    fun provideSetAvatarUsecase(
+        getProfileUsecase: GetProfileUsecase,
+        settingsRepository: SettingsRepository
+    ) = SetAvatarUsecase(getProfileUsecase, settingsRepository)
 
     @ViewModelScoped
     @Provides
     fun provideSetExternalAvatarUsecase(
+        getProfileUsecase: GetProfileUsecase,
         repository: Repository,
         settingsRepository: SettingsRepository,
-    ): SetExternalAvatarUsecase = SetExternalAvatarUsecase(repository, settingsRepository)
+    ) = SetExternalAvatarUsecase(getProfileUsecase, repository, settingsRepository)
 
     @ViewModelScoped
     @Provides
