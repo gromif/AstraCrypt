@@ -6,6 +6,7 @@ import io.gromif.astracrypt.profile.domain.repository.Repository
 import io.gromif.astracrypt.profile.domain.repository.SettingsRepository
 
 class SetExternalAvatarUsecase(
+    private val setProfileUsecase: SetProfileUseCase,
     private val getProfileUsecase: GetProfileUsecase,
     private val repository: Repository,
     private val settingsRepository: SettingsRepository,
@@ -20,7 +21,7 @@ class SetExternalAvatarUsecase(
             size = ValidationRules.SIZE_ICON
         )
         val newProfile = getProfileUsecase().copy(avatar = Avatar.External)
-        settingsRepository.setProfile(profile = newProfile)
+        setProfileUsecase(profile = newProfile)
     }
 
 }

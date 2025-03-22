@@ -15,6 +15,7 @@ import io.gromif.astracrypt.profile.domain.usecase.SetAeadModeUseCase
 import io.gromif.astracrypt.profile.domain.usecase.SetAvatarUsecase
 import io.gromif.astracrypt.profile.domain.usecase.SetExternalAvatarUsecase
 import io.gromif.astracrypt.profile.domain.usecase.SetNameUsecase
+import io.gromif.astracrypt.profile.domain.usecase.SetProfileUseCase
 
 @Module
 @InstallIn(ViewModelComponent::class)
@@ -27,30 +28,36 @@ internal object UsecaseModule {
 
     @ViewModelScoped
     @Provides
+    fun provideSetProfileUsecase(settingsRepository: SettingsRepository) =
+        SetProfileUseCase(settingsRepository)
+
+    @ViewModelScoped
+    @Provides
     fun provideGetProfileFlowUsecase(settingsRepository: SettingsRepository) =
         GetProfileFlowUsecase(settingsRepository)
 
     @ViewModelScoped
     @Provides
     fun provideSetNameUsecase(
+        setProfileUsecase: SetProfileUseCase,
         getProfileUsecase: GetProfileUsecase,
-        settingsRepository: SettingsRepository
-    ) = SetNameUsecase(getProfileUsecase, settingsRepository)
+    ) = SetNameUsecase(setProfileUsecase, getProfileUsecase)
 
     @ViewModelScoped
     @Provides
     fun provideSetAvatarUsecase(
+        setProfileUsecase: SetProfileUseCase,
         getProfileUsecase: GetProfileUsecase,
-        settingsRepository: SettingsRepository
-    ) = SetAvatarUsecase(getProfileUsecase, settingsRepository)
+    ) = SetAvatarUsecase(setProfileUsecase, getProfileUsecase)
 
     @ViewModelScoped
     @Provides
     fun provideSetExternalAvatarUsecase(
+        setProfileUsecase: SetProfileUseCase,
         getProfileUsecase: GetProfileUsecase,
         repository: Repository,
         settingsRepository: SettingsRepository,
-    ) = SetExternalAvatarUsecase(getProfileUsecase, repository, settingsRepository)
+    ) = SetExternalAvatarUsecase(setProfileUsecase, getProfileUsecase, repository, settingsRepository)
 
     @ViewModelScoped
     @Provides
