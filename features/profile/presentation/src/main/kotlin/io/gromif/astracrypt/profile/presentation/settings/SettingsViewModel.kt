@@ -7,7 +7,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.gromif.astracrypt.profile.di.AvatarImageLoader
 import io.gromif.astracrypt.profile.domain.model.DefaultAvatar
 import io.gromif.astracrypt.profile.domain.model.Profile
-import io.gromif.astracrypt.profile.domain.usecase.GetProfileUsecase
+import io.gromif.astracrypt.profile.domain.usecase.GetProfileFlowUsecase
 import io.gromif.astracrypt.profile.domain.usecase.GetValidationRulesUsecase
 import io.gromif.astracrypt.profile.domain.usecase.SetAvatarUsecase
 import io.gromif.astracrypt.profile.domain.usecase.SetExternalAvatarUsecase
@@ -29,10 +29,10 @@ internal class SettingsViewModel @Inject constructor(
     @AvatarImageLoader
     val imageLoader: ImageLoader,
     getValidationRulesUsecase: GetValidationRulesUsecase,
-    getProfileUsecase: GetProfileUsecase,
+    getProfileFlowUsecase: GetProfileFlowUsecase,
 ): ViewModel() {
     val validationRules = getValidationRulesUsecase()
-    val profileState = getProfileUsecase().stateIn(
+    val profileState = getProfileFlowUsecase().stateIn(
         viewModelScope, SharingStarted.WhileSubscribed(), Profile()
     )
 

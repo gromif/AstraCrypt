@@ -4,7 +4,7 @@ import io.gromif.astracrypt.profile.domain.model.Profile
 import io.gromif.astracrypt.profile.domain.repository.SettingsRepository
 import kotlinx.coroutines.flow.Flow
 
-class GetProfileUsecase(
+class GetProfileFlowUsecase(
     private val settingsRepository: SettingsRepository
 ) {
 

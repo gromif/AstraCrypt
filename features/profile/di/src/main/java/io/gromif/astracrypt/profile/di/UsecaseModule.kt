@@ -8,7 +8,7 @@ import dagger.hilt.android.scopes.ViewModelScoped
 import io.gromif.astracrypt.profile.domain.repository.Repository
 import io.gromif.astracrypt.profile.domain.repository.SettingsRepository
 import io.gromif.astracrypt.profile.domain.usecase.GetAeadModeFlowUseCase
-import io.gromif.astracrypt.profile.domain.usecase.GetProfileUsecase
+import io.gromif.astracrypt.profile.domain.usecase.GetProfileFlowUsecase
 import io.gromif.astracrypt.profile.domain.usecase.GetValidationRulesUsecase
 import io.gromif.astracrypt.profile.domain.usecase.SetAeadModeUseCase
 import io.gromif.astracrypt.profile.domain.usecase.SetAvatarUsecase
@@ -21,8 +21,8 @@ internal object UsecaseModule {
 
     @ViewModelScoped
     @Provides
-    fun provideGetProfileUsecase(settingsRepository: SettingsRepository) =
-        GetProfileUsecase(settingsRepository)
+    fun provideGetProfileFlowUsecase(settingsRepository: SettingsRepository) =
+        GetProfileFlowUsecase(settingsRepository)
 
     @ViewModelScoped
     @Provides
