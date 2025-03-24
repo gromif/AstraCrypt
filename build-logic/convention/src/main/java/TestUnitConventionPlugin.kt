@@ -8,6 +8,7 @@ class TestUnitConventionPlugin: Plugin<Project> {
         dependencies {
             "testImplementation"(libs.findLibrary("junit").get())
             "testImplementation"(libs.findLibrary("mockk").get())
+            "testImplementation"(libs.findLibrary("robolectric").get())
             "testImplementation"(libs.findLibrary("kotlin.coroutines.test").get())
         }
     }
