@@ -1,10 +1,10 @@
 [versions]
-kotlin = "2.1.10"
+kotlin = "2.1.20"
 kotlin-coroutines = "1.10.1"
 kotlin-coroutines-test = "1.10.1"
 kotlin-serialization = "1.7.3"
 agp = "8.9.1"
-ksp = "2.1.10-1.0.30"
+ksp = "2.1.20-1.0.31"
 
 room = "2.6.1"
 lifecycle = "2.8.7"
