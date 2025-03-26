@@ -1,4 +1,4 @@
-package io.gromif.astracrypt.di.work
+package io.gromif.astracrypt.di
 
 import android.content.Context
 import androidx.work.WorkManager
@@ -17,6 +17,6 @@ object WorkManagerModule {
     @Provides
     fun provideWorkManager(
         @ApplicationContext context: Context
-    ): WorkManager = WorkManager.getInstance(context)
+    ): WorkManager = WorkManager.Companion.getInstance(context)
 
 }
