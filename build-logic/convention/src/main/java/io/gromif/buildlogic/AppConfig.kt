@@ -24,7 +24,7 @@ internal object AppConfig {
     }
 
     object Compose {
-        const val METRICS = false
+        const val METRICS = true
     }
 
 }
