@@ -23,7 +23,7 @@ dependencies {
     implementation(projects.features.quickActions)
     implementation(projects.features.deviceAdmin)
 
-    fdroidImplementation(projects.features.about.fdroid)
+    defaultImplementation(projects.features.about.fdroid)
     playImplementation(projects.features.about.googlePlay)
     implementation(projects.features.about.privacy)
 

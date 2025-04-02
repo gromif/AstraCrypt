@@ -10,7 +10,7 @@ import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 
 private const val DIMENSION_MARKET = "market"
-private const val FLAVOR_FDROID = "fdroid"
+private const val FLAVOR_DEFAULT = "default"
 private const val FLAVOR_PLAY = "play"
 
 class FlavorMarketConventionPlugin: Plugin<Project> {
@@ -26,7 +26,7 @@ internal fun Flavor.createMarket(
 ): Unit = with(commonExtension) {
     flavorDimensions += DIMENSION_MARKET
     productFlavors {
-        register(FLAVOR_FDROID) {
+        register(FLAVOR_DEFAULT) {
             dimension = DIMENSION_MARKET
         }
         register(FLAVOR_PLAY) {
