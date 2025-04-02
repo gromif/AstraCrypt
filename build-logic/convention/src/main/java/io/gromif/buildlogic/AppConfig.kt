@@ -13,9 +13,9 @@ internal object AppConfig {
     }
 
     object Versions {
-        private const val MAJOR = 1
-        private const val MINOR = 7
-        private const val PATCH = 3
+        private const val MAJOR = 2
+        private const val MINOR = 0
+        private const val PATCH = 0
 
         const val CODE = MAJOR * 10000 + MINOR * 100 + PATCH
         const val NAME = "$MAJOR.$MINOR.$PATCH"
