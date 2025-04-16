@@ -38,6 +38,7 @@ appcompat = "1.7.0"
 material = "1.12.0"
 
 detekt = "1.23.8"
+leakcanary = "2.14"
 
 [libraries] # ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 # COMPOSE LIBRARIES --------------------------------------------------------------------------------------------------------------------------------
@@ -96,6 +97,8 @@ androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "j
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
 mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 robolectric = { group = "org.robolectric", name = "robolectric", version.ref = "robolectric" }
+
+leakcanary = { group = "com.squareup.leakcanary", name = "leakcanary-android", version.ref = "leakcanary" }
 
 # Dependencies of the included build-logic
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }

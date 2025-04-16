@@ -25,6 +25,7 @@ internal object AppConfig {
 
     object Tools {
         const val COMPOSE_METRICS = true
+        const val LEAK_CANARY = true
     }
 
 }

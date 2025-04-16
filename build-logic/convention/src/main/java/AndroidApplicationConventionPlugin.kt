@@ -5,10 +5,13 @@ import io.gromif.buildlogic.Plugins
 import io.gromif.buildlogic.configureDefaultConfig
 import io.gromif.buildlogic.configureFlavors
 import io.gromif.buildlogic.configureKotlinAndroid
+import io.gromif.buildlogic.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
+import org.gradle.kotlin.dsl.dependencies
 
+@Suppress("KotlinConstantConditions")
 class AndroidApplicationConventionPlugin : Plugin<Project> {
     override fun apply(target: Project): Unit = with(target) {
         with(pluginManager) {
@@ -34,6 +37,13 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
         }
         extensions.configure<HiltExtension> {
             enableAggregatingTask = true
+        }
+
+        dependencies {
+            if (AppConfig.Tools.LEAK_CANARY) add(
+                configurationName = "debugImplementation",
+                dependencyNotation = libs.findLibrary("leakcanary").get()
+            )
         }
     }
 }
