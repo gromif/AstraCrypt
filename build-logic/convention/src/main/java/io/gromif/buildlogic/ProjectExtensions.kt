@@ -27,7 +27,7 @@ internal fun ApplicationExtension.configureFlavors() {
 
 @Suppress("KotlinConstantConditions")
 internal fun Project.configureComposeMetrics() {
-    if (AppConfig.Compose.METRICS) extensions.configure<ComposeCompilerGradlePluginExtension> {
+    if (AppConfig.Tools.COMPOSE_METRICS) extensions.configure<ComposeCompilerGradlePluginExtension> {
         val outputDirectory = layout.buildDirectory.dir("compose_compiler")
         reportsDestination.set(outputDirectory)
         metricsDestination.set(outputDirectory)
