@@ -1,5 +1,6 @@
 
 import com.android.build.api.dsl.LibraryExtension
+import io.gromif.buildlogic.Plugins
 import io.gromif.buildlogic.configureComposeMetrics
 import io.gromif.buildlogic.configureComposeStabilityConfig
 import io.gromif.buildlogic.libs
@@ -11,7 +12,7 @@ import org.gradle.kotlin.dsl.dependencies
 class AndroidLibraryComposeConventionPlugin: Plugin<Project> {
     override fun apply(target: Project): Unit = with(target) {
         with(pluginManager) {
-            apply("com.android.library")
+            apply(Plugins.ANDROID_LIBRARY)
             apply("org.jetbrains.kotlin.plugin.compose")
         }
         configureComposeStabilityConfig()

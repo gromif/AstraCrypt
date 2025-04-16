@@ -37,6 +37,8 @@ documentfile = "1.0.1"
 appcompat = "1.7.0"
 material = "1.12.0"
 
+detekt = "1.23.8"
+
 [libraries] # ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 # COMPOSE LIBRARIES --------------------------------------------------------------------------------------------------------------------------------
 compose-activity = { group = "androidx.activity", name = "activity-compose", version.ref = "compose-activity" }
@@ -116,6 +118,7 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 
 # Plugins defined by this project
 astracrypt-android-library-flavor-market = { id = "astracrypt.flavor.market" }
