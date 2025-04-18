@@ -22,6 +22,7 @@ dependencies {
     implementation(projects.features.profile.presentation)
     implementation(projects.features.quickActions)
     implementation(projects.features.deviceAdmin)
+    implementation(projects.features.security.secureContent)
 
     defaultImplementation(projects.features.about.fdroid)
     playImplementation(projects.features.about.googlePlay)

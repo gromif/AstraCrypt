@@ -14,7 +14,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         Haptic.init(context = applicationContext)
-        setContent { AstraCryptApp() }
+        setContent { AstraCryptApp(window = window) }
         /*with(binding) {
             movePanel.setBackgroundColor(ColorManager.navigationBarColor)
             move.setOnClickListener {

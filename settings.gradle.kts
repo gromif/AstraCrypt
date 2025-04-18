@@ -10,7 +10,10 @@ val coreModules = listOf(
 
 val cryptoCoreModules = listOf("tink", "tink-datastore")
 
-val featuresModules = listOf("help")
+val featuresModules = listOf(
+    "help",
+    "security:secure-content"
+)
 val uiModules = listOf(
     "compose-core", "compose-details", "design-system",
     "haptic", "navigation", "resources",

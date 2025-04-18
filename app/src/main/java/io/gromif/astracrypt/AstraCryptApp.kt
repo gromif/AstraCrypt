@@ -1,5 +1,6 @@
 package io.gromif.astracrypt
 
+import android.view.Window
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -23,6 +24,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
@@ -46,6 +48,8 @@ import io.gromif.astracrypt.resources.R
 import io.gromif.astracrypt.ui.design_system.AstraCryptTheme
 import io.gromif.astracrypt.utils.Api
 import io.gromif.calculator.CalculatorScreen
+import io.gromif.secure_content.presentation.SetSecureContentFlag
+import io.gromif.secure_content.presentation.secureContent
 import io.gromif.ui.compose.core.ext.FlowObserver
 import io.gromif.ui.compose.core.wrappers.TextWrap
 import kotlinx.coroutines.channels.Channel
@@ -56,18 +60,23 @@ import kotlinx.coroutines.launch
 @Composable
 fun AstraCryptApp(
     modifier: Modifier = Modifier,
+    window: Window,
     vm: MainVM = viewModel<MainVM>(),
     navController: NavHostController = rememberNavController(),
-    dynamicThemeState: State<Boolean> = vm.appearanceManager.dynamicThemeFlow.collectAsStateWithLifecycle(true)
+    dynamicThemeState: State<Boolean> = vm.appearanceManager.dynamicThemeFlow.collectAsStateWithLifecycle(true),
 ) = AstraCryptTheme(
     isDynamicThemeSupported = Api.atLeast12(),
     dynamicThemeState = dynamicThemeState.value
 ) {
+    val isWindowFocused = LocalWindowInfo.current.isWindowFocused
     var uiState by vm.uiState
     val (toolbar, fab, bottomBarTab, searchBar) = uiState
     var searchBarExpanded by rememberSaveable { mutableStateOf(false) }
     val onFabClick = remember { Channel<Any>(0) }
     val onToolbarActions = remember { Channel<ToolbarActions.Action>(0) }
+
+    val secureContentMode by vm.secureContentStateFlow.collectAsStateWithLifecycle()
+    SetSecureContentFlag(mode = secureContentMode, window = window)
 
     val coroutineScope = rememberCoroutineScope()
     val topBarScroll = TopAppBarDefaults.enterAlwaysScrollBehavior()
@@ -82,11 +91,13 @@ fun AstraCryptApp(
     val isSearching = remember(searchQueryState) { searchQueryState.isNotEmpty() }
     val snackbarHostState = remember { SnackbarHostState() }
     Scaffold(
-        modifier = modifier.nestedScroll(
-            if (searchBar) bottomBarScroll.nestedScrollConnection else {
-                topBarScroll.nestedScrollConnection
-            }
-        ),
+        modifier = modifier
+            .secureContent(mode = secureContentMode, windowHasFocus = isWindowFocused)
+            .nestedScroll(
+                if (searchBar) bottomBarScroll.nestedScrollConnection else {
+                    topBarScroll.nestedScrollConnection
+                }
+            ),
         topBar = {
             LaunchedEffect(searchBar) {
                 if (!searchBar && !toolbar.isContextual) vm.setSearchQuery("")

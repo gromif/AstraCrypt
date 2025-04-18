@@ -12,6 +12,8 @@ import io.gromif.astracrypt.auth.domain.usecase.VerifySkinUseCase
 import io.gromif.astracrypt.presentation.navigation.models.UiState
 import io.gromif.astracrypt.utils.AppearanceManager
 import io.gromif.astracrypt.utils.dispatchers.IoDispatcher
+import io.gromif.secure_content.domain.SecureContentMode
+import io.gromif.secure_content.domain.usecase.GetContentModeFlowUseCase
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
@@ -27,10 +29,14 @@ class MainVM @Inject constructor(
     private val state: SavedStateHandle,
     private val verifySkinUseCase: VerifySkinUseCase,
     getAuthFlowUseCase: GetAuthFlowUseCase,
+    getContentModeFlowUseCase: GetContentModeFlowUseCase,
     val appearanceManager: AppearanceManager
 ) : ViewModel() {
     var uiState = mutableStateOf(UiState())
     val searchQueryState = state.getStateFlow(SEARCH_QUERY, "")
+
+    val secureContentStateFlow = getContentModeFlowUseCase()
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), SecureContentMode.ENABLED)
 
     var userIsAuthenticated by mutableStateOf(false)
     var skinIsAuthenticated by mutableStateOf(false)
