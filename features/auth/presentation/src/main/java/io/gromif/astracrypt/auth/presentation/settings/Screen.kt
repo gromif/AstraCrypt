@@ -11,6 +11,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.tooling.preview.Preview
+import io.gromif.astracrypt.auth.presentation.settings.model.Actions
+import io.gromif.astracrypt.auth.presentation.settings.model.Params
 import io.gromif.astracrypt.resources.R
 import io.gromif.ui.compose.core.Preference
 import io.gromif.ui.compose.core.PreferencesGroup
@@ -28,89 +31,76 @@ private val skinMethods = listOf(
     R.string.settings_camouflageType_no, R.string.settings_camouflageType_calculator
 )
 
+@Preview
 @Composable
 internal fun SettingsAuthScreen(
-    isAuthEnabled: Boolean,
-    isAssociatedDataEncrypted: Boolean,
-    hintState: Boolean,
-    hintText: String,
-    typeIndex: Int,
-    skinIndex: Int,
-    onDisableAuth: (String) -> Unit,
-    onChangePassword: (String) -> Unit,
-    onVerifyPassword: suspend (String) -> Boolean,
-    onSetBindPassword: (state: Boolean, password: String) -> Unit,
-    onDisableSkin: () -> Unit,
-    onSetSkinCalculator: (String) -> Unit,
-    onChangeHintState: (Boolean) -> Unit,
-    onChangeHintText: (String) -> Unit
+    params: Params = Params(),
+    actions: Actions = Actions.default
 ) = PreferencesScreen {
     PreferencesGroup(text = stringResource(id = R.string.settings_authentication)) {
         var dialogPasswordCheckDisableAuth by dialogCheckPassword(
-            onVerify = onVerifyPassword,
-            onMatch = onDisableAuth
+            onVerify = actions::verifyPassword,
+            onMatch = { actions.disableAuth() }
         )
-        var dialogPasswordSetup by dialogPassword { onChangePassword(it) }
+        var dialogPasswordSetup by dialogPassword(onResult = actions::changePassword)
         var dialogAuthMethodsState by DialogsCore.Selectable.radio(
             onSelected = {
-                if (it != typeIndex) {
-                    when (it) {
-                        0 -> dialogPasswordCheckDisableAuth = true
-                        1 -> dialogPasswordSetup = true
-                    }
+                if (it != params.typeIndex) when (it) {
+                    0 -> dialogPasswordCheckDisableAuth = true
+                    1 -> dialogPasswordSetup = true
                 }
             },
             title = stringResource(id = R.string.settings_authentication),
             items = authMethods.map { stringResource(it) },
-            selectedItemIndex = typeIndex
+            selectedItemIndex = params.typeIndex
         )
         Preference(
             titleText = stringResource(id = R.string.settings_authenticationMethod),
-            summaryText = stringResource(authMethods[typeIndex])
+            summaryText = stringResource(authMethods[params.typeIndex])
         ) { dialogAuthMethodsState = true }
     }
     PreferencesGroupAnimated(
         text = stringResource(id = R.string.hint),
-        isVisible = isAuthEnabled
+        isVisible = params.isAuthEnabled
     ) {
         PreferencesSwitch(
             titleText = stringResource(id = R.string.settings_showHint),
-            isChecked = hintState,
-            callback = onChangeHintState
+            isChecked = params.hintState,
+            callback = actions::setHintState
         )
-        AnimatedVisibility(visible = hintState) {
-            var dialogHintEditor by dialogHintEditor(currentHint = hintText) {
-                if (it != hintText) onChangeHintText(it)
+        AnimatedVisibility(visible = params.hintState) {
+            var dialogHintEditor by dialogHintEditor(currentHint = params.hintText) {
+                if (it != params.hintText) actions.setHintText(it)
             }
             Preference(
                 titleText = stringResource(id = R.string.hint),
-                summaryText = hintText
+                summaryText = params.hintText
             ) { dialogHintEditor = true }
         }
     }
     PreferencesGroupAnimated(
         text = stringResource(id = R.string.settings_encryption),
-        isVisible = isAuthEnabled
+        isVisible = params.isAuthEnabled
     ) {
-        var dialogPasswordCheckBindEncryption by dialogCheckPassword(onVerify = onVerifyPassword) {
-            onSetBindPassword(!isAssociatedDataEncrypted, it)
+        var dialogPasswordCheckBindEncryption by dialogCheckPassword(actions::verifyPassword) {
+            actions.setBindAuthState(!params.isAssociatedDataEncrypted, it)
         }
         PreferencesSwitch(
             titleText = stringResource(id = R.string.settings_bindWithFiles),
-            isChecked = isAssociatedDataEncrypted
+            isChecked = params.isAssociatedDataEncrypted
         ) { dialogPasswordCheckBindEncryption = true }
     }
     PreferencesGroup(text = stringResource(id = R.string.settings_camouflage)) {
-        var dialogCalculatorCombination by dialogCalculatorCombination(onSetSkinCalculator)
-        var dialogSkinMethodsState by dialogCamouflageMethods(skinIndex = skinIndex) {
-            if (it != skinIndex) when (it) {
-                0 -> onDisableSkin()
+        var dialogCalculatorCombination by dialogCalculatorCombination(actions::setCalculatorSkin)
+        var dialogSkinMethodsState by dialogCamouflageMethods(skinIndex = params.skinIndex) {
+            if (it != params.skinIndex) when (it) {
+                0 -> actions.disableSkin()
                 1 -> dialogCalculatorCombination = true
             }
         }
         Preference(
             titleText = stringResource(id = R.string.settings_camouflage),
-            summaryText = stringResource(skinMethods[skinIndex])
+            summaryText = stringResource(skinMethods[params.skinIndex])
         ) { dialogSkinMethodsState = true }
     }
 }

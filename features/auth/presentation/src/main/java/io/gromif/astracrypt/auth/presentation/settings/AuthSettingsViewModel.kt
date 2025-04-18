@@ -3,7 +3,6 @@ package io.gromif.astracrypt.auth.presentation.settings
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.gromif.astracrypt.auth.domain.model.Auth
 import io.gromif.astracrypt.auth.domain.model.AuthType
 import io.gromif.astracrypt.auth.domain.model.SkinType
 import io.gromif.astracrypt.auth.domain.usecase.GetAuthFlowUseCase
@@ -16,8 +15,6 @@ import io.gromif.astracrypt.auth.domain.usecase.VerifyAuthUseCase
 import io.gromif.astracrypt.utils.app.AppComponentService
 import io.gromif.astracrypt.utils.dispatchers.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -35,8 +32,7 @@ internal class AuthSettingsViewModel @Inject constructor(
     private val setBindTinkAdUseCase: SetBindTinkAdUseCase,
     getAuthFlowUseCase: GetAuthFlowUseCase
 ) : ViewModel() {
-    val authState = getAuthFlowUseCase()
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), Auth())
+    val authFlow = getAuthFlowUseCase()
 
     fun disable() = viewModelScope.launch(defaultDispatcher) {
         setAuthTypeUseCase(authType = null, data = null)

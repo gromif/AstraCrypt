@@ -1,39 +1,65 @@
 package io.gromif.astracrypt.auth.presentation.settings
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import io.gromif.astracrypt.auth.domain.model.Auth
+import io.gromif.astracrypt.auth.presentation.settings.model.Actions
+import io.gromif.astracrypt.auth.presentation.settings.model.Params
 import io.gromif.astracrypt.resources.R
 
 @Composable
 fun AuthSettingsScreen() {
     val vm: AuthSettingsViewModel = hiltViewModel()
-    val auth by vm.authState.collectAsState()
+    val placeholderValue = remember { Auth() }
+    val auth by vm.authFlow.collectAsStateWithLifecycle(placeholderValue)
 
-    val typeIndex = remember(auth.type) {
-        auth.type?.let { it.ordinal + 1 } ?: 0
-    }
-    val skinTypeIndex = remember(auth.skinType) {
-        auth.skinType?.let { it.ordinal + 1 } ?: 0
-    }
-    SettingsAuthScreen(
-        isAuthEnabled = auth.type != null,
-        isAssociatedDataEncrypted = auth.bindTinkAd,
-        hintState = auth.hintState,
-        hintText = auth.hintText ?: stringResource(R.string.none),
-        skinIndex = skinTypeIndex,
-        typeIndex = typeIndex,
-        onDisableAuth = { vm.disable() },
-        onChangePassword = { vm.setPassword(password = it) },
-        onVerifyPassword = { vm.verifyPassword(password = it) },
-        onSetBindPassword = { state, password -> vm.setBindAssociatedData(state, password) },
-        onDisableSkin = { vm.disableSkin() },
-        onSetSkinCalculator = { vm.setCalculatorSkin(combination = it) },
-        onChangeHintState = { vm.setHintState(state = it) },
-        onChangeHintText = { vm.setHintText(text = it) }
+    if (auth !== placeholderValue) SettingsAuthScreen(
+        params = Params(
+            isAuthEnabled = auth.type != null,
+            typeIndex = auth.type?.let { it.ordinal + 1 } ?: 0,
+            skinIndex = auth.skinType?.let { it.ordinal + 1 } ?: 0,
+            isAssociatedDataEncrypted = auth.bindTinkAd,
+            hintState = auth.hintState,
+            hintText = auth.hintText ?: stringResource(R.string.none)
+        ),
+        actions = object : Actions {
+            override fun disableAuth() {
+                vm.disable()
+            }
+
+            override fun disableSkin() {
+                vm.disableSkin()
+            }
+
+            override fun changePassword(password: String) {
+                vm.setPassword(password)
+            }
+
+            override suspend fun verifyPassword(password: String): Boolean {
+                return vm.verifyPassword(password)
+            }
+
+            override fun setBindAuthState(state: Boolean, password: String) {
+                vm.setBindAssociatedData(state, password)
+            }
+
+            override fun setCalculatorSkin(combination: String) {
+                vm.setCalculatorSkin(combination)
+            }
+
+            override fun setHintState(state: Boolean) {
+                vm.setHintState(state)
+            }
+
+            override fun setHintText(text: String) {
+                vm.setHintText(text)
+            }
+
+        }
     )
 
 }
