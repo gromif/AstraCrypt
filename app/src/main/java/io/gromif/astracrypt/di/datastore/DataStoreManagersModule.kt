@@ -16,7 +16,7 @@ object DataStoreManagersModule {
     @Singleton
     @Provides
     fun provideAppearanceManager(
-        @DefaultDataStore dataStore: DataStore<Preferences>
+        dataStore: DataStore<Preferences>
     ) = AppearanceManager(dataStore = dataStore)
 
 }

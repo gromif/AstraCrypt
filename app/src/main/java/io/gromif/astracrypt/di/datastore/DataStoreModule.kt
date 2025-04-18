@@ -20,7 +20,6 @@ private const val KEYSET = "keyset"
 @InstallIn(SingletonComponent::class)
 object DataStoreModule {
 
-    @DefaultDataStore
     @Singleton
     @Provides
     fun provideDefaultDataStore(
@@ -45,10 +44,6 @@ object DataStoreModule {
     )
 
 }
-
-@Qualifier
-@Retention(AnnotationRetention.BINARY)
-annotation class DefaultDataStore
 
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
