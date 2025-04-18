@@ -20,8 +20,8 @@ fun AuthSettingsScreen() {
     if (auth !== placeholderValue) SettingsAuthScreen(
         params = Params(
             isAuthEnabled = auth.type != null,
-            typeIndex = auth.type?.let { it.ordinal + 1 } ?: 0,
-            skinIndex = auth.skinType?.let { it.ordinal + 1 } ?: 0,
+            type = auth.type,
+            skin = auth.skinType,
             isAssociatedDataEncrypted = auth.bindTinkAd,
             hintState = auth.hintState,
             hintText = auth.hintText ?: stringResource(R.string.none)
