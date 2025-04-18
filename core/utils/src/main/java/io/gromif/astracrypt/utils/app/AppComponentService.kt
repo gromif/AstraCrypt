@@ -17,7 +17,7 @@ class AppComponentService(context: Context) {
     private val packageManager = context.packageManager
 
 
-    private val _main = Component(context, "$rootPackage.view.MainActivity")
+    private val _main = Component(context, "$rootPackage.MainActivity")
     var main
         get() = getState(comp = _main) == ENABLED
         set(value) = setState(comp = _main, state = value)
