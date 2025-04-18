@@ -12,12 +12,14 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Qualifier
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 internal object DatastoreModule {
 
+    @ProfileDataStore
     @Singleton
     @Provides
     fun provideRepository(
@@ -32,3 +34,7 @@ internal object DatastoreModule {
 }
 
 private const val DATASTORE_NAME = "profile"
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class ProfileDataStore
