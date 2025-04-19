@@ -1,4 +1,4 @@
-package io.gromif.astracrypt.auth.domain.usecase
+package io.gromif.astracrypt.auth.domain.usecase.auth
 
 import io.gromif.astracrypt.auth.domain.repository.SettingsRepository
 import io.gromif.astracrypt.auth.domain.service.TinkService

@@ -1,9 +1,11 @@
-package io.gromif.astracrypt.auth.domain.usecase
+package io.gromif.astracrypt.auth.domain.usecase.skin
 
 import io.gromif.astracrypt.auth.domain.model.Auth
 import io.gromif.astracrypt.auth.domain.model.SkinType
 import io.gromif.astracrypt.auth.domain.repository.SettingsRepository
 import io.gromif.astracrypt.auth.domain.service.TinkService
+import io.gromif.astracrypt.auth.domain.usecase.auth.GetAuthUseCase
+import io.gromif.astracrypt.auth.domain.usecase.auth.SetAuthUseCase
 import io.mockk.coEvery
 import io.mockk.coJustRun
 import io.mockk.coVerify
@@ -21,7 +23,8 @@ class SetSkinTypeUseCaseTest {
 
     @Before
     fun setUp() {
-        setSkinTypeUseCase = SetSkinTypeUseCase(getAuthUseCase, setAuthUseCase, settingsRepository, tinkService)
+        setSkinTypeUseCase =
+            SetSkinTypeUseCase(getAuthUseCase, setAuthUseCase, settingsRepository, tinkService)
     }
 
     @Test

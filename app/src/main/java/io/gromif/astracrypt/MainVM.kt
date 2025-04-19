@@ -9,9 +9,9 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.gromif.astracrypt.auth.domain.usecase.GetAuthFlowUseCase
 import io.gromif.astracrypt.auth.domain.usecase.SetLastActiveTimeUseCase
-import io.gromif.astracrypt.auth.domain.usecase.VerifySkinUseCase
+import io.gromif.astracrypt.auth.domain.usecase.auth.GetAuthFlowUseCase
+import io.gromif.astracrypt.auth.domain.usecase.skin.VerifySkinUseCase
 import io.gromif.astracrypt.auth.domain.usecase.timeout.CheckAuthTimeoutUseCase
 import io.gromif.astracrypt.presentation.navigation.models.UiState
 import io.gromif.astracrypt.utils.AppearanceManager

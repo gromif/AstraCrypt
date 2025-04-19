@@ -1,8 +1,8 @@
 package io.gromif.astracrypt.auth.presentation.settings.aead
 
 import io.gromif.astracrypt.auth.domain.model.AeadMode
-import io.gromif.astracrypt.auth.domain.usecase.GetAeadModeFlowUseCase
-import io.gromif.astracrypt.auth.domain.usecase.SetAeadModeUseCase
+import io.gromif.astracrypt.auth.domain.usecase.auth.GetAeadModeFlowUseCase
+import io.gromif.astracrypt.auth.domain.usecase.encryption.SetAeadModeUseCase
 import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.mockk

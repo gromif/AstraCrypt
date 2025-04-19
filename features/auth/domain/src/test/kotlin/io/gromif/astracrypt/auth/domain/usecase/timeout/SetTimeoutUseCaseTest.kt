@@ -2,8 +2,8 @@ package io.gromif.astracrypt.auth.domain.usecase.timeout
 
 import io.gromif.astracrypt.auth.domain.model.Auth
 import io.gromif.astracrypt.auth.domain.model.Timeout
-import io.gromif.astracrypt.auth.domain.usecase.GetAuthUseCase
-import io.gromif.astracrypt.auth.domain.usecase.SetAuthUseCase
+import io.gromif.astracrypt.auth.domain.usecase.auth.GetAuthUseCase
+import io.gromif.astracrypt.auth.domain.usecase.auth.SetAuthUseCase
 import io.mockk.coEvery
 import io.mockk.coJustRun
 import io.mockk.coVerify

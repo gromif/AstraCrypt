@@ -1,4 +1,4 @@
-package io.gromif.astracrypt.auth.domain.usecase
+package io.gromif.astracrypt.auth.domain.usecase.auth
 
 import io.gromif.astracrypt.auth.domain.model.Auth
 import io.gromif.astracrypt.auth.domain.model.AuthType
@@ -21,7 +21,8 @@ class SetAuthTypeUseCaseTest {
 
     @Before
     fun setUp() {
-        setAuthTypeUseCase = SetAuthTypeUseCase(getAuthUseCase, setAuthUseCase, settingsRepository, tinkService)
+        setAuthTypeUseCase =
+            SetAuthTypeUseCase(getAuthUseCase, setAuthUseCase, settingsRepository, tinkService)
     }
 
     @Test

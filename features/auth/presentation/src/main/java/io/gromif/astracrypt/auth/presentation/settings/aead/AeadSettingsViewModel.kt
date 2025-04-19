@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.gromif.astracrypt.auth.domain.model.AeadMode
-import io.gromif.astracrypt.auth.domain.usecase.GetAeadModeFlowUseCase
-import io.gromif.astracrypt.auth.domain.usecase.SetAeadModeUseCase
+import io.gromif.astracrypt.auth.domain.usecase.auth.GetAeadModeFlowUseCase
+import io.gromif.astracrypt.auth.domain.usecase.encryption.SetAeadModeUseCase
 import io.gromif.astracrypt.utils.dispatchers.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.SharingStarted

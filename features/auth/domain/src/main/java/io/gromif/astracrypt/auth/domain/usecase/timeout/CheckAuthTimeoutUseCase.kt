@@ -2,7 +2,7 @@ package io.gromif.astracrypt.auth.domain.usecase.timeout
 
 import io.gromif.astracrypt.auth.domain.model.Timeout
 import io.gromif.astracrypt.auth.domain.service.ClockService
-import io.gromif.astracrypt.auth.domain.usecase.GetAuthUseCase
+import io.gromif.astracrypt.auth.domain.usecase.auth.GetAuthUseCase
 
 class CheckAuthTimeoutUseCase(
     private val getAuthUseCase: GetAuthUseCase,

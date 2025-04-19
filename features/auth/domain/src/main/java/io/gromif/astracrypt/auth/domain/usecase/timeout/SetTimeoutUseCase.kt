@@ -1,8 +1,8 @@
 package io.gromif.astracrypt.auth.domain.usecase.timeout
 
 import io.gromif.astracrypt.auth.domain.model.Timeout
-import io.gromif.astracrypt.auth.domain.usecase.GetAuthUseCase
-import io.gromif.astracrypt.auth.domain.usecase.SetAuthUseCase
+import io.gromif.astracrypt.auth.domain.usecase.auth.GetAuthUseCase
+import io.gromif.astracrypt.auth.domain.usecase.auth.SetAuthUseCase
 
 class SetTimeoutUseCase(
     private val getAuthUseCase: GetAuthUseCase,

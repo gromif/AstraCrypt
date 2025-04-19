@@ -1,6 +1,8 @@
-package io.gromif.astracrypt.auth.domain.usecase
+package io.gromif.astracrypt.auth.domain.usecase.hint
 
 import io.gromif.astracrypt.auth.domain.model.Auth
+import io.gromif.astracrypt.auth.domain.usecase.auth.GetAuthUseCase
+import io.gromif.astracrypt.auth.domain.usecase.auth.SetAuthUseCase
 import io.mockk.coEvery
 import io.mockk.coJustRun
 import io.mockk.coVerify

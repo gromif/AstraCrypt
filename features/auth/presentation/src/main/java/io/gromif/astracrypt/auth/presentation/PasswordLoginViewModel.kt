@@ -4,9 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.gromif.astracrypt.auth.domain.model.Auth
-import io.gromif.astracrypt.auth.domain.usecase.DecryptTinkAdUseCase
-import io.gromif.astracrypt.auth.domain.usecase.GetAuthFlowUseCase
-import io.gromif.astracrypt.auth.domain.usecase.VerifyAuthUseCase
+import io.gromif.astracrypt.auth.domain.usecase.auth.GetAuthFlowUseCase
+import io.gromif.astracrypt.auth.domain.usecase.auth.VerifyAuthUseCase
+import io.gromif.astracrypt.auth.domain.usecase.encryption.DecryptTinkAdUseCase
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject

@@ -1,9 +1,9 @@
 package io.gromif.astracrypt.auth.presentation
 
 import io.gromif.astracrypt.auth.domain.model.Auth
-import io.gromif.astracrypt.auth.domain.usecase.DecryptTinkAdUseCase
-import io.gromif.astracrypt.auth.domain.usecase.GetAuthFlowUseCase
-import io.gromif.astracrypt.auth.domain.usecase.VerifyAuthUseCase
+import io.gromif.astracrypt.auth.domain.usecase.auth.GetAuthFlowUseCase
+import io.gromif.astracrypt.auth.domain.usecase.auth.VerifyAuthUseCase
+import io.gromif.astracrypt.auth.domain.usecase.encryption.DecryptTinkAdUseCase
 import io.mockk.coEvery
 import io.mockk.coJustRun
 import io.mockk.coVerify

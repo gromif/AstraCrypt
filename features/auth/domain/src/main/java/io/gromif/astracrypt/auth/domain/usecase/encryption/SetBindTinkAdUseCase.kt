@@ -1,6 +1,8 @@
-package io.gromif.astracrypt.auth.domain.usecase
+package io.gromif.astracrypt.auth.domain.usecase.encryption
 
 import io.gromif.astracrypt.auth.domain.service.TinkService
+import io.gromif.astracrypt.auth.domain.usecase.auth.GetAuthUseCase
+import io.gromif.astracrypt.auth.domain.usecase.auth.SetAuthUseCase
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 

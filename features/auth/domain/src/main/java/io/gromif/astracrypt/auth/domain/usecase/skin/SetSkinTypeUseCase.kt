@@ -1,8 +1,10 @@
-package io.gromif.astracrypt.auth.domain.usecase
+package io.gromif.astracrypt.auth.domain.usecase.skin
 
 import io.gromif.astracrypt.auth.domain.model.SkinType
 import io.gromif.astracrypt.auth.domain.repository.SettingsRepository
 import io.gromif.astracrypt.auth.domain.service.TinkService
+import io.gromif.astracrypt.auth.domain.usecase.auth.GetAuthUseCase
+import io.gromif.astracrypt.auth.domain.usecase.auth.SetAuthUseCase
 
 class SetSkinTypeUseCase(
     private val getAuthUseCase: GetAuthUseCase,
