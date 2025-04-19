@@ -1,6 +1,5 @@
 package io.gromif.astracrypt.presentation.navigation.composables.appbar
 
-import android.R
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.compose.foundation.layout.Box
@@ -54,7 +53,7 @@ fun SearchBarImpl(
                 placeholder = {
                     Text(
                         modifier = Modifier,
-                        text = stringResource(id = R.string.search_go)
+                        text = stringResource(id = android.R.string.search_go)
                     )
                 },
                 leadingIcon = {

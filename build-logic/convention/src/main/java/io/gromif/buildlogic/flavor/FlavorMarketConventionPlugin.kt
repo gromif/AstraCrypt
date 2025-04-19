@@ -1,5 +1,3 @@
-@file:Suppress("ClassName", "SpellCheckingInspection")
-
 package io.gromif.buildlogic.flavor
 
 import com.android.build.api.dsl.CommonExtension
