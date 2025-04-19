@@ -46,11 +46,7 @@ class MainVM @Inject constructor(
 
     var userIsAuthenticated by mutableStateOf(false)
     var skinIsAuthenticated by mutableStateOf(false)
-    val authState = getAuthFlowUseCase().stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.Companion.WhileSubscribed(),
-        initialValue = null
-    )
+    val authFlow = getAuthFlowUseCase()
 
     fun verifySkin(data: String) = viewModelScope.launch(defaultDispatcher) {
         skinIsAuthenticated = verifySkinUseCase(data)
