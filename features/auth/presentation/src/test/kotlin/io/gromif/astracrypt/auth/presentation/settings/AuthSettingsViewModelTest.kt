@@ -3,6 +3,7 @@ package io.gromif.astracrypt.auth.presentation.settings
 import io.gromif.astracrypt.auth.domain.model.Auth
 import io.gromif.astracrypt.auth.domain.model.AuthType
 import io.gromif.astracrypt.auth.domain.model.SkinType
+import io.gromif.astracrypt.auth.domain.model.Timeout
 import io.gromif.astracrypt.auth.domain.usecase.GetAuthFlowUseCase
 import io.gromif.astracrypt.auth.domain.usecase.SetAuthTypeUseCase
 import io.gromif.astracrypt.auth.domain.usecase.SetBindTinkAdUseCase
@@ -10,6 +11,7 @@ import io.gromif.astracrypt.auth.domain.usecase.SetHintTextUseCase
 import io.gromif.astracrypt.auth.domain.usecase.SetHintVisibilityUseCase
 import io.gromif.astracrypt.auth.domain.usecase.SetSkinTypeUseCase
 import io.gromif.astracrypt.auth.domain.usecase.VerifyAuthUseCase
+import io.gromif.astracrypt.auth.domain.usecase.timeout.SetTimeoutUseCase
 import io.gromif.astracrypt.utils.app.AppComponentService
 import io.mockk.coJustRun
 import io.mockk.coVerify
@@ -37,6 +39,7 @@ class AuthSettingsViewModelTest {
     private val setHintVisibilityUseCaseMock: SetHintVisibilityUseCase = mockk()
     private val setHintTextUseCaseMock: SetHintTextUseCase = mockk()
     private val setBindTinkAdUseCaseMock: SetBindTinkAdUseCase = mockk()
+    private val setTimeoutUseCaseMock: SetTimeoutUseCase = mockk()
     private val getAuthFlowUseCaseMock: GetAuthFlowUseCase = mockk()
     private val targetAuthFlow = flow<Auth> { Auth() }
 
@@ -53,6 +56,7 @@ class AuthSettingsViewModelTest {
             setHintVisibilityUseCase = setHintVisibilityUseCaseMock,
             setHintTextUseCase = setHintTextUseCaseMock,
             setBindTinkAdUseCase = setBindTinkAdUseCaseMock,
+            setTimeoutUseCase = setTimeoutUseCaseMock,
             getAuthFlowUseCase = getAuthFlowUseCaseMock
         )
     }
@@ -120,6 +124,19 @@ class AuthSettingsViewModelTest {
 
         coVerify(exactly = 1) {
             setBindTinkAdUseCaseMock(bind = targetState, password = targetPassword)
+        }
+    }
+
+    @Test
+    fun `should call setTimeoutUseCaseMock when updating timeout state`() {
+        val targetTimeout = Timeout.SECONDS_60
+
+        coJustRun { setTimeoutUseCaseMock(targetTimeout) }
+
+        authSettingsViewModel.setTimeout(targetTimeout)
+
+        coVerify(exactly = 1) {
+            setTimeoutUseCaseMock(targetTimeout)
         }
     }
 

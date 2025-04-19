@@ -8,6 +8,7 @@ class AuthDtoMapper: Mapper<Auth, AuthDto> {
     override fun invoke(item: Auth): AuthDto {
         return AuthDto(
             type = item.type?.ordinal ?: -1,
+            timeout = item.timeout.ordinal,
             skin = item.skinType?.ordinal ?: -1,
             hintState = item.hintState,
             hintText = item.hintText,

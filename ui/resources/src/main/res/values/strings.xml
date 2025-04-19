@@ -193,6 +193,9 @@
     <string name="help_encryption_settings">"This setting controls the encryption of the internal settings files. These files contain encrypted keys, user profile information, and other application-specific data. Note that changing the encryption will cause the settings files to be completely re-encrypted. "</string>
     <string name="notification_channel_fileOperations_id" translatable="false">file_operations_channel</string>
     <string name="back">Back</string>
+    <string name="timeout">Timeout</string>
+    <string name="immediately">Immediately</string>
+    <string name="never">Never</string>
     <string name="settings_secureContent_title">Content Protection</string>
     <string name="settings_secureContent_switch_title">Block Screenshots and Non-Secure Views</string>
     <string name="settings_secureContent_switch_summary">Prevents screen captures and restricts display on non-secure surfaces.</string>

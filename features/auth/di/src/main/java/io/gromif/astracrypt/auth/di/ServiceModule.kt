@@ -5,7 +5,9 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.scopes.ViewModelScoped
+import io.gromif.astracrypt.auth.data.service.ClockServiceImpl
 import io.gromif.astracrypt.auth.data.service.TinkServiceImpl
+import io.gromif.astracrypt.auth.domain.service.ClockService
 import io.gromif.astracrypt.auth.domain.service.TinkService
 import io.gromif.crypto.tink.core.GetGlobalAssociatedDataPrf
 import io.gromif.crypto.tink.data.AssociatedDataManager
@@ -26,5 +28,9 @@ internal object ServiceModule {
         associatedDataManager = associatedDataManager,
         getGlobalAssociatedDataPrf = getGlobalAssociatedDataPrf
     )
+
+    @ViewModelScoped
+    @Provides
+    fun provideClockService(): ClockService = ClockServiceImpl()
 
 }

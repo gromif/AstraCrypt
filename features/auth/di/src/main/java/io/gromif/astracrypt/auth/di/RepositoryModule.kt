@@ -5,8 +5,7 @@ import androidx.datastore.preferences.core.Preferences
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ViewModelComponent
-import dagger.hilt.android.scopes.ViewModelScoped
+import dagger.hilt.components.SingletonComponent
 import io.gromif.astracrypt.auth.data.dto.AuthDto
 import io.gromif.astracrypt.auth.data.repository.SettingsRepositoryImpl
 import io.gromif.astracrypt.auth.domain.model.Auth
@@ -15,12 +14,13 @@ import io.gromif.astracrypt.utils.Mapper
 import io.gromif.crypto.tink.core.encoders.Base64Encoder
 import io.gromif.crypto.tink.data.KeysetManager
 import io.gromif.tink_datastore.TinkDataStore
+import javax.inject.Singleton
 
 @Module
-@InstallIn(ViewModelComponent::class)
+@InstallIn(SingletonComponent::class)
 internal object RepositoryModule {
 
-    @ViewModelScoped
+    @Singleton
     @Provides
     fun provideSettingsRepository(
         @AuthDataStore

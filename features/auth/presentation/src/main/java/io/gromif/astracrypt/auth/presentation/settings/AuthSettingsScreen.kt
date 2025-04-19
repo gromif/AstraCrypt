@@ -7,6 +7,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.gromif.astracrypt.auth.domain.model.Auth
+import io.gromif.astracrypt.auth.domain.model.Timeout
 import io.gromif.astracrypt.auth.presentation.settings.model.Actions
 import io.gromif.astracrypt.auth.presentation.settings.model.Params
 import io.gromif.astracrypt.resources.R
@@ -17,10 +18,11 @@ fun AuthSettingsScreen() {
     val placeholderValue = remember { Auth() }
     val auth by vm.authFlow.collectAsStateWithLifecycle(placeholderValue)
 
-    if (auth !== placeholderValue) SettingsAuthScreen(
+    SettingsAuthScreen(
         params = Params(
             isAuthEnabled = auth.type != null,
             type = auth.type,
+            timeout = auth.timeout,
             skin = auth.skinType,
             isAssociatedDataEncrypted = auth.bindTinkAd,
             hintState = auth.hintState,
@@ -41,6 +43,10 @@ fun AuthSettingsScreen() {
 
             override suspend fun verifyPassword(password: String): Boolean {
                 return vm.verifyPassword(password)
+            }
+
+            override fun setTimeout(timeout: Timeout) {
+                vm.setTimeout(timeout)
             }
 
             override fun setBindAuthState(state: Boolean, password: String) {

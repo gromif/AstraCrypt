@@ -6,6 +6,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.scopes.ViewModelScoped
 import io.gromif.astracrypt.auth.domain.repository.SettingsRepository
+import io.gromif.astracrypt.auth.domain.service.ClockService
 import io.gromif.astracrypt.auth.domain.service.TinkService
 import io.gromif.astracrypt.auth.domain.usecase.DecryptTinkAdUseCase
 import io.gromif.astracrypt.auth.domain.usecase.GetAeadModeFlowUseCase
@@ -17,9 +18,12 @@ import io.gromif.astracrypt.auth.domain.usecase.SetAuthUseCase
 import io.gromif.astracrypt.auth.domain.usecase.SetBindTinkAdUseCase
 import io.gromif.astracrypt.auth.domain.usecase.SetHintTextUseCase
 import io.gromif.astracrypt.auth.domain.usecase.SetHintVisibilityUseCase
+import io.gromif.astracrypt.auth.domain.usecase.SetLastActiveTimeUseCase
 import io.gromif.astracrypt.auth.domain.usecase.SetSkinTypeUseCase
 import io.gromif.astracrypt.auth.domain.usecase.VerifyAuthUseCase
 import io.gromif.astracrypt.auth.domain.usecase.VerifySkinUseCase
+import io.gromif.astracrypt.auth.domain.usecase.timeout.CheckAuthTimeoutUseCase
+import io.gromif.astracrypt.auth.domain.usecase.timeout.SetTimeoutUseCase
 
 @Module
 @InstallIn(ViewModelComponent::class)
@@ -42,6 +46,28 @@ internal object UseCaseModule {
     fun provideGetAuthFlowUseCase(
         settingsRepository: SettingsRepository,
     ): GetAuthFlowUseCase = GetAuthFlowUseCase(settingsRepository = settingsRepository)
+
+    @ViewModelScoped
+    @Provides
+    fun provideSetTimeoutUseCase(
+        getAuthUseCase: GetAuthUseCase,
+        setAuthUseCase: SetAuthUseCase,
+    ) = SetTimeoutUseCase(getAuthUseCase = getAuthUseCase, setAuthUseCase = setAuthUseCase)
+
+    @ViewModelScoped
+    @Provides
+    fun provideSetLastActiveTimeUseCase(clockService: ClockService) =
+        SetLastActiveTimeUseCase(clockService = clockService)
+
+    @ViewModelScoped
+    @Provides
+    fun provideCheckAuthTimeoutUseCase(
+        getAuthUseCase: GetAuthUseCase,
+        clockService: ClockService
+    ) = CheckAuthTimeoutUseCase(
+        getAuthUseCase = getAuthUseCase,
+        clockService = clockService
+    )
 
     @ViewModelScoped
     @Provides

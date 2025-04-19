@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.gromif.astracrypt.auth.domain.model.AuthType
 import io.gromif.astracrypt.auth.domain.model.SkinType
+import io.gromif.astracrypt.auth.domain.model.Timeout
 import io.gromif.astracrypt.auth.domain.usecase.GetAuthFlowUseCase
 import io.gromif.astracrypt.auth.domain.usecase.SetAuthTypeUseCase
 import io.gromif.astracrypt.auth.domain.usecase.SetBindTinkAdUseCase
@@ -12,6 +13,7 @@ import io.gromif.astracrypt.auth.domain.usecase.SetHintTextUseCase
 import io.gromif.astracrypt.auth.domain.usecase.SetHintVisibilityUseCase
 import io.gromif.astracrypt.auth.domain.usecase.SetSkinTypeUseCase
 import io.gromif.astracrypt.auth.domain.usecase.VerifyAuthUseCase
+import io.gromif.astracrypt.auth.domain.usecase.timeout.SetTimeoutUseCase
 import io.gromif.astracrypt.utils.app.AppComponentService
 import io.gromif.astracrypt.utils.dispatchers.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
@@ -30,6 +32,7 @@ internal class AuthSettingsViewModel @Inject constructor(
     private val setHintVisibilityUseCase: SetHintVisibilityUseCase,
     private val setHintTextUseCase: SetHintTextUseCase,
     private val setBindTinkAdUseCase: SetBindTinkAdUseCase,
+    private val setTimeoutUseCase: SetTimeoutUseCase,
     getAuthFlowUseCase: GetAuthFlowUseCase
 ) : ViewModel() {
     val authFlow = getAuthFlowUseCase()
@@ -74,6 +77,10 @@ internal class AuthSettingsViewModel @Inject constructor(
 
     fun setHintText(text: String) = viewModelScope.launch(defaultDispatcher) {
         setHintTextUseCase(text = text)
+    }
+
+    fun setTimeout(timeout: Timeout) = viewModelScope.launch(defaultDispatcher) {
+        setTimeoutUseCase(timeout)
     }
 
 }

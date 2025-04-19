@@ -6,6 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class AuthDto(
     @SerialName("a") val type: Int,
+    @SerialName("f") val timeout: Int? = null,
     @SerialName("b") val skin: Int,
     @SerialName("c") val hintState: Boolean,
     @SerialName("d") val hintText: String?,

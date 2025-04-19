@@ -11,6 +11,7 @@ import io.gromif.astracrypt.auth.presentation.settings.preferences.BindWithEncry
 import io.gromif.astracrypt.auth.presentation.settings.preferences.CamouflagePreference
 import io.gromif.astracrypt.auth.presentation.settings.preferences.HintEditorPreference
 import io.gromif.astracrypt.auth.presentation.settings.preferences.HintStatePreference
+import io.gromif.astracrypt.auth.presentation.settings.preferences.TimeoutPreference
 import io.gromif.astracrypt.resources.R
 import io.gromif.ui.compose.core.PreferencesGroup
 import io.gromif.ui.compose.core.PreferencesGroupAnimated
@@ -29,6 +30,12 @@ internal fun SettingsAuthScreen(
             onDisableAuth = actions::disableAuth,
             onVerifyPassword = actions::verifyPassword
         )
+        AnimatedVisibility(params.isAuthEnabled) {
+            TimeoutPreference(
+                currentTimeout = params.timeout,
+                onSetTimeout = actions::setTimeout
+            )
+        }
     }
     PreferencesGroupAnimated(
         text = stringResource(id = R.string.hint),

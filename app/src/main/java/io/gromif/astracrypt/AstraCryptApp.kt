@@ -25,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalWindowInfo
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
@@ -51,6 +52,7 @@ import io.gromif.calculator.CalculatorScreen
 import io.gromif.secure_content.presentation.SetSecureContentFlag
 import io.gromif.secure_content.presentation.secureContent
 import io.gromif.ui.compose.core.ext.FlowObserver
+import io.gromif.ui.compose.core.ext.ObserveLifecycleEvents
 import io.gromif.ui.compose.core.wrappers.TextWrap
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -68,6 +70,7 @@ fun AstraCryptApp(
     isDynamicThemeSupported = Api.atLeast12(),
     dynamicThemeState = dynamicThemeState.value
 ) {
+    vm.ObserveLifecycleEvents(LocalLifecycleOwner.current.lifecycle)
     val isWindowFocused = LocalWindowInfo.current.isWindowFocused
     var uiState by vm.uiState
     val (toolbar, fab, bottomBarTab, searchBar) = uiState
