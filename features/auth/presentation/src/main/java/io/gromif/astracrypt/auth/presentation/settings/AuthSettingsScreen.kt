@@ -2,11 +2,9 @@ package io.gromif.astracrypt.auth.presentation.settings
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import io.gromif.astracrypt.auth.domain.model.Auth
 import io.gromif.astracrypt.auth.domain.model.Timeout
 import io.gromif.astracrypt.auth.presentation.settings.model.Actions
 import io.gromif.astracrypt.auth.presentation.settings.model.Params
@@ -15,10 +13,10 @@ import io.gromif.astracrypt.resources.R
 @Composable
 fun AuthSettingsScreen() {
     val vm: AuthSettingsViewModel = hiltViewModel()
-    val placeholderValue = remember { Auth() }
-    val auth by vm.authFlow.collectAsStateWithLifecycle(placeholderValue)
+    val authState by vm.authFlow.collectAsStateWithLifecycle(null)
+    val auth = authState
 
-    SettingsAuthScreen(
+    if (auth != null) SettingsAuthScreen(
         params = Params(
             isAuthEnabled = auth.type != null,
             type = auth.type,
@@ -64,8 +62,6 @@ fun AuthSettingsScreen() {
             override fun setHintText(text: String) {
                 vm.setHintText(text)
             }
-
         }
     )
-
 }
