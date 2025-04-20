@@ -165,6 +165,7 @@ fun AstraCryptApp(
                             modifier = Modifier.fillMaxSize(),
                             onCalculate = vm::verifySkin
                         )
+                        return@let
                     }
 
                     null -> vm.skinIsAuthenticated = true
