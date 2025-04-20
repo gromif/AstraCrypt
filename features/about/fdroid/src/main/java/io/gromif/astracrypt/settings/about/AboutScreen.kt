@@ -25,7 +25,7 @@ fun AboutScreen(
     Screen(
         params = Params(
             version = version,
-            storeName = "F-Droid"
+            storeName = "Github"
         ),
         onMoreApps = {
             open(Config.MORE_APPS_PAGE)
