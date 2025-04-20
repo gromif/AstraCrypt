@@ -51,3 +51,5 @@ AstraCrypt on Play Store will install as a different app from other sources. Som
 -    **Navigation:** AndroidX Navigation-Compose.
 -    **Unit Tests:** Junit v4, Mockk, Robolectric, KotlinX Coroutines Test.
 -    **Persistent Data:** AndroidX DataStore, KotlinX Serialization, Kotlin Parcelize.
+-    **DI:** Dagger Hilt.
+-    **Miscellaneous:** Haptic Feedback.
