@@ -19,7 +19,7 @@ AstraCrypt - is a free, powerful and open-source encryption app that has everyth
 -    And more!
 ## Screenshots
 <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/feature_graphic.png">
+    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/screenshots.png">
     <img alt="Screenshots" src="docs/assets/screenshots.png">
 </picture>
 
