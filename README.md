@@ -25,7 +25,13 @@ AstraCrypt - is a free, powerful and open-source encryption app that has everyth
 
 ## Download
 <p align="left">
-	<a href="https://github.com/gromif/AstraCrypt/releases/latest">
+  <a href="https://apt.izzysoft.de/fdroid/index/apk/com.nevidimka655.astracrypt">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="docs/assets/badge_izzy-on-droid.png" height="60">
+      <img alt="Get it on IzzyOnDroid" src="docs/assets/badge_izzy-on-droid.png" height="60">
+    </picture>
+  </a>
+  <a href="https://github.com/gromif/AstraCrypt/releases/latest">
     <picture>
       <source media="(prefers-color-scheme: dark)" srcset="docs/assets/badge-github.png" height="60">
       <img alt="Get it on GitHub" src="docs/assets/badge-github.png" height="60">
