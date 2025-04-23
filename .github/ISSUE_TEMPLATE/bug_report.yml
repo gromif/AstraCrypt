@@ -1,0 +1,63 @@
+name: Bug Report
+description: Report an issue or unexpected behaviour that occurs within the application
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: checkboxes
+    attributes:
+      label: Guidelines
+      description: Please ensure you've completed all of the following.
+      options:
+        - label: I have encountered this bug in the [latest release of AstraCrypt](https://github.com/gromif/AstraCrypt/releases).
+          required: true
+        - label: I have [searched the issue tracker for open and closed issues](https://github.com/gromif/AstraCrypt/issues?q=is%3Aissue+sort%3Arelevance-desc) that are similar to the bug report I want to file, without success.
+          required: true
+        - label: This issue contains only one bug.
+          required: true
+  - type: textarea
+    attributes:
+      label: Describe the bug
+      description: A clear and concise description of what the bug is.
+      placeholder: |
+          1. Go to '...'
+          2. Click on '....'
+          3. Scroll down to '....'
+          4. See error
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Expected behaviour
+      description: A clear and concise description of what you expected to happen.
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: AstraCrypt Version
+      placeholder: "v2.0.0"
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Device + OS
+      placeholder: "e.g. Pixel 9 Pro, Android 15 (Official)"
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: OS Modifications
+      description: Do you have any OS modifications that change its functionality?
+      placeholder: "e.g. Magisk, Xposed"
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: 'Last Known Working AstraCrypt Version (If Any)'
+      description: What is the last version of AstraCrypt this worked in, if applicable?
+      placeholder: "v2.0.0"
+  - type: textarea
+    attributes:
+      label: Additional Information
+      description: |
+        Add additional information here.
+        You may drag-and-drop screenshots/videos and log files here, or paste the log file in code blocks.
