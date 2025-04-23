@@ -1,0 +1,38 @@
+name: Feature request
+description: Suggest an idea for AstraCrypt which you would like to see in a future release
+title: "[Feature Request]: "
+labels: "enhancement"
+body:
+  - type: checkboxes
+    attributes:
+      label: Guidelines
+      description: Please ensure you've completed all of the following.
+      options:
+          - label: I have [searched the issue tracker for open and closed issues](https://github.com/gromif/AstraCrypt/issues?q=is%3Aissue+sort%3Arelevance-desc) that are similar to the feature request I want to file, without success.
+            required: true
+          - label: This issue contains only one feature request.
+            required: true
+  - type: textarea
+    attributes:
+      label: Problem Description
+      description: Please add a clear and concise description of the problem you are seeking to solve with this feature request.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Proposed Solution
+      description: Describe the solution you'd like in a clear and concise manner.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Alternatives Considered
+      description: A clear and concise description of any alternative solutions or features you've considered.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Additional Information
+      description: |
+        Add any other context or screenshots/videos about the feature request here.
+        You may drag-and-drop screenshots.
