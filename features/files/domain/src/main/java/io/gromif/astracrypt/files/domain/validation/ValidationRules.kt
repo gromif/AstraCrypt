@@ -5,7 +5,7 @@ import io.gromif.astracrypt.files.domain.model.ValidationRulesDto
 internal object ValidationRules {
 
     const val MIN_NAME_LENGTH = 1
-    const val MAX_NAME_LENGTH = 128
+    const val MAX_NAME_LENGTH = 256
     const val MAX_BACKSTACK_NAME_LENGTH = 80
 
     val DTO_DEFAULT = ValidationRulesDto(
