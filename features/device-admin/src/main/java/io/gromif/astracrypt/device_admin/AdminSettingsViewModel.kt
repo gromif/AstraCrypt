@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-internal class SettingsAdminViewModel @Inject constructor(
+internal class AdminSettingsViewModel @Inject constructor(
     @IoDispatcher
     private val defaultDispatcher: CoroutineDispatcher,
     private val deviceAdminManager: DeviceAdminManager,

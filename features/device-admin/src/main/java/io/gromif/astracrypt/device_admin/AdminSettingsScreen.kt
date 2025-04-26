@@ -1,27 +1,29 @@
 package io.gromif.astracrypt.device_admin
 
-import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.compose.ui.res.stringResource
+import io.gromif.astracrypt.resources.R
+import io.gromif.ui.compose.core.PreferencesGroup
+import io.gromif.ui.compose.core.PreferencesScreen
+import io.gromif.ui.compose.core.PreferencesSwitch
+import io.gromif.ui.compose.core.banners.Banner
+import io.gromif.ui.compose.core.banners.Warning
 
 @Composable
-fun AdminSettingsScreen() {
-    val vm: SettingsAdminViewModel = hiltViewModel()
-
-    var adminRightsState by remember { mutableStateOf(vm.isActive) }
-    val requestDeviceAdmin = rememberLauncherForActivityResult(vm.requestDeviceAdminContract) {
-        adminRightsState = it
-    }
-    AdminScreen(
-        adminRightsGranted = adminRightsState,
-        requestAdminRights = { requestDeviceAdmin.launch(null) },
-        disableAdminRights = {
-            vm.disable()
-            adminRightsState = false
+internal fun AdminSettingsScreen(
+    adminRightsGranted: Boolean = true,
+    requestAdminRights: () -> Unit = {},
+    disableAdminRights: () -> Unit = {}
+) = PreferencesScreen {
+    Banner.Warning(text = stringResource(id = R.string.settings_deviceAdminRights_warning))
+    PreferencesGroup {
+        PreferencesSwitch(
+            titleText = stringResource(id = R.string.settings_deviceAdminRights),
+            summaryText = stringResource(id = R.string.settings_deviceAdminRights_summary),
+            isChecked = adminRightsGranted
+        ) {
+            if (it) requestAdminRights()
+            else disableAdminRights()
         }
-    )
+    }
 }
