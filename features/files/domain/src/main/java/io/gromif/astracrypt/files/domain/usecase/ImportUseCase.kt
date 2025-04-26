@@ -28,7 +28,11 @@ class ImportUseCase(
         val aeadInfo = getAeadInfoUseCase()
         pathList.forEach {
             launch {
-                processFile(aeadInfo, it, parentId, saveSource)
+                try {
+                    processFile(aeadInfo, it, parentId, saveSource)
+                } catch (_: Exception) {
+                    // TODO: Implement proper error detection
+                }
             }
         }
     }
