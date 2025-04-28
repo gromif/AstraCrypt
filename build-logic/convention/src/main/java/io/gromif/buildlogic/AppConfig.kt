@@ -3,7 +3,7 @@ package io.gromif.buildlogic
 internal object AppConfig {
 
     object SDK {
-        const val TARGET = 35
+        const val TARGET = 36
         const val COMPILE = TARGET
         const val MIN = 23
     }
@@ -20,7 +20,7 @@ internal object AppConfig {
         const val CODE = MAJOR * 10000 + MINOR * 100 + PATCH
         const val NAME = "$MAJOR.$MINOR.$PATCH"
 
-        const val BUILD_TOOLS = "35.0.0"
+        const val BUILD_TOOLS = "36.0.0"
     }
 
     object Tools {
