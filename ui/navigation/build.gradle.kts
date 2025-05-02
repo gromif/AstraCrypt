@@ -21,7 +21,7 @@ dependencies {
     implementation(projects.features.help)
     implementation(projects.features.profile.presentation)
     implementation(projects.features.quickActions)
-    implementation(projects.features.deviceAdmin)
+    implementation(projects.features.deviceAdmin.presentation)
     implementation(projects.features.security.secureContent)
 
     defaultImplementation(projects.features.about.fdroid)

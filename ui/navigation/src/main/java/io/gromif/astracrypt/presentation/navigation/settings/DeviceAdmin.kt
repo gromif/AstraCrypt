@@ -2,7 +2,7 @@ package io.gromif.astracrypt.presentation.navigation.settings
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import io.gromif.astracrypt.device_admin.AdminSettings
+import io.gromif.astracrypt.device_admin.presentation.AdminSettings
 import io.gromif.astracrypt.presentation.navigation.Route
 import io.gromif.astracrypt.presentation.navigation.models.UiState
 import io.gromif.astracrypt.presentation.navigation.shared.LocalHostEvents

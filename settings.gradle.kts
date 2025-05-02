@@ -5,7 +5,7 @@ include(":app")
 
 val coreModules = listOf(
     "database", "tiles-with-coroutines",
-    "utils",
+    "utils", "device-admin-api"
 )
 
 val cryptoCoreModules = listOf("tink", "tink-datastore")
@@ -21,6 +21,7 @@ val uiModules = listOf(
 
 val features = listOf(
     "auth",
+    "device-admin",
     "files",
     "notes",
     "profile",
@@ -68,4 +69,3 @@ include(":features:about:google-play")
 include(":features:about:fdroid")
 include(":features:about:privacy")
 include(":features:quick-actions")
-include(":features:device-admin")
