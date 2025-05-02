@@ -39,9 +39,7 @@ class RepositoryImpl(
         val cached = cachedFilesDaoAeadAdapter
         if (cached != null && cached.compareAeadInfo(aeadInfo)) return cached
 
-        val filesDaoAeadAdapter = filesDaoAeadAdapterFactory.create(aeadInfo)
-        cachedFilesDaoAeadAdapter = filesDaoAeadAdapter
-        return filesDaoAeadAdapter
+        return filesDaoAeadAdapterFactory.create(aeadInfo).also { cachedFilesDaoAeadAdapter = it }
     }
 
     override suspend fun get(aeadInfo: AeadInfo, id: Long): Item {
