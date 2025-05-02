@@ -110,7 +110,7 @@ class RepositoryImpl(
         }
     }
 
-    override suspend fun move(ids: List<Long>, parent: Long) = filesDao.move(ids, parent)
+    override suspend fun move(ids: List<Long>, parentId: Long) = filesDao.move(ids, parentId)
 
     override suspend fun rename(
         aeadInfo: AeadInfo,
@@ -177,10 +177,10 @@ class RepositoryImpl(
     }
 
     override suspend fun changeAead(
-        currentAeadInfo: AeadInfo,
+        oldAeadInfo: AeadInfo,
         targetAeadInfo: AeadInfo
     ) = coroutineScope {
-        val currentFilesDaoAead = getFilesDaoAead(aeadInfo = currentAeadInfo)
+        val currentFilesDaoAead = getFilesDaoAead(aeadInfo = oldAeadInfo)
         val targetFilesDaoAead = filesDaoAeadAdapterFactory.create(aeadInfo = targetAeadInfo)
 
         val pageSize = 10

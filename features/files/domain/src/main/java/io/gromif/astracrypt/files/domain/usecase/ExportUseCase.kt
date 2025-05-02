@@ -14,7 +14,7 @@ class ExportUseCase(
         require(idList.isNotEmpty()) { throw ValidationException.EmptyIdListException() }
 
         repository.export(
-            ids = idList,
+            idList = idList,
             outputPath = outputPath
         )
     }
