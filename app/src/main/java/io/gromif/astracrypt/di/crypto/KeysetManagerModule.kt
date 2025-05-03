@@ -20,8 +20,8 @@ import io.gromif.crypto.tink.core.serializers.KeysetSerializerWithAead
 import io.gromif.crypto.tink.core.utils.DefaultKeysetIdUtil
 import io.gromif.crypto.tink.core.utils.DefaultKeystoreKeysetIdUtil
 import io.gromif.crypto.tink.data.AeadManager
+import io.gromif.crypto.tink.data.AndroidKeyManagementService
 import io.gromif.crypto.tink.data.AssociatedDataManager
-import io.gromif.crypto.tink.data.DefaultKeysetFactory
 import io.gromif.crypto.tink.data.KeysetManager
 import java.io.File
 import javax.inject.Singleton
@@ -38,10 +38,10 @@ object KeysetManagerModule {
     @Singleton
     @Provides
     fun provideKeysetManager(
-        defaultKeysetFactory: DefaultKeysetFactory,
+        defaultKeysetFactory: AndroidKeyManagementService,
         associatedDataManager: AssociatedDataManager,
     ) = KeysetManager(
-        keysetFactory = defaultKeysetFactory,
+        keyManagementService = defaultKeysetFactory,
         associatedDataManager = associatedDataManager
     )
 
@@ -71,7 +71,7 @@ object KeysetManagerModule {
         keysetParserWithAead: KeysetParserWithAead,
         prefsKeysetIdUtil: DefaultKeysetIdUtil,
         masterKeysetIdUtil: DefaultKeystoreKeysetIdUtil,
-    ) = DefaultKeysetFactory(
+    ) = AndroidKeyManagementService(
         keysetReader = datastoreKeysetReader,
         keysetWriter = datastoreKeysetWriter,
         keysetSerializerWithAead = keysetSerializerWithAead,
