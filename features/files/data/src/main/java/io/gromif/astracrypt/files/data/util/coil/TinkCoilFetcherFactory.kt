@@ -9,8 +9,8 @@ import coil.fetch.SourceResult
 import coil.request.Options
 import io.gromif.astracrypt.files.data.util.FileHandler
 import io.gromif.astracrypt.files.domain.model.FileSource
-import io.gromif.crypto.tink.data.AssociatedDataManager
-import io.gromif.crypto.tink.model.KeysetTemplates
+import io.gromif.crypto.tink.keyset.KeysetTemplates
+import io.gromif.crypto.tink.keyset.associated_data.AssociatedDataManager
 import okio.buffer
 import okio.source
 import java.io.File

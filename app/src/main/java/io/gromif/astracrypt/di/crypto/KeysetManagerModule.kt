@@ -11,18 +11,18 @@ import dagger.hilt.components.SingletonComponent
 import io.gromif.astracrypt.di.datastore.KeysetDataStore
 import io.gromif.astracrypt.utils.crypto.DatastoreKeysetReader
 import io.gromif.astracrypt.utils.crypto.DatastoreKeysetWriter
-import io.gromif.crypto.tink.core.GetGlobalAssociatedDataPrf
+import io.gromif.crypto.tink.aead.AeadManager
 import io.gromif.crypto.tink.core.encoders.HexEncoder
 import io.gromif.crypto.tink.core.hash.Sha256Util
 import io.gromif.crypto.tink.core.hash.Sha384Util
-import io.gromif.crypto.tink.core.parsers.KeysetParserWithAead
-import io.gromif.crypto.tink.core.serializers.KeysetSerializerWithAead
 import io.gromif.crypto.tink.core.utils.DefaultKeysetIdUtil
 import io.gromif.crypto.tink.core.utils.DefaultKeystoreKeysetIdUtil
-import io.gromif.crypto.tink.data.AeadManager
-import io.gromif.crypto.tink.data.AndroidKeyManagementService
-import io.gromif.crypto.tink.data.AssociatedDataManager
-import io.gromif.crypto.tink.data.KeysetManager
+import io.gromif.crypto.tink.keyset.KeysetManager
+import io.gromif.crypto.tink.keyset.associated_data.AssociatedDataManager
+import io.gromif.crypto.tink.keyset.associated_data.GetGlobalAssociatedDataPrf
+import io.gromif.crypto.tink.keyset.parser.KeysetParserWithAead
+import io.gromif.crypto.tink.keyset.serializers.KeysetSerializerWithAead
+import io.gromif.crypto.tink.kms.AndroidKeyManagementService
 import java.io.File
 import javax.inject.Singleton
 

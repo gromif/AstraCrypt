@@ -9,7 +9,7 @@ import coil.fetch.SourceResult
 import coil.request.Options
 import io.gromif.astracrypt.profile.domain.model.Avatar
 import io.gromif.astracrypt.profile.domain.repository.SettingsRepository
-import io.gromif.crypto.tink.model.KeysetTemplates
+import io.gromif.crypto.tink.keyset.KeysetTemplates
 import okio.buffer
 import okio.source
 import java.io.File

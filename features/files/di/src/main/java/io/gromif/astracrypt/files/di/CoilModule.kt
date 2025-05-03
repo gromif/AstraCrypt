@@ -12,7 +12,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import io.gromif.astracrypt.files.data.util.FileHandler
 import io.gromif.astracrypt.files.data.util.coil.TinkCoilFetcherFactory
-import io.gromif.crypto.tink.data.AssociatedDataManager
+import io.gromif.crypto.tink.keyset.associated_data.AssociatedDataManager
 import javax.inject.Qualifier
 import javax.inject.Singleton
 

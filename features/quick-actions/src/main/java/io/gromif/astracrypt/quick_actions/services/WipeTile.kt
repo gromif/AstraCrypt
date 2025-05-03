@@ -6,7 +6,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import io.gromif.astracrypt.db.AppDatabase
 import io.gromif.astracrypt.utils.dispatchers.IoDispatcher
 import io.gromif.astracrypt.utils.io.FilesUtil
-import io.gromif.crypto.tink.data.AssociatedDataManager
+import io.gromif.crypto.tink.keyset.associated_data.AssociatedDataManager
 import io.gromif.tiles_with_coroutines.TileServiceCoroutine
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch

@@ -3,7 +3,7 @@ package io.gromif.astracrypt.utils.crypto
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.stringPreferencesKey
-import io.gromif.crypto.tink.model.KeysetReader
+import io.gromif.crypto.tink.keyset.io.KeysetReader
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 

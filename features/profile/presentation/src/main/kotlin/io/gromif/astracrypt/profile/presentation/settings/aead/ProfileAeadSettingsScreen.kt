@@ -9,8 +9,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.gromif.astracrypt.profile.domain.model.AeadMode
 import io.gromif.astracrypt.resources.R
-import io.gromif.crypto.tink.extensions.getTemplateList
-import io.gromif.crypto.tink.model.KeysetTemplates
+import io.gromif.crypto.tink.core.extensions.getTemplateList
+import io.gromif.crypto.tink.keyset.KeysetTemplates
 
 @Composable
 fun ProfileAeadSettingsScreen() {

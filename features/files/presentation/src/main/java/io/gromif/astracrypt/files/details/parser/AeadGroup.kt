@@ -7,7 +7,7 @@ import io.gromif.astracrypt.resources.R
 import io.gromif.compose.details.addGroup
 import io.gromif.compose.details.addItem
 import io.gromif.compose.details.model.DetailsGroup
-import io.gromif.crypto.tink.model.KeysetTemplates
+import io.gromif.crypto.tink.keyset.KeysetTemplates
 import io.gromif.ui.compose.core.wrappers.TextWrap
 
 internal fun SnapshotStateList<DetailsGroup>.addAeadGroup(

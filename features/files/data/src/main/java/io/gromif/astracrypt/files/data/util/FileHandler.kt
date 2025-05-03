@@ -4,9 +4,9 @@ import com.google.crypto.tink.StreamingAead
 import com.google.crypto.tink.streamingaead.StreamingAeadParameters
 import io.gromif.astracrypt.files.domain.repository.SettingsRepository
 import io.gromif.astracrypt.utils.io.Randomizer
-import io.gromif.crypto.tink.data.AeadManager
-import io.gromif.crypto.tink.data.AssociatedDataManager
-import io.gromif.crypto.tink.model.KeysetTemplates
+import io.gromif.crypto.tink.aead.AeadManager
+import io.gromif.crypto.tink.keyset.KeysetTemplates
+import io.gromif.crypto.tink.keyset.associated_data.AssociatedDataManager
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.isActive
 import java.io.File

@@ -9,9 +9,9 @@ import io.gromif.astracrypt.auth.data.service.ClockServiceImpl
 import io.gromif.astracrypt.auth.data.service.TinkServiceImpl
 import io.gromif.astracrypt.auth.domain.service.ClockService
 import io.gromif.astracrypt.auth.domain.service.TinkService
-import io.gromif.crypto.tink.core.GetGlobalAssociatedDataPrf
-import io.gromif.crypto.tink.data.AssociatedDataManager
-import io.gromif.crypto.tink.data.KeysetManager
+import io.gromif.crypto.tink.keyset.KeysetManager
+import io.gromif.crypto.tink.keyset.associated_data.AssociatedDataManager
+import io.gromif.crypto.tink.keyset.associated_data.GetGlobalAssociatedDataPrf
 
 @Module
 @InstallIn(ViewModelComponent::class)

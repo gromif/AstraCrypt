@@ -6,9 +6,9 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import io.gromif.astracrypt.files.data.util.AeadHandler
 import io.gromif.astracrypt.files.data.util.AeadUtil
+import io.gromif.crypto.tink.aead.AeadManager
 import io.gromif.crypto.tink.core.encoders.Base64Encoder
-import io.gromif.crypto.tink.data.AeadManager
-import io.gromif.crypto.tink.data.AssociatedDataManager
+import io.gromif.crypto.tink.keyset.associated_data.AssociatedDataManager
 import javax.inject.Singleton
 
 @Module

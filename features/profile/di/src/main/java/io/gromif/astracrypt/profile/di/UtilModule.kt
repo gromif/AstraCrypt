@@ -15,8 +15,8 @@ import io.gromif.astracrypt.profile.data.util.PreviewUtil
 import io.gromif.astracrypt.profile.data.util.preview.CoilPreviewUtil
 import io.gromif.astracrypt.profile.data.util.preview.NativePreviewUtil
 import io.gromif.astracrypt.utils.io.BitmapCompressor
-import io.gromif.crypto.tink.data.AssociatedDataManager
-import io.gromif.crypto.tink.data.KeysetManager
+import io.gromif.crypto.tink.keyset.KeysetManager
+import io.gromif.crypto.tink.keyset.associated_data.AssociatedDataManager
 import javax.inject.Qualifier
 
 @Module

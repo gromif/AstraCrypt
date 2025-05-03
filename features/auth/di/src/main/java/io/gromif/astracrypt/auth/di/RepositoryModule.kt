@@ -12,7 +12,7 @@ import io.gromif.astracrypt.auth.domain.model.Auth
 import io.gromif.astracrypt.auth.domain.repository.SettingsRepository
 import io.gromif.astracrypt.utils.Mapper
 import io.gromif.crypto.tink.core.encoders.Base64Encoder
-import io.gromif.crypto.tink.data.KeysetManager
+import io.gromif.crypto.tink.keyset.KeysetManager
 import io.gromif.tink_datastore.TinkDataStore
 import javax.inject.Singleton
 

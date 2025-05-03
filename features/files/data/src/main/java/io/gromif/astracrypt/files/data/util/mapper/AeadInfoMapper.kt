@@ -4,7 +4,7 @@ import io.gromif.astracrypt.files.data.dto.AeadInfoDto
 import io.gromif.astracrypt.files.domain.model.AeadInfo
 import io.gromif.astracrypt.files.domain.model.AeadMode
 import io.gromif.astracrypt.utils.Mapper
-import io.gromif.crypto.tink.model.KeysetTemplates
+import io.gromif.crypto.tink.keyset.KeysetTemplates
 
 class AeadInfoDtoMapper: Mapper<AeadInfo, AeadInfoDto> {
     override fun invoke(item: AeadInfo): AeadInfoDto {

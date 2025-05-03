@@ -30,8 +30,8 @@ import io.gromif.astracrypt.utils.Mapper
 import io.gromif.astracrypt.utils.Serializer
 import io.gromif.astracrypt.utils.io.BitmapCompressor
 import io.gromif.astracrypt.utils.io.Randomizer
-import io.gromif.crypto.tink.data.AeadManager
-import io.gromif.crypto.tink.data.AssociatedDataManager
+import io.gromif.crypto.tink.aead.AeadManager
+import io.gromif.crypto.tink.keyset.associated_data.AssociatedDataManager
 import javax.inject.Qualifier
 
 @Module

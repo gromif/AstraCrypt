@@ -10,8 +10,8 @@ import io.gromif.astracrypt.profile.domain.model.Profile
 import io.gromif.astracrypt.profile.domain.repository.SettingsRepository
 import io.gromif.astracrypt.utils.Mapper
 import io.gromif.crypto.tink.core.encoders.Encoder
-import io.gromif.crypto.tink.data.KeysetManager
-import io.gromif.crypto.tink.model.KeysetTemplates
+import io.gromif.crypto.tink.keyset.KeysetManager
+import io.gromif.crypto.tink.keyset.KeysetTemplates
 import io.gromif.tink_datastore.TinkDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first

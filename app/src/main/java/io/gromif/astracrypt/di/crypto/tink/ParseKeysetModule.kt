@@ -5,10 +5,10 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import io.gromif.crypto.tink.core.encoders.HexEncoder
-import io.gromif.crypto.tink.core.parsers.KeysetParser
-import io.gromif.crypto.tink.core.parsers.KeysetParserWithAead
-import io.gromif.crypto.tink.core.parsers.KeysetParserWithKey
-import io.gromif.crypto.tink.data.keyset.KeysetAeadFactory
+import io.gromif.crypto.tink.keyset.KeysetAeadFactory
+import io.gromif.crypto.tink.keyset.parser.KeysetParser
+import io.gromif.crypto.tink.keyset.parser.KeysetParserWithAead
+import io.gromif.crypto.tink.keyset.parser.KeysetParserWithKey
 import javax.inject.Singleton
 
 @Module

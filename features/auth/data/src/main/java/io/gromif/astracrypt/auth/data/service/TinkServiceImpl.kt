@@ -2,11 +2,11 @@ package io.gromif.astracrypt.auth.data.service
 
 import com.google.crypto.tink.prf.PrfSet
 import io.gromif.astracrypt.auth.domain.service.TinkService
-import io.gromif.crypto.tink.core.GetGlobalAssociatedDataPrf
-import io.gromif.crypto.tink.data.AssociatedDataManager
-import io.gromif.crypto.tink.data.KeysetManager
-import io.gromif.crypto.tink.extensions.prf
-import io.gromif.crypto.tink.model.KeysetTemplates
+import io.gromif.crypto.tink.core.extensions.prf
+import io.gromif.crypto.tink.keyset.KeysetManager
+import io.gromif.crypto.tink.keyset.KeysetTemplates
+import io.gromif.crypto.tink.keyset.associated_data.AssociatedDataManager
+import io.gromif.crypto.tink.keyset.associated_data.GetGlobalAssociatedDataPrf
 
 class TinkServiceImpl(
     private val keysetManager: KeysetManager,

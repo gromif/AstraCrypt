@@ -1,9 +1,9 @@
 package io.gromif.astracrypt.profile.data.util
 
-import io.gromif.crypto.tink.data.AssociatedDataManager
-import io.gromif.crypto.tink.data.KeysetManager
-import io.gromif.crypto.tink.extensions.streamingAead
-import io.gromif.crypto.tink.model.KeysetTemplates
+import io.gromif.crypto.tink.core.extensions.streamingAead
+import io.gromif.crypto.tink.keyset.KeysetManager
+import io.gromif.crypto.tink.keyset.KeysetTemplates
+import io.gromif.crypto.tink.keyset.associated_data.AssociatedDataManager
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.InputStream
