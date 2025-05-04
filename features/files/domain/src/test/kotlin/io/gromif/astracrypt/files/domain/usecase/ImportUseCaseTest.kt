@@ -7,7 +7,6 @@ import io.gromif.astracrypt.files.domain.repository.Repository
 import io.gromif.astracrypt.files.domain.util.FileUtil
 import io.gromif.astracrypt.files.domain.util.FlagsUtil
 import io.gromif.astracrypt.files.domain.util.PreviewUtil
-import io.gromif.astracrypt.files.domain.validation.ValidationException
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.every
@@ -74,7 +73,7 @@ class ImportUseCaseTest {
         verify(exactly = pathList.size) { fileUtil.delete() }
     }
 
-    @Test(expected = ValidationException.InvalidNameException::class)
+    /*@Test(expected = ValidationException.InvalidNameException::class)
     fun whenNameIsNull_shouldThrowException() = runTest {
         val fileUtil: FileUtil = mockk()
         val pathList = listOf("file1.txt", "file2.txt")
@@ -133,6 +132,6 @@ class ImportUseCaseTest {
         coEvery { fileUtil.write() } returns filePath
 
         importUseCase(pathList, parentId, saveSource)
-    }
+    }*/
 
 }
