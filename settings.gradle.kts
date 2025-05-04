@@ -3,6 +3,8 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 include(":app")
 
+val contractGroup = listOf("secure-content")
+
 val coreModules = listOf(
     "database", "tiles-with-coroutines",
     "utils", "device-admin-api"
@@ -32,6 +34,7 @@ val features = listOf(
 // Include all modules
 include(":app")
 include("core", coreModules)
+include("contract", contractGroup)
 include("core:crypto", cryptoCoreModules)
 include("features", featuresModules)
 includeFeatures()

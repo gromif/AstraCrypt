@@ -11,6 +11,8 @@ android {
 }
 
 dependencies {
+    implementation(projects.contract.secureContent)
+
     implementation(projects.ui.resources)
     implementation(projects.core.utils)
     implementation(libs.androidx.datastore.preferences)

@@ -75,6 +75,9 @@ dependencies {
 
     implementation(project(":ui:compose-details"))
 
+    // Contracts
+    implementation(projects.contract.secureContent)
+
     // Compose
     implementation(libs.compose.activity)
 

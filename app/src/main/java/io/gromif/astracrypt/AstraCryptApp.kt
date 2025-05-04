@@ -47,9 +47,9 @@ import io.gromif.astracrypt.presentation.navigation.models.actions.ToolbarAction
 import io.gromif.astracrypt.resources.R
 import io.gromif.astracrypt.ui.design_system.AstraCryptTheme
 import io.gromif.astracrypt.utils.Api
+import io.gromif.astracrypt.utils.SetSecureContentFlag
+import io.gromif.astracrypt.utils.secureContent
 import io.gromif.calculator.CalculatorScreen
-import io.gromif.secure_content.presentation.SetSecureContentFlag
-import io.gromif.secure_content.presentation.secureContent
 import io.gromif.ui.compose.core.ext.FlowObserver
 import io.gromif.ui.compose.core.ext.ObserveLifecycleEvents
 import io.gromif.ui.compose.core.wrappers.TextWrap
