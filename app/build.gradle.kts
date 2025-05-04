@@ -71,8 +71,6 @@ dependencies {
     implementation(projects.features.calculator.domain)
     implementation(projects.features.auth.di)
 
-    implementation(projects.features.security.secureContent)
-
     implementation(project(":ui:compose-details"))
 
     // Contracts
