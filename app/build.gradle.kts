@@ -8,8 +8,6 @@ plugins {
     alias(libs.plugins.astracrypt.kotlin.serialization)
     alias(libs.plugins.astracrypt.android.hilt)
     alias(libs.plugins.astracrypt.android.hilt.compose)
-    alias(libs.plugins.astracrypt.android.room)
-    alias(libs.plugins.astracrypt.android.paging)
     alias(libs.plugins.astracrypt.android.work)
     alias(libs.plugins.astracrypt.android.coil)
 }
