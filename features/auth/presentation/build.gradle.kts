@@ -16,6 +16,7 @@ android {
 dependencies {
     implementation(projects.features.auth.domain)
     implementation(projects.features.auth.di)
+    implementation(projects.features.calculator.presentation)
 
     implementation(projects.core.crypto.tink)
     implementation(projects.core.utils)
