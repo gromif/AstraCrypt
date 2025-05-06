@@ -12,7 +12,6 @@ import contract.secure_content.SecureContentContract
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.gromif.astracrypt.auth.domain.usecase.SetLastActiveTimeUseCase
 import io.gromif.astracrypt.auth.domain.usecase.auth.GetAuthFlowUseCase
-import io.gromif.astracrypt.auth.domain.usecase.skin.VerifySkinUseCase
 import io.gromif.astracrypt.auth.domain.usecase.timeout.CheckAuthTimeoutUseCase
 import io.gromif.astracrypt.presentation.navigation.models.UiState
 import io.gromif.astracrypt.utils.AppearanceManager
@@ -30,7 +29,6 @@ class MainVM @Inject constructor(
     @IoDispatcher
     private val defaultDispatcher: CoroutineDispatcher,
     private val state: SavedStateHandle,
-    private val verifySkinUseCase: VerifySkinUseCase,
     private val setLastActiveTimeUseCase: SetLastActiveTimeUseCase,
     private val checkAuthTimeoutUseCase: CheckAuthTimeoutUseCase,
     secureContentContract: SecureContentContract,
@@ -47,10 +45,6 @@ class MainVM @Inject constructor(
     var userIsAuthenticated by mutableStateOf(false)
     var skinIsAuthenticated by mutableStateOf(false)
     val authFlow = getAuthFlowUseCase()
-
-    fun verifySkin(data: String) = viewModelScope.launch(defaultDispatcher) {
-        skinIsAuthenticated = verifySkinUseCase(data)
-    }
 
     fun setSearchQuery(query: String) {
         state[SEARCH_QUERY] = query

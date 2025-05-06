@@ -33,6 +33,7 @@ import com.nevidimka655.astracrypt.BuildConfig
 import io.gromif.astracrypt.auth.domain.model.AuthType
 import io.gromif.astracrypt.auth.domain.model.SkinType
 import io.gromif.astracrypt.auth.presentation.PasswordLoginScreen
+import io.gromif.astracrypt.auth.presentation.calculator.AuthCalculatorSkin
 import io.gromif.astracrypt.presentation.navigation.MainNavHost
 import io.gromif.astracrypt.presentation.navigation.Route
 import io.gromif.astracrypt.presentation.navigation.composables.BottomBarImpl
@@ -49,7 +50,6 @@ import io.gromif.astracrypt.ui.design_system.AstraCryptTheme
 import io.gromif.astracrypt.utils.Api
 import io.gromif.astracrypt.utils.SetSecureContentFlag
 import io.gromif.astracrypt.utils.secureContent
-import io.gromif.calculator.CalculatorScreen
 import io.gromif.ui.compose.core.ext.FlowObserver
 import io.gromif.ui.compose.core.ext.ObserveLifecycleEvents
 import io.gromif.ui.compose.core.wrappers.TextWrap
@@ -161,9 +161,9 @@ fun AstraCryptApp(
                         uiState = UiState(
                             toolbar = UiState.Toolbar(title = TextWrap.Resource(id = R.string.settings_camouflageType_calculator))
                         )
-                        CalculatorScreen(
+                        AuthCalculatorSkin(
                             modifier = Modifier.fillMaxSize(),
-                            onCalculate = vm::verifySkin
+                            onValidate = vm::skinIsAuthenticated::set
                         )
                         return@let
                     }
