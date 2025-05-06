@@ -68,7 +68,6 @@ dependencies {
     implementation(projects.features.calculator.presentation)
 
     implementation(projects.features.auth.domain)
-    implementation(projects.features.calculator.domain)
     implementation(projects.features.auth.di)
 
     implementation(project(":ui:compose-details"))
