@@ -64,6 +64,7 @@ dependencies {
     implementation(projects.features.auth.domain)
 
     // Contracts
+    implementation(projects.contract.auth)
     implementation(projects.contract.secureContent)
 
     // Compose
