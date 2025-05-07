@@ -3,7 +3,7 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 include(":app")
 
-val contractGroup = listOf("secure-content")
+val contractGroup = listOf("auth", "secure-content")
 
 val coreModules = listOf(
     "database", "tiles-with-coroutines",
