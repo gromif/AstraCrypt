@@ -14,6 +14,8 @@ android {
 }
 
 dependencies {
+    implementation(projects.contract.auth)
+
     implementation(projects.features.auth.domain)
     implementation(projects.features.auth.di)
     implementation(projects.features.calculator.presentation)
