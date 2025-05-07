@@ -22,6 +22,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.gromif.astracrypt.auth.domain.model.Auth
 import io.gromif.astracrypt.resources.R
 import io.gromif.ui.compose.core.TextFields
@@ -40,11 +41,12 @@ fun PasswordLoginScreen(
 ) {
     val context = LocalContext.current
     val vm: PasswordLoginViewModel = hiltViewModel()
+    val auth by vm.authState.collectAsStateWithLifecycle(Auth())
     var password by rememberSaveable { mutableStateOf("") }
 
     FlowObserver(onFabClick) {
         if (vm.verifyPassword(password = password)) {
-            if (vm.isTinkAdTiedToAuth()) vm.decryptTinkAd(password = password)
+            if (auth.bindTinkAd) vm.decryptTinkAd(password = password)
             onAuthenticated()
         } else Toast.makeText(context, R.string.t_invalidPass, Toast.LENGTH_SHORT).show()
     }
