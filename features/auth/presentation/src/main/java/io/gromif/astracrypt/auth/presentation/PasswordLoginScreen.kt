@@ -12,7 +12,6 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -26,11 +25,11 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import io.gromif.astracrypt.auth.domain.model.Auth
 import io.gromif.astracrypt.resources.R
 import io.gromif.ui.compose.core.TextFields
+import io.gromif.ui.compose.core.ext.FlowObserver
 import io.gromif.ui.compose.core.text_fields.Password
 import io.gromif.ui.compose.core.text_fields.icons.PasswordToggleIconButton
 import io.gromif.ui.compose.core.theme.spaces
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun PasswordLoginScreen(
@@ -43,13 +42,11 @@ fun PasswordLoginScreen(
     val vm: PasswordLoginViewModel = hiltViewModel()
     var password by rememberSaveable { mutableStateOf("") }
 
-    LaunchedEffect(Unit) {
-        onFabClick.collectLatest {
-            if (vm.verifyPassword(password = password)) {
-                if (vm.isTinkAdTiedToAuth()) vm.decryptTinkAd(password = password)
-                onAuthenticated()
-            } else Toast.makeText(context, R.string.t_invalidPass, Toast.LENGTH_SHORT).show()
-        }
+    FlowObserver(onFabClick) {
+        if (vm.verifyPassword(password = password)) {
+            if (vm.isTinkAdTiedToAuth()) vm.decryptTinkAd(password = password)
+            onAuthenticated()
+        } else Toast.makeText(context, R.string.t_invalidPass, Toast.LENGTH_SHORT).show()
     }
 
     Screen(
