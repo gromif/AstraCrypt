@@ -35,7 +35,6 @@ import kotlinx.coroutines.flow.Flow
 @Composable
 fun PasswordLoginScreen(
     modifier: Modifier = Modifier,
-    auth: Auth,
     onFabClick: Flow<Any>,
     onAuthenticated: () -> Unit
 ) {
