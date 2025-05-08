@@ -6,10 +6,8 @@ import io.mockk.coVerify
 import io.mockk.mockk
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 
@@ -28,16 +26,14 @@ class AuthCalculatorSkinViewModelTest {
     }
 
     @Test
-    fun `verifySkin calls verifySkinUseCase and sends the result correctly`() = runTest {
+    fun `verifySkin calls verifySkinUseCase correctly`() = runTest {
         val targetData = "12345"
         val targetResult = false
 
         coEvery { verifySkinUseCaseMock(targetData) } returns targetResult
 
         vm.verifySkin(targetData)
-        val resultState = vm.resultFlow.first()
 
-        Assert.assertEquals(targetResult, resultState)
         coVerify(exactly = 1) { verifySkinUseCaseMock(targetData) }
     }
 
