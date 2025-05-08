@@ -6,7 +6,7 @@ include(":app")
 val contractGroup = listOf("auth", "secure-content")
 
 val coreModules = listOf(
-    "database", "tiles-with-coroutines",
+    "database", "dispatchers", "tiles-with-coroutines",
     "utils", "device-admin-api"
 )
 
@@ -63,7 +63,6 @@ dependencyResolutionManagement {
         gradlePluginPortal()
     }
 }
-include(":core:utils:dispatchers")
 include(":features:calculator:domain")
 include(":features:calculator:presentation")
 include(":core:crypto:")
