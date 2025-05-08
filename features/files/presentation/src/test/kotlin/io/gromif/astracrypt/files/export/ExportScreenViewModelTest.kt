@@ -33,6 +33,7 @@ class ExportScreenViewModelTest {
     fun setUp() {
         exportScreenViewModel = ExportScreenViewModel(
             defaultDispatcher = defaultDispatcher,
+            secureContentContract = mockk(relaxed = true),
             filesUtil = filesUtil,
             workManager = workManager,
             privateExportUseCase = privateExportUseCase,
