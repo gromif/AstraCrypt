@@ -3,8 +3,7 @@ package io.gromif.astracrypt.auth.di
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ViewModelComponent
-import dagger.hilt.android.scopes.ViewModelScoped
+import dagger.hilt.components.SingletonComponent
 import io.gromif.astracrypt.auth.data.service.ClockServiceImpl
 import io.gromif.astracrypt.auth.data.service.TinkServiceImpl
 import io.gromif.astracrypt.auth.domain.service.ClockService
@@ -12,12 +11,13 @@ import io.gromif.astracrypt.auth.domain.service.TinkService
 import io.gromif.crypto.tink.keyset.KeysetManager
 import io.gromif.crypto.tink.keyset.associated_data.AssociatedDataManager
 import io.gromif.crypto.tink.keyset.associated_data.GetGlobalAssociatedDataPrf
+import javax.inject.Singleton
 
 @Module
-@InstallIn(ViewModelComponent::class)
+@InstallIn(SingletonComponent::class)
 internal object ServiceModule {
 
-    @ViewModelScoped
+    @Singleton
     @Provides
     fun provideTinkService(
         keysetManager: KeysetManager,
@@ -29,7 +29,7 @@ internal object ServiceModule {
         getGlobalAssociatedDataPrf = getGlobalAssociatedDataPrf
     )
 
-    @ViewModelScoped
+    @Singleton
     @Provides
     fun provideClockService(): ClockService = ClockServiceImpl()
 
