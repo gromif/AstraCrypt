@@ -26,14 +26,12 @@ fun AuthScreen(
 
     if (skinType != null && !skinState) when (skinType) {
         SkinType.Calculator -> AuthCalculatorSkin(
-            modifier = modifier,
-            onValidate = {}
+            modifier = modifier
         ).also { onSkinType.onCalculator() }
     } else if (authType != null && !authState) when (authType) {
         AuthType.PASSWORD -> PasswordLoginScreen(
             modifier = modifier,
-            onFabClick = onFabClick,
-            onAuthenticated = {}
+            onFabClick = onFabClick
         ).also { onAuthType.onPassword() }
     }
 }

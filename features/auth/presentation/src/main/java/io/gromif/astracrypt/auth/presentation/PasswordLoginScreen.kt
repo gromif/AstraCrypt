@@ -35,8 +35,7 @@ import kotlinx.coroutines.flow.Flow
 @Composable
 fun PasswordLoginScreen(
     modifier: Modifier = Modifier,
-    onFabClick: Flow<Any>,
-    onAuthenticated: () -> Unit
+    onFabClick: Flow<Any>
 ) {
     val context = LocalContext.current
     val vm: PasswordLoginViewModel = hiltViewModel()
@@ -46,7 +45,6 @@ fun PasswordLoginScreen(
     FlowObserver(onFabClick) {
         if (vm.verifyPassword(password = password)) {
             if (auth.bindTinkAd) vm.decryptTinkAd(password = password)
-            onAuthenticated()
         } else Toast.makeText(context, R.string.t_invalidPass, Toast.LENGTH_SHORT).show()
     }
 
