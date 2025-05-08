@@ -1,3 +1,3 @@
 <component name="DependencyValidationManager">
-  <scope name="Feature — Auth" pattern="file[AstraCrypt.features.auth*]:*//*||file[AstraCrypt.features.auth.presentation]:build.gradle.kts||file[AstraCrypt.features.auth.domain]:build.gradle.kts||file[AstraCrypt.features.auth.di]:build.gradle.kts||file[AstraCrypt.features.auth.data]:build.gradle.kts" />
+  <scope name="Feature — Auth" pattern="file[AstraCrypt.features.auth*]:*//*||file[AstraCrypt.features.auth.presentation]:build.gradle.kts||file[AstraCrypt.features.auth.domain]:build.gradle.kts||file[AstraCrypt.features.auth.di]:build.gradle.kts||file[AstraCrypt.features.auth.data]:build.gradle.kts||file[AstraCrypt.contract.auth*]:*//*||file[AstraCrypt.contract.auth]:build.gradle.kts" />
 </component>
