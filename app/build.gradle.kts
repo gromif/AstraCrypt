@@ -5,7 +5,6 @@ plugins {
     alias(libs.plugins.astracrypt.android.application)
     alias(libs.plugins.astracrypt.android.application.compose)
     alias(libs.plugins.astracrypt.kotlin.coroutines)
-    alias(libs.plugins.astracrypt.kotlin.serialization)
     alias(libs.plugins.astracrypt.android.hilt)
     alias(libs.plugins.astracrypt.android.hilt.compose)
 }
