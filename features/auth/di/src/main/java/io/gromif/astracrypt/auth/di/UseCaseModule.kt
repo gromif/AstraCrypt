@@ -5,6 +5,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.scopes.ViewModelScoped
+import io.gromif.astracrypt.auth.domain.repository.Repository
 import io.gromif.astracrypt.auth.domain.repository.SettingsRepository
 import io.gromif.astracrypt.auth.domain.service.ClockService
 import io.gromif.astracrypt.auth.domain.service.TinkService
@@ -15,6 +16,7 @@ import io.gromif.astracrypt.auth.domain.usecase.auth.GetAuthUseCase
 import io.gromif.astracrypt.auth.domain.usecase.auth.SetAuthTypeUseCase
 import io.gromif.astracrypt.auth.domain.usecase.auth.SetAuthUseCase
 import io.gromif.astracrypt.auth.domain.usecase.auth.VerifyAuthUseCase
+import io.gromif.astracrypt.auth.domain.usecase.auth.state.GetAuthStateFlowUseCase
 import io.gromif.astracrypt.auth.domain.usecase.encryption.DecryptTinkAdUseCase
 import io.gromif.astracrypt.auth.domain.usecase.encryption.SetAeadModeUseCase
 import io.gromif.astracrypt.auth.domain.usecase.encryption.SetBindTinkAdUseCase
@@ -56,17 +58,24 @@ internal object UseCaseModule {
 
     @ViewModelScoped
     @Provides
-    fun provideSetLastActiveTimeUseCase(clockService: ClockService) =
-        SetLastActiveTimeUseCase(clockService = clockService)
+    fun provideSetLastActiveTimeUseCase(
+        getAuthStateFlowUseCase: GetAuthStateFlowUseCase,
+        clockService: ClockService
+    ) = SetLastActiveTimeUseCase(
+        getAuthStateFlowUseCase = getAuthStateFlowUseCase,
+        clockService = clockService
+    )
 
     @ViewModelScoped
     @Provides
     fun provideCheckAuthTimeoutUseCase(
         getAuthUseCase: GetAuthUseCase,
-        clockService: ClockService
+        clockService: ClockService,
+        repository: Repository
     ) = CheckAuthTimeoutUseCase(
         getAuthUseCase = getAuthUseCase,
-        clockService = clockService
+        clockService = clockService,
+        repository = repository
     )
 
     @ViewModelScoped
@@ -121,17 +130,17 @@ internal object UseCaseModule {
     @Provides
     fun provideVerifyCalculatorCombinationUseCase(
         settingsRepository: SettingsRepository,
-        tinkService: TinkService,
+        repository: Repository,
     ): VerifySkinUseCase =
-        VerifySkinUseCase(settingsRepository = settingsRepository, tinkService = tinkService)
+        VerifySkinUseCase(settingsRepository = settingsRepository, repository = repository)
 
     @ViewModelScoped
     @Provides
     fun provideVerifyPasswordUseCase(
         settingsRepository: SettingsRepository,
-        tinkService: TinkService,
+        repository: Repository,
     ): VerifyAuthUseCase =
-        VerifyAuthUseCase(settingsRepository = settingsRepository, tinkService = tinkService)
+        VerifyAuthUseCase(settingsRepository = settingsRepository, repository = repository)
 
     @ViewModelScoped
     @Provides
@@ -155,6 +164,13 @@ internal object UseCaseModule {
     fun provideGetAeadModeFlowUseCase(
         settingsRepository: SettingsRepository,
     ): GetAeadModeFlowUseCase = GetAeadModeFlowUseCase(settingsRepository = settingsRepository)
+
+    @ViewModelScoped
+    @Provides
+    fun provideGetAuthStateFlowUseCase(
+        getAuthFlowUseCase: GetAuthFlowUseCase,
+        repository: Repository,
+    ) = GetAuthStateFlowUseCase(getAuthFlowUseCase = getAuthFlowUseCase, repository = repository)
 
     @ViewModelScoped
     @Provides

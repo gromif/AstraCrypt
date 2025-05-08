@@ -1,38 +1,46 @@
 package io.gromif.astracrypt.auth.domain.usecase.auth
 
+import io.gromif.astracrypt.auth.domain.repository.Repository
 import io.gromif.astracrypt.auth.domain.repository.SettingsRepository
-import io.gromif.astracrypt.auth.domain.service.TinkService
 import io.mockk.coEvery
-import io.mockk.coVerify
+import io.mockk.coVerifySequence
+import io.mockk.confirmVerified
 import io.mockk.mockk
 import kotlinx.coroutines.test.runTest
+import org.junit.After
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 
 class VerifyAuthUseCaseTest {
     private lateinit var verifyAuthUseCase: VerifyAuthUseCase
-    private val settingsRepository: SettingsRepository = mockk()
-    private val tinkService: TinkService = mockk()
+    private val settingsRepositoryMock: SettingsRepository = mockk()
+    private val repositoryMock: Repository = mockk()
 
     @Before
     fun setUp() {
-        verifyAuthUseCase = VerifyAuthUseCase(settingsRepository, tinkService)
+        verifyAuthUseCase = VerifyAuthUseCase(settingsRepositoryMock, repositoryMock)
     }
 
     @Test
-    fun shouldComputeAuthHash_and_compareToSaved_thenReturnResult() = runTest {
+    fun `should call verifyAuth with correct parameters and return the result`() = runTest {
         val inputData = "random_data"
         val savedHash = ByteArray(2)
-        val targetHash = ByteArray(8)
 
-        coEvery { tinkService.computeAuthHash(inputData) } returns targetHash
-        coEvery { settingsRepository.getAuthHash() } returns savedHash
+        coEvery { settingsRepositoryMock.getAuthHash() } returns savedHash
+        coEvery { repositoryMock.verifyAuth(savedHash, inputData) } returns true
 
         val compareResult = verifyAuthUseCase(inputData)
-        Assert.assertFalse(compareResult)
+        Assert.assertTrue(compareResult)
 
-        coVerify(exactly = 1) { tinkService.computeAuthHash(inputData) }
-        coVerify(exactly = 1) { settingsRepository.getAuthHash() }
+        coVerifySequence {
+            settingsRepositoryMock.getAuthHash()
+            repositoryMock.verifyAuth(savedHash, inputData)
+        }
+    }
+
+    @After
+    fun tearDown() {
+        confirmVerified(settingsRepositoryMock, repositoryMock)
     }
 }

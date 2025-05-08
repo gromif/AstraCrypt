@@ -30,10 +30,9 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.nevidimka655.astracrypt.BuildConfig
-import io.gromif.astracrypt.auth.domain.model.AuthType
-import io.gromif.astracrypt.auth.domain.model.SkinType
-import io.gromif.astracrypt.auth.presentation.PasswordLoginScreen
-import io.gromif.astracrypt.auth.presentation.calculator.AuthCalculatorSkin
+import io.gromif.astracrypt.auth.presentation.AuthScreen
+import io.gromif.astracrypt.auth.presentation.shared.onAuthType
+import io.gromif.astracrypt.auth.presentation.shared.onSkinType
 import io.gromif.astracrypt.presentation.navigation.MainNavHost
 import io.gromif.astracrypt.presentation.navigation.Route
 import io.gromif.astracrypt.presentation.navigation.composables.BottomBarImpl
@@ -79,6 +78,7 @@ fun AstraCryptApp(
 
     val secureContentMode by vm.secureContentStateFlow.collectAsStateWithLifecycle()
     SetSecureContentFlag(mode = secureContentMode, window = window)
+    val authState by vm.authStateFlow.collectAsStateWithLifecycle(false)
 
     val coroutineScope = rememberCoroutineScope()
     val topBarScroll = TopAppBarDefaults.enterAlwaysScrollBehavior()
@@ -114,16 +114,16 @@ fun AstraCryptApp(
                 expanded = searchBarExpanded,
                 onExpandedChange = { searchBarExpanded = it },
                 backButtonEnabled = searchBarExpanded || isSearching
-            ) else if (vm.skinIsAuthenticated) ToolbarImpl(
+            ) else if (authState) ToolbarImpl(
                 title = toolbar.title,
-                backButton = vm.userIsAuthenticated && bottomBarTab == null,
+                backButton = bottomBarTab == null,
                 isContextual = toolbar.isContextual,
                 actions = toolbar.actions,
                 onNavigateUp = navController::navigateUp,
                 onActionPressed = {
                     coroutineScope.launch { onToolbarActions.send(it) }
                 },
-                scrollBehavior = if (!vm.userIsAuthenticated) null else topBarScroll
+                scrollBehavior = topBarScroll
             )
         },
         floatingActionButton = {
@@ -153,41 +153,25 @@ fun AstraCryptApp(
             }
         }
     ) { padding ->
-        if (!vm.userIsAuthenticated) {
-            val auth by vm.authFlow.collectAsStateWithLifecycle(null)
-            auth?.let {
-                if (!vm.skinIsAuthenticated) when (it.skinType) {
-                    SkinType.Calculator -> {
-                        uiState = UiState(
-                            toolbar = UiState.Toolbar(title = TextWrap.Resource(id = R.string.settings_camouflageType_calculator))
-                        )
-                        AuthCalculatorSkin(
-                            modifier = Modifier.fillMaxSize(),
-                            onValidate = vm::skinIsAuthenticated::set
-                        )
-                        return@let
-                    }
-
-                    null -> vm.skinIsAuthenticated = true
+        if (!authState) AuthScreen(
+            modifier = Modifier.fillMaxSize(),
+            onFabClick = onFabClick.receiveAsFlow(),
+            onAuthType = object: onAuthType {
+                override fun onPassword() {
+                    uiState = UiState(
+                        toolbar = UiState.Toolbar(title = TextWrap.Resource(id = R.string.settings_authentication)),
+                        fab = UiState.Fab(icon = Icons.Default.Key)
+                    )
                 }
-                when (it.type) {
-                    AuthType.PASSWORD -> {
-                        uiState = UiState(
-                            toolbar = UiState.Toolbar(title = TextWrap.Resource(id = R.string.settings_authentication)),
-                            fab = UiState.Fab(icon = Icons.Default.Key)
-                        )
-                        PasswordLoginScreen(
-                            modifier = Modifier.fillMaxSize(),
-                            auth = it,
-                            onFabClick = onFabClick.receiveAsFlow(),
-                            onAuthenticated = { vm.userIsAuthenticated = true }
-                        )
-                    }
-
-                    null -> vm.userIsAuthenticated = true
+            },
+            onSkinType = object: onSkinType {
+                override fun onCalculator() {
+                    uiState = UiState(
+                        toolbar = UiState.Toolbar(title = TextWrap.Resource(id = R.string.settings_camouflageType_calculator))
+                    )
                 }
             }
-        } else MainNavHost(
+        ) else MainNavHost(
             modifier = Modifier.padding(padding),
             navParams = NavParams(
                 isActionsSupported = Api.atLeast7(),
