@@ -44,14 +44,12 @@ import io.gromif.astracrypt.presentation.navigation.models.HostStateHolder
 import io.gromif.astracrypt.presentation.navigation.models.NavParams
 import io.gromif.astracrypt.presentation.navigation.models.UiState
 import io.gromif.astracrypt.presentation.navigation.models.actions.ToolbarActions
-import io.gromif.astracrypt.resources.R
 import io.gromif.astracrypt.ui.design_system.AstraCryptTheme
 import io.gromif.astracrypt.utils.Api
 import io.gromif.astracrypt.utils.SetSecureContentFlag
 import io.gromif.astracrypt.utils.secureContent
 import io.gromif.ui.compose.core.ext.FlowObserver
 import io.gromif.ui.compose.core.ext.ObserveLifecycleEvents
-import io.gromif.ui.compose.core.wrappers.TextWrap
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
@@ -158,17 +156,12 @@ fun AstraCryptApp(
             onFabClick = onFabClick.receiveAsFlow(),
             onAuthType = object: onAuthType {
                 override fun onPassword() {
-                    uiState = UiState(
-                        toolbar = UiState.Toolbar(title = TextWrap.Resource(id = R.string.settings_authentication)),
-                        fab = UiState.Fab(icon = Icons.Default.Key)
-                    )
+                    uiState = UiState(fab = UiState.Fab(icon = Icons.Default.Key))
                 }
             },
             onSkinType = object: onSkinType {
                 override fun onCalculator() {
-                    uiState = UiState(
-                        toolbar = UiState.Toolbar(title = TextWrap.Resource(id = R.string.settings_camouflageType_calculator))
-                    )
+                    uiState = UiState()
                 }
             }
         ) else MainNavHost(
