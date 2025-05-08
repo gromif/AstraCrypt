@@ -7,6 +7,7 @@ class AndroidHiltComposeConventionPlugin: Plugin<Project> {
     override fun apply(target: Project): Unit = with(target) {
         dependencies {
             "implementation"(libs.findLibrary("hilt.compose.navigation").get())
+            "implementation"(project(":core:utils:dispatchers"))
         }
     }
 }
