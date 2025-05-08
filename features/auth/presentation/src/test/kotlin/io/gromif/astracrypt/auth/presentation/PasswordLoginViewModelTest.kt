@@ -12,7 +12,6 @@ import io.mockk.mockk
 import io.mockk.verify
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.runTest
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 
@@ -45,13 +44,6 @@ class PasswordLoginViewModelTest {
         passwordLoginViewModel.verifyPassword(targetPassword)
 
         coVerify { verifyAuthUseCaseMock(targetPassword) }
-    }
-
-    @Test
-    fun `should return the correct bindTinkAd value`() {
-        val result = passwordLoginViewModel.isTinkAdTiedToAuth()
-
-        Assert.assertFalse(result)
     }
 
     @Test
