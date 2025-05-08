@@ -61,7 +61,6 @@ dependencies {
     implementation(projects.ui.designSystem)
 
     implementation(projects.features.auth.presentation)
-    implementation(projects.features.auth.domain)
 
     // Contracts
     implementation(projects.contract.auth)
