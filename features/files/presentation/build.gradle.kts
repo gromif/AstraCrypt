@@ -18,6 +18,8 @@ android {
 }
 
 dependencies {
+    implementation(projects.contract.secureContent)
+
     implementation(projects.features.files.domain)
     implementation(projects.features.files.di)
 

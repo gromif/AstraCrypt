@@ -10,6 +10,7 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.OutOfQuotaPolicy
 import androidx.work.WorkManager
 import androidx.work.workDataOf
+import contract.secure_content.SecureContentContract
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.gromif.astracrypt.files.domain.usecase.PrivateExportUseCase
 import io.gromif.astracrypt.files.export.model.ExportStateHolder
@@ -20,6 +21,7 @@ import io.gromif.astracrypt.utils.dispatchers.IoDispatcher
 import io.gromif.astracrypt.utils.io.FilesUtil
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.cancel
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -30,12 +32,17 @@ import javax.inject.Inject
 internal class ExportScreenViewModel @Inject constructor(
     @IoDispatcher
     private val defaultDispatcher: CoroutineDispatcher,
+    private val secureContentContract: SecureContentContract,
     private val filesUtil: FilesUtil,
     private val workManager: WorkManager,
     private val privateExportUseCase: PrivateExportUseCase,
     private val uriMapper: Mapper<String, Uri>
 ) : ViewModel() {
     private val workUUID = UUID.randomUUID()
+    val secureContentModeState = secureContentContract.getContractModeFlow().stateIn(
+        viewModelScope, SharingStarted.WhileSubscribed(), SecureContentContract.Mode.ENABLED
+    )
+
     var internalExportUri: Uri = Uri.EMPTY
     var uiState by mutableStateOf(ExportStateHolder())
 
