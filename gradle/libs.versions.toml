@@ -7,7 +7,7 @@ agp = "8.10.0"
 ksp = "2.1.20-2.0.1"
 
 room = "2.7.1"
-lifecycle = "2.8.7"
+lifecycle = "2.9.0"
 paging = "3.3.6"
 coil = "2.7.0"
 
