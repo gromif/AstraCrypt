@@ -1,6 +1,3 @@
-[submodule "core/tiles-with-coroutines"]
-	path = core/tiles-with-coroutines
-	url = git@github.com:gromif/core_tiles_with_coroutines.git
 [submodule "crypto/tink-lab"]
 	path = features/tink-lab
 	url = git@github.com:gromif/crypto_tink_lab.git
