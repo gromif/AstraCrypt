@@ -22,9 +22,6 @@
 [submodule "ui/compose-help"]
 	path = features/help
 	url = git@github.com:gromif/ui_compose_help.git
-[submodule "ui/compose-notes"]
-	path = features/notes
-	url = git@github.com:gromif/ui_compose_notes.git
 [submodule "crypto/tink-lab"]
 	path = features/tink-lab
 	url = git@github.com:gromif/crypto_tink_lab.git
