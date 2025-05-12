@@ -1,6 +1,3 @@
-[submodule "modules/ui/compose-core"]
-	path = ui/compose-core
-	url = git@github.com:gromif/ui_compose_core.git
 [submodule "crypto/tink"]
 	path = core/crypto/tink
 	url = git@github.com:gromif/crypto_tink.git
