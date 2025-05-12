@@ -7,9 +7,6 @@
 [submodule "ui/compose-color-schemes"]
 	path = ui/compose-color-schemes
 	url = git@github.com:gromif/ui_compose_color_schemes.git
-[submodule "ui/compose-details"]
-	path = ui/compose-details
-	url = git@github.com:gromif/ui_compose_details.git
 [submodule "crypto/tink"]
 	path = core/crypto/tink
 	url = git@github.com:gromif/crypto_tink.git
