@@ -1,3 +1,0 @@
-[submodule "crypto/tink-lab"]
-	path = features/tink-lab
-	url = git@github.com:gromif/crypto_tink_lab.git
