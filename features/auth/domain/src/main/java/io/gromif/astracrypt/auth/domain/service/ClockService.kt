@@ -6,5 +6,4 @@ interface ClockService {
 
     fun setLastActiveTime(millis: Long)
     fun getLastActiveTime(): Long
-
 }

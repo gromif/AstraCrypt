@@ -19,11 +19,10 @@ class GetAuthStateFlowUseCase(
         ) { config, authState, skinState ->
             AuthState(
                 authType = config.type,
-                authState = if(config.type == null) true else authState,
+                authState = if (config.type == null) true else authState,
                 skinType = config.skinType,
-                skinState = if(config.skinType == null) true else skinState
+                skinState = if (config.skinType == null) true else skinState
             )
         }
     }
-
 }

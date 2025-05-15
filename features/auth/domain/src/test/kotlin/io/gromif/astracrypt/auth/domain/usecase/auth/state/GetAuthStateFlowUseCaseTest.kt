@@ -97,5 +97,4 @@ class GetAuthStateFlowUseCaseTest {
         verify(exactly = 1) { repositoryMock.getAuthStateFlow() }
         verify(exactly = 1) { repositoryMock.getSkinStateFlow() }
     }
-
 }

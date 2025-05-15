@@ -23,5 +23,4 @@ class SetAuthTypeUseCase(
         )
         if (authType == null) tinkService.disableAssociatedDataBind()
     }
-
 }

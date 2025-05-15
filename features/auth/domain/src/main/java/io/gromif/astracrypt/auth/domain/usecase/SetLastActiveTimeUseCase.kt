@@ -17,5 +17,4 @@ class SetLastActiveTimeUseCase(
             clockService.setLastActiveTime(currentTimeMillis)
         }
     }
-
 }

@@ -18,5 +18,4 @@ interface Repository {
     suspend fun verifyAuth(savedHash: ByteArray, secret: String): Boolean
 
     suspend fun verifySkin(savedHash: ByteArray, secret: String): Boolean
-
 }

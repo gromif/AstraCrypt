@@ -18,9 +18,11 @@ class SetBindTinkAdUseCase(
             setAuthUseCase(auth.copy(bindTinkAd = bind))
         }
         launch {
-            if (bind) tinkService.enableAssociatedDataBind(password = password)
-            else tinkService.disableAssociatedDataBind()
+            if (bind) {
+                tinkService.enableAssociatedDataBind(password = password)
+            } else {
+                tinkService.disableAssociatedDataBind()
+            }
         }
     }
-
 }
