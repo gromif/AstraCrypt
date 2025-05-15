@@ -9,7 +9,7 @@ import io.gromif.astracrypt.files.domain.model.ItemState
 import io.gromif.astracrypt.files.domain.model.ValidationRulesDto
 import io.gromif.astracrypt.files.domain.model.ViewMode
 import io.gromif.astracrypt.files.domain.provider.PagingProvider
-import io.gromif.astracrypt.files.domain.usecase.GetValidationRulesUsecase
+import io.gromif.astracrypt.files.domain.usecase.GetValidationRulesUseCase
 import io.gromif.astracrypt.files.domain.usecase.actions.CreateFolderUseCase
 import io.gromif.astracrypt.files.domain.usecase.actions.DeleteUseCase
 import io.gromif.astracrypt.files.domain.usecase.actions.MoveUseCase
@@ -47,7 +47,7 @@ class FilesViewModelTest {
     private val filesUtil: FilesUtil = mockk(relaxed = true)
     private val imageLoader: ImageLoader = mockk(relaxed = true)
     private val getListViewModeUseCase: GetListViewModeUseCase = mockk(relaxed = true)
-    private val getValidationRulesUseCase: GetValidationRulesUsecase = mockk(relaxed = true)
+    private val getValidationRulesUseCase: GetValidationRulesUseCase = mockk(relaxed = true)
 
     @Before
     fun setup() {

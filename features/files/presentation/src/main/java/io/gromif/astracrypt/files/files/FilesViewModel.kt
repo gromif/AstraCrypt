@@ -19,7 +19,7 @@ import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.domain.model.ItemState
 import io.gromif.astracrypt.files.domain.model.ViewMode
 import io.gromif.astracrypt.files.domain.provider.PagingProvider
-import io.gromif.astracrypt.files.domain.usecase.GetValidationRulesUsecase
+import io.gromif.astracrypt.files.domain.usecase.GetValidationRulesUseCase
 import io.gromif.astracrypt.files.domain.usecase.actions.CreateFolderUseCase
 import io.gromif.astracrypt.files.domain.usecase.actions.DeleteUseCase
 import io.gromif.astracrypt.files.domain.usecase.actions.MoveUseCase
@@ -63,7 +63,7 @@ class FilesViewModel @Inject constructor(
     @FilesImageLoader
     val imageLoader: ImageLoader,
     getListViewModeUseCase: GetListViewModeUseCase,
-    getValidationRulesUsecase: GetValidationRulesUsecase,
+    getValidationRulesUsecase: GetValidationRulesUseCase,
 ) : ViewModel() {
     private val parentIdState = MutableStateFlow(0L)
     private val parentBackStackMutable = mutableStateListOf<RootInfo>()

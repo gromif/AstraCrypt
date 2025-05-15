@@ -7,7 +7,7 @@ import dagger.hilt.components.SingletonComponent
 import io.gromif.astracrypt.files.domain.repository.Repository
 import io.gromif.astracrypt.files.domain.usecase.GetItemDetailsUseCase
 import io.gromif.astracrypt.files.domain.usecase.GetRecentItemsUseCase
-import io.gromif.astracrypt.files.domain.usecase.GetValidationRulesUsecase
+import io.gromif.astracrypt.files.domain.usecase.GetValidationRulesUseCase
 import io.gromif.astracrypt.files.domain.usecase.aead.GetAeadInfoFlowUseCase
 import io.gromif.astracrypt.files.domain.usecase.aead.GetAeadInfoUseCase
 
@@ -16,7 +16,7 @@ import io.gromif.astracrypt.files.domain.usecase.aead.GetAeadInfoUseCase
 internal object UsecaseModule {
 
     @Provides
-    fun provideGetValidationRulesUsecase() = GetValidationRulesUsecase()
+    fun provideGetValidationRulesUseCase() = GetValidationRulesUseCase()
 
     @Provides
     fun provideGetRecentItemsUseCase(
