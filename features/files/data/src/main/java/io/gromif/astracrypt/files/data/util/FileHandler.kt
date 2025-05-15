@@ -2,7 +2,7 @@ package io.gromif.astracrypt.files.data.util
 
 import com.google.crypto.tink.StreamingAead
 import com.google.crypto.tink.streamingaead.StreamingAeadParameters
-import io.gromif.astracrypt.files.domain.repository.SettingsRepository
+import io.gromif.astracrypt.files.domain.repository.AeadSettingsRepository
 import io.gromif.astracrypt.utils.io.Randomizer
 import io.gromif.crypto.tink.aead.AeadManager
 import io.gromif.crypto.tink.keyset.KeysetTemplates
@@ -16,7 +16,7 @@ import java.io.OutputStream
 class FileHandler(
     private val aeadManager: AeadManager,
     private val associatedDataManager: AssociatedDataManager,
-    private val settingsRepository: SettingsRepository,
+    private val aeadSettingsRepository: AeadSettingsRepository,
     private val randomizer: Randomizer,
     filesDir: File
 ) {
@@ -91,14 +91,14 @@ class FileHandler(
     } else inputStream
 
     private suspend fun getFileStreamingAead(aeadIndex: Int? = null): StreamingAead? {
-        val aeadIndex = aeadIndex ?: settingsRepository.getAeadInfo().fileMode.id
+        val aeadIndex = aeadIndex ?: aeadSettingsRepository.getAeadInfo().fileMode.id
         return KeysetTemplates.Stream.entries.getOrNull(aeadIndex)?.let {
             aeadManager.streamingAead(tag = TAG_KEYSET_FILE, keyParams = it.params)
         }
     }
 
     private suspend fun getPreviewStreamingAead(): StreamingAead? {
-        val aeadIndex = settingsRepository.getAeadInfo().previewMode.id
+        val aeadIndex = aeadSettingsRepository.getAeadInfo().previewMode.id
         return KeysetTemplates.Stream.entries.getOrNull(aeadIndex)?.let {
             getPreviewStreamingAead(parameters = it.params)
         }

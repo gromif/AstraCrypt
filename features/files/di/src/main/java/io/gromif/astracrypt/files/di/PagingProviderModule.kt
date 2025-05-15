@@ -12,8 +12,8 @@ import io.gromif.astracrypt.files.data.provider.PagingProviderImpl
 import io.gromif.astracrypt.files.data.util.AeadHandler
 import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.domain.provider.PagingProvider
+import io.gromif.astracrypt.files.domain.repository.AeadSettingsRepository
 import io.gromif.astracrypt.files.domain.repository.Repository
-import io.gromif.astracrypt.files.domain.repository.SettingsRepository
 
 @Module
 @InstallIn(ViewModelComponent::class)
@@ -25,7 +25,7 @@ internal object PagingProviderModule {
         filesDao: FilesDao,
         aeadHandler: AeadHandler,
         repository: Repository,
-        settingsRepository: SettingsRepository
+        aeadSettingsRepository: AeadSettingsRepository
     ): PagingProvider<PagingData<Item>> = PagingProviderImpl(
         filesDao = filesDao,
         pagingConfig = PagingConfig(
@@ -34,7 +34,7 @@ internal object PagingProviderModule {
         ),
         aeadHandler = aeadHandler,
         repository = repository,
-        settingsRepository = settingsRepository
+        aeadSettingsRepository = aeadSettingsRepository
     )
 
 }
