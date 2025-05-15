@@ -11,6 +11,8 @@ internal fun Project.configureDetekt() {
     pluginManager.apply(Plugins.DETEKT)
 
     extensions.configure<DetektExtension> {
+        buildUponDefaultConfig = true
+        config.setFrom(rootProject.file("config/detekt.yml"))
         autoCorrect = true
     }
 
