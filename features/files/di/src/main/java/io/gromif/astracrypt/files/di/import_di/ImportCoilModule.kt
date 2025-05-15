@@ -15,7 +15,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-internal object CoilModule {
+internal object ImportCoilModule {
 
     @ImportImageRequestBuilder
     @Singleton
