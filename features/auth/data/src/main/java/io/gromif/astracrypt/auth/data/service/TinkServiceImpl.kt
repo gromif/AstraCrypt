@@ -12,7 +12,7 @@ class TinkServiceImpl(
     private val keysetManager: KeysetManager,
     private val associatedDataManager: AssociatedDataManager,
     private val getGlobalAssociatedDataPrf: GetGlobalAssociatedDataPrf
-): TinkService {
+) : TinkService {
     private var prfSetInterface: PrfSet? = null
     private suspend fun getPrfSet(): PrfSet {
         return prfSetInterface ?: getGlobalAssociatedDataPrf().also { prfSetInterface = it }
@@ -53,7 +53,6 @@ class TinkServiceImpl(
     override suspend fun computeSkinHash(data: String): ByteArray {
         return calculateHash(string = data, outputLength = 18)
     }
-
 }
 
 private const val KEYSET_TAG_HASH = "<-q<@1sN"
