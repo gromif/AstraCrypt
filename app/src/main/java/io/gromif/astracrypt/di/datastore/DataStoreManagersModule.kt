@@ -18,5 +18,4 @@ object DataStoreManagersModule {
     fun provideAppearanceManager(
         dataStore: DataStore<Preferences>
     ) = AppearanceManager(dataStore = dataStore)
-
 }

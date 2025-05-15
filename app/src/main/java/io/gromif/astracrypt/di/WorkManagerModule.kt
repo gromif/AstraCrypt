@@ -18,5 +18,4 @@ object WorkManagerModule {
     fun provideWorkManager(
         @ApplicationContext context: Context
     ): WorkManager = WorkManager.Companion.getInstance(context)
-
 }

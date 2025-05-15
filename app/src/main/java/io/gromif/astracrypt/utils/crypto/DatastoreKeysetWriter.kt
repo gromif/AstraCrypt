@@ -14,5 +14,4 @@ class DatastoreKeysetWriter(
         val prefsKey = stringPreferencesKey(name = key)
         dataStore.edit { it[prefsKey] = keyset }
     }
-
 }
