@@ -17,7 +17,7 @@ import androidx.work.workDataOf
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import io.gromif.astracrypt.files.domain.model.AeadInfo
-import io.gromif.astracrypt.files.domain.usecase.SetDatabaseAeadUseCase
+import io.gromif.astracrypt.files.domain.usecase.aead.SetDatabaseAeadUseCase
 import io.gromif.astracrypt.files.dto.AeadInfoDto
 import io.gromif.astracrypt.files.dto.toDto
 import io.gromif.astracrypt.resources.R

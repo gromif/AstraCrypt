@@ -4,8 +4,8 @@ import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
 import io.gromif.astracrypt.files.domain.model.AeadInfo
 import io.gromif.astracrypt.files.domain.model.AeadMode
-import io.gromif.astracrypt.files.domain.usecase.GetAeadInfoFlowUseCase
-import io.gromif.astracrypt.files.domain.usecase.SetAeadInfoUseCase
+import io.gromif.astracrypt.files.domain.usecase.aead.GetAeadInfoFlowUseCase
+import io.gromif.astracrypt.files.domain.usecase.aead.SetAeadInfoUseCase
 import io.mockk.coJustRun
 import io.mockk.coVerify
 import io.mockk.every

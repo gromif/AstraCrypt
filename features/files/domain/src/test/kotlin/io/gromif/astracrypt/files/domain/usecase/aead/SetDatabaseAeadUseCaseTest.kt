@@ -1,4 +1,4 @@
-package io.gromif.astracrypt.files.domain.usecase
+package io.gromif.astracrypt.files.domain.usecase.aead
 
 import io.gromif.astracrypt.files.domain.model.AeadInfo
 import io.gromif.astracrypt.files.domain.repository.Repository
@@ -18,7 +18,8 @@ class SetDatabaseAeadUseCaseTest {
 
     @Before
     fun setUp() {
-        setDatabaseAeadUseCase = SetDatabaseAeadUseCase(setAeadInfoUseCase, getAeadInfoUseCase, repository)
+        setDatabaseAeadUseCase =
+            SetDatabaseAeadUseCase(setAeadInfoUseCase, getAeadInfoUseCase, repository)
     }
 
     @Test

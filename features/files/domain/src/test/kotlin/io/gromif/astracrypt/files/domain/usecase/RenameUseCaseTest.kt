@@ -2,6 +2,7 @@ package io.gromif.astracrypt.files.domain.usecase
 
 import io.gromif.astracrypt.files.domain.model.AeadInfo
 import io.gromif.astracrypt.files.domain.repository.Repository
+import io.gromif.astracrypt.files.domain.usecase.aead.GetAeadInfoUseCase
 import io.gromif.astracrypt.files.domain.validation.ValidationException
 import io.mockk.coEvery
 import io.mockk.coVerify
