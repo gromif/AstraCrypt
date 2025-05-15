@@ -1,4 +1,4 @@
-package io.gromif.astracrypt.files.di
+package io.gromif.astracrypt.files.di.repository
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -10,6 +10,7 @@ import io.gromif.astracrypt.files.data.dto.AeadInfoDto
 import io.gromif.astracrypt.files.data.repository.SettingsRepositoryImpl
 import io.gromif.astracrypt.files.data.util.mapper.AeadInfoDtoMapper
 import io.gromif.astracrypt.files.data.util.mapper.AeadInfoMapper
+import io.gromif.astracrypt.files.di.FilesDataStore
 import io.gromif.astracrypt.files.domain.model.AeadInfo
 import io.gromif.astracrypt.files.domain.repository.SettingsRepository
 import io.gromif.astracrypt.utils.Mapper

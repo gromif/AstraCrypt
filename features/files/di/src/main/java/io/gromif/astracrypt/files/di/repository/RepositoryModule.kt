@@ -1,4 +1,4 @@
-package io.gromif.astracrypt.files.di
+package io.gromif.astracrypt.files.di.repository
 
 import dagger.Module
 import dagger.Provides
