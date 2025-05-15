@@ -8,5 +8,4 @@ interface ItemExporter {
     )
 
     suspend fun internalExport(id: Long): String
-
 }
