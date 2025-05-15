@@ -1,6 +1,8 @@
 package io.gromif.astracrypt.files.domain.usecase
 
 import io.gromif.astracrypt.files.domain.model.AeadInfo
+import io.gromif.astracrypt.files.domain.model.ImportItemDto
+import io.gromif.astracrypt.files.domain.model.ItemState
 import io.gromif.astracrypt.files.domain.model.ItemType
 import io.gromif.astracrypt.files.domain.repository.Repository
 import io.gromif.astracrypt.files.domain.validation.ValidationException
@@ -28,18 +30,25 @@ class CreateFolderUseCaseTest {
         val parentId: Long? = 42
         val mockAeadInfo = mockk<AeadInfo>()
 
+        val targetImportItemDto = ImportItemDto(
+            parent = parentId ?: 0,
+            name = trimmedName,
+            itemState = ItemState.Default,
+            itemType = ItemType.Folder,
+            file = null,
+            preview = null,
+            flags = null,
+            creationTime = 0,
+            size = 0
+        )
+
         coEvery { getAeadInfoUseCase() } returns mockAeadInfo
 
         runBlocking { createFolderUseCase(rawName, parentId) }
 
         coVerify(exactly = 1) { getAeadInfoUseCase() }
         coVerify(exactly = 1) {
-            repository.insert(
-                aeadInfo = mockAeadInfo,
-                name = trimmedName,
-                parent = 42,
-                itemType = ItemType.Folder
-            )
+            repository.insert(aeadInfo = mockAeadInfo, importItemDto = targetImportItemDto)
         }
     }
 
@@ -48,17 +57,24 @@ class CreateFolderUseCaseTest {
         val name = "Test Folder"
         val mockAeadInfo = mockk<AeadInfo>()
 
+        val targetImportItemDto = ImportItemDto(
+            parent = 0,
+            name = name,
+            itemState = ItemState.Default,
+            itemType = ItemType.Folder,
+            file = null,
+            preview = null,
+            flags = null,
+            creationTime = 0,
+            size = 0
+        )
+
         coEvery { getAeadInfoUseCase() } returns mockAeadInfo
 
         runBlocking { createFolderUseCase(name, null) }
 
         coVerify(exactly = 1) {
-            repository.insert(
-                aeadInfo = mockAeadInfo,
-                name = name,
-                parent = 0,
-                itemType = ItemType.Folder
-            )
+            repository.insert(aeadInfo = mockAeadInfo, importItemDto = targetImportItemDto)
         }
     }
 
@@ -72,5 +88,4 @@ class CreateFolderUseCaseTest {
 
         runBlocking { createFolderUseCase(name, parentId) }
     }
-
 }

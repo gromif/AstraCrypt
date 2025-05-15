@@ -20,5 +20,4 @@ class MoveUseCaseTest {
     fun shouldThrowException_whenIdListIsEmpty() {
         runBlocking { moveUseCase(emptyList(), 0) }
     }
-
 }

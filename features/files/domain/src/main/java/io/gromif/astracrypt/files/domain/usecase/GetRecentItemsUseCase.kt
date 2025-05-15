@@ -17,5 +17,4 @@ class GetRecentItemsUseCase(
             repository.getRecentFilesList(it)
         }
     }
-
 }

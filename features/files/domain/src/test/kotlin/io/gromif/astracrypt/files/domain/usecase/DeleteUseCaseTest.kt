@@ -21,5 +21,4 @@ class DeleteUseCaseTest {
     fun shouldThrowException_whenIdListIsEmpty() {
         runBlocking { deleteUseCase(emptyList()) }
     }
-
 }

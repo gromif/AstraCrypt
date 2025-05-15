@@ -11,5 +11,4 @@ class GetAeadInfoFlowUseCase(
     operator fun invoke(): Flow<AeadInfo> {
         return settingsRepository.getAeadInfoFlow()
     }
-
 }

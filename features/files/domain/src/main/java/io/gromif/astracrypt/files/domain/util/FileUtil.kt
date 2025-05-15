@@ -21,5 +21,4 @@ interface FileUtil {
     fun delete()
 
     fun parseType(): ItemType
-
 }

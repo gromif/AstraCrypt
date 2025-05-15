@@ -15,5 +15,4 @@ class MoveUseCase(
             parentId = parentId
         )
     }
-
 }

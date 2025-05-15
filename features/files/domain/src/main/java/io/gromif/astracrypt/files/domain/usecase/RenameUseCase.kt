@@ -15,5 +15,4 @@ class RenameUseCase(
         val aeadInfo = getAeadInfoUseCase()
         repository.rename(aeadInfo, id, targetName)
     }
-
 }

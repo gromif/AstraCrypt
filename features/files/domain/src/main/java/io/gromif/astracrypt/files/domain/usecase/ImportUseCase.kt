@@ -1,6 +1,7 @@
 package io.gromif.astracrypt.files.domain.usecase
 
 import io.gromif.astracrypt.files.domain.model.AeadInfo
+import io.gromif.astracrypt.files.domain.model.ImportItemDto
 import io.gromif.astracrypt.files.domain.model.ItemState
 import io.gromif.astracrypt.files.domain.repository.Repository
 import io.gromif.astracrypt.files.domain.util.FileUtil
@@ -30,9 +31,7 @@ class ImportUseCase(
             launch {
                 try {
                     processFile(aeadInfo, it, parentId, saveSource)
-                } catch (_: Exception) {
-                    // TODO: Implement proper error detection
-                }
+                } catch (_: Exception) {}
             }
         }
     }
@@ -60,8 +59,7 @@ class ImportUseCase(
         val flags = flagsUtil.getFlags(type, path)
 
         if (!saveSource) fileUtil.delete()
-        repository.insert(
-            aeadInfo = aeadInfo,
+        val importItemDto = ImportItemDto(
             parent = parentId,
             name = name,
             itemState = ItemState.Default,
@@ -72,6 +70,6 @@ class ImportUseCase(
             creationTime = creationTime,
             size = size
         )
+        repository.insert(aeadInfo = aeadInfo, importItemDto = importItemDto)
     }
-
 }

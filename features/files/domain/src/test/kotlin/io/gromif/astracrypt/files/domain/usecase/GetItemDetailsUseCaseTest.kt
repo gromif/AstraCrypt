@@ -82,5 +82,4 @@ class GetItemDetailsUseCaseTest {
 
         runBlocking { getItemDetailsUseCase(id) }
     }
-
 }

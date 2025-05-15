@@ -51,5 +51,4 @@ class RenameUseCaseTest {
 
         runBlocking { renameUseCase(id, name) }
     }
-
 }

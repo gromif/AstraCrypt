@@ -10,5 +10,4 @@ class SetListViewModeUseCase(
     suspend operator fun invoke(viewMode: ViewMode) {
         settingsRepository.setViewMode(viewMode)
     }
-
 }

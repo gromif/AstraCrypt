@@ -9,5 +9,4 @@ class PrivateExportUseCase(
     suspend operator fun invoke(id: Long): String? {
         return repository.exportPrivately(id)
     }
-
 }

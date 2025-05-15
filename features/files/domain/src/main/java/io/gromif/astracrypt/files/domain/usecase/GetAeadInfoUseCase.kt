@@ -10,5 +10,4 @@ class GetAeadInfoUseCase(
     suspend operator fun invoke(): AeadInfo {
         return settingsRepository.getAeadInfo()
     }
-
 }

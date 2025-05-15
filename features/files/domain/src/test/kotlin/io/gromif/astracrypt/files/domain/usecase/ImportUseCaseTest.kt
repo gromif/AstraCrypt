@@ -1,6 +1,7 @@
 package io.gromif.astracrypt.files.domain.usecase
 
 import io.gromif.astracrypt.files.domain.model.AeadInfo
+import io.gromif.astracrypt.files.domain.model.ImportItemDto
 import io.gromif.astracrypt.files.domain.model.ItemState
 import io.gromif.astracrypt.files.domain.model.ItemType
 import io.gromif.astracrypt.files.domain.repository.Repository
@@ -48,6 +49,18 @@ class ImportUseCaseTest {
         val creationTime = 123456789L
         val fileSize = 1024L
 
+        val targetImportItemDto = ImportItemDto(
+            parent = parentId,
+            name = fileName,
+            itemState = ItemState.Default,
+            itemType = fileType,
+            file = filePath,
+            preview = previewPath,
+            flags = flags,
+            creationTime = creationTime,
+            size = fileSize
+        )
+
         coEvery { getAeadInfoUseCase() } returns mockkAeadInfo
         coEvery { fileUtilFactory.create() } returns fileUtil
         coEvery { fileUtil.open(any()) } returns true
@@ -69,7 +82,8 @@ class ImportUseCaseTest {
         coVerify(exactly = pathList.size) { fileUtil.write() }
         coVerify(exactly = pathList.size) { previewUtil.getPreviewPath(fileType, any()) }
         coVerify(exactly = pathList.size) { flagsUtil.getFlags(fileType, any()) }
-        coVerify(exactly = pathList.size) { repository.insert(mockkAeadInfo, parentId, fileName, ItemState.Default, fileType, filePath, previewPath, flags, creationTime, fileSize) }
+
+        coVerify(exactly = pathList.size) { repository.insert(mockkAeadInfo, targetImportItemDto) }
         verify(exactly = pathList.size) { fileUtil.delete() }
     }
 
@@ -133,5 +147,4 @@ class ImportUseCaseTest {
 
         importUseCase(pathList, parentId, saveSource)
     }*/
-
 }

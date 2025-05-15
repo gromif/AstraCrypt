@@ -20,5 +20,4 @@ class ExportUseCaseTest {
     fun shouldThrowException_whenIdListIsEmpty() {
         runBlocking { exportUseCase(emptyList(), "") }
     }
-
 }

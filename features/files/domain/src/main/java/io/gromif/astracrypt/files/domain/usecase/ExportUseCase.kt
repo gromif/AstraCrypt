@@ -18,5 +18,4 @@ class ExportUseCase(
             outputPath = outputPath
         )
     }
-
 }

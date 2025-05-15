@@ -40,5 +40,4 @@ class SetDatabaseAeadUseCaseTest {
             setAeadInfoUseCase(targetAeadInfo)
         }
     }
-
 }

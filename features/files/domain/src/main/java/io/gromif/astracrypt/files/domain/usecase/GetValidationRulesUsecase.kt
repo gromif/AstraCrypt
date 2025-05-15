@@ -8,5 +8,4 @@ class GetValidationRulesUsecase {
     operator fun invoke(): ValidationRulesDto {
         return ValidationRules.DTO_DEFAULT
     }
-
 }

@@ -11,5 +11,4 @@ class GetListViewModeUseCase(
     operator fun invoke(): Flow<ViewMode> {
         return settingsRepository.getViewModeFlow()
     }
-
 }
