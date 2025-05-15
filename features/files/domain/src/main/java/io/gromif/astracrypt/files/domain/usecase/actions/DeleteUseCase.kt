@@ -1,21 +1,23 @@
-package io.gromif.astracrypt.files.domain.usecase
+package io.gromif.astracrypt.files.domain.usecase.actions
 
-import io.gromif.astracrypt.files.domain.model.ItemState
 import io.gromif.astracrypt.files.domain.repository.Repository
+import io.gromif.astracrypt.files.domain.usecase.aead.GetAeadInfoUseCase
 import io.gromif.astracrypt.files.domain.validation.ValidationException
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
-class SetStateUseCase(
+class DeleteUseCase(
+    private val getAeadInfoUseCase: GetAeadInfoUseCase,
     private val repository: Repository,
 ) {
 
-    suspend operator fun invoke(ids: List<Long>, itemState: ItemState) = coroutineScope {
+    suspend operator fun invoke(ids: List<Long>) = coroutineScope {
         require(ids.isNotEmpty()) { throw ValidationException.EmptyIdListException() }
 
+        val aeadInfo = getAeadInfoUseCase()
         ids.forEach {
             launch {
-                repository.setState(it, itemState)
+                repository.delete(aeadInfo, it)
             }
         }
     }

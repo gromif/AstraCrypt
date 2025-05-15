@@ -1,4 +1,4 @@
-package io.gromif.astracrypt.files.domain.usecase
+package io.gromif.astracrypt.files.domain.usecase.actions
 
 import io.gromif.astracrypt.files.domain.repository.Repository
 import io.gromif.astracrypt.files.domain.usecase.aead.GetAeadInfoUseCase
