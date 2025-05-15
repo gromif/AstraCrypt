@@ -1,12 +1,12 @@
 package io.gromif.astracrypt.files.domain.usecase
 
-import io.gromif.astracrypt.files.domain.repository.Repository
+import io.gromif.astracrypt.files.domain.repository.ItemExporter
 
 class PrivateExportUseCase(
-    private val repository: Repository
+    private val itemExporter: ItemExporter
 ) {
 
     suspend operator fun invoke(id: Long): String? {
-        return repository.exportPrivately(id)
+        return itemExporter.internalExport(id)
     }
 }

@@ -4,7 +4,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import io.gromif.astracrypt.files.domain.repository.Repository
+import io.gromif.astracrypt.files.domain.repository.ItemExporter
 import io.gromif.astracrypt.files.domain.usecase.ExportUseCase
 import io.gromif.astracrypt.files.domain.usecase.PrivateExportUseCase
 
@@ -13,11 +13,11 @@ import io.gromif.astracrypt.files.domain.usecase.PrivateExportUseCase
 internal object UsecaseModule {
 
     @Provides
-    fun provideExportUseCase(repository: Repository): ExportUseCase =
-        ExportUseCase(repository = repository)
+    fun provideExportUseCase(itemExporter: ItemExporter): ExportUseCase =
+        ExportUseCase(itemExporter = itemExporter)
 
     @Provides
-    fun providePrivateExportUseCase(repository: Repository): PrivateExportUseCase =
-        PrivateExportUseCase(repository = repository)
+    fun providePrivateExportUseCase(itemExporter: ItemExporter): PrivateExportUseCase =
+        PrivateExportUseCase(itemExporter = itemExporter)
 
 }

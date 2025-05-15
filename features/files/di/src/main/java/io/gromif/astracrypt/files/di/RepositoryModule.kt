@@ -1,6 +1,5 @@
 package io.gromif.astracrypt.files.di
 
-import android.net.Uri
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -11,7 +10,6 @@ import io.gromif.astracrypt.files.data.db.FilesEntity
 import io.gromif.astracrypt.files.data.db.tuples.DetailsTuple
 import io.gromif.astracrypt.files.data.repository.RepositoryImpl
 import io.gromif.astracrypt.files.data.util.AeadHandler
-import io.gromif.astracrypt.files.data.util.ExportUtil
 import io.gromif.astracrypt.files.data.util.FileHandler
 import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.domain.model.ItemDetails
@@ -29,10 +27,8 @@ internal object RepositoryModule {
         filesDao: FilesDao,
         aeadHandler: AeadHandler,
         fileHandler: FileHandler,
-        exportUtil: ExportUtil,
         itemMapper: Mapper<FilesEntity, Item>,
         itemDetailsMapper: Mapper<DetailsTuple, ItemDetails>,
-        uriMapper: Mapper<String, Uri>,
     ): Repository = RepositoryImpl(
         filesDao = filesDao,
         filesDaoAeadAdapterFactory = FilesDaoAeadAdapter.Factory(
@@ -41,9 +37,7 @@ internal object RepositoryModule {
         ),
         fileHandler = fileHandler,
         itemMapper = itemMapper,
-        exportUtil = exportUtil,
         itemDetailsMapper = itemDetailsMapper,
-        uriMapper = uriMapper
     )
 
 }

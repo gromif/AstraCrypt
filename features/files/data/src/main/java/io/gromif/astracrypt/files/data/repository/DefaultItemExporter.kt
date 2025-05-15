@@ -1,39 +1,44 @@
-package io.gromif.astracrypt.files.data.util
+package io.gromif.astracrypt.files.data.repository
 
 import android.content.Context
 import android.net.Uri
 import androidx.documentfile.provider.DocumentFile
 import io.gromif.astracrypt.files.data.db.FilesDao
+import io.gromif.astracrypt.files.data.util.FileHandler
 import io.gromif.astracrypt.files.domain.model.ItemType
+import io.gromif.astracrypt.files.domain.repository.ItemExporter
 import io.gromif.astracrypt.utils.Mapper
 import io.gromif.astracrypt.utils.io.FilesUtil
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.isActive
 
-class ExportUtil(
+class DefaultItemExporter(
     private val context: Context,
     private val filesDao: FilesDao,
     private val fileHandler: FileHandler,
     private val filesUtil: FilesUtil,
-    private val stringToUriMapper: Mapper<Uri, String>
-) : AutoCloseable {
-    private var outputDocumentFile: DocumentFile? = null
+    private val uriToString: Mapper<Uri, String>,
+    private val stringToUri: Mapper<String, Uri>
+): ItemExporter {
 
-    fun createDocumentFile(uri: Uri): Boolean {
-        outputDocumentFile = DocumentFile.fromTreeUri(context, uri)
-        return outputDocumentFile != null
-    }
+    override suspend fun externalExport(
+        idList: List<Long>,
+        outputPath: String
+    ) = coroutineScope {
+        val outputFolder = DocumentFile.fromTreeUri(
+            /* context = */ context,
+            /* treeUri = */ stringToUri(outputPath)
+        )!!
 
-    suspend fun startExternally(idList: List<Long>) = coroutineScope {
-        val outputFolder = outputDocumentFile!!
         val folderMap = mutableMapOf<Long, DocumentFile>()
         idList.forEach { folderMap[it] = outputFolder }
-        val deque = ArrayDeque<Long>()
-        deque.addAll(idList)
+
+        val deque = ArrayDeque<Long>().apply { addAll(idList) }
         while (isActive && deque.isNotEmpty()) {
             val currentId = deque.removeFirst()
             val currentFolder = folderMap.remove(currentId) ?: continue
             val exportData = filesDao.getExportData(id = currentId)
+
             if (exportData.type == ItemType.Folder) {
                 val newFolder = currentFolder.createDirectory(exportData.name) ?: continue
                 val idList = filesDao.getIdList(parent = currentId)
@@ -51,7 +56,7 @@ class ExportUtil(
         }
     }
 
-    suspend fun startPrivately(id: Long): String? = coroutineScope {
+    override suspend fun internalExport(id: Long): String {
         val exportData = filesDao.getExportData(id)
         val exportFile = filesUtil.getExportedCacheFile(exportData.name)
         val outputUri = filesUtil.getExportedCacheFileUri(file = exportFile)
@@ -60,12 +65,7 @@ class ExportUtil(
             relativePath = exportData.file!!,
             aeadIndex = exportData.fileAead
         )
-        if (!isActive) exportFile.delete() else return@coroutineScope stringToUriMapper(outputUri)
-        null
-    }
-
-    override fun close() {
-        outputDocumentFile = null
+        return uriToString(outputUri)
     }
 
 }

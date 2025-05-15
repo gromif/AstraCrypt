@@ -1,10 +1,10 @@
 package io.gromif.astracrypt.files.domain.usecase
 
-import io.gromif.astracrypt.files.domain.repository.Repository
+import io.gromif.astracrypt.files.domain.repository.ItemExporter
 import io.gromif.astracrypt.files.domain.validation.ValidationException
 
 class ExportUseCase(
-    private val repository: Repository
+    private val itemExporter: ItemExporter
 ) {
 
     suspend operator fun invoke(
@@ -13,7 +13,7 @@ class ExportUseCase(
     ) {
         require(idList.isNotEmpty()) { throw ValidationException.EmptyIdListException() }
 
-        repository.export(
+        itemExporter.externalExport(
             idList = idList,
             outputPath = outputPath
         )

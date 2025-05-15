@@ -30,10 +30,6 @@ interface Repository {
 
     suspend fun setState(id: Long, state: ItemState)
 
-    suspend fun export(idList: List<Long>, outputPath: String)
-
-    suspend fun exportPrivately(id: Long): String?
-
     suspend fun getRecentFilesList(aeadInfo: AeadInfo): Flow<List<Item>>
 
     suspend fun getItemDetails(aeadInfo: AeadInfo, id: Long): ItemDetails
