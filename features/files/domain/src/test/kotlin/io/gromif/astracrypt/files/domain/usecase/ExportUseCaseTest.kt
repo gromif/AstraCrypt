@@ -8,16 +8,16 @@ import org.junit.Before
 import org.junit.Test
 
 class ExportUseCaseTest {
-    private lateinit var exportUseCase: ExportUseCase
+    private lateinit var externalExportUseCase: ExternalExportUseCase
     private val itemExporter: ItemExporter = mockk(relaxed = true)
 
     @Before
     fun setUp() {
-        exportUseCase = ExportUseCase(itemExporter)
+        externalExportUseCase = ExternalExportUseCase(itemExporter)
     }
 
     @Test(expected = ValidationException.EmptyIdListException::class)
     fun shouldThrowException_whenIdListIsEmpty() {
-        runBlocking { exportUseCase(emptyList(), "") }
+        runBlocking { externalExportUseCase(emptyList(), "") }
     }
 }

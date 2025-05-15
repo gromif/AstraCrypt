@@ -3,7 +3,7 @@ package io.gromif.astracrypt.files.domain.usecase
 import io.gromif.astracrypt.files.domain.repository.ItemExporter
 import io.gromif.astracrypt.files.domain.validation.ValidationException
 
-class ExportUseCase(
+class ExternalExportUseCase(
     private val itemExporter: ItemExporter
 ) {
 
