@@ -19,5 +19,4 @@ internal object MapperModule {
 
     @Provides
     fun provideAuthMapper(): Mapper<AuthDto, Auth> = AuthMapper()
-
 }
