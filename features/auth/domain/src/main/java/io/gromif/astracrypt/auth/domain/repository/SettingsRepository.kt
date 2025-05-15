@@ -19,5 +19,4 @@ interface SettingsRepository {
 
     suspend fun setAead(aeadMode: AeadMode)
     fun getAeadFlow(): Flow<AeadMode>
-
 }

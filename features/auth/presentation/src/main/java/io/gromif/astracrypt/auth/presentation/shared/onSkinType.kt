@@ -8,5 +8,4 @@ import androidx.compose.runtime.Immutable
 interface onSkinType {
 
     fun onCalculator()
-
 }

@@ -36,5 +36,4 @@ class AuthCalculatorSkinViewModelTest {
 
         coVerify(exactly = 1) { verifySkinUseCaseMock(targetData) }
     }
-
 }

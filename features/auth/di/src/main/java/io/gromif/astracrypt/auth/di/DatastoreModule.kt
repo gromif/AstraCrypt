@@ -26,13 +26,12 @@ internal object DatastoreModule {
     @Provides
     fun provideDataStore(
         @ApplicationContext context: Context
-    ):  DataStore<Preferences> = PreferenceDataStoreFactory.create(
+    ): DataStore<Preferences> = PreferenceDataStoreFactory.create(
         corruptionHandler = ReplaceFileCorruptionHandler(
             produceNewData = { emptyPreferences() }
         ),
         produceFile = { context.preferencesDataStoreFile(AUTH) }
     )
-
 }
 
 @Qualifier

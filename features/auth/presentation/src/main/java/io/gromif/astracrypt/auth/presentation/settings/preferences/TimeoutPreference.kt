@@ -41,7 +41,7 @@ private fun getTimeoutOptionsList(): List<String> {
 
     return remember {
         Timeout.entries.map {
-            when(it) {
+            when (it) {
                 Timeout.IMMEDIATELY -> context.getString(R.string.immediately)
                 Timeout.NEVER -> context.getString(R.string.never)
                 else -> context.resources.getQuantityString(R.plurals.plural_seconds, it.seconds, it.seconds)

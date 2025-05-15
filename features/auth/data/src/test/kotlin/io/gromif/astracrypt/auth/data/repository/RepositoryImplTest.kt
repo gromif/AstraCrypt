@@ -118,5 +118,4 @@ class RepositoryImplTest {
     fun tearDown() {
         confirmVerified(tinkServiceMock)
     }
-
 }

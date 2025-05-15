@@ -8,6 +8,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.flow.updateAndGet
 
+private const val SECOND_MILLIS = 1000
+
 class RepositoryImpl(
     private val tinkService: TinkService
 ) : Repository {
@@ -22,7 +24,7 @@ class RepositoryImpl(
         lastActiveTime: Long,
         timeout: Timeout
     ) {
-        val timeoutMillis = timeout.seconds * 1000
+        val timeoutMillis = timeout.seconds * SECOND_MILLIS
 
         if (timeout != Timeout.NEVER) {
             val verificationResult = currentTime - lastActiveTime < timeoutMillis
@@ -52,5 +54,4 @@ class RepositoryImpl(
             secretHash.contentEquals(savedHash)
         }
     }
-
 }

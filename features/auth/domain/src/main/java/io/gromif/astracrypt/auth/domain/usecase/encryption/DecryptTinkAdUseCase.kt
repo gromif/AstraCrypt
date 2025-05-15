@@ -9,5 +9,4 @@ class DecryptTinkAdUseCase(
     suspend operator fun invoke(data: String) {
         tinkService.decryptAssociatedData(password = data)
     }
-
 }

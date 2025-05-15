@@ -21,5 +21,4 @@ class CheckAuthTimeoutUseCase(
             timeout = timeout
         )
     }
-
 }

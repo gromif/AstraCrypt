@@ -15,5 +15,4 @@ class VerifyAuthUseCase(
             secret = password
         )
     }
-
 }

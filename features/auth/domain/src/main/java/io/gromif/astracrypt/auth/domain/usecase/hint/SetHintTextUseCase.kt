@@ -12,5 +12,4 @@ class SetHintTextUseCase(
         val auth = getAuthUseCase()
         setAuthUseCase(auth.copy(hintText = text))
     }
-
 }

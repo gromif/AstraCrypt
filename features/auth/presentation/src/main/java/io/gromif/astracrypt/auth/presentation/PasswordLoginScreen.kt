@@ -45,7 +45,9 @@ fun PasswordLoginScreen(
     FlowObserver(onFabClick) {
         if (vm.verifyPassword(password = password)) {
             if (auth.bindTinkAd) vm.decryptTinkAd(password = password)
-        } else Toast.makeText(context, R.string.t_invalidPass, Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(context, R.string.t_invalidPass, Toast.LENGTH_SHORT).show()
+        }
     }
 
     Screen(
@@ -89,8 +91,10 @@ private fun Screen(
                 label = TextFields.label(text = stringResource(R.string.password)),
                 visualTransformation = TextFields.passwordVisualTransform(state = passwordVisible)
             )
-            if (isHintVisible) OutlinedButton(onClick = onShowHint) {
-                Text(text = stringResource(id = R.string.hint))
+            if (isHintVisible) {
+                OutlinedButton(onClick = onShowHint) {
+                    Text(text = stringResource(id = R.string.hint))
+                }
             }
         }
     }

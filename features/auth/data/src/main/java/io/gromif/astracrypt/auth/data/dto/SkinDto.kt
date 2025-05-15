@@ -10,6 +10,5 @@ sealed class SkinDto {
     data class Calculator(
         @SerialName("a")
         val combinationHash: String
-    ): SkinDto()
-
+    ) : SkinDto()
 }

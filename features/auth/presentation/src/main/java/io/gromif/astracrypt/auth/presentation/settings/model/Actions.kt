@@ -33,5 +33,4 @@ internal interface Actions {
             override fun setHintText(text: String) {}
         }
     }
-
 }

@@ -12,7 +12,7 @@ internal class PasswordLoginViewModel @Inject constructor(
     private val verifyAuthUseCase: VerifyAuthUseCase,
     private val decryptTinkAdUseCase: DecryptTinkAdUseCase,
     getAuthFlowUseCase: GetAuthFlowUseCase
-): ViewModel() {
+) : ViewModel() {
     val authState = getAuthFlowUseCase()
 
     suspend fun verifyPassword(password: String): Boolean {
@@ -22,5 +22,4 @@ internal class PasswordLoginViewModel @Inject constructor(
     suspend fun decryptTinkAd(password: String) {
         decryptTinkAdUseCase(password)
     }
-
 }

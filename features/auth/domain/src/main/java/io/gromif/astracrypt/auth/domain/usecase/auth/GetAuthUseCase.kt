@@ -10,5 +10,4 @@ class GetAuthUseCase(
     suspend operator fun invoke(): Auth {
         return settingsRepository.getAuth()
     }
-
 }

@@ -11,5 +11,4 @@ class GetAeadModeFlowUseCase(
     operator fun invoke(): Flow<AeadMode> {
         return settingsRepository.getAeadFlow()
     }
-
 }

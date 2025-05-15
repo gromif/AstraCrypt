@@ -32,9 +32,11 @@ internal fun CamouflagePreference(
         options = options,
         skinIndex = currentOptionIndex
     ) {
-        if (it != currentOptionIndex) when (it) {
-            0 -> onDisableCamouflage()
-            1 -> dialogCalculatorCombination = true
+        if (it != currentOptionIndex) {
+            when (it) {
+                0 -> onDisableCamouflage()
+                1 -> dialogCalculatorCombination = true
+            }
         }
     }
 
@@ -76,7 +78,7 @@ private fun dialogCalculatorCombination(
     params = DialogsCore.TextFields.Params(
         label = stringResource(id = R.string.settings_camouflage_numberCombination),
         selectAllText = true,
-        //maxLength = CalculatorManager.MAX_NUM_LENGTH,
+        // maxLength = CalculatorManager.MAX_NUM_LENGTH,
         singleLine = true,
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword)
     ),

@@ -1,4 +1,4 @@
-package io.gromif.astracrypt.auth.di
+package io.gromif.astracrypt.auth.di.repository
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -7,12 +7,10 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import io.gromif.astracrypt.auth.data.dto.AuthDto
-import io.gromif.astracrypt.auth.data.repository.RepositoryImpl
 import io.gromif.astracrypt.auth.data.repository.SettingsRepositoryImpl
+import io.gromif.astracrypt.auth.di.AuthDataStore
 import io.gromif.astracrypt.auth.domain.model.Auth
-import io.gromif.astracrypt.auth.domain.repository.Repository
 import io.gromif.astracrypt.auth.domain.repository.SettingsRepository
-import io.gromif.astracrypt.auth.domain.service.TinkService
 import io.gromif.astracrypt.utils.Mapper
 import io.gromif.crypto.tink.core.encoders.Base64Encoder
 import io.gromif.crypto.tink.keyset.KeysetManager
@@ -21,7 +19,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-internal object RepositoryModule {
+internal object SettingsRepositoryModule {
 
     @Singleton
     @Provides
@@ -39,14 +37,6 @@ internal object RepositoryModule {
         tinkDataStoreParams = TinkDataStore.Params(purpose = "auth"),
         authMapper = authMapper,
         authDtoMapper = authDtoMapper
-    )
-
-    @Singleton
-    @Provides
-    fun provideRepository(
-        tinkService: TinkService
-    ): Repository = RepositoryImpl(
-        tinkService = tinkService
     )
 
 }
