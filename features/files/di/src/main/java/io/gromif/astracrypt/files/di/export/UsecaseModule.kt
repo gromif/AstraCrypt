@@ -6,7 +6,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import io.gromif.astracrypt.files.domain.repository.ItemExporter
 import io.gromif.astracrypt.files.domain.usecase.ExternalExportUseCase
-import io.gromif.astracrypt.files.domain.usecase.PrivateExportUseCase
+import io.gromif.astracrypt.files.domain.usecase.InternalExportUseCase
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -17,7 +17,7 @@ internal object UsecaseModule {
         ExternalExportUseCase(itemExporter = itemExporter)
 
     @Provides
-    fun providePrivateExportUseCase(itemExporter: ItemExporter) =
-        PrivateExportUseCase(itemExporter = itemExporter)
+    fun provideInternalExportUseCase(itemExporter: ItemExporter) =
+        InternalExportUseCase(itemExporter = itemExporter)
 
 }

@@ -12,7 +12,7 @@ import androidx.work.WorkManager
 import androidx.work.workDataOf
 import contract.secureContent.SecureContentContract
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.gromif.astracrypt.files.domain.usecase.PrivateExportUseCase
+import io.gromif.astracrypt.files.domain.usecase.InternalExportUseCase
 import io.gromif.astracrypt.files.export.model.ExportStateHolder
 import io.gromif.astracrypt.files.work.ExportFilesWorker
 import io.gromif.astracrypt.files.work.ExportFilesWorker.Args
@@ -35,7 +35,7 @@ internal class ExportScreenViewModel @Inject constructor(
     private val secureContentContract: SecureContentContract,
     private val filesUtil: FilesUtil,
     private val workManager: WorkManager,
-    private val privateExportUseCase: PrivateExportUseCase,
+    private val internalExportUseCase: InternalExportUseCase,
     private val uriMapper: Mapper<String, Uri>
 ) : ViewModel() {
     private val workUUID = UUID.randomUUID()
@@ -47,7 +47,7 @@ internal class ExportScreenViewModel @Inject constructor(
     var uiState by mutableStateOf(ExportStateHolder())
 
     fun export(id: Long) = viewModelScope.launch(defaultDispatcher) {
-        privateExportUseCase(id)?.let {
+        internalExportUseCase(id)?.let {
             internalExportUri = uriMapper(it)
         }
         uiState = uiState.copy(isDone = true)

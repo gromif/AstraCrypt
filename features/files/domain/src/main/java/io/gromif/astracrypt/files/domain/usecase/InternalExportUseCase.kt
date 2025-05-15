@@ -2,7 +2,7 @@ package io.gromif.astracrypt.files.domain.usecase
 
 import io.gromif.astracrypt.files.domain.repository.ItemExporter
 
-class PrivateExportUseCase(
+class InternalExportUseCase(
     private val itemExporter: ItemExporter
 ) {
 
