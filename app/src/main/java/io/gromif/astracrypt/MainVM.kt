@@ -33,7 +33,9 @@ class MainVM @Inject constructor(
     val searchQueryState = state.getStateFlow(SEARCH_QUERY, "")
 
     val secureContentStateFlow = secureContentContract.getContractModeFlow().stateIn(
-        viewModelScope, SharingStarted.WhileSubscribed(), SecureContentContract.Mode.ENABLED
+        viewModelScope,
+        SharingStarted.WhileSubscribed(),
+        SecureContentContract.Mode.ENABLED
     )
     val authStateFlow = authContract.getAuthStateFlow()
 
