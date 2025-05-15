@@ -21,10 +21,15 @@ internal fun dialogCheckPassword(
     return dialogPassword {
         scope.launch {
             val passwordValidationResult = onVerify(it)
-            if (passwordValidationResult) onMatch(it)
-            else Toast.makeText(
-                context, context.getString(R.string.t_invalidPass), Toast.LENGTH_SHORT
-            ).show()
+            if (passwordValidationResult) {
+                onMatch(it)
+            } else {
+                Toast.makeText(
+                    context,
+                    context.getString(R.string.t_invalidPass),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 }
@@ -34,7 +39,7 @@ internal fun dialogPassword(onResult: (String) -> Unit) = DialogsCore.TextFields
     title = stringResource(id = R.string.password),
     params = DialogsCore.TextFields.Params(
         label = stringResource(id = R.string.password),
-        //maxLength = AppConfig.AUTH_PASSWORD_MAX_LENGTH,
+        // maxLength = AppConfig.AUTH_PASSWORD_MAX_LENGTH,
         singleLine = true
     ),
     onResult = onResult

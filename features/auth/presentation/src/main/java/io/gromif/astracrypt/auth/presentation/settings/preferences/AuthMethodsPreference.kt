@@ -33,9 +33,11 @@ internal fun AuthMethodsPreference(
     var dialogPasswordSetup by dialogPassword(onResult = setPassword)
     var dialogAuthMethodsState by DialogsCore.Selectable.radio(
         onSelected = {
-            if (it != currentOptionIndex) when (it) {
-                0 -> dialogPasswordCheckDisableAuth = true
-                1 -> dialogPasswordSetup = true
+            if (it != currentOptionIndex) {
+                when (it) {
+                    0 -> dialogPasswordCheckDisableAuth = true
+                    1 -> dialogPasswordSetup = true
+                }
             }
         },
         title = stringResource(id = R.string.settings_authentication),

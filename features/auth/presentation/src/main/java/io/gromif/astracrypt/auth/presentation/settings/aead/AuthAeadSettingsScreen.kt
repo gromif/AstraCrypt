@@ -27,7 +27,9 @@ fun AuthAeadSettingsScreen() {
     val settingsOptionIndex = remember(aeadMode) {
         if (aeadMode is AeadMode.Template) {
             aeadTemplateList.indexOfFirst { it.id == aeadMode.id } + 1
-        } else 0
+        } else {
+            0
+        }
     }
 
     AeadSettingsScreen(
@@ -37,7 +39,9 @@ fun AuthAeadSettingsScreen() {
         ),
         actions = object : AeadSettingsScreenActions {
             override fun onSettingsChanged(optionIndex: Int) {
-                val newAeadMode = if (optionIndex == 0) AeadMode.None else {
+                val newAeadMode = if (optionIndex == 0) {
+                    AeadMode.None
+                } else {
                     val template = aeadTemplateList[optionIndex - 1]
                     AeadMode.Template(id = template.id)
                 }

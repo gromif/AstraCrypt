@@ -192,5 +192,4 @@ class AuthSettingsViewModelTest {
             setHintTextUseCaseMock(text = targetText)
         }
     }
-
 }

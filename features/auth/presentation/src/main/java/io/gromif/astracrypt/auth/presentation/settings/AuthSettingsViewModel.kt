@@ -21,6 +21,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
+@Suppress("detekt:LongParameterList")
 @HiltViewModel
 internal class AuthSettingsViewModel @Inject constructor(
     @IoDispatcher
@@ -58,7 +59,8 @@ internal class AuthSettingsViewModel @Inject constructor(
     }
 
     fun setBindAssociatedData(
-        state: Boolean, password: String
+        state: Boolean,
+        password: String
     ) = viewModelScope.launch(defaultDispatcher) {
         setBindTinkAdUseCase(bind = state, password = password)
     }
@@ -82,5 +84,4 @@ internal class AuthSettingsViewModel @Inject constructor(
     fun setTimeout(timeout: Timeout) = viewModelScope.launch(defaultDispatcher) {
         setTimeoutUseCase(timeout)
     }
-
 }

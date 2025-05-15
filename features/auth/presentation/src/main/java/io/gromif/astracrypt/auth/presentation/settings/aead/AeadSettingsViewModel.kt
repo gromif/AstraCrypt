@@ -19,13 +19,14 @@ internal class AeadSettingsViewModel @Inject constructor(
     private val defaultDispatcher: CoroutineDispatcher,
     private val setAeadModeUseCase: SetAeadModeUseCase,
     getAeadModeFlowUseCase: GetAeadModeFlowUseCase
-): ViewModel() {
+) : ViewModel() {
     val aeadModeFlow = getAeadModeFlowUseCase().stateIn(
-        viewModelScope, SharingStarted.WhileSubscribed(), AeadMode.None
+        viewModelScope,
+        SharingStarted.WhileSubscribed(),
+        AeadMode.None
     )
 
     fun setSettingsAead(aeadMode: AeadMode) = viewModelScope.launch(defaultDispatcher) {
         setAeadModeUseCase(aeadMode)
     }
-
 }

@@ -22,16 +22,25 @@ fun AuthScreen(
     val vm: AuthViewModel = hiltViewModel()
     val authStateFlow by vm.authStateFlow.collectAsStateWithLifecycle(null)
     val authStateValue = authStateFlow ?: return
-    val (authType, authState, skinType, skinState) = authStateValue
 
-    if (skinType != null && !skinState) when (skinType) {
-        SkinType.Calculator -> AuthCalculatorSkin(
-            modifier = modifier
-        ).also { onSkinType.onCalculator() }
-    } else if (authType != null && !authState) when (authType) {
-        AuthType.PASSWORD -> PasswordLoginScreen(
-            modifier = modifier,
-            onFabClick = onFabClick
-        ).also { onAuthType.onPassword() }
+    val skinType = authStateValue.skinType
+    val skinState = authStateValue.skinState
+
+    if (skinType != null && !skinState) {
+        when (skinType) {
+            SkinType.Calculator -> AuthCalculatorSkin(modifier = modifier)
+                .also { onSkinType.onCalculator() }
+        }
+        return
+    }
+
+    val authType = authStateValue.authType
+    val authState = authStateValue.authState
+
+    if (authType != null && !authState) {
+        when (authType) {
+            AuthType.PASSWORD -> PasswordLoginScreen(modifier = modifier, onFabClick = onFabClick)
+                .also { onAuthType.onPassword() }
+        }
     }
 }
