@@ -22,7 +22,7 @@ internal object UsecaseModule {
         fileUtilFactory: FileUtil.Factory,
         previewUtil: PreviewUtil,
         flagsUtil: FlagsUtil
-    ): ImportUseCase = ImportUseCase(
+    ) = ImportUseCase(
         getAeadInfoUseCase = getAeadInfoUseCase,
         repository = repository,
         fileUtilFactory = fileUtilFactory,

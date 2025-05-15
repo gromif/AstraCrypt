@@ -13,11 +13,11 @@ import io.gromif.astracrypt.files.domain.usecase.PrivateExportUseCase
 internal object UsecaseModule {
 
     @Provides
-    fun provideExportUseCase(itemExporter: ItemExporter): ExportUseCase =
+    fun provideExportUseCase(itemExporter: ItemExporter) =
         ExportUseCase(itemExporter = itemExporter)
 
     @Provides
-    fun providePrivateExportUseCase(itemExporter: ItemExporter): PrivateExportUseCase =
+    fun providePrivateExportUseCase(itemExporter: ItemExporter) =
         PrivateExportUseCase(itemExporter = itemExporter)
 
 }

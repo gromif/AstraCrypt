@@ -26,13 +26,13 @@ import io.gromif.astracrypt.files.domain.usecase.SetStateUseCase
 internal object UsecaseModule {
 
     @Provides
-    fun provideGetValidationRulesUsecase(): GetValidationRulesUsecase = GetValidationRulesUsecase()
+    fun provideGetValidationRulesUsecase() = GetValidationRulesUsecase()
 
     @Provides
     fun provideCreateFolderUseCase(
         getAeadInfoUseCase: GetAeadInfoUseCase,
         repository: Repository,
-    ): CreateFolderUseCase = CreateFolderUseCase(getAeadInfoUseCase, repository)
+    ) = CreateFolderUseCase(getAeadInfoUseCase, repository)
 
     @Provides
     fun provideDeleteUseCase(
@@ -41,11 +41,11 @@ internal object UsecaseModule {
     ) = DeleteUseCase(getAeadInfoUseCase, repository)
 
     @Provides
-    fun provideGetListViewModeUseCase(settingsRepository: SettingsRepository): GetListViewModeUseCase =
+    fun provideGetListViewModeUseCase(settingsRepository: SettingsRepository) =
         GetListViewModeUseCase(settingsRepository = settingsRepository)
 
     @Provides
-    fun provideSetListViewModeUseCase(settingsRepository: SettingsRepository): SetListViewModeUseCase =
+    fun provideSetListViewModeUseCase(settingsRepository: SettingsRepository) =
         SetListViewModeUseCase(settingsRepository = settingsRepository)
 
     @Provides
@@ -58,8 +58,7 @@ internal object UsecaseModule {
     ) = RenameUseCase(getAeadInfoUseCase, repository)
 
     @Provides
-    fun provideSetStarredUseCase(repository: Repository): SetStateUseCase =
-        SetStateUseCase(repository = repository)
+    fun provideSetStarredUseCase(repository: Repository) = SetStateUseCase(repository = repository)
 
     @Provides
     fun provideGetRecentItemsUseCase(
@@ -74,7 +73,7 @@ internal object UsecaseModule {
     fun provideGetItemDetailsUseCase(
         getAeadInfoUseCase: GetAeadInfoUseCase,
         repository: Repository,
-    ): GetItemDetailsUseCase = GetItemDetailsUseCase(getAeadInfoUseCase, repository)
+    ) = GetItemDetailsUseCase(getAeadInfoUseCase, repository)
 
     @Provides
     fun provideSetDatabaseAeadUseCase(
@@ -89,18 +88,15 @@ internal object UsecaseModule {
 
 
     @Provides
-    fun provideGetAeadInfoFlowUseCase(
-        settingsRepository: SettingsRepository,
-    ): GetAeadInfoFlowUseCase = GetAeadInfoFlowUseCase(settingsRepository)
+    fun provideGetAeadInfoFlowUseCase(settingsRepository: SettingsRepository) =
+        GetAeadInfoFlowUseCase(settingsRepository)
 
     @Provides
-    fun provideGetAeadInfoUseCase(
-        settingsRepository: SettingsRepository,
-    ): GetAeadInfoUseCase = GetAeadInfoUseCase(settingsRepository)
+    fun provideGetAeadInfoUseCase(settingsRepository: SettingsRepository) =
+        GetAeadInfoUseCase(settingsRepository)
 
     @Provides
-    fun provideSetAeadInfoUseCase(
-        settingsRepository: SettingsRepository,
-    ): SetAeadInfoUseCase = SetAeadInfoUseCase(settingsRepository)
+    fun provideSetAeadInfoUseCase(settingsRepository: SettingsRepository) =
+        SetAeadInfoUseCase(settingsRepository)
 
 }
