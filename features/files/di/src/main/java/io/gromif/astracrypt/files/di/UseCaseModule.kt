@@ -13,7 +13,7 @@ import io.gromif.astracrypt.files.domain.usecase.aead.GetAeadInfoUseCase
 
 @Module
 @InstallIn(SingletonComponent::class)
-internal object UsecaseModule {
+internal object UseCaseModule {
 
     @Provides
     fun provideGetValidationRulesUseCase() = GetValidationRulesUseCase()
