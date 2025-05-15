@@ -37,7 +37,7 @@ import javax.inject.Qualifier
 
 @Module
 @InstallIn(SingletonComponent::class)
-internal object UtilModule {
+internal object ImportUtilModule {
 
     @Provides
     fun provideFileHandler(
