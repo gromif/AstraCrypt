@@ -9,13 +9,13 @@ import io.gromif.astracrypt.files.domain.model.ItemState
 import io.gromif.astracrypt.files.domain.model.ValidationRulesDto
 import io.gromif.astracrypt.files.domain.model.ViewMode
 import io.gromif.astracrypt.files.domain.provider.PagingProvider
-import io.gromif.astracrypt.files.domain.usecase.GetListViewModeUseCase
 import io.gromif.astracrypt.files.domain.usecase.GetValidationRulesUsecase
 import io.gromif.astracrypt.files.domain.usecase.actions.CreateFolderUseCase
 import io.gromif.astracrypt.files.domain.usecase.actions.DeleteUseCase
 import io.gromif.astracrypt.files.domain.usecase.actions.MoveUseCase
 import io.gromif.astracrypt.files.domain.usecase.actions.RenameUseCase
 import io.gromif.astracrypt.files.domain.usecase.actions.SetStateUseCase
+import io.gromif.astracrypt.files.domain.usecase.preferences.GetListViewModeUseCase
 import io.gromif.astracrypt.utils.io.FilesUtil
 import io.gromif.astracrypt.utils.io.WorkerSerializer
 import io.mockk.coVerify

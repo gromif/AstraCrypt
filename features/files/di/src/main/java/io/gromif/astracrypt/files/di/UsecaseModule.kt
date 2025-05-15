@@ -5,12 +5,9 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import io.gromif.astracrypt.files.domain.repository.Repository
-import io.gromif.astracrypt.files.domain.repository.SettingsRepository
 import io.gromif.astracrypt.files.domain.usecase.GetItemDetailsUseCase
-import io.gromif.astracrypt.files.domain.usecase.GetListViewModeUseCase
 import io.gromif.astracrypt.files.domain.usecase.GetRecentItemsUseCase
 import io.gromif.astracrypt.files.domain.usecase.GetValidationRulesUsecase
-import io.gromif.astracrypt.files.domain.usecase.SetListViewModeUseCase
 import io.gromif.astracrypt.files.domain.usecase.aead.GetAeadInfoFlowUseCase
 import io.gromif.astracrypt.files.domain.usecase.aead.GetAeadInfoUseCase
 
@@ -20,14 +17,6 @@ internal object UsecaseModule {
 
     @Provides
     fun provideGetValidationRulesUsecase() = GetValidationRulesUsecase()
-
-    @Provides
-    fun provideGetListViewModeUseCase(settingsRepository: SettingsRepository) =
-        GetListViewModeUseCase(settingsRepository = settingsRepository)
-
-    @Provides
-    fun provideSetListViewModeUseCase(settingsRepository: SettingsRepository) =
-        SetListViewModeUseCase(settingsRepository = settingsRepository)
 
     @Provides
     fun provideGetRecentItemsUseCase(

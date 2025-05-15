@@ -1,8 +1,8 @@
 package io.gromif.astracrypt.files.settings
 
 import io.gromif.astracrypt.files.domain.model.ViewMode
-import io.gromif.astracrypt.files.domain.usecase.GetListViewModeUseCase
-import io.gromif.astracrypt.files.domain.usecase.SetListViewModeUseCase
+import io.gromif.astracrypt.files.domain.usecase.preferences.GetListViewModeUseCase
+import io.gromif.astracrypt.files.domain.usecase.preferences.SetListViewModeUseCase
 import io.mockk.coJustRun
 import io.mockk.coVerify
 import io.mockk.every

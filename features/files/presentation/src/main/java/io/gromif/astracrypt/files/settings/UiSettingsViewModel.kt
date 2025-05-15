@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.gromif.astracrypt.files.domain.model.ViewMode
-import io.gromif.astracrypt.files.domain.usecase.GetListViewModeUseCase
-import io.gromif.astracrypt.files.domain.usecase.SetListViewModeUseCase
+import io.gromif.astracrypt.files.domain.usecase.preferences.GetListViewModeUseCase
+import io.gromif.astracrypt.files.domain.usecase.preferences.SetListViewModeUseCase
 import io.gromif.astracrypt.utils.dispatchers.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.SharingStarted
