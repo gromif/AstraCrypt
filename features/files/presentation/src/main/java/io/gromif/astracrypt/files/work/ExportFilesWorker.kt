@@ -15,7 +15,7 @@ import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
-import io.gromif.astracrypt.files.domain.usecase.ExternalExportUseCase
+import io.gromif.astracrypt.files.domain.usecase.export.ExternalExportUseCase
 import io.gromif.astracrypt.resources.R
 import io.gromif.astracrypt.utils.Api
 import io.gromif.astracrypt.utils.dispatchers.IoDispatcher

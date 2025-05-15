@@ -1,4 +1,4 @@
-package io.gromif.astracrypt.files.domain.usecase
+package io.gromif.astracrypt.files.domain.usecase.export
 
 import io.gromif.astracrypt.files.domain.repository.ItemExporter
 

@@ -2,7 +2,7 @@ package io.gromif.astracrypt.files.export
 
 import android.net.Uri
 import androidx.work.WorkManager
-import io.gromif.astracrypt.files.domain.usecase.InternalExportUseCase
+import io.gromif.astracrypt.files.domain.usecase.export.InternalExportUseCase
 import io.gromif.astracrypt.utils.Mapper
 import io.gromif.astracrypt.utils.io.FilesUtil
 import io.mockk.coEvery

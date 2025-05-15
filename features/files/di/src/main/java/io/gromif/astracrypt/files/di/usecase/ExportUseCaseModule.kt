@@ -1,16 +1,16 @@
-package io.gromif.astracrypt.files.di.export
+package io.gromif.astracrypt.files.di.usecase
 
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import io.gromif.astracrypt.files.domain.repository.ItemExporter
-import io.gromif.astracrypt.files.domain.usecase.ExternalExportUseCase
-import io.gromif.astracrypt.files.domain.usecase.InternalExportUseCase
+import io.gromif.astracrypt.files.domain.usecase.export.ExternalExportUseCase
+import io.gromif.astracrypt.files.domain.usecase.export.InternalExportUseCase
 
 @Module
 @InstallIn(SingletonComponent::class)
-internal object UsecaseModule {
+internal object ExportUseCaseModule {
 
     @Provides
     fun provideExternalExportUseCase(itemExporter: ItemExporter) =

@@ -12,7 +12,7 @@ import androidx.work.WorkManager
 import androidx.work.workDataOf
 import contract.secureContent.SecureContentContract
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.gromif.astracrypt.files.domain.usecase.InternalExportUseCase
+import io.gromif.astracrypt.files.domain.usecase.export.InternalExportUseCase
 import io.gromif.astracrypt.files.export.model.ExportStateHolder
 import io.gromif.astracrypt.files.work.ExportFilesWorker
 import io.gromif.astracrypt.files.work.ExportFilesWorker.Args
