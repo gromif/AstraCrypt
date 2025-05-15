@@ -1,13 +1,13 @@
 package io.gromif.astracrypt.files.domain.usecase.aead
 
 import io.gromif.astracrypt.files.domain.model.AeadInfo
-import io.gromif.astracrypt.files.domain.repository.SettingsRepository
+import io.gromif.astracrypt.files.domain.repository.AeadSettingsRepository
 
 class GetAeadInfoUseCase(
-    private val settingsRepository: SettingsRepository,
+    private val aeadSettingsRepository: AeadSettingsRepository,
 ) {
 
     suspend operator fun invoke(): AeadInfo {
-        return settingsRepository.getAeadInfo()
+        return aeadSettingsRepository.getAeadInfo()
     }
 }

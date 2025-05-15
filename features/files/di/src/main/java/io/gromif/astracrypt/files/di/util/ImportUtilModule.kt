@@ -22,7 +22,7 @@ import io.gromif.astracrypt.files.data.util.FlagsUtilImpl
 import io.gromif.astracrypt.files.data.util.PreviewUtilImpl
 import io.gromif.astracrypt.files.di.coil.FilesImageLoader
 import io.gromif.astracrypt.files.di.coil.ImportImageRequestBuilder
-import io.gromif.astracrypt.files.domain.repository.SettingsRepository
+import io.gromif.astracrypt.files.domain.repository.AeadSettingsRepository
 import io.gromif.astracrypt.files.domain.util.FileUtil
 import io.gromif.astracrypt.files.domain.util.FlagsUtil
 import io.gromif.astracrypt.files.domain.util.PreviewUtil
@@ -44,12 +44,12 @@ internal object ImportUtilModule {
         @ApplicationContext context: Context,
         aeadManager: AeadManager,
         associatedDataManager: AssociatedDataManager,
-        settingsRepository: SettingsRepository,
+        aeadSettingsRepository: AeadSettingsRepository,
         randomizer: Randomizer
     ): FileHandler = FileHandler(
         aeadManager = aeadManager,
         associatedDataManager = associatedDataManager,
-        settingsRepository = settingsRepository,
+        aeadSettingsRepository = aeadSettingsRepository,
         randomizer = randomizer,
         filesDir = context.filesDir
     )

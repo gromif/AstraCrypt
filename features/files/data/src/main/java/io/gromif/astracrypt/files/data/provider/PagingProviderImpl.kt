@@ -14,8 +14,8 @@ import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.domain.model.ItemState
 import io.gromif.astracrypt.files.domain.model.ItemType
 import io.gromif.astracrypt.files.domain.provider.PagingProvider
+import io.gromif.astracrypt.files.domain.repository.AeadSettingsRepository
 import io.gromif.astracrypt.files.domain.repository.Repository
-import io.gromif.astracrypt.files.domain.repository.SettingsRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -28,7 +28,7 @@ class PagingProviderImpl(
     private val pagingConfig: PagingConfig,
     private val aeadHandler: AeadHandler,
     private val repository: Repository,
-    private val settingsRepository: SettingsRepository,
+    private val aeadSettingsRepository: AeadSettingsRepository,
 ) : PagingProvider<PagingData<Item>> {
     private var pagingSource: PagingSource<Int, PagerTuple>? = null
     private val searchQueryState = MutableStateFlow<String?>(null)
@@ -39,7 +39,7 @@ class PagingProviderImpl(
         parentIdState: StateFlow<Long>,
         isStarredMode: Boolean,
     ): Flow<PagingData<Item>> {
-        val aeadInfoFlow = settingsRepository.getAeadInfoFlow().onEach {
+        val aeadInfoFlow = aeadSettingsRepository.getAeadInfoFlow().onEach {
             sortingSecondType.emit(if (it.name) 6 else 1)
             invalidate()
         }
