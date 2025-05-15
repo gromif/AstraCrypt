@@ -20,7 +20,8 @@ import io.gromif.astracrypt.files.data.util.FileHandler
 import io.gromif.astracrypt.files.data.util.FileUtilFactoryImpl
 import io.gromif.astracrypt.files.data.util.FlagsUtilImpl
 import io.gromif.astracrypt.files.data.util.PreviewUtilImpl
-import io.gromif.astracrypt.files.di.FilesImageLoader
+import io.gromif.astracrypt.files.di.coil.FilesImageLoader
+import io.gromif.astracrypt.files.di.coil.ImportImageRequestBuilder
 import io.gromif.astracrypt.files.domain.repository.SettingsRepository
 import io.gromif.astracrypt.files.domain.util.FileUtil
 import io.gromif.astracrypt.files.domain.util.FlagsUtil

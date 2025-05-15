@@ -1,4 +1,4 @@
-package io.gromif.astracrypt.files.di.import_di
+package io.gromif.astracrypt.files.di.coil
 
 import android.content.Context
 import coil.request.CachePolicy

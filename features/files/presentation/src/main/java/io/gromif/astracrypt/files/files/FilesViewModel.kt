@@ -14,7 +14,7 @@ import androidx.work.WorkManager
 import androidx.work.workDataOf
 import coil.ImageLoader
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.gromif.astracrypt.files.di.FilesImageLoader
+import io.gromif.astracrypt.files.di.coil.FilesImageLoader
 import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.domain.model.ItemState
 import io.gromif.astracrypt.files.domain.model.ViewMode
