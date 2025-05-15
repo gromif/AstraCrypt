@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.unit.dp
-import contract.secure_content.SecureContentContract
+import contract.secureContent.SecureContentContract
 
 fun Modifier.secureContent(
     mode: SecureContentContract.Mode,

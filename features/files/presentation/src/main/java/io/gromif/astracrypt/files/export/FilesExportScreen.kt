@@ -8,7 +8,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import contract.secure_content.SecureContentContract
+import contract.secureContent.SecureContentContract
 import io.gromif.astracrypt.files.export.model.Params
 
 @Composable

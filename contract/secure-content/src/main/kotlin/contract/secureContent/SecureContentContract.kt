@@ -1,4 +1,4 @@
-package contract.secure_content
+package contract.secureContent
 
 import kotlinx.coroutines.flow.Flow
 
@@ -11,5 +11,4 @@ interface SecureContentContract {
         ENABLED,
         FORCE
     }
-
 }

@@ -10,7 +10,7 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.OutOfQuotaPolicy
 import androidx.work.WorkManager
 import androidx.work.workDataOf
-import contract.secure_content.SecureContentContract
+import contract.secureContent.SecureContentContract
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.gromif.astracrypt.files.domain.usecase.PrivateExportUseCase
 import io.gromif.astracrypt.files.export.model.ExportStateHolder

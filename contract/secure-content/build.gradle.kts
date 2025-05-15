@@ -4,5 +4,5 @@ plugins {
 }
 
 android {
-    namespace = "contract.secure_content"
+    namespace = "contract.secureContent"
 }
