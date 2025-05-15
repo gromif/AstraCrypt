@@ -7,7 +7,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import contract.auth.AuthContract
-import contract.secure_content.SecureContentContract
+import contract.secureContent.SecureContentContract
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.gromif.astracrypt.presentation.navigation.models.UiState
 import io.gromif.astracrypt.utils.AppearanceManager

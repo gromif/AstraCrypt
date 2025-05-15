@@ -1,6 +1,6 @@
 package io.gromif.secure_content.data
 
-import contract.secure_content.SecureContentContract
+import contract.secureContent.SecureContentContract
 import io.gromif.secure_content.data.mapper.toContractMode
 import io.gromif.secure_content.domain.SettingsRepository
 import kotlinx.coroutines.flow.Flow
