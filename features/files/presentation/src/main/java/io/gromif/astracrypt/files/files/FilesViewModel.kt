@@ -14,18 +14,18 @@ import androidx.work.WorkManager
 import androidx.work.workDataOf
 import coil.ImageLoader
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.gromif.astracrypt.files.di.FilesImageLoader
+import io.gromif.astracrypt.files.di.coil.FilesImageLoader
 import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.domain.model.ItemState
 import io.gromif.astracrypt.files.domain.model.ViewMode
 import io.gromif.astracrypt.files.domain.provider.PagingProvider
-import io.gromif.astracrypt.files.domain.usecase.CreateFolderUseCase
-import io.gromif.astracrypt.files.domain.usecase.DeleteUseCase
-import io.gromif.astracrypt.files.domain.usecase.GetListViewModeUseCase
-import io.gromif.astracrypt.files.domain.usecase.GetValidationRulesUsecase
-import io.gromif.astracrypt.files.domain.usecase.MoveUseCase
-import io.gromif.astracrypt.files.domain.usecase.RenameUseCase
-import io.gromif.astracrypt.files.domain.usecase.SetStateUseCase
+import io.gromif.astracrypt.files.domain.usecase.GetValidationRulesUseCase
+import io.gromif.astracrypt.files.domain.usecase.actions.CreateFolderUseCase
+import io.gromif.astracrypt.files.domain.usecase.actions.DeleteUseCase
+import io.gromif.astracrypt.files.domain.usecase.actions.MoveUseCase
+import io.gromif.astracrypt.files.domain.usecase.actions.RenameUseCase
+import io.gromif.astracrypt.files.domain.usecase.actions.SetStateUseCase
+import io.gromif.astracrypt.files.domain.usecase.preferences.GetListViewModeUseCase
 import io.gromif.astracrypt.files.files.model.RootInfo
 import io.gromif.astracrypt.files.work.ImportFilesWorker
 import io.gromif.astracrypt.utils.dispatchers.IoDispatcher
@@ -63,7 +63,7 @@ class FilesViewModel @Inject constructor(
     @FilesImageLoader
     val imageLoader: ImageLoader,
     getListViewModeUseCase: GetListViewModeUseCase,
-    getValidationRulesUsecase: GetValidationRulesUsecase,
+    getValidationRulesUsecase: GetValidationRulesUseCase,
 ) : ViewModel() {
     private val parentIdState = MutableStateFlow(0L)
     private val parentBackStackMutable = mutableStateListOf<RootInfo>()

@@ -15,7 +15,7 @@ import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
-import io.gromif.astracrypt.files.domain.usecase.ExportUseCase
+import io.gromif.astracrypt.files.domain.usecase.export.ExternalExportUseCase
 import io.gromif.astracrypt.resources.R
 import io.gromif.astracrypt.utils.Api
 import io.gromif.astracrypt.utils.dispatchers.IoDispatcher
@@ -30,7 +30,7 @@ class ExportFilesWorker @AssistedInject constructor(
     @IoDispatcher
     private val defaultDispatcher: CoroutineDispatcher,
     private val workManager: WorkManager,
-    private val exportUseCase: ExportUseCase
+    private val externalExportUseCase: ExternalExportUseCase
 ) : CoroutineWorker(context, params) {
 
     object Args {
@@ -42,7 +42,7 @@ class ExportFilesWorker @AssistedInject constructor(
         setForeground(getForegroundInfo())
         val uriTarget = inputData.getString(Args.URI_TARGET)!!
         val itemId = inputData.getLongArray(Args.ID_LIST)!!
-        exportUseCase(
+        externalExportUseCase(
             idList = itemId.toList(),
             outputPath = uriTarget
         )

@@ -13,5 +13,4 @@ internal object ValidationRules {
         maxNameLength = MAX_NAME_LENGTH,
         maxBackstackNameLength = MAX_BACKSTACK_NAME_LENGTH,
     )
-
 }

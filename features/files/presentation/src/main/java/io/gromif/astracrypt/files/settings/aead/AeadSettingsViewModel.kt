@@ -8,8 +8,8 @@ import androidx.work.WorkManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.gromif.astracrypt.files.domain.model.AeadInfo
 import io.gromif.astracrypt.files.domain.model.AeadMode
-import io.gromif.astracrypt.files.domain.usecase.GetAeadInfoFlowUseCase
-import io.gromif.astracrypt.files.domain.usecase.SetAeadInfoUseCase
+import io.gromif.astracrypt.files.domain.usecase.aead.GetAeadInfoFlowUseCase
+import io.gromif.astracrypt.files.domain.usecase.aead.SetAeadInfoUseCase
 import io.gromif.astracrypt.files.settings.aead.work.SetDatabaseAeadWorker
 import io.gromif.astracrypt.utils.dispatchers.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher

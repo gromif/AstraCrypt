@@ -10,11 +10,9 @@ interface SettingsRepository {
 
     suspend fun setViewMode(viewMode: ViewMode)
 
-
     fun getAeadInfoFlow(): Flow<AeadInfo>
 
     suspend fun getAeadInfo(): AeadInfo
 
     suspend fun setAeadInfo(aeadInfo: AeadInfo)
-
 }

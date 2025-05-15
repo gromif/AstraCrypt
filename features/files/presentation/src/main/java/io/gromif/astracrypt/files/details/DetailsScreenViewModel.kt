@@ -12,7 +12,7 @@ import io.gromif.astracrypt.files.details.parser.addAeadGroup
 import io.gromif.astracrypt.files.details.parser.addDetailsGroup
 import io.gromif.astracrypt.files.details.parser.addFlagsGroup
 import io.gromif.astracrypt.files.details.parser.addFolderGroup
-import io.gromif.astracrypt.files.di.FilesImageLoader
+import io.gromif.astracrypt.files.di.coil.FilesImageLoader
 import io.gromif.astracrypt.files.domain.model.ItemDetails
 import io.gromif.astracrypt.files.domain.model.ItemType
 import io.gromif.astracrypt.files.domain.usecase.GetItemDetailsUseCase

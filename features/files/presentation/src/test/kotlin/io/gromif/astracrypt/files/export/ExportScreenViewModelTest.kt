@@ -2,7 +2,7 @@ package io.gromif.astracrypt.files.export
 
 import android.net.Uri
 import androidx.work.WorkManager
-import io.gromif.astracrypt.files.domain.usecase.PrivateExportUseCase
+import io.gromif.astracrypt.files.domain.usecase.export.InternalExportUseCase
 import io.gromif.astracrypt.utils.Mapper
 import io.gromif.astracrypt.utils.io.FilesUtil
 import io.mockk.coEvery
@@ -26,7 +26,7 @@ class ExportScreenViewModelTest {
     private val defaultDispatcher: CoroutineDispatcher = UnconfinedTestDispatcher()
     private val filesUtil: FilesUtil = mockk()
     private val workManager: WorkManager = mockk()
-    private val privateExportUseCase: PrivateExportUseCase = mockk()
+    private val internalExportUseCase: InternalExportUseCase = mockk()
     private val uriMapper: Mapper<String, Uri> = mockk()
 
     @Before
@@ -36,7 +36,7 @@ class ExportScreenViewModelTest {
             secureContentContract = mockk(relaxed = true),
             filesUtil = filesUtil,
             workManager = workManager,
-            privateExportUseCase = privateExportUseCase,
+            internalExportUseCase = internalExportUseCase,
             uriMapper = uriMapper
         )
     }
@@ -46,11 +46,11 @@ class ExportScreenViewModelTest {
         val targetId: Long = 43
         val targetUiState = exportScreenViewModel.uiState.copy(isDone = true)
 
-        coEvery { privateExportUseCase(targetId) } returns "sample"
+        coEvery { internalExportUseCase(targetId) } returns "sample"
         every { uriMapper(any()) } returns Uri.EMPTY
         exportScreenViewModel.export(targetId)
 
-        coVerify(exactly = 1) { privateExportUseCase(targetId) }
+        coVerify(exactly = 1) { internalExportUseCase(targetId) }
         Assert.assertEquals(targetUiState, exportScreenViewModel.uiState)
     }
 

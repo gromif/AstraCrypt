@@ -8,5 +8,4 @@ interface PreviewUtil {
         type: ItemType,
         path: String
     ): String?
-
 }

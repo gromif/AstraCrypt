@@ -12,13 +12,12 @@ internal object NameValidator {
 
         val length = name.length
         val lengthRule = length >= ValidationRules.MIN_NAME_LENGTH &&
-                length <= ValidationRules.MAX_NAME_LENGTH
+            length <= ValidationRules.MAX_NAME_LENGTH
         require(lengthRule) {
             throw ValidationException.InvalidNameException(
                 "Name length must be between ${ValidationRules.MIN_NAME_LENGTH} " +
-                        "and ${ValidationRules.MAX_NAME_LENGTH}. Received length: $length."
+                    "and ${ValidationRules.MAX_NAME_LENGTH}. Received length: $length."
             )
         }
     }
-
 }

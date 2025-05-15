@@ -1,14 +1,13 @@
 package io.gromif.astracrypt.files.data.repository
 
-import android.net.Uri
 import io.gromif.astracrypt.files.data.db.FilesDao
 import io.gromif.astracrypt.files.data.db.FilesDaoAeadAdapter
 import io.gromif.astracrypt.files.data.db.FilesEntity
 import io.gromif.astracrypt.files.data.db.tuples.DetailsTuple
 import io.gromif.astracrypt.files.data.db.tuples.UpdateAeadTuple
-import io.gromif.astracrypt.files.data.util.ExportUtil
 import io.gromif.astracrypt.files.data.util.FileHandler
 import io.gromif.astracrypt.files.domain.model.AeadInfo
+import io.gromif.astracrypt.files.domain.model.ImportItemDto
 import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.domain.model.ItemDetails
 import io.gromif.astracrypt.files.domain.model.ItemState
@@ -27,10 +26,8 @@ class RepositoryImpl(
     private val filesDao: FilesDao,
     private val filesDaoAeadAdapterFactory: FilesDaoAeadAdapter.Factory,
     private val fileHandler: FileHandler,
-    private val exportUtil: ExportUtil,
     private val itemMapper: Mapper<FilesEntity, Item>,
     private val itemDetailsMapper: Mapper<DetailsTuple, ItemDetails>,
-    private val uriMapper: Mapper<String, Uri>
 ) : Repository {
     private val mutex = Mutex()
     private var cachedFilesDaoAeadAdapter: FilesDaoAeadAdapter? = null
@@ -66,29 +63,23 @@ class RepositoryImpl(
 
     override suspend fun insert(
         aeadInfo: AeadInfo,
-        parent: Long,
-        name: String,
-        itemState: ItemState,
-        itemType: ItemType,
-        file: String?,
-        preview: String?,
-        flags: String?,
-        creationTime: Long,
-        size: Long,
+        importItemDto: ImportItemDto
     ) {
-        val time = if (creationTime == 0L) System.currentTimeMillis() else creationTime
+        val time = if (importItemDto.creationTime == 0L) System.currentTimeMillis() else {
+            importItemDto.creationTime
+        }
         val filesEntity = FilesEntity(
-            parent = parent,
-            name = name,
-            state = itemState,
-            type = itemType,
-            file = file,
+            parent = importItemDto.parent,
+            name = importItemDto.name,
+            state = importItemDto.itemState,
+            type = importItemDto.itemType,
+            file = importItemDto.file,
             fileAead = aeadInfo.fileMode.id,
-            preview = preview,
+            preview = importItemDto.preview,
             previewAead = aeadInfo.previewMode.id,
-            flags = flags,
+            flags = importItemDto.flags,
             time = time,
-            size = size
+            size = importItemDto.size
         )
         getFilesDaoAead(aeadInfo).insert(filesEntity)
     }
@@ -120,19 +111,6 @@ class RepositoryImpl(
 
     override suspend fun setState(id: Long, state: ItemState) {
         filesDao.setStarred(id = id, state = state.ordinal)
-    }
-
-    override suspend fun export(idList: List<Long>, outputPath: String) {
-        val uri = uriMapper(outputPath)
-        if (exportUtil.createDocumentFile(uri)) exportUtil.use {
-            it.startExternally(idList = idList)
-        }
-    }
-
-    override suspend fun exportPrivately(id: Long): String? {
-        return exportUtil.use {
-            it.startPrivately(id)
-        }
     }
 
     override suspend fun getRecentFilesList(aeadInfo: AeadInfo): Flow<List<Item>> {

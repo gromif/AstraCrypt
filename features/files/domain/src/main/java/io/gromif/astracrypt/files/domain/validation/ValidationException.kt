@@ -9,5 +9,4 @@ internal sealed class ValidationException(message: String) : Exception(message) 
     class InvalidFileSizeException : ValidationException("File size cannot be negative.")
 
     class EmptyIdListException : ValidationException("Id list cannot be empty.")
-
 }

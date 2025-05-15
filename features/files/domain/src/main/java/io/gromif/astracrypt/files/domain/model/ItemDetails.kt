@@ -12,13 +12,12 @@ sealed class ItemDetails(
         val flags: FileFlags?,
         val size: Long,
         val creationTime: Long,
-    ): ItemDetails(itemName = name)
+    ) : ItemDetails(itemName = name)
 
     data class Folder(
         val name: String,
         val filesCount: Int,
         val foldersCount: Int,
         val creationTime: Long,
-    ): ItemDetails(itemName = name)
-
+    ) : ItemDetails(itemName = name)
 }
