@@ -8,10 +8,10 @@ import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.domain.model.ItemState
 import io.gromif.astracrypt.files.domain.model.ValidationRulesDto
 import io.gromif.astracrypt.files.domain.model.ViewMode
-import io.gromif.astracrypt.files.domain.repository.DataSource
 import io.gromif.astracrypt.files.domain.usecase.GetValidationRulesUseCase
 import io.gromif.astracrypt.files.domain.usecase.preferences.GetListViewModeUseCase
 import io.gromif.astracrypt.files.files.util.ActionUseCases
+import io.gromif.astracrypt.files.files.util.DataUseCases
 import io.gromif.astracrypt.utils.io.FilesUtil
 import io.gromif.astracrypt.utils.io.WorkerSerializer
 import io.mockk.coVerify
@@ -21,6 +21,7 @@ import io.mockk.every
 import io.mockk.mockk
 import io.mockk.spyk
 import io.mockk.verify
+import io.mockk.verifyAll
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
@@ -34,7 +35,7 @@ class FilesViewModelTest {
     private lateinit var vm: FilesViewModel
 
     private val state: SavedStateHandle = SavedStateHandle()
-    private val dataSource: DataSource<PagingData<Item>> = mockk(relaxed = true)
+    private val dataUseCases: DataUseCases<PagingData<Item>> = mockk(relaxed = true)
     private val actionUseCasesMock: ActionUseCases = mockk(relaxed = true)
     private val workManager: WorkManager = mockk()
     private val workerSerializer: WorkerSerializer = mockk()
@@ -53,13 +54,13 @@ class FilesViewModelTest {
             maxNameLength = 32,
             maxBackstackNameLength = 32
         )
-        every { dataSource.provide(any()) } returns flowOf<PagingData<Item>>(PagingData.empty())
-        every { dataSource.provide(any(), any()) } returns flowOf<PagingData<Item>>(PagingData.empty())
+        every { dataUseCases.getFilesDataFlow(any()) } returns flowOf(PagingData.empty<Item>())
+        every { dataUseCases.getStarredDataFlow(any()) } returns flowOf(PagingData.empty<Item>())
 
         vm = FilesViewModel(
             defaultDispatcher = testDispatcher,
             state = state,
-            dataSource = dataSource,
+            dataUseCases = dataUseCases,
             actionUseCases = actionUseCasesMock,
             workManager = workManager,
             workerSerializer = workerSerializer,
@@ -68,6 +69,11 @@ class FilesViewModelTest {
             getListViewModeUseCase = getListViewModeUseCase,
             getValidationRulesUsecase = getValidationRulesUseCase
         )
+
+        verifyAll {
+            dataUseCases.getFilesDataFlow(any())
+            dataUseCases.getStarredDataFlow(any())
+        }
     }
 
     @Test
@@ -75,7 +81,7 @@ class FilesViewModelTest {
         vm.openDirectory(1L, "Documents")
 
         assert(vm.parentBackStack.last().id == 1L)
-        verify { dataSource.invalidate() }
+        verify { dataUseCases.invalidateDataSourceUseCase() }
     }
 
     @Test
@@ -129,6 +135,6 @@ class FilesViewModelTest {
 
     @After
     fun tearDown() {
-        confirmVerified(actionUseCasesMock)
+        confirmVerified(actionUseCasesMock, dataUseCases)
     }
 }
