@@ -1,4 +1,4 @@
-package io.gromif.astracrypt.files.domain.provider
+package io.gromif.astracrypt.files.domain.repository
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow

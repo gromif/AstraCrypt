@@ -11,8 +11,8 @@ import io.gromif.astracrypt.files.data.db.FilesDao
 import io.gromif.astracrypt.files.data.provider.DataSourceImpl
 import io.gromif.astracrypt.files.data.util.AeadHandler
 import io.gromif.astracrypt.files.domain.model.Item
-import io.gromif.astracrypt.files.domain.provider.DataSource
 import io.gromif.astracrypt.files.domain.repository.AeadSettingsRepository
+import io.gromif.astracrypt.files.domain.repository.DataSource
 import io.gromif.astracrypt.files.domain.repository.Repository
 
 @Module
