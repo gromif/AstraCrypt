@@ -8,25 +8,25 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.scopes.ViewModelScoped
 import io.gromif.astracrypt.files.data.db.FilesDao
-import io.gromif.astracrypt.files.data.provider.PagingProviderImpl
+import io.gromif.astracrypt.files.data.provider.DataSourceImpl
 import io.gromif.astracrypt.files.data.util.AeadHandler
 import io.gromif.astracrypt.files.domain.model.Item
-import io.gromif.astracrypt.files.domain.provider.PagingProvider
+import io.gromif.astracrypt.files.domain.provider.DataSource
 import io.gromif.astracrypt.files.domain.repository.AeadSettingsRepository
 import io.gromif.astracrypt.files.domain.repository.Repository
 
 @Module
 @InstallIn(ViewModelComponent::class)
-internal object PagingProviderModule {
+internal object DataSourceModule {
 
     @ViewModelScoped
     @Provides
-    fun providePagingProvider(
+    fun provideDataSource(
         filesDao: FilesDao,
         aeadHandler: AeadHandler,
         repository: Repository,
         aeadSettingsRepository: AeadSettingsRepository
-    ): PagingProvider<PagingData<Item>> = PagingProviderImpl(
+    ): DataSource<PagingData<Item>> = DataSourceImpl(
         filesDao = filesDao,
         pagingConfig = PagingConfig(
             pageSize = 10,
