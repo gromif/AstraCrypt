@@ -47,7 +47,7 @@ private const val ROOT_CURRENT = "root_current"
 private const val ROOT_BACK_STACK = "root_back_stack"
 
 @HiltViewModel
-class FilesViewModel @Inject constructor(
+internal class FilesViewModel @Inject constructor(
     @IoDispatcher
     private val defaultDispatcher: CoroutineDispatcher,
     private val state: SavedStateHandle,
