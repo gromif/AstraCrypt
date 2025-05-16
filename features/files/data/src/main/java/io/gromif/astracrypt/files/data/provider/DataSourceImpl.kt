@@ -13,8 +13,8 @@ import io.gromif.astracrypt.files.domain.model.FileSource
 import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.domain.model.ItemState
 import io.gromif.astracrypt.files.domain.model.ItemType
-import io.gromif.astracrypt.files.domain.provider.PagingProvider
 import io.gromif.astracrypt.files.domain.repository.AeadSettingsRepository
+import io.gromif.astracrypt.files.domain.repository.DataSource
 import io.gromif.astracrypt.files.domain.repository.Repository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,13 +23,13 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 
-class PagingProviderImpl(
+class DataSourceImpl(
     private val filesDao: FilesDao,
     private val pagingConfig: PagingConfig,
     private val aeadHandler: AeadHandler,
     private val repository: Repository,
     private val aeadSettingsRepository: AeadSettingsRepository,
-) : PagingProvider<PagingData<Item>> {
+) : DataSource<PagingData<Item>> {
     private var pagingSource: PagingSource<Int, PagerTuple>? = null
     private val searchQueryState = MutableStateFlow<String?>(null)
     private val searchFolderIdState = MutableStateFlow<List<Long>>(emptyList())

@@ -18,7 +18,7 @@ import io.gromif.astracrypt.files.di.coil.FilesImageLoader
 import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.domain.model.ItemState
 import io.gromif.astracrypt.files.domain.model.ViewMode
-import io.gromif.astracrypt.files.domain.provider.PagingProvider
+import io.gromif.astracrypt.files.domain.repository.DataSource
 import io.gromif.astracrypt.files.domain.usecase.GetValidationRulesUseCase
 import io.gromif.astracrypt.files.domain.usecase.preferences.GetListViewModeUseCase
 import io.gromif.astracrypt.files.files.model.RootInfo
@@ -47,7 +47,7 @@ internal class FilesViewModel @Inject constructor(
     @IoDispatcher
     private val defaultDispatcher: CoroutineDispatcher,
     private val state: SavedStateHandle,
-    private val pagingProvider: PagingProvider<PagingData<Item>>,
+    private val dataSource: DataSource<PagingData<Item>>,
     private val actionUseCases: ActionUseCases,
     private val workManager: WorkManager,
     private val workerSerializer: WorkerSerializer,
@@ -64,8 +64,8 @@ internal class FilesViewModel @Inject constructor(
         get() = parentIdState.value
         set(value) = parentIdState.update { value }
 
-    val pagingFlow = pagingProvider.provide(parentIdState).cachedIn(viewModelScope)
-    val pagingStarredFlow = pagingProvider.provide(
+    val pagingFlow = dataSource.provide(parentIdState).cachedIn(viewModelScope)
+    val pagingStarredFlow = dataSource.provide(
         parentIdState = parentIdState,
         isStarredMode = true
     ).cachedIn(viewModelScope)
@@ -74,7 +74,7 @@ internal class FilesViewModel @Inject constructor(
     val viewModeState = getListViewModeUseCase()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), ViewMode.Grid)
 
-    suspend fun setSearchQuery(query: String) = pagingProvider.setSearchQuery(parentId, query)
+    suspend fun setSearchQuery(query: String) = dataSource.setSearchQuery(parentId, query)
 
     fun openDirectory(id: Long, name: String) = viewModelScope.launch(defaultDispatcher) {
         val maxLength = validationRules.maxBackstackNameLength
@@ -82,20 +82,20 @@ internal class FilesViewModel @Inject constructor(
         val rootInfo = RootInfo(id, newName)
         parentBackStackMutable.add(rootInfo)
         parentId = id
-        pagingProvider.invalidate()
+        dataSource.invalidate()
     }
 
     fun openDirectoryFromBackStack(index: Int?) = viewModelScope.launch(defaultDispatcher) {
         if (index == null) {
             parentBackStackMutable.clear()
             parentId = 0
-            pagingProvider.invalidate()
+            dataSource.invalidate()
         } else {
             val selectedNavigatorDir = parentBackStackMutable[index]
             if (parentId != selectedNavigatorDir.id) {
                 parentBackStackMutable.removeRange(index + 1, parentBackStackMutable.size)
                 parentId = parentBackStackMutable.last().id
-                pagingProvider.invalidate()
+                dataSource.invalidate()
             }
         }
     }
@@ -103,7 +103,7 @@ internal class FilesViewModel @Inject constructor(
     fun closeDirectory() {
         parentBackStackMutable.removeAt(parentBackStackMutable.lastIndex)
         parentId = parentBackStack.lastOrNull()?.id ?: 0L
-        pagingProvider.invalidate()
+        dataSource.invalidate()
     }
 
     fun createFolder(name: String) = viewModelScope.launch(defaultDispatcher) {

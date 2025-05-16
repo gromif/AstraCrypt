@@ -8,7 +8,7 @@ import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.domain.model.ItemState
 import io.gromif.astracrypt.files.domain.model.ValidationRulesDto
 import io.gromif.astracrypt.files.domain.model.ViewMode
-import io.gromif.astracrypt.files.domain.provider.PagingProvider
+import io.gromif.astracrypt.files.domain.repository.DataSource
 import io.gromif.astracrypt.files.domain.usecase.GetValidationRulesUseCase
 import io.gromif.astracrypt.files.domain.usecase.preferences.GetListViewModeUseCase
 import io.gromif.astracrypt.files.files.util.ActionUseCases
@@ -34,7 +34,7 @@ class FilesViewModelTest {
     private lateinit var vm: FilesViewModel
 
     private val state: SavedStateHandle = SavedStateHandle()
-    private val pagingProvider: PagingProvider<PagingData<Item>> = mockk(relaxed = true)
+    private val dataSource: DataSource<PagingData<Item>> = mockk(relaxed = true)
     private val actionUseCasesMock: ActionUseCases = mockk(relaxed = true)
     private val workManager: WorkManager = mockk()
     private val workerSerializer: WorkerSerializer = mockk()
@@ -53,13 +53,13 @@ class FilesViewModelTest {
             maxNameLength = 32,
             maxBackstackNameLength = 32
         )
-        every { pagingProvider.provide(any()) } returns flowOf<PagingData<Item>>(PagingData.empty())
-        every { pagingProvider.provide(any(), any()) } returns flowOf<PagingData<Item>>(PagingData.empty())
+        every { dataSource.provide(any()) } returns flowOf<PagingData<Item>>(PagingData.empty())
+        every { dataSource.provide(any(), any()) } returns flowOf<PagingData<Item>>(PagingData.empty())
 
         vm = FilesViewModel(
             defaultDispatcher = testDispatcher,
             state = state,
-            pagingProvider = pagingProvider,
+            dataSource = dataSource,
             actionUseCases = actionUseCasesMock,
             workManager = workManager,
             workerSerializer = workerSerializer,
@@ -75,7 +75,7 @@ class FilesViewModelTest {
         vm.openDirectory(1L, "Documents")
 
         assert(vm.parentBackStack.last().id == 1L)
-        verify { pagingProvider.invalidate() }
+        verify { dataSource.invalidate() }
     }
 
     @Test
