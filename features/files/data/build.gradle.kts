@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.astracrypt.android.room)
     alias(libs.plugins.astracrypt.android.paging)
     alias(libs.plugins.astracrypt.android.coil)
+    alias(libs.plugins.astracrypt.test.unit)
 }
 
 android {
