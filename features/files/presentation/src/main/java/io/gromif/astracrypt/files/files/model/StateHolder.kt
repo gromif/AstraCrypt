@@ -6,6 +6,7 @@ import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.paging.PagingData
 import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.domain.model.ViewMode
+import io.gromif.astracrypt.files.domain.repository.StorageNavigator
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
 
@@ -17,7 +18,5 @@ data class StateHolder(
     val viewMode: ViewMode = ViewMode.Grid,
     val pagingFlow: Flow<PagingData<Item>> = emptyFlow(),
     val multiselectStateList: SnapshotStateList<Long> = mutableStateListOf(),
-    val backStackList: List<RootInfo> = listOf(
-        RootInfo(name = "Root1"), RootInfo(name = "Root2"), RootInfo(name = "Root3")
-    )
+    val backStackList: List<StorageNavigator.Folder> = listOf()
 )

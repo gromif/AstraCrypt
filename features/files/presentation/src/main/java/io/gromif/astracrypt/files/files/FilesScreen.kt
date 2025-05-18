@@ -17,6 +17,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.gromif.astracrypt.files.domain.model.Item
+import io.gromif.astracrypt.files.domain.repository.StorageNavigator
 import io.gromif.astracrypt.files.files.model.ContextualAction
 import io.gromif.astracrypt.files.files.model.Mode
 import io.gromif.astracrypt.files.files.model.StateHolder
@@ -47,6 +48,7 @@ fun FilesScreen(
     val validationRules = vm.validationRules
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
+    val backStack by vm.navigationBackStackState.collectAsStateWithLifecycle()
     val viewMode by vm.viewModeState.collectAsStateWithLifecycle()
     val searchQuery by searchQueryState.collectAsStateWithLifecycle()
     var isSearching by rememberSaveable { mutableStateOf(false) }
@@ -54,7 +56,7 @@ fun FilesScreen(
         isSearching = searchQuery.isNotEmpty()
         vm.setSearchQuery(query = searchQuery)
     }
-    BackHandler(enabled = !isSearching && vm.parentBackStack.isNotEmpty()) {
+    BackHandler(enabled = !isSearching && backStack.isNotEmpty()) {
         vm.closeDirectory()
     }
 
@@ -82,18 +84,17 @@ fun FilesScreen(
     }
     BackHandler(enabled = mode is Mode.Multiselect, onBack = ::closeContextualToolbar)
 
-    val backStackList = vm.parentBackStack
-    val stateHolder = remember(isSearching, multiselectStateList, backStackList, viewMode) {
+    val stateHolder = remember(isSearching, multiselectStateList, backStack, viewMode) {
         StateHolder(
             isStarred = isStarred,
             isSearching = isSearching,
             mode = mode,
             viewMode = viewMode,
             pagingFlow = run {
-                if (isStarred && backStackList.isEmpty()) vm.pagingStarredFlow else vm.pagingFlow
+                if (isStarred && backStack.isEmpty()) vm.pagingStarredFlow else vm.pagingFlow
             },
             multiselectStateList = multiselectStateList,
-            backStackList = backStackList,
+            backStackList = backStack,
         )
     }
 
@@ -108,8 +109,13 @@ fun FilesScreen(
         navActions = navActions,
 
         actions = object : Actions {
-            override fun backStackClick(index: Int?) {
-                vm.openDirectoryFromBackStack(index)
+            override fun backStackClick(folder: StorageNavigator.Folder?) {
+                folder?.let {
+                    vm.openDirectory(
+                        id = it.id,
+                        name = it.name
+                    )
+                } ?: vm.openRootDirectory()
             }
 
             override fun click(item: Item) {

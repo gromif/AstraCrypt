@@ -12,6 +12,7 @@ import io.gromif.astracrypt.files.domain.usecase.GetValidationRulesUseCase
 import io.gromif.astracrypt.files.domain.usecase.preferences.GetListViewModeUseCase
 import io.gromif.astracrypt.files.files.util.ActionUseCases
 import io.gromif.astracrypt.files.files.util.DataUseCases
+import io.gromif.astracrypt.files.files.util.NavigatorUseCases
 import io.gromif.astracrypt.utils.io.FilesUtil
 import io.gromif.astracrypt.utils.io.WorkerSerializer
 import io.mockk.coVerify
@@ -36,6 +37,7 @@ class FilesViewModelTest {
 
     private val state: SavedStateHandle = SavedStateHandle()
     private val dataUseCases: DataUseCases<PagingData<Item>> = mockk(relaxed = true)
+    private val navigatorUseCasesMock: NavigatorUseCases<PagingData<Item>> = mockk(relaxed = true)
     private val actionUseCasesMock: ActionUseCases = mockk(relaxed = true)
     private val workManager: WorkManager = mockk()
     private val workerSerializer: WorkerSerializer = mockk()
@@ -54,13 +56,14 @@ class FilesViewModelTest {
             maxNameLength = 32,
             maxBackstackNameLength = 32
         )
-        every { dataUseCases.getFilesDataFlow(any()) } returns flowOf(PagingData.empty<Item>())
-        every { dataUseCases.getStarredDataFlow(any()) } returns flowOf(PagingData.empty<Item>())
+        every { dataUseCases.getFilesDataFlow() } returns flowOf(PagingData.empty<Item>())
+        every { dataUseCases.getStarredDataFlow() } returns flowOf(PagingData.empty<Item>())
 
         vm = FilesViewModel(
             defaultDispatcher = testDispatcher,
             state = state,
             dataUseCases = dataUseCases,
+            navigatorUseCases = navigatorUseCasesMock,
             actionUseCases = actionUseCasesMock,
             workManager = workManager,
             workerSerializer = workerSerializer,
@@ -71,27 +74,36 @@ class FilesViewModelTest {
         )
 
         verifyAll {
-            dataUseCases.getFilesDataFlow(any())
-            dataUseCases.getStarredDataFlow(any())
+            navigatorUseCasesMock.getNavBackStackFlowUseCase()
+            dataUseCases.getFilesDataFlow()
+            dataUseCases.getStarredDataFlow()
         }
     }
 
     @Test
-    fun `openDirectory updates state and triggers pagingProvider`() {
-        vm.openDirectory(1L, "Documents")
+    fun `openDirectory calls use case with correct parameters`() {
+        val targetId = 1L
+        val targetName = "New Folder"
 
-        assert(vm.parentBackStack.last().id == 1L)
-        verify { dataUseCases.invalidateDataSourceUseCase() }
+        vm.openDirectory(targetId, targetName)
+
+        verify { navigatorUseCasesMock.openNavFolderUseCase(targetId, targetName) }
+    }
+
+    @Test
+    fun `openRootDirectory calls use case with correct parameters`() {
+        vm.openRootDirectory()
+
+        verify { navigatorUseCasesMock.resetNavBackStackUseCase() }
     }
 
     @Test
     fun `createFolder calls use case with correct parameters`() {
         val targetName = "New Folder"
-        val targetRootId = 0L
 
         vm.createFolder(targetName)
 
-        coVerify(exactly = 1) { actionUseCasesMock.createFolderUseCase(targetName, targetRootId) }
+        coVerify(exactly = 1) { actionUseCasesMock.createFolderUseCase(targetName) }
     }
 
     @Test
@@ -109,7 +121,7 @@ class FilesViewModelTest {
 
         vm.move(ids)
 
-        coVerify(exactly = 1) { actionUseCasesMock.moveUseCase(ids, parentId = 0L) }
+        coVerify(exactly = 1) { actionUseCasesMock.moveUseCase(ids) }
     }
 
     @Test
@@ -135,6 +147,6 @@ class FilesViewModelTest {
 
     @After
     fun tearDown() {
-        confirmVerified(actionUseCasesMock, dataUseCases)
+        confirmVerified(actionUseCasesMock, dataUseCases, navigatorUseCasesMock)
     }
 }
