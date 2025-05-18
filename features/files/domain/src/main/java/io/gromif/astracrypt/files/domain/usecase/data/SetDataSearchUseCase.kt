@@ -6,11 +6,8 @@ class SetDataSearchUseCase<T>(
     private val dataSource: DataSource<T>
 ) {
 
-    suspend operator fun invoke(parentId: Long, query: String?) {
-        dataSource.setSearchQuery(
-            parentId = parentId,
-            query = query
-        )
+    suspend operator fun invoke(query: String?) {
+        dataSource.setSearchQuery(query = query)
     }
 
 }
