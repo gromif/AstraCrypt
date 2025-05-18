@@ -20,20 +20,15 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import io.gromif.astracrypt.files.files.model.RootInfo
+import io.gromif.astracrypt.files.domain.repository.StorageNavigator
 import io.gromif.astracrypt.resources.R
 import io.gromif.ui.compose.core.theme.spaces
 
 @Preview(showBackground = true)
 @Composable
 internal fun FilesBackStackList(
-    rootBackStack: List<RootInfo> = listOf(
-        RootInfo(name = "Root1"),
-        RootInfo(name = "Root2"),
-        RootInfo(name = "Root3"),
-        RootInfo(name = "Root4")
-    ),
-    onClick: (index: Int?) -> Unit = {},
+    rootBackStack: List<StorageNavigator.Folder> = listOf(),
+    onClick: (folder: StorageNavigator.Folder?) -> Unit = {},
 ) {
     val scrollState = rememberScrollState()
     LaunchedEffect(rootBackStack.size) {
@@ -47,13 +42,13 @@ internal fun FilesBackStackList(
         verticalAlignment = Alignment.CenterVertically
     ) {
         FilesBackStackListItem(title = stringResource(id = R.string.home)) { onClick(null) }
-        rootBackStack.forEachIndexed { i, it ->
+        rootBackStack.forEach {
             VerticalDivider(
                 modifier = Modifier
                     .width(2.dp)
                     .height(20.dp)
             )
-            FilesBackStackListItem(title = it.name) { onClick(i) }
+            FilesBackStackListItem(title = it.name) { onClick(it) }
         }
     }
 }

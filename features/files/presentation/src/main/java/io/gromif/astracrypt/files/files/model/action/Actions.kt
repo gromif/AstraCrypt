@@ -2,10 +2,11 @@ package io.gromif.astracrypt.files.files.model.action
 
 import android.net.Uri
 import io.gromif.astracrypt.files.domain.model.Item
+import io.gromif.astracrypt.files.domain.repository.StorageNavigator
 
 internal interface Actions {
 
-    fun backStackClick(index: Int?)
+    fun backStackClick(folder: StorageNavigator.Folder?)
     fun click(item: Item)
     fun longClick(id: Long)
 
@@ -24,7 +25,7 @@ internal interface Actions {
 
     companion object {
         internal val Default = object : Actions {
-            override fun backStackClick(index: Int?) {}
+            override fun backStackClick(folder: StorageNavigator.Folder?) {}
             override fun click(item: Item) {}
             override fun longClick(id: Long) {}
             override fun setMoveMode() {}

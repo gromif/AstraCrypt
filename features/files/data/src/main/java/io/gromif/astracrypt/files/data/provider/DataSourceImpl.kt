@@ -18,7 +18,6 @@ import io.gromif.astracrypt.files.domain.repository.DataSource
 import io.gromif.astracrypt.files.domain.repository.Repository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
@@ -31,14 +30,12 @@ class DataSourceImpl(
     private val aeadSettingsRepository: AeadSettingsRepository,
 ) : DataSource<PagingData<Item>> {
     private var pagingSource: PagingSource<Int, PagerTuple>? = null
+    private val folderIdState = MutableStateFlow<Long>(0)
     private val searchQueryState = MutableStateFlow<String?>(null)
     private val searchFolderIdState = MutableStateFlow<List<Long>>(emptyList())
     private var sortingSecondType = MutableStateFlow(1)
 
-    override fun provide(
-        parentIdState: StateFlow<Long>,
-        isStarredMode: Boolean,
-    ): Flow<PagingData<Item>> {
+    override fun provide(isStarredMode: Boolean): Flow<PagingData<Item>> {
         val aeadInfoFlow = aeadSettingsRepository.getAeadInfoFlow().onEach {
             sortingSecondType.emit(if (it.name) 6 else 1)
             invalidate()
@@ -52,7 +49,7 @@ class DataSourceImpl(
                         sortingItemType = ItemType.Folder.ordinal,
                         sortingSecondType = sortingSecondType.value
                     ) else listDefault(
-                        rootId = parentIdState.value,
+                        rootId = folderIdState.value,
                         query = searchQueryState.value,
                         rootIdsToSearch = searchFolderIdState.value,
                         sortingItemType = ItemType.Folder.ordinal,
@@ -79,14 +76,18 @@ class DataSourceImpl(
         }
     }
 
-    override suspend fun setSearchQuery(parentId: Long, query: String?) {
+    override suspend fun setSearchQuery(query: String?) {
         val searchQuery = query?.takeIf { it.isNotEmpty() }
         if (searchQuery == searchQueryState.value) return
         searchQueryState.update { searchQuery }
         searchFolderIdState.update {
-            if (searchQuery != null) repository.getFolderIds(parentId) else emptyList()
+            if (searchQuery != null) repository.getFolderIds(folderIdState.value) else emptyList()
         }
         pagingSource?.invalidate()
+    }
+
+    override fun setFolderId(id: Long) {
+        folderIdState.update { id }
     }
 
     override fun invalidate() {
