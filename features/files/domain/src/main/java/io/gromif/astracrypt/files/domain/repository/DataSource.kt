@@ -6,6 +6,8 @@ interface DataSource<T> {
 
     fun provide(isStarredMode: Boolean = false): Flow<T>
 
+    fun provideStarred(): Flow<T>
+
     suspend fun setSearchQuery(query: String?)
 
     fun setFolderId(id: Long)

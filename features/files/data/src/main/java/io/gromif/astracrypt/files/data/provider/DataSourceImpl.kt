@@ -35,28 +35,16 @@ class DataSourceImpl(
     private val searchFolderIdState = MutableStateFlow<List<Long>>(emptyList())
     private var sortingSecondType = MutableStateFlow(1)
 
-    override fun provide(isStarredMode: Boolean): Flow<PagingData<Item>> {
+    private fun createPagerFlow(
+        pagingSource: () -> PagingSource<Int, PagerTuple>
+    ): Flow<PagingData<Item>> {
         val aeadInfoFlow = aeadSettingsRepository.getAeadInfoFlow().onEach {
             sortingSecondType.emit(if (it.name) 6 else 1)
             invalidate()
         }
         return Pager(
             config = pagingConfig,
-            pagingSourceFactory = {
-                with(filesDao) {
-                    if (isStarredMode) listStarred(
-                        query = searchQueryState.value,
-                        sortingItemType = ItemType.Folder.ordinal,
-                        sortingSecondType = sortingSecondType.value
-                    ) else listDefault(
-                        rootId = folderIdState.value,
-                        query = searchQueryState.value,
-                        rootIdsToSearch = searchFolderIdState.value,
-                        sortingItemType = ItemType.Folder.ordinal,
-                        sortingSecondType = sortingSecondType.value
-                    )
-                }.also { pagingSource = it }
-            }
+            pagingSourceFactory = pagingSource
         ).flow.combine(aeadInfoFlow) { pd, aeadInfo ->
             pd.map { pagerTuple ->
                 val databaseMode = aeadInfo.databaseMode
@@ -73,6 +61,28 @@ class DataSourceImpl(
                     state = ItemState.entries[data.state]
                 )
             }
+        }
+    }
+
+    override fun provide(isStarredMode: Boolean): Flow<PagingData<Item>> {
+        return createPagerFlow {
+            filesDao.listDefault(
+                rootId = folderIdState.value,
+                query = searchQueryState.value,
+                rootIdsToSearch = searchFolderIdState.value,
+                sortingItemType = ItemType.Folder.ordinal,
+                sortingSecondType = sortingSecondType.value
+            ).also { pagingSource = it }
+        }
+    }
+
+    override fun provideStarred(): Flow<PagingData<Item>> {
+        return createPagerFlow {
+            filesDao.listStarred(
+                query = searchQueryState.value,
+                sortingItemType = ItemType.Folder.ordinal,
+                sortingSecondType = sortingSecondType.value
+            ).also { pagingSource = it }
         }
     }
 
