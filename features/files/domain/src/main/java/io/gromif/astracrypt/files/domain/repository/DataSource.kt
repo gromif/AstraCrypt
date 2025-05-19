@@ -4,7 +4,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface DataSource<T> {
 
-    fun provide(): Flow<T>
+    fun provideFiles(): Flow<T>
 
     fun provideStarred(): Flow<T>
 
