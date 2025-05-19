@@ -64,7 +64,7 @@ class DataSourceImpl(
         }
     }
 
-    override fun provide(isStarredMode: Boolean): Flow<PagingData<Item>> {
+    override fun provide(): Flow<PagingData<Item>> {
         return createPagerFlow {
             filesDao.listDefault(
                 rootId = folderIdState.value,
