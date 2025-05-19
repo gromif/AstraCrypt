@@ -38,6 +38,23 @@ class DefaultStorageNavigatorTest {
     }
 
     @Test
+    fun `getCurrentFolderFlow should return the last folder when backStack is not empty`() = runTest {
+        val targetFolder = Folder(id = 24, name = "Test")
+
+        storageNavigator.push(targetFolder)
+        val result = storageNavigator.getCurrentFolderFlow().first()
+
+        Assert.assertSame(targetFolder, result)
+    }
+
+    @Test
+    fun `getCurrentFolderFlow should return the rootFolder when backStack is empty`() = runTest {
+        val targetRootFolder = Folder(id = 0, name = "")
+        val result = storageNavigator.getCurrentFolderFlow().first()
+        Assert.assertEquals(targetRootFolder, result)
+    }
+
+    @Test
     fun `swapBackStackWith should swap the backStack with targetBackStack`() = runTest {
         storageNavigator.swapBackStackWith(predefinedBackStack)
         val result = storageNavigator.getBackStackFlow().first()

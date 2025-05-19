@@ -8,6 +8,8 @@ interface StorageNavigator {
 
     fun getCurrentFolder(): Folder
 
+    fun getCurrentFolderFlow(): Flow<Folder>
+
     fun push(folder: Folder)
 
     fun pop()

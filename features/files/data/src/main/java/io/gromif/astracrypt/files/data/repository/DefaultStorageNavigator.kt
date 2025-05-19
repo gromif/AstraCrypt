@@ -3,6 +3,7 @@ package io.gromif.astracrypt.files.data.repository
 import io.gromif.astracrypt.files.domain.repository.StorageNavigator
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 
 private typealias Folder = StorageNavigator.Folder
@@ -24,6 +25,12 @@ class DefaultStorageNavigator : StorageNavigator {
 
     override fun getCurrentFolder(): Folder {
         return backStack.lastOrNull() ?: rootFolder
+    }
+
+    override fun getCurrentFolderFlow(): Flow<StorageNavigator.Folder> {
+        return backStackMutableStateFlow.map {
+            it.lastOrNull() ?: rootFolder
+        }
     }
 
     override fun push(folder: StorageNavigator.Folder) {
