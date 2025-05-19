@@ -8,7 +8,7 @@ class GetStarredDataFlow<T>(
 ) {
 
     operator fun invoke(): Flow<T> {
-        return dataSource.provide(isStarredMode = true)
+        return dataSource.provideStarred()
     }
 
 }

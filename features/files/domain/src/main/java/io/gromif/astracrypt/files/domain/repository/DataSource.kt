@@ -4,7 +4,9 @@ import kotlinx.coroutines.flow.Flow
 
 interface DataSource<T> {
 
-    fun provide(isStarredMode: Boolean = false): Flow<T>
+    fun provideFiles(): Flow<T>
+
+    fun provideStarred(): Flow<T>
 
     suspend fun setSearchQuery(query: String?)
 

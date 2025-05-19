@@ -8,7 +8,7 @@ class GetFilesDataFlow<T>(
 ) {
 
     operator fun invoke(): Flow<T> {
-        return dataSource.provide(isStarredMode = false)
+        return dataSource.provideFiles()
     }
 
 }
