@@ -1,7 +1,7 @@
 package io.gromif.astracrypt.files.files.util
 
 import io.gromif.astracrypt.files.di.DataSources
-import io.gromif.astracrypt.files.domain.usecase.data.GetDataFlowUseCase
+import io.gromif.astracrypt.files.domain.usecase.GetDataFlowUseCase
 import io.gromif.astracrypt.files.domain.usecase.search.RequestSearchUseCase
 import javax.inject.Inject
 

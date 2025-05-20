@@ -9,7 +9,7 @@ import dagger.hilt.android.scopes.ViewModelScoped
 import io.gromif.astracrypt.files.di.DataSources
 import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.domain.repository.DataSource
-import io.gromif.astracrypt.files.domain.usecase.data.GetDataFlowUseCase
+import io.gromif.astracrypt.files.domain.usecase.GetDataFlowUseCase
 import io.gromif.astracrypt.files.domain.usecase.navigator.GetCurrentNavFolderFlowUseCase
 import io.gromif.astracrypt.files.domain.usecase.search.GetSearchRequestFlow
 
