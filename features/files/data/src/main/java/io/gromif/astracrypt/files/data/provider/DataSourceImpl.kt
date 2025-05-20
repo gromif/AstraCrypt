@@ -16,6 +16,7 @@ import io.gromif.astracrypt.files.domain.model.ItemType
 import io.gromif.astracrypt.files.domain.repository.AeadSettingsRepository
 import io.gromif.astracrypt.files.domain.repository.DataSource
 import io.gromif.astracrypt.files.domain.repository.Repository
+import io.gromif.astracrypt.files.domain.repository.search.SearchStrategy
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
@@ -23,6 +24,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 
 class DataSourceImpl(
+    private val defaultSearchStrategy: SearchStrategy<Long, List<Long>>,
     private val filesDao: FilesDao,
     private val pagingConfig: PagingConfig,
     private val aeadHandler: AeadHandler,
@@ -64,12 +66,18 @@ class DataSourceImpl(
         }
     }
 
-    override fun provideFiles(searchRequest: String?): Flow<PagingData<Item>> {
+    override suspend fun provideFiles(searchRequest: String?): Flow<PagingData<Item>> {
+        val searchQuery = searchRequest?.takeIf { it.isNotEmpty() }
+        val rootIdsToSearch = if (searchQuery != null) {
+            defaultSearchStrategy.search(request = folderIdState.value)
+        } else {
+            emptyList()
+        }
         return createPagerFlow {
             filesDao.listDefault(
                 rootId = folderIdState.value,
-                query = searchQueryState.value,
-                rootIdsToSearch = searchFolderIdState.value,
+                query = searchQuery,
+                rootIdsToSearch = rootIdsToSearch,
                 sortingItemType = ItemType.Folder.ordinal,
                 sortingSecondType = sortingSecondType.value
             ).also { pagingSource = it }
