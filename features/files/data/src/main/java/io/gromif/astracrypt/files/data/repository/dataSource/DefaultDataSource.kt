@@ -8,9 +8,11 @@ import io.gromif.astracrypt.files.domain.model.AeadInfo
 import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.domain.model.ItemType
 import io.gromif.astracrypt.files.domain.repository.DataSource
+import io.gromif.astracrypt.files.domain.repository.search.SearchStrategy
 import kotlinx.coroutines.flow.Flow
 
-class StarredDataSource(
+class DefaultDataSource(
+    private val defaultSearchStrategy: SearchStrategy<Long, List<Long>>,
     private val filesDao: FilesDao,
     private val pagingConfig: PagingConfig,
     private val aeadHandler: AeadHandler
@@ -22,14 +24,21 @@ class StarredDataSource(
         aeadInfo: AeadInfo
     ): Flow<PagingData<Item>> {
         val searchQuery = searchRequest?.takeIf { it.isNotEmpty() }
+        val rootIdsToSearch = if (searchQuery != null) {
+            defaultSearchStrategy.search(request = folderId)
+        } else {
+            emptyList()
+        }
         val sortSecondType = if (aeadInfo.name) ItemType.Folder.ordinal else ItemType.Other.ordinal
         return DefaultPagerFactory(
             pagingConfig = pagingConfig,
             aeadHandler = aeadHandler,
             aeadInfo = aeadInfo
         ) {
-            filesDao.listStarred(
+            filesDao.listDefault(
+                rootId = folderId,
                 query = searchQuery,
+                rootIdsToSearch = rootIdsToSearch,
                 sortingItemType = ItemType.Folder.ordinal,
                 sortingSecondType = sortSecondType
             )
