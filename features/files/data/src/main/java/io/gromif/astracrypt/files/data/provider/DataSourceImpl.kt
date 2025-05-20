@@ -8,6 +8,7 @@ import androidx.paging.map
 import io.gromif.astracrypt.files.data.db.FilesDao
 import io.gromif.astracrypt.files.data.db.tuples.PagerTuple
 import io.gromif.astracrypt.files.data.util.AeadHandler
+import io.gromif.astracrypt.files.domain.model.AeadInfo
 import io.gromif.astracrypt.files.domain.model.AeadMode
 import io.gromif.astracrypt.files.domain.model.FileSource
 import io.gromif.astracrypt.files.domain.model.Item
@@ -18,8 +19,7 @@ import io.gromif.astracrypt.files.domain.repository.DataSource
 import io.gromif.astracrypt.files.domain.repository.search.SearchStrategy
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 
 class DataSourceImpl(
@@ -34,17 +34,30 @@ class DataSourceImpl(
     private val searchQueryState = MutableStateFlow<String?>(null)
     private var sortingSecondType = MutableStateFlow(1)
 
-    private fun createPagerFlow(
-        pagingSource: () -> PagingSource<Int, PagerTuple>
+    override suspend fun getDataFlow(
+        folderId: Long,
+        searchRequest: String?,
+        aeadInfo: AeadInfo
     ): Flow<PagingData<Item>> {
-        val aeadInfoFlow = aeadSettingsRepository.getAeadInfoFlow().onEach {
-            sortingSecondType.emit(if (it.name) 6 else 1)
-            invalidate()
+        val searchQuery = searchRequest?.takeIf { it.isNotEmpty() }
+        val rootIdsToSearch = if (searchQuery != null) {
+            defaultSearchStrategy.search(request = folderId)
+        } else {
+            emptyList()
         }
+        val sortSecondType = if (aeadInfo.name) ItemType.Folder.ordinal else ItemType.Other.ordinal
         return Pager(
             config = pagingConfig,
-            pagingSourceFactory = pagingSource
-        ).flow.combine(aeadInfoFlow) { pd, aeadInfo ->
+            pagingSourceFactory = {
+                filesDao.listDefault(
+                    rootId = folderId,
+                    query = searchQuery,
+                    rootIdsToSearch = rootIdsToSearch,
+                    sortingItemType = ItemType.Folder.ordinal,
+                    sortingSecondType = sortSecondType
+                ).also { pagingSource = it }
+            }
+        ).flow.map { pd ->
             pd.map { pagerTuple ->
                 val databaseMode = aeadInfo.databaseMode
                 val data = if (databaseMode is AeadMode.Template) {
@@ -60,27 +73,6 @@ class DataSourceImpl(
                     state = ItemState.entries[data.state]
                 )
             }
-        }
-    }
-
-    override suspend fun getDataFlow(
-        folderId: Long,
-        searchRequest: String?
-    ): Flow<PagingData<Item>> {
-        val searchQuery = searchRequest?.takeIf { it.isNotEmpty() }
-        val rootIdsToSearch = if (searchQuery != null) {
-            defaultSearchStrategy.search(request = folderId)
-        } else {
-            emptyList()
-        }
-        return createPagerFlow {
-            filesDao.listDefault(
-                rootId = folderId,
-                query = searchQuery,
-                rootIdsToSearch = rootIdsToSearch,
-                sortingItemType = ItemType.Folder.ordinal,
-                sortingSecondType = sortingSecondType.value
-            ).also { pagingSource = it }
         }
     }
 

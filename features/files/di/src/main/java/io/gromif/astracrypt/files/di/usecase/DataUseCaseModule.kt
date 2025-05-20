@@ -10,6 +10,7 @@ import io.gromif.astracrypt.files.di.DataSources
 import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.domain.repository.DataSource
 import io.gromif.astracrypt.files.domain.usecase.GetDataFlowUseCase
+import io.gromif.astracrypt.files.domain.usecase.aead.GetAeadInfoFlowUseCase
 import io.gromif.astracrypt.files.domain.usecase.navigator.GetCurrentNavFolderFlowUseCase
 import io.gromif.astracrypt.files.domain.usecase.search.GetSearchRequestFlow
 
@@ -22,10 +23,12 @@ internal object DataUseCaseModule {
     @Provides
     fun provideGetFilesDataFlow(
         getCurrentNavFolderFlowUseCase: GetCurrentNavFolderFlowUseCase,
+        getAeadInfoFlowUseCase: GetAeadInfoFlowUseCase,
         getSearchRequestFlow: GetSearchRequestFlow,
         @DataSources.Default dataSource: DataSource<PagingData<Item>>
     ) = GetDataFlowUseCase(
         getCurrentNavFolderFlowUseCase = getCurrentNavFolderFlowUseCase,
+        getAeadInfoFlowUseCase = getAeadInfoFlowUseCase,
         getSearchRequestFlow = getSearchRequestFlow,
         dataSource = dataSource
     )
@@ -35,10 +38,12 @@ internal object DataUseCaseModule {
     @Provides
     fun provideGetStarredDataFlow(
         getCurrentNavFolderFlowUseCase: GetCurrentNavFolderFlowUseCase,
+        getAeadInfoFlowUseCase: GetAeadInfoFlowUseCase,
         getSearchRequestFlow: GetSearchRequestFlow,
         @DataSources.Starred dataSource: DataSource<PagingData<Item>>
     ) = GetDataFlowUseCase(
         getCurrentNavFolderFlowUseCase = getCurrentNavFolderFlowUseCase,
+        getAeadInfoFlowUseCase = getAeadInfoFlowUseCase,
         getSearchRequestFlow = getSearchRequestFlow,
         dataSource = dataSource
     )
