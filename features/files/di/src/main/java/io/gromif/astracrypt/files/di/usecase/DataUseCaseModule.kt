@@ -9,7 +9,7 @@ import dagger.hilt.android.scopes.ViewModelScoped
 import io.gromif.astracrypt.files.di.DataSources
 import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.domain.repository.DataSource
-import io.gromif.astracrypt.files.domain.usecase.data.GetFilesDataFlow
+import io.gromif.astracrypt.files.domain.usecase.data.GetDataFlowUseCase
 import io.gromif.astracrypt.files.domain.usecase.navigator.GetCurrentNavFolderFlowUseCase
 import io.gromif.astracrypt.files.domain.usecase.search.GetSearchRequestFlow
 
@@ -24,7 +24,7 @@ internal object DataUseCaseModule {
         getCurrentNavFolderFlowUseCase: GetCurrentNavFolderFlowUseCase,
         getSearchRequestFlow: GetSearchRequestFlow,
         @DataSources.Default dataSource: DataSource<PagingData<Item>>
-    ) = GetFilesDataFlow(
+    ) = GetDataFlowUseCase(
         getCurrentNavFolderFlowUseCase = getCurrentNavFolderFlowUseCase,
         getSearchRequestFlow = getSearchRequestFlow,
         dataSource = dataSource
@@ -37,7 +37,7 @@ internal object DataUseCaseModule {
         getCurrentNavFolderFlowUseCase: GetCurrentNavFolderFlowUseCase,
         getSearchRequestFlow: GetSearchRequestFlow,
         @DataSources.Starred dataSource: DataSource<PagingData<Item>>
-    ) = GetFilesDataFlow(
+    ) = GetDataFlowUseCase(
         getCurrentNavFolderFlowUseCase = getCurrentNavFolderFlowUseCase,
         getSearchRequestFlow = getSearchRequestFlow,
         dataSource = dataSource

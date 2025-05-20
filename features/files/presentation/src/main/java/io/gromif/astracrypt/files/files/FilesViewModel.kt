@@ -56,7 +56,7 @@ internal class FilesViewModel @Inject constructor(
     val navigationBackStackState = navigatorUseCases.getNavBackStackFlowUseCase()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), listOf())
 
-    val pagingFlow = dataUseCases.getFilesDataFlow().cachedIn(viewModelScope)
+    val pagingFlow = dataUseCases.getDataFlowUseCase().cachedIn(viewModelScope)
     val pagingStarredFlow = dataUseCases.getStarredDataFlow().cachedIn(viewModelScope)
 
     val validationRules = getValidationRulesUsecase()

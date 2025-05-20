@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class GetFilesDataFlow<T>(
+class GetDataFlowUseCase<T>(
     private val getCurrentNavFolderFlowUseCase: GetCurrentNavFolderFlowUseCase,
     private val getSearchRequestFlow: GetSearchRequestFlow,
     private val dataSource: DataSource<T>

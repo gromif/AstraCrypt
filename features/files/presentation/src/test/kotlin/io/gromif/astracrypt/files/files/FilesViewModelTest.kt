@@ -56,7 +56,7 @@ class FilesViewModelTest {
             maxNameLength = 32,
             maxBackstackNameLength = 32
         )
-        every { dataUseCases.getFilesDataFlow() } returns flowOf(PagingData.empty<Item>())
+        every { dataUseCases.getDataFlowUseCase() } returns flowOf(PagingData.empty<Item>())
         every { dataUseCases.getStarredDataFlow() } returns flowOf(PagingData.empty<Item>())
 
         vm = FilesViewModel(
@@ -75,7 +75,7 @@ class FilesViewModelTest {
 
         verifyAll {
             navigatorUseCasesMock.getNavBackStackFlowUseCase()
-            dataUseCases.getFilesDataFlow()
+            dataUseCases.getDataFlowUseCase()
             dataUseCases.getStarredDataFlow()
         }
     }
