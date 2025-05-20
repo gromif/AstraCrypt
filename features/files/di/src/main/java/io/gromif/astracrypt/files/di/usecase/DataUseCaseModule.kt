@@ -6,12 +6,11 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.scopes.ViewModelScoped
+import io.gromif.astracrypt.files.di.DataSources
 import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.domain.repository.DataSource
 import io.gromif.astracrypt.files.domain.usecase.data.GetFilesDataFlow
-import io.gromif.astracrypt.files.domain.usecase.data.GetStarredDataFlow
 import io.gromif.astracrypt.files.domain.usecase.data.InvalidateDataSourceUseCase
-import io.gromif.astracrypt.files.domain.usecase.data.SetDataSearchUseCase
 import io.gromif.astracrypt.files.domain.usecase.navigator.GetCurrentNavFolderUseCase
 import io.gromif.astracrypt.files.domain.usecase.search.GetSearchRequestFlow
 
@@ -19,11 +18,23 @@ import io.gromif.astracrypt.files.domain.usecase.search.GetSearchRequestFlow
 @InstallIn(ViewModelComponent::class)
 internal object DataUseCaseModule {
 
+    @DataSources.Default
     @ViewModelScoped
     @Provides
     fun provideGetFilesDataFlow(
         getSearchRequestFlow: GetSearchRequestFlow,
-        dataSource: DataSource<PagingData<Item>>
+        @DataSources.Default dataSource: DataSource<PagingData<Item>>
+    ) = GetFilesDataFlow(
+        getSearchRequestFlow = getSearchRequestFlow,
+        dataSource = dataSource
+    )
+
+    @DataSources.Starred
+    @ViewModelScoped
+    @Provides
+    fun provideGetStarredDataFlow(
+        getSearchRequestFlow: GetSearchRequestFlow,
+        @DataSources.Starred dataSource: DataSource<PagingData<Item>>
     ) = GetFilesDataFlow(
         getSearchRequestFlow = getSearchRequestFlow,
         dataSource = dataSource
@@ -31,22 +42,13 @@ internal object DataUseCaseModule {
 
     @ViewModelScoped
     @Provides
-    fun provideGetStarredDataFlow(dataSource: DataSource<PagingData<Item>>) =
-        GetStarredDataFlow(dataSource = dataSource)
-
-    @ViewModelScoped
-    @Provides
     fun provideInvalidateDataSourceUseCase(
         getCurrentNavFolderUseCase: GetCurrentNavFolderUseCase,
+        @DataSources.Default
         dataSource: DataSource<PagingData<Item>>
     ) = InvalidateDataSourceUseCase(
         getCurrentNavFolderUseCase = getCurrentNavFolderUseCase,
         dataSource = dataSource
     )
-
-    @ViewModelScoped
-    @Provides
-    fun provideSetDataSearchUseCase(dataSource: DataSource<PagingData<Item>>) =
-        SetDataSearchUseCase(dataSource = dataSource)
 
 }
