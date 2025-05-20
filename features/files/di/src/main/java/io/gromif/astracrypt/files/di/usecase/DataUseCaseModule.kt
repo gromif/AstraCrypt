@@ -11,6 +11,7 @@ import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.domain.repository.DataSource
 import io.gromif.astracrypt.files.domain.usecase.data.GetFilesDataFlow
 import io.gromif.astracrypt.files.domain.usecase.data.InvalidateDataSourceUseCase
+import io.gromif.astracrypt.files.domain.usecase.navigator.GetCurrentNavFolderFlowUseCase
 import io.gromif.astracrypt.files.domain.usecase.navigator.GetCurrentNavFolderUseCase
 import io.gromif.astracrypt.files.domain.usecase.search.GetSearchRequestFlow
 
@@ -22,9 +23,11 @@ internal object DataUseCaseModule {
     @ViewModelScoped
     @Provides
     fun provideGetFilesDataFlow(
+        getCurrentNavFolderFlowUseCase: GetCurrentNavFolderFlowUseCase,
         getSearchRequestFlow: GetSearchRequestFlow,
         @DataSources.Default dataSource: DataSource<PagingData<Item>>
     ) = GetFilesDataFlow(
+        getCurrentNavFolderFlowUseCase = getCurrentNavFolderFlowUseCase,
         getSearchRequestFlow = getSearchRequestFlow,
         dataSource = dataSource
     )
@@ -33,9 +36,11 @@ internal object DataUseCaseModule {
     @ViewModelScoped
     @Provides
     fun provideGetStarredDataFlow(
+        getCurrentNavFolderFlowUseCase: GetCurrentNavFolderFlowUseCase,
         getSearchRequestFlow: GetSearchRequestFlow,
         @DataSources.Starred dataSource: DataSource<PagingData<Item>>
     ) = GetFilesDataFlow(
+        getCurrentNavFolderFlowUseCase = getCurrentNavFolderFlowUseCase,
         getSearchRequestFlow = getSearchRequestFlow,
         dataSource = dataSource
     )
