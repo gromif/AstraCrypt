@@ -11,7 +11,4 @@ interface DataSource<T> {
         aeadInfo: AeadInfo
     ): Flow<T>
 
-    fun setFolderId(id: Long)
-
-    fun invalidate()
 }

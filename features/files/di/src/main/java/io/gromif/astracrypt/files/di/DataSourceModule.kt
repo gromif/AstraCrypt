@@ -12,7 +12,6 @@ import io.gromif.astracrypt.files.data.provider.DataSourceImpl
 import io.gromif.astracrypt.files.data.repository.dataSource.StarredDataSource
 import io.gromif.astracrypt.files.data.util.AeadHandler
 import io.gromif.astracrypt.files.domain.model.Item
-import io.gromif.astracrypt.files.domain.repository.AeadSettingsRepository
 import io.gromif.astracrypt.files.domain.repository.DataSource
 import io.gromif.astracrypt.files.domain.repository.search.SearchStrategy
 import javax.inject.Qualifier
@@ -27,8 +26,7 @@ internal object DataSourceModule {
     fun provideDefaultDataSource(
         defaultSearchStrategy: SearchStrategy<Long, List<Long>>,
         filesDao: FilesDao,
-        aeadHandler: AeadHandler,
-        aeadSettingsRepository: AeadSettingsRepository
+        aeadHandler: AeadHandler
     ): DataSource<PagingData<Item>> = DataSourceImpl(
         defaultSearchStrategy = defaultSearchStrategy,
         filesDao = filesDao,
@@ -36,8 +34,7 @@ internal object DataSourceModule {
             pageSize = 10,
             enablePlaceholders = false
         ),
-        aeadHandler = aeadHandler,
-        aeadSettingsRepository = aeadSettingsRepository
+        aeadHandler = aeadHandler
     )
 
     @DataSources.Starred
@@ -45,16 +42,14 @@ internal object DataSourceModule {
     @Provides
     fun provideStarredDataSource(
         filesDao: FilesDao,
-        aeadHandler: AeadHandler,
-        aeadSettingsRepository: AeadSettingsRepository
+        aeadHandler: AeadHandler
     ): DataSource<PagingData<Item>> = StarredDataSource(
         filesDao = filesDao,
         pagingConfig = PagingConfig(
             pageSize = 10,
             enablePlaceholders = false
         ),
-        aeadHandler = aeadHandler,
-        aeadSettingsRepository = aeadSettingsRepository
+        aeadHandler = aeadHandler
     )
 
 }
