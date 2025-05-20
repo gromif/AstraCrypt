@@ -8,7 +8,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.scopes.ViewModelScoped
 import io.gromif.astracrypt.files.data.db.FilesDao
-import io.gromif.astracrypt.files.data.provider.DataSourceImpl
+import io.gromif.astracrypt.files.data.repository.dataSource.DefaultDataSource
 import io.gromif.astracrypt.files.data.repository.dataSource.StarredDataSource
 import io.gromif.astracrypt.files.data.util.AeadHandler
 import io.gromif.astracrypt.files.domain.model.Item
@@ -27,7 +27,7 @@ internal object DataSourceModule {
         defaultSearchStrategy: SearchStrategy<Long, List<Long>>,
         filesDao: FilesDao,
         aeadHandler: AeadHandler
-    ): DataSource<PagingData<Item>> = DataSourceImpl(
+    ): DataSource<PagingData<Item>> = DefaultDataSource(
         defaultSearchStrategy = defaultSearchStrategy,
         filesDao = filesDao,
         pagingConfig = PagingConfig(

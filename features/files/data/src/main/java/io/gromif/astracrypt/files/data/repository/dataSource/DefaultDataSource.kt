@@ -1,4 +1,4 @@
-package io.gromif.astracrypt.files.data.provider
+package io.gromif.astracrypt.files.data.repository.dataSource
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
@@ -17,7 +17,7 @@ import io.gromif.astracrypt.files.domain.repository.search.SearchStrategy
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class DataSourceImpl(
+class DefaultDataSource(
     private val defaultSearchStrategy: SearchStrategy<Long, List<Long>>,
     private val filesDao: FilesDao,
     private val pagingConfig: PagingConfig,
