@@ -63,16 +63,19 @@ class DataSourceImpl(
         }
     }
 
-    override suspend fun getDataFlow(searchRequest: String?): Flow<PagingData<Item>> {
+    override suspend fun getDataFlow(
+        folderId: Long,
+        searchRequest: String?
+    ): Flow<PagingData<Item>> {
         val searchQuery = searchRequest?.takeIf { it.isNotEmpty() }
         val rootIdsToSearch = if (searchQuery != null) {
-            defaultSearchStrategy.search(request = folderIdState.value)
+            defaultSearchStrategy.search(request = folderId)
         } else {
             emptyList()
         }
         return createPagerFlow {
             filesDao.listDefault(
-                rootId = folderIdState.value,
+                rootId = folderId,
                 query = searchQuery,
                 rootIdsToSearch = rootIdsToSearch,
                 sortingItemType = ItemType.Folder.ordinal,

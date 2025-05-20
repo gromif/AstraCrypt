@@ -4,7 +4,10 @@ import kotlinx.coroutines.flow.Flow
 
 interface DataSource<T> {
 
-    suspend fun getDataFlow(searchRequest: String?): Flow<T>
+    suspend fun getDataFlow(
+        folderId: Long,
+        searchRequest: String?
+    ): Flow<T>
 
     fun setFolderId(id: Long)
 

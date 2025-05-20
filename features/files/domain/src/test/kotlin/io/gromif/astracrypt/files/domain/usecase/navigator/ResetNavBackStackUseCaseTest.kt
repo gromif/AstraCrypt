@@ -9,8 +9,8 @@ import org.junit.Before
 import org.junit.Test
 
 class ResetNavBackStackUseCaseTest {
-    private lateinit var resetNavBackStackUseCase: ResetNavBackStackUseCase<Unit>
-    private val swapNavBackStackUseCase: SwapNavBackStackUseCase<Unit> = mockk(relaxed = true)
+    private lateinit var resetNavBackStackUseCase: ResetNavBackStackUseCase
+    private val swapNavBackStackUseCase: SwapNavBackStackUseCase = mockk(relaxed = true)
 
     @Before
     fun setUp() {

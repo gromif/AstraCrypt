@@ -23,10 +23,6 @@ class DefaultStorageNavigator : StorageNavigator {
 
     override fun getBackStackFlow(): Flow<List<Folder>> = backStackMutableStateFlow
 
-    override fun getCurrentFolder(): Folder {
-        return backStack.lastOrNull() ?: rootFolder
-    }
-
     override fun getCurrentFolderFlow(): Flow<StorageNavigator.Folder> {
         return backStackMutableStateFlow.map {
             it.lastOrNull() ?: rootFolder

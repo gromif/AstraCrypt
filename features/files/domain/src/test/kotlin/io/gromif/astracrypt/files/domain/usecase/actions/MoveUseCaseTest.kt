@@ -1,13 +1,14 @@
 package io.gromif.astracrypt.files.domain.usecase.actions
 
 import io.gromif.astracrypt.files.domain.repository.Repository
-import io.gromif.astracrypt.files.domain.usecase.navigator.GetCurrentNavFolderUseCase
+import io.gromif.astracrypt.files.domain.repository.StorageNavigator
+import io.gromif.astracrypt.files.domain.usecase.navigator.GetCurrentNavFolderFlowUseCase
 import io.gromif.astracrypt.files.domain.validation.ValidationException
 import io.mockk.coVerify
 import io.mockk.confirmVerified
 import io.mockk.every
 import io.mockk.mockk
-import io.mockk.verify
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
@@ -15,13 +16,13 @@ import org.junit.Test
 
 class MoveUseCaseTest {
     private lateinit var moveUseCase: MoveUseCase
-    private val getCurrentNavFolderUseCaseMock: GetCurrentNavFolderUseCase = mockk()
+    private val getCurrentNavFolderFlowUseCaseMock: GetCurrentNavFolderFlowUseCase = mockk()
     private val repository: Repository = mockk(relaxed = true)
 
     @Before
     fun setUp() {
         moveUseCase = MoveUseCase(
-            getCurrentNavFolderUseCase = getCurrentNavFolderUseCaseMock,
+            getCurrentNavFolderFlowUseCase = getCurrentNavFolderFlowUseCaseMock,
             repository = repository
         )
     }
@@ -35,12 +36,13 @@ class MoveUseCaseTest {
     fun `should call repository with correct parameters`() = runTest {
         val targetFolderId = 5L
         val targetIds = listOf(targetFolderId)
+        val targetNavFolderFlow = flowOf(StorageNavigator.Folder(targetFolderId, ""))
 
-        every { getCurrentNavFolderUseCaseMock().id } returns targetFolderId
+        every { getCurrentNavFolderFlowUseCaseMock() } returns targetNavFolderFlow
 
         moveUseCase(targetIds)
 
-        verify { getCurrentNavFolderUseCaseMock().id }
+        coVerify { getCurrentNavFolderFlowUseCaseMock() }
         coVerify(exactly = 1) {
             repository.move(targetIds, targetFolderId)
         }
@@ -48,6 +50,6 @@ class MoveUseCaseTest {
 
     @After
     fun tearDown() {
-        confirmVerified(getCurrentNavFolderUseCaseMock, repository)
+        confirmVerified(getCurrentNavFolderFlowUseCaseMock, repository)
     }
 }

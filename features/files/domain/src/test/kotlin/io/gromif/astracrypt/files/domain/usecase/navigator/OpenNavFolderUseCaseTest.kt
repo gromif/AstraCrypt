@@ -3,22 +3,21 @@ package io.gromif.astracrypt.files.domain.usecase.navigator
 import io.gromif.astracrypt.files.domain.model.ValidationRulesDto
 import io.gromif.astracrypt.files.domain.repository.StorageNavigator
 import io.gromif.astracrypt.files.domain.usecase.GetValidationRulesUseCase
-import io.gromif.astracrypt.files.domain.usecase.data.InvalidateDataSourceUseCase
 import io.mockk.confirmVerified
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import io.mockk.verifyOrder
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
 class OpenNavFolderUseCaseTest {
-    private lateinit var openNavFolderUseCase: OpenNavFolderUseCase<Unit>
+    private lateinit var openNavFolderUseCase: OpenNavFolderUseCase
     private val storageNavigatorMock: StorageNavigator = mockk(relaxed = true)
-    private val getCurrentNavFolderUseCaseMock: GetCurrentNavFolderUseCase = mockk()
-    private val invalidateDataSourceUseCaseMock: InvalidateDataSourceUseCase<Unit> =
-        mockk(relaxed = true)
+    private val getCurrentNavFolderFlowUseCaseMock: GetCurrentNavFolderFlowUseCase = mockk()
     private val getValidationRulesUseCaseMock: GetValidationRulesUseCase = mockk()
 
     @Before
@@ -31,48 +30,46 @@ class OpenNavFolderUseCaseTest {
 
         openNavFolderUseCase = OpenNavFolderUseCase(
             storageNavigator = storageNavigatorMock,
-            getCurrentNavFolderUseCase = getCurrentNavFolderUseCaseMock,
-            invalidateDataSourceUseCase = invalidateDataSourceUseCaseMock,
+            getCurrentNavFolderFlowUseCase = getCurrentNavFolderFlowUseCaseMock,
             getValidationRulesUseCase = getValidationRulesUseCaseMock
         )
     }
 
     @Test
-    fun `should do nothing when the target ID equals the current ID`() {
+    fun `should do nothing when the target ID equals the current ID`() = runTest {
         val currentId = 4L
         val targetId = currentId
         val targetName = ""
 
         every {
-            getCurrentNavFolderUseCaseMock()
-        } returns StorageNavigator.Folder(currentId, targetName)
+            getCurrentNavFolderFlowUseCaseMock()
+        } returns flowOf(StorageNavigator.Folder(currentId, targetName))
 
         openNavFolderUseCase(targetId, targetName)
 
-        verify(exactly = 1) { getCurrentNavFolderUseCaseMock() }
+        verify(exactly = 1) { getCurrentNavFolderFlowUseCaseMock() }
 
         tearDown()
     }
 
     @Test
-    fun `should correctly update the backStack and the dataSource when the name exceeds allowed length`() {
+    fun `correctly updates the backStack-dataSource when the name exceeds max length`() = runTest {
         val currentId = 4L
         val targetId = 5L
         val targetName = "qwertyuiop"
 
         every {
-            getCurrentNavFolderUseCaseMock()
-        } returns StorageNavigator.Folder(currentId, targetName)
+            getCurrentNavFolderFlowUseCaseMock()
+        } returns flowOf(StorageNavigator.Folder(currentId, targetName))
 
         openNavFolderUseCase(targetId, targetName)
 
         val expectedName = "qwertyui…"
         val expectedFolder = StorageNavigator.Folder(targetId, expectedName)
         verifyOrder {
-            getCurrentNavFolderUseCaseMock()
+            getCurrentNavFolderFlowUseCaseMock()
             getValidationRulesUseCaseMock()
             storageNavigatorMock.push(expectedFolder)
-            invalidateDataSourceUseCaseMock()
         }
     }
 
@@ -80,8 +77,7 @@ class OpenNavFolderUseCaseTest {
     fun tearDown() {
         confirmVerified(
             storageNavigatorMock,
-            getCurrentNavFolderUseCaseMock,
-            invalidateDataSourceUseCaseMock,
+            getCurrentNavFolderFlowUseCaseMock,
             getValidationRulesUseCaseMock
         )
     }

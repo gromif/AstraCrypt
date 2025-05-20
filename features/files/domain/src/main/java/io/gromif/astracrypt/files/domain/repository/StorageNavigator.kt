@@ -6,8 +6,6 @@ interface StorageNavigator {
 
     fun getBackStackFlow(): Flow<List<Folder>>
 
-    fun getCurrentFolder(): Folder
-
     fun getCurrentFolderFlow(): Flow<Folder>
 
     fun push(folder: Folder)

@@ -30,6 +30,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -42,7 +43,7 @@ internal class FilesViewModel @Inject constructor(
     private val defaultDispatcher: CoroutineDispatcher,
     private val state: SavedStateHandle,
     private val dataUseCases: DataUseCases<PagingData<Item>>,
-    private val navigatorUseCases: NavigatorUseCases<PagingData<Item>>,
+    private val navigatorUseCases: NavigatorUseCases,
     private val actionUseCases: ActionUseCases,
     private val workManager: WorkManager,
     private val workerSerializer: WorkerSerializer,
@@ -108,7 +109,7 @@ internal class FilesViewModel @Inject constructor(
     ) = viewModelScope.launch(defaultDispatcher) {
         val listToSave = uriList.map { it.toString() }
         val fileWithUris = workerSerializer.saveStringListToFile(listToSave)
-        val folderId = navigatorUseCases.getCurrentNavFolderUseCase().id
+        val folderId = navigatorUseCases.getCurrentNavFolderFlowUseCase().first().id
         val data = workDataOf(
             Args.URI_FILE to fileWithUris.toString(),
             Args.PARENT_ID to folderId,

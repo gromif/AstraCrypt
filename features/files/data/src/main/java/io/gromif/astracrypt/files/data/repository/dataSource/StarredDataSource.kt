@@ -60,7 +60,10 @@ class StarredDataSource(
         }
     }
 
-    override suspend fun getDataFlow(searchRequest: String?): Flow<PagingData<Item>> {
+    override suspend fun getDataFlow(
+        folderId: Long,
+        searchRequest: String?,
+    ): Flow<PagingData<Item>> {
         val searchQuery = searchRequest?.takeIf { it.isNotEmpty() }
         return createPagerFlow {
             filesDao.listStarred(
