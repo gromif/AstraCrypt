@@ -2,16 +2,16 @@ package io.gromif.astracrypt.files.domain.usecase.navigator
 
 import io.gromif.astracrypt.files.domain.repository.StorageNavigator
 import io.gromif.astracrypt.files.domain.usecase.GetValidationRulesUseCase
+import kotlinx.coroutines.flow.first
 
 class OpenNavFolderUseCase(
     private val storageNavigator: StorageNavigator,
-    private val getCurrentNavFolderUseCase: GetCurrentNavFolderUseCase,
+    private val getCurrentNavFolderFlowUseCase: GetCurrentNavFolderFlowUseCase,
     private val getValidationRulesUseCase: GetValidationRulesUseCase,
 ) {
 
-    operator fun invoke(id: Long, name: String) {
-        val currentFolderId = getCurrentNavFolderUseCase().id
-
+    suspend operator fun invoke(id: Long, name: String) {
+        val currentFolderId = getCurrentNavFolderFlowUseCase().first().id
         if (id != currentFolderId) {
             val validationRules = getValidationRulesUseCase()
             val maxBackstackNameLength = validationRules.maxBackstackNameLength

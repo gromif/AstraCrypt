@@ -12,7 +12,6 @@ import io.gromif.astracrypt.files.domain.repository.DataSource
 import io.gromif.astracrypt.files.domain.usecase.data.GetFilesDataFlow
 import io.gromif.astracrypt.files.domain.usecase.data.InvalidateDataSourceUseCase
 import io.gromif.astracrypt.files.domain.usecase.navigator.GetCurrentNavFolderFlowUseCase
-import io.gromif.astracrypt.files.domain.usecase.navigator.GetCurrentNavFolderUseCase
 import io.gromif.astracrypt.files.domain.usecase.search.GetSearchRequestFlow
 
 @Module
@@ -48,12 +47,8 @@ internal object DataUseCaseModule {
     @ViewModelScoped
     @Provides
     fun provideInvalidateDataSourceUseCase(
-        getCurrentNavFolderUseCase: GetCurrentNavFolderUseCase,
         @DataSources.Default
         dataSource: DataSource<PagingData<Item>>
-    ) = InvalidateDataSourceUseCase(
-        getCurrentNavFolderUseCase = getCurrentNavFolderUseCase,
-        dataSource = dataSource
-    )
+    ) = InvalidateDataSourceUseCase(dataSource = dataSource)
 
 }

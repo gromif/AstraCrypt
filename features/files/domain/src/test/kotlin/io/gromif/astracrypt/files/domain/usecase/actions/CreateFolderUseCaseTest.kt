@@ -5,28 +5,29 @@ import io.gromif.astracrypt.files.domain.model.ImportItemDto
 import io.gromif.astracrypt.files.domain.model.ItemState
 import io.gromif.astracrypt.files.domain.model.ItemType
 import io.gromif.astracrypt.files.domain.repository.Repository
+import io.gromif.astracrypt.files.domain.repository.StorageNavigator
 import io.gromif.astracrypt.files.domain.usecase.aead.GetAeadInfoUseCase
-import io.gromif.astracrypt.files.domain.usecase.navigator.GetCurrentNavFolderUseCase
+import io.gromif.astracrypt.files.domain.usecase.navigator.GetCurrentNavFolderFlowUseCase
 import io.gromif.astracrypt.files.domain.validation.ValidationException
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.mockk
-import io.mockk.verify
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
 
 class CreateFolderUseCaseTest {
     private lateinit var createFolderUseCase: CreateFolderUseCase
-    private val getCurrentNavFolderUseCaseMock: GetCurrentNavFolderUseCase = mockk()
+    private val getCurrentNavFolderFlowUseCaseMock: GetCurrentNavFolderFlowUseCase = mockk()
     private val getAeadInfoUseCase: GetAeadInfoUseCase = mockk()
     private val repository: Repository = mockk(relaxed = true)
 
     @Before
     fun setUp() {
         createFolderUseCase = CreateFolderUseCase(
-            getCurrentNavFolderUseCase = getCurrentNavFolderUseCaseMock,
+            getCurrentNavFolderFlowUseCase = getCurrentNavFolderFlowUseCaseMock,
             getAeadInfoUseCase = getAeadInfoUseCase,
             repository = repository
         )
@@ -36,6 +37,7 @@ class CreateFolderUseCaseTest {
     fun shouldTrimName_and_callRepositoryWithCorrectValues() = runTest {
         val targetFolderId = 66L
         val rawName = "  New Folder  "
+        val targetNavFolderFlow = flowOf(StorageNavigator.Folder(targetFolderId, rawName))
         val trimmedName = rawName.trim()
         val mockAeadInfo = mockk<AeadInfo>()
 
@@ -51,12 +53,12 @@ class CreateFolderUseCaseTest {
             size = 0
         )
 
-        every { getCurrentNavFolderUseCaseMock().id } returns targetFolderId
+        every { getCurrentNavFolderFlowUseCaseMock() } returns targetNavFolderFlow
         coEvery { getAeadInfoUseCase() } returns mockAeadInfo
 
         createFolderUseCase(rawName)
 
-        verify(exactly = 1) { getCurrentNavFolderUseCaseMock().id }
+        coVerify(exactly = 1) { getCurrentNavFolderFlowUseCaseMock() }
         coVerify(exactly = 1) { getAeadInfoUseCase() }
         coVerify(exactly = 1) {
             repository.insert(aeadInfo = mockAeadInfo, importItemDto = targetImportItemDto)
@@ -65,13 +67,14 @@ class CreateFolderUseCaseTest {
 
     @Test(expected = ValidationException.InvalidNameException::class)
     fun shouldThrowException_whenNameValidatorFails() = runTest {
-        val targetFolderId = 66L
-        val name = "    "
+        val targetName = "    "
+        val targetFolder = StorageNavigator.Folder(66L, targetName)
+        val targetFlow = flowOf(targetFolder)
         val mockAeadInfo = mockk<AeadInfo>()
 
-        every { getCurrentNavFolderUseCaseMock().id } returns targetFolderId
+        every { getCurrentNavFolderFlowUseCaseMock() } returns targetFlow
         coEvery { getAeadInfoUseCase() } returns mockAeadInfo
 
-        createFolderUseCase(name)
+        createFolderUseCase(targetName)
     }
 }

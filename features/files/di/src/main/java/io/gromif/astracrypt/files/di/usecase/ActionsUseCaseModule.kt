@@ -11,7 +11,7 @@ import io.gromif.astracrypt.files.domain.usecase.actions.MoveUseCase
 import io.gromif.astracrypt.files.domain.usecase.actions.RenameUseCase
 import io.gromif.astracrypt.files.domain.usecase.actions.SetStateUseCase
 import io.gromif.astracrypt.files.domain.usecase.aead.GetAeadInfoUseCase
-import io.gromif.astracrypt.files.domain.usecase.navigator.GetCurrentNavFolderUseCase
+import io.gromif.astracrypt.files.domain.usecase.navigator.GetCurrentNavFolderFlowUseCase
 
 @Module
 @InstallIn(ViewModelComponent::class)
@@ -19,11 +19,11 @@ internal object ActionsUseCaseModule {
 
     @Provides
     fun provideCreateFolderUseCase(
-        getCurrentNavFolderUseCase: GetCurrentNavFolderUseCase,
+        getCurrentNavFolderFlowUseCase: GetCurrentNavFolderFlowUseCase,
         getAeadInfoUseCase: GetAeadInfoUseCase,
         repository: Repository,
     ) = CreateFolderUseCase(
-        getCurrentNavFolderUseCase = getCurrentNavFolderUseCase,
+        getCurrentNavFolderFlowUseCase = getCurrentNavFolderFlowUseCase,
         getAeadInfoUseCase = getAeadInfoUseCase,
         repository = repository
     )
@@ -36,9 +36,12 @@ internal object ActionsUseCaseModule {
 
     @Provides
     fun provideMoveUseCase(
-        getCurrentNavFolderUseCase: GetCurrentNavFolderUseCase,
+        getCurrentNavFolderFlowUseCase: GetCurrentNavFolderFlowUseCase,
         repository: Repository
-    ) = MoveUseCase(getCurrentNavFolderUseCase, repository)
+    ) = MoveUseCase(
+        getCurrentNavFolderFlowUseCase = getCurrentNavFolderFlowUseCase,
+        repository = repository
+    )
 
     @Provides
     fun provideRenameUseCase(

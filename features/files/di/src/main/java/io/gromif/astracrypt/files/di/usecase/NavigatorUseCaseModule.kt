@@ -9,7 +9,6 @@ import io.gromif.astracrypt.files.domain.repository.StorageNavigator
 import io.gromif.astracrypt.files.domain.usecase.GetValidationRulesUseCase
 import io.gromif.astracrypt.files.domain.usecase.navigator.CloseNavFolderUseCase
 import io.gromif.astracrypt.files.domain.usecase.navigator.GetCurrentNavFolderFlowUseCase
-import io.gromif.astracrypt.files.domain.usecase.navigator.GetCurrentNavFolderUseCase
 import io.gromif.astracrypt.files.domain.usecase.navigator.GetNavBackStackFlowUseCase
 import io.gromif.astracrypt.files.domain.usecase.navigator.OpenNavFolderUseCase
 import io.gromif.astracrypt.files.domain.usecase.navigator.ResetNavBackStackUseCase
@@ -27,11 +26,6 @@ internal object NavigatorUseCaseModule {
 
     @ViewModelScoped
     @Provides
-    fun provideGetCurrentNavFolderUseCase(storageNavigator: StorageNavigator) =
-        GetCurrentNavFolderUseCase(storageNavigator = storageNavigator)
-
-    @ViewModelScoped
-    @Provides
     fun provideGetCurrentNavFolderFlowUseCase(storageNavigator: StorageNavigator) =
         GetCurrentNavFolderFlowUseCase(storageNavigator = storageNavigator)
 
@@ -44,11 +38,11 @@ internal object NavigatorUseCaseModule {
     @Provides
     fun provideOpenNavFolderUseCase(
         storageNavigator: StorageNavigator,
-        getCurrentNavFolderUseCase: GetCurrentNavFolderUseCase,
+        getCurrentNavFolderFlowUseCase: GetCurrentNavFolderFlowUseCase,
         getValidationRulesUseCase: GetValidationRulesUseCase
     ) = OpenNavFolderUseCase(
         storageNavigator = storageNavigator,
-        getCurrentNavFolderUseCase = getCurrentNavFolderUseCase,
+        getCurrentNavFolderFlowUseCase = getCurrentNavFolderFlowUseCase,
         getValidationRulesUseCase = getValidationRulesUseCase
     )
 

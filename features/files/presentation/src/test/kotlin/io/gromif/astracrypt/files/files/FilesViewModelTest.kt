@@ -96,7 +96,7 @@ class FilesViewModelTest {
 
         vm.openDirectory(targetId, targetName)
 
-        verify { navigatorUseCasesMock.openNavFolderUseCase(targetId, targetName) }
+        coVerify { navigatorUseCasesMock.openNavFolderUseCase(targetId, targetName) }
     }
 
     @Test
