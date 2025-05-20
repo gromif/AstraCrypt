@@ -3,7 +3,6 @@ package io.gromif.astracrypt.files.domain.usecase.navigator
 import io.gromif.astracrypt.files.domain.model.ValidationRulesDto
 import io.gromif.astracrypt.files.domain.repository.StorageNavigator
 import io.gromif.astracrypt.files.domain.usecase.GetValidationRulesUseCase
-import io.gromif.astracrypt.files.domain.usecase.data.InvalidateDataSourceUseCase
 import io.mockk.confirmVerified
 import io.mockk.every
 import io.mockk.mockk
@@ -14,11 +13,9 @@ import org.junit.Before
 import org.junit.Test
 
 class OpenNavFolderUseCaseTest {
-    private lateinit var openNavFolderUseCase: OpenNavFolderUseCase<Unit>
+    private lateinit var openNavFolderUseCase: OpenNavFolderUseCase
     private val storageNavigatorMock: StorageNavigator = mockk(relaxed = true)
     private val getCurrentNavFolderUseCaseMock: GetCurrentNavFolderUseCase = mockk()
-    private val invalidateDataSourceUseCaseMock: InvalidateDataSourceUseCase<Unit> =
-        mockk(relaxed = true)
     private val getValidationRulesUseCaseMock: GetValidationRulesUseCase = mockk()
 
     @Before
@@ -32,7 +29,6 @@ class OpenNavFolderUseCaseTest {
         openNavFolderUseCase = OpenNavFolderUseCase(
             storageNavigator = storageNavigatorMock,
             getCurrentNavFolderUseCase = getCurrentNavFolderUseCaseMock,
-            invalidateDataSourceUseCase = invalidateDataSourceUseCaseMock,
             getValidationRulesUseCase = getValidationRulesUseCaseMock
         )
     }
@@ -72,7 +68,6 @@ class OpenNavFolderUseCaseTest {
             getCurrentNavFolderUseCaseMock()
             getValidationRulesUseCaseMock()
             storageNavigatorMock.push(expectedFolder)
-            invalidateDataSourceUseCaseMock()
         }
     }
 
@@ -81,7 +76,6 @@ class OpenNavFolderUseCaseTest {
         confirmVerified(
             storageNavigatorMock,
             getCurrentNavFolderUseCaseMock,
-            invalidateDataSourceUseCaseMock,
             getValidationRulesUseCaseMock
         )
     }

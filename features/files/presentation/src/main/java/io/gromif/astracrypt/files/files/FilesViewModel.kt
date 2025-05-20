@@ -42,7 +42,7 @@ internal class FilesViewModel @Inject constructor(
     private val defaultDispatcher: CoroutineDispatcher,
     private val state: SavedStateHandle,
     private val dataUseCases: DataUseCases<PagingData<Item>>,
-    private val navigatorUseCases: NavigatorUseCases<PagingData<Item>>,
+    private val navigatorUseCases: NavigatorUseCases,
     private val actionUseCases: ActionUseCases,
     private val workManager: WorkManager,
     private val workerSerializer: WorkerSerializer,

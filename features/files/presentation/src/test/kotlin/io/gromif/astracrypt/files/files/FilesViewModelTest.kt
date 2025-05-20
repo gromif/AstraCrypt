@@ -37,7 +37,7 @@ class FilesViewModelTest {
 
     private val state: SavedStateHandle = SavedStateHandle()
     private val dataUseCases: DataUseCases<PagingData<Item>> = mockk(relaxed = true)
-    private val navigatorUseCasesMock: NavigatorUseCases<PagingData<Item>> = mockk(relaxed = true)
+    private val navigatorUseCasesMock: NavigatorUseCases = mockk(relaxed = true)
     private val actionUseCasesMock: ActionUseCases = mockk(relaxed = true)
     private val workManager: WorkManager = mockk()
     private val workerSerializer: WorkerSerializer = mockk()

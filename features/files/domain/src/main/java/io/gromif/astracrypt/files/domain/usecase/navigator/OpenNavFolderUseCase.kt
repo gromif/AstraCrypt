@@ -2,12 +2,10 @@ package io.gromif.astracrypt.files.domain.usecase.navigator
 
 import io.gromif.astracrypt.files.domain.repository.StorageNavigator
 import io.gromif.astracrypt.files.domain.usecase.GetValidationRulesUseCase
-import io.gromif.astracrypt.files.domain.usecase.data.InvalidateDataSourceUseCase
 
-class OpenNavFolderUseCase<T>(
+class OpenNavFolderUseCase(
     private val storageNavigator: StorageNavigator,
     private val getCurrentNavFolderUseCase: GetCurrentNavFolderUseCase,
-    private val invalidateDataSourceUseCase: InvalidateDataSourceUseCase<T>,
     private val getValidationRulesUseCase: GetValidationRulesUseCase,
 ) {
 
@@ -25,7 +23,6 @@ class OpenNavFolderUseCase<T>(
 
             val newFolder = StorageNavigator.Folder(id, targetName)
             storageNavigator.push(folder = newFolder)
-            invalidateDataSourceUseCase()
         }
     }
 }

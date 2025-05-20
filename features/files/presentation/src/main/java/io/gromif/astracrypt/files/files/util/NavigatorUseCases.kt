@@ -8,11 +8,11 @@ import io.gromif.astracrypt.files.domain.usecase.navigator.ResetNavBackStackUseC
 import io.gromif.astracrypt.files.domain.usecase.navigator.SwapNavBackStackUseCase
 import javax.inject.Inject
 
-internal data class NavigatorUseCases<T> @Inject constructor(
+internal data class NavigatorUseCases @Inject constructor(
     val getNavBackStackFlowUseCase: GetNavBackStackFlowUseCase,
     val getCurrentNavFolderUseCase: GetCurrentNavFolderUseCase,
-    val openNavFolderUseCase: OpenNavFolderUseCase<T>,
-    val closeNavFolderUseCase: CloseNavFolderUseCase<T>,
-    val resetNavBackStackUseCase: ResetNavBackStackUseCase<T>,
-    val swapNavBackStackUseCase: SwapNavBackStackUseCase<T>
+    val openNavFolderUseCase: OpenNavFolderUseCase,
+    val closeNavFolderUseCase: CloseNavFolderUseCase,
+    val resetNavBackStackUseCase: ResetNavBackStackUseCase,
+    val swapNavBackStackUseCase: SwapNavBackStackUseCase
 )
