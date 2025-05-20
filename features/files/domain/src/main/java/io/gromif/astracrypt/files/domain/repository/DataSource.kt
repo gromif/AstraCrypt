@@ -6,8 +6,6 @@ interface DataSource<T> {
 
     suspend fun getDataFlow(searchRequest: String?): Flow<T>
 
-    fun provideStarred(): Flow<T>
-
     fun setFolderId(id: Long)
 
     fun invalidate()

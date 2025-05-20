@@ -81,16 +81,6 @@ class DataSourceImpl(
         }
     }
 
-    override fun provideStarred(): Flow<PagingData<Item>> {
-        return createPagerFlow {
-            filesDao.listStarred(
-                query = searchQueryState.value,
-                sortingItemType = ItemType.Folder.ordinal,
-                sortingSecondType = sortingSecondType.value
-            ).also { pagingSource = it }
-        }
-    }
-
     override fun setFolderId(id: Long) {
         folderIdState.update { id }
     }
