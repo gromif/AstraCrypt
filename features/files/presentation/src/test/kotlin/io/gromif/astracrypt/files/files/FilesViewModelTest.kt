@@ -81,6 +81,15 @@ class FilesViewModelTest {
     }
 
     @Test
+    fun `setSearchQuery calls use case with correct parameters`() {
+        val targetRequest = "New Folder"
+
+        vm.setSearchQuery(targetRequest)
+
+        verify { dataUseCases.requestSearchUseCase(targetRequest) }
+    }
+
+    @Test
     fun `openDirectory calls use case with correct parameters`() {
         val targetId = 1L
         val targetName = "New Folder"
