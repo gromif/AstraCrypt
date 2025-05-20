@@ -63,7 +63,7 @@ class DataSourceImpl(
         }
     }
 
-    override suspend fun provideFiles(searchRequest: String?): Flow<PagingData<Item>> {
+    override suspend fun getDataFlow(searchRequest: String?): Flow<PagingData<Item>> {
         val searchQuery = searchRequest?.takeIf { it.isNotEmpty() }
         val rootIdsToSearch = if (searchQuery != null) {
             defaultSearchStrategy.search(request = folderIdState.value)

@@ -21,7 +21,7 @@ class GetFilesDataFlow<T>(
         ) { it }.flatMapLatest { resultArray ->
             val searchRequest = resultArray[0]
 
-            dataSource.provideFiles(
+            dataSource.getDataFlow(
                 searchRequest = searchRequest
             )
         }

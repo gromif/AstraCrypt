@@ -4,7 +4,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface DataSource<T> {
 
-    suspend fun provideFiles(searchRequest: String?): Flow<T>
+    suspend fun getDataFlow(searchRequest: String?): Flow<T>
 
     fun provideStarred(): Flow<T>
 
