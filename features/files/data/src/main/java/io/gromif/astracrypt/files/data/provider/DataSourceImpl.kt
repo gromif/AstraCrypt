@@ -94,16 +94,6 @@ class DataSourceImpl(
         }
     }
 
-    override suspend fun setSearchQuery(query: String?) {
-        val searchQuery = query?.takeIf { it.isNotEmpty() }
-        if (searchQuery == searchQueryState.value) return
-        searchQueryState.update { searchQuery }
-        searchFolderIdState.update {
-            if (searchQuery != null) repository.getFolderIds(folderIdState.value) else emptyList()
-        }
-        pagingSource?.invalidate()
-    }
-
     override fun setFolderId(id: Long) {
         folderIdState.update { id }
     }

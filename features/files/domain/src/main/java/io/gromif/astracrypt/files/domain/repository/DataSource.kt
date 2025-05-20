@@ -8,8 +8,6 @@ interface DataSource<T> {
 
     fun provideStarred(): Flow<T>
 
-    suspend fun setSearchQuery(query: String?)
-
     fun setFolderId(id: Long)
 
     fun invalidate()
