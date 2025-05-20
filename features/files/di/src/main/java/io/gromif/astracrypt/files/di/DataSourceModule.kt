@@ -13,7 +13,6 @@ import io.gromif.astracrypt.files.data.util.AeadHandler
 import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.domain.repository.AeadSettingsRepository
 import io.gromif.astracrypt.files.domain.repository.DataSource
-import io.gromif.astracrypt.files.domain.repository.Repository
 import io.gromif.astracrypt.files.domain.repository.search.SearchStrategy
 
 @Module
@@ -26,7 +25,6 @@ internal object DataSourceModule {
         defaultSearchStrategy: SearchStrategy<Long, List<Long>>,
         filesDao: FilesDao,
         aeadHandler: AeadHandler,
-        repository: Repository,
         aeadSettingsRepository: AeadSettingsRepository
     ): DataSource<PagingData<Item>> = DataSourceImpl(
         defaultSearchStrategy = defaultSearchStrategy,
@@ -36,7 +34,6 @@ internal object DataSourceModule {
             enablePlaceholders = false
         ),
         aeadHandler = aeadHandler,
-        repository = repository,
         aeadSettingsRepository = aeadSettingsRepository
     )
 

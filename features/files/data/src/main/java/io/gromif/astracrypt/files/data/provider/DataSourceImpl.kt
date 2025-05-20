@@ -15,7 +15,6 @@ import io.gromif.astracrypt.files.domain.model.ItemState
 import io.gromif.astracrypt.files.domain.model.ItemType
 import io.gromif.astracrypt.files.domain.repository.AeadSettingsRepository
 import io.gromif.astracrypt.files.domain.repository.DataSource
-import io.gromif.astracrypt.files.domain.repository.Repository
 import io.gromif.astracrypt.files.domain.repository.search.SearchStrategy
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -28,13 +27,11 @@ class DataSourceImpl(
     private val filesDao: FilesDao,
     private val pagingConfig: PagingConfig,
     private val aeadHandler: AeadHandler,
-    private val repository: Repository,
     private val aeadSettingsRepository: AeadSettingsRepository,
 ) : DataSource<PagingData<Item>> {
     private var pagingSource: PagingSource<Int, PagerTuple>? = null
     private val folderIdState = MutableStateFlow<Long>(0)
     private val searchQueryState = MutableStateFlow<String?>(null)
-    private val searchFolderIdState = MutableStateFlow<List<Long>>(emptyList())
     private var sortingSecondType = MutableStateFlow(1)
 
     private fun createPagerFlow(
