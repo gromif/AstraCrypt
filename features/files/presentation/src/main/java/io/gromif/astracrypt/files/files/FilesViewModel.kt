@@ -62,8 +62,8 @@ internal class FilesViewModel @Inject constructor(
     val viewModeState = getListViewModeUseCase()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), ViewMode.Grid)
 
-    suspend fun setSearchQuery(query: String) {
-        dataUseCases.setDataSearchUseCase(query)
+    fun setSearchQuery(query: String) {
+        dataUseCases.requestSearchUseCase(query)
     }
 
     fun openDirectory(id: Long, name: String) = viewModelScope.launch(defaultDispatcher) {
