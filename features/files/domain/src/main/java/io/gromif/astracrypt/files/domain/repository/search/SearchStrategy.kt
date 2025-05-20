@@ -1,6 +1,6 @@
 package io.gromif.astracrypt.files.domain.repository.search
 
-interface SearchStrategy<in T, out R> {
+interface SearchStrategy<T, R> {
 
     suspend fun search(request: T): R
 
