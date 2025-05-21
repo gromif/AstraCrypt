@@ -8,5 +8,4 @@ interface SettingsRepository {
     fun getViewModeFlow(): Flow<ViewMode>
 
     suspend fun setViewMode(viewMode: ViewMode)
-
 }

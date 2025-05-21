@@ -7,5 +7,4 @@ interface SearchManager {
     fun setSearchRequest(query: String?)
 
     fun getSearchRequestFlow(): Flow<String?>
-
 }

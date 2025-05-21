@@ -30,5 +30,4 @@ class CloseNavFolderUseCaseTest {
     fun tearDown() {
         confirmVerified(storageNavigatorMock)
     }
-
 }

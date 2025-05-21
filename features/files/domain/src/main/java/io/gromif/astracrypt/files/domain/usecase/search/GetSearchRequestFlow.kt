@@ -10,5 +10,4 @@ class GetSearchRequestFlow(
     operator fun invoke(): Flow<String?> {
         return searchManager.getSearchRequestFlow()
     }
-
 }

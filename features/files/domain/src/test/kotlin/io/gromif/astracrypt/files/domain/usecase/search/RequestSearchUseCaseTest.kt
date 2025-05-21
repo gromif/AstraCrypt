@@ -35,5 +35,4 @@ class RequestSearchUseCaseTest {
     fun tearDown() {
         confirmVerified(searchManagerMock)
     }
-
 }
