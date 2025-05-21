@@ -2,6 +2,7 @@ package io.gromif.astracrypt.files.data.util
 
 import com.google.crypto.tink.StreamingAead
 import com.google.crypto.tink.streamingaead.StreamingAeadParameters
+import io.gromif.astracrypt.files.data.util.ext.copyToSuspend
 import io.gromif.astracrypt.files.domain.repository.AeadSettingsRepository
 import io.gromif.astracrypt.utils.io.Randomizer
 import io.gromif.crypto.tink.aead.AeadManager
@@ -71,18 +72,6 @@ class FileHandler(
             return@coroutineScope null
         }
         fileRelativePath
-    }
-
-    private suspend fun InputStream.copyToSuspend(
-        output: OutputStream
-    ) = coroutineScope {
-        val buffer = ByteArray(DEFAULT_BUFFER_SIZE)
-        var loadedSize = read(buffer)
-        while (isActive && loadedSize != -1) {
-            output.write(buffer, 0, loadedSize)
-            loadedSize = read(buffer)
-        }
-        output.close()
     }
 
     private suspend fun getConditionalOutputStream(
