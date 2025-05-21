@@ -14,7 +14,6 @@ import java.io.File
 import java.io.InputStream
 import java.io.OutputStream
 
-private const val DEFAULT_BUFFER_SIZE = 8 * 1024
 private const val DEFAULT_FILE_NAME_LENGTH = 6
 private const val DEFAULT_FOLDER_NAME_LENGTH = 2
 
