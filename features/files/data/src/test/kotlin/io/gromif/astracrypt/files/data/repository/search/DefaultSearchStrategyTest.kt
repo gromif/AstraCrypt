@@ -20,12 +20,25 @@ class DefaultSearchStrategyTest {
     }
 
     @Test
-    fun `should correctly fetch the rootIds list`() = runTest {
+    fun `should correctly fetch the rootIds list and cache the result`() = runTest {
         val targetRequest = 5L
 
         searchStrategy.search(request = targetRequest)
+        searchStrategy.search(request = targetRequest)
 
         coVerify(exactly = 1) { repositoryMock.getFolderIds(targetRequest) }
+    }
+
+    @Test
+    fun `should correctly fetch the rootIds list when the result is cached`() = runTest {
+        val targetRequestOld = 5L
+        val targetRequestNew = 6L
+
+        searchStrategy.search(request = targetRequestOld)
+        searchStrategy.search(request = targetRequestNew)
+
+        coVerify(exactly = 1) { repositoryMock.getFolderIds(targetRequestOld) }
+        coVerify(exactly = 1) { repositoryMock.getFolderIds(targetRequestNew) }
     }
 
     @After
