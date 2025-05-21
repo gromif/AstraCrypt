@@ -25,8 +25,13 @@ class FileHandler(
     filesDir: File
 ) {
     private val dataFolder = "$filesDir/data"
-    private val newRelativePath get() = "${getRandomFolderName()}/${getRandomFileName()}"
     private val defaultBuffer get() = ByteArray(DEFAULT_BUFFER_SIZE)
+
+    private fun randomRelativePath(): String {
+        val folderName = randomizer.generateUrlSafeString(DEFAULT_FOLDER_NAME_LENGTH)
+        val fileName = randomizer.generateUrlSafeString(DEFAULT_FILE_NAME_LENGTH)
+        return "$folderName/$fileName"
+    }
 
     suspend fun exportFile(
         outputStream: OutputStream,
@@ -41,7 +46,7 @@ class FileHandler(
     }
 
     suspend fun writeFile(input: InputStream): String? = coroutineScope {
-        val fileRelativePath = newRelativePath
+        val fileRelativePath = randomRelativePath()
         val file = getFilePath(relativePath = fileRelativePath)
         val aead = getFileStreamingAead()
         val outputStream = getConditionalOutputStream(
@@ -53,7 +58,7 @@ class FileHandler(
     }
 
     suspend fun writePreview(bytes: ByteArray): String? = coroutineScope {
-        val fileRelativePath = newRelativePath
+        val fileRelativePath = randomRelativePath()
         val file = getFilePath(relativePath = fileRelativePath)
         val aead = getPreviewStreamingAead()
         val outputStream = getConditionalOutputStream(
@@ -117,12 +122,6 @@ class FileHandler(
     suspend fun getPreviewStreamingAead(parameters: StreamingAeadParameters): StreamingAead {
         return aeadManager.streamingAead(tag = TAG_KEYSET_PREVIEW, keyParams = parameters)
     }
-
-    private fun getRandomFileName(): String =
-        randomizer.generateUrlSafeString(DEFAULT_FILE_NAME_LENGTH)
-
-    private fun getRandomFolderName(): String =
-        randomizer.generateUrlSafeString(DEFAULT_FOLDER_NAME_LENGTH)
 
     fun getFilePath(relativePath: String): File {
         return File("$dataFolder/$relativePath").apply {
