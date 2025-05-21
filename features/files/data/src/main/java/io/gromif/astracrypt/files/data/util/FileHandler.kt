@@ -13,6 +13,10 @@ import java.io.File
 import java.io.InputStream
 import java.io.OutputStream
 
+private const val DEFAULT_BUFFER_SIZE = 8 * 1024
+private const val DEFAULT_FILE_NAME_LENGTH = 6
+private const val DEFAULT_FOLDER_NAME_LENGTH = 2
+
 class FileHandler(
     private val aeadManager: AeadManager,
     private val associatedDataManager: AssociatedDataManager,
@@ -22,7 +26,7 @@ class FileHandler(
 ) {
     private val dataFolder = "$filesDir/data"
     private val newRelativePath get() = "${getRandomFolderName()}/${getRandomFileName()}"
-    private val defaultBuffer get() = ByteArray(8 * 1024)
+    private val defaultBuffer get() = ByteArray(DEFAULT_BUFFER_SIZE)
 
     suspend fun exportFile(
         outputStream: OutputStream,
@@ -109,12 +113,16 @@ class FileHandler(
             getPreviewStreamingAead(parameters = it.params)
         }
     }
+
     suspend fun getPreviewStreamingAead(parameters: StreamingAeadParameters): StreamingAead {
         return aeadManager.streamingAead(tag = TAG_KEYSET_PREVIEW, keyParams = parameters)
     }
 
-    private fun getRandomFileName(): String = randomizer.generateUrlSafeString(6)
-    private fun getRandomFolderName(): String = randomizer.generateUrlSafeString(2)
+    private fun getRandomFileName(): String =
+        randomizer.generateUrlSafeString(DEFAULT_FILE_NAME_LENGTH)
+
+    private fun getRandomFolderName(): String =
+        randomizer.generateUrlSafeString(DEFAULT_FOLDER_NAME_LENGTH)
 
     fun getFilePath(relativePath: String): File {
         return File("$dataFolder/$relativePath").apply {
