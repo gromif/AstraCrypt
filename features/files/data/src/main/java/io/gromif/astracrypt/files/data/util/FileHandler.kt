@@ -40,7 +40,7 @@ class FileHandler(
         val file = getFilePath(relativePath = relativePath)
         val aead = getFileStreamingAead(aeadIndex = aeadIndex)
         val inputStream = getConditionalInputStream(aead = aead, inputStream = file.inputStream())
-        copyInputToOutput(input = inputStream, output = outputStream)
+        copyToSuspend(input = inputStream, output = outputStream)
         isActive
     }
 
@@ -52,7 +52,7 @@ class FileHandler(
             aead = aead,
             outputStream = file.outputStream()
         )
-        copyInputToOutput(input = input, output = outputStream)
+        copyToSuspend(input = input, output = outputStream)
         if (!isActive && file.delete()) null else fileRelativePath
     }
 
@@ -73,7 +73,7 @@ class FileHandler(
         fileRelativePath
     }
 
-    private suspend fun copyInputToOutput(
+    private suspend fun copyToSuspend(
         input: InputStream,
         output: OutputStream
     ) = coroutineScope {
