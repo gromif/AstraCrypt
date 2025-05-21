@@ -43,7 +43,6 @@ class AeadUtil(
             cachedAeadMap[aeadIndex] = it
         }
     }
-
 }
 
 private const val TAG_KEYSET = "files_db"

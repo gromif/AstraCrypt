@@ -56,7 +56,9 @@ class FileHandler(
             aead = aead,
             outputStream = file.outputStream()
         )
-        if (isActive && file.exists()) outputStream.use { it.write(bytes) } else {
+        if (isActive && file.exists()) {
+            outputStream.use { it.write(bytes) }
+        } else {
             file.delete()
             return@coroutineScope null
         }
@@ -81,14 +83,18 @@ class FileHandler(
         outputStream: OutputStream
     ): OutputStream = if (aead != null) {
         aead.newEncryptingStream(outputStream, associatedDataManager.getAssociatedData())
-    } else outputStream
+    } else {
+        outputStream
+    }
 
     private suspend fun getConditionalInputStream(
         aead: StreamingAead?,
         inputStream: InputStream
     ): InputStream = if (aead != null) {
         aead.newDecryptingStream(inputStream, associatedDataManager.getAssociatedData())
-    } else inputStream
+    } else {
+        inputStream
+    }
 
     private suspend fun getFileStreamingAead(aeadIndex: Int? = null): StreamingAead? {
         val aeadIndex = aeadIndex ?: aeadSettingsRepository.getAeadInfo().fileMode.id
@@ -116,7 +122,6 @@ class FileHandler(
             createNewFile()
         }
     }
-
 }
 
 private const val TAG_KEYSET_FILE = "import_file"

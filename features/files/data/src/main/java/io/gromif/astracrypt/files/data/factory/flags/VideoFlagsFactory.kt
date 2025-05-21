@@ -35,5 +35,4 @@ class VideoFlagsFactory(
         val videoFlags = FileFlagsDto.Video(resolution = resolution)
         return videoFlags.takeIf { it != defaultVideoFlags }
     }
-
 }

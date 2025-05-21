@@ -19,15 +19,17 @@ class DefaultItemExporter(
     private val filesUtil: FilesUtil,
     private val uriToString: Mapper<Uri, String>,
     private val stringToUri: Mapper<String, Uri>
-): ItemExporter {
+) : ItemExporter {
 
     override suspend fun externalExport(
         idList: List<Long>,
         outputPath: String
     ) = coroutineScope {
         val outputFolder = DocumentFile.fromTreeUri(
-            /* context = */ context,
-            /* treeUri = */ stringToUri(outputPath)
+            /* context = */
+            context,
+            /* treeUri = */
+            stringToUri(outputPath)
         )!!
 
         val folderMap = mutableMapOf<Long, DocumentFile>()
@@ -67,5 +69,4 @@ class DefaultItemExporter(
         )
         return uriToString(outputUri)
     }
-
 }

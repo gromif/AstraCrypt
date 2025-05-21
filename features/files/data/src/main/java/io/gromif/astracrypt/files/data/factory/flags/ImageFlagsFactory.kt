@@ -27,18 +27,19 @@ class ImageFlagsFactory(
                 height = getAttribute(ExifInterface.TAG_IMAGE_LENGTH)?.toIntOrNull() ?: 0
             }
         }
-        if (width + height == 0) fileDescriptor?.let {
-            val bitmapOptions = BitmapFactory.Options().apply { inJustDecodeBounds = true }
-            BitmapFactory.decodeFileDescriptor(it.fileDescriptor, null, bitmapOptions)
-            height = bitmapOptions.outHeight
-            width = bitmapOptions.outWidth
+        if (width + height == 0) {
+            fileDescriptor?.let {
+                val bitmapOptions = BitmapFactory.Options().apply { inJustDecodeBounds = true }
+                BitmapFactory.decodeFileDescriptor(it.fileDescriptor, null, bitmapOptions)
+                height = bitmapOptions.outHeight
+                width = bitmapOptions.outWidth
+            }
         }
         fileDescriptor?.close()
 
-        if (width + height != 0) resolution = "${width}x${height}"
+        if (width + height != 0) resolution = "${width}x$height"
 
         val imageFlags = FileFlagsDto.Image(resolution = resolution)
         return imageFlags.takeIf { it != default }
     }
-
 }

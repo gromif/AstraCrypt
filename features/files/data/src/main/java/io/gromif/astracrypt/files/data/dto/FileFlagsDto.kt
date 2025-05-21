@@ -13,7 +13,7 @@ sealed class FileFlagsDto {
         @SerialName("a")
         val resolution: String = ""
 
-    ): FileFlagsDto()
+    ) : FileFlagsDto()
 
     @SerialName("vid")
     @Serializable
@@ -22,7 +22,7 @@ sealed class FileFlagsDto {
         @SerialName("a")
         val resolution: String = ""
 
-    ): FileFlagsDto()
+    ) : FileFlagsDto()
 
     @SerialName("aud")
     @Serializable
@@ -35,6 +35,5 @@ sealed class FileFlagsDto {
 
         @SerialName("c")
         val author: String? = null
-    ): FileFlagsDto()
-
+    ) : FileFlagsDto()
 }

@@ -65,7 +65,9 @@ class RepositoryImpl(
         aeadInfo: AeadInfo,
         importItemDto: ImportItemDto
     ) {
-        val time = if (importItemDto.creationTime == 0L) System.currentTimeMillis() else {
+        val time = if (importItemDto.creationTime == 0L) {
+            System.currentTimeMillis()
+        } else {
             importItemDto.creationTime
         }
         val filesEntity = FilesEntity(
@@ -91,9 +93,11 @@ class RepositoryImpl(
             val currentId = deque.removeFirst()
             val (id, file, preview) = filesDaoAead.getDeleteData(currentId)
             filesDaoAead.delete(id)
-            if (file != null) with(fileHandler) {
-                getFilePath(relativePath = file).delete()
-                if (preview != null) getFilePath(relativePath = preview).delete()
+            if (file != null) {
+                with(fileHandler) {
+                    getFilePath(relativePath = file).delete()
+                    if (preview != null) getFilePath(relativePath = preview).delete()
+                }
             } else {
                 val innerIdList = filesDaoAead.getIdList(parent = id)
                 deque.addAll(innerIdList)
@@ -177,5 +181,4 @@ class RepositoryImpl(
             }
         }
     }
-
 }

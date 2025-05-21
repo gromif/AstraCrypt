@@ -18,18 +18,22 @@ class DefaultAeadSettingsRepository(
     private val dataStore: DataStore<Preferences>,
     private val aeadInfoMapper: Mapper<AeadInfoDto, AeadInfo>,
     private val aeadInfoDtoMapper: Mapper<AeadInfo, AeadInfoDto>
-): AeadSettingsRepository {
+) : AeadSettingsRepository {
     private val aeadInfoKey = stringPreferencesKey("aead_info")
     private var cachedAeadInfo: AeadInfo? = null
     override fun getAeadInfoFlow(): Flow<AeadInfo> {
         return dataStore.data.map {
             val cached = cachedAeadInfo
-            if (cached != null) cached else {
+            if (cached != null) {
+                cached
+            } else {
                 val serializedValue = it[aeadInfoKey]
                 val aeadInfo = if (serializedValue != null) {
                     val dto: AeadInfoDto = Json.decodeFromString(serializedValue)
                     aeadInfoMapper(dto)
-                } else AeadInfo()
+                } else {
+                    AeadInfo()
+                }
                 cachedAeadInfo = aeadInfo
                 aeadInfo
             }

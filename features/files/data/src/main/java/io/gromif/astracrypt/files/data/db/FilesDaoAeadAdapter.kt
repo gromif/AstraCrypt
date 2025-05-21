@@ -28,7 +28,6 @@ class FilesDaoAeadAdapter private constructor(
                 aeadInfo = aeadInfo
             )
         }
-
     }
 
     private val databaseMode = aeadInfo.databaseMode
@@ -41,41 +40,53 @@ class FilesDaoAeadAdapter private constructor(
         val filesEntity = filesDao.get(id)
         return if (databaseMode is AeadMode.Template) {
             aeadHandler.decryptFilesEntity(aeadInfo, databaseMode, filesEntity)
-        } else filesEntity
+        } else {
+            filesEntity
+        }
     }
 
     override suspend fun getDeleteData(id: Long): DeleteTuple {
         val deleteTuple = filesDao.getDeleteData(id)
         return if (databaseMode is AeadMode.Template) {
             aeadHandler.decryptDeleteTuple(aeadInfo, databaseMode, deleteTuple)
-        } else deleteTuple
+        } else {
+            deleteTuple
+        }
     }
 
     override suspend fun getDetailsById(id: Long): DetailsTuple {
         val detailsTuple = filesDao.getDetailsById(id)
         return if (databaseMode is AeadMode.Template) {
             aeadHandler.decryptDetailsTuple(aeadInfo, databaseMode, detailsTuple)
-        } else detailsTuple
+        } else {
+            detailsTuple
+        }
     }
 
     override suspend fun insert(filesEntity: FilesEntity) {
         val entity = if (databaseMode is AeadMode.Template) {
             aeadHandler.encryptFilesEntity(aeadInfo, databaseMode, filesEntity)
-        } else filesEntity
+        } else {
+            filesEntity
+        }
         filesDao.insert(entity)
     }
 
     override suspend fun rename(id: Long, name: String) {
         val name = if (databaseMode is AeadMode.Template) {
             aeadHandler.encryptNameIfNeeded(aeadInfo, databaseMode, name)
-        } else name
+        } else {
+            name
+        }
         filesDao.rename(id, name)
     }
 
     override suspend fun updateAead(updateAeadTuple: UpdateAeadTuple) {
         val tuple = if (databaseMode is AeadMode.Template) {
             aeadHandler.encryptUpdateAeadTuple(aeadInfo, databaseMode, updateAeadTuple)
-        } else updateAeadTuple
+        } else {
+            updateAeadTuple
+        }
         filesDao.updateAead(tuple)
     }
 
@@ -83,7 +94,9 @@ class FilesDaoAeadAdapter private constructor(
         val exportTuple = filesDao.getExportData(id)
         return if (databaseMode is AeadMode.Template) {
             aeadHandler.decryptExportTuple(aeadInfo, databaseMode, exportTuple)
-        } else exportTuple
+        } else {
+            exportTuple
+        }
     }
 
     override suspend fun getUpdateAeadTupleList(
@@ -91,17 +104,24 @@ class FilesDaoAeadAdapter private constructor(
         pageOffset: Int,
     ): List<UpdateAeadTuple> {
         val updateAeadTuple = filesDao.getUpdateAeadTupleList(pageSize, pageOffset)
-        return if (databaseMode is AeadMode.Template) updateAeadTuple.map {
-            aeadHandler.decryptUpdateAeadTuple(aeadInfo, databaseMode, it)
-        } else updateAeadTuple
+        return if (databaseMode is AeadMode.Template) {
+            updateAeadTuple.map {
+                aeadHandler.decryptUpdateAeadTuple(aeadInfo, databaseMode, it)
+            }
+        } else {
+            updateAeadTuple
+        }
     }
 
     override fun getRecentFilesFlow(): Flow<List<FilesEntity>> {
         return filesDao.getRecentFilesFlow().map { list ->
-            if (databaseMode is AeadMode.Template) list.map {
-                aeadHandler.decryptFilesEntity(aeadInfo, databaseMode, it)
-            } else list
+            if (databaseMode is AeadMode.Template) {
+                list.map {
+                    aeadHandler.decryptFilesEntity(aeadInfo, databaseMode, it)
+                }
+            } else {
+                list
+            }
         }
     }
-
 }

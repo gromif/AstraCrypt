@@ -41,5 +41,4 @@ class AudioPreviewFactory(
             bitmapCompressor(bitmap = it, quality = 70)
         }
     }
-
 }

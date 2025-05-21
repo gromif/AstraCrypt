@@ -45,5 +45,4 @@ class DefaultSearchStrategyTest {
     fun tearDown() {
         confirmVerified(repositoryMock)
     }
-
 }

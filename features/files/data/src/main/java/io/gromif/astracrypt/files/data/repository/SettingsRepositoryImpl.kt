@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.map
 
 class SettingsRepositoryImpl(
     private val dataStore: DataStore<Preferences>
-): SettingsRepository {
+) : SettingsRepository {
     private val viewModeKey = intPreferencesKey("view_mode")
     override fun getViewModeFlow(): Flow<ViewMode> {
         return dataStore.data.map {
@@ -25,5 +25,4 @@ class SettingsRepositoryImpl(
             preferences[viewModeKey] = viewMode.ordinal
         }
     }
-
 }

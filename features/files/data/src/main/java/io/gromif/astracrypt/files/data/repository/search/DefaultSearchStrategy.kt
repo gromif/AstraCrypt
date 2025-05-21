@@ -5,7 +5,7 @@ import io.gromif.astracrypt.files.domain.repository.search.SearchStrategy
 
 class DefaultSearchStrategy(
     private val repository: Repository
-): SearchStrategy<Long, List<Long>> {
+) : SearchStrategy<Long, List<Long>> {
     private var cachedStrategy: Pair<Long, List<Long>>? = null
 
     override suspend fun search(request: Long): List<Long> {
@@ -15,5 +15,4 @@ class DefaultSearchStrategy(
             cachedStrategy = Pair(request, it)
         }
     }
-
 }
