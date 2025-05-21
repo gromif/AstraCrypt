@@ -25,7 +25,6 @@ class FileHandler(
     filesDir: File
 ) {
     private val dataFolder = "$filesDir/data"
-    private val defaultBuffer get() = ByteArray(DEFAULT_BUFFER_SIZE)
 
     private fun randomRelativePath(): String {
         val folderName = randomizer.generateUrlSafeString(DEFAULT_FOLDER_NAME_LENGTH)
@@ -78,7 +77,7 @@ class FileHandler(
         input: InputStream,
         output: OutputStream
     ) = coroutineScope {
-        val buffer = defaultBuffer
+        val buffer = ByteArray(DEFAULT_BUFFER_SIZE)
         var loadedSize = input.read(buffer)
         while (isActive && loadedSize != -1) {
             output.write(buffer, 0, loadedSize)
