@@ -39,8 +39,14 @@ class FileHandler(
     ): Boolean = coroutineScope {
         val file = getFilePath(relativePath = relativePath)
         val aead = getFileStreamingAead(aeadIndex = aeadIndex)
-        val inputStream = getConditionalInputStream(aead = aead, inputStream = file.inputStream())
-        inputStream.copyToSuspend(outputStream)
+        val fileInputStream = file.inputStream()
+
+        val targetInputStream = if (aead != null) {
+            aead.newDecryptingStream(fileInputStream, associatedDataManager.getAssociatedData())
+        } else {
+            fileInputStream
+        }
+        targetInputStream.copyToSuspend(outputStream)
         isActive
     }
 
@@ -80,15 +86,6 @@ class FileHandler(
         aead.newEncryptingStream(outputStream, associatedDataManager.getAssociatedData())
     } else {
         outputStream
-    }
-
-    private suspend fun getConditionalInputStream(
-        aead: StreamingAead?,
-        inputStream: InputStream
-    ): InputStream = if (aead != null) {
-        aead.newDecryptingStream(inputStream, associatedDataManager.getAssociatedData())
-    } else {
-        inputStream
     }
 
     private suspend fun getFileStreamingAead(aeadIndex: Int? = null): StreamingAead? {
