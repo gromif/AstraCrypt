@@ -4,6 +4,7 @@ import io.gromif.astracrypt.files.data.db.DaoManager
 import io.gromif.astracrypt.files.data.db.FilesEntity
 import io.gromif.astracrypt.files.data.db.tuples.DetailsTuple
 import io.gromif.astracrypt.files.data.util.FileHandler
+import io.gromif.astracrypt.files.data.util.mapper.toFilesEntity
 import io.gromif.astracrypt.files.domain.model.AeadInfo
 import io.gromif.astracrypt.files.domain.model.ImportItemDto
 import io.gromif.astracrypt.files.domain.model.Item
@@ -50,19 +51,7 @@ class RepositoryImpl(
         aeadInfo: AeadInfo,
         importItemDto: ImportItemDto
     ) {
-        val filesEntity = FilesEntity(
-            parent = importItemDto.parent,
-            name = importItemDto.name,
-            state = importItemDto.itemState,
-            type = importItemDto.itemType,
-            file = importItemDto.file,
-            fileAead = aeadInfo.fileMode.id,
-            preview = importItemDto.preview,
-            previewAead = aeadInfo.previewMode.id,
-            flags = importItemDto.flags,
-            time = importItemDto.creationTime,
-            size = importItemDto.size
-        )
+        val filesEntity = importItemDto.toFilesEntity(aeadInfo)
         daoManager.files(aeadInfo).insert(filesEntity)
     }
 
