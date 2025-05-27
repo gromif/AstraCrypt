@@ -5,6 +5,7 @@ import io.gromif.astracrypt.files.domain.model.ImportItemDto
 import io.gromif.astracrypt.files.domain.model.ItemState
 import io.gromif.astracrypt.files.domain.model.ItemType
 import io.gromif.astracrypt.files.domain.repository.Repository
+import io.gromif.astracrypt.files.domain.service.ClockService
 import io.gromif.astracrypt.files.domain.usecase.aead.GetAeadInfoUseCase
 import io.gromif.astracrypt.files.domain.util.FileUtil
 import io.gromif.astracrypt.files.domain.util.FlagsUtil
@@ -22,6 +23,7 @@ import org.junit.Test
 class ImportUseCaseTest {
     private lateinit var importUseCase: ImportUseCase
     private val getAeadInfoUseCase: GetAeadInfoUseCase = mockk()
+    private val clockService: ClockService = mockk(relaxed = true)
     private val repository: Repository = mockk(relaxed = true)
     private val fileUtilFactory: FileUtil.Factory = mockk()
     private val previewUtil: PreviewUtil = mockk()
@@ -32,7 +34,7 @@ class ImportUseCaseTest {
     @Before
     fun setUp() {
         importUseCase = ImportUseCase(
-            getAeadInfoUseCase, repository, fileUtilFactory, previewUtil, flagsUtil
+            getAeadInfoUseCase, clockService, repository, fileUtilFactory, previewUtil, flagsUtil
         )
     }
 
