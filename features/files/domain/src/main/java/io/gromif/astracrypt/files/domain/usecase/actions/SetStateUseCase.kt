@@ -1,13 +1,13 @@
 package io.gromif.astracrypt.files.domain.usecase.actions
 
 import io.gromif.astracrypt.files.domain.model.ItemState
-import io.gromif.astracrypt.files.domain.repository.Repository
+import io.gromif.astracrypt.files.domain.repository.item.ItemWriter
 import io.gromif.astracrypt.files.domain.validation.ValidationException
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
 class SetStateUseCase(
-    private val repository: Repository,
+    private val itemWriter: ItemWriter,
 ) {
 
     suspend operator fun invoke(ids: List<Long>, itemState: ItemState) = coroutineScope {
@@ -15,7 +15,7 @@ class SetStateUseCase(
 
         ids.forEach {
             launch {
-                repository.setState(it, itemState)
+                itemWriter.setState(it, itemState)
             }
         }
     }

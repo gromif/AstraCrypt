@@ -4,7 +4,7 @@ import io.gromif.astracrypt.files.domain.model.AeadInfo
 import io.gromif.astracrypt.files.domain.model.ImportItemDto
 import io.gromif.astracrypt.files.domain.model.ItemState
 import io.gromif.astracrypt.files.domain.model.ItemType
-import io.gromif.astracrypt.files.domain.repository.Repository
+import io.gromif.astracrypt.files.domain.repository.item.ItemWriter
 import io.gromif.astracrypt.files.domain.service.ClockService
 import io.gromif.astracrypt.files.domain.usecase.aead.GetAeadInfoUseCase
 import io.gromif.astracrypt.files.domain.util.FileUtil
@@ -24,7 +24,7 @@ class ImportUseCaseTest {
     private lateinit var importUseCase: ImportUseCase
     private val getAeadInfoUseCase: GetAeadInfoUseCase = mockk()
     private val clockService: ClockService = mockk(relaxed = true)
-    private val repository: Repository = mockk(relaxed = true)
+    private val itemWriter: ItemWriter = mockk(relaxed = true)
     private val fileUtilFactory: FileUtil.Factory = mockk()
     private val previewUtil: PreviewUtil = mockk()
     private val flagsUtil: FlagsUtil = mockk()
@@ -34,7 +34,7 @@ class ImportUseCaseTest {
     @Before
     fun setUp() {
         importUseCase = ImportUseCase(
-            getAeadInfoUseCase, clockService, repository, fileUtilFactory, previewUtil, flagsUtil
+            getAeadInfoUseCase, clockService, itemWriter, fileUtilFactory, previewUtil, flagsUtil
         )
     }
 
@@ -86,7 +86,7 @@ class ImportUseCaseTest {
         coVerify(exactly = pathList.size) { previewUtil.getPreviewPath(fileType, any()) }
         coVerify(exactly = pathList.size) { flagsUtil.getFlags(fileType, any()) }
 
-        coVerify(exactly = pathList.size) { repository.insert(mockkAeadInfo, targetImportItemDto) }
+        coVerify(exactly = pathList.size) { itemWriter.insert(mockkAeadInfo, targetImportItemDto) }
         verify(exactly = pathList.size) { fileUtil.delete() }
     }
 

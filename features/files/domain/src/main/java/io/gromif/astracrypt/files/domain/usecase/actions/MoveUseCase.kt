@@ -1,13 +1,13 @@
 package io.gromif.astracrypt.files.domain.usecase.actions
 
-import io.gromif.astracrypt.files.domain.repository.Repository
+import io.gromif.astracrypt.files.domain.repository.item.ItemWriter
 import io.gromif.astracrypt.files.domain.usecase.navigator.GetCurrentNavFolderFlowUseCase
 import io.gromif.astracrypt.files.domain.validation.ValidationException
 import kotlinx.coroutines.flow.first
 
 class MoveUseCase(
     private val getCurrentNavFolderFlowUseCase: GetCurrentNavFolderFlowUseCase,
-    private val repository: Repository
+    private val itemWriter: ItemWriter
 ) {
 
     suspend operator fun invoke(ids: List<Long>) {
@@ -15,7 +15,7 @@ class MoveUseCase(
 
         val folderId = getCurrentNavFolderFlowUseCase().first().id
 
-        repository.move(
+        itemWriter.move(
             ids = ids,
             parentId = folderId
         )
