@@ -5,6 +5,7 @@ import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
 class DaoManager(
+    private val filesDao: FilesDao,
     private val filesDaoAeadAdapterFactory: FilesDaoAeadAdapter.Factory,
 ) {
     private val mutex = Mutex()
@@ -15,6 +16,10 @@ class DaoManager(
         if (cached != null && cached.compareAeadInfo(aeadInfo)) return cached
 
         return filesDaoAeadAdapterFactory.create(aeadInfo).also { cachedFilesDaoAeadAdapter = it }
+    }
+
+    fun files(): FilesDao {
+        return filesDao
     }
 
 }

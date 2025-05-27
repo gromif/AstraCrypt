@@ -7,7 +7,6 @@ import dagger.hilt.components.SingletonComponent
 import io.gromif.astracrypt.files.data.db.DaoManager
 import io.gromif.astracrypt.files.data.db.FilesDao
 import io.gromif.astracrypt.files.data.db.FilesDaoAeadAdapter
-import io.gromif.astracrypt.files.data.util.AeadHandler
 import javax.inject.Singleton
 
 @Module
@@ -18,12 +17,10 @@ internal object DaoManagerModule {
     @Provides
     fun provideDaoManager(
         filesDao: FilesDao,
-        aeadHandler: AeadHandler,
+        filesDaoAeadAdapterFactory: FilesDaoAeadAdapter.Factory
     ) = DaoManager(
-        filesDaoAeadAdapterFactory = FilesDaoAeadAdapter.Factory(
-            filesDao = filesDao,
-            aeadHandler = aeadHandler
-        )
+        filesDao = filesDao,
+        filesDaoAeadAdapterFactory = filesDaoAeadAdapterFactory
     )
 
 }
