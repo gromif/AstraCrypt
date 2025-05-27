@@ -4,8 +4,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import io.gromif.astracrypt.files.data.db.FilesDao
-import io.gromif.astracrypt.files.data.db.FilesDaoAeadAdapter
+import io.gromif.astracrypt.files.data.db.DaoManager
 import io.gromif.astracrypt.files.data.db.FilesEntity
 import io.gromif.astracrypt.files.data.db.tuples.DetailsTuple
 import io.gromif.astracrypt.files.data.repository.RepositoryImpl
@@ -23,14 +22,12 @@ internal object RepositoryModule {
     @Singleton
     @Provides
     fun provideRepository(
-        filesDaoAeadAdapterFactory: FilesDaoAeadAdapter.Factory,
-        filesDao: FilesDao,
+        daoManager: DaoManager,
         fileHandler: FileHandler,
         itemMapper: Mapper<FilesEntity, Item>,
         itemDetailsMapper: Mapper<DetailsTuple, ItemDetails>,
     ): Repository = RepositoryImpl(
-        filesDao = filesDao,
-        filesDaoAeadAdapterFactory = filesDaoAeadAdapterFactory,
+        daoManager = daoManager,
         fileHandler = fileHandler,
         itemMapper = itemMapper,
         itemDetailsMapper = itemDetailsMapper,
