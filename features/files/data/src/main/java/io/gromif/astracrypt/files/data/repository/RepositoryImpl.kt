@@ -50,11 +50,6 @@ class RepositoryImpl(
         aeadInfo: AeadInfo,
         importItemDto: ImportItemDto
     ) {
-        val time = if (importItemDto.creationTime == 0L) {
-            System.currentTimeMillis()
-        } else {
-            importItemDto.creationTime
-        }
         val filesEntity = FilesEntity(
             parent = importItemDto.parent,
             name = importItemDto.name,
@@ -65,7 +60,7 @@ class RepositoryImpl(
             preview = importItemDto.preview,
             previewAead = aeadInfo.previewMode.id,
             flags = importItemDto.flags,
-            time = time,
+            time = importItemDto.creationTime,
             size = importItemDto.size
         )
         daoManager.files(aeadInfo).insert(filesEntity)
