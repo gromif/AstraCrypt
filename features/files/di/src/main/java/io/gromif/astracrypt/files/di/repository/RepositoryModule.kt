@@ -9,7 +9,6 @@ import io.gromif.astracrypt.files.data.db.FilesDaoAeadAdapter
 import io.gromif.astracrypt.files.data.db.FilesEntity
 import io.gromif.astracrypt.files.data.db.tuples.DetailsTuple
 import io.gromif.astracrypt.files.data.repository.RepositoryImpl
-import io.gromif.astracrypt.files.data.util.AeadHandler
 import io.gromif.astracrypt.files.data.util.FileHandler
 import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.domain.model.ItemDetails
@@ -24,17 +23,14 @@ internal object RepositoryModule {
     @Singleton
     @Provides
     fun provideRepository(
+        filesDaoAeadAdapterFactory: FilesDaoAeadAdapter.Factory,
         filesDao: FilesDao,
-        aeadHandler: AeadHandler,
         fileHandler: FileHandler,
         itemMapper: Mapper<FilesEntity, Item>,
         itemDetailsMapper: Mapper<DetailsTuple, ItemDetails>,
     ): Repository = RepositoryImpl(
         filesDao = filesDao,
-        filesDaoAeadAdapterFactory = FilesDaoAeadAdapter.Factory(
-            filesDao = filesDao,
-            aeadHandler = aeadHandler
-        ),
+        filesDaoAeadAdapterFactory = filesDaoAeadAdapterFactory,
         fileHandler = fileHandler,
         itemMapper = itemMapper,
         itemDetailsMapper = itemDetailsMapper,

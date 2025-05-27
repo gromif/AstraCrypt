@@ -5,10 +5,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import io.gromif.astracrypt.files.data.db.DaoManager
-import io.gromif.astracrypt.files.data.db.FilesDao
 import io.gromif.astracrypt.files.data.db.FilesDaoAeadAdapter
 import io.gromif.astracrypt.files.data.repository.DefaultAeadManager
-import io.gromif.astracrypt.files.data.util.AeadHandler
 import io.gromif.astracrypt.files.domain.repository.AeadManager
 
 @Module
@@ -17,15 +15,11 @@ internal object AeadManagerModule {
 
     @Provides
     fun provideAeadManager(
-        filesDao: FilesDao,
-        aeadHandler: AeadHandler,
+        filesDaoAeadAdapterFactory: FilesDaoAeadAdapter.Factory,
         daoManager: DaoManager
     ): AeadManager = DefaultAeadManager(
         daoManager = daoManager,
-        filesDaoAeadAdapterFactory = FilesDaoAeadAdapter.Factory(
-            filesDao = filesDao,
-            aeadHandler = aeadHandler
-        ),
+        filesDaoAeadAdapterFactory = filesDaoAeadAdapterFactory
     )
 
 }
