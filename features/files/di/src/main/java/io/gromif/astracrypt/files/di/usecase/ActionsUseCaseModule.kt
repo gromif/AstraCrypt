@@ -4,7 +4,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
-import io.gromif.astracrypt.files.domain.repository.Repository
+import io.gromif.astracrypt.files.domain.repository.item.ItemDeleter
+import io.gromif.astracrypt.files.domain.repository.item.ItemWriter
 import io.gromif.astracrypt.files.domain.usecase.actions.CreateFolderUseCase
 import io.gromif.astracrypt.files.domain.usecase.actions.DeleteUseCase
 import io.gromif.astracrypt.files.domain.usecase.actions.MoveUseCase
@@ -21,35 +22,35 @@ internal object ActionsUseCaseModule {
     fun provideCreateFolderUseCase(
         getCurrentNavFolderFlowUseCase: GetCurrentNavFolderFlowUseCase,
         getAeadInfoUseCase: GetAeadInfoUseCase,
-        repository: Repository,
+        itemWriter: ItemWriter,
     ) = CreateFolderUseCase(
         getCurrentNavFolderFlowUseCase = getCurrentNavFolderFlowUseCase,
         getAeadInfoUseCase = getAeadInfoUseCase,
-        repository = repository
+        itemWriter = itemWriter
     )
 
     @Provides
     fun provideDeleteUseCase(
         getAeadInfoUseCase: GetAeadInfoUseCase,
-        repository: Repository,
-    ) = DeleteUseCase(getAeadInfoUseCase, repository)
+        itemDeleter: ItemDeleter,
+    ) = DeleteUseCase(getAeadInfoUseCase, itemDeleter = itemDeleter)
 
     @Provides
     fun provideMoveUseCase(
         getCurrentNavFolderFlowUseCase: GetCurrentNavFolderFlowUseCase,
-        repository: Repository
+        itemWriter: ItemWriter
     ) = MoveUseCase(
         getCurrentNavFolderFlowUseCase = getCurrentNavFolderFlowUseCase,
-        repository = repository
+        itemWriter = itemWriter
     )
 
     @Provides
     fun provideRenameUseCase(
         getAeadInfoUseCase: GetAeadInfoUseCase,
-        repository: Repository,
-    ) = RenameUseCase(getAeadInfoUseCase, repository)
+        itemWriter: ItemWriter,
+    ) = RenameUseCase(getAeadInfoUseCase, itemWriter = itemWriter)
 
     @Provides
-    fun provideSetStarredUseCase(repository: Repository) = SetStateUseCase(repository = repository)
+    fun provideSetStarredUseCase(itemWriter: ItemWriter) = SetStateUseCase(itemWriter = itemWriter)
 
 }

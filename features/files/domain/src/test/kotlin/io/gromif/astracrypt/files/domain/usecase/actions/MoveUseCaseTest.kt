@@ -1,7 +1,7 @@
 package io.gromif.astracrypt.files.domain.usecase.actions
 
-import io.gromif.astracrypt.files.domain.repository.Repository
 import io.gromif.astracrypt.files.domain.repository.StorageNavigator
+import io.gromif.astracrypt.files.domain.repository.item.ItemWriter
 import io.gromif.astracrypt.files.domain.usecase.navigator.GetCurrentNavFolderFlowUseCase
 import io.gromif.astracrypt.files.domain.validation.ValidationException
 import io.mockk.coVerify
@@ -17,13 +17,13 @@ import org.junit.Test
 class MoveUseCaseTest {
     private lateinit var moveUseCase: MoveUseCase
     private val getCurrentNavFolderFlowUseCaseMock: GetCurrentNavFolderFlowUseCase = mockk()
-    private val repository: Repository = mockk(relaxed = true)
+    private val itemWriter: ItemWriter = mockk(relaxed = true)
 
     @Before
     fun setUp() {
         moveUseCase = MoveUseCase(
             getCurrentNavFolderFlowUseCase = getCurrentNavFolderFlowUseCaseMock,
-            repository = repository
+            itemWriter = itemWriter
         )
     }
 
@@ -44,12 +44,12 @@ class MoveUseCaseTest {
 
         coVerify { getCurrentNavFolderFlowUseCaseMock() }
         coVerify(exactly = 1) {
-            repository.move(targetIds, targetFolderId)
+            itemWriter.move(targetIds, targetFolderId)
         }
     }
 
     @After
     fun tearDown() {
-        confirmVerified(getCurrentNavFolderFlowUseCaseMock, repository)
+        confirmVerified(getCurrentNavFolderFlowUseCaseMock, itemWriter)
     }
 }

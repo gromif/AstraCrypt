@@ -4,7 +4,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import io.gromif.astracrypt.files.domain.repository.Repository
+import io.gromif.astracrypt.files.domain.repository.item.ItemReader
 import io.gromif.astracrypt.files.domain.usecase.GetItemDetailsUseCase
 import io.gromif.astracrypt.files.domain.usecase.GetRecentItemsUseCase
 import io.gromif.astracrypt.files.domain.usecase.GetValidationRulesUseCase
@@ -21,16 +21,16 @@ internal object UseCaseModule {
     @Provides
     fun provideGetRecentItemsUseCase(
         getAeadInfoFlowUseCase: GetAeadInfoFlowUseCase,
-        repository: Repository,
+        itemReader: ItemReader,
     ) = GetRecentItemsUseCase(
         getAeadInfoFlowUseCase = getAeadInfoFlowUseCase,
-        repository = repository,
+        itemReader = itemReader,
     )
 
     @Provides
     fun provideGetItemDetailsUseCase(
         getAeadInfoUseCase: GetAeadInfoUseCase,
-        repository: Repository,
-    ) = GetItemDetailsUseCase(getAeadInfoUseCase, repository)
+        itemReader: ItemReader,
+    ) = GetItemDetailsUseCase(getAeadInfoUseCase, itemReader = itemReader)
 
 }

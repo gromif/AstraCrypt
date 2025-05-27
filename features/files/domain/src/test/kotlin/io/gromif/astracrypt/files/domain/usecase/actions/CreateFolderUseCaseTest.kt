@@ -4,8 +4,8 @@ import io.gromif.astracrypt.files.domain.model.AeadInfo
 import io.gromif.astracrypt.files.domain.model.ImportItemDto
 import io.gromif.astracrypt.files.domain.model.ItemState
 import io.gromif.astracrypt.files.domain.model.ItemType
-import io.gromif.astracrypt.files.domain.repository.Repository
 import io.gromif.astracrypt.files.domain.repository.StorageNavigator
+import io.gromif.astracrypt.files.domain.repository.item.ItemWriter
 import io.gromif.astracrypt.files.domain.usecase.aead.GetAeadInfoUseCase
 import io.gromif.astracrypt.files.domain.usecase.navigator.GetCurrentNavFolderFlowUseCase
 import io.gromif.astracrypt.files.domain.validation.ValidationException
@@ -22,14 +22,14 @@ class CreateFolderUseCaseTest {
     private lateinit var createFolderUseCase: CreateFolderUseCase
     private val getCurrentNavFolderFlowUseCaseMock: GetCurrentNavFolderFlowUseCase = mockk()
     private val getAeadInfoUseCase: GetAeadInfoUseCase = mockk()
-    private val repository: Repository = mockk(relaxed = true)
+    private val itemWriter: ItemWriter = mockk(relaxed = true)
 
     @Before
     fun setUp() {
         createFolderUseCase = CreateFolderUseCase(
             getCurrentNavFolderFlowUseCase = getCurrentNavFolderFlowUseCaseMock,
             getAeadInfoUseCase = getAeadInfoUseCase,
-            repository = repository
+            itemWriter = itemWriter
         )
     }
 
@@ -61,7 +61,7 @@ class CreateFolderUseCaseTest {
         coVerify(exactly = 1) { getCurrentNavFolderFlowUseCaseMock() }
         coVerify(exactly = 1) { getAeadInfoUseCase() }
         coVerify(exactly = 1) {
-            repository.insert(aeadInfo = mockAeadInfo, importItemDto = targetImportItemDto)
+            itemWriter.insert(aeadInfo = mockAeadInfo, importItemDto = targetImportItemDto)
         }
     }
 

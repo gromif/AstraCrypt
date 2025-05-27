@@ -1,6 +1,6 @@
 package io.gromif.astracrypt.files.data.repository.search
 
-import io.gromif.astracrypt.files.domain.repository.Repository
+import io.gromif.astracrypt.files.domain.repository.item.ItemReader
 import io.gromif.astracrypt.files.domain.repository.search.SearchStrategy
 import io.mockk.coVerify
 import io.mockk.confirmVerified
@@ -12,11 +12,11 @@ import org.junit.Test
 
 class DefaultSearchStrategyTest {
     private lateinit var searchStrategy: SearchStrategy<Long, List<Long>>
-    private val repositoryMock: Repository = mockk(relaxed = true)
+    private val itemReader: ItemReader = mockk(relaxed = true)
 
     @Before
     fun setUp() {
-        searchStrategy = DefaultSearchStrategy(repository = repositoryMock)
+        searchStrategy = DefaultSearchStrategy(itemReader = itemReader)
     }
 
     @Test
@@ -26,7 +26,7 @@ class DefaultSearchStrategyTest {
         searchStrategy.search(request = targetRequest)
         searchStrategy.search(request = targetRequest)
 
-        coVerify(exactly = 1) { repositoryMock.getFolderIds(targetRequest) }
+        coVerify(exactly = 1) { itemReader.getFolderIds(targetRequest) }
     }
 
     @Test
@@ -37,12 +37,12 @@ class DefaultSearchStrategyTest {
         searchStrategy.search(request = targetRequestOld)
         searchStrategy.search(request = targetRequestNew)
 
-        coVerify(exactly = 1) { repositoryMock.getFolderIds(targetRequestOld) }
-        coVerify(exactly = 1) { repositoryMock.getFolderIds(targetRequestNew) }
+        coVerify(exactly = 1) { itemReader.getFolderIds(targetRequestOld) }
+        coVerify(exactly = 1) { itemReader.getFolderIds(targetRequestNew) }
     }
 
     @After
     fun tearDown() {
-        confirmVerified(repositoryMock)
+        confirmVerified(itemReader)
     }
 }

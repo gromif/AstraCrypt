@@ -3,7 +3,7 @@ package io.gromif.astracrypt.files.domain.usecase.actions
 import io.gromif.astracrypt.files.domain.model.AeadInfo
 import io.gromif.astracrypt.files.domain.model.ImportItemDto
 import io.gromif.astracrypt.files.domain.model.ItemState
-import io.gromif.astracrypt.files.domain.repository.Repository
+import io.gromif.astracrypt.files.domain.repository.item.ItemWriter
 import io.gromif.astracrypt.files.domain.service.ClockService
 import io.gromif.astracrypt.files.domain.usecase.aead.GetAeadInfoUseCase
 import io.gromif.astracrypt.files.domain.util.FileUtil
@@ -18,7 +18,7 @@ import kotlinx.coroutines.supervisorScope
 class ImportUseCase(
     private val getAeadInfoUseCase: GetAeadInfoUseCase,
     private val clockService: ClockService,
-    private val repository: Repository,
+    private val itemWriter: ItemWriter,
     private val fileUtilFactory: FileUtil.Factory,
     private val previewUtil: PreviewUtil,
     private val flagsUtil: FlagsUtil,
@@ -75,6 +75,6 @@ class ImportUseCase(
             creationTime = creationTime,
             size = size
         )
-        repository.insert(aeadInfo = aeadInfo, importItemDto = importItemDto)
+        itemWriter.insert(aeadInfo = aeadInfo, importItemDto = importItemDto)
     }
 }
