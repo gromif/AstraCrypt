@@ -5,6 +5,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import io.gromif.astracrypt.files.domain.repository.Repository
+import io.gromif.astracrypt.files.domain.service.ClockService
 import io.gromif.astracrypt.files.domain.usecase.actions.ImportUseCase
 import io.gromif.astracrypt.files.domain.usecase.aead.GetAeadInfoUseCase
 import io.gromif.astracrypt.files.domain.util.FileUtil
@@ -18,12 +19,14 @@ internal object ImportUseCaseModule {
     @Provides
     fun provideImportUseCase(
         getAeadInfoUseCase: GetAeadInfoUseCase,
+        clockService: ClockService,
         repository: Repository,
         fileUtilFactory: FileUtil.Factory,
         previewUtil: PreviewUtil,
         flagsUtil: FlagsUtil
     ) = ImportUseCase(
         getAeadInfoUseCase = getAeadInfoUseCase,
+        clockService = clockService,
         repository = repository,
         fileUtilFactory = fileUtilFactory,
         previewUtil = previewUtil,

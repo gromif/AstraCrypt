@@ -4,6 +4,7 @@ import io.gromif.astracrypt.files.domain.model.AeadInfo
 import io.gromif.astracrypt.files.domain.model.ImportItemDto
 import io.gromif.astracrypt.files.domain.model.ItemState
 import io.gromif.astracrypt.files.domain.repository.Repository
+import io.gromif.astracrypt.files.domain.service.ClockService
 import io.gromif.astracrypt.files.domain.usecase.aead.GetAeadInfoUseCase
 import io.gromif.astracrypt.files.domain.util.FileUtil
 import io.gromif.astracrypt.files.domain.util.FlagsUtil
@@ -16,6 +17,7 @@ import kotlinx.coroutines.supervisorScope
 
 class ImportUseCase(
     private val getAeadInfoUseCase: GetAeadInfoUseCase,
+    private val clockService: ClockService,
     private val repository: Repository,
     private val fileUtilFactory: FileUtil.Factory,
     private val previewUtil: PreviewUtil,
@@ -50,7 +52,9 @@ class ImportUseCase(
         NameValidator(name)
 
         val type = fileUtil.parseType()
-        val creationTime = fileUtil.creationTime()
+        val creationTime = fileUtil.creationTime().let {
+            if (it == 0L) clockService.getCurrentTime() else it
+        }
         val size = fileUtil.length() ?: 0
         require(size > -1) { throw ValidationException.InvalidFileSizeException() }
 
