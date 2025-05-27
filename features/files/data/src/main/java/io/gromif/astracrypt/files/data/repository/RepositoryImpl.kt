@@ -1,10 +1,8 @@
 package io.gromif.astracrypt.files.data.repository
 
-import io.gromif.astracrypt.files.data.db.FilesDao
-import io.gromif.astracrypt.files.data.db.FilesDaoAeadAdapter
+import io.gromif.astracrypt.files.data.db.DaoManager
 import io.gromif.astracrypt.files.data.db.FilesEntity
 import io.gromif.astracrypt.files.data.db.tuples.DetailsTuple
-import io.gromif.astracrypt.files.data.db.tuples.UpdateAeadTuple
 import io.gromif.astracrypt.files.data.util.FileHandler
 import io.gromif.astracrypt.files.domain.model.AeadInfo
 import io.gromif.astracrypt.files.domain.model.ImportItemDto
@@ -18,29 +16,16 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.sync.Mutex
-import kotlinx.coroutines.sync.withLock
 
 class RepositoryImpl(
-    private val filesDao: FilesDao,
-    private val filesDaoAeadAdapterFactory: FilesDaoAeadAdapter.Factory,
+    private val daoManager: DaoManager,
     private val fileHandler: FileHandler,
     private val itemMapper: Mapper<FilesEntity, Item>,
     private val itemDetailsMapper: Mapper<DetailsTuple, ItemDetails>,
 ) : Repository {
-    private val mutex = Mutex()
-    private var cachedFilesDaoAeadAdapter: FilesDaoAeadAdapter? = null
-
-    private suspend fun getFilesDaoAead(aeadInfo: AeadInfo): FilesDao = mutex.withLock {
-        val cached = cachedFilesDaoAeadAdapter
-        if (cached != null && cached.compareAeadInfo(aeadInfo)) return cached
-
-        return filesDaoAeadAdapterFactory.create(aeadInfo).also { cachedFilesDaoAeadAdapter = it }
-    }
 
     override suspend fun get(aeadInfo: AeadInfo, id: Long): Item {
-        val filesEntity = getFilesDaoAead(aeadInfo).get(id)
+        val filesEntity = daoManager.files(aeadInfo).get(id)
         return itemMapper(filesEntity)
     }
 
@@ -54,7 +39,7 @@ class RepositoryImpl(
         while (deque.isNotEmpty()) {
             ensureActive()
             val id = deque.removeFirst()
-            val innerFolderIds = filesDao.getIdList(parent = id, typeFilter = ItemType.Folder)
+            val innerFolderIds = daoManager.files().getIdList(parent = id, typeFilter = ItemType.Folder)
             idList.addAll(innerFolderIds)
             if (recursively) deque.addAll(innerFolderIds)
         }
@@ -65,7 +50,9 @@ class RepositoryImpl(
         aeadInfo: AeadInfo,
         importItemDto: ImportItemDto
     ) {
-        val time = if (importItemDto.creationTime == 0L) System.currentTimeMillis() else {
+        val time = if (importItemDto.creationTime == 0L) {
+            System.currentTimeMillis()
+        } else {
             importItemDto.creationTime
         }
         val filesEntity = FilesEntity(
@@ -81,19 +68,21 @@ class RepositoryImpl(
             time = time,
             size = importItemDto.size
         )
-        getFilesDaoAead(aeadInfo).insert(filesEntity)
+        daoManager.files(aeadInfo).insert(filesEntity)
     }
 
     override suspend fun delete(aeadInfo: AeadInfo, id: Long) {
-        val filesDaoAead = getFilesDaoAead(aeadInfo)
+        val filesDaoAead = daoManager.files(aeadInfo)
         val deque = ArrayDeque<Long>().also { it.add(id) }
         while (deque.isNotEmpty()) {
             val currentId = deque.removeFirst()
             val (id, file, preview) = filesDaoAead.getDeleteData(currentId)
             filesDaoAead.delete(id)
-            if (file != null) with(fileHandler) {
-                getFilePath(relativePath = file).delete()
-                if (preview != null) getFilePath(relativePath = preview).delete()
+            if (file != null) {
+                with(fileHandler) {
+                    getFilePath(relativePath = file).delete()
+                    if (preview != null) getFilePath(relativePath = preview).delete()
+                }
             } else {
                 val innerIdList = filesDaoAead.getIdList(parent = id)
                 deque.addAll(innerIdList)
@@ -101,26 +90,28 @@ class RepositoryImpl(
         }
     }
 
-    override suspend fun move(ids: List<Long>, parentId: Long) = filesDao.move(ids, parentId)
+    override suspend fun move(ids: List<Long>, parentId: Long) {
+        daoManager.files().move(ids, parentId)
+    }
 
     override suspend fun rename(
         aeadInfo: AeadInfo,
         id: Long,
         name: String
-    ) = getFilesDaoAead(aeadInfo).rename(id, name)
+    ) = daoManager.files(aeadInfo).rename(id, name)
 
     override suspend fun setState(id: Long, state: ItemState) {
-        filesDao.setStarred(id = id, state = state.ordinal)
+        daoManager.files().setStarred(id = id, state = state.ordinal)
     }
 
     override suspend fun getRecentFilesList(aeadInfo: AeadInfo): Flow<List<Item>> {
-        return getFilesDaoAead(aeadInfo).getRecentFilesFlow().map { list ->
+        return daoManager.files(aeadInfo).getRecentFilesFlow().map { list ->
             list.map { itemMapper(it) }
         }
     }
 
     override suspend fun getItemDetails(aeadInfo: AeadInfo, id: Long): ItemDetails {
-        val filesDaoAead = getFilesDaoAead(aeadInfo)
+        val filesDaoAead = daoManager.files(aeadInfo)
 
         val dto = filesDaoAead.getDetailsById(id)
         val itemDetails: ItemDetails
@@ -152,30 +143,6 @@ class RepositoryImpl(
             else -> itemDetails = itemDetailsMapper(dto)
         }
         return itemDetails
-    }
-
-    override suspend fun changeAead(
-        oldAeadInfo: AeadInfo,
-        targetAeadInfo: AeadInfo
-    ) = coroutineScope {
-        val currentFilesDaoAead = getFilesDaoAead(aeadInfo = oldAeadInfo)
-        val targetFilesDaoAead = filesDaoAeadAdapterFactory.create(aeadInfo = targetAeadInfo)
-
-        val pageSize = 10
-        var offset = 0
-        var page: List<UpdateAeadTuple> = listOf()
-
-        suspend fun nextItemsPage(): Boolean {
-            page = currentFilesDaoAead.getUpdateAeadTupleList(pageSize, offset)
-            offset += page.size
-            return page.isNotEmpty()
-        }
-
-        while (nextItemsPage()) page.forEach {
-            launch {
-                targetFilesDaoAead.updateAead(it)
-            }
-        }
     }
 
 }

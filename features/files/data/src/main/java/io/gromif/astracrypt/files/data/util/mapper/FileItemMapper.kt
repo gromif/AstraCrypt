@@ -6,7 +6,7 @@ import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.domain.model.ItemType
 import io.gromif.astracrypt.utils.Mapper
 
-class FileItemMapper: Mapper<FilesEntity, Item> {
+class FileItemMapper : Mapper<FilesEntity, Item> {
     override fun invoke(item: FilesEntity): Item {
         return Item(
             id = item.id,

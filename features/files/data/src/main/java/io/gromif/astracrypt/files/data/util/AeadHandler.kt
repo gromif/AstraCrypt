@@ -35,7 +35,6 @@ class AeadHandler(
         flags = mode.decryptIfNeeded(info.flag, data.flags),
     )
 
-
     suspend fun encryptUpdateAeadTuple(
         info: AeadInfo,
         mode: AeadMode.Template,
@@ -57,7 +56,6 @@ class AeadHandler(
         preview = mode.decryptIfNeeded(info.preview, data.preview),
         flags = mode.decryptIfNeeded(info.flag, data.flags),
     )
-
 
     suspend fun decryptPagerTuple(
         info: AeadInfo,
@@ -97,7 +95,6 @@ class AeadHandler(
         flags = mode.decryptIfNeeded(info.flag, data.flags),
     )
 
-
     suspend fun encryptNameIfNeeded(
         info: AeadInfo,
         mode: AeadMode.Template,
@@ -115,5 +112,4 @@ class AeadHandler(
             if (state) aeadUtil.encrypt(aeadIndex = id, data) else data
         }
     }
-
 }

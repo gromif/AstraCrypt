@@ -84,5 +84,4 @@ class DefaultStorageNavigatorTest {
         val contentMatchesCondition = result.contentEquals(targetBackStack)
         Assert.assertTrue(contentMatchesCondition)
     }
-
 }

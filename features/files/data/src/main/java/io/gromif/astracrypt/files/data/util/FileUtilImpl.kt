@@ -12,7 +12,7 @@ class FileUtilImpl(
     private val context: Context,
     private val fileHandler: FileHandler,
     private val uriMapper: Mapper<String, Uri>
-): FileUtil {
+) : FileUtil {
     private var uri: Uri = Uri.EMPTY
     private var file: DocumentFile? = null
 
@@ -43,8 +43,10 @@ class FileUtilImpl(
 
     override fun delete() {
         file?.delete()
-        if (file?.exists() == true) file?.parentFile?.let { parent ->
-            DocumentsContractCompat.removeDocument(context.contentResolver, uri, parent.uri)
+        if (file?.exists() == true) {
+            file?.parentFile?.let { parent ->
+                DocumentsContractCompat.removeDocument(context.contentResolver, uri, parent.uri)
+            }
         }
     }
 
@@ -60,5 +62,4 @@ class FileUtilImpl(
             }
         } ?: ItemType.Other
     }
-
 }

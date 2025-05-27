@@ -40,5 +40,4 @@ class GetDataFlowUseCase<T>(
             )
         }
     }
-
 }

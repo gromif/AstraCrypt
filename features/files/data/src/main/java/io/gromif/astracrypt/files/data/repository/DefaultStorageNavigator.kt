@@ -42,7 +42,9 @@ class DefaultStorageNavigator : StorageNavigator {
                     toIndex = backStack.size
                 )
                 removeAll(entriesToRemove)
-            } else add(folder)
+            } else {
+                add(folder)
+            }
         }
     }
 
@@ -53,5 +55,4 @@ class DefaultStorageNavigator : StorageNavigator {
     override fun swapBackStackWith(targetBackStack: List<StorageNavigator.Folder>) {
         backStackMutableStateFlow.update { targetBackStack }
     }
-
 }

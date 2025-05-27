@@ -9,13 +9,13 @@ class PreviewUtilImpl(
     private val fileHandler: FileHandler,
     private val defaultPreviewFactory: DefaultPreviewFactory,
     private val audioPreviewFactory: AudioPreviewFactory
-): PreviewUtil {
+) : PreviewUtil {
 
     override suspend fun getPreviewPath(
         type: ItemType,
         path: String,
     ): String? {
-        val bytes = when(type) {
+        val bytes = when (type) {
             ItemType.Music -> audioPreviewFactory.create(path)
             else -> defaultPreviewFactory.create(path)
         }
@@ -23,5 +23,4 @@ class PreviewUtilImpl(
             fileHandler.writePreview(it)?.toString()
         }
     }
-
 }

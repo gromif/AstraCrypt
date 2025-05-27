@@ -31,5 +31,4 @@ class AudioFlagsFactory(
         val audioFlags = FileFlagsDto.Audio(sampleRate = sampleRate)
         return audioFlags.takeIf { it != defaultAudioFlags }
     }
-
 }

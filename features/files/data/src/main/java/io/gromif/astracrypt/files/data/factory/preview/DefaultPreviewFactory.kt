@@ -23,5 +23,4 @@ class DefaultPreviewFactory(
             bitmapCompressor(bitmap = it, quality = 70)
         }
     }
-
 }

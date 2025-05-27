@@ -1,7 +1,7 @@
 package io.gromif.astracrypt.files.domain.usecase.aead
 
 import io.gromif.astracrypt.files.domain.model.AeadInfo
-import io.gromif.astracrypt.files.domain.repository.Repository
+import io.gromif.astracrypt.files.domain.repository.AeadManager
 import io.mockk.coEvery
 import io.mockk.coJustRun
 import io.mockk.coVerifyOrder
@@ -14,12 +14,12 @@ class SetDatabaseAeadUseCaseTest {
     private lateinit var setDatabaseAeadUseCase: SetDatabaseAeadUseCase
     private val setAeadInfoUseCase: SetAeadInfoUseCase = mockk()
     private val getAeadInfoUseCase: GetAeadInfoUseCase = mockk()
-    private val repository: Repository = mockk(relaxed = true)
+    private val aeadManager: AeadManager = mockk(relaxed = true)
 
     @Before
     fun setUp() {
         setDatabaseAeadUseCase =
-            SetDatabaseAeadUseCase(setAeadInfoUseCase, getAeadInfoUseCase, repository)
+            SetDatabaseAeadUseCase(setAeadInfoUseCase, getAeadInfoUseCase, aeadManager)
     }
 
     @Test
@@ -34,7 +34,7 @@ class SetDatabaseAeadUseCaseTest {
 
         coVerifyOrder {
             getAeadInfoUseCase()
-            repository.changeAead(
+            aeadManager.changeAead(
                 oldAeadInfo = currentAeadInfo,
                 targetAeadInfo = targetAeadInfo
             )

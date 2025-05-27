@@ -20,10 +20,12 @@ interface FilesDao {
     @Query("select * from store_items where id = :id")
     suspend fun get(id: Long): FilesEntity
 
-    @Query("select id from store_items " +
+    @Query(
+        "select id from store_items " +
             "where parent = :parent " +
             "and (not :excludeFolders or type > 0)" +
-            "and (:typeFilter is null or type = :typeFilter)")
+            "and (:typeFilter is null or type = :typeFilter)"
+    )
     suspend fun getIdList(
         parent: Long,
         typeFilter: ItemType? = null,
@@ -75,18 +77,18 @@ interface FilesDao {
     @RewriteQueriesToDropUnusedColumns
     @Query(
         "select * from store_items where " +
-        "(" +
+            "(" +
             "(:query is null and parent = :rootId) " +
             "or " +
             "(:query is not null and parent in (:rootIdsToSearch))" +
-        ") " +
-        "and (state = 0 or state = 2) " +
-        "and (:query is null or name like '%' || :query || '%') " +
-        "order by type = :sortingItemType desc, " +
-        "case :sortingSecondType " +
-        "   when 6 then id " +
-        "   when 1 then name " +
-        "end"
+            ") " +
+            "and (state = 0 or state = 2) " +
+            "and (:query is null or name like '%' || :query || '%') " +
+            "order by type = :sortingItemType desc, " +
+            "case :sortingSecondType " +
+            "   when 6 then id " +
+            "   when 1 then name " +
+            "end"
     )
     fun listDefault(
         rootId: Long = 0,
@@ -100,17 +102,16 @@ interface FilesDao {
     @RewriteQueriesToDropUnusedColumns
     @Query(
         "select * from store_items where state = 2 " +
-        "and (:query is null or name like '%' || :query || '%') " +
-        "order by type = :sortingItemType desc, " +
-        "case :sortingSecondType " +
-        "   when 6 then id " +
-        "   when 1 then name " +
-        "end"
+            "and (:query is null or name like '%' || :query || '%') " +
+            "order by type = :sortingItemType desc, " +
+            "case :sortingSecondType " +
+            "   when 6 then id " +
+            "   when 1 then name " +
+            "end"
     )
     fun listStarred(
         query: String? = null,
         sortingItemType: Int,
         sortingSecondType: Int
     ): PagingSource<Int, PagerTuple>
-
 }

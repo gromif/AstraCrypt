@@ -30,7 +30,9 @@ internal object DefaultPagerFactory {
             val databaseMode = aeadInfo.databaseMode
             val data = if (databaseMode is AeadMode.Template) {
                 aeadHandler.decryptPagerTuple(aeadInfo, databaseMode, pagerTuple)
-            } else pagerTuple
+            } else {
+                pagerTuple
+            }
             Item(
                 id = data.id,
                 name = data.name,
@@ -42,5 +44,4 @@ internal object DefaultPagerFactory {
             )
         }
     }
-
 }

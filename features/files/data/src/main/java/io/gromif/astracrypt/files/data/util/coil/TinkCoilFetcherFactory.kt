@@ -29,18 +29,20 @@ class TinkCoilFetcherFactory(
             val aead = KeysetTemplates.Stream.entries.getOrNull(index = data.aeadIndex)
             val sourceInputChannel = aead?.let {
                 fileHandler.getPreviewStreamingAead(parameters = aead.params).newDecryptingStream(
-                    /* ciphertextSource = */ file.inputStream(),
-                    /* associatedData = */ associatedDataManager.getAssociatedData()
+                    /* ciphertextSource = */
+                    file.inputStream(),
+                    /* associatedData = */
+                    associatedDataManager.getAssociatedData()
                 )
             } ?: file.inputStream()
             return SourceResult(
                 source = ImageSource(
-                    source = sourceInputChannel.source().buffer(), cacheDir
+                    source = sourceInputChannel.source().buffer(),
+                    cacheDir
                 ),
                 mimeType = null,
                 dataSource = DataSource.DISK
             )
         }
     }
-
 }

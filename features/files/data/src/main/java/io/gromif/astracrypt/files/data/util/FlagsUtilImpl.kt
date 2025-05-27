@@ -13,13 +13,13 @@ class FlagsUtilImpl(
     private val imageFlagsFactory: ImageFlagsFactory,
     private val videoFlagsFactory: VideoFlagsFactory,
     private val serializer: Serializer<FileFlagsDto, String>
-): FlagsUtil {
+) : FlagsUtil {
 
     override suspend fun getFlags(
         type: ItemType,
         path: String,
     ): String? {
-        val dto = when(type) {
+        val dto = when (type) {
             ItemType.Photo -> imageFlagsFactory.create(path)
             ItemType.Music -> audioFlagsFactory.create(path)
             ItemType.Video -> videoFlagsFactory.create(path)
@@ -27,5 +27,4 @@ class FlagsUtilImpl(
         }
         return dto?.let { serializer(it) }
     }
-
 }

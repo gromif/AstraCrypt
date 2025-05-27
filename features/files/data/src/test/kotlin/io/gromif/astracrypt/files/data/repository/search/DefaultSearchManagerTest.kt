@@ -30,5 +30,4 @@ class DefaultSearchManagerTest {
         val result = searchManager.getSearchRequestFlow().first()
         Assert.assertEquals(targetState, result)
     }
-
 }

@@ -9,5 +9,4 @@ class RequestSearchUseCase(
     operator fun invoke(request: String?) {
         searchManager.setSearchRequest(request)
     }
-
 }

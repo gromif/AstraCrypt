@@ -10,5 +10,4 @@ interface DataSource<T> {
         searchRequest: String?,
         aeadInfo: AeadInfo
     ): Flow<T>
-
 }

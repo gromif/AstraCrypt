@@ -38,5 +38,4 @@ class GetSearchRequestFlowTest {
     fun tearDown() {
         confirmVerified(searchManagerMock)
     }
-
 }
