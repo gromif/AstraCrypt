@@ -4,7 +4,6 @@ import io.gromif.astracrypt.files.data.db.FilesDao
 import io.gromif.astracrypt.files.data.db.FilesDaoAeadAdapter
 import io.gromif.astracrypt.files.data.db.FilesEntity
 import io.gromif.astracrypt.files.data.db.tuples.DetailsTuple
-import io.gromif.astracrypt.files.data.db.tuples.UpdateAeadTuple
 import io.gromif.astracrypt.files.data.util.FileHandler
 import io.gromif.astracrypt.files.domain.model.AeadInfo
 import io.gromif.astracrypt.files.domain.model.ImportItemDto
@@ -18,7 +17,6 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
@@ -158,27 +156,4 @@ class RepositoryImpl(
         return itemDetails
     }
 
-    override suspend fun changeAead(
-        oldAeadInfo: AeadInfo,
-        targetAeadInfo: AeadInfo
-    ) = coroutineScope {
-        val currentFilesDaoAead = getFilesDaoAead(aeadInfo = oldAeadInfo)
-        val targetFilesDaoAead = filesDaoAeadAdapterFactory.create(aeadInfo = targetAeadInfo)
-
-        val pageSize = 10
-        var offset = 0
-        var page: List<UpdateAeadTuple> = listOf()
-
-        suspend fun nextItemsPage(): Boolean {
-            page = currentFilesDaoAead.getUpdateAeadTupleList(pageSize, offset)
-            offset += page.size
-            return page.isNotEmpty()
-        }
-
-        while (nextItemsPage()) page.forEach {
-            launch {
-                targetFilesDaoAead.updateAead(it)
-            }
-        }
-    }
 }

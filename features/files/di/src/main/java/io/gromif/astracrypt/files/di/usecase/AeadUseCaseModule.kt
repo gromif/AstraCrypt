@@ -4,8 +4,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import io.gromif.astracrypt.files.domain.repository.AeadManager
 import io.gromif.astracrypt.files.domain.repository.AeadSettingsRepository
-import io.gromif.astracrypt.files.domain.repository.Repository
 import io.gromif.astracrypt.files.domain.usecase.aead.GetAeadInfoFlowUseCase
 import io.gromif.astracrypt.files.domain.usecase.aead.GetAeadInfoUseCase
 import io.gromif.astracrypt.files.domain.usecase.aead.SetAeadInfoUseCase
@@ -31,11 +31,11 @@ internal object AeadUseCaseModule {
     fun provideSetDatabaseAeadUseCase(
         setAeadInfoUseCase: SetAeadInfoUseCase,
         getAeadInfoUseCase: GetAeadInfoUseCase,
-        repository: Repository,
+        aeadManager: AeadManager,
     ) = SetDatabaseAeadUseCase(
         setAeadInfoUseCase = setAeadInfoUseCase,
         getAeadInfoUseCase = getAeadInfoUseCase,
-        repository = repository
+        aeadManager = aeadManager
     )
 
 }
