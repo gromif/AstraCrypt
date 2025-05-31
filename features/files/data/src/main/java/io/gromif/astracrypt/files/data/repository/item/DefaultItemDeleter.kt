@@ -21,10 +21,8 @@ class DefaultItemDeleter(
             val (id, file, preview) = filesDaoAead.getDeleteData(currentId)
             filesDaoAead.delete(id)
             if (file != null) {
-                with(fileHandler) {
-                    getFilePath(relativePath = file).delete()
-                    if (preview != null) getFilePath(relativePath = preview).delete()
-                }
+                fileHandler.getFilePath(relativePath = file).delete()
+                if (preview != null) fileHandler.getFilePath(relativePath = preview).delete()
             } else {
                 val innerIdList = filesDaoAead.getIdList(parent = id)
                 deque.addAll(innerIdList)
