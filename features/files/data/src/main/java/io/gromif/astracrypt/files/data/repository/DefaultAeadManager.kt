@@ -8,6 +8,8 @@ import io.gromif.astracrypt.files.domain.repository.AeadManager
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
+private const val DEFAULT_PAGE_SIZE = 10
+
 class DefaultAeadManager(
     private val daoManager: DaoManager,
     private val filesDaoAeadAdapterFactory: FilesDaoAeadAdapter.Factory,
@@ -20,12 +22,11 @@ class DefaultAeadManager(
         val currentFilesDaoAead = daoManager.files(aeadInfo = oldAeadInfo)
         val targetFilesDaoAead = filesDaoAeadAdapterFactory.create(aeadInfo = targetAeadInfo)
 
-        val pageSize = 10
         var offset = 0
         var page: List<UpdateAeadTuple> = listOf()
 
         suspend fun nextItemsPage(): Boolean {
-            page = currentFilesDaoAead.getUpdateAeadTupleList(pageSize, offset)
+            page = currentFilesDaoAead.getUpdateAeadTupleList(DEFAULT_PAGE_SIZE, offset)
             offset += page.size
             return page.isNotEmpty()
         }
