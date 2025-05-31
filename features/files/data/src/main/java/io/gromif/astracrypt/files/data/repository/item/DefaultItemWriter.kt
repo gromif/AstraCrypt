@@ -37,5 +37,4 @@ class DefaultItemWriter(
     ) {
         daoManager.files().setStarred(id = id, state = state.ordinal)
     }
-
 }

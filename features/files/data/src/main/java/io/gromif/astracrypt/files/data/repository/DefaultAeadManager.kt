@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 class DefaultAeadManager(
     private val daoManager: DaoManager,
     private val filesDaoAeadAdapterFactory: FilesDaoAeadAdapter.Factory,
-): AeadManager {
+) : AeadManager {
 
     override suspend fun changeAead(
         oldAeadInfo: AeadInfo,
@@ -36,5 +36,4 @@ class DefaultAeadManager(
             }
         }
     }
-
 }

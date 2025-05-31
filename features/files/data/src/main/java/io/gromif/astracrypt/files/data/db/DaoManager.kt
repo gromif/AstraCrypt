@@ -21,5 +21,4 @@ class DaoManager(
     fun files(): FilesDao {
         return filesDao
     }
-
 }
