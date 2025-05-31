@@ -34,5 +34,4 @@ internal object MapperModule {
 
     @Provides
     fun provideFileItemMapper(): Mapper<FilesEntity, Item> = FileItemMapper()
-
 }

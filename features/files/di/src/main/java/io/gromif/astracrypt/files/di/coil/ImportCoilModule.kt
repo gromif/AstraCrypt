@@ -28,7 +28,6 @@ internal object ImportCoilModule {
         .size(500)
         .scale(Scale.FILL)
         .transformations(CenterCropTransformation())
-
 }
 
 @Qualifier

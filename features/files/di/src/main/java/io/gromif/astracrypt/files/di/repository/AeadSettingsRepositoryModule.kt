@@ -40,5 +40,4 @@ internal object AeadSettingsRepositoryModule {
     @Singleton
     @Provides
     fun provideAeadInfoMapper(): Mapper<AeadInfoDto, AeadInfo> = AeadInfoMapper()
-
 }

@@ -15,5 +15,4 @@ internal object StorageNavigatorModule {
     @ViewModelScoped
     @Provides
     fun provideStorageNavigator(): StorageNavigator = DefaultStorageNavigator()
-
 }

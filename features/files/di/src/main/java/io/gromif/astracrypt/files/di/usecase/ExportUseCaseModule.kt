@@ -19,5 +19,4 @@ internal object ExportUseCaseModule {
     @Provides
     fun provideInternalExportUseCase(itemExporter: ItemExporter) =
         InternalExportUseCase(itemExporter = itemExporter)
-
 }

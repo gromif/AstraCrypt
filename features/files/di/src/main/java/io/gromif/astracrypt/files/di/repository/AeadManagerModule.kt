@@ -15,5 +15,4 @@ internal object AeadManagerModule {
     @Provides
     fun provideAeadManager(daoManager: DaoManager): AeadManager =
         DefaultAeadManager(daoManager = daoManager)
-
 }

@@ -52,7 +52,6 @@ internal object DataSourceModule {
         ),
         pagerTupleAeadHandler = pagerTupleAeadHandler
     )
-
 }
 
 object DataSources {

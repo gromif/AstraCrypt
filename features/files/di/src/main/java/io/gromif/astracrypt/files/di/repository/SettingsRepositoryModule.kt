@@ -20,5 +20,4 @@ internal object SettingsRepositoryModule {
     fun provideSettingsRepository(
         @FilesDataStore dataStore: DataStore<Preferences>
     ): SettingsRepository = SettingsRepositoryImpl(dataStore = dataStore)
-
 }

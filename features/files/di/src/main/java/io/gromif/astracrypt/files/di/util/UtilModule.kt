@@ -25,5 +25,4 @@ internal object UtilModule {
         associatedDataManager = associatedDataManager,
         base64Encoder = base64Encoder
     )
-
 }

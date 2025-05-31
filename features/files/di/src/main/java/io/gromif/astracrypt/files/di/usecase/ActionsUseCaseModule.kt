@@ -52,5 +52,4 @@ internal object ActionsUseCaseModule {
 
     @Provides
     fun provideSetStarredUseCase(itemWriter: ItemWriter) = SetStateUseCase(itemWriter = itemWriter)
-
 }

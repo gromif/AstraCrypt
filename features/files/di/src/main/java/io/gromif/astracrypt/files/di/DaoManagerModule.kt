@@ -38,5 +38,4 @@ internal object DaoManagerModule {
         renameTupleAeadHandler = renameTupleAeadHandler,
         updateTupleAeadHandler = updateTupleAeadHandler,
     )
-
 }

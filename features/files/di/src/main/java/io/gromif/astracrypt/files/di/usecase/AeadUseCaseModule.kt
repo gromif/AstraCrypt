@@ -37,5 +37,4 @@ internal object AeadUseCaseModule {
         getAeadInfoUseCase = getAeadInfoUseCase,
         aeadManager = aeadManager
     )
-
 }

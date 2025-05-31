@@ -13,5 +13,4 @@ internal object ServiceModule {
 
     @Provides
     fun provideClockService(): ClockService = DefaultClockService()
-
 }

@@ -115,7 +115,9 @@ internal object ImportUtilModule {
     @FilesBitmapCompressor
     @Provides
     fun provideBitmapCompressor(): BitmapCompressor = BitmapCompressor(
-        compressFormat = if (Api.atLeast11()) Bitmap.CompressFormat.WEBP_LOSSY else {
+        compressFormat = if (Api.atLeast11()) {
+            Bitmap.CompressFormat.WEBP_LOSSY
+        } else {
             Bitmap.CompressFormat.WEBP
         }
     )
@@ -123,5 +125,4 @@ internal object ImportUtilModule {
     @Qualifier
     @Retention(AnnotationRetention.BINARY)
     annotation class FilesBitmapCompressor
-
 }
