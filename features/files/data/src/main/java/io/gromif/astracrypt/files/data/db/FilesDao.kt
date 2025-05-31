@@ -15,6 +15,7 @@ import io.gromif.astracrypt.files.data.db.tuples.UpdateAeadTuple
 import io.gromif.astracrypt.files.domain.model.ItemType
 import kotlinx.coroutines.flow.Flow
 
+@Suppress("detekt:TooManyFunctions")
 @Dao
 interface FilesDao {
 
