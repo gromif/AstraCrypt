@@ -46,7 +46,6 @@ internal object FilesCoilModule {
         associatedDataManager = associatedDataManager,
         cacheDir = context.cacheDir
     )
-
 }
 
 @Qualifier

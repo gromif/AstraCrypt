@@ -82,8 +82,11 @@ internal fun Screen(
         Button(
             enabled = state.isDone,
             onClick = {
-                if (isExternalExport) back()
-                else onOpenExportedFile()
+                if (isExternalExport) {
+                    back()
+                } else {
+                    onOpenExportedFile()
+                }
             }
         ) {
             Text(

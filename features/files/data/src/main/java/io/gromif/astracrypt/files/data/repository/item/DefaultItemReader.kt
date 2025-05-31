@@ -18,7 +18,7 @@ class DefaultItemReader(
     private val daoManager: DaoManager,
     private val itemMapper: Mapper<FilesEntity, Item>,
     private val itemDetailsMapper: Mapper<DetailsTuple, ItemDetails>,
-): ItemReader {
+) : ItemReader {
     override suspend fun get(
         aeadInfo: AeadInfo,
         id: Long
@@ -86,5 +86,4 @@ class DefaultItemReader(
         }
         return itemDetails
     }
-
 }

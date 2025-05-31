@@ -62,9 +62,11 @@ fun FilesScreen(
 
     if (startParentId != null) {
         var recycled by rememberSaveable { mutableStateOf(false) }
-        if (!recycled) LaunchedEffect(Unit) {
-            vm.openDirectory(startParentId, startParentName)
-            recycled = true
+        if (!recycled) {
+            LaunchedEffect(Unit) {
+                vm.openDirectory(startParentId, startParentName)
+                recycled = true
+            }
         }
     }
 
@@ -122,7 +124,9 @@ fun FilesScreen(
                 val (id, _, name) = item
                 when {
                     mode is Mode.Multiselect && multiselectStateList.isNotEmpty() -> selectItem(id)
-                    item.isFolder -> if (isStarred) navActions.toFiles(id, name) else {
+                    item.isFolder -> if (isStarred) {
+                        navActions.toFiles(id, name)
+                    } else {
                         if (mode === Mode.Move && multiselectStateList.contains(id)) return
                         vm.openDirectory(id, name)
                     }

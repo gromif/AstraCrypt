@@ -42,18 +42,21 @@ class DefaultItemExporter(
             val exportData = filesDao.getExportData(id = currentId)
 
             if (exportData.type == ItemType.Folder) {
-                val newFolder = currentFolder.createDirectory(exportData.name) ?: continue
-                val idList = filesDao.getIdList(parent = currentId)
-                idList.forEach { folderMap[it] = newFolder }
-                deque.addAll(idList)
+                currentFolder.createDirectory(exportData.name)?.let { newFolder ->
+                    val idList = filesDao.getIdList(parent = currentId)
+                    idList.forEach { folderMap[it] = newFolder }
+                    deque.addAll(idList)
+                }
             } else {
-                val outputFile = currentFolder.createFile("text/binary", exportData.name) ?: continue
-                fileHandler.exportFile(
-                    outputStream = context.contentResolver.openOutputStream(outputFile.uri)!!,
-                    relativePath = exportData.file!!,
-                    aeadIndex = exportData.fileAead
-                )
-                if (!isActive) outputFile.delete()
+                currentFolder.createFile("text/binary", exportData.name)?.let { newFile ->
+                    val outStream = context.contentResolver.openOutputStream(newFile.uri)!!
+                    fileHandler.exportFile(
+                        outputStream = outStream,
+                        relativePath = exportData.file!!,
+                        aeadIndex = exportData.fileAead
+                    )
+                    if (!isActive) newFile.delete()
+                }
             }
         }
     }

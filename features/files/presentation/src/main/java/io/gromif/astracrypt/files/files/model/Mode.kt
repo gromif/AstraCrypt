@@ -4,15 +4,14 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-sealed class Mode: Parcelable {
+sealed class Mode : Parcelable {
 
     @Parcelize
-    data object Default: Mode()
+    data object Default : Mode()
 
     @Parcelize
-    data class Multiselect(val count: Int): Mode()
+    data class Multiselect(val count: Int) : Mode()
 
     @Parcelize
-    data object Move: Mode()
-
+    data object Move : Mode()
 }

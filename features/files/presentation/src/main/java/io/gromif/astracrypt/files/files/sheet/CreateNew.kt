@@ -67,7 +67,8 @@ fun filesCreateNewSheet(
                     }
                 },
             verticalArrangement = Arrangement.spacedBy(
-                MaterialTheme.spaces.spaceMedium, Alignment.CenterVertically
+                MaterialTheme.spaces.spaceMedium,
+                Alignment.CenterVertically
             ),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -78,7 +79,8 @@ fun filesCreateNewSheet(
     LazyVerticalGrid(
         columns = GridCells.Fixed(3),
         verticalArrangement = Arrangement.spacedBy(
-            MaterialTheme.spaces.spaceMedium, Alignment.CenterVertically
+            MaterialTheme.spaces.spaceMedium,
+            Alignment.CenterVertically
         ),
         horizontalArrangement = Arrangement.Center
     ) {

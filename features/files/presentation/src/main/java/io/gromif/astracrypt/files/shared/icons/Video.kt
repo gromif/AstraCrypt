@@ -47,6 +47,7 @@ private fun Preview(vectors: List<ImageVector> = listOf(default(), alt())) = Col
     }
 }
 
+@Suppress("detekt:MagicNumber")
 private fun video(foreground: Color) = ImageVector.Builder(
     name = "video",
     defaultWidth = 24.dp,

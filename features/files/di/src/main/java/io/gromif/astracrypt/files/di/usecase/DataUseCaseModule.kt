@@ -47,5 +47,4 @@ internal object DataUseCaseModule {
         getSearchRequestFlow = getSearchRequestFlow,
         dataSource = dataSource
     )
-
 }

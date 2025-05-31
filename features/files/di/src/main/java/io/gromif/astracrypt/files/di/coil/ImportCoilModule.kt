@@ -13,6 +13,8 @@ import io.gromif.astracrypt.files.data.util.coil.CenterCropTransformation
 import javax.inject.Qualifier
 import javax.inject.Singleton
 
+private const val IMPORT_IMAGE_SIZE = 500
+
 @Module
 @InstallIn(SingletonComponent::class)
 internal object ImportCoilModule {
@@ -25,10 +27,9 @@ internal object ImportCoilModule {
     ): ImageRequest.Builder = ImageRequest.Builder(context)
         .diskCachePolicy(CachePolicy.DISABLED)
         .memoryCachePolicy(CachePolicy.DISABLED)
-        .size(500)
+        .size(IMPORT_IMAGE_SIZE)
         .scale(Scale.FILL)
         .transformations(CenterCropTransformation())
-
 }
 
 @Qualifier

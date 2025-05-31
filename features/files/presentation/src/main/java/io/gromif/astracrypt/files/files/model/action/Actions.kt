@@ -22,7 +22,6 @@ internal interface Actions {
     fun rename(id: Long, name: String)
     fun delete(idList: List<Long>)
 
-
     companion object {
         internal val Default = object : Actions {
             override fun backStackClick(folder: StorageNavigator.Folder?) {}
@@ -40,5 +39,4 @@ internal interface Actions {
             override fun delete(idList: List<Long>) {}
         }
     }
-
 }

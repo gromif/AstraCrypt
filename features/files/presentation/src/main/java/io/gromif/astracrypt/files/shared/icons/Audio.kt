@@ -46,6 +46,7 @@ private fun Preview(vectors: List<ImageVector> = listOf(default(), alt())) = Col
     }
 }
 
+@Suppress("detekt:MagicNumber")
 private fun audio(background: Color, foreground: Color) = ImageVector.Builder(
     name = "audio",
     defaultWidth = 24.dp,

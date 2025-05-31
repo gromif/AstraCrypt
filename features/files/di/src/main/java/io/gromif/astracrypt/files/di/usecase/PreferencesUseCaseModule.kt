@@ -19,5 +19,4 @@ internal object PreferencesUseCaseModule {
     @Provides
     fun provideSetListViewModeUseCase(settingsRepository: SettingsRepository) =
         SetListViewModeUseCase(settingsRepository = settingsRepository)
-
 }

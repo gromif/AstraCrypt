@@ -15,7 +15,5 @@ interface Actions {
             override fun openFile(id: Long) {}
             override fun openFolder(id: Long, name: String) {}
         }
-
     }
-
 }

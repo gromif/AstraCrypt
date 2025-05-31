@@ -56,7 +56,8 @@ internal fun FilesBackStackList(
 @Preview(showBackground = true)
 @Composable
 internal fun FilesBackStackListItem(
-    title: String = "Folder", onClick: () -> Unit = {},
+    title: String = "Folder",
+    onClick: () -> Unit = {},
 ) = Text(
     modifier = Modifier
         .clip(CircleShape)

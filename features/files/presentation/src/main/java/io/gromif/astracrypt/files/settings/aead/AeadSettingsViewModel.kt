@@ -25,7 +25,7 @@ internal class AeadSettingsViewModel @Inject constructor(
     private val workManager: WorkManager,
     private val setAeadInfoUseCase: SetAeadInfoUseCase,
     getAeadInfoFlowUseCase: GetAeadInfoFlowUseCase,
-): ViewModel() {
+) : ViewModel() {
     val aeadInfoState = getAeadInfoFlowUseCase()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), AeadInfo())
 
@@ -48,5 +48,4 @@ internal class AeadSettingsViewModel @Inject constructor(
         }.build()
         workManager.enqueue(workerRequest)
     }
-
 }

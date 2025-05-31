@@ -63,7 +63,8 @@ class ImportFilesWorker @AssistedInject constructor(
         // Create a Notification channel if necessary
         if (Api.atLeast8()) createChannel()
         val notification = NotificationCompat.Builder(
-            applicationContext, NOTIFICATION_CHANNEL_ID
+            applicationContext,
+            NOTIFICATION_CHANNEL_ID
         ).apply {
             setContentTitle(title)
             setTicker(title)
@@ -74,11 +75,15 @@ class ImportFilesWorker @AssistedInject constructor(
             addAction(R.drawable.ic_close, cancelText, workerStopPendingIntent)
         }.build()
         val notificationId = Random.nextInt()
-        return if (Api.atLeast10()) ForegroundInfo(
-            notificationId,
-            notification,
-            ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC
-        ) else ForegroundInfo(notificationId, notification)
+        return if (Api.atLeast10()) {
+            ForegroundInfo(
+                notificationId,
+                notification,
+                ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC
+            )
+        } else {
+            ForegroundInfo(notificationId, notification)
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -92,7 +97,7 @@ class ImportFilesWorker @AssistedInject constructor(
         }
         // Register the channel with the system
         val notificationManager = applicationContext.getSystemService(Context.NOTIFICATION_SERVICE)
-                as NotificationManager
+            as NotificationManager
         notificationManager.createNotificationChannel(channel)
     }
 }

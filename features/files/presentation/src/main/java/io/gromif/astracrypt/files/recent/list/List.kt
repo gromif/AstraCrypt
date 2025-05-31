@@ -40,9 +40,13 @@ internal fun RecentFilesList(
         itemType = item.type,
         state = item.state
     ) {
-        if (item.isFolder) actions.openFolder(
-            id = item.id,
-            name = item.name
-        ) else actions.openFile(id = item.id)
+        if (item.isFolder) {
+            actions.openFolder(
+                id = item.id,
+                name = item.name
+            )
+        } else {
+            actions.openFile(id = item.id)
+        }
     }
 }

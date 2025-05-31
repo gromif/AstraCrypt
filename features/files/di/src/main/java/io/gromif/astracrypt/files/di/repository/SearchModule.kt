@@ -23,5 +23,4 @@ internal object SearchModule {
     @Provides
     fun provideDefaultSearchStrategy(itemReader: ItemReader): SearchStrategy<Long, List<Long>> =
         DefaultSearchStrategy(itemReader = itemReader)
-
 }

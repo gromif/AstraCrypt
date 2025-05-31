@@ -29,8 +29,11 @@ internal fun ColumnsAeadSettingsScreen(
             isChecked = params.name,
             titleText = stringResource(id = R.string.name)
         ) {
-            if (it) dialogNameConfirmation = true
-            else onSetName(false)
+            if (it) {
+                dialogNameConfirmation = true
+            } else {
+                onSetName(false)
+            }
         }
         CheckBoxOneLineListItem(
             isChecked = params.preview,

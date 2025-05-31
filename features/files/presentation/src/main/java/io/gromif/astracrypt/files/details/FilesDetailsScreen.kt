@@ -27,29 +27,37 @@ fun FilesDetailsScreen(id: Long) {
     }
     val itemDetails = vm.itemDetails
 
-    if (itemDetails != null) DetailsScreen(
-        groups = detailsStateList,
-        headerImage = {
-            if (itemDetails is ItemDetails.File) {
-                if (itemDetails.preview == null) Icon(
-                    modifier = Modifier.fillMaxSize(0.5f),
-                    imageVector = itemDetails.type.icon,
-                    contentDescription = null,
-                    tint = Color.Unspecified
-                ) else AsyncImage(
-                    modifier = Modifier.fillMaxSize(),
-                    model = itemDetails.preview,
-                    contentDescription = null,
-                    imageLoader = vm.imageLoader,
-                    contentScale = ContentScale.Crop
-                )
-            } else Icon(
-                modifier = Modifier.fillMaxSize(0.5f),
-                imageVector = ItemType.Folder.icon,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.onSurfaceVariant
-            )
-        },
-        title = itemDetails.itemName,
-    )
+    if (itemDetails != null) {
+        DetailsScreen(
+            groups = detailsStateList,
+            headerImage = {
+                if (itemDetails is ItemDetails.File) {
+                    if (itemDetails.preview == null) {
+                        Icon(
+                            modifier = Modifier.fillMaxSize(0.5f),
+                            imageVector = itemDetails.type.icon,
+                            contentDescription = null,
+                            tint = Color.Unspecified
+                        )
+                    } else {
+                        AsyncImage(
+                            modifier = Modifier.fillMaxSize(),
+                            model = itemDetails.preview,
+                            contentDescription = null,
+                            imageLoader = vm.imageLoader,
+                            contentScale = ContentScale.Crop
+                        )
+                    }
+                } else {
+                    Icon(
+                        modifier = Modifier.fillMaxSize(0.5f),
+                        imageVector = ItemType.Folder.icon,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+            },
+            title = itemDetails.itemName,
+        )
+    }
 }

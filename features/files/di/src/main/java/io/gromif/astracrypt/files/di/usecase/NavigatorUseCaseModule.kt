@@ -56,5 +56,4 @@ internal object NavigatorUseCaseModule {
     fun provideSwapNavBackStackUseCase(
         storageNavigator: StorageNavigator
     ) = SwapNavBackStackUseCase(storageNavigator = storageNavigator)
-
 }

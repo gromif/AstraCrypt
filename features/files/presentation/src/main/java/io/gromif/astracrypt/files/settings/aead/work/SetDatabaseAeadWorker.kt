@@ -49,7 +49,6 @@ internal class SetDatabaseAeadWorker @AssistedInject constructor(
             )
             return data
         }
-
     }
 
     override suspend fun doWork(): Result {
@@ -73,7 +72,8 @@ internal class SetDatabaseAeadWorker @AssistedInject constructor(
         // Create a Notification channel if necessary
         if (Api.atLeast8()) createChannel()
         val notification = NotificationCompat.Builder(
-            applicationContext, NOTIFICATION_CHANNEL_ID
+            applicationContext,
+            NOTIFICATION_CHANNEL_ID
         ).apply {
             setContentTitle(title)
             setTicker(title)
@@ -84,11 +84,15 @@ internal class SetDatabaseAeadWorker @AssistedInject constructor(
             addAction(R.drawable.ic_close, cancelText, workerStopPendingIntent)
         }.build()
         val notificationId = Random.nextInt()
-        return if (Api.atLeast10()) ForegroundInfo(
-            notificationId,
-            notification,
-            ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC
-        ) else ForegroundInfo(notificationId, notification)
+        return if (Api.atLeast10()) {
+            ForegroundInfo(
+                notificationId,
+                notification,
+                ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC
+            )
+        } else {
+            ForegroundInfo(notificationId, notification)
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -102,10 +106,9 @@ internal class SetDatabaseAeadWorker @AssistedInject constructor(
         }
         // Register the channel with the system
         val notificationManager = applicationContext.getSystemService(Context.NOTIFICATION_SERVICE)
-                as NotificationManager
+            as NotificationManager
         notificationManager.createNotificationChannel(channel)
     }
-
 }
 
 private const val NOTIFICATION_CHANNEL_ID = "file_operations_channel"

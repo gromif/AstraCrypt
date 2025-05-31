@@ -47,6 +47,7 @@ private fun Preview(vectors: List<ImageVector> = listOf(default(), alt())) = Col
     }
 }
 
+@Suppress("detekt:MagicNumber")
 private fun photo(background: Color, foreground: Color) = ImageVector.Builder(
     name = "photo",
     defaultWidth = 24.dp,

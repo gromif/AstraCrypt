@@ -32,5 +32,4 @@ internal object UseCaseModule {
         getAeadInfoUseCase: GetAeadInfoUseCase,
         itemReader: ItemReader,
     ) = GetItemDetailsUseCase(getAeadInfoUseCase, itemReader = itemReader)
-
 }

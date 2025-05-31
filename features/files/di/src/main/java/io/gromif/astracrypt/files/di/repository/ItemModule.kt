@@ -49,5 +49,4 @@ internal object ItemModule {
         daoManager = daoManager,
         fileHandler = fileHandler
     )
-
 }

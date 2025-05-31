@@ -75,13 +75,17 @@ fun FilesAeadSettings(
 }
 
 private fun List<AeadTemplate>.indexOf(mode: AeadMode): Int {
-    return if (mode is AeadMode.None) 0 else {
+    return if (mode is AeadMode.None) {
+        0
+    } else {
         indexOfFirst { it.id == mode.id } + 1
     }
 }
 
 private fun List<AeadTemplate>.parseAeadIndex(index: Int): AeadMode {
-    return if (index == 0) AeadMode.None else {
+    return if (index == 0) {
+        AeadMode.None
+    } else {
         val originalIndex = index - 1
         val aeadTemplate = get(originalIndex)
         AeadMode.Template(id = aeadTemplate.id, name = aeadTemplate.name)

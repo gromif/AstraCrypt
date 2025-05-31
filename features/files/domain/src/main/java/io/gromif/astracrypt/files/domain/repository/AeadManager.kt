@@ -8,5 +8,4 @@ interface AeadManager {
         oldAeadInfo: AeadInfo,
         targetAeadInfo: AeadInfo
     )
-
 }

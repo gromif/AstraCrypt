@@ -14,5 +14,4 @@ internal object ParserModule {
 
     @Provides
     fun provideItemFlagsDtoParser(): Parser<String, FileFlagsDto> = ItemFlagsDtoParser()
-
 }

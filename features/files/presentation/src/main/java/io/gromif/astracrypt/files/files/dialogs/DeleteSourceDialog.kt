@@ -23,21 +23,23 @@ internal fun deleteSourceDialog(
         onResult(saveSource)
     }
 
-    if (dialogDeleteSourceState.value) DialogWithNewButtonBar(
-        title = stringResource(id = R.string.dialog_deleteOriginalFiles),
-        onDismissRequest = {},
-        onConfirmRequest = { sendResult(saveSource = false) },
-        buttonBar = DialogDefaults.newButtonBar(
-            onConfirmClick = { sendResult(saveSource = false) },
-            onDismissClick = { sendResult(saveSource = true) },
-            isConfirmButtonEnabled = true,
-            confirmText = stringResource(id = R.string.files_options_delete),
-            confirmIcon = Icons.Default.DeleteForever,
-            dismissText = stringResource(id = R.string.save),
-            dismissIcon = Icons.Default.Close
-        )
-    ) {
-        Text(text = stringResource(id = R.string.dialog_deleteOriginalFiles_msg))
+    if (dialogDeleteSourceState.value) {
+        DialogWithNewButtonBar(
+            title = stringResource(id = R.string.dialog_deleteOriginalFiles),
+            onDismissRequest = {},
+            onConfirmRequest = { sendResult(saveSource = false) },
+            buttonBar = DialogDefaults.newButtonBar(
+                onConfirmClick = { sendResult(saveSource = false) },
+                onDismissClick = { sendResult(saveSource = true) },
+                isConfirmButtonEnabled = true,
+                confirmText = stringResource(id = R.string.files_options_delete),
+                confirmIcon = Icons.Default.DeleteForever,
+                dismissText = stringResource(id = R.string.save),
+                dismissIcon = Icons.Default.Close
+            )
+        ) {
+            Text(text = stringResource(id = R.string.dialog_deleteOriginalFiles_msg))
+        }
     }
     return dialogDeleteSourceState
 }

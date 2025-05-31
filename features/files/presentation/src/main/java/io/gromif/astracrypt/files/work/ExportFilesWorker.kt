@@ -67,11 +67,15 @@ class ExportFilesWorker @AssistedInject constructor(
             addAction(R.drawable.ic_close, cancelText, workerStopPendingIntent)
         }.build()
         val notificationId = Random.nextInt()
-        return if (Api.atLeast10()) ForegroundInfo(
-            notificationId,
-            notification,
-            ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC
-        ) else ForegroundInfo(notificationId, notification)
+        return if (Api.atLeast10()) {
+            ForegroundInfo(
+                notificationId,
+                notification,
+                ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC
+            )
+        } else {
+            ForegroundInfo(notificationId, notification)
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -89,7 +93,6 @@ class ExportFilesWorker @AssistedInject constructor(
         // Register the channel with the system
         NotificationManagerCompat.from(applicationContext).createNotificationChannel(channel)
     }
-
 }
 
 private const val NOTIFICATION_CHANNEL_ID = "file_operations_channel"

@@ -22,5 +22,4 @@ internal object SearchUseCaseModule {
     @Provides
     fun provideRequestSearchUseCase(searchManager: SearchManager) =
         RequestSearchUseCase(searchManager = searchManager)
-
 }

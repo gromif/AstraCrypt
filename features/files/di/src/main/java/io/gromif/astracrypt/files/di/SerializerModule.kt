@@ -14,5 +14,4 @@ internal object SerializerModule {
 
     @Provides
     fun provideItemFlagsDtoSerializer(): Serializer<FileFlagsDto, String> = ItemFlagsDtoSerializer()
-
 }

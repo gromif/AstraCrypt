@@ -59,8 +59,10 @@ internal fun Screen(
     var optionsItem by rememberSaveable { mutableStateOf(OptionsItem()) }
     val items = stateHolder.pagingFlow.collectAsLazyPagingItems()
 
-    if (!stateHolder.isSearching) AnimatedVisibility(stateHolder.backStackList.isNotEmpty()) {
-        FilesBackStackList(stateHolder.backStackList, actions::backStackClick)
+    if (!stateHolder.isSearching) {
+        AnimatedVisibility(stateHolder.backStackList.isNotEmpty()) {
+            FilesBackStackList(stateHolder.backStackList, actions::backStackClick)
+        }
     }
     val isEmpty = remember {
         derivedStateOf { items.itemCount == 0 && items.loadState.refresh is LoadState.NotLoading }
@@ -101,7 +103,8 @@ internal fun Screen(
         onCreate = actions::createFolder,
     )
     var dialogRenameState by renameDialog(
-        maxLength = maxNameLength, name = optionsItem.name
+        maxLength = maxNameLength,
+        name = optionsItem.name
     ) { actions.rename(optionsItem.id, it) }
     var dialogDeleteState by deleteDialog(optionsItem.name) { actions.delete(listOf(optionsItem.id)) }
     var dialogDeleteSourceState by deleteSourceDialog { saveSource ->

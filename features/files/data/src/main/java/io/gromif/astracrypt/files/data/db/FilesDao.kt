@@ -10,10 +10,12 @@ import io.gromif.astracrypt.files.data.db.tuples.DeleteTuple
 import io.gromif.astracrypt.files.data.db.tuples.DetailsTuple
 import io.gromif.astracrypt.files.data.db.tuples.ExportTuple
 import io.gromif.astracrypt.files.data.db.tuples.PagerTuple
+import io.gromif.astracrypt.files.data.db.tuples.RenameTuple
 import io.gromif.astracrypt.files.data.db.tuples.UpdateAeadTuple
 import io.gromif.astracrypt.files.domain.model.ItemType
 import kotlinx.coroutines.flow.Flow
 
+@Suppress("detekt:TooManyFunctions")
 @Dao
 interface FilesDao {
 
@@ -49,8 +51,8 @@ interface FilesDao {
     @Query("update store_items set parent = (:parent) where id in (:ids)")
     suspend fun move(ids: List<Long>, parent: Long)
 
-    @Query("update store_items set name = :name where id = :id")
-    suspend fun rename(id: Long, name: String)
+    @Update(entity = FilesEntity::class)
+    suspend fun rename(renameTuple: RenameTuple)
 
     @Query("update store_items set state = :state where id = :id")
     suspend fun setStarred(id: Long, state: Int)
