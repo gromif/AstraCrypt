@@ -17,5 +17,4 @@ interface ItemReader {
     suspend fun getRecentFilesList(aeadInfo: AeadInfo): Flow<List<Item>>
 
     suspend fun getItemDetails(aeadInfo: AeadInfo, id: Long): ItemDetails
-
 }

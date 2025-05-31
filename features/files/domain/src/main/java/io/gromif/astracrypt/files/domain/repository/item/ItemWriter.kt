@@ -17,5 +17,4 @@ interface ItemWriter {
     )
 
     suspend fun setState(id: Long, state: ItemState)
-
 }
