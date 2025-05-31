@@ -22,5 +22,4 @@ data class UiState(
         val icon: ImageVector,
         val contentDescription: TextWrap = TextWrap.Text("")
     )
-
 }

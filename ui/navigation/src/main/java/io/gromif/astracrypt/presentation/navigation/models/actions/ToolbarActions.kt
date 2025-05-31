@@ -8,5 +8,4 @@ object ToolbarActions {
         val contentDescription: Int
         val icon: ImageVector
     }
-
 }

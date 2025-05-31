@@ -31,10 +31,12 @@ internal fun SettingsSecurityScreen(
             titleText = stringResource(id = R.string.settings_deviceAdminRights),
             callback = navigateToDeviceAdmin
         )
-        if (isActionsSupported) Preference(
-            titleText = stringResource(id = R.string.settings_quickActions),
-            callback = navigateToQuickActions
-        )
+        if (isActionsSupported) {
+            Preference(
+                titleText = stringResource(id = R.string.settings_quickActions),
+                callback = navigateToQuickActions
+            )
+        }
     }
     SecureContentSettings()
 }

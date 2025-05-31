@@ -7,7 +7,7 @@ import io.gromif.astracrypt.resources.R
 
 val ToolbarActions.lab get() = _ToolbarActionLab
 
-object _ToolbarActionLab: ToolbarActions.Action {
+object _ToolbarActionLab : ToolbarActions.Action {
     override val contentDescription: Int = R.string.lab
     override val icon: ImageVector = Icons.Outlined.Science
 }

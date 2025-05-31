@@ -33,7 +33,7 @@ import io.gromif.ui.compose.core.theme.spaces
 fun SettingsScreen() {
     val navController = LocalNavController.current
 
-    val cellsCount = when(LocalWindowWidth.current) {
+    val cellsCount = when (LocalWindowWidth.current) {
         WindowWidthSizeClass.Compact -> 2
         WindowWidthSizeClass.Medium -> 3
         WindowWidthSizeClass.Expanded -> 5
