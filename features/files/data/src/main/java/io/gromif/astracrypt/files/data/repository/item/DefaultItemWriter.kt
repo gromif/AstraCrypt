@@ -1,6 +1,7 @@
 package io.gromif.astracrypt.files.data.repository.item
 
 import io.gromif.astracrypt.files.data.db.DaoManager
+import io.gromif.astracrypt.files.data.db.tuples.RenameTuple
 import io.gromif.astracrypt.files.data.util.mapper.toFilesEntity
 import io.gromif.astracrypt.files.domain.model.AeadInfo
 import io.gromif.astracrypt.files.domain.model.ImportItemDto
@@ -28,7 +29,8 @@ class DefaultItemWriter(
         id: Long,
         name: String
     ) {
-        daoManager.files(aeadInfo).rename(id, name)
+        val renameTuple = RenameTuple(id = id, name = name)
+        daoManager.files(aeadInfo).rename(renameTuple = renameTuple)
     }
 
     override suspend fun setState(

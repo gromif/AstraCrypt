@@ -3,6 +3,7 @@ package io.gromif.astracrypt.files.data.db
 import io.gromif.astracrypt.files.data.db.tuples.DeleteTuple
 import io.gromif.astracrypt.files.data.db.tuples.DetailsTuple
 import io.gromif.astracrypt.files.data.db.tuples.ExportTuple
+import io.gromif.astracrypt.files.data.db.tuples.RenameTuple
 import io.gromif.astracrypt.files.data.db.tuples.UpdateAeadTuple
 import io.gromif.astracrypt.files.data.util.AeadHandler
 import io.gromif.astracrypt.files.domain.model.AeadInfo
@@ -72,13 +73,14 @@ class FilesDaoAeadAdapter private constructor(
         filesDao.insert(entity)
     }
 
-    override suspend fun rename(id: Long, name: String) {
-        val name = if (databaseMode is AeadMode.Template) {
-            aeadHandler.encryptNameIfNeeded(aeadInfo, databaseMode, name)
+    override suspend fun rename(renameTuple: RenameTuple) {
+        val tuple = if (databaseMode is AeadMode.Template) {
+            val newName = aeadHandler.encryptNameIfNeeded(aeadInfo, databaseMode, renameTuple.name)
+            renameTuple.copy(name = newName)
         } else {
-            name
+            renameTuple
         }
-        filesDao.rename(id, name)
+        filesDao.rename(tuple)
     }
 
     override suspend fun updateAead(updateAeadTuple: UpdateAeadTuple) {
