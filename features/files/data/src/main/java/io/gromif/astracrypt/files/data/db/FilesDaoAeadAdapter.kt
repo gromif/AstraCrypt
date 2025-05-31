@@ -5,15 +5,21 @@ import io.gromif.astracrypt.files.data.db.tuples.DetailsTuple
 import io.gromif.astracrypt.files.data.db.tuples.ExportTuple
 import io.gromif.astracrypt.files.data.db.tuples.RenameTuple
 import io.gromif.astracrypt.files.data.db.tuples.UpdateAeadTuple
-import io.gromif.astracrypt.files.data.util.AeadHandler
+import io.gromif.astracrypt.files.data.util.aead.AbstractAeadHandler
 import io.gromif.astracrypt.files.domain.model.AeadInfo
 import io.gromif.astracrypt.files.domain.model.AeadMode
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
+@Suppress("detekt:LongParameterList")
 class FilesDaoAeadAdapter(
     private val filesDao: FilesDao,
-    private val aeadHandler: AeadHandler,
+    private val filesEntityAeadHandler: AbstractAeadHandler<FilesEntity>,
+    private val deleteTupleAeadHandler: AbstractAeadHandler<DeleteTuple>,
+    private val detailsTupleAeadHandler: AbstractAeadHandler<DetailsTuple>,
+    private val exportTupleAeadHandler: AbstractAeadHandler<ExportTuple>,
+    private val renameTupleAeadHandler: AbstractAeadHandler<RenameTuple>,
+    private val updateTupleAeadHandler: AbstractAeadHandler<UpdateAeadTuple>,
     private val aeadInfo: AeadInfo,
 ) : FilesDao by filesDao {
 
@@ -26,7 +32,7 @@ class FilesDaoAeadAdapter(
     override suspend fun get(id: Long): FilesEntity {
         val filesEntity = filesDao.get(id)
         return if (databaseMode is AeadMode.Template) {
-            aeadHandler.decryptFilesEntity(aeadInfo, databaseMode, filesEntity)
+            filesEntityAeadHandler.decrypt(aeadInfo, databaseMode, filesEntity)
         } else {
             filesEntity
         }
@@ -35,7 +41,7 @@ class FilesDaoAeadAdapter(
     override suspend fun getDeleteData(id: Long): DeleteTuple {
         val deleteTuple = filesDao.getDeleteData(id)
         return if (databaseMode is AeadMode.Template) {
-            aeadHandler.decryptDeleteTuple(aeadInfo, databaseMode, deleteTuple)
+            deleteTupleAeadHandler.decrypt(aeadInfo, databaseMode, deleteTuple)
         } else {
             deleteTuple
         }
@@ -44,7 +50,7 @@ class FilesDaoAeadAdapter(
     override suspend fun getDetailsById(id: Long): DetailsTuple {
         val detailsTuple = filesDao.getDetailsById(id)
         return if (databaseMode is AeadMode.Template) {
-            aeadHandler.decryptDetailsTuple(aeadInfo, databaseMode, detailsTuple)
+            detailsTupleAeadHandler.decrypt(aeadInfo, databaseMode, detailsTuple)
         } else {
             detailsTuple
         }
@@ -52,7 +58,7 @@ class FilesDaoAeadAdapter(
 
     override suspend fun insert(filesEntity: FilesEntity) {
         val entity = if (databaseMode is AeadMode.Template) {
-            aeadHandler.encryptFilesEntity(aeadInfo, databaseMode, filesEntity)
+            filesEntityAeadHandler.encrypt(aeadInfo, databaseMode, filesEntity)
         } else {
             filesEntity
         }
@@ -61,8 +67,7 @@ class FilesDaoAeadAdapter(
 
     override suspend fun rename(renameTuple: RenameTuple) {
         val tuple = if (databaseMode is AeadMode.Template) {
-            val newName = aeadHandler.encryptNameIfNeeded(aeadInfo, databaseMode, renameTuple.name)
-            renameTuple.copy(name = newName)
+            renameTupleAeadHandler.encrypt(aeadInfo, databaseMode, renameTuple)
         } else {
             renameTuple
         }
@@ -71,7 +76,7 @@ class FilesDaoAeadAdapter(
 
     override suspend fun updateAead(updateAeadTuple: UpdateAeadTuple) {
         val tuple = if (databaseMode is AeadMode.Template) {
-            aeadHandler.encryptUpdateAeadTuple(aeadInfo, databaseMode, updateAeadTuple)
+            updateTupleAeadHandler.encrypt(aeadInfo, databaseMode, updateAeadTuple)
         } else {
             updateAeadTuple
         }
@@ -81,7 +86,7 @@ class FilesDaoAeadAdapter(
     override suspend fun getExportData(id: Long): ExportTuple {
         val exportTuple = filesDao.getExportData(id)
         return if (databaseMode is AeadMode.Template) {
-            aeadHandler.decryptExportTuple(aeadInfo, databaseMode, exportTuple)
+            exportTupleAeadHandler.decrypt(aeadInfo, databaseMode, exportTuple)
         } else {
             exportTuple
         }
@@ -94,7 +99,7 @@ class FilesDaoAeadAdapter(
         val updateAeadTuple = filesDao.getUpdateAeadTupleList(pageSize, pageOffset)
         return if (databaseMode is AeadMode.Template) {
             updateAeadTuple.map {
-                aeadHandler.decryptUpdateAeadTuple(aeadInfo, databaseMode, it)
+                updateTupleAeadHandler.decrypt(aeadInfo, databaseMode, it)
             }
         } else {
             updateAeadTuple
@@ -105,7 +110,7 @@ class FilesDaoAeadAdapter(
         return filesDao.getRecentFilesFlow().map { list ->
             if (databaseMode is AeadMode.Template) {
                 list.map {
-                    aeadHandler.decryptFilesEntity(aeadInfo, databaseMode, it)
+                    filesEntityAeadHandler.decrypt(aeadInfo, databaseMode, it)
                 }
             } else {
                 list
