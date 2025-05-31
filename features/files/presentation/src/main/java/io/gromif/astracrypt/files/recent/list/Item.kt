@@ -55,32 +55,38 @@ internal fun RecentFilesListItem(
                 .height(200.dp),
             contentAlignment = Alignment.Center
         ) {
-            if (preview == null) Icon(
-                modifier = Modifier.size(72.dp),
-                imageVector = itemType.iconAlt,
-                contentDescription = null,
-                tint = itemType.iconTint
-            ) else AsyncImage(
-                modifier = Modifier.fillMaxSize(),
-                model = preview,
-                contentDescription = null,
-                imageLoader = imageLoader,
-                contentScale = ContentScale.Crop
-            )
-            if (state == ItemState.Starred) Icon(
-                modifier = Modifier
-                    .align(Alignment.BottomEnd)
-                    .padding(MaterialTheme.spaces.spaceAltSmall)
-                    .background(
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        shape = CircleShape
-                    )
-                    .padding(MaterialTheme.spaces.spaceAltSmall)
-                    .size(14.dp),
-                imageVector = Icons.Filled.Star,
-                tint = MaterialTheme.colorScheme.surface,
-                contentDescription = null
-            )
+            if (preview == null) {
+                Icon(
+                    modifier = Modifier.size(72.dp),
+                    imageVector = itemType.iconAlt,
+                    contentDescription = null,
+                    tint = itemType.iconTint
+                )
+            } else {
+                AsyncImage(
+                    modifier = Modifier.fillMaxSize(),
+                    model = preview,
+                    contentDescription = null,
+                    imageLoader = imageLoader,
+                    contentScale = ContentScale.Crop
+                )
+            }
+            if (state == ItemState.Starred) {
+                Icon(
+                    modifier = Modifier
+                        .align(Alignment.BottomEnd)
+                        .padding(MaterialTheme.spaces.spaceAltSmall)
+                        .background(
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            shape = CircleShape
+                        )
+                        .padding(MaterialTheme.spaces.spaceAltSmall)
+                        .size(14.dp),
+                    imageVector = Icons.Filled.Star,
+                    tint = MaterialTheme.colorScheme.surface,
+                    contentDescription = null
+                )
+            }
         }
         Row(
             modifier = Modifier

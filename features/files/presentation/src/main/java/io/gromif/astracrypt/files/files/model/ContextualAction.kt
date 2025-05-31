@@ -16,6 +16,5 @@ sealed class ContextualAction(
 
     data object Delete : ContextualAction(resetMode = true)
 
-    data class Star(val state: Boolean): ContextualAction(resetMode = true)
-
+    data class Star(val state: Boolean) : ContextualAction(resetMode = true)
 }

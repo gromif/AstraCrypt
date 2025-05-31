@@ -40,7 +40,9 @@ internal class ExportScreenViewModel @Inject constructor(
 ) : ViewModel() {
     private val workUUID = UUID.randomUUID()
     val secureContentModeState = secureContentContract.getContractModeFlow().stateIn(
-        viewModelScope, SharingStarted.WhileSubscribed(), SecureContentContract.Mode.ENABLED
+        viewModelScope,
+        SharingStarted.WhileSubscribed(),
+        SecureContentContract.Mode.ENABLED
     )
 
     var internalExportUri: Uri = Uri.EMPTY
@@ -80,5 +82,4 @@ internal class ExportScreenViewModel @Inject constructor(
     fun cancelExport() = workManager.cancelWorkById(id = workUUID)
 
     fun onDispose() = filesUtil.clearExportedCache()
-
 }

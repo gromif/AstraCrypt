@@ -140,5 +140,4 @@ internal class FilesViewModel @Inject constructor(
     fun rename(id: Long, newName: String) = viewModelScope.launch(defaultDispatcher) {
         actionUseCases.renameUseCase(id = id, newName = newName)
     }
-
 }

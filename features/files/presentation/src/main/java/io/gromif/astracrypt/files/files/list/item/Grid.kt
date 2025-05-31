@@ -64,9 +64,13 @@ internal fun FilesListGridItem(
     onLongPress: () -> Unit,
 ) = ElevatedCard(
     modifier = modifier.aspectRatio(1f),
-    colors = if (isChecked) CardDefaults.elevatedCardColors(
-        containerColor = MaterialTheme.colorScheme.surfaceContainerHigh
-    ) else CardDefaults.elevatedCardColors(),
+    colors = if (isChecked) {
+        CardDefaults.elevatedCardColors(
+            containerColor = MaterialTheme.colorScheme.surfaceContainerHigh
+        )
+    } else {
+        CardDefaults.elevatedCardColors()
+    },
     shape = ShapeDefaults.Large
 ) {
     Column(
@@ -84,20 +88,25 @@ internal fun FilesListGridItem(
                 .aspectRatio(1.5f),
             contentAlignment = Alignment.Center
         ) {
-            if (preview == null) Icon(
-                modifier = Modifier.size(72.dp),
-                imageVector = itemType.iconAlt,
-                contentDescription = null,
-                tint = itemType.iconTint
-            ) else AsyncImage(
-                modifier = Modifier.fillMaxSize(),
-                model = preview,
-                contentDescription = null,
-                imageLoader = imageLoader,
-                contentScale = ContentScale.Crop,
-                onState = {
-                    loadOtherIcons = it is AsyncImagePainter.State.Success
-                })
+            if (preview == null) {
+                Icon(
+                    modifier = Modifier.size(72.dp),
+                    imageVector = itemType.iconAlt,
+                    contentDescription = null,
+                    tint = itemType.iconTint
+                )
+            } else {
+                AsyncImage(
+                    modifier = Modifier.fillMaxSize(),
+                    model = preview,
+                    contentDescription = null,
+                    imageLoader = imageLoader,
+                    contentScale = ContentScale.Crop,
+                    onState = {
+                        loadOtherIcons = it is AsyncImagePainter.State.Success
+                    }
+                )
+            }
             this@Column.AnimatedVisibility(
                 visible = state == ItemState.Starred,
                 enter = fadeIn(),
@@ -119,48 +128,56 @@ internal fun FilesListGridItem(
                 )
             }
         }
-        if (loadOtherIcons) Row(
-            modifier = Modifier.fillMaxSize(),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            Box(
-                modifier = Modifier.size(48.dp),
-                contentAlignment = Alignment.Center
+        if (loadOtherIcons) {
+            Row(
+                modifier = Modifier.fillMaxSize(),
+                verticalAlignment = Alignment.CenterVertically,
             ) {
-                if (isFile) Icon(
-                    modifier = Modifier.size(28.dp),
-                    imageVector = itemType.icon,
-                    contentDescription = null,
-                    tint = itemType.iconTint
-                )
-            }
-            Text(
-                modifier = Modifier.weight(1f),
-                text = name,
-                textAlign = TextAlign.Center,
-                overflow = TextOverflow.Ellipsis,
-                style = MaterialTheme.typography.bodyMedium,
-                maxLines = 2
-            )
-            Box(
-                modifier = Modifier.size(48.dp),
-                contentAlignment = Alignment.Center
-            ) {
-                if (isChecked) Icon(
-                    modifier = Modifier.size(24.dp),
-                    imageVector = Icons.Filled.CheckCircle,
-                    tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                    contentDescription = null
-                ) else IconButton(
-                    modifier = Modifier.fillMaxSize(),
-                    onClick = onOptions
+                Box(
+                    modifier = Modifier.size(48.dp),
+                    contentAlignment = Alignment.Center
                 ) {
-                    Icon(
-                        modifier = Modifier.size(24.dp),
-                        imageVector = Icons.Filled.MoreVert,
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                        contentDescription = null
-                    )
+                    if (isFile) {
+                        Icon(
+                            modifier = Modifier.size(28.dp),
+                            imageVector = itemType.icon,
+                            contentDescription = null,
+                            tint = itemType.iconTint
+                        )
+                    }
+                }
+                Text(
+                    modifier = Modifier.weight(1f),
+                    text = name,
+                    textAlign = TextAlign.Center,
+                    overflow = TextOverflow.Ellipsis,
+                    style = MaterialTheme.typography.bodyMedium,
+                    maxLines = 2
+                )
+                Box(
+                    modifier = Modifier.size(48.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    if (isChecked) {
+                        Icon(
+                            modifier = Modifier.size(24.dp),
+                            imageVector = Icons.Filled.CheckCircle,
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                            contentDescription = null
+                        )
+                    } else {
+                        IconButton(
+                            modifier = Modifier.fillMaxSize(),
+                            onClick = onOptions
+                        ) {
+                            Icon(
+                                modifier = Modifier.size(24.dp),
+                                imageVector = Icons.Filled.MoreVert,
+                                tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                                contentDescription = null
+                            )
+                        }
+                    }
                 }
             }
         }

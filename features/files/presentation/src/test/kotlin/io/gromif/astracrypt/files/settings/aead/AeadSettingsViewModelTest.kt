@@ -28,7 +28,7 @@ class AeadSettingsViewModelTest {
     private val getAeadInfoFlowUseCaseMock: GetAeadInfoFlowUseCase = mockk()
 
     private val currentAeadInfo: AeadInfo = AeadInfo()
-    private val aeadInfoFlow = flow<AeadInfo> {  }
+    private val aeadInfoFlow = flow<AeadInfo> { }
 
     @Before
     fun setUp() {
@@ -78,5 +78,4 @@ class AeadSettingsViewModelTest {
 
         verify(exactly = 1) { workManagerMock.enqueue(any<OneTimeWorkRequest>()) }
     }
-
 }

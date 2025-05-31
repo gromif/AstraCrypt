@@ -11,4 +11,4 @@ data class OptionsItem(
     val isStarred: Boolean = false,
     val itemType: ItemType = ItemType.Folder,
     val isFolder: Boolean = itemType == ItemType.Folder
-): Parcelable
+) : Parcelable

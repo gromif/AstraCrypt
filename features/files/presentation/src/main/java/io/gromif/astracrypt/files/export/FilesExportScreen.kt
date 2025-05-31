@@ -20,12 +20,16 @@ fun FilesExportScreen(params: Params) {
         state = vm.uiState,
         isExternalExport = params.isExternalExport,
         onStart = {
-            if (params.isExternalExport) vm.export(
-                idList = params.idList.toTypedArray(),
-                output = params.outputPath!!
-            ).invokeOnCompletion { vm.observeWorkInfoState() } else vm.export(
-                id = params.idList.first()
-            )
+            if (params.isExternalExport) {
+                vm.export(
+                    idList = params.idList.toTypedArray(),
+                    output = params.outputPath!!
+                ).invokeOnCompletion { vm.observeWorkInfoState() }
+            } else {
+                vm.export(
+                    id = params.idList.first()
+                )
+            }
         },
         onOpenExportedFile = {
             openExportedFile(

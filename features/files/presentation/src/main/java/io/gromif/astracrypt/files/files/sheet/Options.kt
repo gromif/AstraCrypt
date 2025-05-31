@@ -77,7 +77,9 @@ internal fun filesOptionsSheet(
         )
         SheetFilesOptionsItem(
             text = stringResource(
-                id = if (isStarred) R.string.files_options_removeFromStarred else {
+                id = if (isStarred) {
+                    R.string.files_options_removeFromStarred
+                } else {
                     R.string.files_options_addToStarred
                 }
             ),

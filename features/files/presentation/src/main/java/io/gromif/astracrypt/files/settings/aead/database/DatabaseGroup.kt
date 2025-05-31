@@ -28,7 +28,6 @@ internal fun DatabaseGroup(
 ) = PreferencesGroup(text = stringResource(id = R.string.settings_database)) {
     val context = LocalContext.current
 
-
     var selectedDbEncryptionToConfirm by rememberSaveable { mutableIntStateOf(-1) }
     var dbEncryptConfirmation by DialogsCore.simple(
         title = stringResource(id = R.string.dialog_applyNewSettings),
@@ -48,7 +47,6 @@ internal fun DatabaseGroup(
         titleText = stringResource(id = R.string.settings_database),
         summaryText = databaseOptions[databaseAeadIndex]
     ) { dialogDatabaseState = true }
-
 
     val columnsTextPrefix = stringResource(R.string.settings_columns_summary)
     val columnsEncrypted = remember(aeadInfo) {

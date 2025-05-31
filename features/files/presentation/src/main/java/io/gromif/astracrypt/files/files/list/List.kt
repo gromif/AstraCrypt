@@ -77,7 +77,8 @@ internal fun FilesList(
                     onLongPress = {
                         Haptic.clickHeavy()
                         onLongPress(item.id)
-                    })
+                    }
+                )
             }
             ViewMode.ListDefault -> items(
                 count = pagingItems.itemSnapshotList.size,
@@ -97,7 +98,8 @@ internal fun FilesList(
                         Haptic.clickHeavy()
                         onOptions(item)
                     },
-                    onClick = { onClick.invoke(item) })
+                    onClick = { onClick.invoke(item) }
+                )
             }
         }
     }

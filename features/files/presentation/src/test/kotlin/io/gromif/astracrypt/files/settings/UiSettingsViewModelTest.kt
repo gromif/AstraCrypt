@@ -49,5 +49,4 @@ class UiSettingsViewModelTest {
 
         coVerify { setListViewModeUseCaseMock(targetViewMode) }
     }
-
 }

@@ -62,14 +62,20 @@ internal fun FilesListItem(
     val backgroundColor = animateColorAsState(
         targetValue = if (isChecked) {
             MaterialTheme.colorScheme.surfaceVariant
-        } else Color.Unspecified, label = ""
+        } else {
+            Color.Unspecified
+        },
+        label = ""
     )
     Row(
         modifier = modifier
             .fillMaxWidth()
             .run {
-                if (!isBackgroundTransparent) background(color = backgroundColor.value)
-                else this
+                if (!isBackgroundTransparent) {
+                    background(color = backgroundColor.value)
+                } else {
+                    this
+                }
             }
             .combinedClickable(onClick = onClick, onLongClick = onLongClick)
             .height(dimensionResource(id = R.dimen.filesListItemMediumHeight)),
@@ -79,20 +85,24 @@ internal fun FilesListItem(
             modifier = Modifier.size(dimensionResource(id = R.dimen.filesListItemMediumHeight)),
             contentAlignment = Alignment.Center
         ) {
-            if (preview == null) Icon(
-                modifier = Modifier.size(60.dp),
-                imageVector = itemType.iconAlt,
-                contentDescription = null,
-                tint = itemType.iconTint
-            ) else AsyncImage(
-                model = preview,
-                contentDescription = null,
-                imageLoader = imageLoader,
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .size(85.dp)
-                    .clip(RoundedCornerShape(16.dp))
-            )
+            if (preview == null) {
+                Icon(
+                    modifier = Modifier.size(60.dp),
+                    imageVector = itemType.iconAlt,
+                    contentDescription = null,
+                    tint = itemType.iconTint
+                )
+            } else {
+                AsyncImage(
+                    model = preview,
+                    contentDescription = null,
+                    imageLoader = imageLoader,
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .size(85.dp)
+                        .clip(RoundedCornerShape(16.dp))
+                )
+            }
             this@Row.AnimatedVisibility(
                 visible = state == ItemState.Starred,
                 enter = fadeIn(),
@@ -108,7 +118,8 @@ internal fun FilesListItem(
                         )
                         .padding(MaterialTheme.spaces.spaceXXSmall)
                         .background(
-                            color = MaterialTheme.colorScheme.onSurfaceVariant, shape = CircleShape
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            shape = CircleShape
                         )
                         .padding(MaterialTheme.spaces.spaceAltSmall)
                         .size(14.dp),

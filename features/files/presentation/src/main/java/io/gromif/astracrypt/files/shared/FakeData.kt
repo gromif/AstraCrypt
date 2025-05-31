@@ -26,5 +26,4 @@ internal object FakeData {
             isFile = isFolder.not()
         )
     }
-
 }

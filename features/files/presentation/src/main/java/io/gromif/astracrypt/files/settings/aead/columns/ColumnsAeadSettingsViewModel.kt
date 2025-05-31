@@ -48,5 +48,4 @@ internal class ColumnsAeadSettingsViewModel @Inject constructor(
         }.build()
         workManager.enqueue(workerRequest)
     }
-
 }

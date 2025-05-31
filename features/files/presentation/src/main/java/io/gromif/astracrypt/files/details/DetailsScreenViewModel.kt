@@ -29,7 +29,7 @@ internal class DetailsScreenViewModel @Inject constructor(
     private val getItemDetailsUseCase: GetItemDetailsUseCase,
     @FilesImageLoader
     val imageLoader: ImageLoader
-): ViewModel() {
+) : ViewModel() {
     val detailsStateList = mutableDetailsStateList()
     var itemDetails by mutableStateOf<ItemDetails?>(null)
 
@@ -54,5 +54,4 @@ internal class DetailsScreenViewModel @Inject constructor(
         }
         itemDetails = details
     }
-
 }

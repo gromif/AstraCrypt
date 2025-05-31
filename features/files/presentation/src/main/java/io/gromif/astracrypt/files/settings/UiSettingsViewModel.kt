@@ -19,13 +19,14 @@ internal class UiSettingsViewModel @Inject constructor(
     private val defaultDispatcher: CoroutineDispatcher,
     private val setListViewModeUseCase: SetListViewModeUseCase,
     getListViewModeUseCase: GetListViewModeUseCase
-): ViewModel() {
+) : ViewModel() {
     val viewModeState = getListViewModeUseCase().stateIn(
-        viewModelScope, SharingStarted.WhileSubscribed(), ViewMode.Grid
+        viewModelScope,
+        SharingStarted.WhileSubscribed(),
+        ViewMode.Grid
     )
 
     fun setViewMode(viewMode: ViewMode) = viewModelScope.launch(defaultDispatcher) {
         setListViewModeUseCase(viewMode)
     }
-
 }

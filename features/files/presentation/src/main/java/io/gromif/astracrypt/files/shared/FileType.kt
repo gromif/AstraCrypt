@@ -34,7 +34,7 @@ internal val ItemType.icon @Composable get() = when (this) {
     ItemType.Application,
     ItemType.Other,
     ItemType.Text,
-        -> Icons.FileType.File
+    -> Icons.FileType.File
 }
 
 internal val ItemType.iconAlt @Composable get() = when (this) {
@@ -47,7 +47,7 @@ internal val ItemType.iconAlt @Composable get() = when (this) {
     ItemType.Application,
     ItemType.Other,
     ItemType.Text,
-        -> Icons.FileType.FileAlt
+    -> Icons.FileType.FileAlt
 }
 
 internal val ItemType.title get() = when (this) {

@@ -53,5 +53,4 @@ class ExportScreenViewModelTest {
         coVerify(exactly = 1) { internalExportUseCase(targetId) }
         Assert.assertEquals(targetUiState, exportScreenViewModel.uiState)
     }
-
 }

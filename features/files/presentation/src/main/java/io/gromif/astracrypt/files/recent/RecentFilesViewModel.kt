@@ -15,8 +15,7 @@ internal class RecentFilesViewModel @Inject constructor(
     @FilesImageLoader
     val imageLoader: ImageLoader,
     getRecentItemsUseCase: GetRecentItemsUseCase,
-): ViewModel() {
+) : ViewModel() {
     val recentItemsListState = getRecentItemsUseCase()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), listOf())
-
 }

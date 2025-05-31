@@ -14,7 +14,6 @@ interface FilesNavActions {
             override fun toExportPrivately(id: Long) {}
             override fun toDetails(id: Long) {}
         }
-
     }
 
     fun toFiles(id: Long, name: String)
@@ -24,5 +23,4 @@ interface FilesNavActions {
     fun toExportPrivately(id: Long)
 
     fun toDetails(id: Long)
-
 }

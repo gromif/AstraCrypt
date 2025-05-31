@@ -29,7 +29,6 @@ internal data class AeadInfoDto(
         id == -1 -> AeadMode.None
         else -> AeadMode.Template(id, "")
     }
-
 }
 
 internal fun AeadInfo.toDto(): AeadInfoDto = AeadInfoDto(
