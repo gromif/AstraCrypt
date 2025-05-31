@@ -30,5 +30,4 @@ enum class SettingsMainItems(
         imageVector = Icons.Outlined.Info,
         titleId = R.string.settings_about
     )
-
 }

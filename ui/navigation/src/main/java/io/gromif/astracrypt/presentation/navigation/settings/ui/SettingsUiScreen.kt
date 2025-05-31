@@ -20,10 +20,12 @@ internal fun SettingsUiScreen(
             titleText = stringResource(id = R.string.files),
             callback = navigateToFilesUiSettings
         )
-        if (isDynamicColorsSupported) PreferencesSwitch(
-            isChecked = dynamicThemeState,
-            titleText = stringResource(id = R.string.settings_enableDynamicColors),
-            callback = onDynamicColorsStateChange
-        )
+        if (isDynamicColorsSupported) {
+            PreferencesSwitch(
+                isChecked = dynamicThemeState,
+                titleText = stringResource(id = R.string.settings_enableDynamicColors),
+                callback = onDynamicColorsStateChange
+            )
+        }
     }
 }

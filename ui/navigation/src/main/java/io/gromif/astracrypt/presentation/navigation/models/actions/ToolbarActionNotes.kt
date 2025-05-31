@@ -7,7 +7,7 @@ import io.gromif.astracrypt.resources.R
 
 val ToolbarActions.notes get() = _ToolbarActionNotes
 
-object _ToolbarActionNotes: ToolbarActions.Action {
+object _ToolbarActionNotes : ToolbarActions.Action {
     override val contentDescription: Int = R.string.notes
     override val icon: ImageVector = Icons.AutoMirrored.Default.Notes
 }

@@ -7,7 +7,7 @@ import io.gromif.astracrypt.resources.R
 
 val ToolbarActions.help get() = _ToolbarActionHelp
 
-object _ToolbarActionHelp: ToolbarActions.Action {
+object _ToolbarActionHelp : ToolbarActions.Action {
     override val contentDescription: Int = R.string.help
     override val icon: ImageVector = Icons.AutoMirrored.Outlined.HelpOutline
 }

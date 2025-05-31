@@ -32,8 +32,10 @@ internal fun NavGraphBuilder.overviewNote() = composable<Route.NotesGraph.Overvi
     val onSaveRequestChannel = remember { Channel<Unit>(0) }
     val onDeleteRequestChannel = remember { Channel<Unit>(0) }
 
-    if (editMode) hostEvents.ObserveToolbarActions {
-        if (it == ToolbarActions.delete) onDeleteRequestChannel.send(Unit)
+    if (editMode) {
+        hostEvents.ObserveToolbarActions {
+            if (it == ToolbarActions.delete) onDeleteRequestChannel.send(Unit)
+        }
     }
     hostEvents.ObserveFab {
         onSaveRequestChannel.send(Unit)
@@ -48,7 +50,9 @@ internal fun NavGraphBuilder.overviewNote() = composable<Route.NotesGraph.Overvi
             toolbar = UiState.Toolbar(
                 title = if (newName.isBlank() && !editMode) {
                     TextWrap.Resource(id = R.string.createNew)
-                } else TextWrap.Text(text = newName),
+                } else {
+                    TextWrap.Text(text = newName)
+                },
                 actions = if (editMode) listOf(ToolbarActions.delete) else null
             ),
             fab = if (name.isNotBlank() || text.isNotBlank()) SaveFabUiState else null

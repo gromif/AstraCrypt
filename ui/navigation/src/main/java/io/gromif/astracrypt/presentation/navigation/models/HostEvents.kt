@@ -11,5 +11,4 @@ interface HostEvents {
 
     @Composable
     fun ObserveToolbarActions(action: suspend (Any) -> Unit)
-
 }

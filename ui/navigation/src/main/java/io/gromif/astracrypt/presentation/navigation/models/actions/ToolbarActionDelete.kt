@@ -7,7 +7,7 @@ import io.gromif.astracrypt.resources.R
 
 val ToolbarActions.delete get() = _ToolbarActionDelete
 
-object _ToolbarActionDelete: ToolbarActions.Action {
+object _ToolbarActionDelete : ToolbarActions.Action {
     override val contentDescription: Int = R.string.files_options_delete
     override val icon: ImageVector = Icons.Outlined.DeleteOutline
 }
