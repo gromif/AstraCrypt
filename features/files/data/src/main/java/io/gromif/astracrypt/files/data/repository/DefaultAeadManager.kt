@@ -1,7 +1,6 @@
 package io.gromif.astracrypt.files.data.repository
 
 import io.gromif.astracrypt.files.data.db.DaoManager
-import io.gromif.astracrypt.files.data.db.FilesDaoAeadAdapter
 import io.gromif.astracrypt.files.data.db.tuples.UpdateAeadTuple
 import io.gromif.astracrypt.files.domain.model.AeadInfo
 import io.gromif.astracrypt.files.domain.repository.AeadManager
@@ -12,7 +11,6 @@ private const val DEFAULT_PAGE_SIZE = 10
 
 class DefaultAeadManager(
     private val daoManager: DaoManager,
-    private val filesDaoAeadAdapterFactory: FilesDaoAeadAdapter.Factory,
 ) : AeadManager {
 
     override suspend fun changeAead(
@@ -20,7 +18,7 @@ class DefaultAeadManager(
         targetAeadInfo: AeadInfo
     ) = coroutineScope {
         val currentFilesDaoAead = daoManager.files(aeadInfo = oldAeadInfo)
-        val targetFilesDaoAead = filesDaoAeadAdapterFactory.create(aeadInfo = targetAeadInfo)
+        val targetFilesDaoAead = daoManager.files(aeadInfo = targetAeadInfo)
 
         var offset = 0
         var page: List<UpdateAeadTuple> = listOf()

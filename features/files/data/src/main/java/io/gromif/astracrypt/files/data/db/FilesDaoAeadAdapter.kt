@@ -11,25 +11,11 @@ import io.gromif.astracrypt.files.domain.model.AeadMode
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class FilesDaoAeadAdapter private constructor(
+class FilesDaoAeadAdapter(
     private val filesDao: FilesDao,
     private val aeadHandler: AeadHandler,
     private val aeadInfo: AeadInfo,
 ) : FilesDao by filesDao {
-
-    class Factory(
-        private val filesDao: FilesDao,
-        private val aeadHandler: AeadHandler,
-    ) {
-
-        fun create(aeadInfo: AeadInfo): FilesDaoAeadAdapter {
-            return FilesDaoAeadAdapter(
-                filesDao = filesDao,
-                aeadHandler = aeadHandler,
-                aeadInfo = aeadInfo
-            )
-        }
-    }
 
     private val databaseMode = aeadInfo.databaseMode
 
