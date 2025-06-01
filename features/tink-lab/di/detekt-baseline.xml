@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>FinalNewline:MapperModule.kt$io.gromif.tink_lab.di.MapperModule.kt</ID>
+    <ID>FinalNewline:ParserModule.kt$io.gromif.tink_lab.di.ParserModule.kt</ID>
+    <ID>FinalNewline:RepositoryModule.kt$io.gromif.tink_lab.di.RepositoryModule.kt</ID>
+    <ID>FinalNewline:SerializerModule.kt$io.gromif.tink_lab.di.SerializerModule.kt</ID>
+    <ID>FinalNewline:UseCasesModule.kt$io.gromif.tink_lab.di.UseCasesModule.kt</ID>
+    <ID>FinalNewline:UtilModule.kt$io.gromif.tink_lab.di.UtilModule.kt</ID>
+    <ID>NoBlankLineBeforeRbrace:MapperModule.kt$MapperModule$ </ID>
+    <ID>NoBlankLineBeforeRbrace:ParserModule.kt$ParserModule$ </ID>
+    <ID>NoBlankLineBeforeRbrace:RepositoryModule.kt$RepositoryModule$ </ID>
+    <ID>NoBlankLineBeforeRbrace:SerializerModule.kt$SerializerModule$ </ID>
+    <ID>NoBlankLineBeforeRbrace:UseCasesModule.kt$UseCasesModule$ </ID>
+    <ID>NoBlankLineBeforeRbrace:UtilModule.kt$UtilModule$ </ID>
+    <ID>PackageName:MapperModule.kt$package io.gromif.tink_lab.di</ID>
+    <ID>PackageName:ParserModule.kt$package io.gromif.tink_lab.di</ID>
+    <ID>PackageName:RepositoryModule.kt$package io.gromif.tink_lab.di</ID>
+    <ID>PackageName:SerializerModule.kt$package io.gromif.tink_lab.di</ID>
+    <ID>PackageName:UseCasesModule.kt$package io.gromif.tink_lab.di</ID>
+    <ID>PackageName:UtilModule.kt$package io.gromif.tink_lab.di</ID>
+    <ID>PackageNaming:MapperModule.kt$package io.gromif.tink_lab.di</ID>
+    <ID>PackageNaming:ParserModule.kt$package io.gromif.tink_lab.di</ID>
+    <ID>PackageNaming:RepositoryModule.kt$package io.gromif.tink_lab.di</ID>
+    <ID>PackageNaming:SerializerModule.kt$package io.gromif.tink_lab.di</ID>
+    <ID>PackageNaming:UseCasesModule.kt$package io.gromif.tink_lab.di</ID>
+    <ID>PackageNaming:UtilModule.kt$package io.gromif.tink_lab.di</ID>
+  </CurrentIssues>
+</SmellBaseline>

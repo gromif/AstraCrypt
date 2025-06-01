@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>ArgumentListWrapping:RequestDeviceAdminContract.kt$RequestDeviceAdminContract$( DevicePolicyManager.EXTRA_DEVICE_ADMIN, admin )</ID>
+    <ID>FinalNewline:AdminSettings.kt$io.gromif.astracrypt.device_admin.presentation.AdminSettings.kt</ID>
+    <ID>FinalNewline:AdminSettingsScreen.kt$io.gromif.astracrypt.device_admin.presentation.AdminSettingsScreen.kt</ID>
+    <ID>FinalNewline:AdminSettingsViewModel.kt$io.gromif.astracrypt.device_admin.presentation.AdminSettingsViewModel.kt</ID>
+    <ID>FinalNewline:AdminSettingsViewModelTest.kt$io.gromif.astracrypt.device_admin.presentation.AdminSettingsViewModelTest.kt</ID>
+    <ID>FinalNewline:RequestDeviceAdminContract.kt$io.gromif.astracrypt.device_admin.presentation.contracts.RequestDeviceAdminContract.kt</ID>
+    <ID>Indentation:AdminSettings.kt$ </ID>
+    <ID>MultiLineIfElse:AdminSettings.kt$AdminSettingsScreen( adminRightsGranted = adminState.isActive, requestAdminRights = { requestDeviceAdmin.launch(null) }, disableAdminRights = vm::disable )</ID>
+    <ID>MultiLineIfElse:AdminSettingsScreen.kt$disableAdminRights()</ID>
+    <ID>MultiLineIfElse:AdminSettingsScreen.kt$requestAdminRights()</ID>
+    <ID>PackageName:AdminSettings.kt$package io.gromif.astracrypt.device_admin.presentation</ID>
+    <ID>PackageName:AdminSettingsScreen.kt$package io.gromif.astracrypt.device_admin.presentation</ID>
+    <ID>PackageName:AdminSettingsViewModel.kt$package io.gromif.astracrypt.device_admin.presentation</ID>
+    <ID>PackageName:AdminSettingsViewModelTest.kt$package io.gromif.astracrypt.device_admin.presentation</ID>
+    <ID>PackageName:RequestDeviceAdminContract.kt$package io.gromif.astracrypt.device_admin.presentation.contracts</ID>
+    <ID>PackageNaming:AdminSettings.kt$package io.gromif.astracrypt.device_admin.presentation</ID>
+    <ID>PackageNaming:AdminSettingsScreen.kt$package io.gromif.astracrypt.device_admin.presentation</ID>
+    <ID>PackageNaming:AdminSettingsViewModel.kt$package io.gromif.astracrypt.device_admin.presentation</ID>
+    <ID>PackageNaming:AdminSettingsViewModelTest.kt$package io.gromif.astracrypt.device_admin.presentation</ID>
+    <ID>PackageNaming:RequestDeviceAdminContract.kt$package io.gromif.astracrypt.device_admin.presentation.contracts</ID>
+  </CurrentIssues>
+</SmellBaseline>

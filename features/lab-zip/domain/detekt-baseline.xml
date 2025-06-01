@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>FinalNewline:FileInfo.kt$io.gromif.lab_zip.domain.FileInfo.kt</ID>
+    <ID>FinalNewline:GetFileInfosUseCase.kt$io.gromif.lab_zip.domain.usecase.GetFileInfosUseCase.kt</ID>
+    <ID>FinalNewline:GetSourceFileInfoUseCase.kt$io.gromif.lab_zip.domain.usecase.GetSourceFileInfoUseCase.kt</ID>
+    <ID>FinalNewline:Repository.kt$io.gromif.lab_zip.domain.Repository.kt</ID>
+    <ID>NoBlankLineBeforeRbrace:GetFileInfosUseCase.kt$GetFileInfosUseCase$ </ID>
+    <ID>NoBlankLineBeforeRbrace:GetSourceFileInfoUseCase.kt$GetSourceFileInfoUseCase$ </ID>
+    <ID>NoBlankLineBeforeRbrace:Repository.kt$Repository$ </ID>
+    <ID>PackageName:FileInfo.kt$package io.gromif.lab_zip.domain</ID>
+    <ID>PackageName:GetFileInfosUseCase.kt$package io.gromif.lab_zip.domain.usecase</ID>
+    <ID>PackageName:GetSourceFileInfoUseCase.kt$package io.gromif.lab_zip.domain.usecase</ID>
+    <ID>PackageName:Repository.kt$package io.gromif.lab_zip.domain</ID>
+    <ID>PackageNaming:FileInfo.kt$package io.gromif.lab_zip.domain</ID>
+    <ID>PackageNaming:GetFileInfosUseCase.kt$package io.gromif.lab_zip.domain.usecase</ID>
+    <ID>PackageNaming:GetSourceFileInfoUseCase.kt$package io.gromif.lab_zip.domain.usecase</ID>
+    <ID>PackageNaming:Repository.kt$package io.gromif.lab_zip.domain</ID>
+  </CurrentIssues>
+</SmellBaseline>

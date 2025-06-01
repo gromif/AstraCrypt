@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>FinalNewline:DataStoreModule.kt$io.gromif.notes.di.DataStoreModule.kt</ID>
+    <ID>FinalNewline:RepositoryModule.kt$io.gromif.notes.di.RepositoryModule.kt</ID>
+    <ID>FinalNewline:SettingsRepositoryModule.kt$io.gromif.notes.di.SettingsRepositoryModule.kt</ID>
+    <ID>FinalNewline:UseCases.kt$io.gromif.notes.di.UseCases.kt</ID>
+    <ID>FinalNewline:UtilModule.kt$io.gromif.notes.di.UtilModule.kt</ID>
+    <ID>FinalNewline:WorkerUseCases.kt$io.gromif.notes.di.WorkerUseCases.kt</ID>
+    <ID>NoBlankLineBeforeRbrace:RepositoryModule.kt$RepositoryModule$ </ID>
+    <ID>NoBlankLineBeforeRbrace:SettingsRepositoryModule.kt$SettingsRepositoryModule$ </ID>
+    <ID>NoBlankLineBeforeRbrace:UseCases.kt$UseCases$ </ID>
+    <ID>NoBlankLineBeforeRbrace:UtilModule.kt$UtilModule$ </ID>
+    <ID>NoBlankLineBeforeRbrace:WorkerUseCases.kt$WorkerUseCases$ </ID>
+  </CurrentIssues>
+</SmellBaseline>

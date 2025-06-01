@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>FinalNewline:DeviceAdminService.kt$io.gromif.astracrypt.device_admin.domain.service.DeviceAdminService.kt</ID>
+    <ID>FinalNewline:GetAdminStateFlowUseCase.kt$io.gromif.astracrypt.device_admin.domain.usecase.GetAdminStateFlowUseCase.kt</ID>
+    <ID>FinalNewline:GetAdminStateFlowUseCaseTest.kt$io.gromif.astracrypt.device_admin.domain.usecase.GetAdminStateFlowUseCaseTest.kt</ID>
+    <ID>FinalNewline:RevokeAdminUseCase.kt$io.gromif.astracrypt.device_admin.domain.usecase.RevokeAdminUseCase.kt</ID>
+    <ID>FinalNewline:RevokeAdminUseCaseTest.kt$io.gromif.astracrypt.device_admin.domain.usecase.RevokeAdminUseCaseTest.kt</ID>
+    <ID>NoBlankLineBeforeRbrace:DeviceAdminService.kt$DeviceAdminService$ </ID>
+    <ID>NoBlankLineBeforeRbrace:GetAdminStateFlowUseCase.kt$GetAdminStateFlowUseCase$ </ID>
+    <ID>NoBlankLineBeforeRbrace:RevokeAdminUseCase.kt$RevokeAdminUseCase$ </ID>
+    <ID>PackageName:AdminState.kt$package io.gromif.astracrypt.device_admin.domain.model</ID>
+    <ID>PackageName:DeviceAdminService.kt$package io.gromif.astracrypt.device_admin.domain.service</ID>
+    <ID>PackageName:GetAdminStateFlowUseCase.kt$package io.gromif.astracrypt.device_admin.domain.usecase</ID>
+    <ID>PackageName:GetAdminStateFlowUseCaseTest.kt$package io.gromif.astracrypt.device_admin.domain.usecase</ID>
+    <ID>PackageName:RevokeAdminUseCase.kt$package io.gromif.astracrypt.device_admin.domain.usecase</ID>
+    <ID>PackageName:RevokeAdminUseCaseTest.kt$package io.gromif.astracrypt.device_admin.domain.usecase</ID>
+    <ID>PackageNaming:AdminState.kt$package io.gromif.astracrypt.device_admin.domain.model</ID>
+    <ID>PackageNaming:DeviceAdminService.kt$package io.gromif.astracrypt.device_admin.domain.service</ID>
+    <ID>PackageNaming:GetAdminStateFlowUseCase.kt$package io.gromif.astracrypt.device_admin.domain.usecase</ID>
+    <ID>PackageNaming:GetAdminStateFlowUseCaseTest.kt$package io.gromif.astracrypt.device_admin.domain.usecase</ID>
+    <ID>PackageNaming:RevokeAdminUseCase.kt$package io.gromif.astracrypt.device_admin.domain.usecase</ID>
+    <ID>PackageNaming:RevokeAdminUseCaseTest.kt$package io.gromif.astracrypt.device_admin.domain.usecase</ID>
+  </CurrentIssues>
+</SmellBaseline>
