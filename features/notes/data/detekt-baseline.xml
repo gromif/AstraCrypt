@@ -1,0 +1,34 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>FinalNewline:AeadHandler.kt$io.gromif.notes.data.util.AeadHandler.kt</ID>
+    <ID>FinalNewline:AeadUtil.kt$io.gromif.notes.data.util.AeadUtil.kt</ID>
+    <ID>FinalNewline:NoteItemEntity.kt$io.gromif.notes.data.db.NoteItemEntity.kt</ID>
+    <ID>FinalNewline:NoteMapper.kt$io.gromif.notes.data.mappers.NoteMapper.kt</ID>
+    <ID>FinalNewline:NotesDao.kt$io.gromif.notes.data.db.NotesDao.kt</ID>
+    <ID>FinalNewline:PagingProviderImpl.kt$io.gromif.notes.data.paging.PagingProviderImpl.kt</ID>
+    <ID>FinalNewline:RepositoryImpl.kt$io.gromif.notes.data.repository.RepositoryImpl.kt</ID>
+    <ID>FinalNewline:SettingsRepositoryImpl.kt$io.gromif.notes.data.repository.SettingsRepositoryImpl.kt</ID>
+    <ID>FinalNewline:TransformNotesTuple.kt$io.gromif.notes.data.db.tuples.TransformNotesTuple.kt</ID>
+    <ID>Indentation:PagingProviderImpl.kt$PagingProviderImpl$ </ID>
+    <ID>Indentation:RepositoryImpl.kt$RepositoryImpl$ </ID>
+    <ID>MagicNumber:RepositoryImpl.kt$RepositoryImpl$10</ID>
+    <ID>MagicNumber:RepositoryImpl.kt$RepositoryImpl$80</ID>
+    <ID>MultiLineIfElse:PagingProviderImpl.kt$PagingProviderImpl$pagingData.map { noteMapper(item = it) }</ID>
+    <ID>MultiLineIfElse:PagingProviderImpl.kt$PagingProviderImpl$pagingData.map { val currentItem = aeadHandler.decryptNoteEntity(aead, it) noteMapper(item = currentItem) }</ID>
+    <ID>MultiLineIfElse:RepositoryImpl.kt$RepositoryImpl$it</ID>
+    <ID>MultiLineIfElse:RepositoryImpl.kt$RepositoryImpl$launch { dao.updateTransform(tuple) }</ID>
+    <ID>MultiLineIfElse:RepositoryImpl.kt$RepositoryImpl$launch { val transformedTuple = aeadHandler.encryptTransformTuple( aeadIndex = targetAeadMode, data = tuple ) dao.updateTransform(transformedTuple) }</ID>
+    <ID>NoBlankLineBeforeRbrace:AeadHandler.kt$AeadHandler$ </ID>
+    <ID>NoBlankLineBeforeRbrace:AeadUtil.kt$AeadUtil$ </ID>
+    <ID>NoBlankLineBeforeRbrace:NoteMapper.kt$NoteMapper$ </ID>
+    <ID>NoBlankLineBeforeRbrace:NotesDao.kt$NotesDao$ </ID>
+    <ID>NoBlankLineBeforeRbrace:PagingProviderImpl.kt$PagingProviderImpl$ </ID>
+    <ID>NoBlankLineBeforeRbrace:RepositoryImpl.kt$RepositoryImpl$ </ID>
+    <ID>SpacingAroundColon:NoteMapper.kt$NoteMapper$:</ID>
+    <ID>SpacingAroundColon:PagingProviderImpl.kt$PagingProviderImpl$:</ID>
+    <ID>SpacingAroundColon:SettingsRepositoryImpl.kt$SettingsRepositoryImpl$:</ID>
+    <ID>SpacingAroundKeyword:SettingsRepositoryImpl.kt$SettingsRepositoryImpl$when</ID>
+  </CurrentIssues>
+</SmellBaseline>

@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>ArgumentListWrapping:OverviewNoteViewModelTest.kt$OverviewNoteViewModelTest$( id = 1L, name = "Test Note", text = "Test Content", textPreview = "preview", state = NoteState.Default, creationTime = "" )</ID>
+    <ID>ArgumentListWrapping:OverviewScreen.kt$( modifier = Modifier.fillMaxSize(), label = TextFields.label(text = stringResource(id = R.string.note_title)), value = name, onValueChange = onChangeName )</ID>
+    <ID>ArgumentListWrapping:OverviewScreen.kt$( modifier = Modifier.fillMaxSize(), label = TextFields.label(text = stringResource(id = R.string.text)), value = text, onValueChange = onChangeText )</ID>
+    <ID>ArgumentListWrapping:UpdateAeadWorker.kt$UpdateAeadWorker$( applicationContext, NOTIFICATION_CHANNEL_ID )</ID>
+    <ID>FinalNewline:AeadSettings.kt$io.gromif.notes.presentation.settings.AeadSettings.kt</ID>
+    <ID>FinalNewline:AeadSettingsUi.kt$io.gromif.notes.presentation.settings.AeadSettingsUi.kt</ID>
+    <ID>FinalNewline:AeadSettingsViewModel.kt$io.gromif.notes.presentation.settings.AeadSettingsViewModel.kt</ID>
+    <ID>FinalNewline:DatabaseOption.kt$io.gromif.notes.presentation.settings.shared.DatabaseOption.kt</ID>
+    <ID>FinalNewline:Notes.kt$io.gromif.notes.presentation.Notes.kt</ID>
+    <ID>FinalNewline:NotesListScreen.kt$io.gromif.notes.presentation.NotesListScreen.kt</ID>
+    <ID>FinalNewline:NotesListViewModel.kt$io.gromif.notes.presentation.NotesListViewModel.kt</ID>
+    <ID>FinalNewline:OverviewNoteViewModel.kt$io.gromif.notes.presentation.overview.OverviewNoteViewModel.kt</ID>
+    <ID>FinalNewline:OverviewScreen.kt$io.gromif.notes.presentation.overview.OverviewScreen.kt</ID>
+    <ID>FinalNewline:UpdateAeadWorker.kt$io.gromif.notes.presentation.settings.work.UpdateAeadWorker.kt</ID>
+    <ID>Indentation:AeadSettingsUi.kt$ </ID>
+    <ID>Indentation:NotesListScreen.kt$ </ID>
+    <ID>Indentation:OverviewScreen.kt$ </ID>
+    <ID>Indentation:UpdateAeadWorker.kt$UpdateAeadWorker$ </ID>
+    <ID>LongParameterList:OverviewScreen.kt$( noteId: Long, editMode: Boolean, onSaveRequestChannel: Channel&lt;Unit&gt;, onDeleteRequestChannel: Channel&lt;Unit&gt;, onChangeName: (String) -&gt; Unit, onChangeText: (String) -&gt; Unit )</ID>
+    <ID>MagicNumber:UpdateAeadWorker.kt$UpdateAeadWorker$100</ID>
+    <ID>MagicNumber:UpdateAeadWorker.kt$UpdateAeadWorker$4</ID>
+    <ID>MultiLineIfElse:AeadSettingsUi.kt$DatabaseOption( aeadMode = aeadMode, aeadTemplatesList = aeadTemplatesList, onNotesAeadChange = onNotesAeadChange )</ID>
+    <ID>MultiLineIfElse:DatabaseOption.kt$AeadMode.None</ID>
+    <ID>MultiLineIfElse:NotesListScreen.kt$LazyColumn( modifier = Modifier.fillMaxSize(), contentPadding = PaddingValues(MaterialTheme.spaces.spaceMedium), verticalArrangement = Arrangement.spacedBy(MaterialTheme.spaces.spaceMedium) ) { items( count = items.itemSnapshotList.size, key = { items[it]?.id ?: it } ) { index -&gt; items[index]?.let { Note( title = it.name, summary = it.textPreview, date = it.creationTime ) { onClick(it.id) } } } }</ID>
+    <ID>MultiLineIfElse:NotesListScreen.kt$onEmptyList()</ID>
+    <ID>MultiLineIfElse:OverviewScreen.kt$LaunchedEffect(Unit) { vm.load(id = noteId) onDeleteRequestChannel.receiveAsFlow().collectLatest { vm.delete().invokeOnCompletion { backDispatcher?.onBackPressed() } } }</ID>
+    <ID>MultiLineIfElse:UpdateAeadWorker.kt$UpdateAeadWorker$ForegroundInfo( notificationId, notification, ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC )</ID>
+    <ID>MultiLineIfElse:UpdateAeadWorker.kt$UpdateAeadWorker$ForegroundInfo(notificationId, notification)</ID>
+    <ID>NoBlankLineBeforeRbrace:AeadSettingsViewModel.kt$AeadSettingsViewModel$ </ID>
+    <ID>NoBlankLineBeforeRbrace:NotesListViewModel.kt$NotesListViewModel$ </ID>
+    <ID>NoBlankLineBeforeRbrace:OverviewNoteViewModel.kt$OverviewNoteViewModel$ </ID>
+    <ID>NoBlankLineBeforeRbrace:UpdateAeadWorker.kt$UpdateAeadWorker$ </ID>
+    <ID>NoBlankLineBeforeRbrace:UpdateAeadWorker.kt$UpdateAeadWorker.Companion$ </ID>
+    <ID>SpacingAroundKeyword:DatabaseOption.kt$when</ID>
+  </CurrentIssues>
+</SmellBaseline>

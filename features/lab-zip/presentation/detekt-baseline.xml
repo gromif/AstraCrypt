@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>ArgumentListWrapping:CombinedZipWorker.kt$CombinedZipWorker$( base64Encoder.decode(inputData.getString(Args.SOURCE_URI)!!), dataAD )</ID>
+    <ID>ArgumentListWrapping:CombinedZipWorker.kt$CombinedZipWorker$( base64Encoder.decode(inputData.getString(Args.TARGET_URI)!!), dataAD )</ID>
+    <ID>ArgumentListWrapping:CombinedZipWorker.kt$CombinedZipWorker$( base64Encoder.decode(inputData.getString(Args.ZIP_FILE_URI)!!), dataAD )</ID>
+    <ID>ExplicitItLambdaParameter:CombineZipScreen.kt${ index, it -&gt; OneLineListItem( titleText = it.name ) }</ID>
+    <ID>FinalNewline:CombineZipScreen.kt$io.gromif.lab_zip.presentation.CombineZipScreen.kt</ID>
+    <ID>FinalNewline:CombineZipViewModel.kt$io.gromif.lab_zip.presentation.CombineZipViewModel.kt</ID>
+    <ID>FinalNewline:CombineZipViewModelTest.kt$io.gromif.lab_zip.presentation.CombineZipViewModelTest.kt</ID>
+    <ID>FinalNewline:CombinedZipWorker.kt$io.gromif.lab_zip.presentation.work.CombinedZipWorker.kt</ID>
+    <ID>Indentation:CombineZipScreen.kt$ </ID>
+    <ID>Indentation:CombinedZipWorker.kt$CombinedZipWorker$ </ID>
+    <ID>LongParameterList:CombineZipScreen.kt$( modifier: Modifier = Modifier, source: FileInfo? = null, onAddSource: () -&gt; Unit = {}, onRemoveSource: () -&gt; Unit = {}, filesList: List&lt;FileInfo&gt; = emptyList(), onAddFiles: () -&gt; Unit = {}, onRemoveFiles: () -&gt; Unit = {}, noItemsPage: @Composable () -&gt; Unit = {} )</ID>
+    <ID>LongParameterList:CombineZipScreen.kt$( modifier: Modifier = Modifier, titleText: String = "", stateList: List&lt;FileInfo&gt;, addButtonEnabled: Boolean = true, onAddClick: () -&gt; Unit = {}, onClearClick: () -&gt; Unit = {}, noItemsPage: @Composable () -&gt; Unit )</ID>
+    <ID>LongParameterList:CombineZipViewModel.kt$CombineZipViewModel$( @IoDispatcher private val defaultDispatcher: CoroutineDispatcher, private val getSourceFileInfoUseCase: GetSourceFileInfoUseCase, private val getFileInfosUseCase: GetFileInfosUseCase, private val workManager: WorkManager, private val workerSerializer: WorkerSerializer, private val base64Encoder: Base64Encoder, private val uriToStringMapper: Mapper&lt;Uri, String&gt; )</ID>
+    <ID>MagicNumber:CombineZipScreen.kt$0.5f</ID>
+    <ID>MagicNumber:CombinedZipWorker.kt$CombinedZipWorker$100</ID>
+    <ID>MagicNumber:CombinedZipWorker.kt$CombinedZipWorker$203</ID>
+    <ID>MultiLineIfElse:CombineZipScreen.kt$LazyColumn { itemsIndexed(stateList) { index, it -&gt; OneLineListItem( titleText = it.name ) } }</ID>
+    <ID>MultiLineIfElse:CombineZipScreen.kt$Row( modifier = Modifier.fillMaxSize(), horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spaces.spaceMedium) ) { Row(modifier = Modifier.weight(0.5f)) { LeftPanel() } Row(modifier = Modifier.weight(0.5f)) { RightPanel() } }</ID>
+    <ID>MultiLineIfElse:CombineZipScreen.kt$noItemsPage()</ID>
+    <ID>MultiLineIfElse:CombinedZipWorker.kt$CombinedZipWorker$ForegroundInfo( notificationId, notification, ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC )</ID>
+    <ID>MultiLineIfElse:CombinedZipWorker.kt$CombinedZipWorker$ForegroundInfo(notificationId, notification)</ID>
+    <ID>NoBlankLineBeforeRbrace:CombineZipViewModel.kt$CombineZipViewModel$ </ID>
+    <ID>NoBlankLineBeforeRbrace:CombinedZipWorker.kt$CombinedZipWorker$ </ID>
+    <ID>NoEmptyFirstLineInMethodBlock:CombineZipScreen.kt$ </ID>
+    <ID>PackageName:CombineZipScreen.kt$package io.gromif.lab_zip.presentation</ID>
+    <ID>PackageName:CombineZipViewModel.kt$package io.gromif.lab_zip.presentation</ID>
+    <ID>PackageName:CombineZipViewModelTest.kt$package io.gromif.lab_zip.presentation</ID>
+    <ID>PackageName:CombinedZipWorker.kt$package io.gromif.lab_zip.presentation.work</ID>
+    <ID>PackageNaming:CombineZipScreen.kt$package io.gromif.lab_zip.presentation</ID>
+    <ID>PackageNaming:CombineZipViewModel.kt$package io.gromif.lab_zip.presentation</ID>
+    <ID>PackageNaming:CombineZipViewModelTest.kt$package io.gromif.lab_zip.presentation</ID>
+    <ID>PackageNaming:CombinedZipWorker.kt$package io.gromif.lab_zip.presentation.work</ID>
+    <ID>TooGenericExceptionCaught:CombinedZipWorker.kt$CombinedZipWorker$e: Exception</ID>
+  </CurrentIssues>
+</SmellBaseline>

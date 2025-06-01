@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>FinalNewline:Actions.kt$io.gromif.calculator.buttons.Actions.kt</ID>
+    <ID>FinalNewline:BaseButtons.kt$io.gromif.calculator.buttons.BaseButtons.kt</ID>
+    <ID>FinalNewline:Buttons.kt$io.gromif.calculator.buttons.Buttons.kt</ID>
+    <ID>FinalNewline:CalculatorScreen.kt$io.gromif.calculator.CalculatorScreen.kt</ID>
+    <ID>FinalNewline:CalculatorViewModel.kt$io.gromif.calculator.CalculatorViewModel.kt</ID>
+    <ID>FinalNewline:Numbers.kt$io.gromif.calculator.buttons.Numbers.kt</ID>
+    <ID>LongParameterList:BaseButtons.kt$( symbol: String, modifier: Modifier = Modifier, backgroundColor: Color = MaterialTheme.colorScheme.primaryContainer, textColor: Color = MaterialTheme.colorScheme.onPrimaryContainer, textStyle: TextStyle = TextStyle(), onClick: () -&gt; Unit )</ID>
+    <ID>MagicNumber:CalculatorScreen.kt$3</ID>
+    <ID>MagicNumber:CalculatorScreen.kt$4</ID>
+    <ID>MagicNumber:CalculatorScreen.kt$5</ID>
+    <ID>MagicNumber:CalculatorScreen.kt$6</ID>
+    <ID>MagicNumber:CalculatorScreen.kt$7</ID>
+    <ID>MagicNumber:CalculatorScreen.kt$8</ID>
+    <ID>MagicNumber:CalculatorScreen.kt$9</ID>
+    <ID>MagicNumber:CalculatorViewModel.kt$CalculatorViewModel$15</ID>
+    <ID>MultiLineIfElse:CalculatorScreen.kt$ScreenHorizontal(modifier, state, onAction)</ID>
+    <ID>MultiLineIfElse:CalculatorScreen.kt$ScreenVertical(modifier, state, onAction)</ID>
+    <ID>NoBlankLineBeforeRbrace:CalculatorViewModel.kt$CalculatorViewModel$ </ID>
+    <ID>ReturnCount:CalculatorViewModel.kt$CalculatorViewModel$private fun enterNumber(number: Int)</ID>
+    <ID>SpacingAroundColon:CalculatorViewModel.kt$CalculatorViewModel$:</ID>
+  </CurrentIssues>
+</SmellBaseline>

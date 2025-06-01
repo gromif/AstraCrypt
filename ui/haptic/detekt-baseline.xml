@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>ArgumentListWrapping:Haptic.kt$Haptic$( Effects.PRIMITIVE_LOW_TICK, 0.5f, 80 )</ID>
+    <ID>ArgumentListWrapping:Haptic.kt$Haptic$( Effects.PRIMITIVE_QUICK_RISE, 0.01f, 100 )</ID>
+    <ID>FinalNewline:Haptic.kt$io.gromif.ui.haptic.Haptic.kt</ID>
+    <ID>MagicNumber:Haptic.kt$Haptic$0.01f</ID>
+    <ID>MagicNumber:Haptic.kt$Haptic$0.2f</ID>
+    <ID>MagicNumber:Haptic.kt$Haptic$0.5f</ID>
+    <ID>MagicNumber:Haptic.kt$Haptic$0.8f</ID>
+    <ID>MagicNumber:Haptic.kt$Haptic$100</ID>
+    <ID>MagicNumber:Haptic.kt$Haptic$80</ID>
+    <ID>NoBlankLineBeforeRbrace:Haptic.kt$Haptic$ </ID>
+    <ID>Wrapping:Haptic.kt$Haptic$(</ID>
+  </CurrentIssues>
+</SmellBaseline>

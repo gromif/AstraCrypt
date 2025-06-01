@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>FinalNewline:DataTypeToIdMapper.kt$io.gromif.tink_lab.data.mapper.DataTypeToIdMapper.kt</ID>
+    <ID>FinalNewline:DtoToKeyMapper.kt$io.gromif.tink_lab.data.mapper.DtoToKeyMapper.kt</ID>
+    <ID>FinalNewline:IdToDataTypeMapper.kt$io.gromif.tink_lab.data.mapper.IdToDataTypeMapper.kt</ID>
+    <ID>FinalNewline:KeyDto.kt$io.gromif.tink_lab.data.dto.KeyDto.kt</ID>
+    <ID>FinalNewline:KeyGeneratorImpl.kt$io.gromif.tink_lab.data.util.KeyGeneratorImpl.kt</ID>
+    <ID>FinalNewline:KeyParser.kt$io.gromif.tink_lab.data.util.KeyParser.kt</ID>
+    <ID>FinalNewline:KeyReaderImpl.kt$io.gromif.tink_lab.data.util.KeyReaderImpl.kt</ID>
+    <ID>FinalNewline:KeySerializer.kt$io.gromif.tink_lab.data.util.KeySerializer.kt</ID>
+    <ID>FinalNewline:KeyToDtoMapper.kt$io.gromif.tink_lab.data.mapper.KeyToDtoMapper.kt</ID>
+    <ID>FinalNewline:KeyWriterImpl.kt$io.gromif.tink_lab.data.util.KeyWriterImpl.kt</ID>
+    <ID>FinalNewline:RepositoryImpl.kt$io.gromif.tink_lab.data.repository.RepositoryImpl.kt</ID>
+    <ID>FinalNewline:TextAeadUtil.kt$io.gromif.tink_lab.data.util.TextAeadUtil.kt</ID>
+    <ID>NoBlankLineBeforeRbrace:KeyGeneratorImpl.kt$KeyGeneratorImpl$ </ID>
+    <ID>NoBlankLineBeforeRbrace:KeyReaderImpl.kt$KeyReaderImpl$ </ID>
+    <ID>NoBlankLineBeforeRbrace:KeyWriterImpl.kt$KeyWriterImpl$ </ID>
+    <ID>NoBlankLineBeforeRbrace:TextAeadUtil.kt$TextAeadUtil$ </ID>
+    <ID>PackageName:DataTypeToIdMapper.kt$package io.gromif.tink_lab.data.mapper</ID>
+    <ID>PackageName:DtoToKeyMapper.kt$package io.gromif.tink_lab.data.mapper</ID>
+    <ID>PackageName:IdToDataTypeMapper.kt$package io.gromif.tink_lab.data.mapper</ID>
+    <ID>PackageName:KeyDto.kt$package io.gromif.tink_lab.data.dto</ID>
+    <ID>PackageName:KeyGeneratorImpl.kt$package io.gromif.tink_lab.data.util</ID>
+    <ID>PackageName:KeyParser.kt$package io.gromif.tink_lab.data.util</ID>
+    <ID>PackageName:KeyReaderImpl.kt$package io.gromif.tink_lab.data.util</ID>
+    <ID>PackageName:KeySerializer.kt$package io.gromif.tink_lab.data.util</ID>
+    <ID>PackageName:KeyToDtoMapper.kt$package io.gromif.tink_lab.data.mapper</ID>
+    <ID>PackageName:KeyWriterImpl.kt$package io.gromif.tink_lab.data.util</ID>
+    <ID>PackageName:RepositoryImpl.kt$package io.gromif.tink_lab.data.repository</ID>
+    <ID>PackageName:TextAeadUtil.kt$package io.gromif.tink_lab.data.util</ID>
+    <ID>PackageNaming:DataTypeToIdMapper.kt$package io.gromif.tink_lab.data.mapper</ID>
+    <ID>PackageNaming:DtoToKeyMapper.kt$package io.gromif.tink_lab.data.mapper</ID>
+    <ID>PackageNaming:IdToDataTypeMapper.kt$package io.gromif.tink_lab.data.mapper</ID>
+    <ID>PackageNaming:KeyDto.kt$package io.gromif.tink_lab.data.dto</ID>
+    <ID>PackageNaming:KeyGeneratorImpl.kt$package io.gromif.tink_lab.data.util</ID>
+    <ID>PackageNaming:KeyParser.kt$package io.gromif.tink_lab.data.util</ID>
+    <ID>PackageNaming:KeyReaderImpl.kt$package io.gromif.tink_lab.data.util</ID>
+    <ID>PackageNaming:KeySerializer.kt$package io.gromif.tink_lab.data.util</ID>
+    <ID>PackageNaming:KeyToDtoMapper.kt$package io.gromif.tink_lab.data.mapper</ID>
+    <ID>PackageNaming:KeyWriterImpl.kt$package io.gromif.tink_lab.data.util</ID>
+    <ID>PackageNaming:RepositoryImpl.kt$package io.gromif.tink_lab.data.repository</ID>
+    <ID>PackageNaming:TextAeadUtil.kt$package io.gromif.tink_lab.data.util</ID>
+    <ID>ReturnCount:KeyReaderImpl.kt$KeyReaderImpl$override fun invoke( uriString: String, keysetPassword: String, keysetAssociatedData: ByteArray ): KeyReader.Result</ID>
+    <ID>SpacingAroundColon:DataTypeToIdMapper.kt$DataTypeToIdMapper$:</ID>
+    <ID>SpacingAroundColon:DtoToKeyMapper.kt$DtoToKeyMapper$:</ID>
+    <ID>SpacingAroundColon:IdToDataTypeMapper.kt$IdToDataTypeMapper$:</ID>
+    <ID>SpacingAroundColon:KeyGeneratorImpl.kt$KeyGeneratorImpl$:</ID>
+    <ID>SpacingAroundColon:KeyParser.kt$KeyParser$:</ID>
+    <ID>SpacingAroundColon:KeyReaderImpl.kt$KeyReaderImpl$:</ID>
+    <ID>SpacingAroundColon:KeySerializer.kt$KeySerializer$:</ID>
+    <ID>SpacingAroundColon:KeyToDtoMapper.kt$KeyToDtoMapper$:</ID>
+  </CurrentIssues>
+</SmellBaseline>

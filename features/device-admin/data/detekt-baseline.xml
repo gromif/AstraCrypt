@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>FinalNewline:DeviceAdminServiceImpl.kt$io.gromif.astracrypt.device_admin.data.DeviceAdminServiceImpl.kt</ID>
+    <ID>FinalNewline:DeviceAdminServiceImplTest.kt$io.gromif.astracrypt.device_admin.data.DeviceAdminServiceImplTest.kt</ID>
+    <ID>PackageName:DeviceAdminServiceImpl.kt$package io.gromif.astracrypt.device_admin.data</ID>
+    <ID>PackageName:DeviceAdminServiceImplTest.kt$package io.gromif.astracrypt.device_admin.data</ID>
+    <ID>PackageNaming:DeviceAdminServiceImpl.kt$package io.gromif.astracrypt.device_admin.data</ID>
+    <ID>PackageNaming:DeviceAdminServiceImplTest.kt$package io.gromif.astracrypt.device_admin.data</ID>
+    <ID>SpacingAroundColon:DeviceAdminServiceImpl.kt$DeviceAdminServiceImpl$:</ID>
+  </CurrentIssues>
+</SmellBaseline>
