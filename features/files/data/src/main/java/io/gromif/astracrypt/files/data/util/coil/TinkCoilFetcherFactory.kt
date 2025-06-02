@@ -14,12 +14,10 @@ import io.gromif.crypto.tink.keyset.associated_data.AssociatedDataManager
 import okio.FileSystem
 import okio.buffer
 import okio.source
-import java.io.File
 
 class TinkCoilFetcherFactory(
     private val fileHandler: FileHandler,
     private val associatedDataManager: AssociatedDataManager,
-    private val cacheDir: File
 ) : Fetcher.Factory<FileSource> {
     override fun create(data: FileSource, options: Options, imageLoader: ImageLoader) =
         TinkCoilFetcher(data)

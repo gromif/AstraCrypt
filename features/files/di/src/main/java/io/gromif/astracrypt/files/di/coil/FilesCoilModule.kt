@@ -39,13 +39,11 @@ internal object FilesCoilModule {
     @Singleton
     @Provides
     fun provideTinkCoilFetcherFactory(
-        @ApplicationContext context: Context,
         fileHandler: FileHandler,
         associatedDataManager: AssociatedDataManager,
     ): TinkCoilFetcherFactory = TinkCoilFetcherFactory(
         fileHandler = fileHandler,
         associatedDataManager = associatedDataManager,
-        cacheDir = context.cacheDir
     )
 }
 
