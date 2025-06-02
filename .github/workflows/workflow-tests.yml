@@ -1,0 +1,23 @@
+on:
+  workflow_call:
+
+jobs:
+
+  test:
+    name: 🧪 Run Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout Repo
+      - uses: ./.github/workflows/workflow-repo-checkout.yml
+
+      # Set up Java
+      - uses: ./.github/workflows/workflow-setup-java.yml
+
+      # Set up Gradle
+      - uses: ./.github/workflows/workflow-setup-gradle.yml
+
+      - name: Tests
+        run: ./gradlew test --stacktrace
+
+      - run: echo "🍏 Tests status is ${{ job.status }}."

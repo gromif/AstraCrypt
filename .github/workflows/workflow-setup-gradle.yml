@@ -1,0 +1,12 @@
+on:
+  workflow_call:
+
+jobs:
+
+  setup-gradle:
+    name: 🐘 Set up Gradle
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew

@@ -1,0 +1,15 @@
+on:
+  workflow_call:
+
+jobs:
+
+  setup-java:
+    name: 🔩 Set up Java
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: 21
+          cache: gradle

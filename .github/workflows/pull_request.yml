@@ -1,0 +1,33 @@
+name: Android CI
+
+on:
+  pull_request:
+    branches: [ main, devel ]
+
+jobs:
+
+  workflow-detekt:
+    uses: ./.github/workflows/workflow-detekt.yml
+
+  workflow-tests:
+    uses: ./.github/workflows/workflow-tests.yml
+
+  build:
+    name: 🔨 Build
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "🎉 Triggered by a ${{ github.event_name }} event."
+
+      # Checkout Repo
+      - uses: ./.github/workflows/workflow-repo-checkout.yml
+
+      # Set up Java
+      - uses: ./.github/workflows/workflow-setup-java.yml
+
+      # Set up Gradle
+      - uses: ./.github/workflows/workflow-setup-gradle.yml
+
+      - name: Build
+        run: ./gradlew build --stacktrace
+
+      - run: echo "🍏 Build status is ${{ job.status }}."
