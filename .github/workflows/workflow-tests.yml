@@ -16,8 +16,7 @@ jobs:
       - uses: ./.github/actions/setup-java-action
 
       # Set up Gradle
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
+      - uses: ./.github/actions/setup-gradle-action
 
       - name: Tests
         run: ./gradlew test --stacktrace
