@@ -14,7 +14,6 @@ internal fun Project.configureDetekt() {
     extensions.configure<DetektExtension> {
         buildUponDefaultConfig = true
         config.setFrom(rootProject.file("config/detekt.yml"))
-        autoCorrect = true
         reports {
             html.required.set(true)
             sarif.required.set(true)
