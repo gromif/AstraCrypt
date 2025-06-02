@@ -6,4 +6,5 @@ runs:
       uses: actions/setup-java@v4
       with:
         java-version: 21
+        distribution: 'temurin'
         cache: gradle
