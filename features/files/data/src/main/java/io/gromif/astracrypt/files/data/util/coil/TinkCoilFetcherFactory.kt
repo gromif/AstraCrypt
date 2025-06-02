@@ -1,16 +1,17 @@
 package io.gromif.astracrypt.files.data.util.coil
 
-import coil.ImageLoader
-import coil.decode.DataSource
-import coil.decode.ImageSource
-import coil.fetch.FetchResult
-import coil.fetch.Fetcher
-import coil.fetch.SourceResult
-import coil.request.Options
+import coil3.ImageLoader
+import coil3.decode.DataSource
+import coil3.decode.ImageSource
+import coil3.fetch.FetchResult
+import coil3.fetch.Fetcher
+import coil3.fetch.SourceFetchResult
+import coil3.request.Options
 import io.gromif.astracrypt.files.data.util.FileHandler
 import io.gromif.astracrypt.files.domain.model.FileSource
 import io.gromif.crypto.tink.keyset.KeysetTemplates
 import io.gromif.crypto.tink.keyset.associated_data.AssociatedDataManager
+import okio.FileSystem
 import okio.buffer
 import okio.source
 import java.io.File
@@ -35,10 +36,10 @@ class TinkCoilFetcherFactory(
                     associatedDataManager.getAssociatedData()
                 )
             } ?: file.inputStream()
-            return SourceResult(
+            return SourceFetchResult(
                 source = ImageSource(
                     source = sourceInputChannel.source().buffer(),
-                    cacheDir
+                    fileSystem = FileSystem.SYSTEM
                 ),
                 mimeType = null,
                 dataSource = DataSource.DISK

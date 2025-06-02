@@ -3,7 +3,7 @@ package io.gromif.astracrypt.files.files
 import androidx.lifecycle.SavedStateHandle
 import androidx.paging.PagingData
 import androidx.work.WorkManager
-import coil.ImageLoader
+import coil3.ImageLoader
 import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.domain.model.ItemState
 import io.gromif.astracrypt.files.domain.model.ValidationRulesDto

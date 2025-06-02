@@ -16,7 +16,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
-import coil.ImageLoader
+import coil3.ImageLoader
 import io.gromif.astracrypt.files.domain.model.ItemState
 import io.gromif.astracrypt.files.files.dialogs.deleteDialog
 import io.gromif.astracrypt.files.files.dialogs.deleteSourceDialog

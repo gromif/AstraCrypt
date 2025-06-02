@@ -1,10 +1,11 @@
 package io.gromif.astracrypt.files.di.coil
 
 import android.content.Context
-import coil.ImageLoader
-import coil.decode.VideoFrameDecoder
-import coil.request.CachePolicy
-import coil.transition.CrossfadeTransition
+import coil3.ImageLoader
+import coil3.request.CachePolicy
+import coil3.request.transitionFactory
+import coil3.transition.CrossfadeTransition
+import coil3.video.VideoFrameDecoder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

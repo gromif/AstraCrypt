@@ -6,7 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import coil.ImageLoader
+import coil3.ImageLoader
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.gromif.astracrypt.files.details.parser.addAeadGroup
 import io.gromif.astracrypt.files.details.parser.addDetailsGroup

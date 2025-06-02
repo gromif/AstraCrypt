@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
 import androidx.paging.compose.LazyPagingItems
-import coil.ImageLoader
+import coil3.ImageLoader
 import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.domain.model.ViewMode
 import io.gromif.astracrypt.files.files.list.item.FilesListGridItem
