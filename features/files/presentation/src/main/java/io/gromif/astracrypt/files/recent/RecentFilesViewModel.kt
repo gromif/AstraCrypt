@@ -2,7 +2,7 @@ package io.gromif.astracrypt.files.recent
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import coil.ImageLoader
+import coil3.ImageLoader
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.gromif.astracrypt.files.di.coil.FilesImageLoader
 import io.gromif.astracrypt.files.domain.usecase.GetRecentItemsUseCase

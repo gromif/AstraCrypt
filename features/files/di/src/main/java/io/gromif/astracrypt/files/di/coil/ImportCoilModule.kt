@@ -1,9 +1,10 @@
 package io.gromif.astracrypt.files.di.coil
 
 import android.content.Context
-import coil.request.CachePolicy
-import coil.request.ImageRequest
-import coil.size.Scale
+import coil3.request.CachePolicy
+import coil3.request.ImageRequest
+import coil3.request.transformations
+import coil3.size.Scale
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

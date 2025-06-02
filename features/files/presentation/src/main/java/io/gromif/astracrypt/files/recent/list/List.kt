@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil.ImageLoader
+import coil3.ImageLoader
 import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.shared.FakeData
 import io.gromif.ui.compose.core.theme.spaces

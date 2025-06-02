@@ -11,7 +11,7 @@ import androidx.work.OutOfQuotaPolicy
 import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import androidx.work.workDataOf
-import coil.ImageLoader
+import coil3.ImageLoader
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.gromif.astracrypt.files.di.coil.FilesImageLoader
 import io.gromif.astracrypt.files.domain.model.Item

@@ -2,7 +2,7 @@ package io.gromif.astracrypt.profile.di
 
 import android.content.Context
 import android.graphics.Bitmap
-import coil.ImageLoader
+import coil3.ImageLoader
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -71,7 +71,6 @@ internal object UtilModule {
     @ViewModelScoped
     @Provides
     fun provideBitmapCompressor() = BitmapCompressor(compressFormat = Bitmap.CompressFormat.PNG)
-
 }
 
 @Qualifier

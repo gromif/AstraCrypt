@@ -3,8 +3,8 @@ package io.gromif.astracrypt.files.di.util
 import android.content.Context
 import android.graphics.Bitmap
 import android.net.Uri
-import coil.ImageLoader
-import coil.request.ImageRequest
+import coil3.ImageLoader
+import coil3.request.ImageRequest
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
