@@ -4,4 +4,8 @@ plugins {
 
 android {
     namespace = "io.gromif.astracrypt.resources"
+
+    lint {
+        disable += "MissingTranslation"
+    }
 }
