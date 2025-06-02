@@ -10,6 +10,12 @@
     <ID>FinalNewline:DeviceAdminApi.kt$io.gromif.device_admin_api.DeviceAdminApi.kt</ID>
     <ID>MultiLineIfElse:AndroidDeviceAdminApi.kt$AndroidDeviceAdminApi$DeviceAdminApi.Type.NONE.also { updateType() }</ID>
     <ID>MultiLineIfElse:AndroidDeviceAdminApi.kt$AndroidDeviceAdminApi$type</ID>
+    <ID>NewLineAtEndOfFile:AdminComponentModule.kt$io.gromif.device_admin_api.AdminComponentModule.kt</ID>
+    <ID>NewLineAtEndOfFile:AdminReceiver.kt$io.gromif.device_admin_api.AdminReceiver.kt</ID>
+    <ID>NewLineAtEndOfFile:AdminReceiverTest.kt$io.gromif.device_admin_api.AdminReceiverTest.kt</ID>
+    <ID>NewLineAtEndOfFile:AndroidDeviceAdminApi.kt$io.gromif.device_admin_api.AndroidDeviceAdminApi.kt</ID>
+    <ID>NewLineAtEndOfFile:AndroidDeviceAdminApiTest.kt$io.gromif.device_admin_api.AndroidDeviceAdminApiTest.kt</ID>
+    <ID>NewLineAtEndOfFile:DeviceAdminApi.kt$io.gromif.device_admin_api.DeviceAdminApi.kt</ID>
     <ID>NoBlankLineBeforeRbrace:AdminComponentModule.kt$AdminComponentModule$ </ID>
     <ID>NoBlankLineBeforeRbrace:AdminReceiverTest.kt$AdminReceiverTest$ </ID>
     <ID>NoBlankLineBeforeRbrace:AndroidDeviceAdminApi.kt$AndroidDeviceAdminApi$ </ID>

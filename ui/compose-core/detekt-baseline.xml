@@ -9,6 +9,8 @@
     <ID>ArgumentListWrapping:Components.kt$DialogDefaults$( MaterialTheme.spaces.spaceMedium, Alignment.Top )</ID>
     <ID>ArgumentListWrapping:Components.kt$DialogDefaults$( modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center, title = title )</ID>
     <ID>ArgumentListWrapping:ListItems.kt$( onClick = onClick, onLongClick = longClickCallback )</ID>
+    <ID>EmptyClassBlock:Banner.kt$Banner${ }</ID>
+    <ID>EmptyClassBlock:Lists.kt$Lists${ }</ID>
     <ID>FinalNewline:Banner.kt$io.gromif.ui.compose.core.banners.Banner.kt</ID>
     <ID>FinalNewline:Buttons.kt$io.gromif.ui.compose.core.Buttons.kt</ID>
     <ID>FinalNewline:Cards.kt$io.gromif.ui.compose.core.Cards.kt</ID>
@@ -43,12 +45,6 @@
     <ID>FinalNewline:TwoPanelLayout.kt$io.gromif.ui.compose.core.TwoPanelLayout.kt</ID>
     <ID>FinalNewline:Warning.kt$io.gromif.ui.compose.core.banners.Warning.kt</ID>
     <ID>FinalNewline:WindowSizeClass.kt$io.gromif.ui.compose.core.ext.WindowSizeClass.kt</ID>
-    <ID>Indentation:DialogsCore.kt$DialogsCore$ </ID>
-    <ID>Indentation:ListItems.kt$ </ID>
-    <ID>Indentation:Preferences.kt$ </ID>
-    <ID>Indentation:Selectable.kt$ </ID>
-    <ID>Indentation:Sheets.kt$ </ID>
-    <ID>Indentation:TwoPanelLayout.kt$ </ID>
     <ID>LongParameterList:Chips.kt$( selected: Boolean, crossinline onClick: () -&gt; Unit, label: String, modifier: Modifier = Modifier, enabled: Boolean = true, leadingIcon: ImageVector? = null, trailingIcon: ImageVector? = null )</ID>
     <ID>LongParameterList:Components.kt$( title: @Composable (() -&gt; Unit)?, confirmButton: @Composable () -&gt; Unit, dismissButton: @Composable (() -&gt; Unit)?, onDismissRequest: () -&gt; Unit, dismissOnBackPress: Boolean = true, dismissOnClickOutside: Boolean = true, securePolicy: SecureFlagPolicy = SecureFlagPolicy.Inherit, content: @Composable (() -&gt; Unit) )</ID>
     <ID>LongParameterList:Components.kt$( title: String = "TEST FIELD DIALOG", onDismissRequest: () -&gt; Unit = {}, onConfirmRequest: () -&gt; Unit = {}, isConfirmButtonEnabled: Boolean = true, buttonBar: @Composable () -&gt; Unit = DialogDefaults.newButtonBar( onConfirmClick = onConfirmRequest, onDismissClick = onDismissRequest, isConfirmButtonEnabled = isConfirmButtonEnabled ), content: @Composable () -&gt; Unit, )</ID>
@@ -78,6 +74,40 @@
     <ID>MultiLineIfElse:TwoPanelLayout.kt$Column( Modifier .fillMaxSize() .verticalScroll(rememberScrollState()) .padding(padding), verticalArrangement = Arrangement.spacedBy(padding) ) { left() right() }</ID>
     <ID>MultiLineIfElse:TwoPanelLayout.kt$Row( modifier = Modifier .fillMaxSize() .padding(padding), horizontalArrangement = Arrangement.spacedBy(padding) ) { Column( modifier = Modifier .fillMaxHeight() .weight(0.5f) .nestedScroll(rememberNestedScrollInteropConnection()) .verticalScroll(rememberScrollState()), content = left ) Column( modifier = Modifier .fillMaxHeight() .weight(0.5f) .nestedScroll(rememberNestedScrollInteropConnection()) .verticalScroll(rememberScrollState()), content = right ) }</ID>
     <ID>MultiLineIfElse:TwoPanelLayout.kt$Row( modifier = Modifier .fillMaxSize() .verticalScroll(rememberScrollState()) .padding(padding), horizontalArrangement = Arrangement.spacedBy(padding) ) { Row(modifier = Modifier.weight(0.5f)) { left() } Row(modifier = Modifier.weight(0.5f)) { right() } }</ID>
+    <ID>NewLineAtEndOfFile:Banner.kt$io.gromif.ui.compose.core.banners.Banner.kt</ID>
+    <ID>NewLineAtEndOfFile:Buttons.kt$io.gromif.ui.compose.core.Buttons.kt</ID>
+    <ID>NewLineAtEndOfFile:Cards.kt$io.gromif.ui.compose.core.Cards.kt</ID>
+    <ID>NewLineAtEndOfFile:CheckBoxes.kt$io.gromif.ui.compose.core.CheckBoxes.kt</ID>
+    <ID>NewLineAtEndOfFile:Chips.kt$io.gromif.ui.compose.core.chips.Chips.kt</ID>
+    <ID>NewLineAtEndOfFile:Components.kt$io.gromif.ui.compose.core.chips.Components.kt</ID>
+    <ID>NewLineAtEndOfFile:Components.kt$io.gromif.ui.compose.core.dialogs.Components.kt</ID>
+    <ID>NewLineAtEndOfFile:Components.kt$io.gromif.ui.compose.core.sheets.Components.kt</ID>
+    <ID>NewLineAtEndOfFile:Compose.kt$io.gromif.ui.compose.core.Compose.kt</ID>
+    <ID>NewLineAtEndOfFile:DialogsCore.kt$io.gromif.ui.compose.core.dialogs.DialogsCore.kt</ID>
+    <ID>NewLineAtEndOfFile:FlowObserver.kt$io.gromif.ui.compose.core.ext.FlowObserver.kt</ID>
+    <ID>NewLineAtEndOfFile:IconWrap.kt$io.gromif.ui.compose.core.wrappers.IconWrap.kt</ID>
+    <ID>NewLineAtEndOfFile:Icons.kt$io.gromif.ui.compose.core.Icons.kt</ID>
+    <ID>NewLineAtEndOfFile:ImageVector.kt$io.gromif.ui.compose.core.ext.ImageVector.kt</ID>
+    <ID>NewLineAtEndOfFile:KeyboardOptions.kt$io.gromif.ui.compose.core.text_fields.KeyboardOptions.kt</ID>
+    <ID>NewLineAtEndOfFile:Lifecycle.kt$io.gromif.ui.compose.core.ext.Lifecycle.kt</ID>
+    <ID>NewLineAtEndOfFile:ListHeaders.kt$io.gromif.ui.compose.core.ListHeaders.kt</ID>
+    <ID>NewLineAtEndOfFile:ListItems.kt$io.gromif.ui.compose.core.ListItems.kt</ID>
+    <ID>NewLineAtEndOfFile:Lists.kt$io.gromif.ui.compose.core.list.Lists.kt</ID>
+    <ID>NewLineAtEndOfFile:Note.kt$io.gromif.ui.compose.core.banners.Note.kt</ID>
+    <ID>NewLineAtEndOfFile:PasswordToggleIconButton.kt$io.gromif.ui.compose.core.text_fields.icons.PasswordToggleIconButton.kt</ID>
+    <ID>NewLineAtEndOfFile:Preferences.kt$io.gromif.ui.compose.core.Preferences.kt</ID>
+    <ID>NewLineAtEndOfFile:RadioPreference.kt$io.gromif.ui.compose.core.preferences.RadioPreference.kt</ID>
+    <ID>NewLineAtEndOfFile:Selectable.kt$io.gromif.ui.compose.core.dialogs.Selectable.kt</ID>
+    <ID>NewLineAtEndOfFile:Sheets.kt$io.gromif.ui.compose.core.Sheets.kt</ID>
+    <ID>NewLineAtEndOfFile:Sheets.kt$io.gromif.ui.compose.core.sheets.Sheets.kt</ID>
+    <ID>NewLineAtEndOfFile:Shimmer.kt$io.gromif.ui.compose.core.ext.effects.Shimmer.kt</ID>
+    <ID>NewLineAtEndOfFile:Spaces.kt$io.gromif.ui.compose.core.theme.Spaces.kt</ID>
+    <ID>NewLineAtEndOfFile:TextFields.kt$io.gromif.ui.compose.core.TextFields.kt</ID>
+    <ID>NewLineAtEndOfFile:TextFields.kt$io.gromif.ui.compose.core.dialogs.TextFields.kt</ID>
+    <ID>NewLineAtEndOfFile:TextWrap.kt$io.gromif.ui.compose.core.wrappers.TextWrap.kt</ID>
+    <ID>NewLineAtEndOfFile:TwoPanelLayout.kt$io.gromif.ui.compose.core.TwoPanelLayout.kt</ID>
+    <ID>NewLineAtEndOfFile:Warning.kt$io.gromif.ui.compose.core.banners.Warning.kt</ID>
+    <ID>NewLineAtEndOfFile:WindowSizeClass.kt$io.gromif.ui.compose.core.ext.WindowSizeClass.kt</ID>
     <ID>NoBlankLineBeforeRbrace:Chips.kt$Chips$ </ID>
     <ID>NoBlankLineBeforeRbrace:Components.kt$DialogDefaults$ </ID>
     <ID>NoBlankLineBeforeRbrace:Components.kt$SheetDefaults$ </ID>
@@ -86,6 +116,7 @@
     <ID>NoBlankLineBeforeRbrace:DialogsCore.kt$DialogsCore.TextFields$ </ID>
     <ID>NoBlankLineBeforeRbrace:Lists.kt$Lists$ </ID>
     <ID>NoBlankLineBeforeRbrace:TextFields.kt$TextFields$ </ID>
+    <ID>NoConsecutiveBlankLines:Lists.kt$Lists$ </ID>
     <ID>NoEmptyClassBody:Banner.kt$Banner${ }</ID>
     <ID>NoEmptyClassBody:Lists.kt$Lists${ }</ID>
     <ID>NoTrailingSpaces:RecomposeHighlighter.kt$// We need at least one composition to draw, so draw the smallest border </ID>

@@ -16,9 +16,6 @@
     <ID>FinalNewline:OverviewNoteViewModel.kt$io.gromif.notes.presentation.overview.OverviewNoteViewModel.kt</ID>
     <ID>FinalNewline:OverviewScreen.kt$io.gromif.notes.presentation.overview.OverviewScreen.kt</ID>
     <ID>FinalNewline:UpdateAeadWorker.kt$io.gromif.notes.presentation.settings.work.UpdateAeadWorker.kt</ID>
-    <ID>Indentation:AeadSettingsUi.kt$ </ID>
-    <ID>Indentation:NotesListScreen.kt$ </ID>
-    <ID>Indentation:OverviewScreen.kt$ </ID>
     <ID>Indentation:UpdateAeadWorker.kt$UpdateAeadWorker$ </ID>
     <ID>LongParameterList:OverviewScreen.kt$( noteId: Long, editMode: Boolean, onSaveRequestChannel: Channel&lt;Unit&gt;, onDeleteRequestChannel: Channel&lt;Unit&gt;, onChangeName: (String) -&gt; Unit, onChangeText: (String) -&gt; Unit )</ID>
     <ID>MagicNumber:UpdateAeadWorker.kt$UpdateAeadWorker$100</ID>
@@ -30,6 +27,16 @@
     <ID>MultiLineIfElse:OverviewScreen.kt$LaunchedEffect(Unit) { vm.load(id = noteId) onDeleteRequestChannel.receiveAsFlow().collectLatest { vm.delete().invokeOnCompletion { backDispatcher?.onBackPressed() } } }</ID>
     <ID>MultiLineIfElse:UpdateAeadWorker.kt$UpdateAeadWorker$ForegroundInfo( notificationId, notification, ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC )</ID>
     <ID>MultiLineIfElse:UpdateAeadWorker.kt$UpdateAeadWorker$ForegroundInfo(notificationId, notification)</ID>
+    <ID>NewLineAtEndOfFile:AeadSettings.kt$io.gromif.notes.presentation.settings.AeadSettings.kt</ID>
+    <ID>NewLineAtEndOfFile:AeadSettingsUi.kt$io.gromif.notes.presentation.settings.AeadSettingsUi.kt</ID>
+    <ID>NewLineAtEndOfFile:AeadSettingsViewModel.kt$io.gromif.notes.presentation.settings.AeadSettingsViewModel.kt</ID>
+    <ID>NewLineAtEndOfFile:DatabaseOption.kt$io.gromif.notes.presentation.settings.shared.DatabaseOption.kt</ID>
+    <ID>NewLineAtEndOfFile:Notes.kt$io.gromif.notes.presentation.Notes.kt</ID>
+    <ID>NewLineAtEndOfFile:NotesListScreen.kt$io.gromif.notes.presentation.NotesListScreen.kt</ID>
+    <ID>NewLineAtEndOfFile:NotesListViewModel.kt$io.gromif.notes.presentation.NotesListViewModel.kt</ID>
+    <ID>NewLineAtEndOfFile:OverviewNoteViewModel.kt$io.gromif.notes.presentation.overview.OverviewNoteViewModel.kt</ID>
+    <ID>NewLineAtEndOfFile:OverviewScreen.kt$io.gromif.notes.presentation.overview.OverviewScreen.kt</ID>
+    <ID>NewLineAtEndOfFile:UpdateAeadWorker.kt$io.gromif.notes.presentation.settings.work.UpdateAeadWorker.kt</ID>
     <ID>NoBlankLineBeforeRbrace:AeadSettingsViewModel.kt$AeadSettingsViewModel$ </ID>
     <ID>NoBlankLineBeforeRbrace:NotesListViewModel.kt$NotesListViewModel$ </ID>
     <ID>NoBlankLineBeforeRbrace:OverviewNoteViewModel.kt$OverviewNoteViewModel$ </ID>

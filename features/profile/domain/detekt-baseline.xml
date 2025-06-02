@@ -2,7 +2,6 @@
 <SmellBaseline>
   <ManuallySuppressedIssues/>
   <CurrentIssues>
-    <ID>ArgumentListWrapping:Profile.kt$Profile$( "Name must be between ${ValidationRules.MIN_NAME_LENGTH} and ${ValidationRules.MAX_NAME_LENGTH} characters!")</ID>
     <ID>ArgumentListWrapping:Profile.kt$Profile$("Name must be between ${ValidationRules.MIN_NAME_LENGTH} and ${ValidationRules.MAX_NAME_LENGTH} characters!")</ID>
     <ID>FinalNewline:AeadMode.kt$io.gromif.astracrypt.profile.domain.model.AeadMode.kt</ID>
     <ID>FinalNewline:Avatar.kt$io.gromif.astracrypt.profile.domain.model.Avatar.kt</ID>
@@ -27,8 +26,31 @@
     <ID>FinalNewline:ValidationException.kt$io.gromif.astracrypt.profile.domain.model.ValidationException.kt</ID>
     <ID>FinalNewline:ValidationRules.kt$io.gromif.astracrypt.profile.domain.ValidationRules.kt</ID>
     <ID>FinalNewline:ValidationRulesDto.kt$io.gromif.astracrypt.profile.domain.model.ValidationRulesDto.kt</ID>
-    <ID>MaxLineLength:Profile.kt$Profile$"Name must be between ${ValidationRules.MIN_NAME_LENGTH} and ${ValidationRules.MAX_NAME_LENGTH} characters!"</ID>
+    <ID>MaxLineLength:Profile.kt$Profile$throw ValidationException.IllegalNameException("Name must be between ${ValidationRules.MIN_NAME_LENGTH} and ${ValidationRules.MAX_NAME_LENGTH} characters!")</ID>
     <ID>MaximumLineLength:Profile.kt$Profile$ </ID>
+    <ID>NewLineAtEndOfFile:AeadMode.kt$io.gromif.astracrypt.profile.domain.model.AeadMode.kt</ID>
+    <ID>NewLineAtEndOfFile:Avatar.kt$io.gromif.astracrypt.profile.domain.model.Avatar.kt</ID>
+    <ID>NewLineAtEndOfFile:DefaultAvatar.kt$io.gromif.astracrypt.profile.domain.model.DefaultAvatar.kt</ID>
+    <ID>NewLineAtEndOfFile:GetAeadModeFlowUseCase.kt$io.gromif.astracrypt.profile.domain.usecase.GetAeadModeFlowUseCase.kt</ID>
+    <ID>NewLineAtEndOfFile:GetAvatarAeadUseCase.kt$io.gromif.astracrypt.profile.domain.usecase.GetAvatarAeadUseCase.kt</ID>
+    <ID>NewLineAtEndOfFile:GetProfileFlowUseCase.kt$io.gromif.astracrypt.profile.domain.usecase.GetProfileFlowUseCase.kt</ID>
+    <ID>NewLineAtEndOfFile:GetProfileUseCase.kt$io.gromif.astracrypt.profile.domain.usecase.GetProfileUseCase.kt</ID>
+    <ID>NewLineAtEndOfFile:GetValidationRulesUseCase.kt$io.gromif.astracrypt.profile.domain.usecase.GetValidationRulesUseCase.kt</ID>
+    <ID>NewLineAtEndOfFile:Profile.kt$io.gromif.astracrypt.profile.domain.model.Profile.kt</ID>
+    <ID>NewLineAtEndOfFile:Repository.kt$io.gromif.astracrypt.profile.domain.repository.Repository.kt</ID>
+    <ID>NewLineAtEndOfFile:SetAeadModeUseCase.kt$io.gromif.astracrypt.profile.domain.usecase.SetAeadModeUseCase.kt</ID>
+    <ID>NewLineAtEndOfFile:SetAvatarAeadUseCase.kt$io.gromif.astracrypt.profile.domain.usecase.SetAvatarAeadUseCase.kt</ID>
+    <ID>NewLineAtEndOfFile:SetAvatarUseCase.kt$io.gromif.astracrypt.profile.domain.usecase.SetAvatarUseCase.kt</ID>
+    <ID>NewLineAtEndOfFile:SetAvatarUseCaseTest.kt$io.gromif.astracrypt.profile.domain.usecase.SetAvatarUseCaseTest.kt</ID>
+    <ID>NewLineAtEndOfFile:SetExternalAvatarUseCase.kt$io.gromif.astracrypt.profile.domain.usecase.SetExternalAvatarUseCase.kt</ID>
+    <ID>NewLineAtEndOfFile:SetExternalAvatarUseCaseTest.kt$io.gromif.astracrypt.profile.domain.usecase.SetExternalAvatarUseCaseTest.kt</ID>
+    <ID>NewLineAtEndOfFile:SetNameUseCase.kt$io.gromif.astracrypt.profile.domain.usecase.SetNameUseCase.kt</ID>
+    <ID>NewLineAtEndOfFile:SetNameUseCaseTest.kt$io.gromif.astracrypt.profile.domain.usecase.SetNameUseCaseTest.kt</ID>
+    <ID>NewLineAtEndOfFile:SetProfileUseCase.kt$io.gromif.astracrypt.profile.domain.usecase.SetProfileUseCase.kt</ID>
+    <ID>NewLineAtEndOfFile:SettingsRepository.kt$io.gromif.astracrypt.profile.domain.repository.SettingsRepository.kt</ID>
+    <ID>NewLineAtEndOfFile:ValidationException.kt$io.gromif.astracrypt.profile.domain.model.ValidationException.kt</ID>
+    <ID>NewLineAtEndOfFile:ValidationRules.kt$io.gromif.astracrypt.profile.domain.ValidationRules.kt</ID>
+    <ID>NewLineAtEndOfFile:ValidationRulesDto.kt$io.gromif.astracrypt.profile.domain.model.ValidationRulesDto.kt</ID>
     <ID>NoBlankLineBeforeRbrace:AeadMode.kt$AeadMode$ </ID>
     <ID>NoBlankLineBeforeRbrace:Avatar.kt$Avatar$ </ID>
     <ID>NoBlankLineBeforeRbrace:GetAeadModeFlowUseCase.kt$GetAeadModeFlowUseCase$ </ID>

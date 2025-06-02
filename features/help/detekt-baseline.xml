@@ -4,6 +4,8 @@
   <CurrentIssues>
     <ID>FinalNewline:HelpItem.kt$io.gromif.compose_help.HelpItem.kt</ID>
     <ID>FinalNewline:HelpScreen.kt$io.gromif.compose_help.HelpScreen.kt</ID>
+    <ID>NewLineAtEndOfFile:HelpItem.kt$io.gromif.compose_help.HelpItem.kt</ID>
+    <ID>NewLineAtEndOfFile:HelpScreen.kt$io.gromif.compose_help.HelpScreen.kt</ID>
     <ID>PackageName:HelpItem.kt$package io.gromif.compose_help</ID>
     <ID>PackageName:HelpScreen.kt$package io.gromif.compose_help</ID>
     <ID>PackageNaming:HelpItem.kt$package io.gromif.compose_help</ID>

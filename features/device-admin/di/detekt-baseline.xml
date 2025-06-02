@@ -5,6 +5,9 @@
     <ID>FinalNewline:DevicePolicyModule.kt$io.gromif.astracrypt.device_admin.di.DevicePolicyModule.kt</ID>
     <ID>FinalNewline:ServiceModule.kt$io.gromif.astracrypt.device_admin.di.ServiceModule.kt</ID>
     <ID>FinalNewline:UseCaseModule.kt$io.gromif.astracrypt.device_admin.di.UseCaseModule.kt</ID>
+    <ID>NewLineAtEndOfFile:DevicePolicyModule.kt$io.gromif.astracrypt.device_admin.di.DevicePolicyModule.kt</ID>
+    <ID>NewLineAtEndOfFile:ServiceModule.kt$io.gromif.astracrypt.device_admin.di.ServiceModule.kt</ID>
+    <ID>NewLineAtEndOfFile:UseCaseModule.kt$io.gromif.astracrypt.device_admin.di.UseCaseModule.kt</ID>
     <ID>NoBlankLineBeforeRbrace:DevicePolicyModule.kt$DevicePolicyModule$ </ID>
     <ID>NoBlankLineBeforeRbrace:ServiceModule.kt$ServiceModule$ </ID>
     <ID>NoBlankLineBeforeRbrace:UseCaseModule.kt$UseCaseModule$ </ID>

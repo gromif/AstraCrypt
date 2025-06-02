@@ -8,10 +8,14 @@
     <ID>FinalNewline:AdminSettingsViewModel.kt$io.gromif.astracrypt.device_admin.presentation.AdminSettingsViewModel.kt</ID>
     <ID>FinalNewline:AdminSettingsViewModelTest.kt$io.gromif.astracrypt.device_admin.presentation.AdminSettingsViewModelTest.kt</ID>
     <ID>FinalNewline:RequestDeviceAdminContract.kt$io.gromif.astracrypt.device_admin.presentation.contracts.RequestDeviceAdminContract.kt</ID>
-    <ID>Indentation:AdminSettings.kt$ </ID>
     <ID>MultiLineIfElse:AdminSettings.kt$AdminSettingsScreen( adminRightsGranted = adminState.isActive, requestAdminRights = { requestDeviceAdmin.launch(null) }, disableAdminRights = vm::disable )</ID>
     <ID>MultiLineIfElse:AdminSettingsScreen.kt$disableAdminRights()</ID>
     <ID>MultiLineIfElse:AdminSettingsScreen.kt$requestAdminRights()</ID>
+    <ID>NewLineAtEndOfFile:AdminSettings.kt$io.gromif.astracrypt.device_admin.presentation.AdminSettings.kt</ID>
+    <ID>NewLineAtEndOfFile:AdminSettingsScreen.kt$io.gromif.astracrypt.device_admin.presentation.AdminSettingsScreen.kt</ID>
+    <ID>NewLineAtEndOfFile:AdminSettingsViewModel.kt$io.gromif.astracrypt.device_admin.presentation.AdminSettingsViewModel.kt</ID>
+    <ID>NewLineAtEndOfFile:AdminSettingsViewModelTest.kt$io.gromif.astracrypt.device_admin.presentation.AdminSettingsViewModelTest.kt</ID>
+    <ID>NewLineAtEndOfFile:RequestDeviceAdminContract.kt$io.gromif.astracrypt.device_admin.presentation.contracts.RequestDeviceAdminContract.kt</ID>
     <ID>PackageName:AdminSettings.kt$package io.gromif.astracrypt.device_admin.presentation</ID>
     <ID>PackageName:AdminSettingsScreen.kt$package io.gromif.astracrypt.device_admin.presentation</ID>
     <ID>PackageName:AdminSettingsViewModel.kt$package io.gromif.astracrypt.device_admin.presentation</ID>

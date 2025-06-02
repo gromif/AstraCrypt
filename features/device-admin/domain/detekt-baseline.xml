@@ -7,6 +7,11 @@
     <ID>FinalNewline:GetAdminStateFlowUseCaseTest.kt$io.gromif.astracrypt.device_admin.domain.usecase.GetAdminStateFlowUseCaseTest.kt</ID>
     <ID>FinalNewline:RevokeAdminUseCase.kt$io.gromif.astracrypt.device_admin.domain.usecase.RevokeAdminUseCase.kt</ID>
     <ID>FinalNewline:RevokeAdminUseCaseTest.kt$io.gromif.astracrypt.device_admin.domain.usecase.RevokeAdminUseCaseTest.kt</ID>
+    <ID>NewLineAtEndOfFile:DeviceAdminService.kt$io.gromif.astracrypt.device_admin.domain.service.DeviceAdminService.kt</ID>
+    <ID>NewLineAtEndOfFile:GetAdminStateFlowUseCase.kt$io.gromif.astracrypt.device_admin.domain.usecase.GetAdminStateFlowUseCase.kt</ID>
+    <ID>NewLineAtEndOfFile:GetAdminStateFlowUseCaseTest.kt$io.gromif.astracrypt.device_admin.domain.usecase.GetAdminStateFlowUseCaseTest.kt</ID>
+    <ID>NewLineAtEndOfFile:RevokeAdminUseCase.kt$io.gromif.astracrypt.device_admin.domain.usecase.RevokeAdminUseCase.kt</ID>
+    <ID>NewLineAtEndOfFile:RevokeAdminUseCaseTest.kt$io.gromif.astracrypt.device_admin.domain.usecase.RevokeAdminUseCaseTest.kt</ID>
     <ID>NoBlankLineBeforeRbrace:DeviceAdminService.kt$DeviceAdminService$ </ID>
     <ID>NoBlankLineBeforeRbrace:GetAdminStateFlowUseCase.kt$GetAdminStateFlowUseCase$ </ID>
     <ID>NoBlankLineBeforeRbrace:RevokeAdminUseCase.kt$RevokeAdminUseCase$ </ID>

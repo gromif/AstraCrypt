@@ -3,6 +3,7 @@
   <ManuallySuppressedIssues/>
   <CurrentIssues>
     <ID>FinalNewline:TileServiceCoroutine.kt$io.gromif.tiles_with_coroutines.TileServiceCoroutine.kt</ID>
+    <ID>NewLineAtEndOfFile:TileServiceCoroutine.kt$io.gromif.tiles_with_coroutines.TileServiceCoroutine.kt</ID>
     <ID>NoBlankLineBeforeRbrace:TileServiceCoroutine.kt$TileServiceCoroutine$ </ID>
     <ID>PackageName:TileServiceCoroutine.kt$package io.gromif.tiles_with_coroutines</ID>
     <ID>PackageNaming:TileServiceCoroutine.kt$package io.gromif.tiles_with_coroutines</ID>

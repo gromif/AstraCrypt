@@ -6,6 +6,10 @@
     <ID>FinalNewline:GetFileInfosUseCase.kt$io.gromif.lab_zip.domain.usecase.GetFileInfosUseCase.kt</ID>
     <ID>FinalNewline:GetSourceFileInfoUseCase.kt$io.gromif.lab_zip.domain.usecase.GetSourceFileInfoUseCase.kt</ID>
     <ID>FinalNewline:Repository.kt$io.gromif.lab_zip.domain.Repository.kt</ID>
+    <ID>NewLineAtEndOfFile:FileInfo.kt$io.gromif.lab_zip.domain.FileInfo.kt</ID>
+    <ID>NewLineAtEndOfFile:GetFileInfosUseCase.kt$io.gromif.lab_zip.domain.usecase.GetFileInfosUseCase.kt</ID>
+    <ID>NewLineAtEndOfFile:GetSourceFileInfoUseCase.kt$io.gromif.lab_zip.domain.usecase.GetSourceFileInfoUseCase.kt</ID>
+    <ID>NewLineAtEndOfFile:Repository.kt$io.gromif.lab_zip.domain.Repository.kt</ID>
     <ID>NoBlankLineBeforeRbrace:GetFileInfosUseCase.kt$GetFileInfosUseCase$ </ID>
     <ID>NoBlankLineBeforeRbrace:GetSourceFileInfoUseCase.kt$GetSourceFileInfoUseCase$ </ID>
     <ID>NoBlankLineBeforeRbrace:Repository.kt$Repository$ </ID>

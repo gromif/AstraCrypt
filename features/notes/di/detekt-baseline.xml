@@ -8,6 +8,12 @@
     <ID>FinalNewline:UseCases.kt$io.gromif.notes.di.UseCases.kt</ID>
     <ID>FinalNewline:UtilModule.kt$io.gromif.notes.di.UtilModule.kt</ID>
     <ID>FinalNewline:WorkerUseCases.kt$io.gromif.notes.di.WorkerUseCases.kt</ID>
+    <ID>NewLineAtEndOfFile:DataStoreModule.kt$io.gromif.notes.di.DataStoreModule.kt</ID>
+    <ID>NewLineAtEndOfFile:RepositoryModule.kt$io.gromif.notes.di.RepositoryModule.kt</ID>
+    <ID>NewLineAtEndOfFile:SettingsRepositoryModule.kt$io.gromif.notes.di.SettingsRepositoryModule.kt</ID>
+    <ID>NewLineAtEndOfFile:UseCases.kt$io.gromif.notes.di.UseCases.kt</ID>
+    <ID>NewLineAtEndOfFile:UtilModule.kt$io.gromif.notes.di.UtilModule.kt</ID>
+    <ID>NewLineAtEndOfFile:WorkerUseCases.kt$io.gromif.notes.di.WorkerUseCases.kt</ID>
     <ID>NoBlankLineBeforeRbrace:RepositoryModule.kt$RepositoryModule$ </ID>
     <ID>NoBlankLineBeforeRbrace:SettingsRepositoryModule.kt$SettingsRepositoryModule$ </ID>
     <ID>NoBlankLineBeforeRbrace:UseCases.kt$UseCases$ </ID>

@@ -2,19 +2,20 @@
 <SmellBaseline>
   <ManuallySuppressedIssues/>
   <CurrentIssues>
-    <ID>FinalNewline:CoilModule.kt$io.gromif.astracrypt.profile.di.CoilModule.kt</ID>
     <ID>FinalNewline:DatastoreModule.kt$io.gromif.astracrypt.profile.di.DatastoreModule.kt</ID>
     <ID>FinalNewline:MapperModule.kt$io.gromif.astracrypt.profile.di.MapperModule.kt</ID>
     <ID>FinalNewline:RepositoryModule.kt$io.gromif.astracrypt.profile.di.RepositoryModule.kt</ID>
     <ID>FinalNewline:SettingsRepositoryModule.kt$io.gromif.astracrypt.profile.di.repository.SettingsRepositoryModule.kt</ID>
     <ID>FinalNewline:UsecaseModule.kt$io.gromif.astracrypt.profile.di.UsecaseModule.kt</ID>
-    <ID>FinalNewline:UtilModule.kt$io.gromif.astracrypt.profile.di.UtilModule.kt</ID>
-    <ID>NoBlankLineBeforeRbrace:CoilModule.kt$CoilModule$ </ID>
+    <ID>NewLineAtEndOfFile:DatastoreModule.kt$io.gromif.astracrypt.profile.di.DatastoreModule.kt</ID>
+    <ID>NewLineAtEndOfFile:MapperModule.kt$io.gromif.astracrypt.profile.di.MapperModule.kt</ID>
+    <ID>NewLineAtEndOfFile:RepositoryModule.kt$io.gromif.astracrypt.profile.di.RepositoryModule.kt</ID>
+    <ID>NewLineAtEndOfFile:SettingsRepositoryModule.kt$io.gromif.astracrypt.profile.di.repository.SettingsRepositoryModule.kt</ID>
+    <ID>NewLineAtEndOfFile:UsecaseModule.kt$io.gromif.astracrypt.profile.di.UsecaseModule.kt</ID>
     <ID>NoBlankLineBeforeRbrace:DatastoreModule.kt$DatastoreModule$ </ID>
     <ID>NoBlankLineBeforeRbrace:MapperModule.kt$MapperModule$ </ID>
     <ID>NoBlankLineBeforeRbrace:RepositoryModule.kt$RepositoryModule$ </ID>
     <ID>NoBlankLineBeforeRbrace:SettingsRepositoryModule.kt$SettingsRepositoryModule$ </ID>
     <ID>NoBlankLineBeforeRbrace:UsecaseModule.kt$UsecaseModule$ </ID>
-    <ID>NoBlankLineBeforeRbrace:UtilModule.kt$UtilModule$ </ID>
   </CurrentIssues>
 </SmellBaseline>

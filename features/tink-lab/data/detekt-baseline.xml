@@ -14,6 +14,18 @@
     <ID>FinalNewline:KeyWriterImpl.kt$io.gromif.tink_lab.data.util.KeyWriterImpl.kt</ID>
     <ID>FinalNewline:RepositoryImpl.kt$io.gromif.tink_lab.data.repository.RepositoryImpl.kt</ID>
     <ID>FinalNewline:TextAeadUtil.kt$io.gromif.tink_lab.data.util.TextAeadUtil.kt</ID>
+    <ID>NewLineAtEndOfFile:DataTypeToIdMapper.kt$io.gromif.tink_lab.data.mapper.DataTypeToIdMapper.kt</ID>
+    <ID>NewLineAtEndOfFile:DtoToKeyMapper.kt$io.gromif.tink_lab.data.mapper.DtoToKeyMapper.kt</ID>
+    <ID>NewLineAtEndOfFile:IdToDataTypeMapper.kt$io.gromif.tink_lab.data.mapper.IdToDataTypeMapper.kt</ID>
+    <ID>NewLineAtEndOfFile:KeyDto.kt$io.gromif.tink_lab.data.dto.KeyDto.kt</ID>
+    <ID>NewLineAtEndOfFile:KeyGeneratorImpl.kt$io.gromif.tink_lab.data.util.KeyGeneratorImpl.kt</ID>
+    <ID>NewLineAtEndOfFile:KeyParser.kt$io.gromif.tink_lab.data.util.KeyParser.kt</ID>
+    <ID>NewLineAtEndOfFile:KeyReaderImpl.kt$io.gromif.tink_lab.data.util.KeyReaderImpl.kt</ID>
+    <ID>NewLineAtEndOfFile:KeySerializer.kt$io.gromif.tink_lab.data.util.KeySerializer.kt</ID>
+    <ID>NewLineAtEndOfFile:KeyToDtoMapper.kt$io.gromif.tink_lab.data.mapper.KeyToDtoMapper.kt</ID>
+    <ID>NewLineAtEndOfFile:KeyWriterImpl.kt$io.gromif.tink_lab.data.util.KeyWriterImpl.kt</ID>
+    <ID>NewLineAtEndOfFile:RepositoryImpl.kt$io.gromif.tink_lab.data.repository.RepositoryImpl.kt</ID>
+    <ID>NewLineAtEndOfFile:TextAeadUtil.kt$io.gromif.tink_lab.data.util.TextAeadUtil.kt</ID>
     <ID>NoBlankLineBeforeRbrace:KeyGeneratorImpl.kt$KeyGeneratorImpl$ </ID>
     <ID>NoBlankLineBeforeRbrace:KeyReaderImpl.kt$KeyReaderImpl$ </ID>
     <ID>NoBlankLineBeforeRbrace:KeyWriterImpl.kt$KeyWriterImpl$ </ID>

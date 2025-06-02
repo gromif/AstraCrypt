@@ -77,13 +77,52 @@
     <ID>FinalNewline:Sha256Util.kt$io.gromif.crypto.tink.core.hash.Sha256Util.kt</ID>
     <ID>FinalNewline:Sha384Util.kt$io.gromif.crypto.tink.core.hash.Sha384Util.kt</ID>
     <ID>FinalNewline:WorkerAeadUtil.kt$io.gromif.crypto.tink.aead.WorkerAeadUtil.kt</ID>
-    <ID>Indentation:AssociatedDataManager.kt$AssociatedDataManager$ </ID>
     <ID>LongParameterList:KeysetManager.kt$KeysetManager$( tag: String, associatedData: ByteArray? = null, keyParams: Parameters, keysetTag: String = "$tag:$keyParams", keysetTagHash: Int = keysetTag.hashCode(), cache: Boolean = true )</ID>
     <ID>MagicNumber:KeysetKeyFactory.kt$KeysetKeyFactory$32</ID>
     <ID>MultiLineIfElse:AssociatedDataManager.kt$AssociatedDataManager$SecureRandom()</ID>
     <ID>MultiLineIfElse:AssociatedDataManager.kt$AssociatedDataManager$SecureRandom.getInstanceStrong()</ID>
     <ID>MultiLineIfElse:AssociatedDataManager.kt$AssociatedDataManager$associatedDataFile.readBytes()</ID>
     <ID>MultiLineIfElse:AssociatedDataManager.kt$AssociatedDataManager$generate().also { associatedDataFile.createNewFile() associatedDataFile.writeBytes(it) }</ID>
+    <ID>NewLineAtEndOfFile:AeadManager.kt$io.gromif.crypto.tink.aead.AeadManager.kt</ID>
+    <ID>NewLineAtEndOfFile:AeadManagerTest.kt$io.gromif.crypto.tink.aead.AeadManagerTest.kt</ID>
+    <ID>NewLineAtEndOfFile:AeadTemplate.kt$io.gromif.crypto.tink.keyset.AeadTemplate.kt</ID>
+    <ID>NewLineAtEndOfFile:AndroidKeyManagementService.kt$io.gromif.crypto.tink.kms.AndroidKeyManagementService.kt</ID>
+    <ID>NewLineAtEndOfFile:AssociatedDataManager.kt$io.gromif.crypto.tink.keyset.associated_data.AssociatedDataManager.kt</ID>
+    <ID>NewLineAtEndOfFile:AssociatedDataManagerTest.kt$io.gromif.crypto.tink.keyset.associated_data.AssociatedDataManagerTest.kt</ID>
+    <ID>NewLineAtEndOfFile:Base64Encoder.kt$io.gromif.crypto.tink.core.encoders.Base64Encoder.kt</ID>
+    <ID>NewLineAtEndOfFile:Base64EncoderTest.kt$io.gromif.crypto.tink.core.encoders.Base64EncoderTest.kt</ID>
+    <ID>NewLineAtEndOfFile:DefaultKeysetFactoryTest.kt$io.gromif.crypto.tink.kms.DefaultKeysetFactoryTest.kt</ID>
+    <ID>NewLineAtEndOfFile:DefaultKeysetIdUtil.kt$io.gromif.crypto.tink.core.utils.DefaultKeysetIdUtil.kt</ID>
+    <ID>NewLineAtEndOfFile:DefaultKeysetIdUtilTest.kt$io.gromif.crypto.tink.core.utils.DefaultKeysetIdUtilTest.kt</ID>
+    <ID>NewLineAtEndOfFile:DefaultKeystoreKeysetIdUtil.kt$io.gromif.crypto.tink.core.utils.DefaultKeystoreKeysetIdUtil.kt</ID>
+    <ID>NewLineAtEndOfFile:DefaultKeystoreKeysetIdUtilTest.kt$io.gromif.crypto.tink.core.utils.DefaultKeystoreKeysetIdUtilTest.kt</ID>
+    <ID>NewLineAtEndOfFile:Encoder.kt$io.gromif.crypto.tink.core.encoders.Encoder.kt</ID>
+    <ID>NewLineAtEndOfFile:Extensions.kt$io.gromif.crypto.tink.aead.Extensions.kt</ID>
+    <ID>NewLineAtEndOfFile:GetGlobalAssociatedDataPrf.kt$io.gromif.crypto.tink.keyset.associated_data.GetGlobalAssociatedDataPrf.kt</ID>
+    <ID>NewLineAtEndOfFile:HashUtil.kt$io.gromif.crypto.tink.core.hash.HashUtil.kt</ID>
+    <ID>NewLineAtEndOfFile:HexEncoder.kt$io.gromif.crypto.tink.core.encoders.HexEncoder.kt</ID>
+    <ID>NewLineAtEndOfFile:HexEncoderTest.kt$io.gromif.crypto.tink.core.encoders.HexEncoderTest.kt</ID>
+    <ID>NewLineAtEndOfFile:KeyManagementService.kt$io.gromif.crypto.tink.kms.KeyManagementService.kt</ID>
+    <ID>NewLineAtEndOfFile:KeysetAeadFactory.kt$io.gromif.crypto.tink.keyset.KeysetAeadFactory.kt</ID>
+    <ID>NewLineAtEndOfFile:KeysetHandle.kt$io.gromif.crypto.tink.core.extensions.KeysetHandle.kt</ID>
+    <ID>NewLineAtEndOfFile:KeysetIdUtil.kt$io.gromif.crypto.tink.keyset.KeysetIdUtil.kt</ID>
+    <ID>NewLineAtEndOfFile:KeysetKeyFactory.kt$io.gromif.crypto.tink.keyset.KeysetKeyFactory.kt</ID>
+    <ID>NewLineAtEndOfFile:KeysetManager.kt$io.gromif.crypto.tink.keyset.KeysetManager.kt</ID>
+    <ID>NewLineAtEndOfFile:KeysetManagerTest.kt$io.gromif.crypto.tink.keyset.KeysetManagerTest.kt</ID>
+    <ID>NewLineAtEndOfFile:KeysetParser.kt$io.gromif.crypto.tink.keyset.parser.KeysetParser.kt</ID>
+    <ID>NewLineAtEndOfFile:KeysetParserWithAead.kt$io.gromif.crypto.tink.keyset.parser.KeysetParserWithAead.kt</ID>
+    <ID>NewLineAtEndOfFile:KeysetParserWithKey.kt$io.gromif.crypto.tink.keyset.parser.KeysetParserWithKey.kt</ID>
+    <ID>NewLineAtEndOfFile:KeysetReader.kt$io.gromif.crypto.tink.keyset.io.KeysetReader.kt</ID>
+    <ID>NewLineAtEndOfFile:KeysetSerializer.kt$io.gromif.crypto.tink.keyset.serializers.KeysetSerializer.kt</ID>
+    <ID>NewLineAtEndOfFile:KeysetSerializerWithAead.kt$io.gromif.crypto.tink.keyset.serializers.KeysetSerializerWithAead.kt</ID>
+    <ID>NewLineAtEndOfFile:KeysetSerializerWithKey.kt$io.gromif.crypto.tink.keyset.serializers.KeysetSerializerWithKey.kt</ID>
+    <ID>NewLineAtEndOfFile:KeysetTemplates.kt$io.gromif.crypto.tink.keyset.KeysetTemplates.kt</ID>
+    <ID>NewLineAtEndOfFile:KeysetWriter.kt$io.gromif.crypto.tink.keyset.io.KeysetWriter.kt</ID>
+    <ID>NewLineAtEndOfFile:ReadableKeysetTemplates.kt$io.gromif.crypto.tink.core.extensions.ReadableKeysetTemplates.kt</ID>
+    <ID>NewLineAtEndOfFile:SecureRandom.kt$io.gromif.crypto.tink.core.extensions.SecureRandom.kt</ID>
+    <ID>NewLineAtEndOfFile:Sha256Util.kt$io.gromif.crypto.tink.core.hash.Sha256Util.kt</ID>
+    <ID>NewLineAtEndOfFile:Sha384Util.kt$io.gromif.crypto.tink.core.hash.Sha384Util.kt</ID>
+    <ID>NewLineAtEndOfFile:WorkerAeadUtil.kt$io.gromif.crypto.tink.aead.WorkerAeadUtil.kt</ID>
     <ID>NoBlankLineBeforeRbrace:AeadManager.kt$AeadManager$ </ID>
     <ID>NoBlankLineBeforeRbrace:AeadManagerTest.kt$AeadManagerTest$ </ID>
     <ID>NoBlankLineBeforeRbrace:AndroidKeyManagementService.kt$AndroidKeyManagementService$ </ID>

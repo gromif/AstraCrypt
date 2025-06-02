@@ -21,6 +21,25 @@
     <ID>FinalNewline:UpdateByIdUseCaseTest.kt$io.gromif.notes.domain.usecase.UpdateByIdUseCaseTest.kt</ID>
     <ID>FinalNewline:UpdateNotesAeadUseCase.kt$io.gromif.notes.domain.usecase.UpdateNotesAeadUseCase.kt</ID>
     <ID>FinalNewline:UpdateNotesAeadUseCaseTest.kt$io.gromif.notes.domain.usecase.UpdateNotesAeadUseCaseTest.kt</ID>
+    <ID>NewLineAtEndOfFile:AeadMode.kt$io.gromif.notes.domain.model.AeadMode.kt</ID>
+    <ID>NewLineAtEndOfFile:CreateUseCase.kt$io.gromif.notes.domain.usecase.CreateUseCase.kt</ID>
+    <ID>NewLineAtEndOfFile:CreateUseCaseTest.kt$io.gromif.notes.domain.usecase.CreateUseCaseTest.kt</ID>
+    <ID>NewLineAtEndOfFile:DeleteByIdUseCase.kt$io.gromif.notes.domain.usecase.DeleteByIdUseCase.kt</ID>
+    <ID>NewLineAtEndOfFile:GetAeadPreferenceFlowUseCase.kt$io.gromif.notes.domain.usecase.GetAeadPreferenceFlowUseCase.kt</ID>
+    <ID>NewLineAtEndOfFile:GetAeadPreferenceUseCase.kt$io.gromif.notes.domain.usecase.GetAeadPreferenceUseCase.kt</ID>
+    <ID>NewLineAtEndOfFile:GetNotesListFlow.kt$io.gromif.notes.domain.usecase.GetNotesListFlow.kt</ID>
+    <ID>NewLineAtEndOfFile:LoadByIdUseCase.kt$io.gromif.notes.domain.usecase.LoadByIdUseCase.kt</ID>
+    <ID>NewLineAtEndOfFile:LoadByIdUseCaseTest.kt$io.gromif.notes.domain.usecase.LoadByIdUseCaseTest.kt</ID>
+    <ID>NewLineAtEndOfFile:Note.kt$io.gromif.notes.domain.model.Note.kt</ID>
+    <ID>NewLineAtEndOfFile:NoteState.kt$io.gromif.notes.domain.model.NoteState.kt</ID>
+    <ID>NewLineAtEndOfFile:PagingProvider.kt$io.gromif.notes.domain.paging.PagingProvider.kt</ID>
+    <ID>NewLineAtEndOfFile:Repository.kt$io.gromif.notes.domain.repository.Repository.kt</ID>
+    <ID>NewLineAtEndOfFile:SetAeadPreferenceUseCase.kt$io.gromif.notes.domain.usecase.SetAeadPreferenceUseCase.kt</ID>
+    <ID>NewLineAtEndOfFile:SettingsRepository.kt$io.gromif.notes.domain.repository.SettingsRepository.kt</ID>
+    <ID>NewLineAtEndOfFile:UpdateByIdUseCase.kt$io.gromif.notes.domain.usecase.UpdateByIdUseCase.kt</ID>
+    <ID>NewLineAtEndOfFile:UpdateByIdUseCaseTest.kt$io.gromif.notes.domain.usecase.UpdateByIdUseCaseTest.kt</ID>
+    <ID>NewLineAtEndOfFile:UpdateNotesAeadUseCase.kt$io.gromif.notes.domain.usecase.UpdateNotesAeadUseCase.kt</ID>
+    <ID>NewLineAtEndOfFile:UpdateNotesAeadUseCaseTest.kt$io.gromif.notes.domain.usecase.UpdateNotesAeadUseCaseTest.kt</ID>
     <ID>NoBlankLineBeforeRbrace:AeadMode.kt$AeadMode$ </ID>
     <ID>NoBlankLineBeforeRbrace:CreateUseCase.kt$CreateUseCase$ </ID>
     <ID>NoBlankLineBeforeRbrace:DeleteByIdUseCase.kt$DeleteByIdUseCase$ </ID>
