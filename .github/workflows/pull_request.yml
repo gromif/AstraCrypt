@@ -19,7 +19,8 @@ jobs:
       - run: echo "🎉 Triggered by a ${{ github.event_name }} event."
 
       # Checkout Repo
-      - uses: ./.github/actions/repo-checkout-action
+      - name: 🧩 Checkout Repo
+        uses: actions/checkout@v4
 
       # Set up Java
       - uses: ./.github/actions/setup-java-action
