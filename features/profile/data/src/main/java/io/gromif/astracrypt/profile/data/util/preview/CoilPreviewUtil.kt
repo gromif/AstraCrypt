@@ -3,11 +3,12 @@ package io.gromif.astracrypt.profile.data.util.preview
 import android.content.Context
 import android.graphics.Bitmap
 import android.net.Uri
-import androidx.core.graphics.drawable.toBitmap
-import coil.ImageLoader
-import coil.request.CachePolicy
-import coil.request.ImageRequest
-import coil.size.Scale
+import coil3.ImageLoader
+import coil3.request.CachePolicy
+import coil3.request.ImageRequest
+import coil3.request.transformations
+import coil3.size.Scale
+import coil3.toBitmap
 import io.gromif.astracrypt.profile.data.util.CenterCropTransformation
 
 class CoilPreviewUtil(
@@ -25,7 +26,6 @@ class CoilPreviewUtil(
                 .transformations(CenterCropTransformation())
                 .data(uri)
                 .build()
-        ).drawable!!.toBitmap()
+        ).image!!.toBitmap()
     }
-
 }

@@ -2,11 +2,11 @@ package io.gromif.astracrypt.files.data.factory.preview
 
 import android.content.ContentResolver
 import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
 import android.media.MediaMetadataRetriever
 import android.net.Uri
-import coil.ImageLoader
-import coil.request.ImageRequest
+import coil3.ImageLoader
+import coil3.request.ImageRequest
+import coil3.toBitmap
 import io.gromif.astracrypt.utils.Mapper
 import io.gromif.astracrypt.utils.io.BitmapCompressor
 
@@ -29,8 +29,7 @@ class AudioPreviewFactory(
 
                 media.embeddedPicture?.let {
                     val request = imageRequestBuilder.data(it).build()
-                    val bitmapDrawable = imageLoader.execute(request).drawable as BitmapDrawable?
-                    bitmap = bitmapDrawable?.bitmap
+                    bitmap = imageLoader.execute(request).image?.toBitmap()
                 }
             } finally {
                 media.release()

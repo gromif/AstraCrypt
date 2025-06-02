@@ -2,11 +2,11 @@ package io.gromif.astracrypt.files.data.util.coil
 
 import android.graphics.Bitmap
 import android.media.ThumbnailUtils
-import coil.size.Size
-import coil.size.pxOrElse
-import coil.transform.Transformation
+import coil3.size.Size
+import coil3.size.pxOrElse
+import coil3.transform.Transformation
 
-class CenterCropTransformation : Transformation {
+class CenterCropTransformation : Transformation() {
     override val cacheKey: String
         get() = ""
 

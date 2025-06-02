@@ -2,7 +2,7 @@ package io.gromif.astracrypt.profile.presentation.settings
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import coil.ImageLoader
+import coil3.ImageLoader
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.gromif.astracrypt.profile.di.AvatarImageLoader
 import io.gromif.astracrypt.profile.domain.model.DefaultAvatar
@@ -30,10 +30,12 @@ internal class SettingsViewModel @Inject constructor(
     val imageLoader: ImageLoader,
     getValidationRulesUsecase: GetValidationRulesUseCase,
     getProfileFlowUsecase: GetProfileFlowUseCase,
-): ViewModel() {
+) : ViewModel() {
     val validationRules = getValidationRulesUsecase()
     val profileState = getProfileFlowUsecase().stateIn(
-        viewModelScope, SharingStarted.WhileSubscribed(), Profile()
+        viewModelScope,
+        SharingStarted.WhileSubscribed(),
+        Profile()
     )
 
     fun setName(name: String) = viewModelScope.launch(defaultDispatcher) {
@@ -47,5 +49,4 @@ internal class SettingsViewModel @Inject constructor(
     fun setExternalAvatar(path: String) = viewModelScope.launch(defaultDispatcher) {
         setExternalAvatarUsecase(path)
     }
-
 }

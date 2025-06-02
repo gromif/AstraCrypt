@@ -34,8 +34,8 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import coil.ImageLoader
-import coil.compose.AsyncImage
+import coil3.ImageLoader
+import coil3.compose.AsyncImage
 import io.gromif.astracrypt.files.domain.model.FileSource
 import io.gromif.astracrypt.files.domain.model.ItemState
 import io.gromif.astracrypt.files.domain.model.ItemType
