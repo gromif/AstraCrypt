@@ -1,9 +1,10 @@
 package io.gromif.astracrypt.profile.di
 
 import android.content.Context
-import coil.ImageLoader
-import coil.request.CachePolicy
-import coil.transition.CrossfadeTransition
+import coil3.ImageLoader
+import coil3.request.CachePolicy
+import coil3.request.transitionFactory
+import coil3.transition.CrossfadeTransition
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -42,7 +43,6 @@ internal object CoilModule {
         settingsRepository = settingsRepository,
         fileUtil = fileUtil
     )
-
 }
 
 @Qualifier
