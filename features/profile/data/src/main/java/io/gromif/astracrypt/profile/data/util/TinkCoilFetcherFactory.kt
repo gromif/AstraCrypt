@@ -13,12 +13,10 @@ import io.gromif.crypto.tink.keyset.KeysetTemplates
 import okio.FileSystem
 import okio.buffer
 import okio.source
-import java.io.File
 
 class TinkCoilFetcherFactory(
     private val settingsRepository: SettingsRepository,
-    private val fileUtil: FileUtil,
-    private val cacheDir: File
+    private val fileUtil: FileUtil
 ) : Fetcher.Factory<Avatar.External> {
     override fun create(data: Avatar.External, options: Options, imageLoader: ImageLoader) =
         TinkCoilFetcher()

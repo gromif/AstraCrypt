@@ -36,13 +36,11 @@ internal object CoilModule {
     @ViewModelScoped
     @Provides
     fun provideTinkCoilFetcherFactory(
-        @ApplicationContext context: Context,
         settingsRepository: SettingsRepository,
         fileUtil: FileUtil,
     ): TinkCoilFetcherFactory = TinkCoilFetcherFactory(
         settingsRepository = settingsRepository,
-        fileUtil = fileUtil,
-        cacheDir = context.cacheDir
+        fileUtil = fileUtil
     )
 
 }
