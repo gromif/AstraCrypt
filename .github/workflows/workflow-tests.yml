@@ -9,13 +9,13 @@ jobs:
 
     steps:
       # Checkout Repo
-      - uses: ./.github/workflows/workflow-repo-checkout.yml
+      - uses: ./.github/actions/repo-checkout-action
 
       # Set up Java
-      - uses: ./.github/workflows/workflow-setup-java.yml
+      - uses: ./.github/actions/setup-java-action
 
       # Set up Gradle
-      - uses: ./.github/workflows/workflow-setup-gradle.yml
+      - uses: ./.github/actions/setup-gradle-action
 
       - name: Tests
         run: ./gradlew test --stacktrace

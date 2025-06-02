@@ -19,13 +19,13 @@ jobs:
       - run: echo "🎉 Triggered by a ${{ github.event_name }} event."
 
       # Checkout Repo
-      - uses: ./.github/workflows/workflow-repo-checkout.yml
+      - uses: ./.github/actions/repo-checkout-action
 
       # Set up Java
-      - uses: ./.github/workflows/workflow-setup-java.yml
+      - uses: ./.github/actions/setup-java-action
 
       # Set up Gradle
-      - uses: ./.github/workflows/workflow-setup-gradle.yml
+      - uses: ./.github/actions/setup-gradle-action
 
       - name: Build
         run: ./gradlew build --stacktrace

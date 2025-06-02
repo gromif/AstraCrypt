@@ -1,0 +1,6 @@
+name: "Checkout Repo Action"
+runs:
+  using: "composite"
+  steps:
+    - name: 🧩 Checkout Repo
+      uses: actions/checkout@v4
