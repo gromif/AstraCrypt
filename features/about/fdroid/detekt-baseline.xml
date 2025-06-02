@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>FinalNewline:AboutScreen.kt$io.gromif.astracrypt.settings.about.AboutScreen.kt</ID>
+    <ID>FinalNewline:Config.kt$io.gromif.astracrypt.settings.about.Config.kt</ID>
+  </CurrentIssues>
+</SmellBaseline>

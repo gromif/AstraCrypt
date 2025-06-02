@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>FinalNewline:AppDatabase.kt$io.gromif.astracrypt.db.AppDatabase.kt</ID>
+    <ID>FinalNewline:AppDatabaseModule.kt$io.gromif.astracrypt.db.AppDatabaseModule.kt</ID>
+    <ID>NoBlankLineBeforeRbrace:AppDatabaseModule.kt$AppDatabaseModule$ </ID>
+  </CurrentIssues>
+</SmellBaseline>

@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>ArgumentListWrapping:AppComponentService.kt$AppComponentService$( comp, if (state) ENABLED else DISABLED, PackageManager.DONT_KILL_APP )</ID>
+    <ID>FinalNewline:Api.kt$io.gromif.astracrypt.utils.Api.kt</ID>
+    <ID>FinalNewline:AppComponentService.kt$io.gromif.astracrypt.utils.app.AppComponentService.kt</ID>
+    <ID>FinalNewline:AppModule.kt$io.gromif.astracrypt.utils.di.AppModule.kt</ID>
+    <ID>FinalNewline:BitmapCompressor.kt$io.gromif.astracrypt.utils.io.BitmapCompressor.kt</ID>
+    <ID>FinalNewline:Context.kt$io.gromif.astracrypt.utils.app.ext.Context.kt</ID>
+    <ID>FinalNewline:FilesUtil.kt$io.gromif.astracrypt.utils.io.FilesUtil.kt</ID>
+    <ID>FinalNewline:IoModule.kt$io.gromif.astracrypt.utils.di.IoModule.kt</ID>
+    <ID>FinalNewline:Mapper.kt$io.gromif.astracrypt.utils.Mapper.kt</ID>
+    <ID>FinalNewline:MapperModule.kt$io.gromif.astracrypt.utils.di.MapperModule.kt</ID>
+    <ID>FinalNewline:Parser.kt$io.gromif.astracrypt.utils.Parser.kt</ID>
+    <ID>FinalNewline:Randomizer.kt$io.gromif.astracrypt.utils.io.Randomizer.kt</ID>
+    <ID>FinalNewline:Serializer.kt$io.gromif.astracrypt.utils.Serializer.kt</ID>
+    <ID>FinalNewline:StringToUriMapper.kt$io.gromif.astracrypt.utils.mapper.StringToUriMapper.kt</ID>
+    <ID>FinalNewline:UriToStringMapper.kt$io.gromif.astracrypt.utils.mapper.UriToStringMapper.kt</ID>
+    <ID>FinalNewline:WorkerSerializer.kt$io.gromif.astracrypt.utils.io.WorkerSerializer.kt</ID>
+    <ID>MagicNumber:FilesUtil.kt$FilesUtil$5</ID>
+    <ID>NoBlankLineBeforeRbrace:Api.kt$Api$ </ID>
+    <ID>NoBlankLineBeforeRbrace:AppComponentService.kt$AppComponentService$ </ID>
+    <ID>NoBlankLineBeforeRbrace:AppModule.kt$AppModule$ </ID>
+    <ID>NoBlankLineBeforeRbrace:BitmapCompressor.kt$BitmapCompressor$ </ID>
+    <ID>NoBlankLineBeforeRbrace:FilesUtil.kt$FilesUtil$ </ID>
+    <ID>NoBlankLineBeforeRbrace:IoModule.kt$IoModule$ </ID>
+    <ID>NoBlankLineBeforeRbrace:Mapper.kt$Mapper$ </ID>
+    <ID>NoBlankLineBeforeRbrace:MapperModule.kt$MapperModule$ </ID>
+    <ID>NoBlankLineBeforeRbrace:Parser.kt$Parser$ </ID>
+    <ID>NoBlankLineBeforeRbrace:Serializer.kt$Serializer$ </ID>
+    <ID>NoBlankLineBeforeRbrace:WorkerSerializer.kt$WorkerSerializer$ </ID>
+    <ID>NoConsecutiveBlankLines:AppComponentService.kt$AppComponentService$ </ID>
+    <ID>ParameterListWrapping:AppComponentService.kt$AppComponentService$( comp: Component, state: Boolean )</ID>
+    <ID>SpacingAroundColon:StringToUriMapper.kt$StringToUriMapper$:</ID>
+    <ID>SpacingAroundColon:UriToStringMapper.kt$UriToStringMapper$:</ID>
+    <ID>SpacingAroundParens:FilesUtil.kt$FilesUtil$(</ID>
+    <ID>TopLevelPropertyNaming:AppComponentService.kt$private const val rootPackage = "io.gromif.astracrypt"</ID>
+  </CurrentIssues>
+</SmellBaseline>

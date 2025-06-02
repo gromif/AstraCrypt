@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>ArgumentListWrapping:Screen.kt$( padding = 0.dp, left = { Header( headerImage = headerImage, title = title ) if (showGroups) GroupList( groups = groups, selectedGroup = selectedGroup, onGroupSelected = { selectedGroup = it } ) }, right = { DetailsList(items = groups[selectedGroup].detailsItemList) })</ID>
+    <ID>ExplicitItLambdaParameter:GroupList.kt${ i, it -&gt; Chips.Filter( selected = i == selectedGroup, onClick = { onGroupSelected(i) }, label = it.title.resolve(context) ) }</ID>
+    <ID>FinalNewline:DetailsGroup.kt$io.gromif.compose.details.model.DetailsGroup.kt</ID>
+    <ID>FinalNewline:DetailsItem.kt$io.gromif.compose.details.model.DetailsItem.kt</ID>
+    <ID>FinalNewline:DetailsList.kt$io.gromif.compose.details.shared.DetailsList.kt</ID>
+    <ID>FinalNewline:Extensions.kt$io.gromif.compose.details.Extensions.kt</ID>
+    <ID>FinalNewline:FakeData.kt$io.gromif.compose.details.shared.FakeData.kt</ID>
+    <ID>FinalNewline:GroupList.kt$io.gromif.compose.details.shared.GroupList.kt</ID>
+    <ID>FinalNewline:Header.kt$io.gromif.compose.details.shared.Header.kt</ID>
+    <ID>FinalNewline:Screen.kt$io.gromif.compose.details.Screen.kt</ID>
+    <ID>Indentation:Header.kt$ </ID>
+    <ID>Indentation:Screen.kt$ </ID>
+    <ID>MagicNumber:FakeData.kt$5</ID>
+    <ID>MagicNumber:FakeData.kt$7</ID>
+    <ID>MultiLineIfElse:Header.kt$Row( modifier = Modifier .fillMaxSize() .background(color = MaterialTheme.colorScheme.surfaceVariant) .padding(MaterialTheme.spaces.spaceMedium), ) { content() HeaderTitle(title = title, padding = 10.dp) }</ID>
+    <ID>MultiLineIfElse:Screen.kt$GroupList( groups = groups, selectedGroup = selectedGroup, onGroupSelected = { selectedGroup = it } )</ID>
+    <ID>UnusedPrivateMember:Screen.kt$@Preview(showBackground = true) @Composable private fun DetailsScreenPreview( groups: SnapshotStateList&lt;DetailsGroup&gt; = mutableDetailsStateList().also { FakeData.groups(it) }, headerImage: @Composable BoxScope.() -&gt; Unit = {}, title: String = "Title", showGroups: Boolean = true, )</ID>
+  </CurrentIssues>
+</SmellBaseline>
