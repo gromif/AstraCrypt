@@ -7,7 +7,7 @@ on:
 jobs:
 
   workflow-detekt:
-    uses: ./.github/workflows/workflow-detekt.yml
+    uses: ./.github/workflows/workflow-code-analysis.yml
 
   workflow-tests:
     uses: ./.github/workflows/workflow-tests.yml
