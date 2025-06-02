@@ -29,6 +29,6 @@ jobs:
       - uses: ./.github/actions/setup-gradle-action
 
       - name: Build
-        run: ./gradlew build --stacktrace
+        run: ./gradlew assembleDebug --stacktrace
 
       - run: echo "🍏 Build status is ${{ job.status }}."
