@@ -4,6 +4,8 @@
   <CurrentIssues>
     <ID>FinalNewline:EncryptionUseCaseModule.kt$io.gromif.astracrypt.auth.di.usecase.EncryptionUseCaseModule.kt</ID>
     <ID>FinalNewline:SettingsRepositoryModule.kt$io.gromif.astracrypt.auth.di.repository.SettingsRepositoryModule.kt</ID>
+    <ID>NewLineAtEndOfFile:EncryptionUseCaseModule.kt$io.gromif.astracrypt.auth.di.usecase.EncryptionUseCaseModule.kt</ID>
+    <ID>NewLineAtEndOfFile:SettingsRepositoryModule.kt$io.gromif.astracrypt.auth.di.repository.SettingsRepositoryModule.kt</ID>
     <ID>NoBlankLineBeforeRbrace:AuthUseCaseModule.kt$AuthUseCaseModule$ </ID>
     <ID>NoBlankLineBeforeRbrace:HintUseCaseModule.kt$HintUseCaseModule$ </ID>
     <ID>NoBlankLineBeforeRbrace:RepositoryModule.kt$RepositoryModule$ </ID>

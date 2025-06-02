@@ -19,6 +19,12 @@
     <ID>MagicNumber:CalculatorViewModel.kt$CalculatorViewModel$15</ID>
     <ID>MultiLineIfElse:CalculatorScreen.kt$ScreenHorizontal(modifier, state, onAction)</ID>
     <ID>MultiLineIfElse:CalculatorScreen.kt$ScreenVertical(modifier, state, onAction)</ID>
+    <ID>NewLineAtEndOfFile:Actions.kt$io.gromif.calculator.buttons.Actions.kt</ID>
+    <ID>NewLineAtEndOfFile:BaseButtons.kt$io.gromif.calculator.buttons.BaseButtons.kt</ID>
+    <ID>NewLineAtEndOfFile:Buttons.kt$io.gromif.calculator.buttons.Buttons.kt</ID>
+    <ID>NewLineAtEndOfFile:CalculatorScreen.kt$io.gromif.calculator.CalculatorScreen.kt</ID>
+    <ID>NewLineAtEndOfFile:CalculatorViewModel.kt$io.gromif.calculator.CalculatorViewModel.kt</ID>
+    <ID>NewLineAtEndOfFile:Numbers.kt$io.gromif.calculator.buttons.Numbers.kt</ID>
     <ID>NoBlankLineBeforeRbrace:CalculatorViewModel.kt$CalculatorViewModel$ </ID>
     <ID>ReturnCount:CalculatorViewModel.kt$CalculatorViewModel$private fun enterNumber(number: Int)</ID>
     <ID>SpacingAroundColon:CalculatorViewModel.kt$CalculatorViewModel$:</ID>

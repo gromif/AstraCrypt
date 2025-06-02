@@ -8,6 +8,12 @@
     <ID>FinalNewline:SerializerModule.kt$io.gromif.tink_lab.di.SerializerModule.kt</ID>
     <ID>FinalNewline:UseCasesModule.kt$io.gromif.tink_lab.di.UseCasesModule.kt</ID>
     <ID>FinalNewline:UtilModule.kt$io.gromif.tink_lab.di.UtilModule.kt</ID>
+    <ID>NewLineAtEndOfFile:MapperModule.kt$io.gromif.tink_lab.di.MapperModule.kt</ID>
+    <ID>NewLineAtEndOfFile:ParserModule.kt$io.gromif.tink_lab.di.ParserModule.kt</ID>
+    <ID>NewLineAtEndOfFile:RepositoryModule.kt$io.gromif.tink_lab.di.RepositoryModule.kt</ID>
+    <ID>NewLineAtEndOfFile:SerializerModule.kt$io.gromif.tink_lab.di.SerializerModule.kt</ID>
+    <ID>NewLineAtEndOfFile:UseCasesModule.kt$io.gromif.tink_lab.di.UseCasesModule.kt</ID>
+    <ID>NewLineAtEndOfFile:UtilModule.kt$io.gromif.tink_lab.di.UtilModule.kt</ID>
     <ID>NoBlankLineBeforeRbrace:MapperModule.kt$MapperModule$ </ID>
     <ID>NoBlankLineBeforeRbrace:ParserModule.kt$ParserModule$ </ID>
     <ID>NoBlankLineBeforeRbrace:RepositoryModule.kt$RepositoryModule$ </ID>

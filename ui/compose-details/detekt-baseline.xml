@@ -12,12 +12,19 @@
     <ID>FinalNewline:GroupList.kt$io.gromif.compose.details.shared.GroupList.kt</ID>
     <ID>FinalNewline:Header.kt$io.gromif.compose.details.shared.Header.kt</ID>
     <ID>FinalNewline:Screen.kt$io.gromif.compose.details.Screen.kt</ID>
-    <ID>Indentation:Header.kt$ </ID>
-    <ID>Indentation:Screen.kt$ </ID>
     <ID>MagicNumber:FakeData.kt$5</ID>
     <ID>MagicNumber:FakeData.kt$7</ID>
     <ID>MultiLineIfElse:Header.kt$Row( modifier = Modifier .fillMaxSize() .background(color = MaterialTheme.colorScheme.surfaceVariant) .padding(MaterialTheme.spaces.spaceMedium), ) { content() HeaderTitle(title = title, padding = 10.dp) }</ID>
     <ID>MultiLineIfElse:Screen.kt$GroupList( groups = groups, selectedGroup = selectedGroup, onGroupSelected = { selectedGroup = it } )</ID>
+    <ID>NewLineAtEndOfFile:DetailsGroup.kt$io.gromif.compose.details.model.DetailsGroup.kt</ID>
+    <ID>NewLineAtEndOfFile:DetailsItem.kt$io.gromif.compose.details.model.DetailsItem.kt</ID>
+    <ID>NewLineAtEndOfFile:DetailsList.kt$io.gromif.compose.details.shared.DetailsList.kt</ID>
+    <ID>NewLineAtEndOfFile:Extensions.kt$io.gromif.compose.details.Extensions.kt</ID>
+    <ID>NewLineAtEndOfFile:FakeData.kt$io.gromif.compose.details.shared.FakeData.kt</ID>
+    <ID>NewLineAtEndOfFile:GroupList.kt$io.gromif.compose.details.shared.GroupList.kt</ID>
+    <ID>NewLineAtEndOfFile:Header.kt$io.gromif.compose.details.shared.Header.kt</ID>
+    <ID>NewLineAtEndOfFile:Screen.kt$io.gromif.compose.details.Screen.kt</ID>
     <ID>UnusedPrivateMember:Screen.kt$@Preview(showBackground = true) @Composable private fun DetailsScreenPreview( groups: SnapshotStateList&lt;DetailsGroup&gt; = mutableDetailsStateList().also { FakeData.groups(it) }, headerImage: @Composable BoxScope.() -&gt; Unit = {}, title: String = "Title", showGroups: Boolean = true, )</ID>
+    <ID>Wrapping:Screen.kt$(</ID>
   </CurrentIssues>
 </SmellBaseline>

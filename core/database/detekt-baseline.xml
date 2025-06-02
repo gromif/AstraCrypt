@@ -4,6 +4,8 @@
   <CurrentIssues>
     <ID>FinalNewline:AppDatabase.kt$io.gromif.astracrypt.db.AppDatabase.kt</ID>
     <ID>FinalNewline:AppDatabaseModule.kt$io.gromif.astracrypt.db.AppDatabaseModule.kt</ID>
+    <ID>NewLineAtEndOfFile:AppDatabase.kt$io.gromif.astracrypt.db.AppDatabase.kt</ID>
+    <ID>NewLineAtEndOfFile:AppDatabaseModule.kt$io.gromif.astracrypt.db.AppDatabaseModule.kt</ID>
     <ID>NoBlankLineBeforeRbrace:AppDatabaseModule.kt$AppDatabaseModule$ </ID>
   </CurrentIssues>
 </SmellBaseline>

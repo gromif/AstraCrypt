@@ -11,13 +11,10 @@
     <ID>AnnotationOnSeparateLine:DefaultAvatarDto.kt$DefaultAvatarDto.AVATAR_7$@SerialName("d1")</ID>
     <ID>AnnotationOnSeparateLine:DefaultAvatarDto.kt$DefaultAvatarDto.AVATAR_8$@SerialName("d2")</ID>
     <ID>AnnotationOnSeparateLine:DefaultAvatarDto.kt$DefaultAvatarDto.AVATAR_9$@SerialName("e1")</ID>
-    <ID>ArgumentListWrapping:TinkCoilFetcherFactory.kt$TinkCoilFetcherFactory.TinkCoilFetcher$( source = inputStream.source().buffer(), cacheDir )</ID>
     <ID>CommentWrapping:NativePreviewUtil.kt$NativePreviewUtil$/* signal = */</ID>
     <ID>CommentWrapping:NativePreviewUtil.kt$NativePreviewUtil$/* size = */</ID>
     <ID>CommentWrapping:NativePreviewUtil.kt$NativePreviewUtil$/* uri = */</ID>
     <ID>FinalNewline:AvatarDto.kt$io.gromif.astracrypt.profile.data.dto.AvatarDto.kt</ID>
-    <ID>FinalNewline:CenterCropTransformation.kt$io.gromif.astracrypt.profile.data.util.CenterCropTransformation.kt</ID>
-    <ID>FinalNewline:CoilPreviewUtil.kt$io.gromif.astracrypt.profile.data.util.preview.CoilPreviewUtil.kt</ID>
     <ID>FinalNewline:DefaultAvatarDto.kt$io.gromif.astracrypt.profile.data.dto.DefaultAvatarDto.kt</ID>
     <ID>FinalNewline:ExternalIconUtil.kt$io.gromif.astracrypt.profile.data.util.ExternalIconUtil.kt</ID>
     <ID>FinalNewline:FileUtil.kt$io.gromif.astracrypt.profile.data.util.FileUtil.kt</ID>
@@ -28,16 +25,24 @@
     <ID>FinalNewline:ProfileMapper.kt$io.gromif.astracrypt.profile.data.mapper.ProfileMapper.kt</ID>
     <ID>FinalNewline:RepositoryImpl.kt$io.gromif.astracrypt.profile.data.repository.RepositoryImpl.kt</ID>
     <ID>FinalNewline:SettingsRepositoryImpl.kt$io.gromif.astracrypt.profile.data.repository.SettingsRepositoryImpl.kt</ID>
-    <ID>FinalNewline:TinkCoilFetcherFactory.kt$io.gromif.astracrypt.profile.data.util.TinkCoilFetcherFactory.kt</ID>
     <ID>MultiLineIfElse:PreviewUtil.kt$PreviewUtil$nativePreviewUtil(uri, size)</ID>
+    <ID>NewLineAtEndOfFile:AvatarDto.kt$io.gromif.astracrypt.profile.data.dto.AvatarDto.kt</ID>
+    <ID>NewLineAtEndOfFile:DefaultAvatarDto.kt$io.gromif.astracrypt.profile.data.dto.DefaultAvatarDto.kt</ID>
+    <ID>NewLineAtEndOfFile:ExternalIconUtil.kt$io.gromif.astracrypt.profile.data.util.ExternalIconUtil.kt</ID>
+    <ID>NewLineAtEndOfFile:FileUtil.kt$io.gromif.astracrypt.profile.data.util.FileUtil.kt</ID>
+    <ID>NewLineAtEndOfFile:NativePreviewUtil.kt$io.gromif.astracrypt.profile.data.util.preview.NativePreviewUtil.kt</ID>
+    <ID>NewLineAtEndOfFile:PreviewUtil.kt$io.gromif.astracrypt.profile.data.util.PreviewUtil.kt</ID>
+    <ID>NewLineAtEndOfFile:ProfileDto.kt$io.gromif.astracrypt.profile.data.dto.ProfileDto.kt</ID>
+    <ID>NewLineAtEndOfFile:ProfileDtoMapper.kt$io.gromif.astracrypt.profile.data.mapper.ProfileDtoMapper.kt</ID>
+    <ID>NewLineAtEndOfFile:ProfileMapper.kt$io.gromif.astracrypt.profile.data.mapper.ProfileMapper.kt</ID>
+    <ID>NewLineAtEndOfFile:RepositoryImpl.kt$io.gromif.astracrypt.profile.data.repository.RepositoryImpl.kt</ID>
+    <ID>NewLineAtEndOfFile:SettingsRepositoryImpl.kt$io.gromif.astracrypt.profile.data.repository.SettingsRepositoryImpl.kt</ID>
     <ID>NoBlankLineBeforeRbrace:AvatarDto.kt$AvatarDto$ </ID>
-    <ID>NoBlankLineBeforeRbrace:CoilPreviewUtil.kt$CoilPreviewUtil$ </ID>
     <ID>NoBlankLineBeforeRbrace:ExternalIconUtil.kt$ExternalIconUtil$ </ID>
     <ID>NoBlankLineBeforeRbrace:FileUtil.kt$FileUtil$ </ID>
     <ID>NoBlankLineBeforeRbrace:NativePreviewUtil.kt$NativePreviewUtil$ </ID>
     <ID>NoBlankLineBeforeRbrace:PreviewUtil.kt$PreviewUtil$ </ID>
     <ID>NoBlankLineBeforeRbrace:RepositoryImpl.kt$RepositoryImpl$ </ID>
-    <ID>NoBlankLineBeforeRbrace:TinkCoilFetcherFactory.kt$TinkCoilFetcherFactory$ </ID>
     <ID>NoConsecutiveBlankLines:SettingsRepositoryImpl.kt$SettingsRepositoryImpl$ </ID>
     <ID>NoSemicolons:DefaultAvatarDto.kt$DefaultAvatarDto.AVATAR_9$;</ID>
     <ID>SpacingAroundColon:AvatarDto.kt$AvatarDto.Default$:</ID>

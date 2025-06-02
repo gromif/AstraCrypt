@@ -19,6 +19,21 @@
     <ID>FinalNewline:UriToStringMapper.kt$io.gromif.astracrypt.utils.mapper.UriToStringMapper.kt</ID>
     <ID>FinalNewline:WorkerSerializer.kt$io.gromif.astracrypt.utils.io.WorkerSerializer.kt</ID>
     <ID>MagicNumber:FilesUtil.kt$FilesUtil$5</ID>
+    <ID>NewLineAtEndOfFile:Api.kt$io.gromif.astracrypt.utils.Api.kt</ID>
+    <ID>NewLineAtEndOfFile:AppComponentService.kt$io.gromif.astracrypt.utils.app.AppComponentService.kt</ID>
+    <ID>NewLineAtEndOfFile:AppModule.kt$io.gromif.astracrypt.utils.di.AppModule.kt</ID>
+    <ID>NewLineAtEndOfFile:BitmapCompressor.kt$io.gromif.astracrypt.utils.io.BitmapCompressor.kt</ID>
+    <ID>NewLineAtEndOfFile:Context.kt$io.gromif.astracrypt.utils.app.ext.Context.kt</ID>
+    <ID>NewLineAtEndOfFile:FilesUtil.kt$io.gromif.astracrypt.utils.io.FilesUtil.kt</ID>
+    <ID>NewLineAtEndOfFile:IoModule.kt$io.gromif.astracrypt.utils.di.IoModule.kt</ID>
+    <ID>NewLineAtEndOfFile:Mapper.kt$io.gromif.astracrypt.utils.Mapper.kt</ID>
+    <ID>NewLineAtEndOfFile:MapperModule.kt$io.gromif.astracrypt.utils.di.MapperModule.kt</ID>
+    <ID>NewLineAtEndOfFile:Parser.kt$io.gromif.astracrypt.utils.Parser.kt</ID>
+    <ID>NewLineAtEndOfFile:Randomizer.kt$io.gromif.astracrypt.utils.io.Randomizer.kt</ID>
+    <ID>NewLineAtEndOfFile:Serializer.kt$io.gromif.astracrypt.utils.Serializer.kt</ID>
+    <ID>NewLineAtEndOfFile:StringToUriMapper.kt$io.gromif.astracrypt.utils.mapper.StringToUriMapper.kt</ID>
+    <ID>NewLineAtEndOfFile:UriToStringMapper.kt$io.gromif.astracrypt.utils.mapper.UriToStringMapper.kt</ID>
+    <ID>NewLineAtEndOfFile:WorkerSerializer.kt$io.gromif.astracrypt.utils.io.WorkerSerializer.kt</ID>
     <ID>NoBlankLineBeforeRbrace:Api.kt$Api$ </ID>
     <ID>NoBlankLineBeforeRbrace:AppComponentService.kt$AppComponentService$ </ID>
     <ID>NoBlankLineBeforeRbrace:AppModule.kt$AppModule$ </ID>

@@ -11,8 +11,6 @@
     <ID>FinalNewline:RepositoryImpl.kt$io.gromif.notes.data.repository.RepositoryImpl.kt</ID>
     <ID>FinalNewline:SettingsRepositoryImpl.kt$io.gromif.notes.data.repository.SettingsRepositoryImpl.kt</ID>
     <ID>FinalNewline:TransformNotesTuple.kt$io.gromif.notes.data.db.tuples.TransformNotesTuple.kt</ID>
-    <ID>Indentation:PagingProviderImpl.kt$PagingProviderImpl$ </ID>
-    <ID>Indentation:RepositoryImpl.kt$RepositoryImpl$ </ID>
     <ID>MagicNumber:RepositoryImpl.kt$RepositoryImpl$10</ID>
     <ID>MagicNumber:RepositoryImpl.kt$RepositoryImpl$80</ID>
     <ID>MultiLineIfElse:PagingProviderImpl.kt$PagingProviderImpl$pagingData.map { noteMapper(item = it) }</ID>
@@ -20,6 +18,15 @@
     <ID>MultiLineIfElse:RepositoryImpl.kt$RepositoryImpl$it</ID>
     <ID>MultiLineIfElse:RepositoryImpl.kt$RepositoryImpl$launch { dao.updateTransform(tuple) }</ID>
     <ID>MultiLineIfElse:RepositoryImpl.kt$RepositoryImpl$launch { val transformedTuple = aeadHandler.encryptTransformTuple( aeadIndex = targetAeadMode, data = tuple ) dao.updateTransform(transformedTuple) }</ID>
+    <ID>NewLineAtEndOfFile:AeadHandler.kt$io.gromif.notes.data.util.AeadHandler.kt</ID>
+    <ID>NewLineAtEndOfFile:AeadUtil.kt$io.gromif.notes.data.util.AeadUtil.kt</ID>
+    <ID>NewLineAtEndOfFile:NoteItemEntity.kt$io.gromif.notes.data.db.NoteItemEntity.kt</ID>
+    <ID>NewLineAtEndOfFile:NoteMapper.kt$io.gromif.notes.data.mappers.NoteMapper.kt</ID>
+    <ID>NewLineAtEndOfFile:NotesDao.kt$io.gromif.notes.data.db.NotesDao.kt</ID>
+    <ID>NewLineAtEndOfFile:PagingProviderImpl.kt$io.gromif.notes.data.paging.PagingProviderImpl.kt</ID>
+    <ID>NewLineAtEndOfFile:RepositoryImpl.kt$io.gromif.notes.data.repository.RepositoryImpl.kt</ID>
+    <ID>NewLineAtEndOfFile:SettingsRepositoryImpl.kt$io.gromif.notes.data.repository.SettingsRepositoryImpl.kt</ID>
+    <ID>NewLineAtEndOfFile:TransformNotesTuple.kt$io.gromif.notes.data.db.tuples.TransformNotesTuple.kt</ID>
     <ID>NoBlankLineBeforeRbrace:AeadHandler.kt$AeadHandler$ </ID>
     <ID>NoBlankLineBeforeRbrace:AeadUtil.kt$AeadUtil$ </ID>
     <ID>NoBlankLineBeforeRbrace:NoteMapper.kt$NoteMapper$ </ID>

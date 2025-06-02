@@ -16,8 +16,21 @@
     <ID>FinalNewline:SettingsRepository.kt$io.gromif.secure_content.domain.SettingsRepository.kt</ID>
     <ID>FinalNewline:SettingsRepositoryImpl.kt$io.gromif.secure_content.data.SettingsRepositoryImpl.kt</ID>
     <ID>FinalNewline:SettingsRepositoryImplTest.kt$io.gromif.secure_content.data.SettingsRepositoryImplTest.kt</ID>
-    <ID>Indentation:SecureContentSettings.kt$ </ID>
     <ID>MultiLineIfElse:SecureContentSettings.kt$SecureContentSettingsScreen( isActivated = contentMode != SecureContentMode.DISABLED, onSetState = { val newMode = if (it) SecureContentMode.ENABLED else SecureContentMode.DISABLED vm.setMode(newMode) }, isForced = contentMode == SecureContentMode.FORCE, onSetForcedState = { val newMode = if (it) SecureContentMode.FORCE else SecureContentMode.ENABLED vm.setMode(newMode) } )</ID>
+    <ID>NewLineAtEndOfFile:GetContentModeFlowUseCaseTest.kt$io.gromif.secure_content.domain.usecase.GetContentModeFlowUseCaseTest.kt</ID>
+    <ID>NewLineAtEndOfFile:RepositoryModule.kt$io.gromif.secure_content.di.RepositoryModule.kt</ID>
+    <ID>NewLineAtEndOfFile:SecureContentContractImpl.kt$io.gromif.secure_content.data.SecureContentContractImpl.kt</ID>
+    <ID>NewLineAtEndOfFile:SecureContentContractImplTest.kt$io.gromif.secure_content.data.SecureContentContractImplTest.kt</ID>
+    <ID>NewLineAtEndOfFile:SecureContentMode.kt$io.gromif.secure_content.data.mapper.SecureContentMode.kt</ID>
+    <ID>NewLineAtEndOfFile:SecureContentMode.kt$io.gromif.secure_content.domain.SecureContentMode.kt</ID>
+    <ID>NewLineAtEndOfFile:SecureContentSettings.kt$io.gromif.secure_content.presentation.SecureContentSettings.kt</ID>
+    <ID>NewLineAtEndOfFile:SecureContentSettingsScreen.kt$io.gromif.secure_content.presentation.SecureContentSettingsScreen.kt</ID>
+    <ID>NewLineAtEndOfFile:SecureContentSettingsViewModel.kt$io.gromif.secure_content.presentation.SecureContentSettingsViewModel.kt</ID>
+    <ID>NewLineAtEndOfFile:SecureContentSettingsViewModelTest.kt$io.gromif.secure_content.presentation.SecureContentSettingsViewModelTest.kt</ID>
+    <ID>NewLineAtEndOfFile:SetContentModeUseCaseTest.kt$io.gromif.secure_content.domain.usecase.SetContentModeUseCaseTest.kt</ID>
+    <ID>NewLineAtEndOfFile:SettingsRepository.kt$io.gromif.secure_content.domain.SettingsRepository.kt</ID>
+    <ID>NewLineAtEndOfFile:SettingsRepositoryImpl.kt$io.gromif.secure_content.data.SettingsRepositoryImpl.kt</ID>
+    <ID>NewLineAtEndOfFile:SettingsRepositoryImplTest.kt$io.gromif.secure_content.data.SettingsRepositoryImplTest.kt</ID>
     <ID>NoBlankLineBeforeRbrace:GetContentModeFlowUseCase.kt$GetContentModeFlowUseCase$ </ID>
     <ID>NoBlankLineBeforeRbrace:RepositoryModule.kt$RepositoryModule$ </ID>
     <ID>NoBlankLineBeforeRbrace:SecureContentContractImpl.kt$SecureContentContractImpl$ </ID>

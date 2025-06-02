@@ -4,6 +4,8 @@
   <CurrentIssues>
     <ID>FinalNewline:RepositoryModule.kt$io.gromif.lab_zip.di.RepositoryModule.kt</ID>
     <ID>FinalNewline:UsecaseModule.kt$io.gromif.lab_zip.di.UsecaseModule.kt</ID>
+    <ID>NewLineAtEndOfFile:RepositoryModule.kt$io.gromif.lab_zip.di.RepositoryModule.kt</ID>
+    <ID>NewLineAtEndOfFile:UsecaseModule.kt$io.gromif.lab_zip.di.UsecaseModule.kt</ID>
     <ID>NoBlankLineBeforeRbrace:RepositoryModule.kt$RepositoryModule$ </ID>
     <ID>NoBlankLineBeforeRbrace:UsecaseModule.kt$UsecaseModule$ </ID>
     <ID>PackageName:RepositoryModule.kt$package io.gromif.lab_zip.di</ID>

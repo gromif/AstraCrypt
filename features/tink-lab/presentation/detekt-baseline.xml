@@ -3,6 +3,9 @@
   <ManuallySuppressedIssues/>
   <CurrentIssues>
     <ID>ArgumentListWrapping:KeyScreen.kt$( MaterialTheme.spaces.spaceMedium, Alignment.CenterVertically )</ID>
+    <ID>ArgumentListWrapping:TinkLabFilesWorker.kt$TinkLabFilesWorker$( base64Encoder.decode( inputData.getString(Args.ENCRYPTED_AD)!!.toByteArray() ), dataAD )</ID>
+    <ID>ArgumentListWrapping:TinkLabFilesWorker.kt$TinkLabFilesWorker$( base64Encoder.decode( inputData.getString(Args.ENCRYPTED_KEYSET)!!.toByteArray() ), dataAD )</ID>
+    <ID>ArgumentListWrapping:TinkLabFilesWorker.kt$TinkLabFilesWorker$( base64Encoder.decode( inputData.getString(Args.TARGET_URI)!!.toByteArray() ), dataAD )</ID>
     <ID>ArgumentListWrapping:ToolbarButton.kt$( modifier = modifier, enabled = enabled, icon = imageVector, title = text, onClick = onClick )</ID>
     <ID>FinalNewline:AeadTypeMenu.kt$io.gromif.tink_lab.presentation.key.menu.AeadTypeMenu.kt</ID>
     <ID>FinalNewline:AssociatedDataTextField.kt$io.gromif.tink_lab.presentation.shared.AssociatedDataTextField.kt</ID>
@@ -23,9 +26,7 @@
     <ID>FinalNewline:TinkLabFilesWorker.kt$io.gromif.tink_lab.presentation.work.TinkLabFilesWorker.kt</ID>
     <ID>FinalNewline:ToolbarButton.kt$io.gromif.tink_lab.presentation.shared.ToolbarButton.kt</ID>
     <ID>FinalNewline:UiMode.kt$io.gromif.tink_lab.presentation.key.UiMode.kt</ID>
-    <ID>Indentation:FilesScreen.kt$ </ID>
-    <ID>Indentation:KeyScreen.kt$ </ID>
-    <ID>Indentation:TinkLabFilesWorker.kt$TinkLabFilesWorker$ </ID>
+    <ID>LongMethod:KeyScreen.kt$@OptIn(ExperimentalMaterial3Api::class) @Preview(showBackground = true) @Composable private fun Screen( modifier: Modifier = Modifier, state: KeyScreenState = KeyScreenState(), onSelectDataType: (DataType) -&gt; Unit = {}, onSelectAeadType: (String) -&gt; Unit = {}, onLoadClick: () -&gt; Unit = {}, onSaveClick: () -&gt; Unit = {}, onChangeKeysetKey: (String) -&gt; Unit = {} )</ID>
     <ID>LongParameterList:AeadTypeMenu.kt$( expanded: Boolean = false, enabled: Boolean = true, text: String = "Field", label: String = "Label", items: List&lt;String&gt;, onExpandedChange: (Boolean) -&gt; Unit = {}, onSelect: (String) -&gt; Unit = {} )</ID>
     <ID>LongParameterList:DataTypeMenu.kt$( modifier: Modifier = Modifier, expanded: Boolean = false, enabled: Boolean = true, text: String = "Field", label: String = "Label", items: List&lt;DataType&gt;, onExpandedChange: (Boolean) -&gt; Unit = {}, onSelect: (DataType) -&gt; Unit = {}, )</ID>
     <ID>LongParameterList:FilesScreen.kt$( modifier: Modifier = Modifier, state: FilesScreenState = FilesScreenState(), onEncrypt: () -&gt; Unit = {}, onDecrypt: () -&gt; Unit = {}, onAssociatedDataChange: (String) -&gt; Unit = {}, onSourceClick: () -&gt; Unit = {}, onDestinationClick: () -&gt; Unit = {}, )</ID>
@@ -48,6 +49,25 @@
     <ID>MultiLineIfElse:TinkLabFilesWorker.kt$TinkLabFilesWorker$ForegroundInfo(notificationId, notification)</ID>
     <ID>MultiLineIfElse:TinkLabFilesWorker.kt$TinkLabFilesWorker$stream.newDecryptingStream(input, associatedData).use { inputStream -&gt; out.use { inputStream.copyTo(it) } }</ID>
     <ID>MultiLineIfElse:TinkLabFilesWorker.kt$TinkLabFilesWorker$stream.newEncryptingStream(out, associatedData).use { outputStream -&gt; input.use { it.copyTo(outputStream) } }</ID>
+    <ID>NewLineAtEndOfFile:AeadTypeMenu.kt$io.gromif.tink_lab.presentation.key.menu.AeadTypeMenu.kt</ID>
+    <ID>NewLineAtEndOfFile:AssociatedDataTextField.kt$io.gromif.tink_lab.presentation.shared.AssociatedDataTextField.kt</ID>
+    <ID>NewLineAtEndOfFile:DataTypeMenu.kt$io.gromif.tink_lab.presentation.key.menu.DataTypeMenu.kt</ID>
+    <ID>NewLineAtEndOfFile:DataTypeOverlay.kt$io.gromif.tink_lab.presentation.key.DataTypeOverlay.kt</ID>
+    <ID>NewLineAtEndOfFile:DataTypeSaver.kt$io.gromif.tink_lab.presentation.key.saver.DataTypeSaver.kt</ID>
+    <ID>NewLineAtEndOfFile:EncryptionToolbar.kt$io.gromif.tink_lab.presentation.shared.EncryptionToolbar.kt</ID>
+    <ID>NewLineAtEndOfFile:FilesContracts.kt$io.gromif.tink_lab.presentation.files.FilesContracts.kt</ID>
+    <ID>NewLineAtEndOfFile:FilesScreen.kt$io.gromif.tink_lab.presentation.files.FilesScreen.kt</ID>
+    <ID>NewLineAtEndOfFile:FilesViewModel.kt$io.gromif.tink_lab.presentation.files.FilesViewModel.kt</ID>
+    <ID>NewLineAtEndOfFile:KeyContracts.kt$io.gromif.tink_lab.presentation.key.KeyContracts.kt</ID>
+    <ID>NewLineAtEndOfFile:KeyScreen.kt$io.gromif.tink_lab.presentation.key.KeyScreen.kt</ID>
+    <ID>NewLineAtEndOfFile:KeyScreenState.kt$io.gromif.tink_lab.presentation.key.KeyScreenState.kt</ID>
+    <ID>NewLineAtEndOfFile:KeyViewModel.kt$io.gromif.tink_lab.presentation.key.KeyViewModel.kt</ID>
+    <ID>NewLineAtEndOfFile:TextScreen.kt$io.gromif.tink_lab.presentation.text.TextScreen.kt</ID>
+    <ID>NewLineAtEndOfFile:TextViewModel.kt$io.gromif.tink_lab.presentation.text.TextViewModel.kt</ID>
+    <ID>NewLineAtEndOfFile:TinkLab.kt$io.gromif.tink_lab.presentation.TinkLab.kt</ID>
+    <ID>NewLineAtEndOfFile:TinkLabFilesWorker.kt$io.gromif.tink_lab.presentation.work.TinkLabFilesWorker.kt</ID>
+    <ID>NewLineAtEndOfFile:ToolbarButton.kt$io.gromif.tink_lab.presentation.shared.ToolbarButton.kt</ID>
+    <ID>NewLineAtEndOfFile:UiMode.kt$io.gromif.tink_lab.presentation.key.UiMode.kt</ID>
     <ID>NoBlankLineBeforeRbrace:FilesContracts.kt$FilesContracts$ </ID>
     <ID>NoBlankLineBeforeRbrace:FilesViewModel.kt$FilesViewModel$ </ID>
     <ID>NoBlankLineBeforeRbrace:KeyContracts.kt$KeyContracts$ </ID>

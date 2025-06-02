@@ -3,7 +3,6 @@
   <ManuallySuppressedIssues/>
   <CurrentIssues>
     <ID>ArgumentListWrapping:AeadSettingsViewModel.kt$AeadSettingsViewModel$( viewModelScope, SharingStarted.WhileSubscribed(), AeadMode.None )</ID>
-    <ID>ArgumentListWrapping:SettingsViewModel.kt$SettingsViewModel$( viewModelScope, SharingStarted.WhileSubscribed(), Profile() )</ID>
     <ID>ArgumentListWrapping:Widget.kt$( id = R.string.hello, profile.name ?: stringResource(R.string.user) )</ID>
     <ID>ArgumentListWrapping:WidgetViewModel.kt$WidgetViewModel$( viewModelScope, SharingStarted.WhileSubscribed(), null )</ID>
     <ID>FinalNewline:Actions.kt$io.gromif.astracrypt.profile.presentation.settings.Actions.kt</ID>
@@ -21,11 +20,9 @@
     <ID>FinalNewline:Profile.kt$io.gromif.astracrypt.profile.presentation.shared.Profile.kt</ID>
     <ID>FinalNewline:ProfileAeadSettingsScreen.kt$io.gromif.astracrypt.profile.presentation.settings.aead.ProfileAeadSettingsScreen.kt</ID>
     <ID>FinalNewline:SettingsScreen.kt$io.gromif.astracrypt.profile.presentation.settings.SettingsScreen.kt</ID>
-    <ID>FinalNewline:SettingsViewModel.kt$io.gromif.astracrypt.profile.presentation.settings.SettingsViewModel.kt</ID>
     <ID>FinalNewline:SettingsViewModelTest.kt$io.gromif.astracrypt.profile.presentation.settings.SettingsViewModelTest.kt</ID>
     <ID>FinalNewline:WidgetComponent.kt$io.gromif.astracrypt.profile.presentation.widget.WidgetComponent.kt</ID>
     <ID>FinalNewline:WidgetViewModel.kt$io.gromif.astracrypt.profile.presentation.widget.WidgetViewModel.kt</ID>
-    <ID>Indentation:Screen.kt$ </ID>
     <ID>Indentation:Widget.kt$ </ID>
     <ID>LongParameterList:SettingsViewModel.kt$SettingsViewModel$( @IoDispatcher private val defaultDispatcher: CoroutineDispatcher, private val setNameUsecase: SetNameUseCase, private val setAvatarUsecase: SetAvatarUseCase, private val setExternalAvatarUsecase: SetExternalAvatarUseCase, @AvatarImageLoader val imageLoader: ImageLoader, getValidationRulesUsecase: GetValidationRulesUseCase, getProfileFlowUsecase: GetProfileFlowUseCase, )</ID>
     <ID>MagicNumber:DialogChangeAvatar.kt$3</ID>
@@ -35,15 +32,31 @@
     <ID>MultiLineIfElse:Screen.kt$Avatar( imageLoader = imageLoader, avatar = avatar, showBorder = false, iconSize = 56.dp )</ID>
     <ID>MultiLineIfElse:Widget.kt$""</ID>
     <ID>MultiLineIfElse:Widget.kt$stringResource( id = R.string.hello, profile.name ?: stringResource(R.string.user) )</ID>
+    <ID>NewLineAtEndOfFile:Actions.kt$io.gromif.astracrypt.profile.presentation.settings.Actions.kt</ID>
+    <ID>NewLineAtEndOfFile:AeadSettingsScreen.kt$io.gromif.astracrypt.profile.presentation.settings.aead.AeadSettingsScreen.kt</ID>
+    <ID>NewLineAtEndOfFile:AeadSettingsScreenActions.kt$io.gromif.astracrypt.profile.presentation.settings.aead.AeadSettingsScreenActions.kt</ID>
+    <ID>NewLineAtEndOfFile:AeadSettingsScreenParams.kt$io.gromif.astracrypt.profile.presentation.settings.aead.AeadSettingsScreenParams.kt</ID>
+    <ID>NewLineAtEndOfFile:AeadSettingsViewModel.kt$io.gromif.astracrypt.profile.presentation.settings.aead.AeadSettingsViewModel.kt</ID>
+    <ID>NewLineAtEndOfFile:AeadSettingsViewModelTest.kt$io.gromif.astracrypt.profile.presentation.settings.aead.AeadSettingsViewModelTest.kt</ID>
+    <ID>NewLineAtEndOfFile:Avatar.kt$io.gromif.astracrypt.profile.presentation.shared.Avatar.kt</ID>
+    <ID>NewLineAtEndOfFile:Contracts.kt$io.gromif.astracrypt.profile.presentation.settings.contracts.Contracts.kt</ID>
+    <ID>NewLineAtEndOfFile:DefaultAvatarExt.kt$io.gromif.astracrypt.profile.presentation.shared.DefaultAvatarExt.kt</ID>
+    <ID>NewLineAtEndOfFile:DialogChangeAvatar.kt$io.gromif.astracrypt.profile.presentation.settings.dialogs.DialogChangeAvatar.kt</ID>
+    <ID>NewLineAtEndOfFile:DialogChangeName.kt$io.gromif.astracrypt.profile.presentation.settings.dialogs.DialogChangeName.kt</ID>
+    <ID>NewLineAtEndOfFile:ExternalAvatarContract.kt$io.gromif.astracrypt.profile.presentation.settings.contracts.ExternalAvatarContract.kt</ID>
+    <ID>NewLineAtEndOfFile:Profile.kt$io.gromif.astracrypt.profile.presentation.shared.Profile.kt</ID>
+    <ID>NewLineAtEndOfFile:ProfileAeadSettingsScreen.kt$io.gromif.astracrypt.profile.presentation.settings.aead.ProfileAeadSettingsScreen.kt</ID>
+    <ID>NewLineAtEndOfFile:SettingsScreen.kt$io.gromif.astracrypt.profile.presentation.settings.SettingsScreen.kt</ID>
+    <ID>NewLineAtEndOfFile:SettingsViewModelTest.kt$io.gromif.astracrypt.profile.presentation.settings.SettingsViewModelTest.kt</ID>
+    <ID>NewLineAtEndOfFile:WidgetComponent.kt$io.gromif.astracrypt.profile.presentation.widget.WidgetComponent.kt</ID>
+    <ID>NewLineAtEndOfFile:WidgetViewModel.kt$io.gromif.astracrypt.profile.presentation.widget.WidgetViewModel.kt</ID>
     <ID>NoBlankLineBeforeRbrace:Actions.kt$Actions$ </ID>
     <ID>NoBlankLineBeforeRbrace:AeadSettingsScreenActions.kt$AeadSettingsScreenActions$ </ID>
     <ID>NoBlankLineBeforeRbrace:AeadSettingsViewModel.kt$AeadSettingsViewModel$ </ID>
-    <ID>NoBlankLineBeforeRbrace:SettingsViewModel.kt$SettingsViewModel$ </ID>
     <ID>NoBlankLineBeforeRbrace:SettingsViewModelTest.kt$SettingsViewModelTest$ </ID>
     <ID>NoBlankLineBeforeRbrace:WidgetComponent.kt$ </ID>
     <ID>NoBlankLineBeforeRbrace:WidgetViewModel.kt$WidgetViewModel$ </ID>
     <ID>SpacingAroundColon:AeadSettingsViewModel.kt$AeadSettingsViewModel$:</ID>
-    <ID>SpacingAroundColon:SettingsViewModel.kt$SettingsViewModel$:</ID>
     <ID>SpacingAroundColon:WidgetViewModel.kt$WidgetViewModel$:</ID>
     <ID>SpacingAroundKeyword:DefaultAvatarExt.kt$when</ID>
   </CurrentIssues>

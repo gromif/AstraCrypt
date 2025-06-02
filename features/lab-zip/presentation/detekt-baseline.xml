@@ -10,8 +10,6 @@
     <ID>FinalNewline:CombineZipViewModel.kt$io.gromif.lab_zip.presentation.CombineZipViewModel.kt</ID>
     <ID>FinalNewline:CombineZipViewModelTest.kt$io.gromif.lab_zip.presentation.CombineZipViewModelTest.kt</ID>
     <ID>FinalNewline:CombinedZipWorker.kt$io.gromif.lab_zip.presentation.work.CombinedZipWorker.kt</ID>
-    <ID>Indentation:CombineZipScreen.kt$ </ID>
-    <ID>Indentation:CombinedZipWorker.kt$CombinedZipWorker$ </ID>
     <ID>LongParameterList:CombineZipScreen.kt$( modifier: Modifier = Modifier, source: FileInfo? = null, onAddSource: () -&gt; Unit = {}, onRemoveSource: () -&gt; Unit = {}, filesList: List&lt;FileInfo&gt; = emptyList(), onAddFiles: () -&gt; Unit = {}, onRemoveFiles: () -&gt; Unit = {}, noItemsPage: @Composable () -&gt; Unit = {} )</ID>
     <ID>LongParameterList:CombineZipScreen.kt$( modifier: Modifier = Modifier, titleText: String = "", stateList: List&lt;FileInfo&gt;, addButtonEnabled: Boolean = true, onAddClick: () -&gt; Unit = {}, onClearClick: () -&gt; Unit = {}, noItemsPage: @Composable () -&gt; Unit )</ID>
     <ID>LongParameterList:CombineZipViewModel.kt$CombineZipViewModel$( @IoDispatcher private val defaultDispatcher: CoroutineDispatcher, private val getSourceFileInfoUseCase: GetSourceFileInfoUseCase, private val getFileInfosUseCase: GetFileInfosUseCase, private val workManager: WorkManager, private val workerSerializer: WorkerSerializer, private val base64Encoder: Base64Encoder, private val uriToStringMapper: Mapper&lt;Uri, String&gt; )</ID>
@@ -23,6 +21,10 @@
     <ID>MultiLineIfElse:CombineZipScreen.kt$noItemsPage()</ID>
     <ID>MultiLineIfElse:CombinedZipWorker.kt$CombinedZipWorker$ForegroundInfo( notificationId, notification, ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC )</ID>
     <ID>MultiLineIfElse:CombinedZipWorker.kt$CombinedZipWorker$ForegroundInfo(notificationId, notification)</ID>
+    <ID>NewLineAtEndOfFile:CombineZipScreen.kt$io.gromif.lab_zip.presentation.CombineZipScreen.kt</ID>
+    <ID>NewLineAtEndOfFile:CombineZipViewModel.kt$io.gromif.lab_zip.presentation.CombineZipViewModel.kt</ID>
+    <ID>NewLineAtEndOfFile:CombineZipViewModelTest.kt$io.gromif.lab_zip.presentation.CombineZipViewModelTest.kt</ID>
+    <ID>NewLineAtEndOfFile:CombinedZipWorker.kt$io.gromif.lab_zip.presentation.work.CombinedZipWorker.kt</ID>
     <ID>NoBlankLineBeforeRbrace:CombineZipViewModel.kt$CombineZipViewModel$ </ID>
     <ID>NoBlankLineBeforeRbrace:CombinedZipWorker.kt$CombinedZipWorker$ </ID>
     <ID>NoEmptyFirstLineInMethodBlock:CombineZipScreen.kt$ </ID>

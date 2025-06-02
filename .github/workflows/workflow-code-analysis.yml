@@ -1,0 +1,49 @@
+on:
+  workflow_call:
+
+jobs:
+  lint:
+    name: 🔎 Run Lint
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout Repo
+      - name: 🧩 Checkout Repo
+        uses: actions/checkout@v4
+
+      # Set up Java
+      - uses: ./.github/actions/setup-java-action
+
+      # Set up Gradle
+      - uses: ./.github/actions/setup-gradle-action
+
+      - name: Run lint
+        run: ./gradlew lint
+
+  detekt:
+    name: 🔎 Run Detekt
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout Repo
+      - name: 🧩 Checkout Repo
+        uses: actions/checkout@v4
+
+      # Set up Java
+      - uses: ./.github/actions/setup-java-action
+
+      # Set up Gradle
+      - uses: ./.github/actions/setup-gradle-action
+
+      - name: Run detekt
+        run: ./gradlew detekt
+
+      # Make sure we always run this upload task,
+      # because the previous step may fail if there are findings.
+      - name: Upload SARIF to GitHub using the upload-sarif action
+        uses: github/codeql-action/upload-sarif@v3
+        if: success() || failure()
+        with:
+          sarif_file: app/build/reports/detekt/detekt.sarif
+
+      - run: echo "🍏 Detekt status is ${{ job.status }}."

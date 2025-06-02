@@ -1,6 +1,8 @@
 import java.io.FileInputStream
 import java.util.Properties
 
+private val propReleaseBuild = "RELEASE_BUILD"
+
 plugins {
     alias(libs.plugins.astracrypt.android.application)
     alias(libs.plugins.astracrypt.android.application.compose)
@@ -9,16 +11,16 @@ plugins {
     alias(libs.plugins.astracrypt.android.hilt.compose)
 }
 
-val keystorePropertiesFile = rootProject.file("keystore.properties")
-val keystoreProperties = Properties()
-keystoreProperties.load(FileInputStream(keystorePropertiesFile))
-
 android {
     namespace = "com.nevidimka655.astracrypt"
 
     defaultConfig {
         signingConfigs {
-            create("release") {
+            if (project.hasProperty(propReleaseBuild)) create("release") {
+                val keystorePropertiesFile = rootProject.file("keystore.properties")
+                val keystoreProperties = Properties()
+                keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+
                 keyAlias = keystoreProperties["keyAlias"] as String
                 keyPassword = keystoreProperties["keyPassword"] as String
                 storeFile = file(keystoreProperties["storeFile"] as String)
@@ -44,7 +46,9 @@ android {
                     file("proguard-rules.pro")
                 )
             )
-            signingConfig = signingConfigs.getByName("release")
+            if (project.hasProperty(propReleaseBuild)) {
+                signingConfig = signingConfigs.getByName("release")
+            }
         }
     }
 }

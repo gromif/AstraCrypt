@@ -23,6 +23,22 @@
     <ID>FunctionReturnTypeSpacing:Repository.kt$Repository$fun getTextAeadList() : List&lt;String&gt;</ID>
     <ID>MultiLineIfElse:DecryptTextUseCase.kt$DecryptTextUseCase$return EncryptionResult.Error(EncryptionException.NoValidKeyset)</ID>
     <ID>MultiLineIfElse:EncryptTextUseCase.kt$EncryptTextUseCase$return EncryptionResult.Error(EncryptionException.NoValidKeyset)</ID>
+    <ID>NewLineAtEndOfFile:CreateLabKeyUseCase.kt$io.gromif.tink_lab.domain.usecase.CreateLabKeyUseCase.kt</ID>
+    <ID>NewLineAtEndOfFile:DataType.kt$io.gromif.tink_lab.domain.model.DataType.kt</ID>
+    <ID>NewLineAtEndOfFile:DecryptTextUseCase.kt$io.gromif.tink_lab.domain.usecase.DecryptTextUseCase.kt</ID>
+    <ID>NewLineAtEndOfFile:EncryptTextUseCase.kt$io.gromif.tink_lab.domain.usecase.EncryptTextUseCase.kt</ID>
+    <ID>NewLineAtEndOfFile:EncryptionException.kt$io.gromif.tink_lab.domain.model.EncryptionException.kt</ID>
+    <ID>NewLineAtEndOfFile:EncryptionResult.kt$io.gromif.tink_lab.domain.model.EncryptionResult.kt</ID>
+    <ID>NewLineAtEndOfFile:GetFileAeadListUseCase.kt$io.gromif.tink_lab.domain.usecase.GetFileAeadListUseCase.kt</ID>
+    <ID>NewLineAtEndOfFile:GetTextAeadListUseCase.kt$io.gromif.tink_lab.domain.usecase.GetTextAeadListUseCase.kt</ID>
+    <ID>NewLineAtEndOfFile:Key.kt$io.gromif.tink_lab.domain.model.Key.kt</ID>
+    <ID>NewLineAtEndOfFile:KeyGenerator.kt$io.gromif.tink_lab.domain.util.KeyGenerator.kt</ID>
+    <ID>NewLineAtEndOfFile:KeyReader.kt$io.gromif.tink_lab.domain.util.KeyReader.kt</ID>
+    <ID>NewLineAtEndOfFile:KeyWriter.kt$io.gromif.tink_lab.domain.util.KeyWriter.kt</ID>
+    <ID>NewLineAtEndOfFile:LoadKeyUseCase.kt$io.gromif.tink_lab.domain.usecase.LoadKeyUseCase.kt</ID>
+    <ID>NewLineAtEndOfFile:ParseKeysetUseCase.kt$io.gromif.tink_lab.domain.usecase.ParseKeysetUseCase.kt</ID>
+    <ID>NewLineAtEndOfFile:Repository.kt$io.gromif.tink_lab.domain.model.Repository.kt</ID>
+    <ID>NewLineAtEndOfFile:SaveKeyUseCase.kt$io.gromif.tink_lab.domain.usecase.SaveKeyUseCase.kt</ID>
     <ID>NoBlankLineBeforeRbrace:CreateLabKeyUseCase.kt$CreateLabKeyUseCase$ </ID>
     <ID>NoBlankLineBeforeRbrace:DecryptTextUseCase.kt$DecryptTextUseCase$ </ID>
     <ID>NoBlankLineBeforeRbrace:EncryptTextUseCase.kt$EncryptTextUseCase$ </ID>
@@ -76,6 +92,7 @@
     <ID>SpacingAroundColon:EncryptionException.kt$EncryptionException.NoValidKeyset$:</ID>
     <ID>SpacingAroundColon:EncryptionResult.kt$EncryptionResult.Error$:</ID>
     <ID>SpacingAroundColon:EncryptionResult.kt$EncryptionResult.Success$:</ID>
+    <ID>SpacingAroundColon:Repository.kt$Repository$:</ID>
     <ID>UnusedPrivateMember:EncryptionException.kt$EncryptionException.NoValidKeyset$private fun readResolve(): Any</ID>
   </CurrentIssues>
 </SmellBaseline>

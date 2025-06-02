@@ -7,7 +7,6 @@
     <ID>FinalNewline:ColorExtended.kt$io.gromif.astracrypt.ui.design_system.ColorExtended.kt</ID>
     <ID>FinalNewline:Theme.kt$io.gromif.astracrypt.ui.design_system.Theme.kt</ID>
     <ID>FinalNewline:Type.kt$io.gromif.astracrypt.ui.design_system.Type.kt</ID>
-    <ID>Indentation:Theme.kt$ </ID>
     <ID>MagicNumber:Color.kt$0xFF000000</ID>
     <ID>MagicNumber:Color.kt$0xFF001538</ID>
     <ID>MagicNumber:Color.kt$0xFF001634</ID>
@@ -182,6 +181,10 @@
     <ID>MagicNumber:Color.kt$0xFFFFFAF8</ID>
     <ID>MagicNumber:Color.kt$0xFFFFFFFF</ID>
     <ID>MultiLineIfElse:Theme.kt$SideEffect { val window = activity.window WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme }</ID>
+    <ID>NewLineAtEndOfFile:Color.kt$io.gromif.astracrypt.ui.design_system.Color.kt</ID>
+    <ID>NewLineAtEndOfFile:ColorExtended.kt$io.gromif.astracrypt.ui.design_system.ColorExtended.kt</ID>
+    <ID>NewLineAtEndOfFile:Theme.kt$io.gromif.astracrypt.ui.design_system.Theme.kt</ID>
+    <ID>NewLineAtEndOfFile:Type.kt$io.gromif.astracrypt.ui.design_system.Type.kt</ID>
     <ID>PackageName:Color.kt$package io.gromif.astracrypt.ui.design_system</ID>
     <ID>PackageName:ColorExtended.kt$package io.gromif.astracrypt.ui.design_system</ID>
     <ID>PackageName:Theme.kt$package io.gromif.astracrypt.ui.design_system</ID>

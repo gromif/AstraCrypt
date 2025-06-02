@@ -3,6 +3,7 @@
   <ManuallySuppressedIssues/>
   <CurrentIssues>
     <ID>FinalNewline:AuthContract.kt$contract.auth.AuthContract.kt</ID>
+    <ID>NewLineAtEndOfFile:AuthContract.kt$contract.auth.AuthContract.kt</ID>
     <ID>NoBlankLineBeforeRbrace:AuthContract.kt$AuthContract$ </ID>
   </CurrentIssues>
 </SmellBaseline>
