@@ -2,10 +2,5 @@ name: "Set up Gradle Action"
 runs:
   using: "composite"
   steps:
-    - name: Init gradle wrapper
-      run: gradle wrapper
-      shell: bash
-
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
-      shell: bash
+    - name: Set up Gradle
+      uses: gradle/actions/setup-gradle@v4
