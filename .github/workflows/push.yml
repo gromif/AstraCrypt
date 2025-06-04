@@ -10,6 +10,7 @@ jobs:
     name: 📲 Delivery
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: true # Cancel all jobs if a single job fails
       matrix:
         include:
           - buildVariant: assembleDefaultRelease
