@@ -27,6 +27,8 @@ jobs:
 
       # Set up Gradle
       - uses: ./.github/actions/setup-gradle-action
+        with:
+          gradle-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
 
       - name: Build
         run: ./gradlew assembleDebug --stacktrace

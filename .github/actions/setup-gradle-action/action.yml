@@ -1,4 +1,9 @@
 name: "Set up Gradle Action"
+inputs:
+  gradle-encryption-key:
+    required: true
+    description: Gradle Cache encryption key
+
 runs:
   using: "composite"
   steps:
@@ -6,7 +11,7 @@ runs:
       uses: gradle/actions/setup-gradle@v4
       with:
         # Cache data needs to be encrypted to be safely stored in the GitHub Actions cache
-        cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
+        cache-encryption-key: ${{ inputs.encryption }}
 
         # Builds on other branches will only read existing entries from the cache.
         cache-read-only: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/release' }}

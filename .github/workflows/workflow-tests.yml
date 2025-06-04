@@ -17,6 +17,8 @@ jobs:
 
       # Set up Gradle
       - uses: ./.github/actions/setup-gradle-action
+        with:
+          gradle-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
 
       - name: Tests
         run: ./gradlew test --stacktrace
