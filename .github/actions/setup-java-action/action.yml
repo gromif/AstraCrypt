@@ -7,4 +7,3 @@ runs:
       with:
         java-version: 21
         distribution: 'temurin'
-        cache: gradle
