@@ -1,0 +1,20 @@
+name: "Upload an artifact Action"
+description: "Composite action to upload an artifact"
+
+inputs:
+  artifactName:
+    required: true
+    description: "Name for an artifact"
+
+  artifactPath:
+    required: true
+    description: "Path to an artifact to upload"
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/upload-artifact@v4
+      with:
+        name: ${{ inputs.artifactName }}
+        path: ${{ inputs.artifactPath }}
+        if-no-files-found: error # 'error', 'warn' or 'ignore'
