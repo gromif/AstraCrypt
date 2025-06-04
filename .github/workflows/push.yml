@@ -4,12 +4,17 @@ on:
   push:
     branches: [ main ]
 
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true # Cancel jobs from older commits
+
 jobs:
 
   delivery:
     name: 📲 Delivery
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: true # Cancel all jobs if a single job fails
       matrix:
         include:
           - buildVariant: assembleDefaultRelease
@@ -31,6 +36,9 @@ jobs:
 
       # Set up Gradle
       - uses: ./.github/actions/setup-gradle-action
+        with:
+          cache-read-only: false
+          gradle-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
 
       - name: ⚙️ Set up Keystore
         uses: ./.github/actions/setup-keystore

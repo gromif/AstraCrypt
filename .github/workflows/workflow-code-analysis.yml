@@ -16,6 +16,8 @@ jobs:
 
       # Set up Gradle
       - uses: ./.github/actions/setup-gradle-action
+        with:
+          gradle-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
 
       - name: Run lint
         run: ./gradlew lint
@@ -34,6 +36,9 @@ jobs:
 
       # Set up Gradle
       - uses: ./.github/actions/setup-gradle-action
+        with:
+          cache-read-only: false
+          gradle-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
 
       - name: Run detekt
         run: ./gradlew detekt

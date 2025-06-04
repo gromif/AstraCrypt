@@ -4,6 +4,10 @@ on:
   pull_request:
     branches: [ main, devel ]
 
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true # Cancel jobs from older commits
+
 jobs:
 
   workflow-detekt:
@@ -27,6 +31,9 @@ jobs:
 
       # Set up Gradle
       - uses: ./.github/actions/setup-gradle-action
+        with:
+          cache-read-only: false
+          gradle-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
 
       - name: Build
         run: ./gradlew assembleDebug --stacktrace
