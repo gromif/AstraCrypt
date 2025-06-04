@@ -4,6 +4,10 @@ on:
   pull_request:
     branches: [ main, devel ]
 
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true # Cancel jobs from older commits
+
 jobs:
 
   workflow-detekt:
