@@ -18,6 +18,7 @@ jobs:
       # Set up Gradle
       - uses: ./.github/actions/setup-gradle-action
         with:
+          cache-read-only: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/devel' }}
           gradle-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
 
       - name: Tests
