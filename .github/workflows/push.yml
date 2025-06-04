@@ -1,0 +1,48 @@
+name: Android CD
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+
+  delivery:
+    name: 📲 Delivery
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - buildVariant: assembleDefaultRelease
+            artifactName: app-default-release.apk
+            artifactPath: app/build/outputs/apk/default/release
+
+          - buildVariant: bundlePlayRelease
+            artifactName: app-play-release.aab
+            artifactPath: app/build/outputs/bundle/playRelease
+    steps:
+      - run: echo "🎉 Triggered by a ${{ github.event_name }} event."
+
+      # Checkout Repo
+      - name: 🧩 Checkout Repo
+        uses: actions/checkout@v4
+
+      # Set up Java
+      - uses: ./.github/actions/setup-java-action
+
+      # Set up Gradle
+      - uses: ./.github/actions/setup-gradle-action
+
+      - name: ⚙️ Set up Keystore
+        uses: ./.github/actions/setup-keystore
+
+      - name: 🔶 Generate App Bundle or APKs
+        run: |
+          ./gradlew ${{ matrix.buildVariant }} -PRELEASE_BUILD --stacktrace
+
+      - name: 🔷 Upload an artifact
+        uses: ./.github/actions/upload-artifact
+        with:
+          artifactName: ${{ matrix.artifactName }}
+          artifactPath: ${{ matrix.artifactPath }}
+
+      - run: echo "🍏 Delivery status is ${{ job.status }}."
