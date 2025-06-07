@@ -1,16 +1,38 @@
 name: "Set up Keystore Action"
+
+inputs:
+  file:
+    required: true
+    description: "A keystore file name"
+
+  keystore:
+    required: true
+    description: "A Base64-encoded keystore"
+
+  keystorePassword:
+    required: true
+    description: "A keystore password"
+
+  keyAlias:
+    required: true
+    description: "A key alias to use"
+
+  keyPassword:
+    required: true
+    description: "A key password"
+
 runs:
   using: "composite"
   steps:
     - name: ⚙️ Decode Keystore
       run: |
-        echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > app/keystore.jks
+        echo "${{ inputs.keystore }}" | base64 -d > app/${{ inputs.file }}
       shell: bash
 
     - name: 🔑 Create keystore.properties
       run: |
-          echo "storeFile=keystore.jks" > keystore.properties
-          echo "storePassword=${{ secrets.KEYSTORE_PASSWORD }}" >> keystore.properties
-          echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> keystore.properties
-          echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> keystore.properties
+          echo "storeFile=${{ inputs.file }}" > keystore.properties
+          echo "storePassword=${{ inputs.keystorePassword }}" >> keystore.properties
+          echo "keyAlias=${{ inputs.keyAlias }}" >> keystore.properties
+          echo "keyPassword=${{ inputs.keyPassword }}" >> keystore.properties
       shell: bash
