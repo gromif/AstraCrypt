@@ -3,6 +3,7 @@ package io.gromif.astracrypt.presentation.navigation.tabs.settings
 import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material.icons.outlined.MonetizationOn
 import androidx.compose.material.icons.outlined.Palette
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.Security
@@ -25,6 +26,10 @@ enum class SettingsMainItems(
     Interface(
         imageVector = Icons.Outlined.Palette,
         titleId = R.string.settings_interface
+    ),
+    Donate(
+        imageVector = Icons.Outlined.MonetizationOn,
+        titleId = R.string.settings_donate
     ),
     About(
         imageVector = Icons.Outlined.Info,

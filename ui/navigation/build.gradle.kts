@@ -24,6 +24,8 @@ dependencies {
     implementation(projects.features.deviceAdmin.presentation)
     implementation(projects.features.security.secureContent)
 
+    implementation(projects.features.donate)
+
     defaultImplementation(projects.features.about.fdroid)
     playImplementation(projects.features.about.googlePlay)
     implementation(projects.features.about.privacy)
