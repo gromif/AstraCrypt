@@ -54,6 +54,8 @@ object Route {
 
     @Serializable object EditProfile
 
+    @Serializable object Donate
+
     @Serializable object SettingsUi
 
     @Serializable object SettingsUiFiles

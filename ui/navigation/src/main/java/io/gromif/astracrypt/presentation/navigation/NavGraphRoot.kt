@@ -9,6 +9,7 @@ import io.gromif.astracrypt.presentation.navigation.notes.notesGraph
 import io.gromif.astracrypt.presentation.navigation.settings.about.aboutGraph
 import io.gromif.astracrypt.presentation.navigation.settings.aead.settingsSecurityAead
 import io.gromif.astracrypt.presentation.navigation.settings.aead.settingsSecurityColumnsAead
+import io.gromif.astracrypt.presentation.navigation.settings.donate
 import io.gromif.astracrypt.presentation.navigation.settings.profileSettings
 import io.gromif.astracrypt.presentation.navigation.settings.quickActionsSettings
 import io.gromif.astracrypt.presentation.navigation.settings.security.settingsSecurity
@@ -43,6 +44,7 @@ internal fun root(
     settingsSecurityAead()
     settingsSecurityColumnsAead()
     quickActionsSettings()
+    donate()
     aboutGraph(applicationVersion = navParams.applicationVersion)
 
     help()

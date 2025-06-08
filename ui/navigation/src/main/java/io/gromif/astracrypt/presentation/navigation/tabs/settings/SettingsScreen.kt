@@ -55,6 +55,7 @@ fun SettingsScreen() {
                     SettingsMainItems.EditProfile -> navController.navigate(Route.EditProfile)
                     SettingsMainItems.Security -> navController.navigate(Route.SettingsSecurity)
                     SettingsMainItems.Interface -> navController.navigate(Route.SettingsUi)
+                    SettingsMainItems.Donate -> navController.navigate(Route.Donate)
                     SettingsMainItems.About -> navController.navigate(Route.AboutGraph)
                 }
             }
