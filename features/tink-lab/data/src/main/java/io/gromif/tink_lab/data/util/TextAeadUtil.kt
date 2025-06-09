@@ -3,6 +3,7 @@ package io.gromif.tink_lab.data.util
 import com.google.crypto.tink.Aead
 import com.google.crypto.tink.KeysetHandle
 import io.gromif.crypto.tink.core.extensions.aead
+import io.gromif.tink_lab.domain.model.EncryptionException
 
 class TextAeadUtil {
     private var targetKeysetHandle: KeysetHandle? = null
@@ -16,11 +17,13 @@ class TextAeadUtil {
     }
 
     fun encryptBytes(associatedData: ByteArray, bytes: ByteArray): ByteArray {
-        return aeadService!!.encrypt(bytes, associatedData)
+        return aeadService?.encrypt(bytes, associatedData)
+            ?: throw EncryptionException.NoValidKeyset
     }
 
     fun decryptBytes(associatedData: ByteArray, bytes: ByteArray): ByteArray {
-        return aeadService!!.decrypt(bytes, associatedData)
+        return aeadService?.decrypt(bytes, associatedData)
+            ?: throw EncryptionException.NoValidKeyset
     }
 
 }
