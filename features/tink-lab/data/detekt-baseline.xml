@@ -29,8 +29,10 @@
     <ID>NoBlankLineBeforeRbrace:KeyGeneratorImpl.kt$KeyGeneratorImpl$ </ID>
     <ID>NoBlankLineBeforeRbrace:KeyReaderImpl.kt$KeyReaderImpl$ </ID>
     <ID>NoBlankLineBeforeRbrace:KeyWriterImpl.kt$KeyWriterImpl$ </ID>
+    <ID>NoBlankLineBeforeRbrace:RepositoryImpl.kt$RepositoryImpl$ </ID>
     <ID>NoBlankLineBeforeRbrace:TextAeadUtil.kt$TextAeadUtil$ </ID>
     <ID>PackageName:DataTypeToIdMapper.kt$package io.gromif.tink_lab.data.mapper</ID>
+    <ID>PackageName:DefaultAeadTextService.kt$package io.gromif.tink_lab.data.service</ID>
     <ID>PackageName:DtoToKeyMapper.kt$package io.gromif.tink_lab.data.mapper</ID>
     <ID>PackageName:IdToDataTypeMapper.kt$package io.gromif.tink_lab.data.mapper</ID>
     <ID>PackageName:KeyDto.kt$package io.gromif.tink_lab.data.dto</ID>
@@ -43,6 +45,7 @@
     <ID>PackageName:RepositoryImpl.kt$package io.gromif.tink_lab.data.repository</ID>
     <ID>PackageName:TextAeadUtil.kt$package io.gromif.tink_lab.data.util</ID>
     <ID>PackageNaming:DataTypeToIdMapper.kt$package io.gromif.tink_lab.data.mapper</ID>
+    <ID>PackageNaming:DefaultAeadTextService.kt$package io.gromif.tink_lab.data.service</ID>
     <ID>PackageNaming:DtoToKeyMapper.kt$package io.gromif.tink_lab.data.mapper</ID>
     <ID>PackageNaming:IdToDataTypeMapper.kt$package io.gromif.tink_lab.data.mapper</ID>
     <ID>PackageNaming:KeyDto.kt$package io.gromif.tink_lab.data.dto</ID>
