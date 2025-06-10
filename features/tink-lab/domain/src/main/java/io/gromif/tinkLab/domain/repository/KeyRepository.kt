@@ -2,7 +2,7 @@ package io.gromif.tinkLab.domain.repository
 
 import io.gromif.tinkLab.domain.model.DataType
 import io.gromif.tinkLab.domain.model.Key
-import io.gromif.tinkLab.domain.util.KeyReader
+import io.gromif.tinkLab.domain.model.result.ReadKeyResult
 
 interface KeyRepository {
 
@@ -14,5 +14,5 @@ interface KeyRepository {
         password: String
     )
 
-    suspend fun load(path: String, password: String): KeyReader.Result
+    suspend fun load(path: String, password: String): ReadKeyResult
 }

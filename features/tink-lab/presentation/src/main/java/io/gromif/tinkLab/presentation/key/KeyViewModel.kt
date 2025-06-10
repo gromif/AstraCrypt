@@ -12,12 +12,12 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.gromif.astracrypt.utils.dispatchers.IoDispatcher
 import io.gromif.tinkLab.domain.model.DataType
 import io.gromif.tinkLab.domain.model.Key
+import io.gromif.tinkLab.domain.model.result.ReadKeyResult
 import io.gromif.tinkLab.domain.usecase.CreateLabKeyUseCase
 import io.gromif.tinkLab.domain.usecase.GetFileAeadListUseCase
 import io.gromif.tinkLab.domain.usecase.GetTextAeadListUseCase
 import io.gromif.tinkLab.domain.usecase.LoadKeyUseCase
 import io.gromif.tinkLab.domain.usecase.SaveKeyUseCase
-import io.gromif.tinkLab.domain.util.KeyReader
 import io.gromif.tinkLab.presentation.key.saver.DataTypeSaver
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
@@ -61,6 +61,6 @@ internal class KeyViewModel @Inject constructor(
 
     suspend fun load(path: String) = withContext(defaultDispatcher) {
         val result = loadKeyUseCase(path = path, password = keysetPassword)
-        if (result is KeyReader.Result.Success) result.key else null
+        if (result is ReadKeyResult.Success) result.key else null
     }
 }

@@ -2,6 +2,7 @@ package io.gromif.tinkLab.data.repository
 
 import io.gromif.tinkLab.domain.model.DataType
 import io.gromif.tinkLab.domain.model.Key
+import io.gromif.tinkLab.domain.model.result.ReadKeyResult
 import io.gromif.tinkLab.domain.repository.KeyRepository
 import io.gromif.tinkLab.domain.util.KeyGenerator
 import io.gromif.tinkLab.domain.util.KeyReader
@@ -28,7 +29,7 @@ class DefaultKeyRepository(
         )
     }
 
-    override suspend fun load(path: String, password: String): KeyReader.Result {
+    override suspend fun load(path: String, password: String): ReadKeyResult {
         return keyReader(
             uriString = path,
             keysetPassword = password,
