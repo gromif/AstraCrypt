@@ -10,5 +10,4 @@ interface KeyWriter {
         keysetPassword: String,
         keysetAssociatedData: ByteArray
     )
-
 }

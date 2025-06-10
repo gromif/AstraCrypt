@@ -9,5 +9,4 @@ class GetTextAeadListUseCase(
     operator fun invoke(): List<String> {
         return repository.getTextAeadList()
     }
-
 }

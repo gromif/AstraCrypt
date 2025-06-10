@@ -9,5 +9,4 @@ class ParseKeysetUseCase(
     suspend operator fun invoke(rawKeyset: String) {
         aeadTextService.setKeyset(rawKeyset)
     }
-
 }

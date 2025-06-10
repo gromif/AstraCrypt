@@ -13,5 +13,4 @@ class DecryptTextUseCase(
             associatedData = associatedData
         )
     }
-
 }

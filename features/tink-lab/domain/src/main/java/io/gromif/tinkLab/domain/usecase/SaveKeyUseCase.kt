@@ -14,5 +14,4 @@ class SaveKeyUseCase(
     ) {
         repository.save(key = key, path = path, password = password)
     }
-
 }

@@ -17,5 +17,4 @@ class CreateLabKeyUseCase(
             aeadType = aeadType
         )
     }
-
 }

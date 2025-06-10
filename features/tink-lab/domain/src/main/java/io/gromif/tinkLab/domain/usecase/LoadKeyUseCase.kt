@@ -10,5 +10,4 @@ class LoadKeyUseCase(
     operator fun invoke(path: String, password: String): KeyReader.Result {
         return repository.load(path = path, password = password)
     }
-
 }

@@ -16,7 +16,5 @@ interface KeyReader {
         value class Success(val key: Key) : Result
 
         object Error : Result
-
     }
-
 }

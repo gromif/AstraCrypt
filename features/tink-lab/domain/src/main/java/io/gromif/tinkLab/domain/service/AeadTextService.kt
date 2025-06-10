@@ -9,5 +9,4 @@ interface AeadTextService {
     suspend fun encryptText(text: String, associatedData: String): EncryptionResult
 
     suspend fun decryptText(encryptedText: String, associatedData: String): EncryptionResult
-
 }
