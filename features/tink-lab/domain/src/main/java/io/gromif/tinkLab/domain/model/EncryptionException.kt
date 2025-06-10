@@ -5,6 +5,7 @@ sealed class EncryptionException(
 ) : Exception(message) {
 
     data object NoValidKeyset : EncryptionException(message = "No valid keyset instance found!") {
+        @Suppress("detekt:UnusedPrivateMember") // Serializable object must implement 'readResolve'
         private fun readResolve(): Any = NoValidKeyset
     }
 
