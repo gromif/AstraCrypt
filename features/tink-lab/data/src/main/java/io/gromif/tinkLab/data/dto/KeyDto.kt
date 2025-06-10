@@ -1,4 +1,4 @@
-package io.gromif.tink_lab.data.dto
+package io.gromif.tinkLab.data.dto
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

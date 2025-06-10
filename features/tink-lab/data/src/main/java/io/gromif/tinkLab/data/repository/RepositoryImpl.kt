@@ -1,4 +1,4 @@
-package io.gromif.tink_lab.data.repository
+package io.gromif.tinkLab.data.repository
 
 import io.gromif.crypto.tink.keyset.KeysetTemplates
 import io.gromif.tinkLab.domain.model.DataType

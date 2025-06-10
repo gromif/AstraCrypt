@@ -1,4 +1,4 @@
-package io.gromif.tink_lab.data.mapper
+package io.gromif.tinkLab.data.mapper
 
 import io.gromif.astracrypt.utils.Mapper
 import io.gromif.tinkLab.domain.model.DataType

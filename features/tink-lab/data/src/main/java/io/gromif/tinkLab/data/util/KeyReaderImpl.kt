@@ -1,4 +1,4 @@
-package io.gromif.tink_lab.data.util
+package io.gromif.tinkLab.data.util
 
 import android.content.ContentResolver
 import android.net.Uri
@@ -6,9 +6,9 @@ import io.gromif.astracrypt.utils.Mapper
 import io.gromif.astracrypt.utils.Parser
 import io.gromif.crypto.tink.keyset.parser.KeysetParserWithKey
 import io.gromif.crypto.tink.keyset.serializers.KeysetSerializer
+import io.gromif.tinkLab.data.dto.KeyDto
 import io.gromif.tinkLab.domain.model.Key
 import io.gromif.tinkLab.domain.util.KeyReader
-import io.gromif.tink_lab.data.dto.KeyDto
 
 class KeyReaderImpl(
     private val contentResolver: ContentResolver,

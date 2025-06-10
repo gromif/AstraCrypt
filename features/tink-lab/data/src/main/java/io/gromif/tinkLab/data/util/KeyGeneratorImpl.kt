@@ -1,4 +1,4 @@
-package io.gromif.tink_lab.data.util
+package io.gromif.tinkLab.data.util
 
 import com.google.crypto.tink.KeyTemplates
 import com.google.crypto.tink.KeysetHandle

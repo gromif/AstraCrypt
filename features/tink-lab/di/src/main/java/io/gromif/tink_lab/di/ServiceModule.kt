@@ -7,9 +7,9 @@ import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.scopes.ViewModelScoped
 import io.gromif.crypto.tink.core.encoders.Base64Encoder
 import io.gromif.crypto.tink.keyset.parser.KeysetParser
+import io.gromif.tinkLab.data.service.DefaultAeadTextService
+import io.gromif.tinkLab.data.util.TextAeadUtil
 import io.gromif.tinkLab.domain.service.AeadTextService
-import io.gromif.tink_lab.data.service.DefaultAeadTextService
-import io.gromif.tink_lab.data.util.TextAeadUtil
 import kotlinx.coroutines.Dispatchers
 
 @Module

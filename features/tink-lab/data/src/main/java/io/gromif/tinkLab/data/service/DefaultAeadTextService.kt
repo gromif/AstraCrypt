@@ -1,11 +1,11 @@
-package io.gromif.tink_lab.data.service
+package io.gromif.tinkLab.data.service
 
 import io.gromif.crypto.tink.core.encoders.Base64Encoder
 import io.gromif.crypto.tink.keyset.parser.KeysetParser
+import io.gromif.tinkLab.data.util.TextAeadUtil
 import io.gromif.tinkLab.domain.model.EncryptionException
 import io.gromif.tinkLab.domain.model.EncryptionResult
 import io.gromif.tinkLab.domain.service.AeadTextService
-import io.gromif.tink_lab.data.util.TextAeadUtil
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock

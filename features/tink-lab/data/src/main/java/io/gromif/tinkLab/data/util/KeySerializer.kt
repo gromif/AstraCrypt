@@ -1,8 +1,8 @@
-package io.gromif.tink_lab.data.util
+package io.gromif.tinkLab.data.util
 
 import io.gromif.astracrypt.utils.Serializer
 import io.gromif.crypto.tink.core.encoders.HexEncoder
-import io.gromif.tink_lab.data.dto.KeyDto
+import io.gromif.tinkLab.data.dto.KeyDto
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
