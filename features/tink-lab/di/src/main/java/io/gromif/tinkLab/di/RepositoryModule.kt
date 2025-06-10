@@ -19,15 +19,7 @@ internal object RepositoryModule {
 
     @ViewModelScoped
     @Provides
-    fun provideRepository(
-        keyGenerator: KeyGenerator,
-        keyWriter: KeyWriter,
-        keyReader: KeyReader,
-    ): Repository = RepositoryImpl(
-        keyGenerator = keyGenerator,
-        keyWriter = keyWriter,
-        keyReader = keyReader,
-    )
+    fun provideRepository(): Repository = RepositoryImpl()
 
     @ViewModelScoped
     @Provides
