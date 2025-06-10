@@ -3,5 +3,5 @@ plugins {
 }
 
 android {
-    namespace = "io.gromif.tink_lab.domain"
+    namespace = "io.gromif.tinkLab.domain"
 }

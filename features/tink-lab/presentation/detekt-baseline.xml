@@ -2,30 +2,6 @@
 <SmellBaseline>
   <ManuallySuppressedIssues/>
   <CurrentIssues>
-    <ID>ArgumentListWrapping:KeyScreen.kt$( MaterialTheme.spaces.spaceMedium, Alignment.CenterVertically )</ID>
-    <ID>ArgumentListWrapping:TinkLabFilesWorker.kt$TinkLabFilesWorker$( base64Encoder.decode( inputData.getString(Args.ENCRYPTED_AD)!!.toByteArray() ), dataAD )</ID>
-    <ID>ArgumentListWrapping:TinkLabFilesWorker.kt$TinkLabFilesWorker$( base64Encoder.decode( inputData.getString(Args.ENCRYPTED_KEYSET)!!.toByteArray() ), dataAD )</ID>
-    <ID>ArgumentListWrapping:TinkLabFilesWorker.kt$TinkLabFilesWorker$( base64Encoder.decode( inputData.getString(Args.TARGET_URI)!!.toByteArray() ), dataAD )</ID>
-    <ID>ArgumentListWrapping:ToolbarButton.kt$( modifier = modifier, enabled = enabled, icon = imageVector, title = text, onClick = onClick )</ID>
-    <ID>FinalNewline:AeadTypeMenu.kt$io.gromif.tink_lab.presentation.key.menu.AeadTypeMenu.kt</ID>
-    <ID>FinalNewline:AssociatedDataTextField.kt$io.gromif.tink_lab.presentation.shared.AssociatedDataTextField.kt</ID>
-    <ID>FinalNewline:DataTypeMenu.kt$io.gromif.tink_lab.presentation.key.menu.DataTypeMenu.kt</ID>
-    <ID>FinalNewline:DataTypeOverlay.kt$io.gromif.tink_lab.presentation.key.DataTypeOverlay.kt</ID>
-    <ID>FinalNewline:DataTypeSaver.kt$io.gromif.tink_lab.presentation.key.saver.DataTypeSaver.kt</ID>
-    <ID>FinalNewline:EncryptionToolbar.kt$io.gromif.tink_lab.presentation.shared.EncryptionToolbar.kt</ID>
-    <ID>FinalNewline:FilesContracts.kt$io.gromif.tink_lab.presentation.files.FilesContracts.kt</ID>
-    <ID>FinalNewline:FilesScreen.kt$io.gromif.tink_lab.presentation.files.FilesScreen.kt</ID>
-    <ID>FinalNewline:FilesViewModel.kt$io.gromif.tink_lab.presentation.files.FilesViewModel.kt</ID>
-    <ID>FinalNewline:KeyContracts.kt$io.gromif.tink_lab.presentation.key.KeyContracts.kt</ID>
-    <ID>FinalNewline:KeyScreen.kt$io.gromif.tink_lab.presentation.key.KeyScreen.kt</ID>
-    <ID>FinalNewline:KeyScreenState.kt$io.gromif.tink_lab.presentation.key.KeyScreenState.kt</ID>
-    <ID>FinalNewline:KeyViewModel.kt$io.gromif.tink_lab.presentation.key.KeyViewModel.kt</ID>
-    <ID>FinalNewline:TextScreen.kt$io.gromif.tink_lab.presentation.text.TextScreen.kt</ID>
-    <ID>FinalNewline:TextViewModel.kt$io.gromif.tink_lab.presentation.text.TextViewModel.kt</ID>
-    <ID>FinalNewline:TinkLab.kt$io.gromif.tink_lab.presentation.TinkLab.kt</ID>
-    <ID>FinalNewline:TinkLabFilesWorker.kt$io.gromif.tink_lab.presentation.work.TinkLabFilesWorker.kt</ID>
-    <ID>FinalNewline:ToolbarButton.kt$io.gromif.tink_lab.presentation.shared.ToolbarButton.kt</ID>
-    <ID>FinalNewline:UiMode.kt$io.gromif.tink_lab.presentation.key.UiMode.kt</ID>
     <ID>LongMethod:KeyScreen.kt$@OptIn(ExperimentalMaterial3Api::class) @Preview(showBackground = true) @Composable private fun Screen( modifier: Modifier = Modifier, state: KeyScreenState = KeyScreenState(), onSelectDataType: (DataType) -&gt; Unit = {}, onSelectAeadType: (String) -&gt; Unit = {}, onLoadClick: () -&gt; Unit = {}, onSaveClick: () -&gt; Unit = {}, onChangeKeysetKey: (String) -&gt; Unit = {} )</ID>
     <ID>LongParameterList:AeadTypeMenu.kt$( expanded: Boolean = false, enabled: Boolean = true, text: String = "Field", label: String = "Label", items: List&lt;String&gt;, onExpandedChange: (Boolean) -&gt; Unit = {}, onSelect: (String) -&gt; Unit = {} )</ID>
     <ID>LongParameterList:DataTypeMenu.kt$( modifier: Modifier = Modifier, expanded: Boolean = false, enabled: Boolean = true, text: String = "Field", label: String = "Label", items: List&lt;DataType&gt;, onExpandedChange: (Boolean) -&gt; Unit = {}, onSelect: (DataType) -&gt; Unit = {}, )</ID>
@@ -40,83 +16,5 @@
     <ID>MagicNumber:TextScreen.kt$0.8f</ID>
     <ID>MagicNumber:TinkLabFilesWorker.kt$TinkLabFilesWorker$100</ID>
     <ID>MagicNumber:TinkLabFilesWorker.kt$TinkLabFilesWorker$202</ID>
-    <ID>MultiLineIfElse:FilesScreen.kt$Row(horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spaces.spaceMedium)) { Column( modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(MaterialTheme.spaces.spaceMedium) ) { EncryptionToolbar(onEncrypt = onEncrypt, onDecrypt = onDecrypt) DetailsCard(state = state.processingState) } Column( modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(MaterialTheme.spaces.spaceMedium) ) { AssociatedDataTextField( modifier = Modifier.fillMaxWidth(), value = state.associatedData, onValueChange = onAssociatedDataChange ) SourceTextField(value = state.source, onSourceClick = onSourceClick) DestinationTextField(value = state.destination, onDestinationClick = onDestinationClick) } }</ID>
-    <ID>MultiLineIfElse:KeyScreen.kt$key = loadedKey</ID>
-    <ID>MultiLineIfElse:KeyScreen.kt$toolbar( modifier = Modifier.height(TextFieldDefaults.MinHeight) )</ID>
-    <ID>MultiLineIfElse:TextScreen.kt$clipboardToolbar()</ID>
-    <ID>MultiLineIfElse:TextScreen.kt$clipboardToolbarExpanded()</ID>
-    <ID>MultiLineIfElse:TinkLabFilesWorker.kt$TinkLabFilesWorker$ForegroundInfo( notificationId, notification, ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC )</ID>
-    <ID>MultiLineIfElse:TinkLabFilesWorker.kt$TinkLabFilesWorker$ForegroundInfo(notificationId, notification)</ID>
-    <ID>MultiLineIfElse:TinkLabFilesWorker.kt$TinkLabFilesWorker$stream.newDecryptingStream(input, associatedData).use { inputStream -&gt; out.use { inputStream.copyTo(it) } }</ID>
-    <ID>MultiLineIfElse:TinkLabFilesWorker.kt$TinkLabFilesWorker$stream.newEncryptingStream(out, associatedData).use { outputStream -&gt; input.use { it.copyTo(outputStream) } }</ID>
-    <ID>NewLineAtEndOfFile:AeadTypeMenu.kt$io.gromif.tink_lab.presentation.key.menu.AeadTypeMenu.kt</ID>
-    <ID>NewLineAtEndOfFile:AssociatedDataTextField.kt$io.gromif.tink_lab.presentation.shared.AssociatedDataTextField.kt</ID>
-    <ID>NewLineAtEndOfFile:DataTypeMenu.kt$io.gromif.tink_lab.presentation.key.menu.DataTypeMenu.kt</ID>
-    <ID>NewLineAtEndOfFile:DataTypeOverlay.kt$io.gromif.tink_lab.presentation.key.DataTypeOverlay.kt</ID>
-    <ID>NewLineAtEndOfFile:DataTypeSaver.kt$io.gromif.tink_lab.presentation.key.saver.DataTypeSaver.kt</ID>
-    <ID>NewLineAtEndOfFile:EncryptionToolbar.kt$io.gromif.tink_lab.presentation.shared.EncryptionToolbar.kt</ID>
-    <ID>NewLineAtEndOfFile:FilesContracts.kt$io.gromif.tink_lab.presentation.files.FilesContracts.kt</ID>
-    <ID>NewLineAtEndOfFile:FilesScreen.kt$io.gromif.tink_lab.presentation.files.FilesScreen.kt</ID>
-    <ID>NewLineAtEndOfFile:FilesViewModel.kt$io.gromif.tink_lab.presentation.files.FilesViewModel.kt</ID>
-    <ID>NewLineAtEndOfFile:KeyContracts.kt$io.gromif.tink_lab.presentation.key.KeyContracts.kt</ID>
-    <ID>NewLineAtEndOfFile:KeyScreen.kt$io.gromif.tink_lab.presentation.key.KeyScreen.kt</ID>
-    <ID>NewLineAtEndOfFile:KeyScreenState.kt$io.gromif.tink_lab.presentation.key.KeyScreenState.kt</ID>
-    <ID>NewLineAtEndOfFile:KeyViewModel.kt$io.gromif.tink_lab.presentation.key.KeyViewModel.kt</ID>
-    <ID>NewLineAtEndOfFile:TextScreen.kt$io.gromif.tink_lab.presentation.text.TextScreen.kt</ID>
-    <ID>NewLineAtEndOfFile:TextViewModel.kt$io.gromif.tink_lab.presentation.text.TextViewModel.kt</ID>
-    <ID>NewLineAtEndOfFile:TinkLab.kt$io.gromif.tink_lab.presentation.TinkLab.kt</ID>
-    <ID>NewLineAtEndOfFile:TinkLabFilesWorker.kt$io.gromif.tink_lab.presentation.work.TinkLabFilesWorker.kt</ID>
-    <ID>NewLineAtEndOfFile:ToolbarButton.kt$io.gromif.tink_lab.presentation.shared.ToolbarButton.kt</ID>
-    <ID>NewLineAtEndOfFile:UiMode.kt$io.gromif.tink_lab.presentation.key.UiMode.kt</ID>
-    <ID>NoBlankLineBeforeRbrace:FilesContracts.kt$FilesContracts$ </ID>
-    <ID>NoBlankLineBeforeRbrace:FilesViewModel.kt$FilesViewModel$ </ID>
-    <ID>NoBlankLineBeforeRbrace:KeyContracts.kt$KeyContracts$ </ID>
-    <ID>NoBlankLineBeforeRbrace:KeyViewModel.kt$KeyViewModel$ </ID>
-    <ID>NoBlankLineBeforeRbrace:TextViewModel.kt$TextViewModel$ </ID>
-    <ID>NoBlankLineBeforeRbrace:TinkLabFilesWorker.kt$TinkLabFilesWorker$ </ID>
-    <ID>NoBlankLineBeforeRbrace:UiMode.kt$UiMode$ </ID>
-    <ID>PackageName:AeadTypeMenu.kt$package io.gromif.tink_lab.presentation.key.menu</ID>
-    <ID>PackageName:AssociatedDataTextField.kt$package io.gromif.tink_lab.presentation.shared</ID>
-    <ID>PackageName:DataTypeMenu.kt$package io.gromif.tink_lab.presentation.key.menu</ID>
-    <ID>PackageName:DataTypeOverlay.kt$package io.gromif.tink_lab.presentation.key</ID>
-    <ID>PackageName:DataTypeSaver.kt$package io.gromif.tink_lab.presentation.key.saver</ID>
-    <ID>PackageName:EncryptionToolbar.kt$package io.gromif.tink_lab.presentation.shared</ID>
-    <ID>PackageName:FilesContracts.kt$package io.gromif.tink_lab.presentation.files</ID>
-    <ID>PackageName:FilesScreen.kt$package io.gromif.tink_lab.presentation.files</ID>
-    <ID>PackageName:FilesScreenState.kt$package io.gromif.tink_lab.presentation.files</ID>
-    <ID>PackageName:FilesViewModel.kt$package io.gromif.tink_lab.presentation.files</ID>
-    <ID>PackageName:KeyContracts.kt$package io.gromif.tink_lab.presentation.key</ID>
-    <ID>PackageName:KeyScreen.kt$package io.gromif.tink_lab.presentation.key</ID>
-    <ID>PackageName:KeyScreenState.kt$package io.gromif.tink_lab.presentation.key</ID>
-    <ID>PackageName:KeyViewModel.kt$package io.gromif.tink_lab.presentation.key</ID>
-    <ID>PackageName:TextScreen.kt$package io.gromif.tink_lab.presentation.text</ID>
-    <ID>PackageName:TextViewModel.kt$package io.gromif.tink_lab.presentation.text</ID>
-    <ID>PackageName:TinkLab.kt$package io.gromif.tink_lab.presentation</ID>
-    <ID>PackageName:TinkLabFilesWorker.kt$package io.gromif.tink_lab.presentation.work</ID>
-    <ID>PackageName:ToolbarButton.kt$package io.gromif.tink_lab.presentation.shared</ID>
-    <ID>PackageName:UiMode.kt$package io.gromif.tink_lab.presentation.key</ID>
-    <ID>PackageNaming:AeadTypeMenu.kt$package io.gromif.tink_lab.presentation.key.menu</ID>
-    <ID>PackageNaming:AssociatedDataTextField.kt$package io.gromif.tink_lab.presentation.shared</ID>
-    <ID>PackageNaming:DataTypeMenu.kt$package io.gromif.tink_lab.presentation.key.menu</ID>
-    <ID>PackageNaming:DataTypeOverlay.kt$package io.gromif.tink_lab.presentation.key</ID>
-    <ID>PackageNaming:DataTypeSaver.kt$package io.gromif.tink_lab.presentation.key.saver</ID>
-    <ID>PackageNaming:EncryptionToolbar.kt$package io.gromif.tink_lab.presentation.shared</ID>
-    <ID>PackageNaming:FilesContracts.kt$package io.gromif.tink_lab.presentation.files</ID>
-    <ID>PackageNaming:FilesScreen.kt$package io.gromif.tink_lab.presentation.files</ID>
-    <ID>PackageNaming:FilesScreenState.kt$package io.gromif.tink_lab.presentation.files</ID>
-    <ID>PackageNaming:FilesViewModel.kt$package io.gromif.tink_lab.presentation.files</ID>
-    <ID>PackageNaming:KeyContracts.kt$package io.gromif.tink_lab.presentation.key</ID>
-    <ID>PackageNaming:KeyScreen.kt$package io.gromif.tink_lab.presentation.key</ID>
-    <ID>PackageNaming:KeyScreenState.kt$package io.gromif.tink_lab.presentation.key</ID>
-    <ID>PackageNaming:KeyViewModel.kt$package io.gromif.tink_lab.presentation.key</ID>
-    <ID>PackageNaming:TextScreen.kt$package io.gromif.tink_lab.presentation.text</ID>
-    <ID>PackageNaming:TextViewModel.kt$package io.gromif.tink_lab.presentation.text</ID>
-    <ID>PackageNaming:TinkLab.kt$package io.gromif.tink_lab.presentation</ID>
-    <ID>PackageNaming:TinkLabFilesWorker.kt$package io.gromif.tink_lab.presentation.work</ID>
-    <ID>PackageNaming:ToolbarButton.kt$package io.gromif.tink_lab.presentation.shared</ID>
-    <ID>PackageNaming:UiMode.kt$package io.gromif.tink_lab.presentation.key</ID>
-    <ID>Wrapping:TinkLabFilesWorker.kt$TinkLabFilesWorker$( base64Encoder.decode( inputData.getString(Args.ENCRYPTED_AD)!!.toByteArray() ), dataAD )</ID>
-    <ID>Wrapping:TinkLabFilesWorker.kt$TinkLabFilesWorker$( base64Encoder.decode( inputData.getString(Args.ENCRYPTED_KEYSET)!!.toByteArray() ), dataAD )</ID>
-    <ID>Wrapping:TinkLabFilesWorker.kt$TinkLabFilesWorker$( base64Encoder.decode( inputData.getString(Args.TARGET_URI)!!.toByteArray() ), dataAD )</ID>
   </CurrentIssues>
 </SmellBaseline>

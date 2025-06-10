@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "io.gromif.tink_lab.di"
+    namespace = "io.gromif.tinkLab.di"
 }
 
 dependencies {

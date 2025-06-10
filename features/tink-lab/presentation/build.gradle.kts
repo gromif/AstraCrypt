@@ -9,7 +9,7 @@ plugins {
 }
 
 android {
-    namespace = "io.gromif.tink_lab.presentation"
+    namespace = "io.gromif.tinkLab.presentation"
     defaultConfig {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
