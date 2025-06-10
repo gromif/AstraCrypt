@@ -50,7 +50,7 @@ internal class KeyViewModel @Inject constructor(
         mutableStateOf(DataType.Files)
     }
 
-    fun createKey(dataType: DataType, aeadType: String): Key =
+    suspend fun createKey(dataType: DataType, aeadType: String): Key =
         createLabKeyUseCase(dataType, aeadType.uppercase())
 
     suspend fun save(key: Key, uri: Uri) = withContext(defaultDispatcher) {
