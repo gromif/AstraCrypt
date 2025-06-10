@@ -8,7 +8,6 @@ import io.gromif.crypto.tink.keyset.serializers.KeysetSerializer
 import io.gromif.tinkLab.data.dto.KeyDto
 import io.gromif.tinkLab.data.mapper.toKey
 import io.gromif.tinkLab.domain.model.result.ReadKeyResult
-import io.gromif.tinkLab.domain.util.KeyReader
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
@@ -18,9 +17,9 @@ class KeyReaderImpl(
     private val keyParser: Parser<String, KeyDto>,
     private val keysetParserWithKey: KeysetParserWithKey,
     private val keysetSerializer: KeysetSerializer,
-) : KeyReader {
+) {
 
-    override suspend fun invoke(
+    suspend operator fun invoke(
         uriString: String,
         keysetPassword: String,
         keysetAssociatedData: ByteArray

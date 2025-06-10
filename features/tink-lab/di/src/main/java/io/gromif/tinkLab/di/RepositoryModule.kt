@@ -7,11 +7,11 @@ import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.scopes.ViewModelScoped
 import io.gromif.tinkLab.data.repository.DefaultKeyRepository
 import io.gromif.tinkLab.data.repository.RepositoryImpl
+import io.gromif.tinkLab.data.util.KeyGeneratorImpl
+import io.gromif.tinkLab.data.util.KeyReaderImpl
+import io.gromif.tinkLab.data.util.KeyWriterImpl
 import io.gromif.tinkLab.domain.model.Repository
 import io.gromif.tinkLab.domain.repository.KeyRepository
-import io.gromif.tinkLab.domain.util.KeyGenerator
-import io.gromif.tinkLab.domain.util.KeyReader
-import io.gromif.tinkLab.domain.util.KeyWriter
 
 @Module
 @InstallIn(ViewModelComponent::class)
@@ -24,9 +24,9 @@ internal object RepositoryModule {
     @ViewModelScoped
     @Provides
     fun provideKeyRepository(
-        keyGenerator: KeyGenerator,
-        keyWriter: KeyWriter,
-        keyReader: KeyReader,
+        keyGenerator: KeyGeneratorImpl,
+        keyWriter: KeyWriterImpl,
+        keyReader: KeyReaderImpl,
     ): KeyRepository = DefaultKeyRepository(
         keyGenerator = keyGenerator,
         keyWriter = keyWriter,

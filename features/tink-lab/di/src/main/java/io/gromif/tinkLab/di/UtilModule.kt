@@ -17,9 +17,6 @@ import io.gromif.tinkLab.data.util.KeyGeneratorImpl
 import io.gromif.tinkLab.data.util.KeyReaderImpl
 import io.gromif.tinkLab.data.util.KeyWriterImpl
 import io.gromif.tinkLab.data.util.TextAeadUtil
-import io.gromif.tinkLab.domain.util.KeyGenerator
-import io.gromif.tinkLab.domain.util.KeyReader
-import io.gromif.tinkLab.domain.util.KeyWriter
 import kotlinx.coroutines.Dispatchers
 
 @Module
@@ -30,7 +27,7 @@ internal object UtilModule {
     fun provideTextAeadUtil() = TextAeadUtil()
 
     @Provides
-    fun provideKeyGenerator(keysetSerializer: KeysetSerializer): KeyGenerator =
+    fun provideKeyGenerator(keysetSerializer: KeysetSerializer) =
         KeyGeneratorImpl(keysetSerializer = keysetSerializer)
 
     @Provides
@@ -40,7 +37,7 @@ internal object UtilModule {
         keysetParser: KeysetParser,
         keysetSerializerWithKey: KeysetSerializerWithKey,
         keySerializer: Serializer<KeyDto, String>
-    ): KeyWriter = KeyWriterImpl(
+    ) = KeyWriterImpl(
         dispatcher = Dispatchers.IO,
         contentResolver = context.contentResolver,
         keysetParser = keysetParser,
@@ -55,7 +52,7 @@ internal object UtilModule {
         keyParser: Parser<String, KeyDto>,
         keysetSerializer: KeysetSerializer,
         keysetParserWithKey: KeysetParserWithKey,
-    ): KeyReader = KeyReaderImpl(
+    ) = KeyReaderImpl(
         dispatcher = Dispatchers.IO,
         contentResolver = context.contentResolver,
         keyParser = keyParser,

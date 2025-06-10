@@ -1,19 +1,19 @@
 package io.gromif.tinkLab.data.repository
 
+import io.gromif.tinkLab.data.util.KeyGeneratorImpl
+import io.gromif.tinkLab.data.util.KeyReaderImpl
+import io.gromif.tinkLab.data.util.KeyWriterImpl
 import io.gromif.tinkLab.domain.model.DataType
 import io.gromif.tinkLab.domain.model.Key
 import io.gromif.tinkLab.domain.model.result.ReadKeyResult
 import io.gromif.tinkLab.domain.repository.KeyRepository
-import io.gromif.tinkLab.domain.util.KeyGenerator
-import io.gromif.tinkLab.domain.util.KeyReader
-import io.gromif.tinkLab.domain.util.KeyWriter
 
 private val keysetAssociatedData = "labKey".toByteArray()
 
 class DefaultKeyRepository(
-    private val keyGenerator: KeyGenerator,
-    private val keyWriter: KeyWriter,
-    private val keyReader: KeyReader,
+    private val keyGenerator: KeyGeneratorImpl,
+    private val keyWriter: KeyWriterImpl,
+    private val keyReader: KeyReaderImpl,
 ) : KeyRepository {
 
     override suspend fun createKey(dataType: DataType, aeadType: String): Key {
