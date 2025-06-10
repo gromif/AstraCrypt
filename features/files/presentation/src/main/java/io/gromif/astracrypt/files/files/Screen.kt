@@ -6,6 +6,7 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -15,8 +16,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.paging.LoadState
+import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import coil3.ImageLoader
+import io.gromif.astracrypt.files.domain.model.Item
 import io.gromif.astracrypt.files.domain.model.ItemState
 import io.gromif.astracrypt.files.files.dialogs.deleteDialog
 import io.gromif.astracrypt.files.files.dialogs.deleteSourceDialog
@@ -55,64 +58,41 @@ internal fun Screen(
     actions: Actions = Actions.Default,
     maxNameLength: Int = 128,
 ) = Column {
-    val sheetOptionsState = Compose.state()
     var optionsItem by rememberSaveable { mutableStateOf(OptionsItem()) }
     val items = stateHolder.pagingFlow.collectAsLazyPagingItems()
-
     if (!stateHolder.isSearching) {
         AnimatedVisibility(stateHolder.backStackList.isNotEmpty()) {
             FilesBackStackList(stateHolder.backStackList, actions::backStackClick)
         }
     }
-    val isEmpty = remember {
-        derivedStateOf { items.itemCount == 0 && items.loadState.refresh is LoadState.NotLoading }
-    }
-    AnimatedVisibility(visible = !isEmpty.value, enter = fadeIn(), exit = ExitTransition.None) {
-        FilesList(
-            viewMode = stateHolder.viewMode,
-            pagingItems = items,
-            multiselectStateList = stateHolder.multiselectStateList,
-            imageLoader = imageLoader,
-            onOptions = onOptions@{
-                if (stateHolder.mode is Mode.Move) return@onOptions
-                optionsItem = OptionsItem(
-                    id = it.id,
-                    name = it.name,
-                    isStarred = it.state == ItemState.Starred,
-                    itemType = it.type,
-                    isFolder = it.isFolder
-                )
-                sheetOptionsState.value = true
-            },
-            onClick = actions::click,
-            onLongPress = actions::longClick
-        )
-    }
-    AnimatedVisibility(visible = isEmpty.value, enter = fadeIn(), exit = ExitTransition.None) {
-        EmptyList(stateHolder.isStarred, stateHolder.isSearching)
-    }
 
-    var saveSourceState by rememberSaveable { mutableStateOf(true) }
-    var importMimeTypeState by rememberSaveable { mutableStateOf("") }
+    val sheetOptionsState = optionsSheetIntegration(
+        optionsItem = optionsItem,
+        navActions = navActions,
+        actions = actions,
+        maxNameLength = maxNameLength
+    )
 
-    val pickFileContract = Contracts.pickFile { actions.import(it.toTypedArray(), saveSourceState) }
-    val exportContract = Contracts.export { navActions.toExport(optionsItem.id, it) }
+    FilesListIntegration(
+        items = items,
+        imageLoader = imageLoader,
+        stateHolder = stateHolder,
+        actions = actions,
+        onOpenOptions = {
+            optionsItem = it
+            sheetOptionsState.value = true
+        }
+    )
 
     var dialogNewFolder by newFolderDialog(
         maxLength = maxNameLength,
         onCreate = actions::createFolder,
     )
-    var dialogRenameState by renameDialog(
-        maxLength = maxNameLength,
-        name = optionsItem.name
-    ) { actions.rename(optionsItem.id, it) }
-    var dialogDeleteState by deleteDialog(optionsItem.name) { actions.delete(listOf(optionsItem.id)) }
-    var dialogDeleteSourceState by deleteSourceDialog { saveSource ->
-        saveSourceState = saveSource
-        pickFileContract.launch(arrayOf(importMimeTypeState))
-    }
 
-    val sheetCreateState = Compose.state()
+    val sheetCreateState = createSheetIntegration(
+        onCreateFolder = { dialogNewFolder = true },
+        actions = actions
+    )
     FlowObserver(onContextualAction) {
         val multiselectList = stateHolder.multiselectStateList.toList()
         when (it) {
@@ -126,18 +106,50 @@ internal fun Screen(
         }
         if (it.resetMode) actions.closeContextualToolbar()
     }
+}
 
-    filesCreateNewSheet(
-        state = sheetCreateState,
-        onCreateFolder = { dialogNewFolder = true },
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun createSheetIntegration(
+    onCreateFolder: () -> Unit,
+    actions: Actions
+): MutableState<Boolean> {
+    var saveSourceState by rememberSaveable { mutableStateOf(true) }
+    val pickFileContract = Contracts.pickFile { actions.import(it.toTypedArray(), saveSourceState) }
+    var importMimeTypeState by rememberSaveable { mutableStateOf("") }
+    var dialogDeleteSourceState by deleteSourceDialog { saveSource ->
+        saveSourceState = saveSource
+        pickFileContract.launch(arrayOf(importMimeTypeState))
+    }
+
+    return filesCreateNewSheet(
+        state = Compose.state(),
+        onCreateFolder = onCreateFolder,
         onAdd = {
             importMimeTypeState = "$it/*"
             dialogDeleteSourceState = true
         },
         onScan = actions::scan,
     )
+}
 
-    filesOptionsSheet(
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun optionsSheetIntegration(
+    sheetOptionsState: MutableState<Boolean> = Compose.state(),
+    optionsItem: OptionsItem,
+    navActions: FilesNavActions = FilesNavActions.Default,
+    actions: Actions = Actions(),
+    maxNameLength: Int = 128,
+): MutableState<Boolean> {
+    val exportContract = Contracts.export { navActions.toExport(optionsItem.id, it) }
+    var dialogRenameState by renameDialog(
+        maxLength = maxNameLength,
+        name = optionsItem.name
+    ) { actions.rename(optionsItem.id, it) }
+    var dialogDeleteState by deleteDialog(optionsItem.name) { actions.delete(listOf(optionsItem.id)) }
+
+    return filesOptionsSheet(
         state = sheetOptionsState,
         name = optionsItem.name,
         itemIcon = optionsItem.itemType.icon,
@@ -155,5 +167,48 @@ internal fun Screen(
             Option.Select -> actions.longClick(id)
             Option.Details -> navActions.toDetails(id)
         }
+    }
+}
+
+@Composable
+private fun FilesListIntegration(
+    items: LazyPagingItems<Item>,
+    imageLoader: ImageLoader,
+    stateHolder: StateHolder,
+    actions: Actions,
+    onOpenOptions: (OptionsItem) -> Unit
+) {
+    val isEmpty by remember {
+        derivedStateOf { items.itemCount == 0 && items.loadState.refresh is LoadState.NotLoading }
+    }
+
+    AnimatedVisibility(visible = isEmpty, enter = fadeIn(), exit = ExitTransition.None) {
+        EmptyList(stateHolder.isStarred, stateHolder.isSearching)
+    }
+
+    AnimatedVisibility(
+        visible = !isEmpty,
+        enter = fadeIn(),
+        exit = ExitTransition.None
+    ) {
+        FilesList(
+            viewMode = stateHolder.viewMode,
+            pagingItems = items,
+            multiselectStateList = stateHolder.multiselectStateList,
+            imageLoader = imageLoader,
+            onOptions = onOptions@{
+                if (stateHolder.mode is Mode.Move) return@onOptions
+                val optionsItem = OptionsItem(
+                    id = it.id,
+                    name = it.name,
+                    isStarred = it.state == ItemState.Starred,
+                    itemType = it.type,
+                    isFolder = it.isFolder
+                )
+                onOpenOptions(optionsItem)
+            },
+            onClick = actions::click,
+            onLongPress = actions::longClick
+        )
     }
 }
