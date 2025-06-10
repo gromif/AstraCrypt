@@ -48,5 +48,4 @@ internal object UseCasesModule {
 
     @Provides
     fun provideLoadKeyUseCase(repository: Repository) = LoadKeyUseCase(repository = repository)
-
 }

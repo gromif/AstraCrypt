@@ -16,5 +16,4 @@ internal object SerializerModule {
     @Provides
     fun provideKeySerializer(hexEncoder: HexEncoder): Serializer<KeyDto, String> =
         KeySerializer(hexEncoder = hexEncoder)
-
 }

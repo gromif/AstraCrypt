@@ -30,5 +30,4 @@ internal object MapperModule {
 
     @Provides
     fun provideIdToDataTypeMapper(): Mapper<Int, DataType> = IdToDataTypeMapper()
-
 }

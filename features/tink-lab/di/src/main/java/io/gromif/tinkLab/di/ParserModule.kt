@@ -16,5 +16,4 @@ internal object ParserModule {
     @Provides
     fun provideKeyParser(hexEncoder: HexEncoder): Parser<String, KeyDto> =
         KeyParser(hexEncoder = hexEncoder)
-
 }
