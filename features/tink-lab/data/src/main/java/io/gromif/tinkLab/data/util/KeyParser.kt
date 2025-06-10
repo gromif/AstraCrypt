@@ -7,7 +7,7 @@ import kotlinx.serialization.json.Json
 
 class KeyParser(
     private val hexEncoder: HexEncoder
-): Parser<String, KeyDto> {
+) : Parser<String, KeyDto> {
     override fun invoke(item: String): KeyDto {
         val json = hexEncoder.decode(item).decodeToString()
         return Json.decodeFromString(json)

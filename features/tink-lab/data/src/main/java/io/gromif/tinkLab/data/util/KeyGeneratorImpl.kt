@@ -9,7 +9,7 @@ import io.gromif.tinkLab.domain.util.KeyGenerator
 
 class KeyGeneratorImpl(
     private val keysetSerializer: KeysetSerializer
-): KeyGenerator {
+) : KeyGenerator {
 
     override fun invoke(dataType: DataType, aeadType: String): Key {
         val template = KeyTemplates.get(
@@ -23,5 +23,4 @@ class KeyGeneratorImpl(
             aeadType = aeadType
         )
     }
-
 }

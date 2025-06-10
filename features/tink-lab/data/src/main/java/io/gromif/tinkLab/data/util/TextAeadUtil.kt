@@ -25,5 +25,4 @@ class TextAeadUtil {
         return aeadService?.decrypt(bytes, associatedData)
             ?: throw EncryptionException.NoValidKeyset
     }
-
 }

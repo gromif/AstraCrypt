@@ -46,5 +46,4 @@ class RepositoryImpl(
     override fun getTextAeadList(): List<String> {
         return KeysetTemplates.AEAD.entries.map { it.name.lowercase() }
     }
-
 }

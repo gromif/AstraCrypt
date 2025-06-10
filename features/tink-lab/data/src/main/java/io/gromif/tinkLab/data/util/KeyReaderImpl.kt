@@ -17,7 +17,7 @@ class KeyReaderImpl(
     private val keysetSerializer: KeysetSerializer,
     private val dtoToKeyMapper: Mapper<KeyDto, Key>,
     private val stringToUriMapper: Mapper<String, Uri>
-): KeyReader {
+) : KeyReader {
 
     override fun invoke(
         uriString: String,
@@ -42,5 +42,4 @@ class KeyReaderImpl(
             return KeyReader.Result.Error
         }
     }
-
 }

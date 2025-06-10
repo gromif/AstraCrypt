@@ -7,7 +7,7 @@ import io.gromif.tinkLab.domain.model.Key
 
 class KeyToDtoMapper(
     private val dataTypeToIdMapper: Mapper<DataType, Int>
-): Mapper<Key, KeyDto> {
+) : Mapper<Key, KeyDto> {
     override fun invoke(item: Key): KeyDto = item.run {
         KeyDto(
             dataTypeId = dataTypeToIdMapper(dataType),

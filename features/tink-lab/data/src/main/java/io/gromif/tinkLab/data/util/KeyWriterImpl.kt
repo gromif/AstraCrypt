@@ -40,5 +40,4 @@ class KeyWriterImpl(
             it.write(bytes)
         }
     }
-
 }

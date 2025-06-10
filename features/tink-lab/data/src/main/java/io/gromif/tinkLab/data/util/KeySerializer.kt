@@ -8,7 +8,7 @@ import kotlinx.serialization.json.Json
 
 class KeySerializer(
     private val hexEncoder: HexEncoder
-): Serializer<KeyDto, String> {
+) : Serializer<KeyDto, String> {
     override fun invoke(item: KeyDto): String {
         val keyDtoJson = Json.encodeToString<KeyDto>(item)
         return hexEncoder.encode(keyDtoJson.toByteArray())
