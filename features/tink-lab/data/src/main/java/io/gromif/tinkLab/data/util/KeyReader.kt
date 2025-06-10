@@ -11,7 +11,7 @@ import io.gromif.tinkLab.domain.model.result.ReadKeyResult
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
-class KeyReaderImpl(
+class KeyReader(
     private val dispatcher: CoroutineDispatcher,
     private val contentResolver: ContentResolver,
     private val keyParser: Parser<String, KeyDto>,

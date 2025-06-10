@@ -11,7 +11,7 @@ import io.gromif.tinkLab.domain.model.Key
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
-class KeyWriterImpl(
+class KeyWriter(
     private val dispatcher: CoroutineDispatcher,
     private val contentResolver: ContentResolver,
     private val keysetParser: KeysetParser,

@@ -13,9 +13,9 @@ import io.gromif.crypto.tink.keyset.parser.KeysetParserWithKey
 import io.gromif.crypto.tink.keyset.serializers.KeysetSerializer
 import io.gromif.crypto.tink.keyset.serializers.KeysetSerializerWithKey
 import io.gromif.tinkLab.data.dto.KeyDto
-import io.gromif.tinkLab.data.util.KeyGeneratorImpl
-import io.gromif.tinkLab.data.util.KeyReaderImpl
-import io.gromif.tinkLab.data.util.KeyWriterImpl
+import io.gromif.tinkLab.data.util.KeyGenerator
+import io.gromif.tinkLab.data.util.KeyReader
+import io.gromif.tinkLab.data.util.KeyWriter
 import io.gromif.tinkLab.data.util.TextAeadUtil
 import kotlinx.coroutines.Dispatchers
 
@@ -28,7 +28,7 @@ internal object UtilModule {
 
     @Provides
     fun provideKeyGenerator(keysetSerializer: KeysetSerializer) =
-        KeyGeneratorImpl(keysetSerializer = keysetSerializer)
+        KeyGenerator(keysetSerializer = keysetSerializer)
 
     @Provides
     fun provideKeyWriter(
@@ -37,7 +37,7 @@ internal object UtilModule {
         keysetParser: KeysetParser,
         keysetSerializerWithKey: KeysetSerializerWithKey,
         keySerializer: Serializer<KeyDto, String>
-    ) = KeyWriterImpl(
+    ) = KeyWriter(
         dispatcher = Dispatchers.IO,
         contentResolver = context.contentResolver,
         keysetParser = keysetParser,
@@ -52,7 +52,7 @@ internal object UtilModule {
         keyParser: Parser<String, KeyDto>,
         keysetSerializer: KeysetSerializer,
         keysetParserWithKey: KeysetParserWithKey,
-    ) = KeyReaderImpl(
+    ) = KeyReader(
         dispatcher = Dispatchers.IO,
         contentResolver = context.contentResolver,
         keyParser = keyParser,

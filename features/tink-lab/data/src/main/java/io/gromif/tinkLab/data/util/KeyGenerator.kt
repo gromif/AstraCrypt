@@ -6,7 +6,7 @@ import io.gromif.crypto.tink.keyset.serializers.KeysetSerializer
 import io.gromif.tinkLab.domain.model.DataType
 import io.gromif.tinkLab.domain.model.Key
 
-class KeyGeneratorImpl(
+class KeyGenerator(
     private val keysetSerializer: KeysetSerializer
 ) {
 
