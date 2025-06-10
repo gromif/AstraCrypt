@@ -1,6 +1,6 @@
-package io.gromif.tink_lab.domain.usecase
+package io.gromif.tinkLab.domain.usecase
 
-import io.gromif.tink_lab.domain.model.Repository
+import io.gromif.tinkLab.domain.model.Repository
 
 class GetTextAeadListUseCase(
     private val repository: Repository

@@ -1,4 +1,4 @@
-package io.gromif.tink_lab.domain.model
+package io.gromif.tinkLab.domain.model
 
 sealed class EncryptionException(
     message: String

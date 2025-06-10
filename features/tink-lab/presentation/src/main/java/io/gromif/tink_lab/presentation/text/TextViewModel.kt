@@ -4,11 +4,11 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.gromif.tink_lab.domain.model.EncryptionException
-import io.gromif.tink_lab.domain.model.EncryptionResult
-import io.gromif.tink_lab.domain.usecase.DecryptTextUseCase
-import io.gromif.tink_lab.domain.usecase.EncryptTextUseCase
-import io.gromif.tink_lab.domain.usecase.ParseKeysetUseCase
+import io.gromif.tinkLab.domain.model.EncryptionException
+import io.gromif.tinkLab.domain.model.EncryptionResult
+import io.gromif.tinkLab.domain.usecase.DecryptTextUseCase
+import io.gromif.tinkLab.domain.usecase.EncryptTextUseCase
+import io.gromif.tinkLab.domain.usecase.ParseKeysetUseCase
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch

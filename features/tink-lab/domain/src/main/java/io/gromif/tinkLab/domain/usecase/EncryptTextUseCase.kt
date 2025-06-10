@@ -1,7 +1,7 @@
-package io.gromif.tink_lab.domain.usecase
+package io.gromif.tinkLab.domain.usecase
 
-import io.gromif.tink_lab.domain.model.EncryptionResult
-import io.gromif.tink_lab.domain.service.AeadTextService
+import io.gromif.tinkLab.domain.model.EncryptionResult
+import io.gromif.tinkLab.domain.service.AeadTextService
 
 class EncryptTextUseCase(
     private val aeadTextService: AeadTextService,

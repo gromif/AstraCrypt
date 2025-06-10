@@ -4,16 +4,16 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
-import io.gromif.tink_lab.domain.model.Repository
-import io.gromif.tink_lab.domain.service.AeadTextService
-import io.gromif.tink_lab.domain.usecase.CreateLabKeyUseCase
-import io.gromif.tink_lab.domain.usecase.DecryptTextUseCase
-import io.gromif.tink_lab.domain.usecase.EncryptTextUseCase
-import io.gromif.tink_lab.domain.usecase.GetFileAeadListUseCase
-import io.gromif.tink_lab.domain.usecase.GetTextAeadListUseCase
-import io.gromif.tink_lab.domain.usecase.LoadKeyUseCase
-import io.gromif.tink_lab.domain.usecase.ParseKeysetUseCase
-import io.gromif.tink_lab.domain.usecase.SaveKeyUseCase
+import io.gromif.tinkLab.domain.model.Repository
+import io.gromif.tinkLab.domain.service.AeadTextService
+import io.gromif.tinkLab.domain.usecase.CreateLabKeyUseCase
+import io.gromif.tinkLab.domain.usecase.DecryptTextUseCase
+import io.gromif.tinkLab.domain.usecase.EncryptTextUseCase
+import io.gromif.tinkLab.domain.usecase.GetFileAeadListUseCase
+import io.gromif.tinkLab.domain.usecase.GetTextAeadListUseCase
+import io.gromif.tinkLab.domain.usecase.LoadKeyUseCase
+import io.gromif.tinkLab.domain.usecase.ParseKeysetUseCase
+import io.gromif.tinkLab.domain.usecase.SaveKeyUseCase
 
 @Module
 @InstallIn(ViewModelComponent::class)

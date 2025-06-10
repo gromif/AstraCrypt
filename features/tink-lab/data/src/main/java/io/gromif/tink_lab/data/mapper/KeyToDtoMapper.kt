@@ -1,9 +1,9 @@
 package io.gromif.tink_lab.data.mapper
 
 import io.gromif.astracrypt.utils.Mapper
+import io.gromif.tinkLab.domain.model.DataType
+import io.gromif.tinkLab.domain.model.Key
 import io.gromif.tink_lab.data.dto.KeyDto
-import io.gromif.tink_lab.domain.model.DataType
-import io.gromif.tink_lab.domain.model.Key
 
 class KeyToDtoMapper(
     private val dataTypeToIdMapper: Mapper<DataType, Int>

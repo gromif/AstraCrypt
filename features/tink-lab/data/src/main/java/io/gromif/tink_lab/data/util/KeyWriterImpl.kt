@@ -6,9 +6,9 @@ import io.gromif.astracrypt.utils.Mapper
 import io.gromif.astracrypt.utils.Serializer
 import io.gromif.crypto.tink.keyset.parser.KeysetParser
 import io.gromif.crypto.tink.keyset.serializers.KeysetSerializerWithKey
+import io.gromif.tinkLab.domain.model.Key
+import io.gromif.tinkLab.domain.util.KeyWriter
 import io.gromif.tink_lab.data.dto.KeyDto
-import io.gromif.tink_lab.domain.model.Key
-import io.gromif.tink_lab.domain.util.KeyWriter
 
 class KeyWriterImpl(
     private val contentResolver: ContentResolver,

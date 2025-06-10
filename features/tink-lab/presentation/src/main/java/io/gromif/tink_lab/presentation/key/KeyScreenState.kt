@@ -1,7 +1,7 @@
 package io.gromif.tink_lab.presentation.key
 
 import androidx.compose.runtime.Stable
-import io.gromif.tink_lab.domain.model.DataType
+import io.gromif.tinkLab.domain.model.DataType
 
 @Stable
 internal data class KeyScreenState(

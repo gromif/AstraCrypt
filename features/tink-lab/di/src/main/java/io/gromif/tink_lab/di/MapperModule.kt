@@ -5,13 +5,13 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import io.gromif.astracrypt.utils.Mapper
+import io.gromif.tinkLab.domain.model.DataType
+import io.gromif.tinkLab.domain.model.Key
 import io.gromif.tink_lab.data.dto.KeyDto
 import io.gromif.tink_lab.data.mapper.DataTypeToIdMapper
 import io.gromif.tink_lab.data.mapper.DtoToKeyMapper
 import io.gromif.tink_lab.data.mapper.IdToDataTypeMapper
 import io.gromif.tink_lab.data.mapper.KeyToDtoMapper
-import io.gromif.tink_lab.domain.model.DataType
-import io.gromif.tink_lab.domain.model.Key
 
 @Module
 @InstallIn(ViewModelComponent::class)

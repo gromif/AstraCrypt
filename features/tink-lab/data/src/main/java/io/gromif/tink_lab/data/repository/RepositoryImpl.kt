@@ -1,12 +1,12 @@
 package io.gromif.tink_lab.data.repository
 
 import io.gromif.crypto.tink.keyset.KeysetTemplates
-import io.gromif.tink_lab.domain.model.DataType
-import io.gromif.tink_lab.domain.model.Key
-import io.gromif.tink_lab.domain.model.Repository
-import io.gromif.tink_lab.domain.util.KeyGenerator
-import io.gromif.tink_lab.domain.util.KeyReader
-import io.gromif.tink_lab.domain.util.KeyWriter
+import io.gromif.tinkLab.domain.model.DataType
+import io.gromif.tinkLab.domain.model.Key
+import io.gromif.tinkLab.domain.model.Repository
+import io.gromif.tinkLab.domain.util.KeyGenerator
+import io.gromif.tinkLab.domain.util.KeyReader
+import io.gromif.tinkLab.domain.util.KeyWriter
 
 private val keysetAssociatedData = "labKey".toByteArray()
 

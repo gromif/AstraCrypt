@@ -1,6 +1,6 @@
-package io.gromif.tink_lab.domain.util
+package io.gromif.tinkLab.domain.util
 
-import io.gromif.tink_lab.domain.model.Key
+import io.gromif.tinkLab.domain.model.Key
 
 interface KeyReader {
 

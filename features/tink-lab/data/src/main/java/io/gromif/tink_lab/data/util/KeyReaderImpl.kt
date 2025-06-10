@@ -6,9 +6,9 @@ import io.gromif.astracrypt.utils.Mapper
 import io.gromif.astracrypt.utils.Parser
 import io.gromif.crypto.tink.keyset.parser.KeysetParserWithKey
 import io.gromif.crypto.tink.keyset.serializers.KeysetSerializer
+import io.gromif.tinkLab.domain.model.Key
+import io.gromif.tinkLab.domain.util.KeyReader
 import io.gromif.tink_lab.data.dto.KeyDto
-import io.gromif.tink_lab.domain.model.Key
-import io.gromif.tink_lab.domain.util.KeyReader
 
 class KeyReaderImpl(
     private val contentResolver: ContentResolver,

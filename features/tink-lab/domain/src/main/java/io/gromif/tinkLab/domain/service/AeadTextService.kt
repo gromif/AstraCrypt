@@ -1,6 +1,6 @@
-package io.gromif.tink_lab.domain.service
+package io.gromif.tinkLab.domain.service
 
-import io.gromif.tink_lab.domain.model.EncryptionResult
+import io.gromif.tinkLab.domain.model.EncryptionResult
 
 interface AeadTextService {
 

@@ -3,7 +3,7 @@ package io.gromif.tink_lab.data.util
 import com.google.crypto.tink.Aead
 import com.google.crypto.tink.KeysetHandle
 import io.gromif.crypto.tink.core.extensions.aead
-import io.gromif.tink_lab.domain.model.EncryptionException
+import io.gromif.tinkLab.domain.model.EncryptionException
 
 class TextAeadUtil {
     private var targetKeysetHandle: KeysetHandle? = null
