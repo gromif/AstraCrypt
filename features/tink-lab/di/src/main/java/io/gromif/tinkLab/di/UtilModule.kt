@@ -1,4 +1,4 @@
-package io.gromif.tink_lab.di
+package io.gromif.tinkLab.di
 
 import android.content.Context
 import android.net.Uri
