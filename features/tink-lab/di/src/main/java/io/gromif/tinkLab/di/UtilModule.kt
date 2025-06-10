@@ -20,6 +20,7 @@ import io.gromif.tinkLab.data.util.TextAeadUtil
 import io.gromif.tinkLab.domain.util.KeyGenerator
 import io.gromif.tinkLab.domain.util.KeyReader
 import io.gromif.tinkLab.domain.util.KeyWriter
+import kotlinx.coroutines.Dispatchers
 
 @Module
 @InstallIn(ViewModelComponent::class)
@@ -40,6 +41,7 @@ internal object UtilModule {
         keysetSerializerWithKey: KeysetSerializerWithKey,
         keySerializer: Serializer<KeyDto, String>
     ): KeyWriter = KeyWriterImpl(
+        dispatcher = Dispatchers.IO,
         contentResolver = context.contentResolver,
         keysetParser = keysetParser,
         keysetSerializerWithKey = keysetSerializerWithKey,

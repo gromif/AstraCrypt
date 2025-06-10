@@ -4,7 +4,7 @@ import io.gromif.tinkLab.domain.model.Key
 
 interface KeyWriter {
 
-    operator fun invoke(
+    suspend operator fun invoke(
         uriString: String,
         key: Key,
         keysetPassword: String,

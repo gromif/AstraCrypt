@@ -9,20 +9,23 @@ import io.gromif.tinkLab.data.dto.KeyDto
 import io.gromif.tinkLab.data.mapper.toDto
 import io.gromif.tinkLab.domain.model.Key
 import io.gromif.tinkLab.domain.util.KeyWriter
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.withContext
 
 class KeyWriterImpl(
+    private val dispatcher: CoroutineDispatcher,
     private val contentResolver: ContentResolver,
     private val keysetParser: KeysetParser,
     private val keysetSerializerWithKey: KeysetSerializerWithKey,
     private val keySerializer: Serializer<KeyDto, String>
 ) : KeyWriter {
 
-    override fun invoke(
+    override suspend fun invoke(
         uriString: String,
         key: Key,
         keysetPassword: String,
         keysetAssociatedData: ByteArray
-    ) {
+    ): Unit = withContext(dispatcher) {
         val uri = uriString.toUri()
         val keysetHandle = keysetParser(key.rawKeyset)
         val serializedKeysetWithKey = keysetSerializerWithKey(
