@@ -1,4 +1,4 @@
-package io.gromif.tink_lab.presentation.shared
+package io.gromif.tinkLab.presentation.shared
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Save

@@ -1,4 +1,4 @@
-package io.gromif.tink_lab.presentation.key
+package io.gromif.tinkLab.presentation.key
 
 import android.net.Uri
 import androidx.compose.runtime.getValue
@@ -19,7 +19,7 @@ import io.gromif.tinkLab.domain.usecase.GetTextAeadListUseCase
 import io.gromif.tinkLab.domain.usecase.LoadKeyUseCase
 import io.gromif.tinkLab.domain.usecase.SaveKeyUseCase
 import io.gromif.tinkLab.domain.util.KeyReader
-import io.gromif.tink_lab.presentation.key.saver.DataTypeSaver
+import io.gromif.tinkLab.presentation.key.saver.DataTypeSaver
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

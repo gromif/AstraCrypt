@@ -1,4 +1,4 @@
-package io.gromif.tink_lab.presentation.key.menu
+package io.gromif.tinkLab.presentation.key.menu
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.FileOpen
@@ -14,7 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import io.gromif.tinkLab.domain.model.DataType
-import io.gromif.tink_lab.presentation.key.titleStringId
+import io.gromif.tinkLab.presentation.key.titleStringId
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

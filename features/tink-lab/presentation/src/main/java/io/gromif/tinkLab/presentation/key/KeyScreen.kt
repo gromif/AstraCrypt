@@ -1,4 +1,4 @@
-package io.gromif.tink_lab.presentation.key
+package io.gromif.tinkLab.presentation.key
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -37,10 +37,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import io.gromif.astracrypt.resources.R
 import io.gromif.tinkLab.domain.model.DataType
 import io.gromif.tinkLab.domain.model.Key
-import io.gromif.tink_lab.presentation.TinkLab
-import io.gromif.tink_lab.presentation.key.menu.AeadTypeMenu
-import io.gromif.tink_lab.presentation.key.menu.DataTypeMenu
-import io.gromif.tink_lab.presentation.shared.ToolbarButton
+import io.gromif.tinkLab.presentation.TinkLab
+import io.gromif.tinkLab.presentation.key.menu.AeadTypeMenu
+import io.gromif.tinkLab.presentation.key.menu.DataTypeMenu
+import io.gromif.tinkLab.presentation.shared.ToolbarButton
 import io.gromif.ui.compose.core.TextFields
 import io.gromif.ui.compose.core.ext.FlowObserver
 import io.gromif.ui.compose.core.ext.LocalWindowWidth

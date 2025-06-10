@@ -1,4 +1,4 @@
-package io.gromif.tink_lab.presentation.files
+package io.gromif.tinkLab.presentation.files
 
 import androidx.compose.runtime.Stable
 

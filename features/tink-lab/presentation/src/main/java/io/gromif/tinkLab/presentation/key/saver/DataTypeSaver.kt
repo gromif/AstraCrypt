@@ -1,4 +1,4 @@
-package io.gromif.tink_lab.presentation.key.saver
+package io.gromif.tinkLab.presentation.key.saver
 
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.SaverScope

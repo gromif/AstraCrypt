@@ -1,4 +1,4 @@
-package io.gromif.tink_lab.presentation.key.menu
+package io.gromif.tinkLab.presentation.key.menu
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.DropdownMenuItem

@@ -1,20 +1,20 @@
-package io.gromif.tink_lab.presentation.files
+package io.gromif.tinkLab.presentation.key
 
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
 
-object FilesContracts {
+object KeyContracts {
 
     @Composable
-    fun openInput(onResult: (Uri) -> Unit) = rememberLauncherForActivityResult(
+    fun open(onResult: (Uri) -> Unit) = rememberLauncherForActivityResult(
         ActivityResultContracts.OpenDocument()
     ) { if (it != null) onResult(it) }
 
     @Composable
-    fun openOutputDir(onResult: (Uri) -> Unit) = rememberLauncherForActivityResult(
-        ActivityResultContracts.OpenDocumentTree()
+    fun save(onResult: (Uri) -> Unit) = rememberLauncherForActivityResult(
+        ActivityResultContracts.CreateDocument("text/plain")
     ) { if (it != null) onResult(it) }
 
 }

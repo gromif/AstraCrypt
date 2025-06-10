@@ -1,4 +1,4 @@
-package io.gromif.tink_lab.presentation.work
+package io.gromif.tinkLab.presentation.work
 
 import android.app.NotificationChannel
 import android.app.NotificationManager

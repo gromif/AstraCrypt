@@ -1,4 +1,4 @@
-package io.gromif.tink_lab.presentation.key
+package io.gromif.tinkLab.presentation.key
 
 import androidx.annotation.StringRes
 import io.gromif.astracrypt.resources.R

@@ -1,4 +1,4 @@
-package io.gromif.tink_lab.presentation.files
+package io.gromif.tinkLab.presentation.files
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.expandVertically
@@ -31,9 +31,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.gromif.astracrypt.resources.R
-import io.gromif.tink_lab.presentation.TinkLab
-import io.gromif.tink_lab.presentation.shared.AssociatedDataTextField
-import io.gromif.tink_lab.presentation.shared.EncryptionToolbar
+import io.gromif.tinkLab.presentation.TinkLab
+import io.gromif.tinkLab.presentation.shared.AssociatedDataTextField
+import io.gromif.tinkLab.presentation.shared.EncryptionToolbar
 import io.gromif.ui.compose.core.FilledTonalIconButton
 import io.gromif.ui.compose.core.ext.LocalWindowWidth
 import io.gromif.ui.compose.core.ext.isCompact

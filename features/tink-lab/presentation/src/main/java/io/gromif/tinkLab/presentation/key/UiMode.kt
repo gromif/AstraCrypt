@@ -1,4 +1,4 @@
-package io.gromif.tink_lab.presentation.key
+package io.gromif.tinkLab.presentation.key
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

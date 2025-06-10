@@ -1,4 +1,4 @@
-package io.gromif.tink_lab.presentation.text
+package io.gromif.tinkLab.presentation.text
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel

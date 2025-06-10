@@ -1,4 +1,4 @@
-package io.gromif.tink_lab.presentation.shared
+package io.gromif.tinkLab.presentation.shared
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons

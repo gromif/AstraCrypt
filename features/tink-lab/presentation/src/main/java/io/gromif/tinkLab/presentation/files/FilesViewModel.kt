@@ -1,4 +1,4 @@
-package io.gromif.tink_lab.presentation.files
+package io.gromif.tinkLab.presentation.files
 
 import android.content.Context
 import android.net.Uri
@@ -21,7 +21,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.gromif.astracrypt.utils.Mapper
 import io.gromif.astracrypt.utils.dispatchers.IoDispatcher
 import io.gromif.crypto.tink.core.encoders.Base64Encoder
-import io.gromif.tink_lab.presentation.work.TinkLabFilesWorker
+import io.gromif.tinkLab.presentation.work.TinkLabFilesWorker
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.async
 import kotlinx.coroutines.cancel

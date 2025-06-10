@@ -9,7 +9,7 @@
             android:foregroundServiceType="dataSync" />
 
         <service
-            android:name="io.gromif.tink_lab.presentation.work.TinkLabFilesWorker"
+            android:name="io.gromif.tinkLab.presentation.work.TinkLabFilesWorker"
             android:foregroundServiceType="dataSync"
             tools:ignore="Instantiatable" />
 
