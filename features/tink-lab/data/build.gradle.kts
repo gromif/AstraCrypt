@@ -17,4 +17,6 @@ dependencies {
 
     implementation(projects.core.utils)
     implementation(projects.core.crypto.tink)
+
+    implementation(libs.androidx.core.ktx)
 }

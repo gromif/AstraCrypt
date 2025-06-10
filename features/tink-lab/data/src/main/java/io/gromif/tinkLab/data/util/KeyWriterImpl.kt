@@ -1,7 +1,7 @@
 package io.gromif.tinkLab.data.util
 
 import android.content.ContentResolver
-import android.net.Uri
+import androidx.core.net.toUri
 import io.gromif.astracrypt.utils.Mapper
 import io.gromif.astracrypt.utils.Serializer
 import io.gromif.crypto.tink.keyset.parser.KeysetParser
@@ -14,7 +14,6 @@ class KeyWriterImpl(
     private val contentResolver: ContentResolver,
     private val keysetParser: KeysetParser,
     private val keysetSerializerWithKey: KeysetSerializerWithKey,
-    private val stringToUriMapper: Mapper<String, Uri>,
     private val keyToDtoMapper: Mapper<Key, KeyDto>,
     private val keySerializer: Serializer<KeyDto, String>
 ) : KeyWriter {
@@ -25,7 +24,7 @@ class KeyWriterImpl(
         keysetPassword: String,
         keysetAssociatedData: ByteArray
     ) {
-        val uri = stringToUriMapper(uriString)
+        val uri = uriString.toUri()
         val keysetHandle = keysetParser(key.rawKeyset)
         val serializedKeysetWithKey = keysetSerializerWithKey(
             keysetHandle = keysetHandle,
