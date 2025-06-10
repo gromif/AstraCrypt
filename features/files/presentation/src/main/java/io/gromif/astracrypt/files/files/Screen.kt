@@ -34,7 +34,9 @@ import io.gromif.astracrypt.files.files.model.Option
 import io.gromif.astracrypt.files.files.model.OptionsItem
 import io.gromif.astracrypt.files.files.model.StateHolder
 import io.gromif.astracrypt.files.files.model.action.Actions
+import io.gromif.astracrypt.files.files.model.action.BrowseActions
 import io.gromif.astracrypt.files.files.model.action.FilesNavActions
+import io.gromif.astracrypt.files.files.model.action.ImportActions
 import io.gromif.astracrypt.files.files.sheet.filesCreateNewSheet
 import io.gromif.astracrypt.files.files.sheet.filesOptionsSheet
 import io.gromif.astracrypt.files.files.util.contracts.Contracts
@@ -54,21 +56,20 @@ internal fun Screen(
     stateHolder: StateHolder = StateHolder(pagingFlow = FakeData.paging()),
     onContextualAction: Flow<ContextualAction> = emptyFlow(),
     imageLoader: ImageLoader = ImageLoader(LocalContext.current),
-    navActions: FilesNavActions = FilesNavActions(),
-    actions: Actions = Actions(),
+    actions: Actions.Holder = Actions.Holder(),
     maxNameLength: Int = 128,
 ) = Column {
     var optionsItem by rememberSaveable { mutableStateOf(OptionsItem()) }
     val items = stateHolder.pagingFlow.collectAsLazyPagingItems()
     if (!stateHolder.isSearching) {
         AnimatedVisibility(stateHolder.backStackList.isNotEmpty()) {
-            FilesBackStackList(stateHolder.backStackList, actions::backStackClick)
+            FilesBackStackList(stateHolder.backStackList, actions.browseActions::backStackClick)
         }
     }
 
     val sheetOptionsState = optionsSheetIntegration(
         optionsItem = optionsItem,
-        navActions = navActions,
+        navActions = actions.navigation,
         actions = actions,
         maxNameLength = maxNameLength
     )
@@ -77,7 +78,7 @@ internal fun Screen(
         items = items,
         imageLoader = imageLoader,
         stateHolder = stateHolder,
-        actions = actions,
+        browseActions = actions.browseActions,
         onOpenOptions = {
             optionsItem = it
             sheetOptionsState.value = true
@@ -86,25 +87,25 @@ internal fun Screen(
 
     var dialogNewFolder by newFolderDialog(
         maxLength = maxNameLength,
-        onCreate = actions::createFolder,
+        onCreate = actions.itemActions::createFolder,
     )
 
     val sheetCreateState = createSheetIntegration(
         onCreateFolder = { dialogNewFolder = true },
-        actions = actions
+        importActions = actions.importActions
     )
     FlowObserver(onContextualAction) {
         val multiselectList = stateHolder.multiselectStateList.toList()
         when (it) {
-            ContextualAction.Close -> actions.closeContextualToolbar()
+            ContextualAction.Close -> actions.toolbarActions.closeContextualToolbar()
             ContextualAction.Add -> sheetCreateState.value = true
             ContextualAction.CreateFolder -> dialogNewFolder = true
-            ContextualAction.Delete -> actions.delete(multiselectList)
-            ContextualAction.Move -> actions.move()
-            ContextualAction.MoveNavigation -> actions.setMoveMode()
-            is ContextualAction.Star -> actions.star(it.state, multiselectList)
+            ContextualAction.Delete -> actions.itemActions.delete(multiselectList)
+            ContextualAction.Move -> actions.itemActions.move()
+            ContextualAction.MoveNavigation -> actions.toolbarActions.setMoveMode()
+            is ContextualAction.Star -> actions.itemActions.star(it.state, multiselectList)
         }
-        if (it.resetMode) actions.closeContextualToolbar()
+        if (it.resetMode) actions.toolbarActions.closeContextualToolbar()
     }
 }
 
@@ -112,10 +113,12 @@ internal fun Screen(
 @Composable
 private fun createSheetIntegration(
     onCreateFolder: () -> Unit,
-    actions: Actions
+    importActions: ImportActions
 ): MutableState<Boolean> {
     var saveSourceState by rememberSaveable { mutableStateOf(true) }
-    val pickFileContract = Contracts.pickFile { actions.import(it.toTypedArray(), saveSourceState) }
+    val pickFileContract = Contracts.pickFile {
+        importActions.import(it.toTypedArray(), saveSourceState)
+    }
     var importMimeTypeState by rememberSaveable { mutableStateOf("") }
     var dialogDeleteSourceState by deleteSourceDialog { saveSource ->
         saveSourceState = saveSource
@@ -129,7 +132,7 @@ private fun createSheetIntegration(
             importMimeTypeState = "$it/*"
             dialogDeleteSourceState = true
         },
-        onScan = actions::scan,
+        onScan = importActions::scan,
     )
 }
 
@@ -139,15 +142,17 @@ private fun optionsSheetIntegration(
     sheetOptionsState: MutableState<Boolean> = Compose.state(),
     optionsItem: OptionsItem,
     navActions: FilesNavActions = FilesNavActions(),
-    actions: Actions = Actions(),
+    actions: Actions.Holder,
     maxNameLength: Int = 128,
 ): MutableState<Boolean> {
     val exportContract = Contracts.export { navActions.toExport(optionsItem.id, it) }
     var dialogRenameState by renameDialog(
         maxLength = maxNameLength,
         name = optionsItem.name
-    ) { actions.rename(optionsItem.id, it) }
-    var dialogDeleteState by deleteDialog(optionsItem.name) { actions.delete(listOf(optionsItem.id)) }
+    ) { actions.itemActions.rename(optionsItem.id, it) }
+    var dialogDeleteState by deleteDialog(optionsItem.name) {
+        actions.itemActions.delete(listOf(optionsItem.id))
+    }
 
     return filesOptionsSheet(
         state = sheetOptionsState,
@@ -159,12 +164,12 @@ private fun optionsSheetIntegration(
         sheetOptionsState.value = false
         val (id, _, isStarred) = optionsItem
         when (it) {
-            Option.Open -> actions.open(id)
+            Option.Open -> actions.browseActions.open(id)
             Option.Export -> exportContract.launch(null)
             Option.Rename -> dialogRenameState = true
             Option.Delete -> dialogDeleteState = true
-            Option.Star -> actions.star(state = !isStarred, idList = listOf(id))
-            Option.Select -> actions.longClick(id)
+            Option.Star -> actions.itemActions.star(state = !isStarred, idList = listOf(id))
+            Option.Select -> actions.browseActions.longClick(id)
             Option.Details -> navActions.toDetails(id)
         }
     }
@@ -175,7 +180,7 @@ private fun FilesListIntegration(
     items: LazyPagingItems<Item>,
     imageLoader: ImageLoader,
     stateHolder: StateHolder,
-    actions: Actions,
+    browseActions: BrowseActions,
     onOpenOptions: (OptionsItem) -> Unit
 ) {
     val isEmpty by remember {
@@ -207,8 +212,8 @@ private fun FilesListIntegration(
                 )
                 onOpenOptions(optionsItem)
             },
-            onClick = actions::click,
-            onLongPress = actions::longClick
+            onClick = browseActions::click,
+            onLongPress = browseActions::longClick
         )
     }
 }

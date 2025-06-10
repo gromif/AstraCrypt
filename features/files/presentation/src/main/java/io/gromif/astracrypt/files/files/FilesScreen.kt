@@ -16,17 +16,20 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import io.gromif.astracrypt.files.domain.model.Item
-import io.gromif.astracrypt.files.domain.repository.StorageNavigator
 import io.gromif.astracrypt.files.files.model.ContextualAction
 import io.gromif.astracrypt.files.files.model.Mode
 import io.gromif.astracrypt.files.files.model.StateHolder
 import io.gromif.astracrypt.files.files.model.action.Actions
+import io.gromif.astracrypt.files.files.model.action.BrowseActions
 import io.gromif.astracrypt.files.files.model.action.FilesNavActions
+import io.gromif.astracrypt.files.files.model.action.ImportActions
+import io.gromif.astracrypt.files.files.model.action.factory.createBrowseActions
+import io.gromif.astracrypt.files.files.model.action.factory.createImportActions
+import io.gromif.astracrypt.files.files.model.action.factory.createItemActions
+import io.gromif.astracrypt.files.files.model.action.factory.createToolbarActions
 import io.gromif.astracrypt.files.files.util.contracts.Contracts
 import io.gromif.astracrypt.files.files.util.contracts.scan
 import io.gromif.astracrypt.files.files.util.saver.rememberMultiselectStateList
-import io.gromif.astracrypt.resources.R
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -70,9 +73,6 @@ fun FilesScreen(
         }
     }
 
-    var cameraScanUri by rememberSaveable { mutableStateOf(Uri.EMPTY) }
-    val scanContract = Contracts.scan { vm.import(cameraScanUri) }
-
     val multiselectStateList = rememberMultiselectStateList()
     fun selectItem(id: Long) = with(multiselectStateList) {
         if (contains(id)) remove(id) else add(id)
@@ -104,90 +104,56 @@ fun FilesScreen(
         scope.launch { snackbarHostState.showSnackbar(context.getString(stringId)) }
     }
 
+    val browseActions = Actions.createBrowseActions(
+        vm = vm,
+        navActions = navActions,
+        state = BrowseActions.State(
+            mode = mode,
+            multiselectStateList = multiselectStateList,
+            isStarred = isStarred
+        ),
+        onSelectItem = ::selectItem
+    )
+    val importActions = createImportActions(vm = vm, onMessage = ::showSnackbar)
+    val itemActions = Actions.createItemActions(
+        vm = vm,
+        onMessage = ::showSnackbar,
+        multiselectStateList = multiselectStateList
+    )
+    val toolbarActions = Actions.createToolbarActions(
+        onCloseContextualToolbar = ::closeContextualToolbar,
+        onModeChange = onModeChange
+    )
+
     Screen(
         stateHolder = stateHolder,
         onContextualAction = onContextualAction,
         imageLoader = vm.imageLoader,
-        navActions = navActions,
-
-        actions = object : Actions() {
-            override fun backStackClick(folder: StorageNavigator.Folder?) {
-                folder?.let {
-                    vm.openDirectory(
-                        id = it.id,
-                        name = it.name
-                    )
-                } ?: vm.openRootDirectory()
-            }
-
-            override fun click(item: Item) {
-                val (id, _, name) = item
-                when {
-                    mode is Mode.Multiselect && multiselectStateList.isNotEmpty() -> selectItem(id)
-                    item.isFolder -> if (isStarred) {
-                        navActions.toFiles(id, name)
-                    } else {
-                        if (mode === Mode.Move && multiselectStateList.contains(id)) return
-                        vm.openDirectory(id, name)
-                    }
-                    else -> open(id)
-                }
-            }
-
-            override fun longClick(id: Long) {
-                if (mode !== Mode.Move) selectItem(id)
-            }
-
-            override fun setMoveMode() = onModeChange(Mode.Move)
-            override fun closeContextualToolbar() = closeContextualToolbar()
-
-            override fun open(id: Long) {
-                navActions.toExportPrivately(id)
-            }
-
-            override fun createFolder(name: String) {
-                vm.createFolder(name).invokeOnCompletion {
-                    showSnackbar(stringId = R.string.snack_folderCreated)
-                }
-            }
-
-            override fun import(uriList: Array<Uri>, saveSource: Boolean) {
-                vm.import(
-                    *uriList,
-                    saveSource = saveSource,
-                    onSuccess = { showSnackbar(R.string.snack_imported) },
-                    onError = { showSnackbar(R.string.error) }
-                )
-            }
-
-            override fun scan() {
-                cameraScanUri = vm.getCameraScanOutputUri()
-                scanContract.launch(cameraScanUri)
-            }
-
-            override fun move() {
-                vm.move(ids = multiselectStateList.toList()).invokeOnCompletion {
-                    showSnackbar(stringId = R.string.snack_itemsMoved)
-                }
-            }
-
-            override fun star(state: Boolean, idList: List<Long>) {
-                vm.setStarred(state, idList)
-                showSnackbar(if (state) R.string.snack_starred else R.string.snack_unstarred)
-            }
-
-            override fun rename(id: Long, name: String) {
-                vm.rename(id, name).invokeOnCompletion {
-                    showSnackbar(stringId = R.string.snack_itemRenamed)
-                }
-            }
-
-            override fun delete(idList: List<Long>) {
-                vm.delete(idList).invokeOnCompletion {
-                    showSnackbar(stringId = R.string.snack_itemsDeleted)
-                }
-            }
-        },
+        actions = Actions.Holder(
+            browseActions = browseActions,
+            importActions = importActions,
+            itemActions = itemActions,
+            toolbarActions = toolbarActions,
+            navigation = navActions
+        ),
         maxNameLength = validationRules.maxNameLength
+    )
+}
+
+@Composable
+private fun createImportActions(
+    vm: FilesViewModel,
+    onMessage: (Int) -> Unit
+): ImportActions {
+    var cameraScanUri by rememberSaveable { mutableStateOf(Uri.EMPTY) }
+    val scanContract = Contracts.scan { vm.import(cameraScanUri) }
+
+    return Actions.createImportActions(
+        vm = vm,
+        onScan = {
+            cameraScanUri = vm.getCameraScanOutputUri()
+            scanContract.launch(cameraScanUri)
+        },
+        onMessage = onMessage
     )
 }
