@@ -56,6 +56,7 @@ internal object UtilModule {
         keysetSerializer: KeysetSerializer,
         keysetParserWithKey: KeysetParserWithKey,
     ): KeyReader = KeyReaderImpl(
+        dispatcher = Dispatchers.IO,
         contentResolver = context.contentResolver,
         keyParser = keyParser,
         keysetParserWithKey = keysetParserWithKey,

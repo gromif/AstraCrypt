@@ -4,7 +4,7 @@ import io.gromif.tinkLab.domain.model.Key
 
 interface KeyReader {
 
-    operator fun invoke(
+    suspend operator fun invoke(
         uriString: String,
         keysetPassword: String,
         keysetAssociatedData: ByteArray
