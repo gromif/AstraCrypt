@@ -110,7 +110,7 @@ fun FilesScreen(
         imageLoader = vm.imageLoader,
         navActions = navActions,
 
-        actions = object : Actions {
+        actions = object : Actions() {
             override fun backStackClick(folder: StorageNavigator.Folder?) {
                 folder?.let {
                     vm.openDirectory(

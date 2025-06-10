@@ -120,7 +120,7 @@ private fun AnimatedContentScope.FilesSharedNavigation(
         snackbarHostState = hostStateHolder.snackbarHostState,
         searchQueryState = hostStateHolder.searchQueryState,
         onModeChange = { modeState = it },
-        navActions = object : FilesNavActions {
+        navActions = object : FilesNavActions() {
             override fun toFiles(id: Long, name: String) = with(navController) {
                 clearBackStack(Route.Tabs.Files())
                 navigate(Route.Tabs.Files(startParentId = id, startParentName = name)) {

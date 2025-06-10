@@ -4,23 +4,13 @@ import android.net.Uri
 import androidx.compose.runtime.Stable
 
 @Stable
-interface FilesNavActions {
+open class FilesNavActions {
 
-    companion object {
+    open fun toFiles(id: Long, name: String) {}
 
-        internal val Default = object : FilesNavActions {
-            override fun toFiles(id: Long, name: String) {}
-            override fun toExport(id: Long, output: Uri) {}
-            override fun toExportPrivately(id: Long) {}
-            override fun toDetails(id: Long) {}
-        }
-    }
+    open fun toExport(id: Long, output: Uri) {}
 
-    fun toFiles(id: Long, name: String)
+    open fun toExportPrivately(id: Long) {}
 
-    fun toExport(id: Long, output: Uri)
-
-    fun toExportPrivately(id: Long)
-
-    fun toDetails(id: Long)
+    open fun toDetails(id: Long) {}
 }

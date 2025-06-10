@@ -54,8 +54,8 @@ internal fun Screen(
     stateHolder: StateHolder = StateHolder(pagingFlow = FakeData.paging()),
     onContextualAction: Flow<ContextualAction> = emptyFlow(),
     imageLoader: ImageLoader = ImageLoader(LocalContext.current),
-    navActions: FilesNavActions = FilesNavActions.Default,
-    actions: Actions = Actions.Default,
+    navActions: FilesNavActions = FilesNavActions(),
+    actions: Actions = Actions(),
     maxNameLength: Int = 128,
 ) = Column {
     var optionsItem by rememberSaveable { mutableStateOf(OptionsItem()) }
@@ -138,7 +138,7 @@ private fun createSheetIntegration(
 private fun optionsSheetIntegration(
     sheetOptionsState: MutableState<Boolean> = Compose.state(),
     optionsItem: OptionsItem,
-    navActions: FilesNavActions = FilesNavActions.Default,
+    navActions: FilesNavActions = FilesNavActions(),
     actions: Actions = Actions(),
     maxNameLength: Int = 128,
 ): MutableState<Boolean> {
