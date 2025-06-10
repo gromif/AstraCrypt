@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.SavedStateHandleSaveableApi
 import androidx.lifecycle.viewmodel.compose.saveable
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.gromif.astracrypt.utils.Mapper
 import io.gromif.astracrypt.utils.dispatchers.IoDispatcher
 import io.gromif.tinkLab.domain.model.DataType
 import io.gromif.tinkLab.domain.model.Key
@@ -38,7 +37,6 @@ internal class KeyViewModel @Inject constructor(
     private val createLabKeyUseCase: CreateLabKeyUseCase,
     private val saveKeyUseCase: SaveKeyUseCase,
     private val loadKeyUseCase: LoadKeyUseCase,
-    private val uriToStringMapper: Mapper<Uri, String>,
     getFileAeadListUseCase: GetFileAeadListUseCase,
     getTextAeadListUseCase: GetTextAeadListUseCase
 ) : ViewModel() {
@@ -57,7 +55,7 @@ internal class KeyViewModel @Inject constructor(
 
     suspend fun save(key: Key, uri: Uri) = withContext(defaultDispatcher) {
         val keysetPassword = keysetPassword
-        val uriString = uriToStringMapper(uri)
+        val uriString = uri.toString()
         saveKeyUseCase(key = key, path = uriString, password = keysetPassword)
     }
 
