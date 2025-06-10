@@ -1,13 +1,12 @@
 package io.gromif.tinkLab.data.util
 
 import android.content.ContentResolver
-import android.net.Uri
-import io.gromif.astracrypt.utils.Mapper
+import androidx.core.net.toUri
 import io.gromif.astracrypt.utils.Parser
 import io.gromif.crypto.tink.keyset.parser.KeysetParserWithKey
 import io.gromif.crypto.tink.keyset.serializers.KeysetSerializer
 import io.gromif.tinkLab.data.dto.KeyDto
-import io.gromif.tinkLab.domain.model.Key
+import io.gromif.tinkLab.data.mapper.toKey
 import io.gromif.tinkLab.domain.util.KeyReader
 
 class KeyReaderImpl(
@@ -15,8 +14,6 @@ class KeyReaderImpl(
     private val keyParser: Parser<String, KeyDto>,
     private val keysetParserWithKey: KeysetParserWithKey,
     private val keysetSerializer: KeysetSerializer,
-    private val dtoToKeyMapper: Mapper<KeyDto, Key>,
-    private val stringToUriMapper: Mapper<String, Uri>
 ) : KeyReader {
 
     override fun invoke(
@@ -24,7 +21,7 @@ class KeyReaderImpl(
         keysetPassword: String,
         keysetAssociatedData: ByteArray
     ): KeyReader.Result = run {
-        val uri = stringToUriMapper(uriString)
+        val uri = uriString.toUri()
         val keyDto: KeyDto
         try {
             contentResolver.openInputStream(uri)?.use {
@@ -37,7 +34,7 @@ class KeyReaderImpl(
                 associatedData = keysetAssociatedData
             )
             val decryptedKeyDto = keyDto.copy(encryptedKeyset = keysetSerializer(keysetHandle))
-            KeyReader.Result.Success(dtoToKeyMapper(decryptedKeyDto))
+            KeyReader.Result.Success(decryptedKeyDto.toKey())
         } catch (_: Exception) {
             KeyReader.Result.Error
         }
