@@ -5,6 +5,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import io.gromif.tinkLab.domain.model.Repository
+import io.gromif.tinkLab.domain.repository.KeyRepository
 import io.gromif.tinkLab.domain.service.AeadTextService
 import io.gromif.tinkLab.domain.usecase.CreateLabKeyUseCase
 import io.gromif.tinkLab.domain.usecase.DecryptTextUseCase
@@ -32,8 +33,8 @@ internal object UseCasesModule {
         ParseKeysetUseCase(aeadTextService = aeadTextService)
 
     @Provides
-    fun provideCreateLabKeyUseCase(repository: Repository) =
-        CreateLabKeyUseCase(repository = repository)
+    fun provideCreateLabKeyUseCase(keyRepository: KeyRepository) =
+        CreateLabKeyUseCase(keyRepository = keyRepository)
 
     @Provides
     fun provideGetFileAeadListUseCase(repository: Repository) =
@@ -44,8 +45,10 @@ internal object UseCasesModule {
         GetTextAeadListUseCase(repository = repository)
 
     @Provides
-    fun provideSaveKeyUseCase(repository: Repository) = SaveKeyUseCase(repository = repository)
+    fun provideSaveKeyUseCase(keyRepository: KeyRepository) =
+        SaveKeyUseCase(keyRepository = keyRepository)
 
     @Provides
-    fun provideLoadKeyUseCase(repository: Repository) = LoadKeyUseCase(repository = repository)
+    fun provideLoadKeyUseCase(keyRepository: KeyRepository) =
+        LoadKeyUseCase(keyRepository = keyRepository)
 }

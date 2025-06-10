@@ -1,13 +1,13 @@
 package io.gromif.tinkLab.domain.usecase
 
-import io.gromif.tinkLab.domain.model.Repository
-import io.gromif.tinkLab.domain.util.KeyReader
+import io.gromif.tinkLab.domain.model.result.ReadKeyResult
+import io.gromif.tinkLab.domain.repository.KeyRepository
 
 class LoadKeyUseCase(
-    private val repository: Repository
+    private val keyRepository: KeyRepository
 ) {
 
-    operator fun invoke(path: String, password: String): KeyReader.Result {
-        return repository.load(path = path, password = password)
+    suspend operator fun invoke(path: String, password: String): ReadKeyResult {
+        return keyRepository.load(path = path, password = password)
     }
 }

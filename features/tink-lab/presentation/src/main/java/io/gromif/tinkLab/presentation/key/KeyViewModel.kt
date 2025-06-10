@@ -9,19 +9,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.SavedStateHandleSaveableApi
 import androidx.lifecycle.viewmodel.compose.saveable
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.gromif.astracrypt.utils.Mapper
-import io.gromif.astracrypt.utils.dispatchers.IoDispatcher
 import io.gromif.tinkLab.domain.model.DataType
 import io.gromif.tinkLab.domain.model.Key
+import io.gromif.tinkLab.domain.model.result.ReadKeyResult
 import io.gromif.tinkLab.domain.usecase.CreateLabKeyUseCase
 import io.gromif.tinkLab.domain.usecase.GetFileAeadListUseCase
 import io.gromif.tinkLab.domain.usecase.GetTextAeadListUseCase
 import io.gromif.tinkLab.domain.usecase.LoadKeyUseCase
 import io.gromif.tinkLab.domain.usecase.SaveKeyUseCase
-import io.gromif.tinkLab.domain.util.KeyReader
 import io.gromif.tinkLab.presentation.key.saver.DataTypeSaver
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 private const val UI_MODE = "ui_mode"
@@ -32,13 +28,10 @@ private const val AEAD_TYPE = "aead_type"
 @OptIn(SavedStateHandleSaveableApi::class)
 @HiltViewModel
 internal class KeyViewModel @Inject constructor(
-    @IoDispatcher
-    private val defaultDispatcher: CoroutineDispatcher,
     private val state: SavedStateHandle,
     private val createLabKeyUseCase: CreateLabKeyUseCase,
     private val saveKeyUseCase: SaveKeyUseCase,
     private val loadKeyUseCase: LoadKeyUseCase,
-    private val uriToStringMapper: Mapper<Uri, String>,
     getFileAeadListUseCase: GetFileAeadListUseCase,
     getTextAeadListUseCase: GetTextAeadListUseCase
 ) : ViewModel() {
@@ -52,17 +45,17 @@ internal class KeyViewModel @Inject constructor(
         mutableStateOf(DataType.Files)
     }
 
-    fun createKey(dataType: DataType, aeadType: String): Key =
+    suspend fun createKey(dataType: DataType, aeadType: String): Key =
         createLabKeyUseCase(dataType, aeadType.uppercase())
 
-    suspend fun save(key: Key, uri: Uri) = withContext(defaultDispatcher) {
+    suspend fun save(key: Key, uri: Uri) {
         val keysetPassword = keysetPassword
-        val uriString = uriToStringMapper(uri)
+        val uriString = uri.toString()
         saveKeyUseCase(key = key, path = uriString, password = keysetPassword)
     }
 
-    suspend fun load(path: String) = withContext(defaultDispatcher) {
+    suspend fun load(path: String): Key? {
         val result = loadKeyUseCase(path = path, password = keysetPassword)
-        if (result is KeyReader.Result.Success) result.key else null
+        return if (result is ReadKeyResult.Success) result.key else null
     }
 }

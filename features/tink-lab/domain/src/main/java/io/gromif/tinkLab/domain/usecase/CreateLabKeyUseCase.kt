@@ -2,17 +2,17 @@ package io.gromif.tinkLab.domain.usecase
 
 import io.gromif.tinkLab.domain.model.DataType
 import io.gromif.tinkLab.domain.model.Key
-import io.gromif.tinkLab.domain.model.Repository
+import io.gromif.tinkLab.domain.repository.KeyRepository
 
 class CreateLabKeyUseCase(
-    private val repository: Repository
+    private val keyRepository: KeyRepository
 ) {
 
-    operator fun invoke(
+    suspend operator fun invoke(
         dataType: DataType,
         aeadType: String
     ): Key {
-        return repository.createKey(
+        return keyRepository.createKey(
             dataType = dataType,
             aeadType = aeadType
         )
