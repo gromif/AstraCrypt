@@ -16,5 +16,4 @@ object FilesContracts {
     fun openOutputDir(onResult: (Uri) -> Unit) = rememberLauncherForActivityResult(
         ActivityResultContracts.OpenDocumentTree()
     ) { if (it != null) onResult(it) }
-
 }

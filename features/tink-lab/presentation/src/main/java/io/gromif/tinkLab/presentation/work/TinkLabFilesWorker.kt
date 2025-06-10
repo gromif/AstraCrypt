@@ -76,19 +76,22 @@ internal class TinkLabFilesWorker @AssistedInject constructor(
             dataAead.decrypt(
                 base64Encoder.decode(
                     inputData.getString(Args.TARGET_URI)!!.toByteArray()
-                ), dataAD
+                ),
+                dataAD
             ).decodeToString()
         )
         val associatedData = dataAead.decrypt(
             base64Encoder.decode(
                 inputData.getString(Args.ENCRYPTED_AD)!!.toByteArray()
-            ), dataAD
+            ),
+            dataAD
         )
         val keysetHandle = keysetParser(
             dataAead.decrypt(
                 base64Encoder.decode(
                     inputData.getString(Args.ENCRYPTED_KEYSET)!!.toByteArray()
-                ), dataAD
+                ),
+                dataAD
             ).decodeToString()
         )
         AndroidKeystore.deleteKey(ANDROID_KEYSET_ALIAS)
@@ -127,10 +130,14 @@ internal class TinkLabFilesWorker @AssistedInject constructor(
         val outputUri = destination.createFile(source.type!!, source.name!!)?.uri
         val input = contentResolver.openInputStream(sourceUri)!!
         val out = contentResolver.openOutputStream(outputUri!!, "wt")!!
-        if (mode) stream.newEncryptingStream(out, associatedData).use { outputStream ->
-            input.use { it.copyTo(outputStream) }
-        } else stream.newDecryptingStream(input, associatedData).use { inputStream ->
-            out.use { inputStream.copyTo(it) }
+        if (mode) {
+            stream.newEncryptingStream(out, associatedData).use { outputStream ->
+                input.use { it.copyTo(outputStream) }
+            }
+        } else {
+            stream.newDecryptingStream(input, associatedData).use { inputStream ->
+                out.use { inputStream.copyTo(it) }
+            }
         }
     }
 
@@ -153,11 +160,15 @@ internal class TinkLabFilesWorker @AssistedInject constructor(
             setOngoing(true)
             addAction(R.drawable.ic_close, cancelText, workerStopPendingIntent)
         }.build()
-        return if (Api.atLeast10()) ForegroundInfo(
-            notificationId,
-            notification,
-            ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC
-        ) else ForegroundInfo(notificationId, notification)
+        return if (Api.atLeast10()) {
+            ForegroundInfo(
+                notificationId,
+                notification,
+                ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC
+            )
+        } else {
+            ForegroundInfo(notificationId, notification)
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -178,5 +189,4 @@ internal class TinkLabFilesWorker @AssistedInject constructor(
         // Register the channel with the system
         NotificationManagerCompat.from(applicationContext).createNotificationChannel(channel)
     }
-
 }

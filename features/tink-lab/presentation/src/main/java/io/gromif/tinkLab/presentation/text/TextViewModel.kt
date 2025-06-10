@@ -60,5 +60,4 @@ internal class TextViewModel @Inject constructor(
 
     fun setAssociatedData(data: String) = state.set(ASSOCIATED_DATA, data)
     fun setText(text: String) = state.set(TEXT, text)
-
 }

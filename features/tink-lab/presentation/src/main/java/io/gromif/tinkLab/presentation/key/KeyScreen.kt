@@ -83,7 +83,9 @@ fun TinkLab.KeyScreen(
                     keysetPasswordErrorState = true
                     onInvalidPassword()
                     keysetPasswordErrorState = false
-                } else key = loadedKey
+                } else {
+                    key = loadedKey
+                }
             }
         }
         if (key != null) navigate(key.dataType, key.rawKeyset)
@@ -142,7 +144,8 @@ private fun Screen(
     ElevatedCard {
         val localWindowWidth = LocalWindowWidth.current
         val defaultVerticalArrangement = Arrangement.spacedBy(
-            MaterialTheme.spaces.spaceMedium, Alignment.CenterVertically
+            MaterialTheme.spaces.spaceMedium,
+            Alignment.CenterVertically
         )
         val defaultHorizontalArrangement = Arrangement.spacedBy(MaterialTheme.spaces.spaceSmall)
         Column(
@@ -235,9 +238,11 @@ private fun Screen(
                         horizontalAlignment = horizontalAlignment
                     ) {
                         aeadTypeMenu()
-                        if (!isLoadMode) toolbar(
-                            modifier = Modifier.height(TextFieldDefaults.MinHeight)
-                        )
+                        if (!isLoadMode) {
+                            toolbar(
+                                modifier = Modifier.height(TextFieldDefaults.MinHeight)
+                            )
+                        }
                     }
                 }
             }

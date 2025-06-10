@@ -65,5 +65,4 @@ internal class KeyViewModel @Inject constructor(
         val result = loadKeyUseCase(path = path, password = keysetPassword)
         if (result is KeyReader.Result.Success) result.key else null
     }
-
 }

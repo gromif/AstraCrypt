@@ -157,8 +157,11 @@ private fun Screen(
         value = associatedData,
         onValueChange = onAssociatedDataChange
     )
-    if (localWindowWidth.isCompact) clipboardToolbar()
-    else clipboardToolbarExpanded()
+    if (localWindowWidth.isCompact) {
+        clipboardToolbar()
+    } else {
+        clipboardToolbarExpanded()
+    }
     UserTextField(value = text, onValueChange = onTextChange)
 }
 

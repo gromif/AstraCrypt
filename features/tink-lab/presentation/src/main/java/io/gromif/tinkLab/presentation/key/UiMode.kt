@@ -13,5 +13,4 @@ internal sealed class UiMode : Parcelable {
     data class LoadKey(
         val keysetPath: String
     ) : UiMode()
-
 }

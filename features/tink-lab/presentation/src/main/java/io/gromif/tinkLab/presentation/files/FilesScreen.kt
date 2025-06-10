@@ -93,25 +93,27 @@ private fun Screen(
         SourceTextField(value = state.source, onSourceClick = onSourceClick)
         DestinationTextField(value = state.destination, onDestinationClick = onDestinationClick)
         DetailsCard(state = state.processingState)
-    } else Row(horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spaces.spaceMedium)) {
-        Column(
-            modifier = Modifier.weight(1f),
-            verticalArrangement = Arrangement.spacedBy(MaterialTheme.spaces.spaceMedium)
-        ) {
-            EncryptionToolbar(onEncrypt = onEncrypt, onDecrypt = onDecrypt)
-            DetailsCard(state = state.processingState)
-        }
-        Column(
-            modifier = Modifier.weight(1f),
-            verticalArrangement = Arrangement.spacedBy(MaterialTheme.spaces.spaceMedium)
-        ) {
-            AssociatedDataTextField(
-                modifier = Modifier.fillMaxWidth(),
-                value = state.associatedData,
-                onValueChange = onAssociatedDataChange
-            )
-            SourceTextField(value = state.source, onSourceClick = onSourceClick)
-            DestinationTextField(value = state.destination, onDestinationClick = onDestinationClick)
+    } else {
+        Row(horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spaces.spaceMedium)) {
+            Column(
+                modifier = Modifier.weight(1f),
+                verticalArrangement = Arrangement.spacedBy(MaterialTheme.spaces.spaceMedium)
+            ) {
+                EncryptionToolbar(onEncrypt = onEncrypt, onDecrypt = onDecrypt)
+                DetailsCard(state = state.processingState)
+            }
+            Column(
+                modifier = Modifier.weight(1f),
+                verticalArrangement = Arrangement.spacedBy(MaterialTheme.spaces.spaceMedium)
+            ) {
+                AssociatedDataTextField(
+                    modifier = Modifier.fillMaxWidth(),
+                    value = state.associatedData,
+                    onValueChange = onAssociatedDataChange
+                )
+                SourceTextField(value = state.source, onSourceClick = onSourceClick)
+                DestinationTextField(value = state.destination, onDestinationClick = onDestinationClick)
+            }
         }
     }
 }

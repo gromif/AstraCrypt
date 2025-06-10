@@ -16,5 +16,4 @@ object KeyContracts {
     fun save(onResult: (Uri) -> Unit) = rememberLauncherForActivityResult(
         ActivityResultContracts.CreateDocument("text/plain")
     ) { if (it != null) onResult(it) }
-
 }

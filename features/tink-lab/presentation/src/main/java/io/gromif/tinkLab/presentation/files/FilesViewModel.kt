@@ -112,5 +112,4 @@ internal class FilesViewModel @Inject constructor(
         state[STATE_DESTINATION_DIR_URI] = uriToStringMapper(uri)
         state[STATE_DESTINATION_DIR_NAME] = documentFile?.name ?: ""
     }
-
 }

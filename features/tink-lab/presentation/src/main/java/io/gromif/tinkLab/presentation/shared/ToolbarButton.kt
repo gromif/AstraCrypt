@@ -17,5 +17,9 @@ internal fun ToolbarButton(
     enabled: Boolean = true,
     onClick: () -> Unit = {}
 ) = FilledTonalButtonWithIcon(
-    modifier = modifier, enabled = enabled, icon = imageVector, title = text, onClick = onClick
+    modifier = modifier,
+    enabled = enabled,
+    icon = imageVector,
+    title = text,
+    onClick = onClick
 )
