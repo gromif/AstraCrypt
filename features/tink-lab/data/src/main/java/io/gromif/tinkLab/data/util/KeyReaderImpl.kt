@@ -23,7 +23,7 @@ class KeyReaderImpl(
         uriString: String,
         keysetPassword: String,
         keysetAssociatedData: ByteArray
-    ): KeyReader.Result {
+    ): KeyReader.Result = run {
         val uri = stringToUriMapper(uriString)
         val keyDto: KeyDto
         try {
@@ -37,9 +37,9 @@ class KeyReaderImpl(
                 associatedData = keysetAssociatedData
             )
             val decryptedKeyDto = keyDto.copy(encryptedKeyset = keysetSerializer(keysetHandle))
-            return KeyReader.Result.Success(dtoToKeyMapper(decryptedKeyDto))
+            KeyReader.Result.Success(dtoToKeyMapper(decryptedKeyDto))
         } catch (_: Exception) {
-            return KeyReader.Result.Error
+            KeyReader.Result.Error
         }
     }
 }
