@@ -4,13 +4,11 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.gromif.astracrypt.utils.dispatchers.IoDispatcher
 import io.gromif.tink_lab.domain.model.EncryptionException
 import io.gromif.tink_lab.domain.model.EncryptionResult
 import io.gromif.tink_lab.domain.usecase.DecryptTextUseCase
 import io.gromif.tink_lab.domain.usecase.EncryptTextUseCase
 import io.gromif.tink_lab.domain.usecase.ParseKeysetUseCase
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
@@ -21,8 +19,6 @@ private const val TEXT = "utext"
 
 @HiltViewModel
 internal class TextViewModel @Inject constructor(
-    @IoDispatcher
-    private val defaultDispatcher: CoroutineDispatcher,
     private val state: SavedStateHandle,
     private val parseKeysetUseCase: ParseKeysetUseCase,
     private val encryptTextUseCase: EncryptTextUseCase,
@@ -34,11 +30,11 @@ internal class TextViewModel @Inject constructor(
     private val encryptionExceptionsChannel = Channel<EncryptionException>()
     val encryptionExceptionsFlow = encryptionExceptionsChannel.receiveAsFlow()
 
-    fun parseKeysetHandle(rawKeyset: String) = viewModelScope.launch(defaultDispatcher) {
+    fun parseKeysetHandle(rawKeyset: String) = viewModelScope.launch {
         parseKeysetUseCase(rawKeyset)
     }
 
-    fun encrypt() = viewModelScope.launch(defaultDispatcher) {
+    fun encrypt() = viewModelScope.launch {
         val encryptionResult = encryptTextUseCase(
             text = textState.value,
             associatedData = associatedDataState.value
@@ -50,7 +46,7 @@ internal class TextViewModel @Inject constructor(
         }
     }
 
-    fun decrypt() = viewModelScope.launch(defaultDispatcher) {
+    fun decrypt() = viewModelScope.launch {
         val encryptionResult = decryptTextUseCase(
             encryptedText = textState.value,
             associatedData = associatedDataState.value

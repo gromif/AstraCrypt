@@ -21,8 +21,6 @@
     <ID>FunctionReturnTypeSpacing:Repository.kt$Repository$fun createKey(dataType: DataType, aeadType: String) : Key</ID>
     <ID>FunctionReturnTypeSpacing:Repository.kt$Repository$fun getFileAeadList() : List&lt;String&gt;</ID>
     <ID>FunctionReturnTypeSpacing:Repository.kt$Repository$fun getTextAeadList() : List&lt;String&gt;</ID>
-    <ID>MultiLineIfElse:DecryptTextUseCase.kt$DecryptTextUseCase$return EncryptionResult.Error(EncryptionException.NoValidKeyset)</ID>
-    <ID>MultiLineIfElse:EncryptTextUseCase.kt$EncryptTextUseCase$return EncryptionResult.Error(EncryptionException.NoValidKeyset)</ID>
     <ID>NewLineAtEndOfFile:CreateLabKeyUseCase.kt$io.gromif.tink_lab.domain.usecase.CreateLabKeyUseCase.kt</ID>
     <ID>NewLineAtEndOfFile:DataType.kt$io.gromif.tink_lab.domain.model.DataType.kt</ID>
     <ID>NewLineAtEndOfFile:DecryptTextUseCase.kt$io.gromif.tink_lab.domain.usecase.DecryptTextUseCase.kt</ID>
@@ -39,6 +37,7 @@
     <ID>NewLineAtEndOfFile:ParseKeysetUseCase.kt$io.gromif.tink_lab.domain.usecase.ParseKeysetUseCase.kt</ID>
     <ID>NewLineAtEndOfFile:Repository.kt$io.gromif.tink_lab.domain.model.Repository.kt</ID>
     <ID>NewLineAtEndOfFile:SaveKeyUseCase.kt$io.gromif.tink_lab.domain.usecase.SaveKeyUseCase.kt</ID>
+    <ID>NoBlankLineBeforeRbrace:AeadTextService.kt$AeadTextService$ </ID>
     <ID>NoBlankLineBeforeRbrace:CreateLabKeyUseCase.kt$CreateLabKeyUseCase$ </ID>
     <ID>NoBlankLineBeforeRbrace:DecryptTextUseCase.kt$DecryptTextUseCase$ </ID>
     <ID>NoBlankLineBeforeRbrace:EncryptTextUseCase.kt$EncryptTextUseCase$ </ID>
@@ -54,6 +53,7 @@
     <ID>NoBlankLineBeforeRbrace:ParseKeysetUseCase.kt$ParseKeysetUseCase$ </ID>
     <ID>NoBlankLineBeforeRbrace:Repository.kt$Repository$ </ID>
     <ID>NoBlankLineBeforeRbrace:SaveKeyUseCase.kt$SaveKeyUseCase$ </ID>
+    <ID>PackageName:AeadTextService.kt$package io.gromif.tink_lab.domain.service</ID>
     <ID>PackageName:CreateLabKeyUseCase.kt$package io.gromif.tink_lab.domain.usecase</ID>
     <ID>PackageName:DataType.kt$package io.gromif.tink_lab.domain.model</ID>
     <ID>PackageName:DecryptTextUseCase.kt$package io.gromif.tink_lab.domain.usecase</ID>
@@ -70,6 +70,7 @@
     <ID>PackageName:ParseKeysetUseCase.kt$package io.gromif.tink_lab.domain.usecase</ID>
     <ID>PackageName:Repository.kt$package io.gromif.tink_lab.domain.model</ID>
     <ID>PackageName:SaveKeyUseCase.kt$package io.gromif.tink_lab.domain.usecase</ID>
+    <ID>PackageNaming:AeadTextService.kt$package io.gromif.tink_lab.domain.service</ID>
     <ID>PackageNaming:CreateLabKeyUseCase.kt$package io.gromif.tink_lab.domain.usecase</ID>
     <ID>PackageNaming:DataType.kt$package io.gromif.tink_lab.domain.model</ID>
     <ID>PackageNaming:DecryptTextUseCase.kt$package io.gromif.tink_lab.domain.usecase</ID>
