@@ -10,11 +10,11 @@ private const val FAKE_LIST_SIZE = 10
 private const val FAKE_FOLDERS_COUNT = 4
 
 // fake data for preview
-internal object FakeData {
+object FakeData {
 
     fun paging(): Flow<PagingData<Item>> {
         // create pagingData from a list of fake data
-        val pagingData = PagingData.from(fileItems())
+        val pagingData = PagingData.Companion.from(fileItems())
         // pass pagingData containing fake data to a MutableStateFlow
         return MutableStateFlow(pagingData)
     }

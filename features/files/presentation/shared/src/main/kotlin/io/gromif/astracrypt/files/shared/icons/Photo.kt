@@ -20,17 +20,17 @@ import io.gromif.astracrypt.ui.design_system.darkScheme
 import io.gromif.astracrypt.ui.design_system.extendedColorScheme
 import io.gromif.astracrypt.ui.design_system.lightScheme
 
-internal val _FileType.File @Composable get() = default()
-internal val _FileType.FileAlt @Composable get() = alt()
+val _FileType.Photo @Composable get() = default()
+val _FileType.PhotoAlt @Composable get() = alt()
 
 @Composable
-private fun default(): ImageVector = with(MaterialTheme.extendedColorScheme.blue) {
-    file(background = colorContainer, foreground = onColorContainer)
+private fun default(): ImageVector = with(MaterialTheme.extendedColorScheme.green) {
+    photo(background = colorContainer, foreground = onColorContainer)
 }
 
 @Composable
 private fun alt(): ImageVector = with(MaterialTheme.colorScheme) {
-    file(background = onSurfaceVariant, foreground = surface)
+    photo(background = onSurfaceVariant, foreground = surface)
 }
 
 @Preview
@@ -48,8 +48,8 @@ private fun Preview(vectors: List<ImageVector> = listOf(default(), alt())) = Col
 }
 
 @Suppress("detekt:MagicNumber")
-private fun file(background: Color, foreground: Color) = ImageVector.Builder(
-    name = "file",
+private fun photo(background: Color, foreground: Color) = ImageVector.Builder(
+    name = "photo",
     defaultWidth = 24.dp,
     defaultHeight = 24.dp,
     viewportWidth = 24f,
@@ -57,22 +57,24 @@ private fun file(background: Color, foreground: Color) = ImageVector.Builder(
 ).apply {
     // Background Rectangle Path
     path(fill = SolidColor(background)) {
-        moveTo(14f, 2f)
-        horizontalLineTo(6f)
-        curveTo(4.9f, 2f, 4f, 2.9f, 4f, 4f)
-        verticalLineTo(20f)
-        curveTo(4f, 21.1f, 4.9f, 22f, 6f, 22f)
-        horizontalLineTo(18f)
-        curveTo(19.1f, 22f, 20f, 21.1f, 20f, 20f)
-        verticalLineTo(8f)
-        lineTo(14f, 2f)
+        moveTo(21f, 19f)
+        verticalLineTo(5f)
+        curveTo(21f, 3.9f, 20.1f, 3f, 19f, 3f)
+        horizontalLineTo(5f)
+        curveTo(3.9f, 3f, 3f, 3.9f, 3f, 5f)
+        verticalLineTo(19f)
+        curveTo(3f, 20.1f, 3.9f, 21f, 5f, 21f)
+        horizontalLineTo(19f)
+        curveTo(20.1f, 21f, 21f, 20.1f, 21f, 19f)
         close()
     }
     // Foreground Shape Path
     path(fill = SolidColor(foreground)) {
-        moveTo(13f, 8f)
-        verticalLineTo(3.5f)
-        lineTo(17.5f, 8f)
+        moveTo(8.5f, 13.5f)
+        lineTo(11f, 16.5f)
+        lineTo(14.5f, 12f)
+        lineTo(19f, 18f)
+        lineTo(5f, 18f)
         close()
     }
 }.build()
