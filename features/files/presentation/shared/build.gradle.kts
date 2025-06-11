@@ -17,4 +17,6 @@ dependencies {
     implementation(projects.ui.resources)
     implementation(projects.core.utils)
     implementation(projects.ui.designSystem)
+
+    implementation(libs.androidx.core.ktx)
 }
