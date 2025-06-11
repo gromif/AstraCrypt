@@ -17,6 +17,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import io.gromif.astracrypt.files.files.FilesScreen
 import io.gromif.astracrypt.files.files.model.ContextualAction
+import io.gromif.astracrypt.files.files.model.FilesInitialParams
 import io.gromif.astracrypt.files.files.model.Mode
 import io.gromif.astracrypt.files.files.model.action.FilesNavActions
 import io.gromif.astracrypt.presentation.navigation.BottomBarItems
@@ -112,10 +113,12 @@ private fun AnimatedContentScope.FilesSharedNavigation(
     }
 
     FilesScreen(
-        startParentId = startParentId,
-        startParentName = startParentName,
+        initialParams = FilesInitialParams(
+            startParentId = startParentId,
+            startParentName = startParentName,
+            isStarred = isStarred,
+        ),
         mode = modeState,
-        isStarred = isStarred,
         onContextualAction = contextChannel.receiveAsFlow(),
         snackbarHostState = hostStateHolder.snackbarHostState,
         searchQueryState = hostStateHolder.searchQueryState,

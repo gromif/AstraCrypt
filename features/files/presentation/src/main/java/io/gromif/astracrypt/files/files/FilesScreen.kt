@@ -17,6 +17,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.gromif.astracrypt.files.files.model.ContextualAction
+import io.gromif.astracrypt.files.files.model.FilesInitialParams
 import io.gromif.astracrypt.files.files.model.Mode
 import io.gromif.astracrypt.files.files.model.StateHolder
 import io.gromif.astracrypt.files.files.model.action.Actions
@@ -37,10 +38,8 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FilesScreen(
-    startParentId: Long? = null,
-    startParentName: String = "",
+    initialParams: FilesInitialParams,
     mode: Mode,
-    isStarred: Boolean,
     onContextualAction: Flow<ContextualAction>,
     snackbarHostState: SnackbarHostState,
     searchQueryState: StateFlow<String>,
@@ -63,11 +62,11 @@ fun FilesScreen(
         vm.closeDirectory()
     }
 
-    if (startParentId != null) {
+    if (initialParams.startParentId != null) {
         var recycled by rememberSaveable { mutableStateOf(false) }
         if (!recycled) {
             LaunchedEffect(Unit) {
-                vm.openDirectory(startParentId, startParentName)
+                vm.openDirectory(initialParams.startParentId, initialParams.startParentName)
                 recycled = true
             }
         }
@@ -88,12 +87,14 @@ fun FilesScreen(
 
     val stateHolder = remember(isSearching, multiselectStateList, backStack, viewMode) {
         StateHolder(
-            isStarred = isStarred,
+            isStarred = initialParams.isStarred,
             isSearching = isSearching,
             mode = mode,
             viewMode = viewMode,
-            pagingFlow = run {
-                if (isStarred && backStack.isEmpty()) vm.pagingStarredFlow else vm.pagingFlow
+            pagingFlow = if (initialParams.isStarred && backStack.isEmpty()) {
+                vm.pagingStarredFlow
+            } else {
+                vm.pagingFlow
             },
             multiselectStateList = multiselectStateList,
             backStackList = backStack,
@@ -110,7 +111,7 @@ fun FilesScreen(
         state = BrowseActions.State(
             mode = mode,
             multiselectStateList = multiselectStateList,
-            isStarred = isStarred
+            isStarred = initialParams.isStarred
         ),
         onSelectItem = ::selectItem
     )
