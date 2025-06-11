@@ -38,7 +38,7 @@ internal fun NavGraphBuilder.tabHome() = composable<HomeRoute> {
     }
 
     HomeScreen(
-        recentFilesActions = object : Actions {
+        recentFilesActions = object : Actions() {
             override fun openFile(id: Long) {
                 navController.navigate(Route.Export(isExternalExport = false, itemId = id))
             }

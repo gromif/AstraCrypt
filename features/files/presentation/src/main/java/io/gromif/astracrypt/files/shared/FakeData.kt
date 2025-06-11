@@ -6,6 +6,9 @@ import io.gromif.astracrypt.files.domain.model.ItemType
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 
+private const val FAKE_LIST_SIZE = 10
+private const val FAKE_FOLDERS_COUNT = 4
+
 // fake data for preview
 internal object FakeData {
 
@@ -16,8 +19,8 @@ internal object FakeData {
         return MutableStateFlow(pagingData)
     }
 
-    fun fileItems(): List<Item> = List(10) {
-        var isFolder = it <= 4
+    fun fileItems(): List<Item> = List(FAKE_LIST_SIZE) {
+        var isFolder = it <= FAKE_FOLDERS_COUNT
         Item(
             id = it.toLong(),
             name = "Item $it",
