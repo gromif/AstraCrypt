@@ -19,8 +19,8 @@ import io.gromif.astracrypt.files.shared._FileType
 import io.gromif.astracrypt.ui.design_system.darkScheme
 import io.gromif.astracrypt.ui.design_system.lightScheme
 
-internal val _FileType.Audio @Composable get() = default()
-internal val _FileType.AudioAlt @Composable get() = alt()
+val _FileType.Audio @Composable get() = default()
+val _FileType.AudioAlt @Composable get() = alt()
 
 @Composable
 private fun default(): ImageVector = with(MaterialTheme.colorScheme) {

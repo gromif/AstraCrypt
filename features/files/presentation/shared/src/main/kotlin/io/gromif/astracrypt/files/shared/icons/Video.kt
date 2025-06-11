@@ -20,8 +20,8 @@ import io.gromif.astracrypt.ui.design_system.darkScheme
 import io.gromif.astracrypt.ui.design_system.extendedColorScheme
 import io.gromif.astracrypt.ui.design_system.lightScheme
 
-internal val _FileType.Video @Composable get() = default()
-internal val _FileType.VideoAlt @Composable get() = alt()
+val _FileType.Video @Composable get() = default()
+val _FileType.VideoAlt @Composable get() = alt()
 
 @Composable
 private fun default(): ImageVector = with(MaterialTheme.extendedColorScheme.violet) {

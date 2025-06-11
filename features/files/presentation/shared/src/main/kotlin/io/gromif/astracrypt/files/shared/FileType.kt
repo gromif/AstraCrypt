@@ -18,9 +18,9 @@ import io.gromif.astracrypt.files.shared.icons.Video
 import io.gromif.astracrypt.files.shared.icons.VideoAlt
 import io.gromif.astracrypt.resources.R
 
-internal val Icons.FileType get() = _FileType
+val Icons.FileType get() = _FileType
 
-internal object _FileType
+object _FileType
 
 val _FileType.Folder @Composable get() = Icons.Default.Folder
 
@@ -37,7 +37,7 @@ val ItemType.icon @Composable get() = when (this) {
     -> Icons.FileType.File
 }
 
-internal val ItemType.iconAlt @Composable get() = when (this) {
+val ItemType.iconAlt @Composable get() = when (this) {
     ItemType.Folder -> Icons.FileType.Folder
     ItemType.Photo -> Icons.FileType.PhotoAlt
     ItemType.Music -> Icons.FileType.AudioAlt
@@ -50,7 +50,7 @@ internal val ItemType.iconAlt @Composable get() = when (this) {
     -> Icons.FileType.FileAlt
 }
 
-internal val ItemType.title get() = when (this) {
+val ItemType.title get() = when (this) {
     ItemType.Folder -> R.string.folder
     ItemType.Photo -> R.string.photo
     ItemType.Music -> R.string.music
@@ -61,7 +61,7 @@ internal val ItemType.title get() = when (this) {
     ItemType.Text -> R.string.text
 }
 
-internal val ItemType.iconTint @Composable get() = when (this) {
+val ItemType.iconTint @Composable get() = when (this) {
     ItemType.Folder -> MaterialTheme.colorScheme.onSurfaceVariant
     else -> Color.Unspecified
 }
