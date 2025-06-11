@@ -1,4 +1,4 @@
-package io.gromif.astracrypt.files.dto
+package io.gromif.astracrypt.files.settings.dto
 
 import io.gromif.astracrypt.files.domain.model.AeadInfo
 import io.gromif.astracrypt.files.domain.model.AeadMode

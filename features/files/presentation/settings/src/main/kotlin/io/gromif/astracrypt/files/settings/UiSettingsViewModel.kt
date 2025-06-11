@@ -22,7 +22,7 @@ internal class UiSettingsViewModel @Inject constructor(
 ) : ViewModel() {
     val viewModeState = getListViewModeUseCase().stateIn(
         viewModelScope,
-        SharingStarted.WhileSubscribed(),
+        SharingStarted.Companion.WhileSubscribed(),
         ViewMode.Grid
     )
 
