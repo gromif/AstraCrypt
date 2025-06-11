@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>FinalNewline:RecentFilesViewModel.kt$io.gromif.astracrypt.files.recent.RecentFilesViewModel.kt</ID>
+    <ID>LongMethod:Item.kt$@Composable internal fun RecentFilesListItem( modifier: Modifier = Modifier, imageLoader: ImageLoader, name: String, preview: FileSource?, itemType: ItemType, state: ItemState, onClick: () -&gt; Unit )</ID>
+    <ID>LongParameterList:Item.kt$( modifier: Modifier = Modifier, imageLoader: ImageLoader, name: String, preview: FileSource?, itemType: ItemType, state: ItemState, onClick: () -&gt; Unit )</ID>
+    <ID>NewLineAtEndOfFile:RecentFilesViewModel.kt$io.gromif.astracrypt.files.recent.RecentFilesViewModel.kt</ID>
+  </CurrentIssues>
+</SmellBaseline>
