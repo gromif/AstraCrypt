@@ -36,7 +36,9 @@ val filesModules = listOf(
     "data",
     "di",
     "presentation",
+    "presentation:details",
     "presentation:recent",
+    "presentation:settings",
     "presentation:shared",
 )
 
@@ -82,4 +84,3 @@ include(":features:about:fdroid")
 include(":features:about:privacy")
 include(":features:quick-actions")
 include(":features:donate")
-include(":features:files:presentation:details")
