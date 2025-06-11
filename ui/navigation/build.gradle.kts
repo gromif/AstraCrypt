@@ -14,6 +14,7 @@ dependencies {
     implementation(projects.ui.resources)
 
     implementation(projects.features.files.presentation)
+    implementation(projects.features.files.presentation.details)
     implementation(projects.features.files.presentation.recent)
     implementation(projects.features.tinkLab.presentation)
     implementation(projects.features.labZip.presentation)

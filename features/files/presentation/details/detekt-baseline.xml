@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>FinalNewline:DetailsScreenViewModel.kt$io.gromif.astracrypt.files.details.DetailsScreenViewModel.kt</ID>
+    <ID>MagicNumber:DetailsGroup.kt$1024.0</ID>
+    <ID>MagicNumber:FilesDetailsScreen.kt$0.5f</ID>
+    <ID>NewLineAtEndOfFile:DetailsScreenViewModel.kt$io.gromif.astracrypt.files.details.DetailsScreenViewModel.kt</ID>
+  </CurrentIssues>
+</SmellBaseline>
