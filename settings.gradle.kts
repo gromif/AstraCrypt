@@ -31,12 +31,21 @@ val features = listOf(
     "tink-lab",
 )
 
+val filesModules = listOf(
+    "domain",
+    "data",
+    "di",
+    "presentation",
+    "presentation:shared",
+)
+
 // Include all modules
 include(":app")
 include("core", coreModules)
 include("contract", contractGroup)
 include("core:crypto", cryptoCoreModules)
 include("features", featuresModules)
+include("features:files", filesModules)
 includeFeatures()
 include("ui", uiModules)
 
