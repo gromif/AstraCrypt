@@ -22,9 +22,9 @@ internal val Icons.FileType get() = _FileType
 
 internal object _FileType
 
-internal val _FileType.Folder @Composable get() = Icons.Default.Folder
+val _FileType.Folder @Composable get() = Icons.Default.Folder
 
-internal val ItemType.icon @Composable get() = when (this) {
+val ItemType.icon @Composable get() = when (this) {
     ItemType.Folder -> Icons.FileType.Folder
     ItemType.Photo -> Icons.FileType.Photo
     ItemType.Music -> Icons.FileType.Audio

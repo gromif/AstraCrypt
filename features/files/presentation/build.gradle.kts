@@ -18,6 +18,7 @@ android {
 }
 
 dependencies {
+    implementation(projects.features.files.presentation.shared)
     implementation(projects.contract.secureContent)
 
     implementation(projects.features.files.domain)
