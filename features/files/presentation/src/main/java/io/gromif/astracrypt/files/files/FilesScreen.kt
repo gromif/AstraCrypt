@@ -61,16 +61,7 @@ fun FilesScreen(
     BackHandler(enabled = !isSearching && backStack.isNotEmpty()) {
         vm.closeDirectory()
     }
-
-    if (initialParams.startParentId != null) {
-        var recycled by rememberSaveable { mutableStateOf(false) }
-        if (!recycled) {
-            LaunchedEffect(Unit) {
-                vm.openDirectory(initialParams.startParentId, initialParams.startParentName)
-                recycled = true
-            }
-        }
-    }
+    AcknowledgeInitialParams(vm = vm, initialParams = initialParams)
 
     val multiselectStateList = rememberMultiselectStateList()
     fun selectItem(id: Long) = with(multiselectStateList) {
@@ -139,6 +130,22 @@ fun FilesScreen(
         ),
         maxNameLength = validationRules.maxNameLength
     )
+}
+
+@Composable
+private fun AcknowledgeInitialParams(
+    vm: FilesViewModel,
+    initialParams: FilesInitialParams
+) {
+    if (initialParams.startParentId != null) {
+        var recycled by rememberSaveable { mutableStateOf(false) }
+        if (!recycled) {
+            LaunchedEffect(Unit) {
+                vm.openDirectory(initialParams.startParentId, initialParams.startParentName)
+                recycled = true
+            }
+        }
+    }
 }
 
 @Composable
