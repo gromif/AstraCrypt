@@ -23,7 +23,7 @@ import io.gromif.ui.compose.core.theme.spaces
 internal fun RecentFilesList(
     list: List<Item> = FakeData.fileItems(),
     imageLoader: ImageLoader = ImageLoader(LocalContext.current),
-    actions: Actions = Actions.default,
+    actions: Actions = Actions(),
 ) = HorizontalMultiBrowseCarousel(
     state = rememberCarouselState { list.size },
     preferredItemWidth = 180.dp,
