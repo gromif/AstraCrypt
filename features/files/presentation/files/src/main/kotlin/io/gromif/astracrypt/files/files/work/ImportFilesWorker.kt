@@ -1,4 +1,4 @@
-package io.gromif.astracrypt.files.work
+package io.gromif.astracrypt.files.files.work
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -24,7 +24,7 @@ import java.io.File
 import kotlin.random.Random
 
 @HiltWorker
-class ImportFilesWorker @AssistedInject constructor(
+internal class ImportFilesWorker @AssistedInject constructor(
     @Assisted context: Context,
     @Assisted params: WorkerParameters,
     @IoDispatcher
@@ -74,7 +74,7 @@ class ImportFilesWorker @AssistedInject constructor(
             setSilent(true)
             addAction(R.drawable.ic_close, cancelText, workerStopPendingIntent)
         }.build()
-        val notificationId = Random.nextInt()
+        val notificationId = Random.Default.nextInt()
         return if (Api.atLeast10()) {
             ForegroundInfo(
                 notificationId,

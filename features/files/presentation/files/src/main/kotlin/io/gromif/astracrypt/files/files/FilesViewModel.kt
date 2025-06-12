@@ -22,7 +22,7 @@ import io.gromif.astracrypt.files.domain.usecase.preferences.GetListViewModeUseC
 import io.gromif.astracrypt.files.files.util.ActionUseCases
 import io.gromif.astracrypt.files.files.util.DataUseCases
 import io.gromif.astracrypt.files.files.util.NavigatorUseCases
-import io.gromif.astracrypt.files.work.ImportFilesWorker
+import io.gromif.astracrypt.files.files.work.ImportFilesWorker
 import io.gromif.astracrypt.utils.dispatchers.IoDispatcher
 import io.gromif.astracrypt.utils.io.FilesUtil
 import io.gromif.astracrypt.utils.io.WorkerSerializer

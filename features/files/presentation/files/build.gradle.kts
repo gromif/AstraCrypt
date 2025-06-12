@@ -14,7 +14,7 @@ plugins {
 }
 
 android {
-    namespace = "io.gromif.astracrypt.files"
+    namespace = "io.gromif.astracrypt.files.files"
 }
 
 dependencies {
@@ -24,10 +24,7 @@ dependencies {
     implementation(projects.features.files.domain)
     implementation(projects.features.files.di)
 
-    implementation(projects.ui.composeDetails)
     implementation(projects.core.crypto.tink)
     implementation(projects.ui.resources)
     implementation(projects.core.utils)
-
-    implementation(projects.ui.designSystem)
 }

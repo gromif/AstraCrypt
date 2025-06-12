@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
 
 @Stable
-data class StateHolder(
+internal data class StateHolder(
     val isStarred: Boolean = false,
     val isSearching: Boolean = false,
     val mode: Mode = Mode.Default,
