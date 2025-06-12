@@ -14,8 +14,8 @@ import contract.secureContent.SecureContentContract
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.gromif.astracrypt.files.domain.usecase.export.InternalExportUseCase
 import io.gromif.astracrypt.files.export.model.ExportStateHolder
-import io.gromif.astracrypt.files.work.ExportFilesWorker
-import io.gromif.astracrypt.files.work.ExportFilesWorker.Args
+import io.gromif.astracrypt.files.export.work.ExportFilesWorker
+import io.gromif.astracrypt.files.export.work.ExportFilesWorker.Args
 import io.gromif.astracrypt.utils.Mapper
 import io.gromif.astracrypt.utils.dispatchers.IoDispatcher
 import io.gromif.astracrypt.utils.io.FilesUtil

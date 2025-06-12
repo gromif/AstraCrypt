@@ -1,4 +1,4 @@
-package io.gromif.astracrypt.files.work
+package io.gromif.astracrypt.files.export.work
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -66,7 +66,7 @@ class ExportFilesWorker @AssistedInject constructor(
             setOngoing(true)
             addAction(R.drawable.ic_close, cancelText, workerStopPendingIntent)
         }.build()
-        val notificationId = Random.nextInt()
+        val notificationId = Random.Default.nextInt()
         return if (Api.atLeast10()) {
             ForegroundInfo(
                 notificationId,
