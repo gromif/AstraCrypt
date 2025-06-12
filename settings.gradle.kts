@@ -37,6 +37,7 @@ val filesModules = listOf(
     "di",
     "presentation",
     "presentation:details",
+    "presentation:export",
     "presentation:recent",
     "presentation:settings",
     "presentation:shared",

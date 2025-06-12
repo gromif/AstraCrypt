@@ -15,6 +15,7 @@ dependencies {
 
     implementation(projects.features.files.presentation)
     implementation(projects.features.files.presentation.details)
+    implementation(projects.features.files.presentation.export)
     implementation(projects.features.files.presentation.recent)
     implementation(projects.features.files.presentation.settings)
     implementation(projects.features.tinkLab.presentation)
