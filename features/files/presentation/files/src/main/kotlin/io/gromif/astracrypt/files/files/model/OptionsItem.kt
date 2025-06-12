@@ -5,7 +5,7 @@ import io.gromif.astracrypt.files.domain.model.ItemType
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class OptionsItem(
+internal data class OptionsItem(
     val id: Long = -1,
     val name: String = "Folder",
     val isStarred: Boolean = false,
