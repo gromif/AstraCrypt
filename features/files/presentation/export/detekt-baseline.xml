@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>FinalNewline:ExportFilesWorker.kt$io.gromif.astracrypt.files.export.work.ExportFilesWorker.kt</ID>
+    <ID>LongMethod:Screen.kt$@Preview(showBackground = true) @Composable internal fun Screen( isExternalExport: Boolean = false, state: ExportStateHolder = ExportStateHolder(), onStart: () -&gt; Unit = {}, onOpenExportedFile: () -&gt; Unit = {}, onCancelExport: () -&gt; Unit = {}, onDispose: () -&gt; Unit = {} )</ID>
+    <ID>LongParameterList:Screen.kt$( isExternalExport: Boolean = false, state: ExportStateHolder = ExportStateHolder(), onStart: () -&gt; Unit = {}, onOpenExportedFile: () -&gt; Unit = {}, onCancelExport: () -&gt; Unit = {}, onDispose: () -&gt; Unit = {} )</ID>
+    <ID>MagicNumber:ExportFilesWorker.kt$ExportFilesWorker$100</ID>
+    <ID>NewLineAtEndOfFile:ExportFilesWorker.kt$io.gromif.astracrypt.files.export.work.ExportFilesWorker.kt</ID>
+  </CurrentIssues>
+</SmellBaseline>
