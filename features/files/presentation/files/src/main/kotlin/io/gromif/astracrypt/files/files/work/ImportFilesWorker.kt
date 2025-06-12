@@ -24,7 +24,7 @@ import java.io.File
 import kotlin.random.Random
 
 @HiltWorker
-class ImportFilesWorker @AssistedInject constructor(
+internal class ImportFilesWorker @AssistedInject constructor(
     @Assisted context: Context,
     @Assisted params: WorkerParameters,
     @IoDispatcher
