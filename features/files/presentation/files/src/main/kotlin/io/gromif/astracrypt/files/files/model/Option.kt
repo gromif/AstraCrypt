@@ -1,6 +1,6 @@
 package io.gromif.astracrypt.files.files.model
 
-enum class Option {
+internal enum class Option {
     Open,
     Export,
     Rename,
