@@ -13,7 +13,6 @@ android {
 dependencies {
     implementation(projects.ui.resources)
 
-    implementation(projects.features.files.presentation)
     implementation(projects.features.files.presentation.details)
     implementation(projects.features.files.presentation.export)
     implementation(projects.features.files.presentation.files)

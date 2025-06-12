@@ -35,7 +35,6 @@ val filesModules = listOf(
     "domain",
     "data",
     "di",
-    "presentation",
     "presentation:details",
     "presentation:export",
     "presentation:files",
