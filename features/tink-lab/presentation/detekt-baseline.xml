@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>LongMethod:KeyScreen.kt$@OptIn(ExperimentalMaterial3Api::class) @Preview(showBackground = true) @Composable private fun Screen( modifier: Modifier = Modifier, state: KeyScreenState = KeyScreenState(), onSelectDataType: (DataType) -&gt; Unit = {}, onSelectAeadType: (String) -&gt; Unit = {}, onLoadClick: () -&gt; Unit = {}, onSaveClick: () -&gt; Unit = {}, onChangeKeysetKey: (String) -&gt; Unit = {} )</ID>
+    <ID>LongParameterList:AeadTypeMenu.kt$( expanded: Boolean = false, enabled: Boolean = true, text: String = "Field", label: String = "Label", items: List&lt;String&gt;, onExpandedChange: (Boolean) -&gt; Unit = {}, onSelect: (String) -&gt; Unit = {} )</ID>
+    <ID>LongParameterList:DataTypeMenu.kt$( modifier: Modifier = Modifier, expanded: Boolean = false, enabled: Boolean = true, text: String = "Field", label: String = "Label", items: List&lt;DataType&gt;, onExpandedChange: (Boolean) -&gt; Unit = {}, onSelect: (DataType) -&gt; Unit = {}, )</ID>
+    <ID>LongParameterList:FilesScreen.kt$( modifier: Modifier = Modifier, state: FilesScreenState = FilesScreenState(), onEncrypt: () -&gt; Unit = {}, onDecrypt: () -&gt; Unit = {}, onAssociatedDataChange: (String) -&gt; Unit = {}, onSourceClick: () -&gt; Unit = {}, onDestinationClick: () -&gt; Unit = {}, )</ID>
+    <ID>LongParameterList:KeyScreen.kt$( modifier: Modifier = Modifier, state: KeyScreenState = KeyScreenState(), onSelectDataType: (DataType) -&gt; Unit = {}, onSelectAeadType: (String) -&gt; Unit = {}, onLoadClick: () -&gt; Unit = {}, onSaveClick: () -&gt; Unit = {}, onChangeKeysetKey: (String) -&gt; Unit = {} )</ID>
+    <ID>LongParameterList:KeyViewModel.kt$KeyViewModel$( @IoDispatcher private val defaultDispatcher: CoroutineDispatcher, private val state: SavedStateHandle, private val createLabKeyUseCase: CreateLabKeyUseCase, private val saveKeyUseCase: SaveKeyUseCase, private val loadKeyUseCase: LoadKeyUseCase, private val uriToStringMapper: Mapper&lt;Uri, String&gt;, getFileAeadListUseCase: GetFileAeadListUseCase, getTextAeadListUseCase: GetTextAeadListUseCase )</ID>
+    <ID>LongParameterList:TextScreen.kt$( modifier: Modifier = Modifier, associatedData: String = "PREVIEW_AD", onAssociatedDataChange: (String) -&gt; Unit = {}, text: String = "PREVIEW_TEXT", onTextChange: (String) -&gt; Unit = {}, onPasteClick: () -&gt; Unit = {}, onClearClick: () -&gt; Unit = {}, onCopyClick: () -&gt; Unit = {}, onEncrypt: () -&gt; Unit = {}, onDecrypt: () -&gt; Unit = {}, )</ID>
+    <ID>LongParameterList:TinkLabFilesWorker.kt$TinkLabFilesWorker$( @Assisted context: Context, @Assisted params: WorkerParameters, @IoDispatcher private val defaultDispatcher: CoroutineDispatcher, private val keysetParser: KeysetParser, private val workManager: WorkManager, private val base64Encoder: Base64Encoder, private val stringToUriMapper: Mapper&lt;String, Uri&gt; )</ID>
+    <ID>MagicNumber:EncryptionToolbar.kt$0.5f</ID>
+    <ID>MagicNumber:KeyScreen.kt$0.5f</ID>
+    <ID>MagicNumber:KeyScreen.kt$0.8f</ID>
+    <ID>MagicNumber:TextScreen.kt$0.8f</ID>
+    <ID>MagicNumber:TinkLabFilesWorker.kt$TinkLabFilesWorker$100</ID>
+    <ID>MagicNumber:TinkLabFilesWorker.kt$TinkLabFilesWorker$202</ID>
+  </CurrentIssues>
+</SmellBaseline>

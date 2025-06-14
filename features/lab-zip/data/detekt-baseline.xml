@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>FinalNewline:RepositoryImpl.kt$io.gromif.lab_zip.data.RepositoryImpl.kt</ID>
+    <ID>NewLineAtEndOfFile:RepositoryImpl.kt$io.gromif.lab_zip.data.RepositoryImpl.kt</ID>
+    <ID>PackageName:RepositoryImpl.kt$package io.gromif.lab_zip.data</ID>
+    <ID>PackageNaming:RepositoryImpl.kt$package io.gromif.lab_zip.data</ID>
+    <ID>SpacingAroundColon:RepositoryImpl.kt$RepositoryImpl$:</ID>
+  </CurrentIssues>
+</SmellBaseline>

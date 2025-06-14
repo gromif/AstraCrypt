@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>FinalNewline:TinkDataStore.kt$io.gromif.tink_datastore.TinkDataStore.kt</ID>
+    <ID>MultiLineIfElse:TinkDataStore.kt$TinkDataStore$DEFAULT_AEAD</ID>
+    <ID>MultiLineIfElse:TinkDataStore.kt$TinkDataStore$get(stringPreferencesKey(key))</ID>
+    <ID>MultiLineIfElse:TinkDataStore.kt$TinkDataStore$set(stringPreferencesKey(key), value)</ID>
+    <ID>NewLineAtEndOfFile:TinkDataStore.kt$io.gromif.tink_datastore.TinkDataStore.kt</ID>
+    <ID>NoBlankLineBeforeRbrace:TinkDataStore.kt$TinkDataStore$ </ID>
+    <ID>NoBlankLineBeforeRbrace:TinkDataStore.kt$TinkDataStore.Params$ </ID>
+    <ID>NoConsecutiveBlankLines:TinkDataStore.kt$TinkDataStore$ </ID>
+    <ID>PackageName:TinkDataStore.kt$package io.gromif.tink_datastore</ID>
+    <ID>PackageNaming:TinkDataStore.kt$package io.gromif.tink_datastore</ID>
+    <ID>StringTemplate:TinkDataStore.kt$TinkDataStore$${keyPrfHash}</ID>
+    <ID>TooManyFunctions:TinkDataStore.kt$TinkDataStore</ID>
+  </CurrentIssues>
+</SmellBaseline>

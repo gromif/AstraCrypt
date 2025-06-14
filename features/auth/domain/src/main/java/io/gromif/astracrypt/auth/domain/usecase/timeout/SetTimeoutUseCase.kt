@@ -13,5 +13,4 @@ class SetTimeoutUseCase(
         val auth = getAuthUseCase()
         setAuthUseCase(auth.copy(timeout = timeout))
     }
-
 }

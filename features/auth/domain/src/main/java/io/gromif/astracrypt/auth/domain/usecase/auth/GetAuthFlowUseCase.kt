@@ -11,5 +11,4 @@ class GetAuthFlowUseCase(
     operator fun invoke(): Flow<Auth> {
         return settingsRepository.authFlow
     }
-
 }

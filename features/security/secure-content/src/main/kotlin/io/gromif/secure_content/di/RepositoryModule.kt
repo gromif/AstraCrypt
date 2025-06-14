@@ -2,7 +2,7 @@ package io.gromif.secure_content.di
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
-import contract.secure_content.SecureContentContract
+import contract.secureContent.SecureContentContract
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

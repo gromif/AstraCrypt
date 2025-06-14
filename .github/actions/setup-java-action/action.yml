@@ -1,0 +1,9 @@
+name: "Set up Java Action"
+runs:
+  using: "composite"
+  steps:
+    - name: 🔩 Set up Java
+      uses: actions/setup-java@v4
+      with:
+        java-version: 21
+        distribution: 'temurin'

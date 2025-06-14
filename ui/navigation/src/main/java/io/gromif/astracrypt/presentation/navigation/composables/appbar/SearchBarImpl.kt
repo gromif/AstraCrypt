@@ -33,10 +33,11 @@ fun SearchBarImpl(
     expanded: Boolean = false,
     onExpandedChange: (Boolean) -> Unit = {},
     backButtonEnabled: Boolean = true,
-) = Box(Modifier
-    .fillMaxWidth()
-    .statusBarsPadding()
-    .semantics { isTraversalGroup = true }
+) = Box(
+    Modifier
+        .fillMaxWidth()
+        .statusBarsPadding()
+        .semantics { isTraversalGroup = true }
 ) {
     BackHandler(enabled = query.isNotEmpty()) { onQueryChange("") }
     SearchBar(
@@ -60,11 +61,14 @@ fun SearchBarImpl(
                     val localBackDispatcher = LocalOnBackPressedDispatcherOwner.current
                     val searchIcon = Icons.Default.Search
                     val backIcon = Icons.AutoMirrored.Default.ArrowBack
-                    if (!backButtonEnabled) Icon(searchIcon, null)
-                    else IconButton(
-                        onClick = { localBackDispatcher?.onBackPressedDispatcher?.onBackPressed() }
-                    ) {
-                        Icon(backIcon, null)
+                    if (!backButtonEnabled) {
+                        Icon(searchIcon, null)
+                    } else {
+                        IconButton(
+                            onClick = { localBackDispatcher?.onBackPressedDispatcher?.onBackPressed() }
+                        ) {
+                            Icon(backIcon, null)
+                        }
                     }
                 }
             )

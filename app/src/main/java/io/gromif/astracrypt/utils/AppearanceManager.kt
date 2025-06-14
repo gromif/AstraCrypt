@@ -17,5 +17,4 @@ class AppearanceManager(
             preferences[dynamicTheme] = enabled
         }
     }
-
 }

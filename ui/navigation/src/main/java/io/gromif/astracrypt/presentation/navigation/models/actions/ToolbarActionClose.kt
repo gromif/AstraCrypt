@@ -7,7 +7,7 @@ import io.gromif.astracrypt.resources.R
 
 val ToolbarActions.close get() = _ToolbarActionClose
 
-object _ToolbarActionClose: ToolbarActions.Action {
+object _ToolbarActionClose : ToolbarActions.Action {
     override val contentDescription: Int = R.string.back
     override val icon: ImageVector = Icons.Default.Close
 }

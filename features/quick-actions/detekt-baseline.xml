@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>FinalNewline:QuickActionsScreen.kt$io.gromif.astracrypt.quick_actions.QuickActionsScreen.kt</ID>
+    <ID>FinalNewline:SettingsQuickActionsScreen.kt$io.gromif.astracrypt.quick_actions.SettingsQuickActionsScreen.kt</ID>
+    <ID>FinalNewline:SettingsQuickActionsViewModel.kt$io.gromif.astracrypt.quick_actions.SettingsQuickActionsViewModel.kt</ID>
+    <ID>FinalNewline:WipeTile.kt$io.gromif.astracrypt.quick_actions.services.WipeTile.kt</ID>
+    <ID>NewLineAtEndOfFile:QuickActionsScreen.kt$io.gromif.astracrypt.quick_actions.QuickActionsScreen.kt</ID>
+    <ID>NewLineAtEndOfFile:SettingsQuickActionsScreen.kt$io.gromif.astracrypt.quick_actions.SettingsQuickActionsScreen.kt</ID>
+    <ID>NewLineAtEndOfFile:SettingsQuickActionsViewModel.kt$io.gromif.astracrypt.quick_actions.SettingsQuickActionsViewModel.kt</ID>
+    <ID>NewLineAtEndOfFile:WipeTile.kt$io.gromif.astracrypt.quick_actions.services.WipeTile.kt</ID>
+    <ID>NoBlankLineBeforeRbrace:SettingsQuickActionsViewModel.kt$SettingsQuickActionsViewModel$ </ID>
+    <ID>PackageName:QuickActionsScreen.kt$package io.gromif.astracrypt.quick_actions</ID>
+    <ID>PackageName:SettingsQuickActionsScreen.kt$package io.gromif.astracrypt.quick_actions</ID>
+    <ID>PackageName:SettingsQuickActionsViewModel.kt$package io.gromif.astracrypt.quick_actions</ID>
+    <ID>PackageName:WipeTile.kt$package io.gromif.astracrypt.quick_actions.services</ID>
+    <ID>PackageNaming:QuickActionsScreen.kt$package io.gromif.astracrypt.quick_actions</ID>
+    <ID>PackageNaming:SettingsQuickActionsScreen.kt$package io.gromif.astracrypt.quick_actions</ID>
+    <ID>PackageNaming:SettingsQuickActionsViewModel.kt$package io.gromif.astracrypt.quick_actions</ID>
+    <ID>PackageNaming:WipeTile.kt$package io.gromif.astracrypt.quick_actions.services</ID>
+    <ID>SpacingBetweenDeclarationsWithAnnotations:WipeTile.kt$WipeTile$@Inject lateinit var associatedDataManager: AssociatedDataManager</ID>
+    <ID>SpacingBetweenDeclarationsWithAnnotations:WipeTile.kt$WipeTile$@Inject lateinit var database: AppDatabase</ID>
+    <ID>SpacingBetweenDeclarationsWithAnnotations:WipeTile.kt$WipeTile$@Inject lateinit var filesUtil: FilesUtil</ID>
+  </CurrentIssues>
+</SmellBaseline>

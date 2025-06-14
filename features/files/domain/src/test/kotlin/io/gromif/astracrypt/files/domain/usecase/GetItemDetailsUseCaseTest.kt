@@ -3,7 +3,8 @@ package io.gromif.astracrypt.files.domain.usecase
 import io.gromif.astracrypt.files.domain.model.AeadInfo
 import io.gromif.astracrypt.files.domain.model.ItemDetails
 import io.gromif.astracrypt.files.domain.model.ItemType
-import io.gromif.astracrypt.files.domain.repository.Repository
+import io.gromif.astracrypt.files.domain.repository.item.ItemReader
+import io.gromif.astracrypt.files.domain.usecase.aead.GetAeadInfoUseCase
 import io.gromif.astracrypt.files.domain.validation.ValidationException
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -16,11 +17,11 @@ import org.junit.Test
 class GetItemDetailsUseCaseTest {
     private lateinit var getItemDetailsUseCase: GetItemDetailsUseCase
     private val getAeadInfoUseCase: GetAeadInfoUseCase = mockk()
-    private val repository: Repository = mockk(relaxed = true)
+    private val itemReader: ItemReader = mockk(relaxed = true)
 
     @Before
     fun setUp() {
-        getItemDetailsUseCase = GetItemDetailsUseCase(getAeadInfoUseCase, repository)
+        getItemDetailsUseCase = GetItemDetailsUseCase(getAeadInfoUseCase, itemReader)
     }
 
     @Test
@@ -35,7 +36,7 @@ class GetItemDetailsUseCaseTest {
         )
 
         coEvery { getAeadInfoUseCase() } returns mockAeadInfo
-        coEvery { repository.getItemDetails(mockAeadInfo, id) } returns expectedItemDetails
+        coEvery { itemReader.getItemDetails(mockAeadInfo, id) } returns expectedItemDetails
 
         runBlocking {
             val itemDetails = getItemDetailsUseCase(id)
@@ -43,7 +44,7 @@ class GetItemDetailsUseCaseTest {
         }
 
         coVerify(exactly = 1) { getAeadInfoUseCase() }
-        coVerify(exactly = 1) { repository.getItemDetails(mockAeadInfo, id) }
+        coVerify(exactly = 1) { itemReader.getItemDetails(mockAeadInfo, id) }
     }
 
     @Test(expected = ValidationException.InvalidNameException::class)
@@ -58,7 +59,7 @@ class GetItemDetailsUseCaseTest {
         )
 
         coEvery { getAeadInfoUseCase() } returns mockAeadInfo
-        coEvery { repository.getItemDetails(mockAeadInfo, id) } returns expectedItemDetails
+        coEvery { itemReader.getItemDetails(mockAeadInfo, id) } returns expectedItemDetails
 
         runBlocking { getItemDetailsUseCase(id) }
     }
@@ -78,9 +79,8 @@ class GetItemDetailsUseCaseTest {
         )
 
         coEvery { getAeadInfoUseCase() } returns mockAeadInfo
-        coEvery { repository.getItemDetails(mockAeadInfo, id) } returns expectedItemDetails
+        coEvery { itemReader.getItemDetails(mockAeadInfo, id) } returns expectedItemDetails
 
         runBlocking { getItemDetailsUseCase(id) }
     }
-
 }

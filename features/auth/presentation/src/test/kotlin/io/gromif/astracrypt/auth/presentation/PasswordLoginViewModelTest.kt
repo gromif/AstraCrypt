@@ -55,5 +55,4 @@ class PasswordLoginViewModelTest {
 
         coVerify { decryptTinkAdUseCaseMock(targetPassword) }
     }
-
 }

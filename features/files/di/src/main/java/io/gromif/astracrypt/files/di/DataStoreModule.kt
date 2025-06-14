@@ -30,7 +30,6 @@ object DataStoreModule {
             produceFile = { context.preferencesDataStoreFile("files") }
         )
     }
-
 }
 
 @Qualifier

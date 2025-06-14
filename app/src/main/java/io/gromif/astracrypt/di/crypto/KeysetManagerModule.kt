@@ -61,7 +61,7 @@ object KeysetManagerModule {
         keysetManager = keysetManager
     )
 
-
+    @Suppress("detekt:LongParameterList")
     @Singleton
     @Provides
     fun provideKeysetFactory(
@@ -105,5 +105,4 @@ object KeysetManagerModule {
         hexEncoder: HexEncoder,
         sha384Util: Sha384Util,
     ) = DefaultKeysetIdUtil(encoder = hexEncoder, hashUtil = sha384Util)
-
 }

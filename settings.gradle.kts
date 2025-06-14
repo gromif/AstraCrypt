@@ -31,12 +31,25 @@ val features = listOf(
     "tink-lab",
 )
 
+val filesModules = listOf(
+    "domain",
+    "data",
+    "di",
+    "presentation:details",
+    "presentation:export",
+    "presentation:files",
+    "presentation:recent",
+    "presentation:settings",
+    "presentation:shared",
+)
+
 // Include all modules
 include(":app")
 include("core", coreModules)
 include("contract", contractGroup)
 include("core:crypto", cryptoCoreModules)
 include("features", featuresModules)
+include("features:files", filesModules)
 includeFeatures()
 include("ui", uiModules)
 
@@ -71,3 +84,4 @@ include(":features:about:google-play")
 include(":features:about:fdroid")
 include(":features:about:privacy")
 include(":features:quick-actions")
+include(":features:donate")

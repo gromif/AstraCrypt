@@ -32,5 +32,4 @@ internal object ServiceModule {
     @Singleton
     @Provides
     fun provideClockService(): ClockService = ClockServiceImpl()
-
 }

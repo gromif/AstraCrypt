@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>FinalNewline:UiSettingsViewModel.kt$io.gromif.astracrypt.files.settings.UiSettingsViewModel.kt</ID>
+    <ID>FinalNewline:UiSettingsViewModelTest.kt$io.gromif.astracrypt.files.settings.UiSettingsViewModelTest.kt</ID>
+    <ID>LongParameterList:AeadSettingsScreen.kt$( modifier: Modifier = Modifier, verticalArrangement: Arrangement.Vertical = Arrangement.spacedBy(MaterialTheme.spaces.spaceMedium), params: AeadSettingsScreenParams = AeadSettingsScreenParams(), onFileAeadChange: (Int) -&gt; Unit = {}, onPreviewAeadChange: (Int) -&gt; Unit = {}, onDatabaseAeadChange: (Int) -&gt; Unit = {}, toDatabaseColumnsAeadSettings: () -&gt; Unit = {}, )</ID>
+    <ID>LongParameterList:FilesGroup.kt$( fileOptions: List&lt;String&gt; = listOf("Test"), fileAeadIndex: Int = 0, onFileAeadChange: (Int) -&gt; Unit = {}, previewOptions: List&lt;String&gt; = listOf("Test"), previewAeadIndex: Int = 0, onPreviewAeadChange: (Int) -&gt; Unit = {}, )</ID>
+    <ID>MagicNumber:SetDatabaseAeadWorker.kt$SetDatabaseAeadWorker$100</ID>
+    <ID>MagicNumber:SetDatabaseAeadWorker.kt$SetDatabaseAeadWorker$4</ID>
+    <ID>NewLineAtEndOfFile:UiSettingsViewModel.kt$io.gromif.astracrypt.files.settings.UiSettingsViewModel.kt</ID>
+    <ID>NewLineAtEndOfFile:UiSettingsViewModelTest.kt$io.gromif.astracrypt.files.settings.UiSettingsViewModelTest.kt</ID>
+  </CurrentIssues>
+</SmellBaseline>

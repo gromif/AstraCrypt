@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>FinalNewline:Action.kt$io.gromif.astracrypt.calculator.domain.Action.kt</ID>
+    <ID>FinalNewline:Operation.kt$io.gromif.astracrypt.calculator.domain.Operation.kt</ID>
+    <ID>FinalNewline:State.kt$io.gromif.astracrypt.calculator.domain.State.kt</ID>
+    <ID>NewLineAtEndOfFile:Action.kt$io.gromif.astracrypt.calculator.domain.Action.kt</ID>
+    <ID>NewLineAtEndOfFile:Operation.kt$io.gromif.astracrypt.calculator.domain.Operation.kt</ID>
+    <ID>NewLineAtEndOfFile:State.kt$io.gromif.astracrypt.calculator.domain.State.kt</ID>
+    <ID>SpacingAroundColon:Action.kt$Action.Calculate$:</ID>
+    <ID>SpacingAroundColon:Action.kt$Action.Clear$:</ID>
+    <ID>SpacingAroundColon:Action.kt$Action.Decimal$:</ID>
+    <ID>SpacingAroundColon:Action.kt$Action.Delete$:</ID>
+    <ID>SpacingAroundColon:Action.kt$Action.Number$:</ID>
+    <ID>SpacingAroundColon:Action.kt$Action.Operation$:</ID>
+    <ID>SpacingAroundColon:Operation.kt$Operation.Add$:</ID>
+    <ID>SpacingAroundColon:Operation.kt$Operation.Divide$:</ID>
+    <ID>SpacingAroundColon:Operation.kt$Operation.Multiply$:</ID>
+    <ID>SpacingAroundColon:Operation.kt$Operation.Subtract$:</ID>
+  </CurrentIssues>
+</SmellBaseline>

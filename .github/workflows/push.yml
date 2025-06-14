@@ -1,0 +1,62 @@
+name: Android CD
+
+on:
+  push:
+    branches: [ main ]
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true # Cancel jobs from older commits
+
+jobs:
+
+  delivery:
+    name: 📲 Delivery
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true # Cancel all jobs if a single job fails
+      matrix:
+        include:
+          - buildVariant: assembleDefaultRelease
+            artifactName: app-default-release.apk
+            artifactPath: app/build/outputs/apk/default/release
+
+          - buildVariant: bundlePlayRelease
+            artifactName: app-play-release.aab
+            artifactPath: app/build/outputs/bundle/playRelease
+    steps:
+      - run: echo "🎉 Triggered by a ${{ github.event_name }} event."
+
+      # Checkout Repo
+      - name: 🧩 Checkout Repo
+        uses: actions/checkout@v4
+
+      # Set up Java
+      - uses: ./.github/actions/setup-java-action
+
+      # Set up Gradle
+      - uses: ./.github/actions/setup-gradle-action
+        with:
+          cache-read-only: false
+          gradle-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
+
+      - name: ⚙️ Set up Keystore
+        uses: ./.github/actions/setup-keystore
+        with:
+          file: "keystore.jks"
+          keystore: ${{ secrets.KEYSTORE_BASE64 }}
+          keystorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
+          keyAlias: ${{ secrets.KEY_ALIAS }}
+          keyPassword: ${{ secrets.KEY_PASSWORD }}
+
+      - name: 🔶 Generate App Bundle or APKs
+        run: |
+          ./gradlew ${{ matrix.buildVariant }} -PRELEASE_BUILD --stacktrace
+
+      - name: 🔷 Upload an artifact
+        uses: ./.github/actions/upload-artifact
+        with:
+          artifactName: ${{ matrix.artifactName }}
+          artifactPath: ${{ matrix.artifactPath }}
+
+      - run: echo "🍏 Delivery status is ${{ job.status }}."

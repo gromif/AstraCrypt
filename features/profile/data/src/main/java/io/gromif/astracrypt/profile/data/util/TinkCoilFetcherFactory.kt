@@ -1,23 +1,22 @@
 package io.gromif.astracrypt.profile.data.util
 
-import coil.ImageLoader
-import coil.decode.DataSource
-import coil.decode.ImageSource
-import coil.fetch.FetchResult
-import coil.fetch.Fetcher
-import coil.fetch.SourceResult
-import coil.request.Options
+import coil3.ImageLoader
+import coil3.decode.DataSource
+import coil3.decode.ImageSource
+import coil3.fetch.FetchResult
+import coil3.fetch.Fetcher
+import coil3.fetch.SourceFetchResult
+import coil3.request.Options
 import io.gromif.astracrypt.profile.domain.model.Avatar
 import io.gromif.astracrypt.profile.domain.repository.SettingsRepository
 import io.gromif.crypto.tink.keyset.KeysetTemplates
+import okio.FileSystem
 import okio.buffer
 import okio.source
-import java.io.File
 
 class TinkCoilFetcherFactory(
     private val settingsRepository: SettingsRepository,
-    private val fileUtil: FileUtil,
-    private val cacheDir: File
+    private val fileUtil: FileUtil
 ) : Fetcher.Factory<Avatar.External> {
     override fun create(data: Avatar.External, options: Options, imageLoader: ImageLoader) =
         TinkCoilFetcher()
@@ -28,14 +27,14 @@ class TinkCoilFetcherFactory(
             val inputStream = fileUtil.openInputStream(
                 aeadTemplate = KeysetTemplates.Stream.entries.getOrNull(aead)
             )
-            return SourceResult(
+            return SourceFetchResult(
                 source = ImageSource(
-                    source = inputStream.source().buffer(), cacheDir
+                    source = inputStream.source().buffer(),
+                    fileSystem = FileSystem.SYSTEM
                 ),
                 mimeType = null,
                 dataSource = DataSource.DISK
             )
         }
     }
-
 }

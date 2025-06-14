@@ -1,9 +1,9 @@
 package io.gromif.astracrypt.files.data.factory.preview
 
-import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
-import coil.ImageLoader
-import coil.request.ImageRequest
+import coil3.ImageLoader
+import coil3.request.ImageRequest
+import coil3.toBitmap
 import io.gromif.astracrypt.utils.Mapper
 import io.gromif.astracrypt.utils.io.BitmapCompressor
 
@@ -17,11 +17,9 @@ class DefaultPreviewFactory(
     suspend fun create(path: String): ByteArray? {
         val uri = uriMapper(path)
         val request = imageRequestBuilder.data(uri).build()
-        val bitmapDrawable = imageLoader.execute(request).drawable as BitmapDrawable?
-        val bitmap = bitmapDrawable?.bitmap
+        val bitmap = imageLoader.execute(request).image?.toBitmap()
         return bitmap?.let {
             bitmapCompressor(bitmap = it, quality = 70)
         }
     }
-
 }

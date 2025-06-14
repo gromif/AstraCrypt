@@ -14,8 +14,8 @@ import io.gromif.astracrypt.presentation.navigation.shared.LocalHostEvents
 import io.gromif.astracrypt.presentation.navigation.shared.LocalHostStateHolder
 import io.gromif.astracrypt.presentation.navigation.shared.UiStateHandler
 import io.gromif.astracrypt.resources.R
-import io.gromif.tink_lab.presentation.TinkLab
-import io.gromif.tink_lab.presentation.text.TextScreen
+import io.gromif.tinkLab.presentation.TinkLab
+import io.gromif.tinkLab.presentation.text.TextScreen
 import io.gromif.ui.compose.core.wrappers.TextWrap
 import kotlinx.coroutines.launch
 

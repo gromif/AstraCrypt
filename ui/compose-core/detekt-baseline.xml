@@ -1,0 +1,131 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>ArgumentListWrapping:Buttons.kt$( modifier = modifier, onClick = onClick )</ID>
+    <ID>ArgumentListWrapping:Buttons.kt$( modifier = modifier, onClick = onClick, enabled = enabled )</ID>
+    <ID>ArgumentListWrapping:Buttons.kt$( onClick = onClick, modifier = modifier, enabled = enabled )</ID>
+    <ID>ArgumentListWrapping:Chips.kt$( selected = selected, onClick = { Haptic.tick() onClick() }, label = { Text(text = label) }, modifier = modifier, enabled = enabled, leadingIcon = Chips.Components.icon(icon = leadingIcon), trailingIcon = Chips.Components.icon(icon = trailingIcon) )</ID>
+    <ID>ArgumentListWrapping:Components.kt$DialogDefaults$( MaterialTheme.spaces.spaceMedium, Alignment.Top )</ID>
+    <ID>ArgumentListWrapping:Components.kt$DialogDefaults$( modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center, title = title )</ID>
+    <ID>ArgumentListWrapping:ListItems.kt$( onClick = onClick, onLongClick = longClickCallback )</ID>
+    <ID>EmptyClassBlock:Banner.kt$Banner${ }</ID>
+    <ID>EmptyClassBlock:Lists.kt$Lists${ }</ID>
+    <ID>FinalNewline:Banner.kt$io.gromif.ui.compose.core.banners.Banner.kt</ID>
+    <ID>FinalNewline:Buttons.kt$io.gromif.ui.compose.core.Buttons.kt</ID>
+    <ID>FinalNewline:Cards.kt$io.gromif.ui.compose.core.Cards.kt</ID>
+    <ID>FinalNewline:CheckBoxes.kt$io.gromif.ui.compose.core.CheckBoxes.kt</ID>
+    <ID>FinalNewline:Chips.kt$io.gromif.ui.compose.core.chips.Chips.kt</ID>
+    <ID>FinalNewline:Components.kt$io.gromif.ui.compose.core.chips.Components.kt</ID>
+    <ID>FinalNewline:Components.kt$io.gromif.ui.compose.core.dialogs.Components.kt</ID>
+    <ID>FinalNewline:Components.kt$io.gromif.ui.compose.core.sheets.Components.kt</ID>
+    <ID>FinalNewline:Compose.kt$io.gromif.ui.compose.core.Compose.kt</ID>
+    <ID>FinalNewline:DialogsCore.kt$io.gromif.ui.compose.core.dialogs.DialogsCore.kt</ID>
+    <ID>FinalNewline:FlowObserver.kt$io.gromif.ui.compose.core.ext.FlowObserver.kt</ID>
+    <ID>FinalNewline:IconWrap.kt$io.gromif.ui.compose.core.wrappers.IconWrap.kt</ID>
+    <ID>FinalNewline:Icons.kt$io.gromif.ui.compose.core.Icons.kt</ID>
+    <ID>FinalNewline:ImageVector.kt$io.gromif.ui.compose.core.ext.ImageVector.kt</ID>
+    <ID>FinalNewline:KeyboardOptions.kt$io.gromif.ui.compose.core.text_fields.KeyboardOptions.kt</ID>
+    <ID>FinalNewline:Lifecycle.kt$io.gromif.ui.compose.core.ext.Lifecycle.kt</ID>
+    <ID>FinalNewline:ListHeaders.kt$io.gromif.ui.compose.core.ListHeaders.kt</ID>
+    <ID>FinalNewline:ListItems.kt$io.gromif.ui.compose.core.ListItems.kt</ID>
+    <ID>FinalNewline:Lists.kt$io.gromif.ui.compose.core.list.Lists.kt</ID>
+    <ID>FinalNewline:Note.kt$io.gromif.ui.compose.core.banners.Note.kt</ID>
+    <ID>FinalNewline:PasswordToggleIconButton.kt$io.gromif.ui.compose.core.text_fields.icons.PasswordToggleIconButton.kt</ID>
+    <ID>FinalNewline:Preferences.kt$io.gromif.ui.compose.core.Preferences.kt</ID>
+    <ID>FinalNewline:RadioPreference.kt$io.gromif.ui.compose.core.preferences.RadioPreference.kt</ID>
+    <ID>FinalNewline:Selectable.kt$io.gromif.ui.compose.core.dialogs.Selectable.kt</ID>
+    <ID>FinalNewline:Sheets.kt$io.gromif.ui.compose.core.Sheets.kt</ID>
+    <ID>FinalNewline:Sheets.kt$io.gromif.ui.compose.core.sheets.Sheets.kt</ID>
+    <ID>FinalNewline:Shimmer.kt$io.gromif.ui.compose.core.ext.effects.Shimmer.kt</ID>
+    <ID>FinalNewline:Spaces.kt$io.gromif.ui.compose.core.theme.Spaces.kt</ID>
+    <ID>FinalNewline:TextFields.kt$io.gromif.ui.compose.core.TextFields.kt</ID>
+    <ID>FinalNewline:TextFields.kt$io.gromif.ui.compose.core.dialogs.TextFields.kt</ID>
+    <ID>FinalNewline:TextWrap.kt$io.gromif.ui.compose.core.wrappers.TextWrap.kt</ID>
+    <ID>FinalNewline:TwoPanelLayout.kt$io.gromif.ui.compose.core.TwoPanelLayout.kt</ID>
+    <ID>FinalNewline:Warning.kt$io.gromif.ui.compose.core.banners.Warning.kt</ID>
+    <ID>FinalNewline:WindowSizeClass.kt$io.gromif.ui.compose.core.ext.WindowSizeClass.kt</ID>
+    <ID>LongParameterList:Chips.kt$( selected: Boolean, crossinline onClick: () -&gt; Unit, label: String, modifier: Modifier = Modifier, enabled: Boolean = true, leadingIcon: ImageVector? = null, trailingIcon: ImageVector? = null )</ID>
+    <ID>LongParameterList:Components.kt$( title: @Composable (() -&gt; Unit)?, confirmButton: @Composable () -&gt; Unit, dismissButton: @Composable (() -&gt; Unit)?, onDismissRequest: () -&gt; Unit, dismissOnBackPress: Boolean = true, dismissOnClickOutside: Boolean = true, securePolicy: SecureFlagPolicy = SecureFlagPolicy.Inherit, content: @Composable (() -&gt; Unit) )</ID>
+    <ID>LongParameterList:Components.kt$( title: String = "TEST FIELD DIALOG", onDismissRequest: () -&gt; Unit = {}, onConfirmRequest: () -&gt; Unit = {}, isConfirmButtonEnabled: Boolean = true, buttonBar: @Composable () -&gt; Unit = DialogDefaults.newButtonBar( onConfirmClick = onConfirmRequest, onDismissClick = onDismissRequest, isConfirmButtonEnabled = isConfirmButtonEnabled ), content: @Composable () -&gt; Unit, )</ID>
+    <ID>LongParameterList:Components.kt$DialogDefaults$( onConfirmClick: () -&gt; Unit, onDismissClick: () -&gt; Unit, isConfirmButtonEnabled: Boolean = false, confirmText: String = stringResource(id = android.R.string.ok), confirmIcon: ImageVector = Icons.Default.Done, dismissText: String = stringResource(id = android.R.string.cancel), dismissIcon: ImageVector = Icons.Default.Close )</ID>
+    <ID>LongParameterList:DialogsCore.kt$DialogsCore$( title: String?, text: String, confirmText: String = stringResource(id = android.R.string.ok), dismissText: String? = stringResource(id = android.R.string.cancel), dismissOnButtonClick: Boolean = true, dismissOnOutsideClick: Boolean = true, onDismissRequest: (() -&gt; Unit)? = null, onDismissClick: (() -&gt; Unit)? = null, onConfirmClick: () -&gt; Unit = {} )</ID>
+    <ID>LongParameterList:ListItems.kt$( modifier: Modifier = Modifier, titleText: String = "Some title here", leadingContent: (@Composable () -&gt; Unit)? = null, trailingContent: (@Composable () -&gt; Unit)? = null, longClickCallback: (() -&gt; Unit)? = null, onClick: (() -&gt; Unit)? = {} )</ID>
+    <ID>LongParameterList:ListItems.kt$( modifier: Modifier = Modifier, titleText: String = "Some title here", summaryText: String = "Some summary here", leadingContent: @Composable (() -&gt; Unit)? = null, trailingContent: @Composable (() -&gt; Unit)? = null, longClickCallback: (() -&gt; Unit)? = null, onClick: (() -&gt; Unit)? = null )</ID>
+    <ID>LongParameterList:ListItems.kt$( modifier: Modifier = Modifier, titleText: String = "Some title here", summaryText: String? = null, leadingContent: @Composable (() -&gt; Unit)? = null, trailingContent: @Composable (() -&gt; Unit)? = null, longClickCallback: (() -&gt; Unit)? = null, onClick: (() -&gt; Unit)? = null )</ID>
+    <ID>LongParameterList:NoItemsPage.kt$( modifier: Modifier = Modifier, mainIcon: ImageVector = Icons.Outlined.FolderOpen, actionIcon: ImageVector = Icons.Default.Add, pageSize: NoItemsPageSize = NoItemsPageSize.FULL, title: String = "No items", summary: String = "empty" )</ID>
+    <ID>LongParameterList:Preferences.kt$( modifier: Modifier = Modifier, titleText: String, summaryText: String? = null, leadingContent: @Composable (() -&gt; Unit)? = null, trailingContent: @Composable (() -&gt; Unit)? = null, callback: () -&gt; Unit )</ID>
+    <ID>LongParameterList:Sheets.kt$( onDismissRequest: (() -&gt; Unit)? = null, state: MutableState&lt;Boolean&gt; = Compose.state(), sheetState: SheetState, modifier: Modifier = Modifier, shape: Shape = BottomSheetDefaults.ExpandedShape, containerColor: Color = BottomSheetDefaults.ContainerColor, contentColor: Color = contentColorFor(containerColor), tonalElevation: Dp = BottomSheetDefaults.Elevation, scrimColor: Color = BottomSheetDefaults.ScrimColor, dragHandle: @Composable (() -&gt; Unit)? = { BottomSheetDefaults.DragHandle() }, content: @Composable (ColumnScope.() -&gt; Unit) )</ID>
+    <ID>MagicNumber:RecomposeHighlighter.kt$10000</ID>
+    <ID>MagicNumber:RecomposeHighlighter.kt$100f</ID>
+    <ID>MagicNumber:Shimmer.kt$500</ID>
+    <ID>MagicNumber:TwoPanelLayout.kt$0.5f</ID>
+    <ID>MatchingDeclarationName:Components.kt$SheetDefaults</ID>
+    <ID>MultiLineIfElse:Components.kt$null</ID>
+    <ID>MultiLineIfElse:DialogsCore.kt$DialogsCore$Dialog( title = title?.let { DialogDefaults.title(title = it) }, content = DialogDefaults.contentText(text = text), confirmButton = DialogDefaults.textButton(title = confirmText) { if (dismissOnButtonClick) state.value = false onConfirmClick() }, dismissButton = dismissText?.let { DialogDefaults.textButton(title = it) { if (dismissOnButtonClick) state.value = false onDismissClick?.invoke() } }, onDismissRequest = { if (dismissOnOutsideClick) state.value = false onDismissRequest?.invoke() }, dismissOnBackPress = dismissOnOutsideClick, dismissOnClickOutside = dismissOnOutsideClick )</ID>
+    <ID>MultiLineIfElse:ListItems.kt$OneLineListItem( modifier = modifier, titleText = titleText, leadingContent = leadingContent, trailingContent = trailingContent, onClick = onClick, longClickCallback = longClickCallback )</ID>
+    <ID>MultiLineIfElse:ListItems.kt$TwoLineListItem( modifier = modifier, titleText = titleText, summaryText = summaryText, leadingContent = leadingContent, trailingContent = trailingContent, longClickCallback = longClickCallback, onClick = onClick )</ID>
+    <ID>MultiLineIfElse:Preferences.kt$Text( modifier = Modifier .fillMaxWidth() .padding(start = MaterialTheme.spaces.spaceMedium), text = text, style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.secondary )</ID>
+    <ID>MultiLineIfElse:Selectable.kt$Dialog( title = DialogDefaults.titleCentered(title = title), confirmButton = DialogDefaults.textButton( title = stringResource(id = android.R.string.cancel), onClick = { state.value = false onDismissRequest() } ), dismissButton = null, onDismissRequest = { state.value = false onDismissRequest() }, content = DialogDefaults.contentRootScrollable( verticalArrangement = Arrangement.Top ) { items.forEachIndexed { index, s -&gt; RadioOneLineListItem( isSelected = index == selectedItemIndex, titleText = s ) { state.value = false onSelected(index) } } } )</ID>
+    <ID>MultiLineIfElse:Sheets.kt$ModalBottomSheet( onDismissRequest = { isVisibleState.value = !isVisibleState.value }, sheetState = sheetState ) { CenterAlignedTopAppBar(title = { Text(text = title) }) content() Spacer(modifier = Modifier.navigationBarsPadding()) }</ID>
+    <ID>MultiLineIfElse:Sheets.kt$ModalBottomSheet( onDismissRequest = { state.value = false onDismissRequest?.invoke() }, modifier = modifier, sheetState = sheetState, shape = shape, containerColor = containerColor, contentColor = contentColor, tonalElevation = tonalElevation, scrimColor = scrimColor, dragHandle = dragHandle, content = content )</ID>
+    <ID>MultiLineIfElse:TextFields.kt$TextFields$VisualTransformation.None</ID>
+    <ID>MultiLineIfElse:TwoPanelLayout.kt$Column( Modifier .fillMaxSize() .nestedScroll(rememberNestedScrollInteropConnection()) .verticalScroll(rememberScrollState()) .padding(padding), verticalArrangement = Arrangement.spacedBy(padding) ) { left() right() }</ID>
+    <ID>MultiLineIfElse:TwoPanelLayout.kt$Column( Modifier .fillMaxSize() .verticalScroll(rememberScrollState()) .padding(padding), verticalArrangement = Arrangement.spacedBy(padding) ) { left() right() }</ID>
+    <ID>MultiLineIfElse:TwoPanelLayout.kt$Row( modifier = Modifier .fillMaxSize() .padding(padding), horizontalArrangement = Arrangement.spacedBy(padding) ) { Column( modifier = Modifier .fillMaxHeight() .weight(0.5f) .nestedScroll(rememberNestedScrollInteropConnection()) .verticalScroll(rememberScrollState()), content = left ) Column( modifier = Modifier .fillMaxHeight() .weight(0.5f) .nestedScroll(rememberNestedScrollInteropConnection()) .verticalScroll(rememberScrollState()), content = right ) }</ID>
+    <ID>MultiLineIfElse:TwoPanelLayout.kt$Row( modifier = Modifier .fillMaxSize() .verticalScroll(rememberScrollState()) .padding(padding), horizontalArrangement = Arrangement.spacedBy(padding) ) { Row(modifier = Modifier.weight(0.5f)) { left() } Row(modifier = Modifier.weight(0.5f)) { right() } }</ID>
+    <ID>NewLineAtEndOfFile:Banner.kt$io.gromif.ui.compose.core.banners.Banner.kt</ID>
+    <ID>NewLineAtEndOfFile:Buttons.kt$io.gromif.ui.compose.core.Buttons.kt</ID>
+    <ID>NewLineAtEndOfFile:Cards.kt$io.gromif.ui.compose.core.Cards.kt</ID>
+    <ID>NewLineAtEndOfFile:CheckBoxes.kt$io.gromif.ui.compose.core.CheckBoxes.kt</ID>
+    <ID>NewLineAtEndOfFile:Chips.kt$io.gromif.ui.compose.core.chips.Chips.kt</ID>
+    <ID>NewLineAtEndOfFile:Components.kt$io.gromif.ui.compose.core.chips.Components.kt</ID>
+    <ID>NewLineAtEndOfFile:Components.kt$io.gromif.ui.compose.core.dialogs.Components.kt</ID>
+    <ID>NewLineAtEndOfFile:Components.kt$io.gromif.ui.compose.core.sheets.Components.kt</ID>
+    <ID>NewLineAtEndOfFile:Compose.kt$io.gromif.ui.compose.core.Compose.kt</ID>
+    <ID>NewLineAtEndOfFile:DialogsCore.kt$io.gromif.ui.compose.core.dialogs.DialogsCore.kt</ID>
+    <ID>NewLineAtEndOfFile:FlowObserver.kt$io.gromif.ui.compose.core.ext.FlowObserver.kt</ID>
+    <ID>NewLineAtEndOfFile:IconWrap.kt$io.gromif.ui.compose.core.wrappers.IconWrap.kt</ID>
+    <ID>NewLineAtEndOfFile:Icons.kt$io.gromif.ui.compose.core.Icons.kt</ID>
+    <ID>NewLineAtEndOfFile:ImageVector.kt$io.gromif.ui.compose.core.ext.ImageVector.kt</ID>
+    <ID>NewLineAtEndOfFile:KeyboardOptions.kt$io.gromif.ui.compose.core.text_fields.KeyboardOptions.kt</ID>
+    <ID>NewLineAtEndOfFile:Lifecycle.kt$io.gromif.ui.compose.core.ext.Lifecycle.kt</ID>
+    <ID>NewLineAtEndOfFile:ListHeaders.kt$io.gromif.ui.compose.core.ListHeaders.kt</ID>
+    <ID>NewLineAtEndOfFile:ListItems.kt$io.gromif.ui.compose.core.ListItems.kt</ID>
+    <ID>NewLineAtEndOfFile:Lists.kt$io.gromif.ui.compose.core.list.Lists.kt</ID>
+    <ID>NewLineAtEndOfFile:Note.kt$io.gromif.ui.compose.core.banners.Note.kt</ID>
+    <ID>NewLineAtEndOfFile:PasswordToggleIconButton.kt$io.gromif.ui.compose.core.text_fields.icons.PasswordToggleIconButton.kt</ID>
+    <ID>NewLineAtEndOfFile:Preferences.kt$io.gromif.ui.compose.core.Preferences.kt</ID>
+    <ID>NewLineAtEndOfFile:RadioPreference.kt$io.gromif.ui.compose.core.preferences.RadioPreference.kt</ID>
+    <ID>NewLineAtEndOfFile:Selectable.kt$io.gromif.ui.compose.core.dialogs.Selectable.kt</ID>
+    <ID>NewLineAtEndOfFile:Sheets.kt$io.gromif.ui.compose.core.Sheets.kt</ID>
+    <ID>NewLineAtEndOfFile:Sheets.kt$io.gromif.ui.compose.core.sheets.Sheets.kt</ID>
+    <ID>NewLineAtEndOfFile:Shimmer.kt$io.gromif.ui.compose.core.ext.effects.Shimmer.kt</ID>
+    <ID>NewLineAtEndOfFile:Spaces.kt$io.gromif.ui.compose.core.theme.Spaces.kt</ID>
+    <ID>NewLineAtEndOfFile:TextFields.kt$io.gromif.ui.compose.core.TextFields.kt</ID>
+    <ID>NewLineAtEndOfFile:TextFields.kt$io.gromif.ui.compose.core.dialogs.TextFields.kt</ID>
+    <ID>NewLineAtEndOfFile:TextWrap.kt$io.gromif.ui.compose.core.wrappers.TextWrap.kt</ID>
+    <ID>NewLineAtEndOfFile:TwoPanelLayout.kt$io.gromif.ui.compose.core.TwoPanelLayout.kt</ID>
+    <ID>NewLineAtEndOfFile:Warning.kt$io.gromif.ui.compose.core.banners.Warning.kt</ID>
+    <ID>NewLineAtEndOfFile:WindowSizeClass.kt$io.gromif.ui.compose.core.ext.WindowSizeClass.kt</ID>
+    <ID>NoBlankLineBeforeRbrace:Chips.kt$Chips$ </ID>
+    <ID>NoBlankLineBeforeRbrace:Components.kt$DialogDefaults$ </ID>
+    <ID>NoBlankLineBeforeRbrace:Components.kt$SheetDefaults$ </ID>
+    <ID>NoBlankLineBeforeRbrace:Compose.kt$Compose$ </ID>
+    <ID>NoBlankLineBeforeRbrace:DialogsCore.kt$DialogsCore$ </ID>
+    <ID>NoBlankLineBeforeRbrace:DialogsCore.kt$DialogsCore.TextFields$ </ID>
+    <ID>NoBlankLineBeforeRbrace:Lists.kt$Lists$ </ID>
+    <ID>NoBlankLineBeforeRbrace:TextFields.kt$TextFields$ </ID>
+    <ID>NoConsecutiveBlankLines:Lists.kt$Lists$ </ID>
+    <ID>NoEmptyClassBody:Banner.kt$Banner${ }</ID>
+    <ID>NoEmptyClassBody:Lists.kt$Lists${ }</ID>
+    <ID>NoTrailingSpaces:RecomposeHighlighter.kt$// We need at least one composition to draw, so draw the smallest border </ID>
+    <ID>PackageName:KeyboardOptions.kt$package io.gromif.ui.compose.core.text_fields</ID>
+    <ID>PackageName:PasswordToggleIconButton.kt$package io.gromif.ui.compose.core.text_fields.icons</ID>
+    <ID>PackageNaming:KeyboardOptions.kt$package io.gromif.ui.compose.core.text_fields</ID>
+    <ID>PackageNaming:PasswordToggleIconButton.kt$package io.gromif.ui.compose.core.text_fields.icons</ID>
+    <ID>TopLevelPropertyNaming:KeyboardOptions.kt$@Stable val _keyboardOptionsPassword = KeyboardOptions.Default.copy( autoCorrectEnabled = false, keyboardType = KeyboardType.Password )</ID>
+    <ID>UnusedParameter:Buttons.kt$contentDescription: String? = null</ID>
+    <ID>UnusedPrivateMember:Cards.kt$@Preview @Composable private fun InfoTitleCardPreview()</ID>
+  </CurrentIssues>
+</SmellBaseline>

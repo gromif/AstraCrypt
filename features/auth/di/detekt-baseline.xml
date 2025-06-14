@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>FinalNewline:EncryptionUseCaseModule.kt$io.gromif.astracrypt.auth.di.usecase.EncryptionUseCaseModule.kt</ID>
+    <ID>FinalNewline:SettingsRepositoryModule.kt$io.gromif.astracrypt.auth.di.repository.SettingsRepositoryModule.kt</ID>
+    <ID>NewLineAtEndOfFile:EncryptionUseCaseModule.kt$io.gromif.astracrypt.auth.di.usecase.EncryptionUseCaseModule.kt</ID>
+    <ID>NewLineAtEndOfFile:SettingsRepositoryModule.kt$io.gromif.astracrypt.auth.di.repository.SettingsRepositoryModule.kt</ID>
+    <ID>NoBlankLineBeforeRbrace:AuthUseCaseModule.kt$AuthUseCaseModule$ </ID>
+    <ID>NoBlankLineBeforeRbrace:HintUseCaseModule.kt$HintUseCaseModule$ </ID>
+    <ID>NoBlankLineBeforeRbrace:RepositoryModule.kt$RepositoryModule$ </ID>
+    <ID>NoBlankLineBeforeRbrace:SettingsRepositoryModule.kt$SettingsRepositoryModule$ </ID>
+    <ID>NoBlankLineBeforeRbrace:SkinUseCaseModule.kt$SkinUseCaseModule$ </ID>
+    <ID>NoBlankLineBeforeRbrace:TimeoutUseCaseModule.kt$TimeoutUseCaseModule$ </ID>
+    <ID>NoConsecutiveBlankLines:AuthUseCaseModule.kt$AuthUseCaseModule$ </ID>
+  </CurrentIssues>
+</SmellBaseline>

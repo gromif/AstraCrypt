@@ -43,5 +43,4 @@ enum class BottomBarItems(
         iconOutline = Icons.Outlined.Settings,
         route = Route.Tabs.Settings
     )
-
 }

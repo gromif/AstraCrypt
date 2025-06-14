@@ -99,6 +99,7 @@
     <string name="settings_editProfile">Edit profile</string>
     <string name="settings_security">Security</string>
     <string name="settings_interface">Interface</string>
+    <string name="settings_donate">Donate</string>
     <string name="settings_enableDynamicColors">Enable Dynamic Colors</string>
     <string name="viewMode">View mode</string>
     <string name="viewMode_list">List</string>

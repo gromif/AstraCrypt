@@ -9,5 +9,4 @@ internal interface AeadSettingsScreenActions {
             override fun onSettingsChanged(optionIndex: Int) {}
         }
     }
-
 }

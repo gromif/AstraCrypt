@@ -1,0 +1,79 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>FinalNewline:GetContentModeFlowUseCaseTest.kt$io.gromif.secure_content.domain.usecase.GetContentModeFlowUseCaseTest.kt</ID>
+    <ID>FinalNewline:RepositoryModule.kt$io.gromif.secure_content.di.RepositoryModule.kt</ID>
+    <ID>FinalNewline:SecureContentContractImpl.kt$io.gromif.secure_content.data.SecureContentContractImpl.kt</ID>
+    <ID>FinalNewline:SecureContentContractImplTest.kt$io.gromif.secure_content.data.SecureContentContractImplTest.kt</ID>
+    <ID>FinalNewline:SecureContentMode.kt$io.gromif.secure_content.data.mapper.SecureContentMode.kt</ID>
+    <ID>FinalNewline:SecureContentMode.kt$io.gromif.secure_content.domain.SecureContentMode.kt</ID>
+    <ID>FinalNewline:SecureContentSettings.kt$io.gromif.secure_content.presentation.SecureContentSettings.kt</ID>
+    <ID>FinalNewline:SecureContentSettingsScreen.kt$io.gromif.secure_content.presentation.SecureContentSettingsScreen.kt</ID>
+    <ID>FinalNewline:SecureContentSettingsViewModel.kt$io.gromif.secure_content.presentation.SecureContentSettingsViewModel.kt</ID>
+    <ID>FinalNewline:SecureContentSettingsViewModelTest.kt$io.gromif.secure_content.presentation.SecureContentSettingsViewModelTest.kt</ID>
+    <ID>FinalNewline:SetContentModeUseCaseTest.kt$io.gromif.secure_content.domain.usecase.SetContentModeUseCaseTest.kt</ID>
+    <ID>FinalNewline:SettingsRepository.kt$io.gromif.secure_content.domain.SettingsRepository.kt</ID>
+    <ID>FinalNewline:SettingsRepositoryImpl.kt$io.gromif.secure_content.data.SettingsRepositoryImpl.kt</ID>
+    <ID>FinalNewline:SettingsRepositoryImplTest.kt$io.gromif.secure_content.data.SettingsRepositoryImplTest.kt</ID>
+    <ID>MultiLineIfElse:SecureContentSettings.kt$SecureContentSettingsScreen( isActivated = contentMode != SecureContentMode.DISABLED, onSetState = { val newMode = if (it) SecureContentMode.ENABLED else SecureContentMode.DISABLED vm.setMode(newMode) }, isForced = contentMode == SecureContentMode.FORCE, onSetForcedState = { val newMode = if (it) SecureContentMode.FORCE else SecureContentMode.ENABLED vm.setMode(newMode) } )</ID>
+    <ID>NewLineAtEndOfFile:GetContentModeFlowUseCaseTest.kt$io.gromif.secure_content.domain.usecase.GetContentModeFlowUseCaseTest.kt</ID>
+    <ID>NewLineAtEndOfFile:RepositoryModule.kt$io.gromif.secure_content.di.RepositoryModule.kt</ID>
+    <ID>NewLineAtEndOfFile:SecureContentContractImpl.kt$io.gromif.secure_content.data.SecureContentContractImpl.kt</ID>
+    <ID>NewLineAtEndOfFile:SecureContentContractImplTest.kt$io.gromif.secure_content.data.SecureContentContractImplTest.kt</ID>
+    <ID>NewLineAtEndOfFile:SecureContentMode.kt$io.gromif.secure_content.data.mapper.SecureContentMode.kt</ID>
+    <ID>NewLineAtEndOfFile:SecureContentMode.kt$io.gromif.secure_content.domain.SecureContentMode.kt</ID>
+    <ID>NewLineAtEndOfFile:SecureContentSettings.kt$io.gromif.secure_content.presentation.SecureContentSettings.kt</ID>
+    <ID>NewLineAtEndOfFile:SecureContentSettingsScreen.kt$io.gromif.secure_content.presentation.SecureContentSettingsScreen.kt</ID>
+    <ID>NewLineAtEndOfFile:SecureContentSettingsViewModel.kt$io.gromif.secure_content.presentation.SecureContentSettingsViewModel.kt</ID>
+    <ID>NewLineAtEndOfFile:SecureContentSettingsViewModelTest.kt$io.gromif.secure_content.presentation.SecureContentSettingsViewModelTest.kt</ID>
+    <ID>NewLineAtEndOfFile:SetContentModeUseCaseTest.kt$io.gromif.secure_content.domain.usecase.SetContentModeUseCaseTest.kt</ID>
+    <ID>NewLineAtEndOfFile:SettingsRepository.kt$io.gromif.secure_content.domain.SettingsRepository.kt</ID>
+    <ID>NewLineAtEndOfFile:SettingsRepositoryImpl.kt$io.gromif.secure_content.data.SettingsRepositoryImpl.kt</ID>
+    <ID>NewLineAtEndOfFile:SettingsRepositoryImplTest.kt$io.gromif.secure_content.data.SettingsRepositoryImplTest.kt</ID>
+    <ID>NoBlankLineBeforeRbrace:GetContentModeFlowUseCase.kt$GetContentModeFlowUseCase$ </ID>
+    <ID>NoBlankLineBeforeRbrace:RepositoryModule.kt$RepositoryModule$ </ID>
+    <ID>NoBlankLineBeforeRbrace:SecureContentContractImpl.kt$SecureContentContractImpl$ </ID>
+    <ID>NoBlankLineBeforeRbrace:SecureContentContractImplTest.kt$SecureContentContractImplTest$ </ID>
+    <ID>NoBlankLineBeforeRbrace:SecureContentMode.kt$SecureContentMode$ </ID>
+    <ID>NoBlankLineBeforeRbrace:SecureContentSettingsViewModel.kt$SecureContentSettingsViewModel$ </ID>
+    <ID>NoBlankLineBeforeRbrace:SecureContentSettingsViewModelTest.kt$SecureContentSettingsViewModelTest$ </ID>
+    <ID>NoBlankLineBeforeRbrace:SetContentModeUseCase.kt$SetContentModeUseCase$ </ID>
+    <ID>NoBlankLineBeforeRbrace:SettingsRepository.kt$SettingsRepository$ </ID>
+    <ID>NoBlankLineBeforeRbrace:SettingsRepositoryImplTest.kt$SettingsRepositoryImplTest$ </ID>
+    <ID>PackageName:GetContentModeFlowUseCase.kt$package io.gromif.secure_content.domain.usecase</ID>
+    <ID>PackageName:GetContentModeFlowUseCaseTest.kt$package io.gromif.secure_content.domain.usecase</ID>
+    <ID>PackageName:RepositoryModule.kt$package io.gromif.secure_content.di</ID>
+    <ID>PackageName:SecureContentContractImpl.kt$package io.gromif.secure_content.data</ID>
+    <ID>PackageName:SecureContentContractImplTest.kt$package io.gromif.secure_content.data</ID>
+    <ID>PackageName:SecureContentMode.kt$package io.gromif.secure_content.data.mapper</ID>
+    <ID>PackageName:SecureContentMode.kt$package io.gromif.secure_content.domain</ID>
+    <ID>PackageName:SecureContentSettings.kt$package io.gromif.secure_content.presentation</ID>
+    <ID>PackageName:SecureContentSettingsScreen.kt$package io.gromif.secure_content.presentation</ID>
+    <ID>PackageName:SecureContentSettingsViewModel.kt$package io.gromif.secure_content.presentation</ID>
+    <ID>PackageName:SecureContentSettingsViewModelTest.kt$package io.gromif.secure_content.presentation</ID>
+    <ID>PackageName:SetContentModeUseCase.kt$package io.gromif.secure_content.domain.usecase</ID>
+    <ID>PackageName:SetContentModeUseCaseTest.kt$package io.gromif.secure_content.domain.usecase</ID>
+    <ID>PackageName:SettingsRepository.kt$package io.gromif.secure_content.domain</ID>
+    <ID>PackageName:SettingsRepositoryImpl.kt$package io.gromif.secure_content.data</ID>
+    <ID>PackageName:SettingsRepositoryImplTest.kt$package io.gromif.secure_content.data</ID>
+    <ID>PackageNaming:GetContentModeFlowUseCase.kt$package io.gromif.secure_content.domain.usecase</ID>
+    <ID>PackageNaming:GetContentModeFlowUseCaseTest.kt$package io.gromif.secure_content.domain.usecase</ID>
+    <ID>PackageNaming:RepositoryModule.kt$package io.gromif.secure_content.di</ID>
+    <ID>PackageNaming:SecureContentContractImpl.kt$package io.gromif.secure_content.data</ID>
+    <ID>PackageNaming:SecureContentContractImplTest.kt$package io.gromif.secure_content.data</ID>
+    <ID>PackageNaming:SecureContentMode.kt$package io.gromif.secure_content.data.mapper</ID>
+    <ID>PackageNaming:SecureContentMode.kt$package io.gromif.secure_content.domain</ID>
+    <ID>PackageNaming:SecureContentSettings.kt$package io.gromif.secure_content.presentation</ID>
+    <ID>PackageNaming:SecureContentSettingsScreen.kt$package io.gromif.secure_content.presentation</ID>
+    <ID>PackageNaming:SecureContentSettingsViewModel.kt$package io.gromif.secure_content.presentation</ID>
+    <ID>PackageNaming:SecureContentSettingsViewModelTest.kt$package io.gromif.secure_content.presentation</ID>
+    <ID>PackageNaming:SetContentModeUseCase.kt$package io.gromif.secure_content.domain.usecase</ID>
+    <ID>PackageNaming:SetContentModeUseCaseTest.kt$package io.gromif.secure_content.domain.usecase</ID>
+    <ID>PackageNaming:SettingsRepository.kt$package io.gromif.secure_content.domain</ID>
+    <ID>PackageNaming:SettingsRepositoryImpl.kt$package io.gromif.secure_content.data</ID>
+    <ID>PackageNaming:SettingsRepositoryImplTest.kt$package io.gromif.secure_content.data</ID>
+    <ID>SpacingAroundColon:SecureContentSettingsViewModel.kt$SecureContentSettingsViewModel$:</ID>
+    <ID>SpacingAroundColon:SettingsRepositoryImpl.kt$SettingsRepositoryImpl$:</ID>
+  </CurrentIssues>
+</SmellBaseline>

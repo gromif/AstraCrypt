@@ -23,5 +23,4 @@ internal object ContractModule {
         checkAuthTimeoutUseCase = checkAuthTimeoutUseCase,
         getAuthStateFlowUseCase = getAuthStateFlowUseCase
     )
-
 }

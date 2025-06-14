@@ -1,0 +1,27 @@
+on:
+  workflow_call:
+
+jobs:
+
+  test:
+    name: 🧪 Run Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout Repo
+      - name: 🧩 Checkout Repo
+        uses: actions/checkout@v4
+
+      # Set up Java
+      - uses: ./.github/actions/setup-java-action
+
+      # Set up Gradle
+      - uses: ./.github/actions/setup-gradle-action
+        with:
+          cache-read-only: false
+          gradle-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
+
+      - name: Tests
+        run: ./gradlew test --stacktrace
+
+      - run: echo "🍏 Tests status is ${{ job.status }}."

@@ -1,0 +1,60 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>FinalNewline:AeadMode.kt$io.gromif.notes.domain.model.AeadMode.kt</ID>
+    <ID>FinalNewline:CreateUseCase.kt$io.gromif.notes.domain.usecase.CreateUseCase.kt</ID>
+    <ID>FinalNewline:CreateUseCaseTest.kt$io.gromif.notes.domain.usecase.CreateUseCaseTest.kt</ID>
+    <ID>FinalNewline:DeleteByIdUseCase.kt$io.gromif.notes.domain.usecase.DeleteByIdUseCase.kt</ID>
+    <ID>FinalNewline:GetAeadPreferenceFlowUseCase.kt$io.gromif.notes.domain.usecase.GetAeadPreferenceFlowUseCase.kt</ID>
+    <ID>FinalNewline:GetAeadPreferenceUseCase.kt$io.gromif.notes.domain.usecase.GetAeadPreferenceUseCase.kt</ID>
+    <ID>FinalNewline:GetNotesListFlow.kt$io.gromif.notes.domain.usecase.GetNotesListFlow.kt</ID>
+    <ID>FinalNewline:LoadByIdUseCase.kt$io.gromif.notes.domain.usecase.LoadByIdUseCase.kt</ID>
+    <ID>FinalNewline:LoadByIdUseCaseTest.kt$io.gromif.notes.domain.usecase.LoadByIdUseCaseTest.kt</ID>
+    <ID>FinalNewline:Note.kt$io.gromif.notes.domain.model.Note.kt</ID>
+    <ID>FinalNewline:NoteState.kt$io.gromif.notes.domain.model.NoteState.kt</ID>
+    <ID>FinalNewline:PagingProvider.kt$io.gromif.notes.domain.paging.PagingProvider.kt</ID>
+    <ID>FinalNewline:Repository.kt$io.gromif.notes.domain.repository.Repository.kt</ID>
+    <ID>FinalNewline:SetAeadPreferenceUseCase.kt$io.gromif.notes.domain.usecase.SetAeadPreferenceUseCase.kt</ID>
+    <ID>FinalNewline:SettingsRepository.kt$io.gromif.notes.domain.repository.SettingsRepository.kt</ID>
+    <ID>FinalNewline:UpdateByIdUseCase.kt$io.gromif.notes.domain.usecase.UpdateByIdUseCase.kt</ID>
+    <ID>FinalNewline:UpdateByIdUseCaseTest.kt$io.gromif.notes.domain.usecase.UpdateByIdUseCaseTest.kt</ID>
+    <ID>FinalNewline:UpdateNotesAeadUseCase.kt$io.gromif.notes.domain.usecase.UpdateNotesAeadUseCase.kt</ID>
+    <ID>FinalNewline:UpdateNotesAeadUseCaseTest.kt$io.gromif.notes.domain.usecase.UpdateNotesAeadUseCaseTest.kt</ID>
+    <ID>NewLineAtEndOfFile:AeadMode.kt$io.gromif.notes.domain.model.AeadMode.kt</ID>
+    <ID>NewLineAtEndOfFile:CreateUseCase.kt$io.gromif.notes.domain.usecase.CreateUseCase.kt</ID>
+    <ID>NewLineAtEndOfFile:CreateUseCaseTest.kt$io.gromif.notes.domain.usecase.CreateUseCaseTest.kt</ID>
+    <ID>NewLineAtEndOfFile:DeleteByIdUseCase.kt$io.gromif.notes.domain.usecase.DeleteByIdUseCase.kt</ID>
+    <ID>NewLineAtEndOfFile:GetAeadPreferenceFlowUseCase.kt$io.gromif.notes.domain.usecase.GetAeadPreferenceFlowUseCase.kt</ID>
+    <ID>NewLineAtEndOfFile:GetAeadPreferenceUseCase.kt$io.gromif.notes.domain.usecase.GetAeadPreferenceUseCase.kt</ID>
+    <ID>NewLineAtEndOfFile:GetNotesListFlow.kt$io.gromif.notes.domain.usecase.GetNotesListFlow.kt</ID>
+    <ID>NewLineAtEndOfFile:LoadByIdUseCase.kt$io.gromif.notes.domain.usecase.LoadByIdUseCase.kt</ID>
+    <ID>NewLineAtEndOfFile:LoadByIdUseCaseTest.kt$io.gromif.notes.domain.usecase.LoadByIdUseCaseTest.kt</ID>
+    <ID>NewLineAtEndOfFile:Note.kt$io.gromif.notes.domain.model.Note.kt</ID>
+    <ID>NewLineAtEndOfFile:NoteState.kt$io.gromif.notes.domain.model.NoteState.kt</ID>
+    <ID>NewLineAtEndOfFile:PagingProvider.kt$io.gromif.notes.domain.paging.PagingProvider.kt</ID>
+    <ID>NewLineAtEndOfFile:Repository.kt$io.gromif.notes.domain.repository.Repository.kt</ID>
+    <ID>NewLineAtEndOfFile:SetAeadPreferenceUseCase.kt$io.gromif.notes.domain.usecase.SetAeadPreferenceUseCase.kt</ID>
+    <ID>NewLineAtEndOfFile:SettingsRepository.kt$io.gromif.notes.domain.repository.SettingsRepository.kt</ID>
+    <ID>NewLineAtEndOfFile:UpdateByIdUseCase.kt$io.gromif.notes.domain.usecase.UpdateByIdUseCase.kt</ID>
+    <ID>NewLineAtEndOfFile:UpdateByIdUseCaseTest.kt$io.gromif.notes.domain.usecase.UpdateByIdUseCaseTest.kt</ID>
+    <ID>NewLineAtEndOfFile:UpdateNotesAeadUseCase.kt$io.gromif.notes.domain.usecase.UpdateNotesAeadUseCase.kt</ID>
+    <ID>NewLineAtEndOfFile:UpdateNotesAeadUseCaseTest.kt$io.gromif.notes.domain.usecase.UpdateNotesAeadUseCaseTest.kt</ID>
+    <ID>NoBlankLineBeforeRbrace:AeadMode.kt$AeadMode$ </ID>
+    <ID>NoBlankLineBeforeRbrace:CreateUseCase.kt$CreateUseCase$ </ID>
+    <ID>NoBlankLineBeforeRbrace:DeleteByIdUseCase.kt$DeleteByIdUseCase$ </ID>
+    <ID>NoBlankLineBeforeRbrace:GetAeadPreferenceFlowUseCase.kt$GetAeadPreferenceFlowUseCase$ </ID>
+    <ID>NoBlankLineBeforeRbrace:GetAeadPreferenceUseCase.kt$GetAeadPreferenceUseCase$ </ID>
+    <ID>NoBlankLineBeforeRbrace:GetNotesListFlow.kt$GetNotesListFlow$ </ID>
+    <ID>NoBlankLineBeforeRbrace:LoadByIdUseCase.kt$LoadByIdUseCase$ </ID>
+    <ID>NoBlankLineBeforeRbrace:NoteState.kt$NoteState$ </ID>
+    <ID>NoBlankLineBeforeRbrace:PagingProvider.kt$PagingProvider$ </ID>
+    <ID>NoBlankLineBeforeRbrace:Repository.kt$Repository$ </ID>
+    <ID>NoBlankLineBeforeRbrace:SetAeadPreferenceUseCase.kt$SetAeadPreferenceUseCase$ </ID>
+    <ID>NoBlankLineBeforeRbrace:SettingsRepository.kt$SettingsRepository$ </ID>
+    <ID>NoBlankLineBeforeRbrace:UpdateByIdUseCase.kt$UpdateByIdUseCase$ </ID>
+    <ID>NoBlankLineBeforeRbrace:UpdateNotesAeadUseCase.kt$UpdateNotesAeadUseCase$ </ID>
+    <ID>SpacingAroundColon:AeadMode.kt$AeadMode.None$:</ID>
+    <ID>SpacingAroundColon:AeadMode.kt$AeadMode.Template$:</ID>
+  </CurrentIssues>
+</SmellBaseline>

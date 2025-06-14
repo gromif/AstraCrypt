@@ -12,5 +12,4 @@ class SetHintVisibilityUseCase(
         val auth = getAuthUseCase()
         setAuthUseCase(auth.copy(hintState = visible))
     }
-
 }

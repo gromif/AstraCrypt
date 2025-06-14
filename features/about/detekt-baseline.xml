@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>FinalNewline:Common.kt$io.gromif.astracrypt.settings.about.shared.Common.kt</ID>
+    <ID>FinalNewline:Communication.kt$io.gromif.astracrypt.settings.about.shared.Communication.kt</ID>
+    <ID>FinalNewline:Header.kt$io.gromif.astracrypt.settings.about.shared.Header.kt</ID>
+    <ID>LongParameterList:Screen.kt$( params: Params = Params(), onMoreApps: () -&gt; Unit = {}, onLeaveFeedback: () -&gt; Unit = {}, onEmailClick: () -&gt; Unit = {}, onMarketClick: () -&gt; Unit = {}, toPrivacyPolicy: () -&gt; Unit = {}, )</ID>
+    <ID>NewLineAtEndOfFile:Common.kt$io.gromif.astracrypt.settings.about.shared.Common.kt</ID>
+    <ID>NewLineAtEndOfFile:Communication.kt$io.gromif.astracrypt.settings.about.shared.Communication.kt</ID>
+    <ID>NewLineAtEndOfFile:Header.kt$io.gromif.astracrypt.settings.about.shared.Header.kt</ID>
+    <ID>NoConsecutiveBlankLines:Screen.kt$ </ID>
+  </CurrentIssues>
+</SmellBaseline>

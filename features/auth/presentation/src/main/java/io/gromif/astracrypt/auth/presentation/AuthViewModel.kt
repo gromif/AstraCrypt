@@ -8,7 +8,6 @@ import javax.inject.Inject
 @HiltViewModel
 internal class AuthViewModel @Inject constructor(
     getAuthStateFlowUseCase: GetAuthStateFlowUseCase
-): ViewModel() {
+) : ViewModel() {
     val authStateFlow = getAuthStateFlowUseCase()
-
 }

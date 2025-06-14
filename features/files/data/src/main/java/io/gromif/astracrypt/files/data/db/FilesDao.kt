@@ -10,20 +10,24 @@ import io.gromif.astracrypt.files.data.db.tuples.DeleteTuple
 import io.gromif.astracrypt.files.data.db.tuples.DetailsTuple
 import io.gromif.astracrypt.files.data.db.tuples.ExportTuple
 import io.gromif.astracrypt.files.data.db.tuples.PagerTuple
+import io.gromif.astracrypt.files.data.db.tuples.RenameTuple
 import io.gromif.astracrypt.files.data.db.tuples.UpdateAeadTuple
 import io.gromif.astracrypt.files.domain.model.ItemType
 import kotlinx.coroutines.flow.Flow
 
+@Suppress("detekt:TooManyFunctions")
 @Dao
 interface FilesDao {
 
     @Query("select * from store_items where id = :id")
     suspend fun get(id: Long): FilesEntity
 
-    @Query("select id from store_items " +
+    @Query(
+        "select id from store_items " +
             "where parent = :parent " +
             "and (not :excludeFolders or type > 0)" +
-            "and (:typeFilter is null or type = :typeFilter)")
+            "and (:typeFilter is null or type = :typeFilter)"
+    )
     suspend fun getIdList(
         parent: Long,
         typeFilter: ItemType? = null,
@@ -47,8 +51,8 @@ interface FilesDao {
     @Query("update store_items set parent = (:parent) where id in (:ids)")
     suspend fun move(ids: List<Long>, parent: Long)
 
-    @Query("update store_items set name = :name where id = :id")
-    suspend fun rename(id: Long, name: String)
+    @Update(entity = FilesEntity::class)
+    suspend fun rename(renameTuple: RenameTuple)
 
     @Query("update store_items set state = :state where id = :id")
     suspend fun setStarred(id: Long, state: Int)
@@ -75,18 +79,18 @@ interface FilesDao {
     @RewriteQueriesToDropUnusedColumns
     @Query(
         "select * from store_items where " +
-        "(" +
+            "(" +
             "(:query is null and parent = :rootId) " +
             "or " +
             "(:query is not null and parent in (:rootIdsToSearch))" +
-        ") " +
-        "and (state = 0 or state = 2) " +
-        "and (:query is null or name like '%' || :query || '%') " +
-        "order by type = :sortingItemType desc, " +
-        "case :sortingSecondType " +
-        "   when 6 then id " +
-        "   when 1 then name " +
-        "end"
+            ") " +
+            "and (state = 0 or state = 2) " +
+            "and (:query is null or name like '%' || :query || '%') " +
+            "order by type = :sortingItemType desc, " +
+            "case :sortingSecondType " +
+            "   when 6 then id " +
+            "   when 1 then name " +
+            "end"
     )
     fun listDefault(
         rootId: Long = 0,
@@ -100,17 +104,16 @@ interface FilesDao {
     @RewriteQueriesToDropUnusedColumns
     @Query(
         "select * from store_items where state = 2 " +
-        "and (:query is null or name like '%' || :query || '%') " +
-        "order by type = :sortingItemType desc, " +
-        "case :sortingSecondType " +
-        "   when 6 then id " +
-        "   when 1 then name " +
-        "end"
+            "and (:query is null or name like '%' || :query || '%') " +
+            "order by type = :sortingItemType desc, " +
+            "case :sortingSecondType " +
+            "   when 6 then id " +
+            "   when 1 then name " +
+            "end"
     )
     fun listStarred(
         query: String? = null,
         sortingItemType: Int,
         sortingSecondType: Int
     ): PagingSource<Int, PagerTuple>
-
 }

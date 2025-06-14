@@ -33,7 +33,7 @@ import io.gromif.ui.compose.core.theme.spaces
 fun SettingsScreen() {
     val navController = LocalNavController.current
 
-    val cellsCount = when(LocalWindowWidth.current) {
+    val cellsCount = when (LocalWindowWidth.current) {
         WindowWidthSizeClass.Compact -> 2
         WindowWidthSizeClass.Medium -> 3
         WindowWidthSizeClass.Expanded -> 5
@@ -55,6 +55,7 @@ fun SettingsScreen() {
                     SettingsMainItems.EditProfile -> navController.navigate(Route.EditProfile)
                     SettingsMainItems.Security -> navController.navigate(Route.SettingsSecurity)
                     SettingsMainItems.Interface -> navController.navigate(Route.SettingsUi)
+                    SettingsMainItems.Donate -> navController.navigate(Route.Donate)
                     SettingsMainItems.About -> navController.navigate(Route.AboutGraph)
                 }
             }

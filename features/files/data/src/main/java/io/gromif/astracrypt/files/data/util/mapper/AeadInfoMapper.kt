@@ -6,7 +6,7 @@ import io.gromif.astracrypt.files.domain.model.AeadMode
 import io.gromif.astracrypt.utils.Mapper
 import io.gromif.crypto.tink.keyset.KeysetTemplates
 
-class AeadInfoDtoMapper: Mapper<AeadInfo, AeadInfoDto> {
+class AeadInfoDtoMapper : Mapper<AeadInfo, AeadInfoDto> {
     override fun invoke(item: AeadInfo): AeadInfoDto {
         val fileAeadIndex = item.fileMode.id
         val previewAeadIndex = item.previewMode.id
@@ -23,7 +23,7 @@ class AeadInfoDtoMapper: Mapper<AeadInfo, AeadInfoDto> {
     }
 }
 
-class AeadInfoMapper: Mapper<AeadInfoDto, AeadInfo> {
+class AeadInfoMapper : Mapper<AeadInfoDto, AeadInfo> {
     override fun invoke(item: AeadInfoDto): AeadInfo {
         val fileMode = parseAeadMode(item.fileAeadIndex)
         val previewMode = parseAeadMode(item.previewAeadIndex)
@@ -39,7 +39,7 @@ class AeadInfoMapper: Mapper<AeadInfoDto, AeadInfo> {
         )
     }
 
-    private fun parseAeadMode(aeadIndex: Int): AeadMode = when(aeadIndex) {
+    private fun parseAeadMode(aeadIndex: Int): AeadMode = when (aeadIndex) {
         -1 -> AeadMode.None
         else -> AeadMode.Template(
             id = aeadIndex,

@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>FinalNewline:DispatcherModule.kt$io.gromif.astracrypt.utils.dispatchers.DispatcherModule.kt</ID>
+    <ID>NewLineAtEndOfFile:DispatcherModule.kt$io.gromif.astracrypt.utils.dispatchers.DispatcherModule.kt</ID>
+  </CurrentIssues>
+</SmellBaseline>

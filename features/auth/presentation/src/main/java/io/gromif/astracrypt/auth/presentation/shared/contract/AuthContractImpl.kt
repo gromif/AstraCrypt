@@ -12,7 +12,7 @@ internal class AuthContractImpl @Inject constructor(
     private val setLastActiveTimeUseCase: SetLastActiveTimeUseCase,
     private val checkAuthTimeoutUseCase: CheckAuthTimeoutUseCase,
     private val getAuthStateFlowUseCase: GetAuthStateFlowUseCase
-): AuthContract {
+) : AuthContract {
     override suspend fun updateLastActiveTime() {
         setLastActiveTimeUseCase()
     }

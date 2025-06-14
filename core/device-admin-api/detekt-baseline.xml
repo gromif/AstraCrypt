@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>FinalNewline:AdminComponentModule.kt$io.gromif.device_admin_api.AdminComponentModule.kt</ID>
+    <ID>FinalNewline:AdminReceiver.kt$io.gromif.device_admin_api.AdminReceiver.kt</ID>
+    <ID>FinalNewline:AdminReceiverTest.kt$io.gromif.device_admin_api.AdminReceiverTest.kt</ID>
+    <ID>FinalNewline:AndroidDeviceAdminApi.kt$io.gromif.device_admin_api.AndroidDeviceAdminApi.kt</ID>
+    <ID>FinalNewline:AndroidDeviceAdminApiTest.kt$io.gromif.device_admin_api.AndroidDeviceAdminApiTest.kt</ID>
+    <ID>FinalNewline:DeviceAdminApi.kt$io.gromif.device_admin_api.DeviceAdminApi.kt</ID>
+    <ID>MultiLineIfElse:AndroidDeviceAdminApi.kt$AndroidDeviceAdminApi$DeviceAdminApi.Type.NONE.also { updateType() }</ID>
+    <ID>MultiLineIfElse:AndroidDeviceAdminApi.kt$AndroidDeviceAdminApi$type</ID>
+    <ID>NewLineAtEndOfFile:AdminComponentModule.kt$io.gromif.device_admin_api.AdminComponentModule.kt</ID>
+    <ID>NewLineAtEndOfFile:AdminReceiver.kt$io.gromif.device_admin_api.AdminReceiver.kt</ID>
+    <ID>NewLineAtEndOfFile:AdminReceiverTest.kt$io.gromif.device_admin_api.AdminReceiverTest.kt</ID>
+    <ID>NewLineAtEndOfFile:AndroidDeviceAdminApi.kt$io.gromif.device_admin_api.AndroidDeviceAdminApi.kt</ID>
+    <ID>NewLineAtEndOfFile:AndroidDeviceAdminApiTest.kt$io.gromif.device_admin_api.AndroidDeviceAdminApiTest.kt</ID>
+    <ID>NewLineAtEndOfFile:DeviceAdminApi.kt$io.gromif.device_admin_api.DeviceAdminApi.kt</ID>
+    <ID>NoBlankLineBeforeRbrace:AdminComponentModule.kt$AdminComponentModule$ </ID>
+    <ID>NoBlankLineBeforeRbrace:AdminReceiverTest.kt$AdminReceiverTest$ </ID>
+    <ID>NoBlankLineBeforeRbrace:AndroidDeviceAdminApi.kt$AndroidDeviceAdminApi$ </ID>
+    <ID>NoBlankLineBeforeRbrace:AndroidDeviceAdminApiTest.kt$AndroidDeviceAdminApiTest$ </ID>
+    <ID>NoBlankLineBeforeRbrace:DeviceAdminApi.kt$DeviceAdminApi$ </ID>
+    <ID>PackageName:AdminComponentModule.kt$package io.gromif.device_admin_api</ID>
+    <ID>PackageName:AdminReceiver.kt$package io.gromif.device_admin_api</ID>
+    <ID>PackageName:AdminReceiverTest.kt$package io.gromif.device_admin_api</ID>
+    <ID>PackageName:AndroidDeviceAdminApi.kt$package io.gromif.device_admin_api</ID>
+    <ID>PackageName:AndroidDeviceAdminApiTest.kt$package io.gromif.device_admin_api</ID>
+    <ID>PackageName:DeviceAdminApi.kt$package io.gromif.device_admin_api</ID>
+    <ID>PackageNaming:AdminComponentModule.kt$package io.gromif.device_admin_api</ID>
+    <ID>PackageNaming:AdminReceiver.kt$package io.gromif.device_admin_api</ID>
+    <ID>PackageNaming:AdminReceiverTest.kt$package io.gromif.device_admin_api</ID>
+    <ID>PackageNaming:AndroidDeviceAdminApi.kt$package io.gromif.device_admin_api</ID>
+    <ID>PackageNaming:AndroidDeviceAdminApiTest.kt$package io.gromif.device_admin_api</ID>
+    <ID>PackageNaming:DeviceAdminApi.kt$package io.gromif.device_admin_api</ID>
+    <ID>SpacingAroundColon:AdminReceiver.kt$AdminReceiver$:</ID>
+  </CurrentIssues>
+</SmellBaseline>

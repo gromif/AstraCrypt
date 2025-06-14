@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>LongMethod:FilesScreen.kt$@OptIn(ExperimentalMaterial3Api::class) @Composable fun FilesScreen( initialParams: FilesInitialParams, mode: Mode, onContextualAction: Flow&lt;ContextualAction&gt;, snackbarHostState: SnackbarHostState, searchQueryState: StateFlow&lt;String&gt;, onModeChange: (Mode) -&gt; Unit = {}, navActions: FilesNavActions, )</ID>
+    <ID>LongMethod:Grid.kt$@OptIn(ExperimentalFoundationApi::class) @Composable internal fun FilesListGridItem( modifier: Modifier = Modifier, imageLoader: ImageLoader, name: String, preview: FileSource?, itemType: ItemType, isFile: Boolean, state: ItemState, isChecked: Boolean, onOptions: () -&gt; Unit, onClick: () -&gt; Unit, onLongPress: () -&gt; Unit, )</ID>
+    <ID>LongMethod:Item.kt$@Composable internal fun RecentFilesListItem( modifier: Modifier = Modifier, imageLoader: ImageLoader, name: String, preview: FileSource?, itemType: ItemType, state: ItemState, onClick: () -&gt; Unit )</ID>
+    <ID>LongMethod:List.kt$@Composable internal fun FilesList( viewMode: ViewMode = ViewMode.Grid, pagingItems: LazyPagingItems&lt;Item&gt;, multiselectStateList: SnapshotStateList&lt;Long&gt;, imageLoader: ImageLoader, onOptions: (item: Item) -&gt; Unit, onClick: (item: Item) -&gt; Unit, onLongPress: (id: Long) -&gt; Unit, )</ID>
+    <ID>LongMethod:Screen.kt$@Preview(showBackground = true) @Composable internal fun Screen( isExternalExport: Boolean = false, state: ExportStateHolder = ExportStateHolder(), onStart: () -&gt; Unit = {}, onOpenExportedFile: () -&gt; Unit = {}, onCancelExport: () -&gt; Unit = {}, onDispose: () -&gt; Unit = {} )</ID>
+    <ID>LongMethod:Simple.kt$@OptIn(ExperimentalFoundationApi::class) @Composable internal fun FilesListItem( modifier: Modifier = Modifier, imageLoader: ImageLoader, name: String = "TEST_NAME", preview: FileSource?, itemType: ItemType = ItemType.Document, state: ItemState = ItemState.Default, isChecked: Boolean = false, isBackgroundTransparent: Boolean = false, onLongClick: () -&gt; Unit = {}, onClick: () -&gt; Unit = {}, )</ID>
+    <ID>LongParameterList:AeadSettingsScreen.kt$( modifier: Modifier = Modifier, verticalArrangement: Arrangement.Vertical = Arrangement.spacedBy(MaterialTheme.spaces.spaceMedium), params: AeadSettingsScreenParams = AeadSettingsScreenParams(), onFileAeadChange: (Int) -&gt; Unit = {}, onPreviewAeadChange: (Int) -&gt; Unit = {}, onDatabaseAeadChange: (Int) -&gt; Unit = {}, toDatabaseColumnsAeadSettings: () -&gt; Unit = {}, )</ID>
+    <ID>LongParameterList:CreateNew.kt$( state: MutableState&lt;Boolean&gt;, sheetState: SheetState = SheetDefaults.state(), scope: CoroutineScope = rememberCoroutineScope(), onCreateFolder: () -&gt; Unit, onAdd: (type: String) -&gt; Unit, onScan: () -&gt; Unit, )</ID>
+    <ID>LongParameterList:FilesGroup.kt$( fileOptions: List&lt;String&gt; = listOf("Test"), fileAeadIndex: Int = 0, onFileAeadChange: (Int) -&gt; Unit = {}, previewOptions: List&lt;String&gt; = listOf("Test"), previewAeadIndex: Int = 0, onPreviewAeadChange: (Int) -&gt; Unit = {}, )</ID>
+    <ID>LongParameterList:FilesScreen.kt$( initialParams: FilesInitialParams, mode: Mode, onContextualAction: Flow&lt;ContextualAction&gt;, snackbarHostState: SnackbarHostState, searchQueryState: StateFlow&lt;String&gt;, onModeChange: (Mode) -&gt; Unit = {}, navActions: FilesNavActions, )</ID>
+    <ID>LongParameterList:FilesViewModel.kt$FilesViewModel$( @IoDispatcher private val defaultDispatcher: CoroutineDispatcher, private val state: SavedStateHandle, private val dataUseCases: DataUseCases&lt;PagingData&lt;Item&gt;&gt;, private val navigatorUseCases: NavigatorUseCases, private val actionUseCases: ActionUseCases, private val workManager: WorkManager, private val workerSerializer: WorkerSerializer, val filesUtil: FilesUtil, @FilesImageLoader val imageLoader: ImageLoader, getListViewModeUseCase: GetListViewModeUseCase, getValidationRulesUsecase: GetValidationRulesUseCase, )</ID>
+    <ID>LongParameterList:Grid.kt$( modifier: Modifier = Modifier, imageLoader: ImageLoader, name: String, preview: FileSource?, itemType: ItemType, isFile: Boolean, state: ItemState, isChecked: Boolean, onOptions: () -&gt; Unit, onClick: () -&gt; Unit, onLongPress: () -&gt; Unit, )</ID>
+    <ID>LongParameterList:Item.kt$( modifier: Modifier = Modifier, imageLoader: ImageLoader, name: String, preview: FileSource?, itemType: ItemType, state: ItemState, onClick: () -&gt; Unit )</ID>
+    <ID>LongParameterList:List.kt$( viewMode: ViewMode = ViewMode.Grid, pagingItems: LazyPagingItems&lt;Item&gt;, multiselectStateList: SnapshotStateList&lt;Long&gt;, imageLoader: ImageLoader, onOptions: (item: Item) -&gt; Unit, onClick: (item: Item) -&gt; Unit, onLongPress: (id: Long) -&gt; Unit, )</ID>
+    <ID>LongParameterList:Options.kt$( state: MutableState&lt;Boolean&gt; = Compose.state(), name: String = "Test", itemIcon: ImageVector = Icons.FileType.Photo, isFolder: Boolean = true, isStarred: Boolean = false, sheetState: SheetState = SheetDefaults.state(), onOptionClick: (Option) -&gt; Unit = {}, )</ID>
+    <ID>LongParameterList:Screen.kt$( isExternalExport: Boolean = false, state: ExportStateHolder = ExportStateHolder(), onStart: () -&gt; Unit = {}, onOpenExportedFile: () -&gt; Unit = {}, onCancelExport: () -&gt; Unit = {}, onDispose: () -&gt; Unit = {} )</ID>
+    <ID>LongParameterList:Simple.kt$( modifier: Modifier = Modifier, imageLoader: ImageLoader, name: String = "TEST_NAME", preview: FileSource?, itemType: ItemType = ItemType.Document, state: ItemState = ItemState.Default, isChecked: Boolean = false, isBackgroundTransparent: Boolean = false, onLongClick: () -&gt; Unit = {}, onClick: () -&gt; Unit = {}, )</ID>
+    <ID>MagicNumber:CreateNew.kt$3</ID>
+    <ID>MagicNumber:DetailsGroup.kt$1024.0</ID>
+    <ID>MagicNumber:ExportFilesWorker.kt$ExportFilesWorker$100</ID>
+    <ID>MagicNumber:FilesDetailsScreen.kt$0.5f</ID>
+    <ID>MagicNumber:FilesViewModel.kt$FilesViewModel$6</ID>
+    <ID>MagicNumber:Grid.kt$1.5f</ID>
+    <ID>MagicNumber:ImportFilesWorker.kt$ImportFilesWorker$100</ID>
+    <ID>MagicNumber:ImportFilesWorker.kt$ImportFilesWorker$4</ID>
+    <ID>MagicNumber:List.kt$3</ID>
+    <ID>MagicNumber:List.kt$5</ID>
+    <ID>MagicNumber:SetDatabaseAeadWorker.kt$SetDatabaseAeadWorker$100</ID>
+    <ID>MagicNumber:SetDatabaseAeadWorker.kt$SetDatabaseAeadWorker$4</ID>
+    <ID>SpreadOperator:ImportActionsFactory.kt$&lt;no name provided&gt;$( *uriList, saveSource = saveSource, onSuccess = { onMessage(R.string.snack_imported) }, onError = { onMessage(R.string.error) } )</ID>
+    <ID>TooManyFunctions:FilesViewModel.kt$FilesViewModel : ViewModel</ID>
+  </CurrentIssues>
+</SmellBaseline>

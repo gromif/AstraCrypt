@@ -9,7 +9,7 @@ class FileUtilFactoryImpl(
     private val context: Context,
     private val fileHandler: FileHandler,
     private val uriMapper: Mapper<String, Uri>
-): FileUtil.Factory {
+) : FileUtil.Factory {
     override suspend fun create(): FileUtil {
         return FileUtilImpl(
             context = context,

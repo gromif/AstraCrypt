@@ -1,0 +1,7 @@
+naming:
+  FunctionNaming:
+    ignoreAnnotated: ['Composable', 'Preview']
+
+complexity:
+  LongParameterList:
+    ignoreAnnotated: ['Provides', 'Binds']

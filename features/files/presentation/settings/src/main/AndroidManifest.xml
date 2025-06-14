@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <application>
+        <service
+            android:name="androidx.work.impl.foreground.SystemForegroundService"
+            android:foregroundServiceType="dataSync" />
+
+        <service
+            android:name="io.gromif.astracrypt.files.settings.aead.work.SetDatabaseAeadWorker"
+            android:foregroundServiceType="dataSync"
+            tools:ignore="Instantiatable" />
+    </application>
+</manifest>

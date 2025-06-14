@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>FinalNewline:DevicePolicyModule.kt$io.gromif.astracrypt.device_admin.di.DevicePolicyModule.kt</ID>
+    <ID>FinalNewline:ServiceModule.kt$io.gromif.astracrypt.device_admin.di.ServiceModule.kt</ID>
+    <ID>FinalNewline:UseCaseModule.kt$io.gromif.astracrypt.device_admin.di.UseCaseModule.kt</ID>
+    <ID>NewLineAtEndOfFile:DevicePolicyModule.kt$io.gromif.astracrypt.device_admin.di.DevicePolicyModule.kt</ID>
+    <ID>NewLineAtEndOfFile:ServiceModule.kt$io.gromif.astracrypt.device_admin.di.ServiceModule.kt</ID>
+    <ID>NewLineAtEndOfFile:UseCaseModule.kt$io.gromif.astracrypt.device_admin.di.UseCaseModule.kt</ID>
+    <ID>NoBlankLineBeforeRbrace:DevicePolicyModule.kt$DevicePolicyModule$ </ID>
+    <ID>NoBlankLineBeforeRbrace:ServiceModule.kt$ServiceModule$ </ID>
+    <ID>NoBlankLineBeforeRbrace:UseCaseModule.kt$UseCaseModule$ </ID>
+    <ID>PackageName:DevicePolicyModule.kt$package io.gromif.astracrypt.device_admin.di</ID>
+    <ID>PackageName:ServiceModule.kt$package io.gromif.astracrypt.device_admin.di</ID>
+    <ID>PackageName:UseCaseModule.kt$package io.gromif.astracrypt.device_admin.di</ID>
+    <ID>PackageNaming:DevicePolicyModule.kt$package io.gromif.astracrypt.device_admin.di</ID>
+    <ID>PackageNaming:ServiceModule.kt$package io.gromif.astracrypt.device_admin.di</ID>
+    <ID>PackageNaming:UseCaseModule.kt$package io.gromif.astracrypt.device_admin.di</ID>
+  </CurrentIssues>
+</SmellBaseline>

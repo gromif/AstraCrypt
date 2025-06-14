@@ -10,5 +10,4 @@ class SetAeadModeUseCase(
     suspend operator fun invoke(aeadMode: AeadMode) {
         settingsRepository.setAead(aeadMode = aeadMode)
     }
-
 }

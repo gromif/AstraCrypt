@@ -43,5 +43,4 @@ class VerifySkinUseCaseTest {
     fun tearDown() {
         confirmVerified(settingsRepositoryMock, repositoryMock)
     }
-
 }

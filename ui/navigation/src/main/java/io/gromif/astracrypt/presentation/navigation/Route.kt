@@ -9,11 +9,14 @@ object Route {
 
     object Tabs {
         @Serializable object Home
+
         @Serializable data class Files(
             val startParentId: Long? = null,
             val startParentName: String = ""
         )
+
         @Serializable object Starred
+
         @Serializable object Settings
     }
 
@@ -24,7 +27,9 @@ object Route {
         @Serializable
         object TinkGraph {
             @Serializable object Key
+
             @Serializable data class Text(val rawKeyset: String)
+
             @Serializable data class Files(val rawKeyset: String)
         }
 
@@ -48,18 +53,29 @@ object Route {
     )
 
     @Serializable object EditProfile
+
+    @Serializable object Donate
+
     @Serializable object SettingsUi
+
     @Serializable object SettingsUiFiles
+
     @Serializable object SettingsSecurity
+
     @Serializable object SettingsSecurityAead
+
     @Serializable object SettingsSecurityColumnsAead
+
     @Serializable object SettingsSecurityAdmin
+
     @Serializable object SettingsSecurityAuth
+
     @Serializable object SettingsSecurityQuickActions
 
     @Serializable
     object AboutGraph {
         @Serializable object About
+
         @Serializable object PrivacyPolicy
     }
 

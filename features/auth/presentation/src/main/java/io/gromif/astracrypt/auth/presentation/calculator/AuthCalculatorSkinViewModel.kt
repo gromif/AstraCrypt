@@ -14,10 +14,9 @@ internal class AuthCalculatorSkinViewModel @Inject constructor(
     @IoDispatcher
     private val defaultDispatcher: CoroutineDispatcher,
     private val verifySkinUseCase: VerifySkinUseCase,
-): ViewModel() {
+) : ViewModel() {
 
     fun verifySkin(data: String) = viewModelScope.launch(defaultDispatcher) {
         verifySkinUseCase(data)
     }
-
 }

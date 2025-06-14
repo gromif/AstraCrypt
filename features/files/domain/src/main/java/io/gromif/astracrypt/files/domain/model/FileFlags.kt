@@ -4,16 +4,15 @@ sealed class FileFlags {
 
     data class Image(
         val resolution: String
-    ): FileFlags()
+    ) : FileFlags()
 
     data class Video(
         val resolution: String
-    ): FileFlags()
+    ) : FileFlags()
 
     data class Audio(
         val title: String?,
         val sampleRate: Int,
         val author: String?
-    ): FileFlags()
-
+    ) : FileFlags()
 }

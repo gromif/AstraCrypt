@@ -16,5 +16,4 @@ class MainActivity : ComponentActivity() {
         Haptic.init(context = applicationContext)
         setContent { AstraCryptApp(window = window) }
     }
-
 }

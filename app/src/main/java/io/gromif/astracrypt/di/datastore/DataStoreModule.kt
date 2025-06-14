@@ -42,7 +42,6 @@ object DataStoreModule {
         ),
         produceFile = { context.preferencesDataStoreFile(KEYSET) }
     )
-
 }
 
 @Qualifier

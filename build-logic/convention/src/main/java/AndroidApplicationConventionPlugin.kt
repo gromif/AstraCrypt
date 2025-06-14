@@ -5,6 +5,7 @@ import io.gromif.buildlogic.Plugins
 import io.gromif.buildlogic.configureDefaultConfig
 import io.gromif.buildlogic.configureFlavors
 import io.gromif.buildlogic.configureKotlinAndroid
+import io.gromif.buildlogic.extensions.configureDetekt
 import io.gromif.buildlogic.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -18,9 +19,9 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
             apply(Plugins.ANDROID_APP)
             apply(Plugins.HILT)
             apply(Plugins.KOTLIN_ANDROID)
-            apply(Plugins.DETEKT)
         }
 
+        configureDetekt()
         extensions.configure<ApplicationExtension> {
             configureDefaultConfig(this)
             buildToolsVersion = AppConfig.Versions.BUILD_TOOLS

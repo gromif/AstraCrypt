@@ -13,8 +13,8 @@ import io.gromif.astracrypt.presentation.navigation.shared.LocalHostStateHolder
 import io.gromif.astracrypt.presentation.navigation.shared.LocalNavController
 import io.gromif.astracrypt.presentation.navigation.shared.UiStateHandler
 import io.gromif.astracrypt.resources.R
-import io.gromif.tink_lab.presentation.TinkLab
-import io.gromif.tink_lab.presentation.key.KeyScreen
+import io.gromif.tinkLab.presentation.TinkLab
+import io.gromif.tinkLab.presentation.key.KeyScreen
 import io.gromif.ui.compose.core.wrappers.TextWrap
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow

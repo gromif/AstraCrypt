@@ -15,5 +15,4 @@ class DatastoreKeysetReader(
         val prefsKey = stringPreferencesKey(name = key)
         return dataStore.data.map { it[prefsKey] }.first()
     }
-
 }

@@ -1,6 +1,6 @@
 package io.gromif.secure_content.data.mapper
 
-import contract.secure_content.SecureContentContract
+import contract.secureContent.SecureContentContract
 import io.gromif.secure_content.domain.SecureContentMode
 
 internal fun SecureContentMode.toContractMode(): SecureContentContract.Mode = when (this) {

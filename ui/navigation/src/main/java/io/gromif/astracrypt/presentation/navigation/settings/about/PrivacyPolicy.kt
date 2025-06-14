@@ -18,8 +18,7 @@ private val DefaultUiState = UiState(
     )
 )
 
-internal fun NavGraphBuilder.privacyPolicy(
-) = composable<Route.AboutGraph.PrivacyPolicy> {
+internal fun NavGraphBuilder.privacyPolicy() = composable<Route.AboutGraph.PrivacyPolicy> {
     val hostEvents = LocalHostEvents.current
     UiStateHandler { hostEvents.setUiState(DefaultUiState) }
 

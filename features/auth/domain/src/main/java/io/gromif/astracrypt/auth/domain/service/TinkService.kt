@@ -11,5 +11,4 @@ interface TinkService {
     suspend fun computeAuthHash(data: String): ByteArray
 
     suspend fun computeSkinHash(data: String): ByteArray
-
 }

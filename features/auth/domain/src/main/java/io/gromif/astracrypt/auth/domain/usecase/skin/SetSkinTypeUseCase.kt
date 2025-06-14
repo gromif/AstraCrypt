@@ -19,5 +19,4 @@ class SetSkinTypeUseCase(
         settingsRepository.setSkinHash(hash = skinHash)
         setAuthUseCase(auth = auth.copy(skinType = skinType))
     }
-
 }

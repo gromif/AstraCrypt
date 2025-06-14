@@ -33,7 +33,7 @@ private fun dialogHintEditor(
         text = currentHint,
         label = stringResource(id = R.string.hint),
         selectAllText = true,
-        //maxLength = AppConfig.AUTH_HINT_MAX_LENGTH,
+        // maxLength = AppConfig.AUTH_HINT_MAX_LENGTH,
     ),
     onResult = onResult
 )

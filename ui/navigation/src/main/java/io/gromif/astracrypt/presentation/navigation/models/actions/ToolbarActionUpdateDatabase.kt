@@ -7,7 +7,7 @@ import io.gromif.astracrypt.resources.R
 
 val ToolbarActions.update_database get() = _ToolbarActionUpdateDatabase
 
-object _ToolbarActionUpdateDatabase: ToolbarActions.Action {
+object _ToolbarActionUpdateDatabase : ToolbarActions.Action {
     override val contentDescription: Int = R.string.dialog_dbUpdate
     override val icon: ImageVector = Icons.Outlined.Autorenew
 }

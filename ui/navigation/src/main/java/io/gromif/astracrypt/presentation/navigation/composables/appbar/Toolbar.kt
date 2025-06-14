@@ -44,21 +44,25 @@ fun ToolbarImpl(
     },
     navigationIcon = @Composable {
         if (backButton) {
-            if (!isContextual) IconButton(
-                icon = Icons.AutoMirrored.Default.ArrowBack,
-                contentDescription = stringResource(id = R.string.back),
-                onClick = {
-                    Haptic.click()
-                    onNavigateUp()
-                }
-            ) else IconButton(
-                icon = ToolbarActions.close.icon,
-                contentDescription = stringResource(id = ToolbarActions.close.contentDescription),
-                onClick = {
-                    Haptic.click()
-                    onActionPressed(ToolbarActions.close)
-                }
-            )
+            if (!isContextual) {
+                IconButton(
+                    icon = Icons.AutoMirrored.Default.ArrowBack,
+                    contentDescription = stringResource(id = R.string.back),
+                    onClick = {
+                        Haptic.click()
+                        onNavigateUp()
+                    }
+                )
+            } else {
+                IconButton(
+                    icon = ToolbarActions.close.icon,
+                    contentDescription = stringResource(id = ToolbarActions.close.contentDescription),
+                    onClick = {
+                        Haptic.click()
+                        onActionPressed(ToolbarActions.close)
+                    }
+                )
+            }
         }
     },
     actions = @Composable {
@@ -105,20 +109,24 @@ private fun DynamicToolbar(
     actions: @Composable (RowScope.() -> Unit),
     isContextual: Boolean,
     scrollBehavior: TopAppBarScrollBehavior?,
-) = if (isContextual) TopAppBar(
-    title = title,
-    navigationIcon = navigationIcon,
-    actions = actions,
-    scrollBehavior = scrollBehavior,
-    colors = TopAppBarDefaults.topAppBarColors().copy(
-        containerColor = MaterialTheme.colorScheme.surfaceContainerHighest,
-        navigationIconContentColor = MaterialTheme.colorScheme.onSurface,
-        titleContentColor = MaterialTheme.colorScheme.onSurface,
-        actionIconContentColor = MaterialTheme.colorScheme.onSurface
-    ),
-) else CenterAlignedTopAppBar(
-    title = title,
-    navigationIcon = navigationIcon,
-    actions = actions,
-    scrollBehavior = scrollBehavior,
-)
+) = if (isContextual) {
+    TopAppBar(
+        title = title,
+        navigationIcon = navigationIcon,
+        actions = actions,
+        scrollBehavior = scrollBehavior,
+        colors = TopAppBarDefaults.topAppBarColors().copy(
+            containerColor = MaterialTheme.colorScheme.surfaceContainerHighest,
+            navigationIconContentColor = MaterialTheme.colorScheme.onSurface,
+            titleContentColor = MaterialTheme.colorScheme.onSurface,
+            actionIconContentColor = MaterialTheme.colorScheme.onSurface
+        ),
+    )
+} else {
+    CenterAlignedTopAppBar(
+        title = title,
+        navigationIcon = navigationIcon,
+        actions = actions,
+        scrollBehavior = scrollBehavior,
+    )
+}
