@@ -33,8 +33,8 @@ runs:
       run: |
           cat <<EOF > keystore.properties
           storeFile=${{ inputs.file }}
-          storePassword=${{ inputs.keystorePassword }}
+          storePassword=$(echo ${{ inputs.keystorePassword }} | base64 -d)
           keyAlias=${{ inputs.keyAlias }}
-          keyPassword=${{ inputs.keyPassword }}
+          keyPassword=$(echo ${{ inputs.keyPassword }} | base64 -d)
           EOF
       shell: bash
