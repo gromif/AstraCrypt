@@ -31,8 +31,10 @@ runs:
 
     - name: 🔑 Create keystore.properties
       run: |
-          echo "storeFile=${{ inputs.file }}" > keystore.properties
-          echo "storePassword=${{ inputs.keystorePassword }}" >> keystore.properties
-          echo "keyAlias=${{ inputs.keyAlias }}" >> keystore.properties
-          echo "keyPassword=${{ inputs.keyPassword }}" >> keystore.properties
+          cat <<EOF > keystore.properties
+          storeFile=${{ inputs.file }}
+          storePassword=${{ inputs.keystorePassword }}
+          keyAlias=${{ inputs.keyAlias }}
+          keyPassword=${{ inputs.keyPassword }}
+          EOF
       shell: bash
