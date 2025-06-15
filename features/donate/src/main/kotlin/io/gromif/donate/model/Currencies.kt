@@ -30,7 +30,7 @@ internal object Currencies {
             iconResId = R.drawable.currency_ltc
         ),
         Currency(
-            name = "Cardano (LTC)",
+            name = "Cardano (ADA)",
             address = "addr1qyyjl0d6sqmxmzq04vjwvg29h6hcvzavdps465htrnlj5zkt3vrxy6lt068kdvlymj45mn70k0c0hqxg8az6ya7r8xwsz2g35p",
             iconResId = R.drawable.currency_ada
         ),
