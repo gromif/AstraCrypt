@@ -45,9 +45,9 @@ jobs:
         with:
           file: "keystore.jks"
           keystore: ${{ secrets.KEYSTORE_BASE64 }}
-          keystorePassword: ${{ secrets.KEYSTORE_PASSWORD_BASE64 }}
+          keystorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
           keyAlias: ${{ secrets.KEY_ALIAS }}
-          keyPassword: ${{ secrets.KEY_PASSWORD_BASE64 }}
+          keyPassword: ${{ secrets.KEY_PASSWORD }}
 
       - name: 🔶 Generate App Bundle or APKs
         run: |
