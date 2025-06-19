@@ -3,6 +3,9 @@
     <img alt="Feature Graphic" src="docs/assets/feature_graphic.png">
 </picture>
 
+[![Android CI](https://github.com/gromif/AstraCrypt/actions/workflows/pull_request.yml/badge.svg)](https://github.com/gromif/AstraCrypt/actions/workflows/pull_request.yml)
+[![Android CD](https://github.com/gromif/AstraCrypt/actions/workflows/push.yml/badge.svg)](https://github.com/gromif/AstraCrypt/actions/workflows/push.yml)
+
 # AstraCrypt - Encrypt Your Data
 
 AstraCrypt - is a free, powerful and open-source encryption app that has everything you need to keep your data safe and secure.
