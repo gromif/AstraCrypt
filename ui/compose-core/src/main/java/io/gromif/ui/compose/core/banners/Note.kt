@@ -3,7 +3,6 @@ package io.gromif.ui.compose.core.banners
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
@@ -23,16 +22,17 @@ import io.gromif.ui.compose.core.theme.spaces
 @Preview
 @Composable
 fun Banner.Note(
+    modifier: Modifier = Modifier,
     imageVector: ImageVector = Icons.Default.Star,
     text: String = "SIMPLE_TEXT_TOOLTIP",
     containerColor: Color = MaterialTheme.colorScheme.tertiaryContainer,
     iconTintColor: Color = MaterialTheme.colorScheme.onTertiaryContainer
 ) = Card(
-    modifier = Modifier.fillMaxWidth(),
+    modifier = modifier,
     colors = CardDefaults.cardColors(containerColor = containerColor)
 ) {
     Row(
-        modifier = Modifier.fillMaxWidth().clickable {}.padding(MaterialTheme.spaces.spaceMedium),
+        modifier = Modifier.clickable {}.padding(MaterialTheme.spaces.spaceMedium),
         horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spaces.spaceMedium)
     ) {
         Icon(
