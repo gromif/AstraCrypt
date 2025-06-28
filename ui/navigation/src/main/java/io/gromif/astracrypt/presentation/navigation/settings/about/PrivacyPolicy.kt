@@ -27,9 +27,10 @@ internal fun NavGraphBuilder.privacyPolicy() = composable<Route.AboutGraph.Priva
     val hostEvents = LocalHostEvents.current
     UiStateHandler { hostEvents.setUiState(DefaultUiState) }
 
-    PrivacyPolicyScreen(modifier = Modifier
-        .fillMaxSize()
-        .verticalScroll(rememberScrollState())
-        .padding(MaterialTheme.spaces.spaceMedium)
+    PrivacyPolicyScreen(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .padding(MaterialTheme.spaces.spaceMedium)
     )
 }
