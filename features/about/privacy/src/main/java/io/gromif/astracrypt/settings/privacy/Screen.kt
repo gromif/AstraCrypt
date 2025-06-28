@@ -16,7 +16,7 @@ internal fun Screen(
     modifier: Modifier = Modifier,
     privacyPolicyHtml: String
 ) = Column(modifier = modifier) {
-    if (privacyPolicyHtml.isNotEmpty()) return@Column
+    if (privacyPolicyHtml.isEmpty()) return@Column
     val parsedHtml = AnnotatedString.fromHtml(
         htmlString = privacyPolicyHtml,
         linkStyles = TextLinkStyles(
