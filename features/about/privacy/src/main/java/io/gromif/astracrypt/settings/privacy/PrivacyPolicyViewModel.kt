@@ -16,7 +16,7 @@ import javax.inject.Inject
 internal class PrivacyPolicyViewModel @Inject constructor(
     @IoDispatcher
     private val defaultDispatcher: CoroutineDispatcher
-): ViewModel() {
+) : ViewModel() {
     var html by mutableStateOf("")
         private set
 
@@ -25,5 +25,4 @@ internal class PrivacyPolicyViewModel @Inject constructor(
             html = it.readBytes().decodeToString()
         }
     }
-
 }

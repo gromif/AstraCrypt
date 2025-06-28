@@ -13,7 +13,8 @@ import androidx.compose.ui.text.fromHtml
 
 @Composable
 internal fun Screen(
-    modifier: Modifier = Modifier, privacyPolicyHtml: String
+    modifier: Modifier = Modifier,
+    privacyPolicyHtml: String
 ) = Column(modifier = modifier) {
     if (privacyPolicyHtml.isNotEmpty()) return@Column
     val parsedHtml = AnnotatedString.fromHtml(
