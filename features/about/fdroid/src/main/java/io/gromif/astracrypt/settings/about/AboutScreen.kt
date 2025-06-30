@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import io.gromif.astracrypt.resources.R
 import io.gromif.astracrypt.settings.about.model.Link
+import io.gromif.astracrypt.settings.about.model.Params
 import io.gromif.astracrypt.settings.about.shared.PredefinedLinks
 
 @Composable

@@ -6,6 +6,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import io.gromif.astracrypt.resources.R
 import io.gromif.astracrypt.settings.about.list.LinkList
 import io.gromif.astracrypt.settings.about.model.Link
+import io.gromif.astracrypt.settings.about.model.Params
 import io.gromif.astracrypt.settings.about.shared.CardLinkList
 import io.gromif.astracrypt.settings.about.shared.Header
 import io.gromif.ui.compose.core.PreferencesGroup

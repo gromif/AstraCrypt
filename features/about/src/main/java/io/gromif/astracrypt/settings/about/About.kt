@@ -8,6 +8,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import io.gromif.astracrypt.settings.about.extensions.start
 import io.gromif.astracrypt.settings.about.model.Link
+import io.gromif.astracrypt.settings.about.model.Params
 import kotlinx.coroutines.CoroutineScope
 
 @Preview(showBackground = true)

@@ -1,7 +1,6 @@
-package io.gromif.astracrypt.settings.about
+package io.gromif.astracrypt.settings.about.model
 
 import io.gromif.astracrypt.settings.about.list.FakeData
-import io.gromif.astracrypt.settings.about.model.Link
 
 data class Params(
     val version: String = "<VERSION>",
