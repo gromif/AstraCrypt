@@ -1,4 +1,3 @@
 package io.gromif.ui.compose.core.banners
 
-object Banner {
-}
+object Banner

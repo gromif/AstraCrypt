@@ -10,5 +10,4 @@ object Compose {
     @Composable
     inline fun state(defaultState: Boolean = false) =
         rememberSaveable { mutableStateOf(defaultState) }
-
 }

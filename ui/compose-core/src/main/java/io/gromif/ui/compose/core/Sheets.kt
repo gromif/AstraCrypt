@@ -20,12 +20,14 @@ fun BottomSheetWithToolbar(
     title: String,
     content: @Composable ColumnScope.() -> Unit
 ) {
-    if (isVisibleState.value) ModalBottomSheet(
-        onDismissRequest = { isVisibleState.value = !isVisibleState.value },
-        sheetState = sheetState
-    ) {
-        CenterAlignedTopAppBar(title = { Text(text = title) })
-        content()
-        Spacer(modifier = Modifier.navigationBarsPadding())
+    if (isVisibleState.value) {
+        ModalBottomSheet(
+            onDismissRequest = { isVisibleState.value = !isVisibleState.value },
+            sheetState = sheetState
+        ) {
+            CenterAlignedTopAppBar(title = { Text(text = title) })
+            content()
+            Spacer(modifier = Modifier.navigationBarsPadding())
+        }
     }
 }

@@ -39,7 +39,8 @@ fun OutlinedButtonWithIcon(
     title: String,
     onClick: () -> Unit = {}
 ) = OutlinedButton(
-    modifier = modifier, onClick = onClick
+    modifier = modifier,
+    onClick = onClick
 ) {
     Icon(icon, null, modifier = Modifier.size(16.dp))
     Spacer(modifier = Modifier.Companion.width(MaterialTheme.spaces.spaceMedium))
@@ -54,7 +55,9 @@ fun ButtonWithIcon(
     title: String,
     onClick: () -> Unit
 ) = Button(
-    modifier = modifier, onClick = onClick, enabled = enabled
+    modifier = modifier,
+    onClick = onClick,
+    enabled = enabled
 ) {
     Icon(icon, null, modifier = Modifier.size(16.dp))
     Spacer(modifier = Modifier.width(MaterialTheme.spaces.spaceMedium))
@@ -69,7 +72,9 @@ fun FilledTonalButtonWithIcon(
     title: String,
     onClick: () -> Unit
 ) = FilledTonalButton(
-    modifier = modifier, onClick = onClick, enabled = enabled
+    modifier = modifier,
+    onClick = onClick,
+    enabled = enabled
 ) {
     Icon(icon, null, modifier = Modifier.size(16.dp))
     Spacer(modifier = Modifier.width(MaterialTheme.spaces.spaceMedium))
@@ -84,7 +89,9 @@ fun FilledTonalIconButton(
     contentDescription: String? = null,
     onClick: () -> Unit
 ) = FilledTonalIconButton(
-    modifier = modifier, onClick = onClick, enabled = enabled
+    modifier = modifier,
+    onClick = onClick,
+    enabled = enabled
 ) { Icon(icon, contentDescription) }
 
 @Composable
@@ -95,5 +102,7 @@ fun IconButton(
     contentDescription: String? = null,
     onClick: () -> Unit
 ) = IconButton(
-    onClick = onClick, modifier = modifier, enabled = enabled
+    onClick = onClick,
+    modifier = modifier,
+    enabled = enabled
 ) { Icon(icon, null) }

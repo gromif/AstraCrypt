@@ -17,7 +17,6 @@ object SheetDefaults {
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     fun state() = rememberModalBottomSheetState(skipPartiallyExpanded = true)
-
 }
 
 @Preview(showBackground = true)

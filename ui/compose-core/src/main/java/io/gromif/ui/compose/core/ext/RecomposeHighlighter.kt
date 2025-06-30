@@ -77,7 +77,7 @@ private val recomposeModifier =
 
                 val (color, strokeWidthPx) =
                     when (numCompositionsSinceTimeout) {
-                        // We need at least one composition to draw, so draw the smallest border 
+                        // We need at least one composition to draw, so draw the smallest border
                         // color in blue.
                         1L -> Color.Blue to 1f
                         // 2 compositions is _probably_ okay.
