@@ -11,7 +11,6 @@ import io.gromif.ui.haptic.Haptic
 object Chips {
 
     object Components
-
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -31,7 +30,8 @@ inline fun Chips.Filter(
         onClick()
     },
     label = { Text(text = label) },
-    modifier = modifier, enabled = enabled,
+    modifier = modifier,
+    enabled = enabled,
     leadingIcon = Chips.Components.icon(icon = leadingIcon),
     trailingIcon = Chips.Components.icon(icon = trailingIcon)
 )

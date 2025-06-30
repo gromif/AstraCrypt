@@ -21,7 +21,6 @@ object DialogsCore {
             val singleLine: Boolean = false,
             val keyboardOptions: KeyboardOptions = KeyboardOptions.Default
         )
-
     }
 
     object Selectable
@@ -39,27 +38,28 @@ object DialogsCore {
         onConfirmClick: () -> Unit = {}
     ): MutableState<Boolean> {
         val state = Compose.state()
-        if (state.value) Dialog(
-            title = title?.let { DialogDefaults.title(title = it) },
-            content = DialogDefaults.contentText(text = text),
-            confirmButton = DialogDefaults.textButton(title = confirmText) {
-                if (dismissOnButtonClick) state.value = false
-                onConfirmClick()
-            },
-            dismissButton = dismissText?.let {
-                DialogDefaults.textButton(title = it) {
+        if (state.value) {
+            Dialog(
+                title = title?.let { DialogDefaults.title(title = it) },
+                content = DialogDefaults.contentText(text = text),
+                confirmButton = DialogDefaults.textButton(title = confirmText) {
                     if (dismissOnButtonClick) state.value = false
-                    onDismissClick?.invoke()
-                }
-            },
-            onDismissRequest = {
-                if (dismissOnOutsideClick) state.value = false
-                onDismissRequest?.invoke()
-            },
-            dismissOnBackPress = dismissOnOutsideClick,
-            dismissOnClickOutside = dismissOnOutsideClick
-        )
+                    onConfirmClick()
+                },
+                dismissButton = dismissText?.let {
+                    DialogDefaults.textButton(title = it) {
+                        if (dismissOnButtonClick) state.value = false
+                        onDismissClick?.invoke()
+                    }
+                },
+                onDismissRequest = {
+                    if (dismissOnOutsideClick) state.value = false
+                    onDismissRequest?.invoke()
+                },
+                dismissOnBackPress = dismissOnOutsideClick,
+                dismissOnClickOutside = dismissOnOutsideClick
+            )
+        }
         return state
     }
-
 }

@@ -73,14 +73,16 @@ fun ColumnScope.PreferencesGroupAnimated(
 
 @Composable
 fun PreferencesGroupTitle(text: String? = null) {
-    if (text != null) Text(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(start = MaterialTheme.spaces.spaceMedium),
-        text = text,
-        style = MaterialTheme.typography.titleMedium,
-        color = MaterialTheme.colorScheme.secondary
-    )
+    if (text != null) {
+        Text(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = MaterialTheme.spaces.spaceMedium),
+            text = text,
+            style = MaterialTheme.typography.titleMedium,
+            color = MaterialTheme.colorScheme.secondary
+        )
+    }
 }
 
 @Composable

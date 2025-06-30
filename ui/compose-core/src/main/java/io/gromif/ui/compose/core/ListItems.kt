@@ -31,22 +31,26 @@ fun AutoLineListItem(
     trailingContent: @Composable (() -> Unit)? = null,
     longClickCallback: (() -> Unit)? = null,
     onClick: (() -> Unit)? = null
-) = if (summaryText != null) TwoLineListItem(
-    modifier = modifier,
-    titleText = titleText,
-    summaryText = summaryText,
-    leadingContent = leadingContent,
-    trailingContent = trailingContent,
-    longClickCallback = longClickCallback,
-    onClick = onClick
-) else OneLineListItem(
-    modifier = modifier,
-    titleText = titleText,
-    leadingContent = leadingContent,
-    trailingContent = trailingContent,
-    onClick = onClick,
-    longClickCallback = longClickCallback
-)
+) = if (summaryText != null) {
+    TwoLineListItem(
+        modifier = modifier,
+        titleText = titleText,
+        summaryText = summaryText,
+        leadingContent = leadingContent,
+        trailingContent = trailingContent,
+        longClickCallback = longClickCallback,
+        onClick = onClick
+    )
+} else {
+    OneLineListItem(
+        modifier = modifier,
+        titleText = titleText,
+        leadingContent = leadingContent,
+        trailingContent = trailingContent,
+        onClick = onClick,
+        longClickCallback = longClickCallback
+    )
+}
 
 @OptIn(ExperimentalFoundationApi::class)
 @Preview(showBackground = true)
@@ -63,7 +67,8 @@ fun TwoLineListItem(
     modifier = modifier.run {
         when {
             longClickCallback != null && onClick != null -> combinedClickable(
-                onClick = onClick, onLongClick = longClickCallback
+                onClick = onClick,
+                onLongClick = longClickCallback
             )
             onClick != null -> clickable(onClick = onClick)
             else -> this
@@ -90,7 +95,8 @@ fun OneLineListItem(
     modifier = modifier.run {
         when {
             longClickCallback != null && onClick != null -> combinedClickable(
-                onClick = onClick, onLongClick = longClickCallback
+                onClick = onClick,
+                onLongClick = longClickCallback
             )
             onClick != null -> clickable(onClick = onClick)
             else -> this

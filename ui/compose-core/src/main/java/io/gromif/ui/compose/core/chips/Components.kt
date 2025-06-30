@@ -7,4 +7,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 @Composable
 fun Chips.Components.icon(icon: ImageVector?): (@Composable () -> Unit)? = if (icon != null) {
     { Icon(imageVector = icon, contentDescription = null) }
-} else null
+} else {
+    null
+}

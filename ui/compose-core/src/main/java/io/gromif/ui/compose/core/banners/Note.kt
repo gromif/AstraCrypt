@@ -1,5 +1,6 @@
 package io.gromif.ui.compose.core.banners
 
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -32,7 +33,9 @@ fun Banner.Note(
     colors = CardDefaults.cardColors(containerColor = containerColor)
 ) {
     Row(
-        modifier = Modifier.clickable {}.padding(MaterialTheme.spaces.spaceMedium),
+        modifier = Modifier
+            .clickable {}
+            .padding(MaterialTheme.spaces.spaceMedium),
         horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spaces.spaceMedium)
     ) {
         Icon(
@@ -41,7 +44,9 @@ fun Banner.Note(
             tint = iconTintColor
         )
         Text(
-            modifier = Modifier.align(Alignment.CenterVertically),
+            modifier = Modifier
+                .animateContentSize()
+                .align(Alignment.CenterVertically),
             text = text
         )
     }

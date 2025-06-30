@@ -55,20 +55,22 @@ fun SheetDefaults.base(
     dragHandle: @Composable (() -> Unit)? = { BottomSheetDefaults.DragHandle() },
     content: @Composable (ColumnScope.() -> Unit)
 ): MutableState<Boolean> {
-    if (state.value) ModalBottomSheet(
-        onDismissRequest = {
-            state.value = false
-            onDismissRequest?.invoke()
-        },
-        modifier = modifier,
-        sheetState = sheetState,
-        shape = shape,
-        containerColor = containerColor,
-        contentColor = contentColor,
-        tonalElevation = tonalElevation,
-        scrimColor = scrimColor,
-        dragHandle = dragHandle,
-        content = content
-    )
+    if (state.value) {
+        ModalBottomSheet(
+            onDismissRequest = {
+                state.value = false
+                onDismissRequest?.invoke()
+            },
+            modifier = modifier,
+            sheetState = sheetState,
+            shape = shape,
+            containerColor = containerColor,
+            contentColor = contentColor,
+            tonalElevation = tonalElevation,
+            scrimColor = scrimColor,
+            dragHandle = dragHandle,
+            content = content
+        )
+    }
     return state
 }

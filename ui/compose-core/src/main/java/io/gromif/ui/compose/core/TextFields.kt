@@ -49,6 +49,7 @@ object TextFields {
     @Composable
     fun passwordVisualTransform(state: Boolean) = if (!state) {
         PasswordVisualTransformation()
-    } else VisualTransformation.None
-
+    } else {
+        VisualTransformation.None
+    }
 }

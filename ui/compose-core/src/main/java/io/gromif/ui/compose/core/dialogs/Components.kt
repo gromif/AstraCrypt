@@ -87,13 +87,16 @@ object DialogDefaults {
 
     @Composable
     fun titleCentered(title: String) = title(
-        modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center, title = title
+        modifier = Modifier.fillMaxWidth(),
+        textAlign = TextAlign.Center,
+        title = title
     )
 
     @Composable
     fun contentRootScrollable(
         verticalArrangement: Arrangement.Vertical = Arrangement.spacedBy(
-            MaterialTheme.spaces.spaceMedium, Alignment.Top
+            MaterialTheme.spaces.spaceMedium,
+            Alignment.Top
         ),
         horizontalAlignment: Alignment.Horizontal = Alignment.Start,
         content: @Composable ColumnScope.() -> Unit
@@ -147,5 +150,4 @@ object DialogDefaults {
             )
         }
     }
-
 }

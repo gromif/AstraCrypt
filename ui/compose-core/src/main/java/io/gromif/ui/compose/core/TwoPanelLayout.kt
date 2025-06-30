@@ -25,27 +25,31 @@ fun TwoPanelLayout(
     right: @Composable () -> Unit,
     padding: Dp = MaterialTheme.spaces.spaceMedium
 ) {
-    if (LocalWindowWidth.current.isCompact) Column(
-        Modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-            .padding(padding),
-        verticalArrangement = Arrangement.spacedBy(padding)
-    ) {
-        left()
-        right()
-    } else Row(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-            .padding(padding),
-        horizontalArrangement = Arrangement.spacedBy(padding)
-    ) {
-        Row(modifier = Modifier.weight(0.5f)) {
+    if (LocalWindowWidth.current.isCompact) {
+        Column(
+            Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .padding(padding),
+            verticalArrangement = Arrangement.spacedBy(padding)
+        ) {
             left()
-        }
-        Row(modifier = Modifier.weight(0.5f)) {
             right()
+        }
+    } else {
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .padding(padding),
+            horizontalArrangement = Arrangement.spacedBy(padding)
+        ) {
+            Row(modifier = Modifier.weight(0.5f)) {
+                left()
+            }
+            Row(modifier = Modifier.weight(0.5f)) {
+                right()
+            }
         }
     }
 }
@@ -56,37 +60,41 @@ fun TwoPanelLayoutInnerScroll(
     right: @Composable (ColumnScope.() -> Unit),
     padding: Dp = MaterialTheme.spaces.spaceMedium
 ) {
-    if (LocalWindowWidth.current.isCompact) Column(
-        Modifier
-            .fillMaxSize()
-            .nestedScroll(rememberNestedScrollInteropConnection())
-            .verticalScroll(rememberScrollState())
-            .padding(padding),
-        verticalArrangement = Arrangement.spacedBy(padding)
-    ) {
-        left()
-        right()
-    } else Row(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(padding),
-        horizontalArrangement = Arrangement.spacedBy(padding)
-    ) {
+    if (LocalWindowWidth.current.isCompact) {
         Column(
-            modifier = Modifier
-                .fillMaxHeight()
-                .weight(0.5f)
+            Modifier
+                .fillMaxSize()
                 .nestedScroll(rememberNestedScrollInteropConnection())
-                .verticalScroll(rememberScrollState()),
-            content = left
-        )
-        Column(
+                .verticalScroll(rememberScrollState())
+                .padding(padding),
+            verticalArrangement = Arrangement.spacedBy(padding)
+        ) {
+            left()
+            right()
+        }
+    } else {
+        Row(
             modifier = Modifier
-                .fillMaxHeight()
-                .weight(0.5f)
-                .nestedScroll(rememberNestedScrollInteropConnection())
-                .verticalScroll(rememberScrollState()),
-            content = right
-        )
+                .fillMaxSize()
+                .padding(padding),
+            horizontalArrangement = Arrangement.spacedBy(padding)
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .weight(0.5f)
+                    .nestedScroll(rememberNestedScrollInteropConnection())
+                    .verticalScroll(rememberScrollState()),
+                content = left
+            )
+            Column(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .weight(0.5f)
+                    .nestedScroll(rememberNestedScrollInteropConnection())
+                    .verticalScroll(rememberScrollState()),
+                content = right
+            )
+        }
     }
 }
