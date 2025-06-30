@@ -4,8 +4,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import io.gromif.astracrypt.resources.R
-import io.gromif.astracrypt.settings.about.shared.CommonOptions
-import io.gromif.astracrypt.settings.about.shared.CommunicationOptions
+import io.gromif.astracrypt.settings.about.list.FakeData
+import io.gromif.astracrypt.settings.about.list.LinkList
+import io.gromif.astracrypt.settings.about.model.Link
+import io.gromif.astracrypt.settings.about.shared.CardLinkList
 import io.gromif.astracrypt.settings.about.shared.Header
 import io.gromif.ui.compose.core.PreferencesGroup
 import io.gromif.ui.compose.core.PreferencesScreen
@@ -14,6 +16,9 @@ import io.gromif.ui.compose.core.PreferencesScreen
 @Composable
 fun Screen(
     params: Params = Params(),
+    commonLinks: List<Link> = FakeData.linkList(),
+    supportLinks: List<Link> = FakeData.linkList(),
+    onLinkClick: (Link) -> Unit = {},
     onMoreApps: () -> Unit = {},
     onLeaveFeedback: () -> Unit = {},
     onEmailClick: () -> Unit = {},
@@ -21,17 +26,8 @@ fun Screen(
     toPrivacyPolicy: () -> Unit = {},
 ) = PreferencesScreen {
     Header(version = params.version)
-    CommonOptions(
-        onMoreApps = onMoreApps,
-        onLeaveFeedback = onLeaveFeedback,
-        toPrivacyPolicy = toPrivacyPolicy
-    )
+    CardLinkList(links = commonLinks, onLinkClick = onLinkClick)
     PreferencesGroup(text = stringResource(id = R.string.support)) {
-        CommunicationOptions(
-            storeName = params.storeName,
-            onEmailClick = onEmailClick,
-            onMarketClick = onMarketClick
-        )
+        LinkList(links = supportLinks, onClick = onLinkClick)
     }
 }
-
