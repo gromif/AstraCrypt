@@ -179,7 +179,7 @@ fun AstraCryptApp(
                 hostEvents = buildHostEvents(
                     onFabClickFlow = onFabClick.receiveAsFlow(),
                     onToolbarActionsFlow = onToolbarActions.receiveAsFlow(),
-                    uiState = uiState
+                    uiMutableState = uiState
                 ),
                 navController = navController,
                 onDynamicColorsStateChange = vm::setDynamicColorsState,
@@ -211,10 +211,10 @@ private fun AuthContent(
 private fun buildHostEvents(
     onFabClickFlow: Flow<Any>,
     onToolbarActionsFlow: Flow<ToolbarActions.Action>,
-    uiState: MutableState<UiState>,
+    uiMutableState: MutableState<UiState>,
 ) = object : HostEvents {
-    override fun setUiState(targetState: UiState) {
-        uiState.value = targetState
+    override fun setUiState(uiState: UiState) {
+        uiMutableState.value = uiState
     }
 
     @Composable
