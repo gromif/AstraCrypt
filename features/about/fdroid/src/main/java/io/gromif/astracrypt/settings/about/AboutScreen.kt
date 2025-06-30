@@ -1,55 +1,39 @@
 package io.gromif.astracrypt.settings.about
 
-import android.content.ActivityNotFoundException
-import android.content.Intent
-import android.net.Uri
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.platform.LocalContext
-import androidx.core.net.toUri
+import androidx.compose.ui.res.stringResource
 import io.gromif.astracrypt.resources.R
-import kotlinx.coroutines.launch
+import io.gromif.astracrypt.settings.about.model.Link
+import io.gromif.astracrypt.settings.about.shared.PredefinedLinks
 
 @Composable
 fun AboutScreen(
     snackbarHostState: SnackbarHostState,
     version: String,
     toPrivacyPolicy: () -> Unit,
-) {
-    val context = LocalContext.current
-    val scope = rememberCoroutineScope()
+) = About(
+    params = buildAboutParams(version),
+    snackbarHostState = snackbarHostState,
+    toPrivacyPolicy = toPrivacyPolicy
+)
 
-    fun open(uri: Uri) = context.startActivity(Intent(Intent.ACTION_VIEW, uri))
-
-    Screen(
-        params = Params(
-            version = version,
-            storeName = "Github"
+@Composable
+private fun buildAboutParams(version: String) = Params(
+    version = version,
+    commonLinks = listOf(
+        PredefinedLinks.Market.Play.otherAppsLink(
+            name = stringResource(R.string.about_moreApps),
+            description = stringResource(R.string.about_moreApps_summary)
         ),
-        onMoreApps = {
-            open(Config.MORE_APPS_PAGE)
-        },
-        onLeaveFeedback = {
-            open(Config.APP_PAGE)
-        },
-        onEmailClick = {
-            val intent = Intent(Intent.ACTION_SENDTO).apply {
-                data = "mailto:".toUri()
-                putExtra(Intent.EXTRA_EMAIL, arrayOf(Config.EMAIL))
-                putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.app_name))
-            }
-            try {
-                context.startActivity(intent)
-            } catch (_: ActivityNotFoundException) {
-                scope.launch {
-                    snackbarHostState.showSnackbar(context.getString(R.string.error))
-                }
-            }
-        },
-        onMarketClick = {
-            open(Config.APP_PAGE)
-        },
-        toPrivacyPolicy = toPrivacyPolicy
+        Link.Default(
+            name = stringResource(R.string.about_leaveFeedback),
+            link = PredefinedLinks.Market.GitHub.appLink.link
+        ),
+        Link.PrivacyPolicy
+    ),
+    supportLinks = listOf(
+        PredefinedLinks.Communication.email,
+        PredefinedLinks.Market.GitHub.appLink
     )
-}
+)
