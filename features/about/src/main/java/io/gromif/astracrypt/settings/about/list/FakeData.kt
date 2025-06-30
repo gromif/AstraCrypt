@@ -14,5 +14,4 @@ internal object FakeData {
         PredefinedLinks.Communication.email,
         Link.PrivacyPolicy
     )
-
 }

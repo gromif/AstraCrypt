@@ -9,14 +9,14 @@ sealed class Link {
         val name: String,
         val description: String? = null,
         val link: String,
-    ): Link()
+    ) : Link()
 
-    data object PrivacyPolicy: Link()
+    data object PrivacyPolicy : Link()
 
     data class Email(
         val name: String,
         val description: String? = null,
         val email: String,
         val emailSubject: String? = null,
-    ): Link()
+    ) : Link()
 }
