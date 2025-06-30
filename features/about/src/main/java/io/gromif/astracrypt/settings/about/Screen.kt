@@ -14,7 +14,7 @@ import io.gromif.ui.compose.core.PreferencesScreen
 
 @Preview(showBackground = true)
 @Composable
-fun Screen(
+internal fun Screen(
     params: Params = Params(),
     onLinkClick: (Link) -> Unit = {},
 ) = PreferencesScreen {
