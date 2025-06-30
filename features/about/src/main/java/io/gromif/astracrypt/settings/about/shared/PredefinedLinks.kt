@@ -22,8 +22,12 @@ object PredefinedLinks {
                 link = "https://play.google.com/store/apps/details?id=com.nevidimka655.astracrypt"
             )
 
-            fun otherAppsLink(name: String) = Link.Default(
+            fun otherAppsLink(
+                name: String,
+                description: String? = null,
+            ) = Link.Default(
                 name = name,
+                description = description,
                 link = "https://play.google.com/store/apps/developer?id=gromif"
             )
         }
