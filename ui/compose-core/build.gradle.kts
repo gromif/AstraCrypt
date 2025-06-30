@@ -22,5 +22,4 @@ dependencies {
     api(libs.compose.material3.windowSizeClass)
 
     api(libs.compose.ui.tooling)
-    debugApi(libs.compose.ui.test.manifest)
 }
