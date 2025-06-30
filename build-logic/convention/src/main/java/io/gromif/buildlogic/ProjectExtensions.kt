@@ -9,6 +9,7 @@ import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.getByType
 import org.jetbrains.kotlin.compose.compiler.gradle.ComposeCompilerGradlePluginExtension
+import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidExtension
 import org.jetbrains.kotlin.gradle.dsl.kotlinExtension
 
 val Project.libs
@@ -43,5 +44,11 @@ internal fun Project.configureComposeStabilityConfig() {
     }
 }
 
-internal fun Project.configureKotlinAndroid() =
+internal fun Project.configureKotlinAndroid()  {
     kotlinExtension.jvmToolchain(AppConfig.Kotlin.JVM_TOOLCHAIN_VERSION)
+    extensions.configure<KotlinAndroidExtension> {
+        compilerOptions {
+            freeCompilerArgs.add("-Xannotation-default-target=param-property")
+        }
+    }
+}
