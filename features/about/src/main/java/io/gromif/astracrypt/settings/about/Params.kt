@@ -5,7 +5,6 @@ import io.gromif.astracrypt.settings.about.model.Link
 
 data class Params(
     val version: String = "<VERSION>",
-    val storeName: String = "<STORE-NAME>",
     val commonLinks: List<Link> = FakeData.linkList(),
     val supportLinks: List<Link> = FakeData.linkList(),
 )

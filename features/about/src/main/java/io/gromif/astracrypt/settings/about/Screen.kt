@@ -16,11 +16,6 @@ import io.gromif.ui.compose.core.PreferencesScreen
 fun Screen(
     params: Params = Params(),
     onLinkClick: (Link) -> Unit = {},
-    onMoreApps: () -> Unit = {},
-    onLeaveFeedback: () -> Unit = {},
-    onEmailClick: () -> Unit = {},
-    onMarketClick: () -> Unit = {},
-    toPrivacyPolicy: () -> Unit = {},
 ) = PreferencesScreen {
     Header(version = params.version)
     CardLinkList(links = params.commonLinks, onLinkClick = onLinkClick)
