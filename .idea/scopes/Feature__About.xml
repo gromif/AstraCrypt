@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="Feature — About" pattern="file[AstraCrypt.features.about.main]:*/||file[AstraCrypt.features.about]:build.gradle.kts||file[AstraCrypt.features.about.fdroid]:build.gradle.kts||file[AstraCrypt.features.about.privacy]:build.gradle.kts||file[AstraCrypt.features.about.google-play]:build.gradle.kts||file[AstraCrypt.features.about.privacy.main]:*/||file[AstraCrypt.features.about.google-play.main]:*/||file[AstraCrypt.features.about.fdroid.main]:*/" />
+</component>
