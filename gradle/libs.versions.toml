@@ -1,7 +1,6 @@
 [versions]
 kotlin = "2.1.20"
 kotlin-coroutines = "1.10.1"
-kotlin-coroutines-test = "1.10.1"
 kotlin-serialization = "1.7.3"
 agp = "8.11.0"
 ksp = "2.1.20-2.0.1"
@@ -81,7 +80,7 @@ androidx-work-runtime-ktx = { group = "androidx.work", name = "work-runtime-ktx"
 
 # KOTLIN LIBRARIES --------------------------------------------------------------------------------------------------------------------------------
 kotlin-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlin-coroutines" }
-kotlin-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlin-coroutines-test" }
+kotlin-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlin-coroutines" }
 kotlin-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlin-serialization" }
 
 # OTHER LIBRARIES --------------------------------------------------------------------------------------------------------------------------------
