@@ -13,7 +13,7 @@ import io.gromif.astracrypt.settings.about.model.Link
 import io.gromif.astracrypt.settings.about.model.Params
 import io.gromif.astracrypt.settings.about.shared.CardLinkList
 import io.gromif.astracrypt.settings.about.shared.Header
-import io.gromif.ui.compose.core.PreferenceDefaults
+import io.gromif.ui.compose.core.PreferencesDefaults
 import io.gromif.ui.compose.core.PreferencesGroupContent
 import io.gromif.ui.compose.core.PreferencesGroupTitle
 
@@ -21,20 +21,20 @@ import io.gromif.ui.compose.core.PreferencesGroupTitle
 @Composable
 internal fun Screen(
     modifier: Modifier = Modifier,
-    columns: Int = PreferenceDefaults.Screen.columns,
+    columns: Int = PreferencesDefaults.Screen.columns,
     params: Params = Params(),
     onLinkClick: (Link) -> Unit = {},
 ) = LazyVerticalGrid(
     columns = GridCells.Fixed(columns),
-    horizontalArrangement = PreferenceDefaults.Screen.horizontalArrangement,
-    verticalArrangement = PreferenceDefaults.Screen.verticalArrangement,
-    contentPadding = PreferenceDefaults.Screen.contentPadding,
+    horizontalArrangement = PreferencesDefaults.Screen.horizontalArrangement,
+    verticalArrangement = PreferencesDefaults.Screen.verticalArrangement,
+    contentPadding = PreferencesDefaults.Screen.contentPadding,
     modifier = modifier
 ) {
     item { Header(version = params.version) }
     item { CardLinkList(links = params.commonLinks, onLinkClick = onLinkClick) }
     item {
-        Column(verticalArrangement = PreferenceDefaults.Screen.verticalArrangement) {
+        Column(verticalArrangement = PreferencesDefaults.Screen.verticalArrangement) {
             PreferencesGroupTitle(text = stringResource(id = R.string.support))
             PreferencesGroupContent {
                 LinkList(links = params.supportLinks, onClick = onLinkClick)

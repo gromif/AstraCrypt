@@ -25,7 +25,7 @@ import io.gromif.ui.compose.core.ext.LocalWindowWidth
 import io.gromif.ui.compose.core.theme.spaces
 import io.gromif.ui.haptic.Haptic
 
-object PreferenceDefaults {
+object PreferencesDefaults {
     object Screen {
         val contentPadding
             @Composable get() = PaddingValues(MaterialTheme.spaces.spaceMedium)
