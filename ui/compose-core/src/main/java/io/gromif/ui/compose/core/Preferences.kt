@@ -4,6 +4,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -14,12 +15,40 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
+import io.gromif.ui.compose.core.ext.LocalWindowWidth
 import io.gromif.ui.compose.core.theme.spaces
 import io.gromif.ui.haptic.Haptic
+
+object PreferenceDefaults {
+    object Screen {
+        val contentPadding
+        @Composable get() = PaddingValues(MaterialTheme.spaces.spaceMedium)
+
+        val verticalArrangement: Arrangement.Vertical
+        @Composable get() = Arrangement.spacedBy(MaterialTheme.spaces.spaceMedium)
+
+        val horizontalArrangement: Arrangement.Horizontal
+        @Composable get() = Arrangement.spacedBy(MaterialTheme.spaces.spaceMedium)
+
+        val columns: Int
+        @Composable get() {
+            val localWidth = LocalWindowWidth.current
+            return remember(localWidth) {
+                when (localWidth) {
+                    WindowWidthSizeClass.Expanded -> 3
+                    WindowWidthSizeClass.Medium -> 2
+                    else -> 1
+                }
+            }
+        }
+    }
+}
 
 @Composable
 fun PreferencesScreen(content: @Composable ColumnScope.() -> Unit) {
