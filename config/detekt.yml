@@ -624,6 +624,7 @@ style:
   MagicNumber:
     active: true
     excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/androidUnitTest/**', '**/androidInstrumentedTest/**', '**/jsTest/**', '**/iosTest/**', '**/*.kts']
+    ignoreAnnotated: [ 'Composable', 'Preview' ]
     ignoreNumbers:
       - '-1'
       - '0'
