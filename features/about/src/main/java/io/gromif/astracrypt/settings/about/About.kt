@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import io.gromif.astracrypt.settings.about.extensions.start
@@ -14,6 +15,7 @@ import kotlinx.coroutines.CoroutineScope
 @Preview(showBackground = true)
 @Composable
 fun About(
+    modifier: Modifier = Modifier,
     params: Params = Params(),
     snackbarHostState: SnackbarHostState = SnackbarHostState(),
     toPrivacyPolicy: () -> Unit = {},
@@ -27,7 +29,11 @@ fun About(
         snackbarHostState = snackbarHostState,
         toPrivacyPolicy = toPrivacyPolicy
     )
-    Screen(params = params, onLinkClick = openLinkLambda)
+    Screen(
+        modifier = modifier,
+        params = params,
+        onLinkClick = openLinkLambda
+    )
 }
 
 private fun buildLinkClick(
@@ -43,6 +49,7 @@ private fun buildLinkClick(
             scope = scope,
             snackbarHostState = snackbarHostState
         )
+
         Link.PrivacyPolicy -> toPrivacyPolicy()
     }
 }

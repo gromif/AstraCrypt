@@ -1,5 +1,7 @@
 package io.gromif.astracrypt.presentation.navigation.settings.about
 
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import io.gromif.astracrypt.presentation.navigation.Route
@@ -28,6 +30,7 @@ internal fun NavGraphBuilder.about(
     UiStateHandler { hostEvents.setUiState(DefaultUiState) }
 
     AboutScreen(
+        modifier = Modifier.fillMaxSize(),
         snackbarHostState = hostStateHolder.snackbarHostState,
         version = applicationVersion,
         toPrivacyPolicy = {
