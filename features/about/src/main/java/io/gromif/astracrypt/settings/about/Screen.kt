@@ -1,8 +1,12 @@
 package io.gromif.astracrypt.settings.about
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -13,9 +17,11 @@ import io.gromif.astracrypt.settings.about.model.Link
 import io.gromif.astracrypt.settings.about.model.Params
 import io.gromif.astracrypt.settings.about.shared.CardLinkList
 import io.gromif.astracrypt.settings.about.shared.Header
+import io.gromif.astracrypt.settings.about.shared.MadeWithLove
 import io.gromif.ui.compose.core.PreferencesGroupContent
 import io.gromif.ui.compose.core.PreferencesGroupTitle
 import io.gromif.ui.compose.core.preferences.PreferencesDefaults
+import io.gromif.ui.compose.core.theme.spaces
 
 @Preview(showBackground = true)
 @Composable
@@ -40,5 +46,18 @@ internal fun Screen(
                 LinkList(links = params.supportLinks, onClick = onLinkClick)
             }
         }
+    }
+    item(
+        span = if (columns != 1) {
+            { GridItemSpan(columns) }
+        } else {
+            null
+        }
+    ) {
+        MadeWithLove(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = MaterialTheme.spaces.spaceLarge)
+        )
     }
 }
