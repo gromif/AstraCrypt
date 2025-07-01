@@ -13,9 +13,9 @@ import io.gromif.astracrypt.settings.about.model.Link
 import io.gromif.astracrypt.settings.about.model.Params
 import io.gromif.astracrypt.settings.about.shared.CardLinkList
 import io.gromif.astracrypt.settings.about.shared.Header
-import io.gromif.ui.compose.core.PreferencesDefaults
 import io.gromif.ui.compose.core.PreferencesGroupContent
 import io.gromif.ui.compose.core.PreferencesGroupTitle
+import io.gromif.ui.compose.core.preferences.PreferencesDefaults
 
 @Preview(showBackground = true)
 @Composable
