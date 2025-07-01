@@ -2,6 +2,7 @@ package io.gromif.astracrypt.settings.about
 
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import io.gromif.astracrypt.resources.R
 import io.gromif.astracrypt.settings.about.model.Link
@@ -10,10 +11,12 @@ import io.gromif.astracrypt.settings.about.shared.PredefinedLinks
 
 @Composable
 fun AboutScreen(
+    modifier: Modifier,
     snackbarHostState: SnackbarHostState,
     version: String,
     toPrivacyPolicy: () -> Unit,
 ) = About(
+    modifier = modifier,
     params = buildAboutParams(version),
     snackbarHostState = snackbarHostState,
     toPrivacyPolicy = toPrivacyPolicy
