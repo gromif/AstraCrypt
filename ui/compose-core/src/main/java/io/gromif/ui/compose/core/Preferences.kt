@@ -28,25 +28,25 @@ import io.gromif.ui.haptic.Haptic
 object PreferenceDefaults {
     object Screen {
         val contentPadding
-        @Composable get() = PaddingValues(MaterialTheme.spaces.spaceMedium)
+            @Composable get() = PaddingValues(MaterialTheme.spaces.spaceMedium)
 
         val verticalArrangement: Arrangement.Vertical
-        @Composable get() = Arrangement.spacedBy(MaterialTheme.spaces.spaceMedium)
+            @Composable get() = Arrangement.spacedBy(MaterialTheme.spaces.spaceMedium)
 
         val horizontalArrangement: Arrangement.Horizontal
-        @Composable get() = Arrangement.spacedBy(MaterialTheme.spaces.spaceMedium)
+            @Composable get() = Arrangement.spacedBy(MaterialTheme.spaces.spaceMedium)
 
         val columns: Int
-        @Composable get() {
-            val localWidth = LocalWindowWidth.current
-            return remember(localWidth) {
-                when (localWidth) {
-                    WindowWidthSizeClass.Expanded -> 3
-                    WindowWidthSizeClass.Medium -> 2
-                    else -> 1
+            @Composable get() {
+                val localWidth = LocalWindowWidth.current
+                return remember(localWidth) {
+                    when (localWidth) {
+                        WindowWidthSizeClass.Expanded -> 3
+                        WindowWidthSizeClass.Medium -> 2
+                        else -> 1
+                    }
                 }
             }
-        }
     }
 }
 
