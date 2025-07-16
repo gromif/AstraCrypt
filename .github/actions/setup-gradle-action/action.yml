@@ -11,6 +11,10 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - name: Generate Wrapper
+      run: gradle wrapper
+      shell: bash
+
     - name: Set up Gradle
       uses: gradle/actions/setup-gradle@v4
       with:
