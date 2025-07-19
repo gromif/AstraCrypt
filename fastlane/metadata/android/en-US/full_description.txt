@@ -1,14 +1,23 @@
-AstraCrypt - is a powerful encryption app that has everything you need to keep your data safe and secure. 
+AstraCrypt - is a powerful encryption app that has everything you need to keep your data safe and secure.
+
 Want to hide data? Want to use the encryption algorithms to the maximum? This app combines all of that! And the best part: it's very simple to use.
+
 This app utilizes the Authenticated Encryption with Additional Data algorithms (including AES256/GCM) to protect your files, ensuring that only you have access to them. This encryption is used on a wide range of devices and applications, and is considered one of the most secure encryption methods available.
+
 With an intuitive and modern Material Design interface, AstraCrypt makes it easier than ever to encrypt your data.
+
 AstraCrypt also has many additional features. For example, you can enable  authentication to add an extra layer of protection to your files.
+
 Using the Lab menu, you can use different available algorithms to save encrypted data to an external storage device or vice versa (without linking it to the device data).
+
 The application also allows users to store notes and other types of data in a secure manner, while also providing users with an intuitive and easy-to-use user interface. All data stored in the encrypted container which is fully encrypted and secure, ensuring that any sensitive file or data stored in the application remains safe and secure.
 
 We know how important it is to keep your data secure, so AstraCrypt offers all these features in one package. With AstraCrypt, you can rest assured that your files are encrypted and safe from prying eyes.
+
 Download now to protect your files and keep them safe!
-Main program features:
+
+<b>Main program features:</b>
+
 ✦ 10+ encryption algorithms.
 ✦ Multi-encryption of user data.
 ✦ Device admin features.
