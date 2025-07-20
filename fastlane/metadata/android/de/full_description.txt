@@ -1,0 +1,26 @@
+<i>AstraCrypt</i> - ist eine leistungsstarke Verschlüsselungs-App, die alles hat, was Sie brauchen, um Ihre Daten sicher und geschützt aufzubewahren.</p>
+
+Möchten Sie Daten verbergen? Möchten Sie die Verschlüsselungsalgorithmen maximal nutzen? Diese App vereint all das! Und das Beste: Sie ist sehr einfach zu bedienen.</p>
+
+Diese App verwendet die Authentifizierte Verschlüsselung mit zusätzlichen Datenalgorithmen (einschließlich AES256/GCM), um Ihre Dateien zu schützen und sicherzustellen, dass nur Sie darauf zugreifen können. Diese Verschlüsselung wird auf einer Vielzahl von Geräten und Anwendungen verwendet und gilt als eine der sichersten verfügbaren Verschlüsselungsmethoden.</p>
+
+Mit einer intuitiven und modernen Materialdesign-Oberfläche macht es <i>AstraCrypt</i> einfacher als je zuvor, Ihre Daten zu verschlüsseln.</p>
+
+<i>AstraCrypt</i> hat auch viele zusätzliche Funktionen. Beispielsweise können Sie die Authentifizierung aktivieren, um Ihren Dateien eine zusätzliche Schutzebene hinzuzufügen.</p>
+
+Über das Lab-Menü können Sie verschiedene verfügbare Algorithmen verwenden, um verschlüsselte Daten auf einem externen Speichergerät zu speichern oder umgekehrt (ohne sie mit den Gerätedaten zu verknüpfen).</p>
+
+Die Anwendung ermöglicht es Benutzern auch, Notizen und andere Arten von Daten sicher zu speichern, und bietet den Benutzern gleichzeitig eine intuitive und benutzerfreundliche Benutzeroberfläche. Alle Daten, die im verschlüsselten Container gespeichert sind, der vollständig verschlüsselt und sicher ist, wodurch sichergestellt wird, dass alle sensiblen Dateien oder Daten, die in der Anwendung gespeichert sind, sicher und geschützt bleiben.</p>
+
+<br>Wir wissen, wie wichtig es ist, Ihre Daten sicher zu halten, deshalb bietet <i>AstraCrypt</i> all diese Funktionen in einem Paket. Mit <i>AstraCrypt</i> können Sie sicher sein, dass Ihre Dateien verschlüsselt und vor neugierigen Blicken geschützt sind.</p>
+
+Laden Sie es jetzt herunter, um Ihre Dateien zu schützen und sicher aufzubewahren!</p>
+
+<b>Hauptprogrammmerkmale:</b>
+
+* 10+ Verschlüsselungsalgorithmen.
+* Mehrfachverschlüsselung von Benutzerdaten.
+* Geräteverwaltungsfunktionen.
+* Hochgradig anpassbare Sicherheitseinstellungen.
+* Modernes Material, das Sie entwerfen.
+* Grundlegende Dateisystemstruktur und -funktionen.
