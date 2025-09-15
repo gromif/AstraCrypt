@@ -11,6 +11,11 @@ inputs:
 runs:
   using: "composite"
   steps:
+    # Validates the checksums of all Gradle Wrapper JAR files present in the repo
+    # and fails if any unknown Gradle Wrapper JAR files are found.
+    - name: Validate Gradle Wrapper
+      uses: gradle/actions/wrapper-validation@v4
+
     - name: Set up Gradle
       uses: gradle/actions/setup-gradle@v4
       with:
