@@ -3,7 +3,7 @@ package io.gromif.astracrypt.files.settings.aead.columns
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.gromif.ui.compose.core.ext.FlowObserver
 import kotlinx.coroutines.flow.Flow

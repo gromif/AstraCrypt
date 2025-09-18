@@ -3,7 +3,7 @@ package io.gromif.astracrypt.auth.presentation.settings
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.stringResource
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.gromif.astracrypt.auth.domain.model.Timeout
 import io.gromif.astracrypt.auth.presentation.settings.model.Actions
