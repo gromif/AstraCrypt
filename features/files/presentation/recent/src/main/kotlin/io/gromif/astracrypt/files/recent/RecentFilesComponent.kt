@@ -2,7 +2,7 @@ package io.gromif.astracrypt.files.recent
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.gromif.astracrypt.files.recent.list.Actions
 import io.gromif.astracrypt.files.recent.list.RecentFilesList

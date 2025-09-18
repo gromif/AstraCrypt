@@ -2,7 +2,7 @@ package io.gromif.astracrypt.auth.presentation.calculator
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import io.gromif.calculator.CalculatorScreen
 
 @Composable
