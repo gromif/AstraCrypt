@@ -23,6 +23,7 @@ val uiModules = listOf(
 
 val features = listOf(
     "auth",
+    "container",
     "device-admin",
     "files",
     "notes",
