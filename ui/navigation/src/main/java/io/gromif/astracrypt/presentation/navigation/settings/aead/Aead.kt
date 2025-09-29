@@ -9,7 +9,6 @@ import io.gromif.astracrypt.presentation.navigation.models.UiState
 import io.gromif.astracrypt.presentation.navigation.shared.LocalHostEvents
 import io.gromif.astracrypt.presentation.navigation.shared.LocalNavController
 import io.gromif.astracrypt.presentation.navigation.shared.UiStateHandler
-import io.gromif.astracrypt.profile.presentation.settings.aead.ProfileAeadSettingsScreen
 import io.gromif.astracrypt.resources.R
 import io.gromif.notes.presentation.settings.AeadSettings
 import io.gromif.ui.compose.core.PreferencesScreen
@@ -34,6 +33,5 @@ internal fun NavGraphBuilder.settingsSecurityAead() = composable<Route.SettingsS
         )
         AeadSettings()
         AuthAeadSettingsScreen()
-        ProfileAeadSettingsScreen()
     }
 }

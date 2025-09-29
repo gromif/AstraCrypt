@@ -52,7 +52,6 @@ fun SettingsScreen() {
                 imageVector = key.imageVector
             ) {
                 when (key) {
-                    SettingsMainItems.EditProfile -> navController.navigate(Route.EditProfile)
                     SettingsMainItems.Security -> navController.navigate(Route.SettingsSecurity)
                     SettingsMainItems.Interface -> navController.navigate(Route.SettingsUi)
                     SettingsMainItems.Donate -> navController.navigate(Route.Donate)

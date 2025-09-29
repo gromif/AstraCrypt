@@ -12,8 +12,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import io.gromif.astracrypt.files.recent.RecentFilesComponent
 import io.gromif.astracrypt.files.recent.list.Actions
-import io.gromif.astracrypt.profile.presentation.shared.Profile
-import io.gromif.astracrypt.profile.presentation.widget.WidgetComponent
 import io.gromif.astracrypt.resources.R
 import io.gromif.ui.compose.core.CardWithTitle
 import io.gromif.ui.compose.core.theme.spaces
@@ -28,7 +26,6 @@ fun HomeScreen(
         .padding(MaterialTheme.spaces.spaceMedium),
     verticalArrangement = Arrangement.spacedBy(MaterialTheme.spaces.spaceMedium)
 ) {
-    Profile.WidgetComponent()
     CardWithTitle(titleText = stringResource(id = R.string.recentlyAdded)) {
         RecentFilesComponent(actions = recentFilesActions)
     }

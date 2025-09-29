@@ -52,8 +52,6 @@ object Route {
         val outUri: String? = null
     )
 
-    @Serializable object EditProfile
-
     @Serializable object Donate
 
     @Serializable object SettingsUi
