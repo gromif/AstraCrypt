@@ -14,11 +14,6 @@ enum class SettingsMainItems(
     val imageVector: ImageVector,
     @StringRes val titleId: Int
 ) {
-
-    EditProfile(
-        imageVector = Icons.Outlined.Person,
-        titleId = R.string.settings_editProfile
-    ),
     Security(
         imageVector = Icons.Outlined.Security,
         titleId = R.string.settings_security

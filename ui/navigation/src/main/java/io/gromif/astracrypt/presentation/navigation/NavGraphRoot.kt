@@ -10,7 +10,6 @@ import io.gromif.astracrypt.presentation.navigation.settings.about.aboutGraph
 import io.gromif.astracrypt.presentation.navigation.settings.aead.settingsSecurityAead
 import io.gromif.astracrypt.presentation.navigation.settings.aead.settingsSecurityColumnsAead
 import io.gromif.astracrypt.presentation.navigation.settings.donate
-import io.gromif.astracrypt.presentation.navigation.settings.profileSettings
 import io.gromif.astracrypt.presentation.navigation.settings.quickActionsSettings
 import io.gromif.astracrypt.presentation.navigation.settings.security.settingsSecurity
 import io.gromif.astracrypt.presentation.navigation.settings.settingsSecurityAdmin
@@ -32,7 +31,6 @@ internal fun root(
     labGraph()
 
     // settings
-    profileSettings()
     settingsUi(
         isDynamicColorsSupported = navParams.isDynamicColorsSupported,
         onDynamicColorsStateChange = onDynamicColorsStateChange,
